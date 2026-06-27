@@ -1,0 +1,34 @@
+{
+  "project": "agentFabric",
+  "version": "0.1.0",
+  "description": "Business Workspace on Hermes Agent Runtime",
+  "hermes": "0.17.0",
+  "completed": [
+    "Metrics (signal computation, 9 signals/product, multi-window [3,7,14]d)",
+    "Decision (3 profiles, 5-component scoring, explainability, memory-adjustment)",
+    "Explainability (trust score, 7 contradiction rules, 4-layer business trace)",
+    "Experience (weight/decay formulas, extraction rules, 8 pattern reason→condition→adjustment mappings)",
+    "Review (10-category reason taxonomy, 24h stale queue, feedback capture, knowledge promotion)",
+    "Connectors (JD/Tmall cross-platform normalizer, registry, auth profile loader)",
+    "Hermes Client (subprocess seam, stub client, AI summary wiring)",
+    "Platform (Express 5 server, SQLite storage, CLI)",
+    "Workspace (agentCMS V1 UI replicated: Agent Workspace, inbox, decision panel, mode toggle, i18n)",
+    "Data Migration (67 products + 668 orders from agentCMS)",
+    "V3 Restructure (src/ deleted, apps/platform/shared architecture, path aliases)",
+    "Project Memory system (context/ architecture_snapshot, status.json, current_state, decisions, handoff, roadmap)",
+    "Development spec (CLAUDE.md: mandatory context file updates after every session)",
+    "Proposals (P0001-P0006: product reposition, workspace redesign, context architecture, review pipeline, skill lifecycle, experience model)",
+    "Renames (dashboard→workspace, collectors→connectors, composition.ts→orchestrator.ts)"
+  ],
+  "developing": [],
+  "next": [
+    "Business Context (campaign, business objectives, constraints, environment)",
+    "Skills (validated business SOPs with version, success rate, impact)",
+    "Connectors CDP onboarding (Chrome debug-mode cookie harvest)",
+    "Replay Simulator (time-series replay, counterfactual comparison)",
+    "MCP tool exposure (expose business skills as MCP server to Hermes)"
+  ],
+  "blocked": [],
+  "tests": 144,
+  "coverage": "domains: 80%+ target"
+}
