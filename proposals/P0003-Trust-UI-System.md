@@ -10,8 +10,8 @@ Base UI: AgentFabric vNext 三栏架构（左导航 / 中 Inbox / 右 Decision P
 本设计必须建立在以下结构之上：
 
 ┌──────────────┬──────────────────────────┬──────────────────────┐
-│ Left Nav     │ Center Inbox Stream     │ Right Decision Panel │
-│ (240px)      │ (flex-1)                │ (320px)              │
+│ Left Nav     │ Center Inbox Stream      │ Right Decision Panel │
+│ (240px)      │ (flex-1)                 │ (320px)              │
 └──────────────┴──────────────────────────┴──────────────────────┘
 2. 本 P0003 的核心目标
 
