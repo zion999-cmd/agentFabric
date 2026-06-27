@@ -84,3 +84,9 @@
 - **状态**: Accepted
 - **决策**: 每次开发会话结束后，必须更新 context/{current_state, decisions, handoff, status.json, roadmap}。这些文件是项目的 Single Source of Truth，所有 agent（ChatGPT, Claude Code, Codex, Hermes）共用。
 - **原因**: 见 [chat_history3](docs/chat_history3.txt)。不是为 ChatGPT 写的 context，而是项目自己的记忆系统。
+
+## ADR-013: Trust Decision Stack (P0003 UI 升级)
+- **日期**: 2026-06-27
+- **状态**: Accepted
+- **决策**: Workspace 从 V1 (agentCMS 复刻) 升级为 V2 Trust Decision Stack。右侧面板从 Explain/Reason/Trace 升级为 7 层信任决策栈 (Confidence→Evidence→Reasoning→Skills→Execution→Validation)。Inbox Card 增加 Impact Score、Confidence、Approve/Reject/Modify 行动按钮。侧边栏 IA 对齐 P0002 (Inbox/Discover → Reviews → Skills/Experience → Validation/Reports → Settings)。
+- **原因**: 见 [P0002](proposals/P0002-workspace-information-architecture.md) + [P0003](proposals/P0003-Trust-UI-System.md)。Workspace 不是 Dashboard — 是 Human↔AI Business Decision Operating System。核心原则: Trust is product, not feature。

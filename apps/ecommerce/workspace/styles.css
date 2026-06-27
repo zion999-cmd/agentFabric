@@ -184,37 +184,91 @@ ul, ol { list-style: none; }
 .product-search-row { display: flex; gap: 10px; margin-bottom: 8px; }
 .placeholder { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
 
-/* Decision Inspector Panel */
+/* ═══ Trust Decision Panel ═══════════════════════════════════════ */
 .decision-panel { background: var(--panel); border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
 .decision-header { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid var(--border); }
 .decision-header-left { display: flex; align-items: center; gap: 8px; }
 .decision-header-title { font-size: 0.85rem; font-weight: 600; }
 .decision-entity-label { font-size: 0.75rem; color: var(--muted); }
-.decision-tabs { display: flex; border-bottom: 1px solid var(--border); padding: 0 8px; }
-.decision-tab { padding: 8px 12px; font-size: 0.74rem; color: var(--muted); border-bottom: 2px solid transparent; transition: color 0.12s, border-color 0.12s; font-family: var(--font-mono); font-weight: 500; }
-.decision-tab:hover { color: var(--text); }
-.decision-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
-.decision-content { flex: 1; overflow-y: auto; padding: 16px; }
-.decision-subtitle { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 4px; }
-.decision-subtitle:first-child { margin-top: 0; }
-.reasoning-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-.reasoning-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; }
-.reasoning-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); margin-top: 5px; flex-shrink: 0; }
-.reasoning-item-title { font-weight: 600; }
-.reasoning-item-desc { color: var(--muted); font-size: 0.72rem; }
-.steps-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-.execution-step { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; }
-.step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-bg); color: var(--primary); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.step-title { font-weight: 600; }
-.step-desc { color: var(--muted); font-size: 0.72rem; }
-.tool-calls-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; font-family: var(--font-mono); font-size: 0.72rem; }
-.tool-call-item { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
-.tool-call-name { color: var(--text); }
-.tool-call-status { color: var(--success); font-weight: 500; }
-.decision-trace { font-size: 0.78rem; }
+.decision-content { flex: 1; overflow-y: auto; }
 .decision-placeholder { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; color: var(--muted); font-size: 0.84rem; text-align: center; }
-.decision-chat { border-top: 1px solid var(--border); padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-.decision-chat .chat-messages { max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 0.78rem; }
+
+/* Layer 1: Decision Header */
+.trust-header { padding: 16px 16px 12px; border-bottom: 1px solid var(--border); }
+.trust-header-type { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 6px; }
+.trust-header-type.opportunity { background: #d1fae5; color: #065f46; }
+.trust-header-type.risk { background: #fee2e2; color: #991b1b; }
+.trust-header-type.review { background: #fef3c7; color: #92400e; }
+.trust-header-title { font-size: 0.9rem; font-weight: 700; line-height: 1.3; }
+.trust-header-meta { display: flex; gap: 12px; margin-top: 6px; font-size: 0.72rem; color: var(--muted); }
+.trust-header-impact { font-weight: 600; color: var(--success); }
+
+/* Layer 2-7: Trust Layers */
+.trust-layer { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.trust-layer-title { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+
+/* Confidence bars */
+.confidence-bars { display: flex; flex-direction: column; gap: 6px; }
+.conf-bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.74rem; }
+.conf-bar-label { width: 48px; color: var(--muted); font-size: 0.68rem; flex-shrink: 0; }
+.conf-bar-track { flex: 1; height: 6px; background: var(--bg-strong); border-radius: 3px; overflow: hidden; }
+.conf-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+.conf-bar-fill.high { background: var(--success); }
+.conf-bar-fill.medium { background: var(--warning); }
+.conf-bar-fill.low { background: var(--danger); }
+.conf-bar-value { width: 36px; font-family: var(--font-mono); font-size: 0.68rem; text-align: right; font-weight: 600; flex-shrink: 0; }
+
+/* Evidence items */
+.evidence-items { display: flex; flex-direction: column; gap: 4px; }
+.evidence-item { display: flex; align-items: center; gap: 8px; font-size: 0.76rem; padding: 4px 0; cursor: pointer; }
+.evidence-item:hover { color: var(--primary); }
+.evidence-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+
+/* Reasoning chain */
+.reasoning-chain { display: flex; flex-direction: column; gap: 6px; }
+.reasoning-step { display: flex; align-items: flex-start; gap: 8px; font-size: 0.76rem; }
+.reasoning-step-num { width: 18px; height: 18px; border-radius: 50%; background: var(--primary-bg); color: var(--primary); font-size: 0.62rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.reasoning-step-text { line-height: 1.45; }
+
+/* Skills & Policies */
+.skill-trigger-list { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; }
+.skill-trigger { font-size: 0.74rem; color: var(--primary); display: flex; align-items: center; gap: 4px; }
+.policy-trigger { font-size: 0.74rem; color: var(--warning); display: flex; align-items: center; gap: 4px; }
+
+/* Execution preview */
+.execution-preview-list { display: flex; flex-direction: column; gap: 4px; }
+.execution-preview-item { font-size: 0.76rem; padding: 5px 8px; background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--border); }
+
+/* Validation */
+.validation-outcome { display: flex; gap: 16px; font-size: 0.76rem; }
+.validation-outcome-item { display: flex; flex-direction: column; }
+.validation-outcome-value { font-weight: 700; font-family: var(--font-mono); font-size: 0.9rem; }
+.validation-outcome-value.positive { color: var(--success); }
+.validation-historical { margin-top: 6px; font-size: 0.7rem; color: var(--muted); }
+
+/* ═══ Trust Action Bar ═══════════════════════════ */
+.trust-actions { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); position: sticky; bottom: 0; background: var(--panel); }
+.trust-btn { flex: 1; padding: 8px 0; border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.12s; text-align: center; }
+.trust-btn.approve { background: var(--success); color: white; }
+.trust-btn.approve:hover { background: #15803d; }
+.trust-btn.reject { background: var(--risk-high); color: white; }
+.trust-btn.reject:hover { background: #b91c1c; }
+.trust-btn.modify { background: var(--warning); color: white; }
+.trust-btn.modify:hover { background: #b45309; }
+
+/* ═══ Inbox Card Upgrades ══════════════════════ */
+.finding-impact { font-weight: 700; font-size: 0.76rem; color: var(--success); }
+.finding-confidence-strip { width: 100%; height: 4px; background: var(--bg-strong); border-radius: 2px; margin: 4px 0; overflow: hidden; }
+.finding-confidence-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+.finding-confidence-fill.high { background: var(--success); }
+.finding-confidence-fill.medium { background: var(--warning); }
+.finding-confidence-fill.low { background: var(--danger); }
+.finding-skill-trigger { font-size: 0.66rem; color: var(--primary); margin-top: 2px; }
+.finding-actions { display: flex; gap: 6px; margin-top: 6px; }
+.finding-action-btn { padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.68rem; font-weight: 600; cursor: pointer; transition: all 0.12s; border: 1px solid var(--border); background: var(--panel); }
+.finding-action-btn.approve:hover { background: var(--success); color: white; border-color: var(--success); }
+.finding-action-btn.reject:hover { background: var(--risk-high); color: white; border-color: var(--risk-high); }
+.finding-action-btn.modify:hover { background: var(--warning); color: white; border-color: var(--warning); }
 
 .trace-entry { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; font-size: 0.76rem; }
 .trace-entry-key { color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }

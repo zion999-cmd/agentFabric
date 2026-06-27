@@ -40,21 +40,23 @@
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand"><span class="brand-icon">&#9729;</span><span class="brand-text">agentFabric</span></div>
         <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="nav.section.discovery">发现视图</div>
-          <a href="#" class="sidebar-item active" data-view="inbox" data-filter="all"><span class="sidebar-icon">&#128269;</span><span data-i18n="nav.inbox">今日发现</span><span class="sidebar-badge" id="badgeAll">--</span></a>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="opportunity"><span class="sidebar-icon growth-icon">&#128293;</span><span data-i18n="nav.growth">增长机会</span><span class="sidebar-badge" id="badgeGrowth">--</span></a>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="risk"><span class="sidebar-icon risk-icon">&#9888;</span><span data-i18n="nav.risk">风险预警</span><span class="sidebar-badge" id="badgeRisk">--</span></a>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="review"><span class="sidebar-icon review-icon">&#9745;</span><span data-i18n="nav.review">审核中心</span><span class="sidebar-badge" id="badgeReview">--</span></a>
+          <div class="sidebar-section-label">决策中心</div>
+          <a href="#" class="sidebar-item active" data-view="inbox"><span class="sidebar-icon">&#128269;</span><span>Inbox</span><span class="sidebar-badge" id="badgeAll">--</span></a>
+          <a href="#" class="sidebar-item" data-view="discover"><span class="sidebar-icon" style="color:#7c3aed">&#9889;</span><span>Discover</span><span class="sidebar-badge" id="badgeDiscover">--</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="nav.section.analysis">分析视图</div>
-          <a href="#" class="sidebar-item" data-view="product"><span class="sidebar-icon product-icon">&#127991;</span><span data-i18n="nav.product">商品分析</span></a>
-          <a href="#" class="sidebar-item" data-view="memory"><span class="sidebar-icon memory-icon">&#129504;</span><span data-i18n="nav.memory">Memory 成长</span></a>
+          <div class="sidebar-section-label">人机控制</div>
+          <a href="#" class="sidebar-item" data-view="reviews"><span class="sidebar-icon review-icon">&#9745;</span><span>Reviews</span><span class="sidebar-badge" id="badgeReview">--</span></a>
+          <a href="#" class="sidebar-item" data-view="skills"><span class="sidebar-icon" style="color:#0891b2">&#128736;</span><span>Skills</span></a>
+          <a href="#" class="sidebar-item" data-view="experience"><span class="sidebar-icon memory-icon">&#129504;</span><span>Experience</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
-          <a href="#" class="sidebar-item" data-view="agentConfig"><span class="sidebar-icon config-icon">&#9881;</span><span data-i18n="nav.agentConfig">Agent 配置</span></a>
+          <div class="sidebar-section-label">系统治理</div>
+          <a href="#" class="sidebar-item" data-view="validation"><span class="sidebar-icon" style="color:#16a34a">&#9989;</span><span>Validation</span></a>
+          <a href="#" class="sidebar-item" data-view="reports"><span class="sidebar-icon" style="color:var(--muted)">&#128203;</span><span>Reports</span></a>
+          <a href="#" class="sidebar-item" data-view="settings"><span class="sidebar-icon config-icon">&#9881;</span><span>Settings</span></a>
         </div>
         <div class="sidebar-footer">
           <div class="sidebar-footer-header"><span data-i18n="sidebar.agent">运营Agent</span><span class="status-badge running" data-i18n="sidebar.running">运行中</span></div>
@@ -82,17 +84,37 @@
           </div>
           <div class="inbox-chat-section"><h3 class="chat-section-title" data-i18n="chat.recommended">推荐问题</h3><div class="chat-recommended-chips" id="recommendedChips"><button class="chip chip-question" data-question="为什么销量最高的商品排第一？">为什么销量最高的商品排第一？</button><button class="chip chip-question" data-question="最近7天最大的变化是什么？">最近7天最大的变化是什么？</button><button class="chip chip-question" data-question="有哪些高风险商品？">有哪些高风险商品？</button></div><div class="chat-input-row"><input id="chatInput" class="input chat-input-main" placeholder="追问 Agent..." /><button id="chatSendButton" class="btn btn-primary chat-send-btn">&#10148;</button></div><div id="inboxChatMessages" class="chat-messages-inline"></div></div>
         </div>
-        <div id="view-product" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="product.title">商品分析</h2></div><div class="product-search-row"><input id="productSearchInput" class="input" style="flex:1" placeholder="搜索商品 ID 或名称..." /><button id="productSearchBtn" class="btn btn-primary" data-i18n="product.search">搜索</button></div><div id="productContent" class="muted placeholder">输入商品 ID 查看完整画像</div></div>
-        <div id="view-memory" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="memory.title">Memory 成长</h2><span class="muted" data-i18n="memory.subtitle">Agent 从运营反馈中学习的知识积累</span></div><div id="memoryContent" class="muted placeholder">加载中...</div></div>
-        <div id="view-agentConfig" class="view-container"><h2 class="view-title" data-i18n="config.title">Agent 配置</h2><div class="config-section"><h3 class="config-section-title" data-i18n="config.ranking">排名权重</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.growthWeight">增长权重</label><input type="number" class="input" id="cfgGrowthWeight" value="0.35" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label data-i18n="config.competitionWeight">竞争权重</label><input type="number" class="input" id="cfgCompetitionWeight" value="0.25" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label data-i18n="config.qualityWeight">质量权重</label><input type="number" class="input" id="cfgQualityWeight" value="0.15" min="0" max="1" step="0.05" /></div></div></div><div class="config-section"><h3 class="config-section-title" data-i18n="config.memory">Memory 设置</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.memoryTtl">TTL (天)</label><input type="number" class="input" id="cfgMemoryTtl" value="30" min="1" step="1" /></div><div class="threshold-item"><label data-i18n="config.memoryDecay">衰减率</label><input type="number" class="input" id="cfgMemoryDecay" value="0.05" min="0" max="1" step="0.01" /></div><div class="threshold-item"><label data-i18n="config.memoryThreshold">验证阈值</label><input type="number" class="input" id="cfgMemoryThreshold" value="0.6" min="0" max="1" step="0.05" /></div></div></div><div class="config-section"><h3 class="config-section-title" data-i18n="config.llm">LLM 配置</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.llmProvider">Provider</label><select class="input select" id="cfgLlmProvider"><option value="anthropic">Anthropic</option><option value="openai">OpenAI</option></select></div><div class="threshold-item"><label data-i18n="config.llmModel">Model</label><input type="text" class="input" id="cfgLlmModel" value="claude-sonnet-4-6" /></div><div class="threshold-item"><label data-i18n="config.llmTemp">Temperature</label><input type="number" class="input" id="cfgLlmTemp" value="0.7" min="0" max="2" step="0.1" /></div></div></div><button class="btn btn-primary" id="saveAgentConfig" data-i18n="config.save">保存配置</button></div>
+        <div id="view-discover" class="view-container"><div id="discoverContent" class="muted placeholder">Discover — AI 主动发现的机会池</div></div>
+        <div id="view-reviews" class="view-container"><div class="view-title-row"><h2 class="view-title">Reviews</h2><span class="muted">审核中心 — 所有 AI 决策的人工控制点</span></div><div id="reviewList" class="list"><p class="muted placeholder">加载中...</p></div></div>
+        <div id="view-skills" class="view-container"><div class="view-title-row"><h2 class="view-title">Skills</h2><span class="muted">已验证 SOP · 版本化 · 可衡量</span></div><div id="skillsContent" class="muted placeholder">Skill Library — 通过 Review + Validation 产生的企业技能库</div></div>
+        <div id="view-experience" class="view-container"><div class="view-title-row"><h2 class="view-title">Experience</h2><span class="muted">被验证过的业务历史结果</span></div><div id="experienceContent" class="muted placeholder">加载中...</div></div>
+        <div id="view-validation" class="view-container"><div class="view-title-row"><h2 class="view-title">Validation</h2><span class="muted">判断 AI 是否正确的验证系统</span></div><div id="validationContent" class="muted placeholder">KPI 回测 · 历史对比 · 多模型交叉验证</div></div>
+        <div id="view-reports" class="view-container"><div class="view-title-row"><h2 class="view-title">Reports</h2><span class="muted">面向人类的总结层</span></div><div id="reportsContent" class="muted placeholder">日报 · 周报 · 战略分析 · 风险分析</div></div>
+        <div id="view-settings" class="view-container"><h2 class="view-title">Settings</h2><div class="config-section"><h3 class="config-section-title">Policy Rules</h3><div class="threshold-row"><div class="threshold-item"><label>Risk Threshold</label><input type="number" class="input" id="cfgRiskThreshold" value="0.6" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label>Confidence Threshold</label><input type="number" class="input" id="cfgConfThreshold" value="0.7" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label>Skill Activation</label><select class="input select" id="cfgSkillActivation"><option value="auto">Auto</option><option value="manual">Manual</option></select></div></div></div><div class="config-section" style="margin-top:16px"><h3 class="config-section-title">Ranking Weights</h3><div class="threshold-row"><div class="threshold-item"><label>Growth</label><input type="number" class="input" id="cfgGrowthWeight" value="0.35" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label>Competition</label><input type="number" class="input" id="cfgCompetitionWeight" value="0.25" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label>Quality</label><input type="number" class="input" id="cfgQualityWeight" value="0.15" min="0" max="1" step="0.05" /></div></div></div><div class="config-section" style="margin-top:16px"><h3 class="config-section-title">Experience Settings</h3><div class="threshold-row"><div class="threshold-item"><label>TTL (days)</label><input type="number" class="input" id="cfgMemoryTtl" value="30" min="1" step="1" /></div><div class="threshold-item"><label>Decay Rate</label><input type="number" class="input" id="cfgMemoryDecay" value="0.05" min="0" max="1" step="0.01" /></div><div class="threshold-item"><label>Validation Threshold</label><input type="number" class="input" id="cfgMemoryThreshold" value="0.6" min="0" max="1" step="0.05" /></div></div></div><button class="btn btn-primary" id="saveAgentConfig" style="margin-top:16px">Save Settings</button></div>
       </section>
 
       <aside class="decision-panel" id="decisionPanel">
         <div class="decision-header"><div class="decision-header-left"><span class="decision-header-title" data-i18n="decision.title">决策依据</span><span class="decision-entity-label" id="decisionEntityLabel"></span></div><button class="btn-icon" id="decisionCloseBtn" title="Close">&#10005;</button></div>
         <div class="decision-tabs" id="decisionTabs"><button data-trace="signal" class="decision-tab active">Signal</button><button data-trace="ranking" class="decision-tab">Ranking</button><button data-trace="memory" class="decision-tab">Memory</button><button data-trace="context" class="decision-tab">Context</button><button data-trace="execution" class="decision-tab">Execution</button></div>
-        <div class="decision-content" id="decisionContent"><div id="decisionSummary" class="decision-summary"><h4 class="decision-subtitle" data-i18n="decision.reasoning">推荐原因 (AI 总结)</h4><div id="decisionReasoningList" class="reasoning-list"></div><h4 class="decision-subtitle" data-i18n="decision.steps">Agent 推理步骤</h4><div id="decisionStepsList" class="steps-list"></div><h4 class="decision-subtitle" data-i18n="decision.toolCalls">工具调用</h4><div id="decisionToolCalls" class="tool-calls-list"></div></div><div id="decisionTrace" class="decision-trace" style="display:none;"><div id="traceContent"></div></div></div>
-        <div class="decision-placeholder" id="decisionPlaceholder"><p data-i18n="decision.placeholder">点击左侧 AI 发现卡片查看决策依据。</p></div>
-        <div class="decision-chat" id="decisionChat"><div class="chat-tool-status" id="chatToolStatus" style="display:none;"></div><div class="chat-messages" id="chatMessages"></div><div class="chat-input-row"><input id="decisionChatInput" class="input" placeholder="追问：为什么排第一？" /><button id="decisionChatSendBtn" class="btn btn-primary" style="padding:4px 10px;font-size:0.78rem;">追问</button></div></div>
+        <div class="decision-content" id="decisionContent">
+          <!-- Layer 1: Decision Header -->
+          <div id="trustHeader" class="trust-header"></div>
+          <!-- Layer 2: Confidence -->
+          <div id="trustConfidence" class="trust-layer"></div>
+          <!-- Layer 3: Evidence -->
+          <div id="trustEvidence" class="trust-layer"></div>
+          <!-- Layer 4: Reasoning -->
+          <div id="trustReasoning" class="trust-layer"></div>
+          <!-- Layer 5: Skills & Policies -->
+          <div id="trustSkills" class="trust-layer"></div>
+          <!-- Layer 6: Execution Preview -->
+          <div id="trustExecution" class="trust-layer"></div>
+          <!-- Layer 7: Validation -->
+          <div id="trustValidation" class="trust-layer"></div>
+          <!-- Action Bar -->
+          <div id="trustActions" class="trust-actions"></div>
+        </div>
+        <div class="decision-placeholder" id="decisionPlaceholder"><p>点击左侧 AI 发现卡片查看信任决策栈。</p></div>
       </aside>
     </main>
 
