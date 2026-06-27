@@ -477,9 +477,19 @@ function renderTracePanel(finding, ranking) {
     <div class="validation-item"><span>Confidence</span><span class="validation-value ${(ranking?.confidence||0)>=0.7?'ok':'warn'}">${Math.round((ranking?.confidence||0)*100)}%</span></div>
     <div class="validation-item"><span>Signals Used</span><span class="validation-value">${ranking?.signals_used?.length||0}</span></div>`;
 
-  // Respect current trace state
-  document.getElementById('traceExpanded').style.display = state.traceExpanded || state.traceMode === 'builder' ? 'block' : 'none';
-  document.getElementById('traceExpandBtn').textContent = (state.traceExpanded || state.traceMode === 'builder') ? '▲ Collapse Details' : '▼ Expand Details';
+  // Builder mode: always expanded, no collapse button
+  // Operator mode: collapsible, start collapsed unless user expanded
+  var isBuilder = state.traceMode === 'builder';
+  var expandEl = document.getElementById('traceExpanded');
+  var btnEl = document.getElementById('traceExpandBtn');
+  if (isBuilder) {
+    expandEl.style.display = 'block';
+    btnEl.style.display = 'none';
+  } else {
+    expandEl.style.display = state.traceExpanded ? 'block' : 'none';
+    btnEl.style.display = 'block';
+    btnEl.textContent = state.traceExpanded ? '▲ Collapse Details' : '▼ Expand Details';
+  }
   document.getElementById('traceCollapsed').style.display = 'block';
 }
 
@@ -510,6 +520,7 @@ function togglePanelMode() {
 function toggleBuilderMode() {
   var checked = document.getElementById('traceBuilderToggle').checked;
   state.traceMode = checked ? 'builder' : 'operator';
+  state.traceExpanded = false; // reset expand state
   if (state.selectedEntityId) {
     var finding = state.findingsData.find(function(f) { return (f.entityId||f.entity_id) === state.selectedEntityId; });
     var ranking = state.rankingsCache.find(function(r) { return r.entity_id === state.selectedEntityId; });
@@ -570,10 +581,6 @@ document.querySelectorAll('.chip-question').forEach(chip => {
   const savedLang = localStorage.getItem('agentfabric-lang');
   if (savedLang && i18n[savedLang]) { currentLang = savedLang; document.getElementById('langToggle').value = savedLang; }
   applyI18n();
-  var biz = document.getElementById('panelBusiness');
-  var dev = document.getElementById('panelDeveloper');
-  if (biz) biz.style.display = 'block';
-  if (dev) dev.style.display = 'none';
   switchView('inbox', 'all');
   loadData();
   showToast(t('toast.ready'));
