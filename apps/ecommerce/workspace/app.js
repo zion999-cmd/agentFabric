@@ -13,7 +13,7 @@ const i18n = {
     'header.role': '运营总监', 'header.team': '电商运营团队',
     'nav.section.discovery': '发现视图', 'nav.section.analysis': '分析视图',
     'nav.inbox': '今日发现', 'nav.growth': '增长机会', 'nav.risk': '风险预警', 'nav.review': '审核中心',
-    'nav.product': '商品分析', 'nav.memory': 'Memory 成长', 'nav.agentConfig': 'Agent 配置',
+    'nav.product': '商品分析', 'nav.trend': '趋势观察', 'nav.archive': '历史归档', 'nav.memory': 'Memory 成长', 'nav.agentConfig': 'Agent 配置',
     'sidebar.agent': '运营Agent', 'sidebar.running': '运行中',
     'sidebar.version': '版本', 'sidebar.dataTime': '数据时间',
     'sidebar.decisions': '今日决策', 'sidebar.accuracy': '准确率 (近7天)',
@@ -37,7 +37,10 @@ const i18n = {
     'trace.noSignals': 'No signal data', 'trace.noMemories': 'No active memories',
     'product.title': '商品分析', 'product.search': '搜索', 'product.placeholder': '输入商品 ID 查看完整画像',
     'product.notFound': '未找到该商品', 'product.score': '综合得分', 'product.rank': '排名',
+    'trend.title': '趋势观察', 'trend.subtitle': '信号变化与排名漂移时间轴',
+    'archive.title': '历史归档',
     'memory.title': 'Memory 成长', 'memory.subtitle': 'Agent 从运营反馈中学习的知识积累',
+    'profile.operator': '运营推荐', 'profile.growth': '增长发现', 'profile.sales': '销售排行',
     'config.title': 'Agent 配置', 'config.ranking': '排名权重',
     'config.growthWeight': '增长权重', 'config.competitionWeight': '竞争权重', 'config.qualityWeight': '质量权重',
     'config.memory': 'Memory 设置', 'config.memoryTtl': 'TTL (天)', 'config.memoryDecay': '衰减率', 'config.memoryThreshold': '验证阈值',
@@ -53,7 +56,7 @@ const i18n = {
     'header.role': 'Ops Director', 'header.team': 'E-commerce Team',
     'nav.section.discovery': 'Discovery', 'nav.section.analysis': 'Analysis',
     'nav.inbox': 'Today', 'nav.growth': 'Growth', 'nav.risk': 'Risk Alerts', 'nav.review': 'Reviews',
-    'nav.product': 'Products', 'nav.memory': 'Memory', 'nav.agentConfig': 'Config',
+    'nav.product': 'Products', 'nav.trend': 'Trends', 'nav.archive': 'Archive', 'nav.memory': 'Memory', 'nav.agentConfig': 'Config',
     'sidebar.agent': 'Ops Agent', 'sidebar.running': 'Running',
     'sidebar.version': 'Version', 'sidebar.dataTime': 'Data Time',
     'sidebar.decisions': 'Decisions', 'sidebar.accuracy': 'Accuracy (7d)',
@@ -73,7 +76,10 @@ const i18n = {
     'trace.noSignals': 'No signal data', 'trace.noMemories': 'No active memories',
     'product.title': 'Product Analysis', 'product.search': 'Search', 'product.placeholder': 'Enter product ID',
     'product.notFound': 'Product not found', 'product.score': 'Score', 'product.rank': 'Rank',
+    'trend.title': 'Trend Watch', 'trend.subtitle': 'Signal & ranking drift time series',
+    'archive.title': 'Archive',
     'memory.title': 'Memory Growth', 'memory.subtitle': 'Knowledge from operations feedback',
+    'profile.operator': 'Operator', 'profile.growth': 'Growth', 'profile.sales': 'Sales',
     'config.title': 'Agent Config', 'config.ranking': 'Ranking Weights',
     'config.growthWeight': 'Growth', 'config.competitionWeight': 'Competition', 'config.qualityWeight': 'Quality',
     'config.memory': 'Memory Settings', 'config.memoryTtl': 'TTL (days)', 'config.memoryDecay': 'Decay', 'config.memoryThreshold': 'Threshold',
@@ -118,7 +124,7 @@ function switchView(name, filter = 'all') {
   viewLoaders[name]?.(filter);
 }
 
-const viewLoaders = { inbox: loadInbox, product: loadProduct, memory: loadMemory, agentConfig: loadConfig };
+const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, agentConfig: loadConfig };
 
 // ═══ Data Loading ══════════════════════════════════════════
 async function loadData() {
@@ -299,6 +305,51 @@ async function loadMemory() {
       : '<div class="muted placeholder">暂无已验证的业务经验</div>';
   } catch { ct.innerHTML = `<p class="muted">${t('label.unavailable')}</p>`; }
 }
+
+// ═══ Trend ════════════════════════════════════════════════
+async function loadTrend() {
+  const ct = document.getElementById('trendContent');
+  try {
+    const rankings = state.rankingsCache;
+    const ranking = state.rankingsCache.length ? state.rankingsCache[0] : null;
+    let html = '<div class="list">';
+    html += `<div class="item"><strong>Ranking Coverage</strong><br/><span class="muted">Total ranked: ${rankings.length} products | Avg confidence: ${Math.round((rankings.reduce((s,r)=>s+r.confidence,0)/(rankings.length||1))*100)}%</span></div>`;
+    if (ranking) {
+      html += `<div class="item"><strong>Signal Drift</strong><br/><span class="muted">Top entity: ${ranking.entity_id} | Score: ${ranking.overall_score.toFixed(3)} | Coverage: ${(ranking.coverage*100).toFixed(0)}%</span></div>`;
+      html += `<div class="item"><strong>Memory Growth</strong><br/><span class="muted">Active memories: ${state.memoriesCache.length}</span></div>`;
+    }
+    html += '</div>';
+    ct.innerHTML = html;
+  } catch { ct.innerHTML = '<p class="muted placeholder">趋势数据加载中...</p>'; }
+}
+
+// ═══ Archive ══════════════════════════════════════════════
+async function loadArchive() {
+  const ct = document.getElementById('archiveTimeline');
+  const profile = document.getElementById('archiveProfileSelect')?.value || 'operator_mode';
+  try {
+    const rankings = await apiGet(`/api/ranking/${profile}`);
+    if (!rankings.length) { ct.innerHTML = '<p class="muted placeholder">暂无归档数据 — 运行一次排名计算</p>'; return; }
+    let html = '<div class="timeline">';
+    rankings.slice(0, 20).forEach((r, i) => {
+      html += `<div class="timeline-day ${r.explainability?.risks?.length ? 'changed' : ''}" style="cursor:pointer" data-id="${r.entity_id}">
+        <span><strong>#${i + 1}</strong> ${r.entity_id.slice(-12)}</span>
+        <span>Score: ${r.overall_score.toFixed(3)} | Conf: ${Math.round(r.confidence*100)}%</span>
+        <span>${(r.explainability?.strengths||[]).slice(0,2).join(', ') || '-'}</span>
+      </div>`;
+    });
+    html += '</div>';
+    ct.innerHTML = html;
+    ct.querySelectorAll('.timeline-day').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = el.dataset.id;
+        const f = state.findingsData.find(x => (x.entityId||x.entity_id) === id);
+        if (f) { selectFinding(f); state.activeView = 'archive'; }
+      });
+    });
+  } catch (e) { ct.innerHTML = `<p class="muted placeholder">加载失败 (${e.message})</p>`; }
+}
+document.getElementById('archiveProfileSelect')?.addEventListener('change', loadArchive);
 
 // ═══ Agent Config ═════════════════════════════════════════
 function loadConfig() {
