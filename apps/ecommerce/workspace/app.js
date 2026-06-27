@@ -102,7 +102,8 @@ function applyI18n() {
 // ═══ State ══════════════════════════════════════════════════
 const state = {
   activeView: 'inbox', activeFilter: 'all',
-  traceMode: 'operator', // 'operator' | 'builder'
+  panelMode: 'business',      // 'business' | 'developer'
+  traceMode: 'operator',      // 'operator' | 'builder' (within developer)
   traceExpanded: false,
   selectedEntityId: null, findingsData: [],
   rankingsCache: [], memoriesCache: [],
@@ -361,7 +362,6 @@ function loadConfig() {
 }
 
 // ═══ Agent Trace Panel ════════════════════════════════════
-function selectFinding(finding) {
   state.selectedEntityId = finding.entityId || finding.entity_id;
   const eid = state.selectedEntityId;
   document.querySelectorAll('.finding-card').forEach(c => { c.classList.toggle('selected', c.dataset.entityId === eid); });
@@ -370,81 +370,144 @@ function selectFinding(finding) {
   document.getElementById('decisionContent').style.display = 'block';
 
   const ranking = state.rankingsCache.find(r => r.entity_id === eid);
-  renderTrace(finding, ranking);
+  updatePanel(finding, ranking);
 }
 
-function renderTrace(finding, ranking) {
-  const isBuilder = state.traceMode === 'builder';
+function updatePanel(finding, ranking) {
+  if (state.panelMode === 'business') {
+    renderBusinessPanel(finding, ranking);
+  } else {
+    renderTracePanel(finding, ranking);
+  }
+}
+
+// ═══ V1 Business Mode: AI Summary + Reasoning + Tool Calls ═══
+function renderBusinessPanel(finding, ranking) {
+  document.getElementById('panelBusiness').style.display = 'block';
+  document.getElementById('panelDeveloper').style.display = 'none';
+
+  const comp = ranking?.component_scores ?? {};
+  const reasons = [
+    '综合评分高于同类商品',
+    `增长得分: ${((comp.growth||0)*100).toFixed(0)}% | 竞争得分: ${((comp.competition||0)*100).toFixed(0)}%`,
+    `供应稳定性: ${((comp.supply_stability||0)*100).toFixed(0)}% | 质量: ${((comp.quality||0)*100).toFixed(0)}%`,
+    ranking?.explainability?.risks?.length ? '存在风险信号需关注' : '无显著风险信号',
+  ];
+  document.getElementById('decisionReasoningList').innerHTML = reasons.map(r => `
+    <div class="reasoning-item"><div class="reasoning-dot"></div><div>
+      <div class="reasoning-item-title">${r}</div>
+      <div class="reasoning-item-desc">${finding.aiSuggestion || ''}</div>
+    </div></div>`).join('');
+
+  const steps = [
+    { title: '识别目标', desc: '根据 operator_mode 画像识别高价值商品' },
+    { title: '信号收集', desc: '收集销量、ROI、库存等指标信号' },
+    { title: '信号分析', desc: '分析信号间关联和趋势异常' },
+    { title: '排名计算', desc: '基于加权算法计算综合评分' },
+    { title: '生成建议', desc: '结合业务规则生成具体建议' },
+  ];
+  document.getElementById('decisionStepsList').innerHTML = steps.map((s, i) => `
+    <div class="execution-step"><div class="step-num">${i+1}</div><div>
+      <div class="step-title">${s.title}</div><div class="step-desc">${s.desc}</div>
+    </div></div>`).join('');
+
+  const tools = [
+    { name: 'get_sales_trend', status: '成功' },
+    { name: 'get_ad_performance', status: '成功' },
+    { name: 'get_inventory_status', status: '成功' },
+    { name: 'calculate_ranking_score', status: '成功' },
+  ];
+  document.getElementById('decisionToolCalls').innerHTML = tools.map(t => `
+    <div class="tool-call-item"><span class="tool-call-name">${t.name}</span><span class="tool-call-status">${t.status}</span></div>`).join('');
+}
+
+// ═══ Developer Mode: P0003.1 Trace Panel ══════════════════
+function renderTracePanel(finding, ranking) {
+  document.getElementById('panelBusiness').style.display = 'none';
+  document.getElementById('panelDeveloper').style.display = 'block';
+
   const comp = ranking?.component_scores ?? {};
   const dt = ranking?.decision_trace ?? {};
 
-  // Collapsed: Decision Summary + Data Sources + Execution Status
+  // Decision Summary
   document.getElementById('traceDecisionSummary').innerHTML = `
-    <div class="trace-section-title">${t('trace.decisionSummary')}</div>
+    <div class="trace-section-title">Decision Summary</div>
     <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">${finding.entityName || finding.entityId || '?'} ranked at score ${ranking?.overall_score?.toFixed(3) || '?'}</span></div>
     <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Growth: ${(comp.growth||0).toFixed(2)} | Competition: ${(comp.competition||0).toFixed(2)} | Supply: ${(comp.supply_stability||0).toFixed(2)} | Quality: ${(comp.quality||0).toFixed(2)}</span></div>
     <div class="trace-step-conf"><span class="conf-mini ${(ranking?.confidence||0)>=0.7?'high':(ranking?.confidence||0)>=0.4?'medium':'low'}">Confidence: ${Math.round((ranking?.confidence||0)*100)}%</span><span class="conf-mini ${(ranking?.coverage||0)>=0.7?'high':(ranking?.coverage||0)>=0.4?'medium':'low'}">Coverage: ${Math.round((ranking?.coverage||0)*100)}%</span></div>`;
 
+  // Data Sources
   document.getElementById('traceDataSources').innerHTML = `
-    <div class="trace-section-title">${t('trace.dataSources')}</div>
+    <div class="trace-section-title">Data Sources</div>
     ${(dt.top_signals||[]).slice(0,3).map(s => `<div class="data-source-item"><span class="data-source-dot"></span>${s.signal_name}</div>`).join('') || '<div class="muted">No signal data</div>'}`;
 
+  // Execution Status
   const hasRisks = (dt.risk_signals||[]).length > 0;
   document.getElementById('traceExecutionStatus').innerHTML = `
-    <div class="trace-section-title">${t('trace.executionStatus')}</div>
+    <div class="trace-section-title">Execution Status</div>
     <span class="execution-status ${hasRisks?'warn':'ok'}">${hasRisks?'Needs Review':'OK'}</span>`;
 
-  // Expanded: Skills Triggered, MCP/Tool Calls, Memory Influence, Execution Steps, Result Validation
+  // Builder-expanded sections
   const mems = state.memoriesCache.slice(0, 3);
   document.getElementById('traceSkillsTriggered').innerHTML = `
-    <div class="trace-section-title">${t('trace.skillsTriggered')}</div>
-    <div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">ranking_engine_v1 (operator_mode profile)</span></div>
+    <div class="trace-section-title">Skills Triggered</div>
+    <div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">ranking_engine_v1</span></div>
     <div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">memory_adjustment_v1 (${ranking?.memory_adjustments?.length||0} active)</span></div>`;
 
   document.getElementById('traceMcpCalls').innerHTML = `
-    <div class="trace-section-title">${t('trace.mcpCalls')}</div>
+    <div class="trace-section-title">MCP / Tool Calls</div>
     <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">GET /api/ranking/operator_mode → ${state.rankingsCache.length} results</span></div>
     <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">GET /api/memory → ${mems.length} records</span></div>`;
 
   document.getElementById('traceMemoryInfluence').innerHTML = `
-    <div class="trace-section-title">${t('trace.memoryInfluence')}</div>
+    <div class="trace-section-title">Memory Influence</div>
     ${mems.length ? mems.map(m => `<div class="memory-influence-item"><div class="mi-statement">${m.statement||m.memory_id}</div><div class="mi-meta">${m.memory_type} | score: ${m.weight?.final_score?.toFixed(3)||'?'}</div></div>`).join('') : '<div class="muted">No active memories</div>'}`;
 
   document.getElementById('traceExecutionSteps').innerHTML = `
-    <div class="trace-section-title">${t('trace.executionSteps')}</div>
-    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">Compute signals → 9 metrics/product × [3,7,14]d windows</span></div>
-    <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Score 5 components → weighted avg × (0.7+0.3*conf) × (0.8+0.2*cov)</span></div>
+    <div class="trace-section-title">Execution Steps</div>
+    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">Compute signals → 9 metrics/product × [3,7,14]d</span></div>
+    <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Score 5 components → weighted avg × dampening</span></div>
     <div class="trace-step"><span class="trace-step-num">3</span><span class="trace-step-text">Apply memory adjustments → ${ranking?.memory_adjustments?.length||0} matched</span></div>
-    <div class="trace-step"><span class="trace-step-num">4</span><span class="trace-step-text">Sort by overall_score desc → output ranking</span></div>`;
+    <div class="trace-step"><span class="trace-step-num">4</span><span class="trace-step-text">Sort by overall_score desc → ranking output</span></div>`;
 
   document.getElementById('traceResultValidation').innerHTML = `
-    <div class="trace-section-title">${t('trace.resultValidation')}</div>
+    <div class="trace-section-title">Result Validation</div>
     <div class="validation-item"><span>Coverage</span><span class="validation-value ${(ranking?.coverage||0)>=0.6?'ok':'warn'}">${(ranking?.coverage||0).toFixed(2)}</span></div>
     <div class="validation-item"><span>Confidence</span><span class="validation-value ${(ranking?.confidence||0)>=0.7?'ok':'warn'}">${Math.round((ranking?.confidence||0)*100)}%</span></div>
     <div class="validation-item"><span>Signals Used</span><span class="validation-value">${ranking?.signals_used?.length||0}</span></div>`;
 
-  // Default collapsed
-  state.traceExpanded = false;
-  document.getElementById('traceExpanded').style.display = 'none';
-  document.getElementById('traceExpandBtn').textContent = '▼ ' + t('trace.expandDetails');
+  // Respect current trace state
+  document.getElementById('traceExpanded').style.display = state.traceExpanded || state.traceMode === 'builder' ? 'block' : 'none';
+  document.getElementById('traceExpandBtn').textContent = (state.traceExpanded || state.traceMode === 'builder') ? '▲ Collapse Details' : '▼ Expand Details';
+  document.getElementById('traceCollapsed').style.display = 'block';
+}
+
+// ═══ Mode Toggles ═════════════════════════════════════════
+function togglePanelMode() {
+  const checked = document.getElementById('panelModeToggle').checked;
+  state.panelMode = checked ? 'developer' : 'business';
+  if (state.selectedEntityId) {
+    const finding = state.findingsData.find(f => (f.entityId||f.entity_id) === state.selectedEntityId);
+    const ranking = state.rankingsCache.find(r => r.entity_id === state.selectedEntityId);
+    if (finding) updatePanel(finding, ranking);
+  }
+}
+
+function toggleBuilderMode() {
+  const checked = document.getElementById('traceBuilderToggle').checked;
+  state.traceMode = checked ? 'builder' : 'operator';
+  // Builder: always expanded. Operator: collapsible.
+  if (state.selectedEntityId) {
+    const finding = state.findingsData.find(f => (f.entityId||f.entity_id) === state.selectedEntityId);
+    const ranking = state.rankingsCache.find(r => r.entity_id === state.selectedEntityId);
+    if (finding) renderTracePanel(finding, ranking);
+  }
 }
 
 function toggleTraceExpand() {
   state.traceExpanded = !state.traceExpanded;
   document.getElementById('traceExpanded').style.display = state.traceExpanded ? 'block' : 'none';
-  document.getElementById('traceExpandBtn').textContent = state.traceExpanded ? ('▲ ' + t('trace.collapseDetails')) : ('▼ ' + t('trace.expandDetails'));
-}
-
-// ═══ Trace Mode Toggle (Operator / Builder) ══════════════
-function toggleTraceMode() {
-  const checked = document.getElementById('traceModeToggle').checked;
-  state.traceMode = checked ? 'builder' : 'operator';
-  // In Operator mode, hide: Skills Triggered, MCP/Tool Calls, Memory Influence
-  const builderSections = ['traceSkillsTriggered', 'traceMcpCalls', 'traceMemoryInfluence'];
-  builderSections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = checked ? 'block' : 'none';
-  });
+  document.getElementById('traceExpandBtn').textContent = state.traceExpanded ? '▲ Collapse Details' : '▼ Expand Details';
 }
 
 // ═══ Event Bindings ══════════════════════════════════════
@@ -457,7 +520,8 @@ document.getElementById('langToggle')?.addEventListener('change', (e) => {
 document.querySelectorAll('.sidebar-item').forEach(item => {
   item.addEventListener('click', (e) => { e.preventDefault(); switchView(item.dataset.view, item.dataset.filter || 'all'); });
 });
-document.getElementById('traceModeToggle')?.addEventListener('change', toggleTraceMode);
+document.getElementById('panelModeToggle')?.addEventListener('change', togglePanelMode);
+document.getElementById('traceBuilderToggle')?.addEventListener('change', toggleBuilderMode);
 document.getElementById('decisionCloseBtn')?.addEventListener('click', () => {
   state.selectedEntityId = null;
   document.getElementById('decisionEntityLabel').textContent = '';

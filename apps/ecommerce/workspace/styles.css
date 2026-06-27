@@ -284,6 +284,30 @@ ul, ol { list-style: none; }
 .trace-expand-btn { width: 100%; padding: 8px; border: 1px dashed var(--border); border-radius: var(--radius-sm); font-size: 0.74rem; color: var(--muted); cursor: pointer; transition: color 0.12s, border-color 0.12s; background: var(--panel); margin-top: 4px; }
 .trace-expand-btn:hover { color: var(--primary); border-color: var(--primary); }
 
+/* Sub-header for developer mode toggle */
+.trace-subheader { display: flex; align-items: center; gap: 6px; padding: 8px 0 12px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+.trace-subheader .mode-label { font-size: 0.7rem; }
+.trace-subheader .mode-switch { width: 36px; height: 20px; }
+.trace-subheader .mode-slider::before { height: 14px; width: 14px; left: 3px; bottom: 3px; }
+.trace-subheader .mode-switch input:checked + .mode-slider::before { transform: translateX(16px); }
+
+/* V1 decision-subtitle restore */
+.decision-subtitle { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 16px; }
+.reasoning-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.reasoning-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; }
+.reasoning-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); margin-top: 5px; flex-shrink: 0; }
+.reasoning-item-title { font-weight: 600; }
+.reasoning-item-desc { color: var(--muted); font-size: 0.72rem; }
+.steps-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.execution-step { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-bg); color: var(--primary); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-title { font-weight: 600; }
+.step-desc { color: var(--muted); font-size: 0.72rem; }
+.tool-calls-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; font-family: var(--font-mono); font-size: 0.72rem; }
+.tool-call-item { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.tool-call-name { color: var(--text); }
+.tool-call-status { color: var(--success); font-weight: 500; }
+
 .trace-step { display: flex; align-items: flex-start; gap: 8px; font-size: 0.76rem; padding: 3px 0; }
 .trace-step-num { width: 18px; height: 18px; border-radius: 50%; background: var(--bg-strong); color: var(--muted); font-size: 0.62rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
 .trace-step-text { line-height: 1.45; }

@@ -96,37 +96,60 @@
       <aside class="decision-panel" id="decisionPanel">
         <div class="decision-header">
           <div class="decision-header-left">
-            <span class="decision-header-title" data-i18n="decision.title">Agent Trace</span>
+            <span class="decision-header-title" data-i18n="decision.title">决策依据</span>
             <span class="decision-entity-label" id="decisionEntityLabel"></span>
           </div>
           <div class="mode-toggle-group" style="margin-right:8px">
-            <span class="mode-label" data-i18n="mode.operator">Operator</span>
+            <span class="mode-label" data-i18n="mode.business">运营模式</span>
             <label class="mode-switch">
-              <input type="checkbox" id="traceModeToggle" />
+              <input type="checkbox" id="panelModeToggle" />
               <span class="mode-slider"></span>
             </label>
-            <span class="mode-label muted" data-i18n="mode.builder">Builder</span>
+            <span class="mode-label muted" data-i18n="mode.developer">开发模式</span>
           </div>
           <button class="btn-icon" id="decisionCloseBtn" title="Close">&#10005;</button>
         </div>
+
         <div class="decision-content" id="decisionContent">
-          <!-- Collapsed: Decision Summary + Data Sources + Execution Status -->
-          <div id="traceCollapsed">
-            <div class="trace-section" id="traceDecisionSummary"></div>
-            <div class="trace-section" id="traceDataSources"></div>
-            <div class="trace-section" id="traceExecutionStatus"></div>
-            <button class="trace-expand-btn" id="traceExpandBtn">&#9660; Expand Details</button>
+
+          <!-- Business Mode: AI Summary + Reasoning + Tool Calls (V1) -->
+          <div id="panelBusiness" class="decision-summary">
+            <h4 class="decision-subtitle">推荐原因 (AI 总结)</h4>
+            <div id="decisionReasoningList" class="reasoning-list"></div>
+            <h4 class="decision-subtitle">Agent 推理步骤</h4>
+            <div id="decisionStepsList" class="steps-list"></div>
+            <h4 class="decision-subtitle">工具调用</h4>
+            <div id="decisionToolCalls" class="tool-calls-list"></div>
           </div>
-          <!-- Expanded: Full Trace Layer -->
-          <div id="traceExpanded" style="display:none">
-            <div class="trace-section" id="traceSkillsTriggered"></div>
-            <div class="trace-section" id="traceMcpCalls"></div>
-            <div class="trace-section" id="traceMemoryInfluence"></div>
-            <div class="trace-section" id="traceExecutionSteps"></div>
-            <div class="trace-section" id="traceResultValidation"></div>
+
+          <!-- Developer Mode: Trace Layer (P0003.1) -->
+          <div id="panelDeveloper" style="display:none;">
+            <!-- Sub-toggle: Operator / Builder -->
+            <div class="trace-subheader">
+              <span class="mode-label">Operator</span>
+              <label class="mode-switch">
+                <input type="checkbox" id="traceBuilderToggle" />
+                <span class="mode-slider"></span>
+              </label>
+              <span class="mode-label muted">Builder</span>
+            </div>
+            <div id="traceCollapsed">
+              <div class="trace-section" id="traceDecisionSummary"></div>
+              <div class="trace-section" id="traceDataSources"></div>
+              <div class="trace-section" id="traceExecutionStatus"></div>
+              <button class="trace-expand-btn" id="traceExpandBtn">&#9660; Expand Details</button>
+            </div>
+            <div id="traceExpanded" style="display:none">
+              <div class="trace-section" id="traceSkillsTriggered"></div>
+              <div class="trace-section" id="traceMcpCalls"></div>
+              <div class="trace-section" id="traceMemoryInfluence"></div>
+              <div class="trace-section" id="traceExecutionSteps"></div>
+              <div class="trace-section" id="traceResultValidation"></div>
+            </div>
           </div>
+
         </div>
-        <div class="decision-placeholder" id="decisionPlaceholder"><p data-i18n="decision.placeholder">点击左侧 AI 发现卡片查看 Agent Trace。</p></div>
+        <div class="decision-placeholder" id="decisionPlaceholder"><p>点击左侧 AI 发现卡片查看决策依据。</p></div>
       </aside>
     </main>
 
