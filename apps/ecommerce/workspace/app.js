@@ -484,22 +484,34 @@ function renderTracePanel(finding, ranking) {
 
 // ═══ Mode Toggles ═════════════════════════════════════════
 function togglePanelMode() {
-  const checked = document.getElementById('panelModeToggle').checked;
+  var checked = document.getElementById('panelModeToggle').checked;
   state.panelMode = checked ? 'developer' : 'business';
+
+  var biz = document.getElementById('panelBusiness');
+  var dev = document.getElementById('panelDeveloper');
+  if (!biz || !dev) return;
+
+  if (state.panelMode === 'business') {
+    biz.style.display = 'block';
+    dev.style.display = 'none';
+  } else {
+    biz.style.display = 'none';
+    dev.style.display = 'block';
+  }
+
   if (state.selectedEntityId) {
-    const finding = state.findingsData.find(f => (f.entityId||f.entity_id) === state.selectedEntityId);
-    const ranking = state.rankingsCache.find(r => r.entity_id === state.selectedEntityId);
+    var finding = state.findingsData.find(function(f) { return (f.entityId||f.entity_id) === state.selectedEntityId; });
+    var ranking = state.rankingsCache.find(function(r) { return r.entity_id === state.selectedEntityId; });
     if (finding) updatePanel(finding, ranking);
   }
 }
 
 function toggleBuilderMode() {
-  const checked = document.getElementById('traceBuilderToggle').checked;
+  var checked = document.getElementById('traceBuilderToggle').checked;
   state.traceMode = checked ? 'builder' : 'operator';
-  // Builder: always expanded. Operator: collapsible.
   if (state.selectedEntityId) {
-    const finding = state.findingsData.find(f => (f.entityId||f.entity_id) === state.selectedEntityId);
-    const ranking = state.rankingsCache.find(r => r.entity_id === state.selectedEntityId);
+    var finding = state.findingsData.find(function(f) { return (f.entityId||f.entity_id) === state.selectedEntityId; });
+    var ranking = state.rankingsCache.find(function(r) { return r.entity_id === state.selectedEntityId; });
     if (finding) renderTracePanel(finding, ranking);
   }
 }
@@ -557,6 +569,10 @@ document.querySelectorAll('.chip-question').forEach(chip => {
   const savedLang = localStorage.getItem('agentfabric-lang');
   if (savedLang && i18n[savedLang]) { currentLang = savedLang; document.getElementById('langToggle').value = savedLang; }
   applyI18n();
+  var biz = document.getElementById('panelBusiness');
+  var dev = document.getElementById('panelDeveloper');
+  if (biz) biz.style.display = 'block';
+  if (dev) dev.style.display = 'none';
   switchView('inbox', 'all');
   loadData();
   showToast(t('toast.ready'));
