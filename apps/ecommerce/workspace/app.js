@@ -362,6 +362,7 @@ function loadConfig() {
 }
 
 // ═══ Agent Trace Panel ════════════════════════════════════
+function selectFinding(finding) {
   state.selectedEntityId = finding.entityId || finding.entity_id;
   const eid = state.selectedEntityId;
   document.querySelectorAll('.finding-card').forEach(c => { c.classList.toggle('selected', c.dataset.entityId === eid); });
