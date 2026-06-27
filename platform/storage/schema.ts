@@ -173,7 +173,7 @@ const STATEMENTS: readonly string[] = [
 
   `CREATE TABLE IF NOT EXISTS business_traces (
     trace_id TEXT PRIMARY KEY,
-    ranking_id TEXT REFERENCES ranking_results(ranking_id),
+    ranking_id TEXT,
     conclusion TEXT NOT NULL,
     system_truth TEXT NOT NULL,
     alignment TEXT NOT NULL,

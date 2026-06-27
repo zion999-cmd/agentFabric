@@ -138,39 +138,79 @@ async function loadData() {
 async function loadInbox(filterType = 'all') {
   document.getElementById('findingsTitle').textContent = `${t('findings.title')}`;
   await loadData();
-  const findings = state.findingsData;
+
+  // Build enriched cards from rankings
+  const enriched = state.rankingsCache.map(r => {
+    const isRisk = r.explainability?.risks?.length > r.explainability?.strengths?.length;
+    const dir = (v) => v >= 0.65 ? 'up' : v <= 0.45 ? 'down' : 'neutral';
+    const comp = r.component_scores || {};
+    const tags = [];
+    if (isRisk) tags.push('需关注');
+    if (r.explainability?.strengths?.length) tags.push('增长信号强');
+    if (r.explainability?.risks?.length) tags.push('存在风险');
+    return {
+      id: r.entity_id,
+      entityId: r.entity_id,
+      entityName: 'SKU-' + r.entity_id.slice(-8),
+      type: isRisk ? 'risk' : 'growth',
+      priority: r.overall_score >= 0.5 ? 'high' : r.overall_score >= 0.3 ? 'medium' : 'low',
+      title: r.explainability?.summary || '排名结果',
+      metrics: [
+        { label: '增长得分', value: comp.growth ? (comp.growth * 100).toFixed(1) + '%' : '--', direction: dir(comp.growth) },
+        { label: '增长趋势', value: comp.competition ? (comp.competition * 100).toFixed(1) + '%' : '--', direction: dir(comp.competition) },
+        { label: '库存健康', value: comp.supply_stability ? (comp.supply_stability * 100).toFixed(1) + '%' : '--', direction: dir(comp.supply_stability) },
+        { label: '置信度', value: Math.round(r.confidence * 100) + '%', direction: r.confidence >= 0.7 ? 'up' : 'neutral' },
+      ],
+      tags,
+      aiSuggestion: r.explainability?.strengths?.length
+        ? r.explainability.strengths[0] + '。关注关键指标变化趋势。'
+        : '关注关键指标变化趋势。',
+      reasoningSummary: [
+        `综合得分: ${r.overall_score.toFixed(3)}`,
+        `覆盖度: ${(r.coverage * 100).toFixed(0)}%`,
+        ...(r.explainability?.strengths || []).slice(0, 2),
+        ...(r.explainability?.risks || []).slice(0, 2),
+      ],
+      traceData: null,
+      timestamp: r.ranked_at || new Date().toISOString(),
+    };
+  });
+
+  state.findingsData = enriched;
 
   // Sidebar badges
-  document.getElementById('badgeAll').textContent = findings.length;
-  document.getElementById('badgeGrowth').textContent = findings.filter(f => f.discovery_type === 'opportunity').length;
-  document.getElementById('badgeRisk').textContent = findings.filter(f => f.discovery_type === 'risk').length;
-  document.getElementById('badgeReview').textContent = findings.filter(f => f.discovery_type === 'review').length;
+  document.getElementById('badgeAll').textContent = enriched.length;
+  document.getElementById('badgeGrowth').textContent = enriched.filter(f => f.type === 'growth').length;
+  document.getElementById('badgeRisk').textContent = enriched.filter(f => f.type === 'risk').length;
+  document.getElementById('badgeReview').textContent = 0;
 
   // Filter
-  let filtered = findings;
+  let filtered = enriched;
   if (filterType === 'review') {
     try {
       const reviews = await apiGet('/api/reviews/ranking');
       filtered = (Array.isArray(reviews) ? reviews : []).map(r => ({
-        entity_id: r.entity_id, discovery_type: 'review', priority: 'high',
-        title: r.reason || 'Pending', aiSuggestion: r.reason_category || '',
-        confidence: 0.5, score: 0.5,
+        id: r.review_id, entityId: r.entity_id, entityName: r.entity_id,
+        type: 'review', priority: 'high', title: r.reason || 'Pending Review',
+        metrics: [], tags: [r.status === 'pending' ? '待审核' : r.status],
+        aiSuggestion: r.reason_category || '', reasoningSummary: [`Review: ${r.reason}`],
+        traceData: null, timestamp: r.created_at || new Date().toISOString(),
       }));
     } catch { filtered = []; }
     document.getElementById('findingsTitle').textContent = t('nav.review');
   } else {
-    if (filterType !== 'all') filtered = findings.filter(f => f.discovery_type === filterType);
+    if (filterType !== 'all') filtered = enriched.filter(f => f.type === filterType);
   }
   const priorityFilter = document.getElementById('filterPriority')?.value || 'all';
   if (priorityFilter !== 'all') filtered = filtered.filter(f => f.priority === priorityFilter);
 
-  document.getElementById('inboxSubtitle').textContent = tf('inbox.insightCount', { count: filtered.length });
+  document.getElementById('inboxSubtitle').textContent = tf('inbox.insightCount', { count: enriched.length });
 
   // Stat cards
   document.getElementById('statTotalSku').textContent = state.rankingsCache.length.toLocaleString();
   document.getElementById('statActiveSku').textContent = state.rankingsCache.filter(r => r.overall_score > 0.3).length.toLocaleString();
-  document.getElementById('statNewSignals').textContent = findings.length.toLocaleString();
-  document.getElementById('statPendingReview').textContent = findings.filter(f => f.discovery_type === 'review').length;
+  document.getElementById('statNewSignals').textContent = enriched.length.toLocaleString();
+  document.getElementById('statPendingReview').textContent = '0';
   const up = '<span class="stat-trend up">&#9650;</span>';
   ['statTotalSkuTrend', 'statActiveSkuTrend', 'statNewSignalsTrend'].forEach(id => { document.getElementById(id).innerHTML = up; });
 
@@ -181,22 +221,40 @@ async function loadInbox(filterType = 'all') {
 function renderFindingCards(findings) {
   const list = document.getElementById('findingsList'); clearNode(list);
   if (!findings.length) { list.innerHTML = '<p class="muted placeholder">No findings.</p>'; return; }
+  const dirClass = (d) => d === 'up' ? 'up' : d === 'down' ? 'down' : 'neutral';
+  const tagClass = (tag) => tag.includes('风险') || tag.includes('下滑') ? ' risk-tag' : tag.includes('建议') ? ' action-tag' : '';
+
   findings.forEach(f => {
     const card = document.createElement('div');
     card.className = `finding-card priority-${f.priority || 'medium'}`;
-    if (f.entity_id === state.selectedEntityId) card.classList.add('selected');
-    card.dataset.entityId = f.entity_id;
+    if (f.entityId === state.selectedEntityId) card.classList.add('selected');
+    card.dataset.entityId = f.entityId;
     const priorityLabel = { high: 'High', medium: 'Medium', low: 'Low' }[f.priority] || '';
+
     card.innerHTML = `
       <div class="finding-product-img">&#128230;</div>
       <div class="finding-body">
         <div class="finding-header">
           <span class="finding-priority-badge ${f.priority}">${priorityLabel}</span>
-          <span class="finding-entity-name">${f.entity_id}</span>
-          <span class="finding-tags">${f.discovery_type ? `<span class="finding-tag">${f.discovery_type}</span>` : ''}</span>
+          <span class="finding-entity-name">${f.entityName || f.entityId}</span>
+          <span class="finding-tags">${(f.tags || []).map(tag => `<span class="finding-tag${tagClass(tag)}">${tag}</span>`).join('')}</span>
+          <span class="finding-timestamp">${(f.timestamp || '').substring(11, 16) || '--:--'}</span>
         </div>
-        <p style="font-size:0.8rem;margin:4px 0">${f.title || f.aiSuggestion || ''}</p>
-        ${f.confidence != null ? `<div style="height:3px;background:var(--bg-strong);border-radius:2px;margin:4px 0"><div style="height:100%;width:${Math.round(f.confidence*100)}%;border-radius:2px;background:${f.confidence>=0.7?'var(--success)':f.confidence>=0.4?'var(--warning)':'var(--danger)'}"></div></div><span style="font-size:0.7rem;color:var(--muted)">Confidence: ${Math.round(f.confidence*100)}%</span>` : ''}
+        <div class="finding-metrics">
+          ${(f.metrics || []).map(m => `
+            <div class="finding-metric">
+              <div class="finding-metric-value ${dirClass(m.direction)}">${m.value}</div>
+              <div class="finding-metric-label">${m.label}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="finding-suggestion">
+          <div class="finding-suggestion-text">
+            <div class="finding-suggestion-label">AI 建议</div>
+            ${f.aiSuggestion || ''}
+          </div>
+          <button class="finding-inspect-btn">查看原因 →</button>
+        </div>
       </div>`;
     card.addEventListener('click', () => selectFinding(f));
     list.appendChild(card);
@@ -253,13 +311,14 @@ function loadConfig() {
 
 // ═══ Agent Trace Panel ════════════════════════════════════
 function selectFinding(finding) {
-  state.selectedEntityId = finding.entity_id;
-  document.querySelectorAll('.finding-card').forEach(c => { c.classList.toggle('selected', c.dataset.entityId === finding.entity_id); });
-  document.getElementById('decisionEntityLabel').textContent = finding.entity_id;
+  state.selectedEntityId = finding.entityId || finding.entity_id;
+  const eid = state.selectedEntityId;
+  document.querySelectorAll('.finding-card').forEach(c => { c.classList.toggle('selected', c.dataset.entityId === eid); });
+  document.getElementById('decisionEntityLabel').textContent = finding.entityName || eid;
   document.getElementById('decisionPlaceholder').style.display = 'none';
   document.getElementById('decisionContent').style.display = 'block';
 
-  const ranking = state.rankingsCache.find(r => r.entity_id === finding.entity_id);
+  const ranking = state.rankingsCache.find(r => r.entity_id === eid);
   renderTrace(finding, ranking);
 }
 
@@ -271,7 +330,7 @@ function renderTrace(finding, ranking) {
   // Collapsed: Decision Summary + Data Sources + Execution Status
   document.getElementById('traceDecisionSummary').innerHTML = `
     <div class="trace-section-title">${t('trace.decisionSummary')}</div>
-    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">Entity ${finding.entity_id} ranked at score ${ranking?.overall_score?.toFixed(3) || '?'}</span></div>
+    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">${finding.entityName || finding.entityId || '?'} ranked at score ${ranking?.overall_score?.toFixed(3) || '?'}</span></div>
     <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Growth: ${(comp.growth||0).toFixed(2)} | Competition: ${(comp.competition||0).toFixed(2)} | Supply: ${(comp.supply_stability||0).toFixed(2)} | Quality: ${(comp.quality||0).toFixed(2)}</span></div>
     <div class="trace-step-conf"><span class="conf-mini ${(ranking?.confidence||0)>=0.7?'high':(ranking?.confidence||0)>=0.4?'medium':'low'}">Confidence: ${Math.round((ranking?.confidence||0)*100)}%</span><span class="conf-mini ${(ranking?.coverage||0)>=0.7?'high':(ranking?.coverage||0)>=0.4?'medium':'low'}">Coverage: ${Math.round((ranking?.coverage||0)*100)}%</span></div>`;
 
