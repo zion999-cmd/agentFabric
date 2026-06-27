@@ -103,7 +103,6 @@ function applyI18n() {
 const state = {
   activeView: 'inbox', activeFilter: 'all',
   panelMode: 'business',      // 'business' | 'developer'
-  traceMode: 'operator',      // 'operator' | 'builder' (within developer)
   traceExpanded: false,
   selectedEntityId: null, findingsData: [],
   rankingsCache: [], memoriesCache: [],
@@ -477,19 +476,12 @@ function renderTracePanel(finding, ranking) {
     <div class="validation-item"><span>Confidence</span><span class="validation-value ${(ranking?.confidence||0)>=0.7?'ok':'warn'}">${Math.round((ranking?.confidence||0)*100)}%</span></div>
     <div class="validation-item"><span>Signals Used</span><span class="validation-value">${ranking?.signals_used?.length||0}</span></div>`;
 
-  // Builder mode: always expanded, no collapse button
-  // Operator mode: collapsible, start collapsed unless user expanded
-  var isBuilder = state.traceMode === 'builder';
+  // Collapsible trace: start collapsed, user can expand
   var expandEl = document.getElementById('traceExpanded');
   var btnEl = document.getElementById('traceExpandBtn');
-  if (isBuilder) {
-    expandEl.style.display = 'block';
-    btnEl.style.display = 'none';
-  } else {
-    expandEl.style.display = state.traceExpanded ? 'block' : 'none';
-    btnEl.style.display = 'block';
-    btnEl.textContent = state.traceExpanded ? '▲ Collapse Details' : '▼ Expand Details';
-  }
+  expandEl.style.display = state.traceExpanded ? 'block' : 'none';
+  btnEl.style.display = 'block';
+  btnEl.textContent = state.traceExpanded ? '▲ Collapse Details' : '▼ Expand Details';
   document.getElementById('traceCollapsed').style.display = 'block';
 }
 
@@ -517,17 +509,6 @@ function togglePanelMode() {
   }
 }
 
-function toggleBuilderMode() {
-  var checked = document.getElementById('traceBuilderToggle').checked;
-  state.traceMode = checked ? 'builder' : 'operator';
-  state.traceExpanded = false; // reset expand state
-  if (state.selectedEntityId) {
-    var finding = state.findingsData.find(function(f) { return (f.entityId||f.entity_id) === state.selectedEntityId; });
-    var ranking = state.rankingsCache.find(function(r) { return r.entity_id === state.selectedEntityId; });
-    if (finding) renderTracePanel(finding, ranking);
-  }
-}
-
 function toggleTraceExpand() {
   state.traceExpanded = !state.traceExpanded;
   document.getElementById('traceExpanded').style.display = state.traceExpanded ? 'block' : 'none';
@@ -545,7 +526,6 @@ document.querySelectorAll('.sidebar-item').forEach(item => {
   item.addEventListener('click', (e) => { e.preventDefault(); switchView(item.dataset.view, item.dataset.filter || 'all'); });
 });
 document.getElementById('panelModeToggle')?.addEventListener('change', togglePanelMode);
-document.getElementById('traceBuilderToggle')?.addEventListener('change', toggleBuilderMode);
 document.getElementById('decisionCloseBtn')?.addEventListener('click', () => {
   state.selectedEntityId = null;
   document.getElementById('decisionEntityLabel').textContent = '';
