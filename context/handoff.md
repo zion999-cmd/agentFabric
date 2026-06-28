@@ -1,31 +1,35 @@
 # 交接文档
 
-## 本次会话 (2026-06-27 14:50)
+## 本次会话 (2026-06-28)
 
 ### 新增
-- **Workspace V2** — 基于 P0002 (Workspace IA) + P0003 (Trust UI System) 升级 UI
-  - **Trust Decision Stack**: 右侧面板重构为 7 层信任决策栈 — Confidence Layer (三维: Data/Model/Policy) → Evidence Layer (数据源) → Reasoning Layer (结构化业务推理链) → Skills & Policies Layer (触发的企业能力+策略) → Execution Preview (拟执行操作) → Validation Layer (预测结果+历史对比)
-  - **Inbox Card 升级**: 每张卡片展示 Impact Score、Confidence bar、Approve/Reject/Modify 行动按钮
-  - **侧边栏 IA 对齐 P0002**: 决策中心 (Inbox/Discover) → 人机控制 (Reviews/Skills/Experience) → 系统治理 (Validation/Reports/Settings)
-  - Trust Layer 核心原则: Confidence is first-class citizen; Evidence > Reasoning > Output; Trust is product, not feature
-- **ADR-013**: Trust Decision Stack 设计决策
+- **右侧面板模式合并** — 运营模式 (V1 AI Summary + Steps + Tools) / 开发模式 (Trace Panel 可展开)
+- **分析视图恢复** — 侧边栏分析视图完整: 商品分析 + 趋势观察 + 历史归档 + Memory 成长
+- **Inbox 卡片恢复** — 完整 V1 卡片: 指标网格 (4 cols), 标签, 时间戳, AI 建议, 查看原因按钮
+- **Chat 固定页脚** — 聊天栏固定在页面底部，不随内容滚动
+- **ADR-015**: 合并模式 + 移除 Operator/Builder 子切换
 
 ### 重构
-- `apps/ecommerce/workspace/app.js`: 完全重写 — Trust Decision Stack 渲染, inbox card 升级, approve/reject/modify 处理
-- `apps/ecommerce/workspace/styles.css`: 新增 trust stack 样式 (confidence bars, evidence items, reasoning chain, skill triggers, execution preview, validation, trust action bar)
-- `apps/ecommerce/workspace/index.html`: 侧边栏 IA 更新, 右侧面板更新为 7-layer trust stack 结构, 中心面板添加新视图容器
+- 移除顶部 header 的重复模式切换（仅保留右侧面板的切换）
+- 移除 Operator/Builder 子切换（与 "运营模式" 语义重复）
+- 移除 business_traces FK 约束（修复 ranking 插入失败）
+
+### 修复
+- `selectFinding` 函数头丢失 → 页面 JS 崩溃 → 已恢复
+- 右侧面板 CSS 默认值混乱 → 由 CSS 管理（#panelBusiness 默认可见，#panelDeveloper 默认隐藏）
+- Developer 模式展开/折叠状态管理简化
 
 ### 测试
 - **144 passed**, Typecheck clean
-- Hermes subprocess: v0.17.0 confirmed
-- UI 已验证: inbox 卡片渲染, trust stack 加载, approve/reject/modify 操作, sidebar 导航, chat
+- Hermes v0.17.0: 子进程 AI 摘要可用
+- Dev server: 正常运行，67 产品已排名
 
 ### 风险
-- Skills/Validation/Execution Preview 数据当前为 stub (后端尚未实现 Skills Engine + Validation)
-- chat 功能仍为 stub (Hermes chat 模式需确认)
-- Business Context 模块尚未开始
+- Business Context 模块未开始
+- Skills/Validation 数据为 stub
+- Chat 功能为 stub（Hermes chat 模式需确认）
 
 ### 建议下一步
-1. Business Context (P0003 中定义的 campaign/business/environment context)
-2. Skills Engine (从 Experience → Skill promotion pipeline)
-3. Validation Engine (counterfactual replay + accuracy tracking)
+1. **Business Context** — apps/ecommerce/context/
+2. **Skills Engine** — Experience → Skill promotion
+3. **Replay Simulator** — counterfactual comparison

@@ -96,3 +96,9 @@
 - **状态**: Accepted
 - **决策**: (1) 侧边栏恢复至 V1 agentCMS 稳定结构，全 i18n，移除 P0003 实验性分类。(2) 右侧面板从 Trust Decision Stack 重构为 Agent Transparency / Trace Panel——Operator 模式显示 Decision Summary + Data Sources + Execution Status，Builder 模式展开完整 trace（Skills Triggered、MCP/Tool Calls、Memory Influence、Execution Steps、Result Validation），默认折叠。(3) 中间 Workspace 保持不变。
 - **原因**: 见 [P0003.1](proposals/P0003.1-UI-Fix-&-Right-Panel-Redesign.md)。三栏职责分离清晰：Sidebar = Navigation, Workspace = Execution, Right Panel = Agent Trace。不允许 Sidebar 承担 AI 逻辑、Right Panel 做统计 Dashboard。
+
+## ADR-015: 合并 V1 运营/开发模式 + Trace Panel
+- **日期**: 2026-06-28
+- **状态**: Accepted
+- **决策**: 右侧面板最终方案——运营模式 = V1 业务面板（AI Summary + Reasoning Steps + Tool Calls），开发模式 = Trace Panel（Decision Summary → Data Sources → Execution Status，可展开 Skills/MCP/Memory/Steps/Validation）。移除单独 Operator/Builder 子切换（"Operator" 与 "运营" 语义重复）。
+- **原因**: 用户反馈。V1 模式和新功能是扩展关系而非替换。运营模式服务于日常操作，开发模式服务于深度调试。两档切换简洁清晰。

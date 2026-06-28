@@ -4,19 +4,19 @@
 
 ## 已完成
 
-- [x] 脚手架 + 共享 schemas (7 套) + utils (math/time/crypto)
-- [x] SQLite 存储 (16 tables, schema v2, WAL, 默认权重种子)
 - [x] **Metrics** — 计算器 (growth/risk/density/direction/confidence), pipeline [3,7,14]d, 9 信号/产品
-- [x] **Decision** — 3 profiles, 5 组件评分, explainability + decision trace, memory-adjustment 数学
+- [x] **Decision** — 3 profiles, 5 组件评分, explainability + decision trace, memory-adjustment
 - [x] **Explainability** — trust score (两支), 7 contradictions 规则, builder
-- [x] **Experience** — weight formula (final_score=0.40*conf+0.30*support+0.20*importance+0.10*freshness), 指数衰减, extraction (≥5 rejects, 8 MEMORY_PATTERN_RULES), structural adjustment 持久化
-- [x] **Review** — 10 类 reason category taxonomy, 24h stale queue, feedback capture, knowledge promotion (approve→case, modify→rule, reject→rule), auto-promote
-- [x] **Connectors** — JD/Tmall cross-platform normalizer (spec-based alias mapping), registry, auth profile loader
-- [x] **Hermes Client** — real subprocess seam (`hermes -z`), stub client, AI summary 接入 composition
-- [x] **Platform** — Express 5 (health/ranking/signals/reviews/memory/trace/workspace 路由), CLI (rank/signals/collect/db:init)
-- [x] **Workspace UI** — V2 nav (Discover/Memory/Reviews/Products/Settings), Evidence Hub 右侧面板, vanilla JS
-- [x] **Data Migration** — agentCMS 67 products + 668 orders → SQLite
-- [x] **V3 Restructure** — `src/` 删除, apps/platform/shared 三层, `#app/` `#platform/` `#shared/` path aliases, 命名 reflect 业务语言 (signal→metrics, ranking→decision, trace→explainability, memory→experience)
+- [x] **Experience** — weight/decay formulas, extraction (8 MEMORY_PATTERN_RULES), structural adjustment
+- [x] **Review** — 10 类 taxonomy, 24h queue, feedback, knowledge promotion
+- [x] **Connectors** — JD/Tmall normalizer, registry, auth
+- [x] **Hermes Client** — subprocess seam (`hermes -z` v0.17.0), stub client, AI summary
+- [x] **Platform** — Express 5, SQLite (16 tables), CLI, data migration (67 products + 668 orders)
+- [x] **Workspace UI** — agentCMS V1 完整复刻: 三栏布局, sidebar (发现视图+分析视图), inbox (统计卡片+发现列表+chat pin footer), 右侧面板 (运营/开发模式切换)
+- [x] **右侧面板模式** — 运营模式: V1 AI Summary + Reasoning Steps + Tool Calls; 开发模式: Trace Panel (Decision Summary → Data Sources → Execution Status, 可展开 Skills/MCP/Memory/Steps/Validation)
+- [x] **V3 Restructure** — src/ 删除, apps/platform/shared 三层, path aliases (#shared, #platform, #app)
+- [x] **Project Memory 系统** — context/ (architecture_snapshot, status.json, current_state, decisions, handoff, roadmap)
+- [x] **Proposals** — P0001-P0003.1 (产品定位, Workspace IA, Trust UI, Review Pipeline, Skill Lifecycle, Experience Model, UI Fix)
 
 ## 进行中
 
@@ -24,11 +24,11 @@ _无_
 
 ## 下一步
 
-- [ ] **Business Context** — 一等公民: campaign / business objectives / constraints / environment (这是整个 Workspace 最重要的未完成模块)
-- [ ] **Skills** — 已验证的业务 SOP 含 version / success rate / impact
-- [ ] Connectors CDP onboarding (Chrome debug-mode cookie harvest via CDP)
-- [ ] Replay Simulator (时间序列 replay, counterfactual comparison, management report)
-- [ ] MCP tool exposure (向 Hermes 暴露 business skills 作为 MCP 服务器)
+- [ ] **Business Context** — apps/ecommerce/context/ (campaign, business objectives, seasonality)
+- [ ] **Skills Engine** — 从 Experience → Skill promotion pipeline
+- [ ] **Connectors CDP onboarding** — Chrome debug-mode cookie harvest
+- [ ] **Replay Simulator** — time-series replay, counterfactual comparison
+- [ ] **MCP tool exposure** — 向 Hermes 暴露 business skills
 
 ## 阻塞
 
