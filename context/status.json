@@ -1,9 +1,22 @@
 {
   "project": "agentFabric",
-  "version": "0.1.0",
+  "version": "0.9.1",
   "description": "Business Workspace on Hermes Agent Runtime",
   "hermes": "0.17.0",
   "completed": [
+    "P0006.1.1 Signal Observation Model Refactor — observed_at column, two-layer Signal model, three-timeline architecture",
+    "P0006 HermesAgent & Workspace Integration — Skills, Chat endpoint, Runtime HTTP API, Workspace Runtime View",
+    "P0005.6.1 CLI Final Patch — CLI pure shell, zero business logic, kernel.executeLiveCDP + kernel.executeImport",
+    "P0005.6 Execution Convergence — processDay deleted, all paths go through Kernel/signal-engine",
+    "P0005.5 Runtime Convergence Layer (runtime/kernel/ 6 modules; CLI → Kernel; 895 normalizer keys vs 16; unified pipeline)",
+    "P0005.4 Connector Binding Layer (binding/types, loader, planner, executor; JD connector blueprint-driven; generated/ → consumed)",
+    "JD Business Data Connector P0005.1 (Evidence Store, JD parser/acquisition/manifest, CLI collect)",
+    "D0002 JD Capability Discovery (15 pages, 70 APIs, 7 business contexts, capability matrix)",
+    "JD 商智 帮助文档完整抓取 (34 modules, indicators, pricing)",
+    "D0002 JD Capability Discovery (15 pages, 70 APIs, 7 business contexts, verified from real data)",
+    "P0005.2 Discovery Engine (4 phases, 6 modules: api-inventory, schema-evolution, indicator-dictionary, business-context)",
+    "P0005.3 Capability Generator (6 modules, generated/ 5 JSON output, CLI generate-blueprint)",
+    "Runtime Control Plane P0004 (RuntimeAdapter, ExecutionPlan, Router, Registry, HermesAdapter)",
     "Metrics (signal computation, 9 signals/product, multi-window [3,7,14]d)",
     "Decision (3 profiles, 5-component scoring, explainability, memory-adjustment)",
     "Explainability (trust score, 7 contradiction rules, 4-layer business trace)",
@@ -21,14 +34,8 @@
     "Renames (dashboard→workspace, collectors→connectors, composition.ts→orchestrator.ts)"
   ],
   "developing": [],
-  "next": [
-    "Business Context (campaign, business objectives, constraints, environment)",
-    "Skills (validated business SOPs with version, success rate, impact)",
-    "Connectors CDP onboarding (Chrome debug-mode cookie harvest)",
-    "Replay Simulator (time-series replay, counterfactual comparison)",
-    "MCP tool exposure (expose business skills as MCP server to Hermes)"
-  ],
+  "next": [],
   "blocked": [],
-  "tests": 144,
+  "tests": 413,
   "coverage": "domains: 80%+ target"
 }

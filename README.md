@@ -23,9 +23,13 @@ apps/ecommerce/         # 电商业务空间 — 全部业务逻辑在此
   analysis/               decision/ metrics/ explainability/ composition.ts
   experience/             review/ connectors/ workspace/
   skills/ policy/ knowledge/ reports/
+  runtime/                kernel/ (统一运行时收敛层)
 platform/               # 共享基础设施
-  runtime/hermes/          storage/ server/
+  runtime/hermes/          storage/ (SQLite schema + persistence)
+  server/                    Express routes
 shared/                 # 跨 App 共享 (schemas + utils)
+scripts/                # CLI 入口
+tests/                  # contract/ domain/ unit/ integration/
 ```
 
 ## 核心命令
@@ -33,13 +37,27 @@ shared/                 # 跨 App 共享 (schemas + utils)
 | 命令 | 说明 |
 |------|------|
 | `npm run typecheck` | TypeScript 类型检查 |
-| `npm test` | 运行全部测试 (144 tests) |
+| `npm test` | 运行全部测试 (413 tests) |
 | `npm run dev` | 开发服务器 (tsx watch platform/server) |
 | `npm run cli -- rank` | CLI: 排名计算 |
+| `npm run cli -- collect jd <shopId>` | CLI: 京东商智数据采集 |
+| `npm run cli -- generate-blueprint` | CLI: 生成 Connector Blueprint |
 
 ## 技术栈
 
 Node.js + TypeScript (ES modules) · Express 5 · SQLite (better-sqlite3, WAL) · Zod · Vitest · Vanilla JS SPA · Hermes (Python, subprocess)
+
+## 架构
+
+```
+Hermes Agent Runtime (Python)
+        ↓ subprocess
+agentFabric (TypeScript + SQLite)
+  ├── Business Loop: Connectors → Metrics → Decision → Explainability
+  ├── Experience: Validation → Memory → Skills evolution
+  ├── Review: Human approval → Feedback → Knowledge promotion
+  └── Workspace: Evidence Hub + Runtime View + Chat
+```
 
 ## 设计原则
 
@@ -48,3 +66,20 @@ Node.js + TypeScript (ES modules) · Express 5 · SQLite (better-sqlite3, WAL) �
 3. **人在回路中** — 所有重要决策保持可审核
 4. **可解释性** — 每个 AI 结论追溯到证据
 5. **Runtime 可替换** — 业务逻辑只依赖 `HermesClient` 接口
+6. **Loop Driven** — 业务循环是产品，功能只是接口
+7. **Capability is Data** — Blueprint 驱动 Connector，不手写
+8. **Single Source of Truth** — 所有 Agent 读同一套项目记忆 (`context/`)
+
+## 项目记忆
+
+`context/` 目录是项目的 Single Source of Truth：
+
+| 文件 | 用途 |
+|------|------|
+| `current_state.md` | 版本、已完成、进行中、下一步、阻塞 |
+| `decisions.md` | ADR (Architecture Decision Records) |
+| `handoff.md` | 会话交接记录 |
+| `status.json` | 机器可读快照 |
+| `roadmap.md` | 路线图 |
+
+每次开发会话后必须更新这些文件。详见 `CLAUDE.md`。

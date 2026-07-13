@@ -23,17 +23,21 @@
 - [x] Path aliases (`#shared/`, `#platform/`, `#app/`)
 - [x] Project Memory 系统 (context files)
 
-## Phase 5: Context Engine 🔜
+## Phase 5: HermesAgent + Workspace Integration ✅
+- [x] **Skills** — 5 business skills (collect_data, analyze_ranking, query_signals, query_evidence, general_question)
+- [x] **Chat Endpoint** — 自然语言 → 意图分类 → Kernel → 响应
+- [x] **Runtime HTTP API** — Kernel 通过 HTTP 可访问
+- [x] **Workspace Runtime View** — 执行历史 + 详情 + Chat 接入
+
+## Phase 6: Context Engine 🔜
 - [ ] **Business Context** — 一等公民 (campaign, business objectives, seasonality, constraints, competitor snapshot)
 - [ ] 每次 Decision 前自动 Load Business Context
 
-## Phase 6: Skills + Workflows 🔮
-- [ ] **Skills** — 已验证的业务 SOP 含 version / success rate / impact (自带 Prompt)
-- [ ] `prompts/` → 吸收进 Skills
+## Phase 7: Skills + Workflows 🔮
 - [ ] **Business Workflows** — 618, 双11, 新品上市, 日报/周报/月报 (不是 Runtime Workflow)
 
 ## Phase 7: 后续增强 🔮
-- [ ] Connectors CDP onboarding (Chrome debug-mode cookie harvest)
+- [x] Connectors CDP onboarding (Chrome debug-mode, JD session reuse, Playwright connectOverCDP) ✅ D0002
 - [ ] Replay Simulator (counterfactual comparison, management report)
 - [ ] MCP tool exposure (向 Hermes 暴露 business skills)
 - [ ] 反馈驱动的信号重加权 (signal usefulness → 权重推荐)
