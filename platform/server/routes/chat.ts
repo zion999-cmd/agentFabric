@@ -92,7 +92,7 @@ const dispatchHandler = async (
         const result = await kernel.execute({
           shopId: ctx.shopId,
           date: ctx.date,
-          mock: true, // Chat always uses mock mode for safety
+          mock: false, // Use real evidence data from DB
           shopName: ctx.shopName,
         });
         return {
@@ -307,7 +307,7 @@ export const chatRouter = (db: Db): Router => {
           const execResult = await kernel.execute({
             shopId: handlerCtx.shopId ?? 'jd_shop_001',
             date: handlerCtx.date ?? new Date().toISOString().slice(0, 10),
-            mock: true, // Chat mock mode; live CDP requires CLI
+            mock: false, // Use real evidence data from DB
             shopName: handlerCtx.shopName ?? '京东店铺',
           });
           executionResult = {
