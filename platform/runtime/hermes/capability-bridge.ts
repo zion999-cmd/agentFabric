@@ -16,7 +16,6 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { createCapabilityRegistry } from '#app/connectors/capability/index.js';
 import type { CapabilityRegistry, ContractMatch } from '#app/connectors/capability/index.js';
-import type { CapabilityContract } from '#app/connectors/capability/index.js';
 
 // ---- Bridge Interface ----
 
@@ -63,7 +62,6 @@ export interface CapabilityBridge {
 const CONTRACT_PATH = resolve(process.cwd(), 'generated', 'capability-contract.json');
 
 let _registry: CapabilityRegistry | null = null;
-let _contract: CapabilityContract | null = null;
 
 const getRegistry = (): CapabilityRegistry => {
   if (!_registry) {
@@ -73,8 +71,7 @@ const getRegistry = (): CapabilityRegistry => {
         '. Run "npm run cli -- generate-contract" first.',
       );
     }
-    const contract: CapabilityContract = JSON.parse(readFileSync(CONTRACT_PATH, 'utf-8'));
-    _contract = contract;
+    const contract = JSON.parse(readFileSync(CONTRACT_PATH, 'utf-8'));
     _registry = createCapabilityRegistry();
     _registry.loadContract(contract);
   }
@@ -95,7 +92,7 @@ export const createCapabilityBridge = (): CapabilityBridge => {
       return {
         bestMatch: matches.length > 0 ? matches[0]! : null,
         candidates: matches.slice(0, 5),
-        totalCapabilities: summary.total_capabilities ?? summary.totalCapabilities ?? 0,
+        totalCapabilities: summary.total_capabilities,
         domains: summary.domains,
       };
     },
@@ -124,5 +121,4 @@ export const createCapabilityBridge = (): CapabilityBridge => {
  */
 export const resetCapabilityBridge = (): void => {
   _registry = null;
-  _contract = null;
 };

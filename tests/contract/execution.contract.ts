@@ -7,6 +7,12 @@ import {
   ExecutionEventSchema,
   ExecutionEventTypeSchema,
   ExecutionStatusSchema,
+  AcquisitionStartedEventSchema,
+  AcquisitionProgressEventSchema,
+  AcquisitionCompletedEventSchema,
+  EvidenceCreatedEventSchema,
+  ExecutionCompletedEventSchema,
+  ExecutionFailedEventSchema,
 } from '#shared/schemas/execution.js';
 
 // ---- ExecutionRequest Tests ----
@@ -87,68 +93,68 @@ describe('ExecutionEvent', () => {
 
   it('validates acquisition.started event', () => {
     const event = {
-      type: 'acquisition.started',
+      type: 'acquisition.started' as const,
       taskId: 'task_001',
       timestamp: '2026-08-11T10:00:01Z',
-      data: { method: 'cdp', platform: 'jd', page: 'flow-summary' },
+      data: { method: 'cdp' as const, platform: 'jd', page: 'flow-summary' },
     };
-    const result = ExecutionEventSchema.parse(event);
+    const result = AcquisitionStartedEventSchema.parse(event);
     expect(result.type).toBe('acquisition.started');
     expect(result.data.method).toBe('cdp');
   });
 
   it('validates acquisition.progress event', () => {
     const event = {
-      type: 'acquisition.progress',
+      type: 'acquisition.progress' as const,
       taskId: 'task_001',
       timestamp: '2026-08-11T10:00:05Z',
       data: { completed: 3, total: 7 },
     };
-    const result = ExecutionEventSchema.parse(event);
+    const result = AcquisitionProgressEventSchema.parse(event);
     expect(result.data.completed).toBe(3);
   });
 
   it('validates acquisition.completed event', () => {
     const event = {
-      type: 'acquisition.completed',
+      type: 'acquisition.completed' as const,
       taskId: 'task_001',
       timestamp: '2026-08-11T10:00:15Z',
       data: { endpointsCaptured: 7, durationMs: 14200 },
     };
-    const result = ExecutionEventSchema.parse(event);
+    const result = AcquisitionCompletedEventSchema.parse(event);
     expect(result.data.endpointsCaptured).toBe(7);
   });
 
   it('validates evidence.created event', () => {
     const event = {
-      type: 'evidence.created',
+      type: 'evidence.created' as const,
       taskId: 'task_001',
       timestamp: '2026-08-11T10:00:12Z',
       data: { evidenceId: 'ev_001', dataType: 'traffic', metricsCount: 17 },
     };
-    const result = ExecutionEventSchema.parse(event);
+    const result = EvidenceCreatedEventSchema.parse(event);
     expect(result.data.metricsCount).toBe(17);
   });
 
   it('validates execution.completed event', () => {
     const event = {
-      type: 'execution.completed',
+      type: 'execution.completed' as const,
       taskId: 'task_001',
       timestamp: '2026-08-11T10:00:20Z',
       data: { totalEvidence: 7, totalMetrics: 17, durationMs: 20000 },
     };
-    const result = ExecutionEventSchema.parse(event);
+    const result = ExecutionCompletedEventSchema.parse(event);
     expect(result.data.totalEvidence).toBe(7);
   });
 
   it('validates execution.failed event', () => {
     const event = {
-      type: 'execution.failed',
+      type: 'execution.failed' as const,
       taskId: 'task_001',
       timestamp: '2026-08-11T10:00:05Z',
       data: { code: 'CDP_CONNECTION_FAILED', message: 'Cannot connect to Chrome on port 9222', recoverable: true },
     };
-    const result = ExecutionEventSchema.parse(event);
+    const result = ExecutionFailedEventSchema.parse(event);
     expect(result.type).toBe('execution.failed');
     expect(result.data.recoverable).toBe(true);
   });

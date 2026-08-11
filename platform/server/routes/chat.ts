@@ -15,6 +15,7 @@ import { matchIntent, generateResponse } from '#app/skills/registry.js';
 import type { SkillDefinition } from '#app/skills/definitions.js';
 import { SKILL_CATALOG } from '#app/skills/definitions.js';
 import { createRuntimeKernel, createEmptyBlueprint } from '#app/runtime/kernel/index.js';
+import { createCapabilityBridge } from '#platform/runtime/hermes/index.js';
 import { loadBlueprint } from '#app/connectors/binding/loader.js';
 import { rankProductsComposition } from '#app/orchestrator.js';
 import { SignalFacade } from '#app/analysis/metrics/facade.js';
@@ -226,6 +227,30 @@ const dispatchHandler = async (
         };
       }
 
+      // ---- Bridge Handlers (Phase 3.2) ----
+      case 'bridge.discover': {
+        const bridge = createCapabilityBridge();
+        const result = bridge.searchByIntent(ctx.date ? `分析流量 ${ctx.date}` : '分析流量');
+        if (!result.bestMatch) {
+          return { success: false, data: {}, error: 'No matching capability found for this intent.' };
+        }
+        const cap = result.bestMatch.entry;
+        return {
+          success: true,
+          data: {
+            summary: `最佳匹配: ${cap.name} (${cap.capability}). ${cap.description}`,
+            capability: cap.capability,
+            capabilityName: cap.name,
+            domain: cap.domain,
+            provider: `${cap.provider.platform} (${cap.provider.acquisition})`,
+            validation: cap.validation.status,
+            outputs: cap.outputs.join(', '),
+            metricsCount: String(cap.outputs.length),
+            candidates: JSON.stringify(result.candidates.slice(0, 3).map((c) => ({ capability: c.entry.capability, name: c.entry.name, score: c.score }))),
+          },
+        };
+      }
+
       default:
         return {
           success: false,
@@ -271,8 +296,35 @@ export const chatRouter = (db: Db): Router => {
       if (context?.profile !== undefined) handlerCtx.profile = context.profile;
       const dispatchResult = await dispatchHandler(match.skill, db, handlerCtx);
 
+      // Step 2.5: If capability discovered, execute it (Phase 3.4 E2E chain)
+      let executionResult: Record<string, unknown> | null = null;
+      if (match.skill.name === 'discover_capability' && dispatchResult.success && dispatchResult.data['capability']) {
+        const discoveredCapability = dispatchResult.data['capability'] as string;
+        try {
+          let blueprint;
+          try { blueprint = loadBlueprint('jd'); } catch { blueprint = createEmptyBlueprint('jd'); }
+          const kernel = createRuntimeKernel(db, blueprint);
+          const execResult = await kernel.execute({
+            shopId: handlerCtx.shopId ?? 'jd_shop_001',
+            date: handlerCtx.date ?? new Date().toISOString().slice(0, 10),
+            mock: true, // Chat mock mode; live CDP requires CLI
+            shopName: handlerCtx.shopName ?? '京东店铺',
+          });
+          executionResult = {
+            capability: discoveredCapability,
+            success: execResult.success,
+            signalCount: execResult.signals.length,
+            evidenceCount: execResult.evidence.length,
+            signalTypes: execResult.signals.map((s) => s.signal_name).filter((v, i, a) => a.indexOf(v) === i).join(', '),
+            errors: execResult.errors.join('; '),
+          };
+        } catch (e) {
+          executionResult = { capability: discoveredCapability, success: false, error: e instanceof Error ? e.message : 'Execution failed' };
+        }
+      }
+
       // Step 3: Response generation
-      const skillResult = { skill: match.skill, ...dispatchResult };
+      const skillResult = { skill: match.skill, ...dispatchResult, executionResult };
       const reply = await generateResponse(
         match.skill,
         skillResult,
@@ -289,7 +341,7 @@ export const chatRouter = (db: Db): Router => {
         execution: {
           success: dispatchResult.success,
           skillName: match.skill.name,
-          data: dispatchResult.data,
+          data: { ...dispatchResult.data, ...(executionResult ? { execution: executionResult } : {}) },
         },
       };
 

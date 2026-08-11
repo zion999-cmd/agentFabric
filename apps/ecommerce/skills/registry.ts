@@ -54,6 +54,8 @@ const buildClassificationPrompt = (message: string): string => {
     '- 如果用户想获取/采集/拉取数据，选择 collect_data',
     '- 如果用户想看排名/榜单/哪个商品好，选择 analyze_ranking',
     '- 如果用户想查询具体数据/信号/指标，选择 query_signals',
+    '- 如果用户想知道系统能获取什么数据/有什么能力/能分析什么，选择 discover_capability',
+    '- 如果用户想分析流量/交易/商品/行业等具体业务问题，选择 discover_capability',
     '- 如果用户问系统能做什么或一般性问题，选择 general_question',
     '- 如果不确定，选择 general_question',
     '',
