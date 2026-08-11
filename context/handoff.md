@@ -1,10 +1,24 @@
 # 交接文档
 
-## 本次会话 (2026-08-11) — Phase 2 Workspace + Proposal Taxonomy
+## 本次会话 (2026-08-11) — Phase 2 Workspace + Proposal Taxonomy + Phase 3 Design
 
 ### 做了什么
 
-完成 P0006.5.3 Capability Contract 后，实现 Phase 2 Agent Cognitive Workspace（Human ↔ Agent ↔ Capability ↔ Evidence），并规范化 proposals/ 目录命名体系。
+完成 P0006.5.3 Capability Contract 后，实现 Phase 2 Agent Cognitive Workspace（Human ↔ Agent ↔ Capability ↔ Evidence），规范化 proposals/ 目录命名体系，并创建 Phase 3 HermesAgent Integration 设计提案。
+
+### Phase 3 Hermes Integration Proposal
+
+- **文件**: `proposals/workspace-v0.2-phase3-hermes-integration.md`
+- **格式**: Feature Proposal（非 P-number；日后可升级为 P0006.3）
+- **核心设计**:
+  1. HermesAgent → CapabilityRegistry.searchByIntent() → 选择能力（不执行采集）
+  2. Runtime Kernel 作为 Capability Execution Layer（共享于所有 Agent Runtime）
+  3. Observable Event Model: intent.resolved → capability.selected → execution.started → acquisition.* → evidence.created → execution.completed → response.ready
+  4. POST /api/runtime/chat：异步 task 模型（SSE 事件流），不是同步 Chat API
+- **Phase 2 vs Phase 3 关系**:
+  - Phase 2: UI shell（static event slots + disabled input）
+  - Phase 3: 接通 HermesAgent，UI 消费真实事件流
+  - P0006.5.3: Capability Contract（Phase 3 HermesAgent 的查询入口）
 
 ### Phase 2 Workspace UI 实施
 

@@ -4,6 +4,7 @@
 
 ## 已完成
 
+- [x] **Phase 3 HermesAgent Integration Proposal** — workspace-v0.2-phase3-hermes-integration.md. 四个核心设计: (1) HermesAgent → CapabilityRegistry.searchByIntent() 能力选择, (2) Runtime Kernel 作为共享 Capability Execution Layer, (3) Observable Event Model 8 种事件类型, (4) POST /api/runtime/chat 异步 task 模型 + SSE 事件流. NOT Included: HermesAgent 内部实现, Skill/Memory 系统, MCP, 多轮对话.
 - [x] **Phase 2 Agent Cognitive Workspace** — Human ↔ Agent ↔ Capability ↔ Evidence. Agent Session (主视图, UI state contract, Phase 3 接 HermesAgent), Capability Explorer (11 capabilities, domain filter, intent search), Evidence Viewer (provenance chain + evidence timeline). GET /api/capabilities, GET /api/evidence/:id. JS loaders 实现. 测试 412/413 pass. Tag: v0.2-phase2-workspace. 无 CBP 污染. ADR-030
 - [x] **P0006.5.3 Capability Contract** — Schema (intent/inputs/outputs/provider), Generator (11 capabilities, 48 metrics, 8 domains), Registry (searchByIntent, findByMetric, findByDomain), CLI (generate-contract, describe-capability). Contract Artifact: generated/capability-contract.json. ADR-029
 - [x] **P0006.2 Real Data Runtime Replay** — 验证完整闭环: Evidence Store (573 真实 CDP 文件) → Historical Acquire → Runtime Kernel (190 天逐日执行) → Signal (3,489 signals) → Workspace (Runtime Timeline). 修复 `parseAcquiredData` 证据数据包装 + `jd-schema.ts` SQL 分号. 0 errors, 全部真实 GMV 数据 (¥4,628~¥14,230/天). ADR-027
