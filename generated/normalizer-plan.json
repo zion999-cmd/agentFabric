@@ -1,0 +1,6215 @@
+{
+  "generated_at": "2026-07-03T17:12:07.963Z",
+  "source": "discovery/jd-capability indicator_dictionary + api_inventory",
+  "rules": [
+    {
+      "source_field": "fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "sch_traffic_intr_ord_cvr_deal",
+      "unit": "ratio",
+      "transform": "identity",
+      "confidence": 0.2
+    },
+    {
+      "source_field": "fo_jdr_sch_industry_deal_rate",
+      "canonical": "deal",
+      "unit": "ratio",
+      "transform": "identity",
+      "confidence": 0.5
+    },
+    {
+      "source_field": "fo_jdr_sch_industry_deal_rate##compare",
+      "canonical": "deal",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 0.5
+    },
+    {
+      "source_field": "fo_jdr_sch_industry_deal_rate##compareValue",
+      "canonical": "deal",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 0.5
+    },
+    {
+      "source_field": "fo_jdr_sch_trade_cancel_refund_ord_amt",
+      "canonical": "refund",
+      "unit": "currency",
+      "transform": "identity",
+      "confidence": 0.5
+    },
+    {
+      "source_field": "fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "canonical": "ord_amt_user",
+      "unit": "currency",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "canonical": "page_qtty",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.5
+    },
+    {
+      "source_field": "jdr_sch_sku_main_pic_address",
+      "canonical": "pic",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.5
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "canonical": "gmv",
+      "unit": "currency",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+      "canonical": "gmv",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+      "canonical": "gmv",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+      "canonical": "orders",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+      "canonical": "orders",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+      "canonical": "orders",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "canonical": "items_sold",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 1
+    },
+    {
+      "source_field": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "canonical": "sku_page_cnt_traffic_plat_item_di",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+      "canonical": "sku_page_cnt_traffic_plat_item_di",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+      "canonical": "sku_page_cnt_traffic_plat_item_di",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "sku_cnt_jd_unified_attribution",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "canonical": "sku_qtty_jd_unified_attribution",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "canonical": "last_field_src_rmad",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "ord_ord_amt_jd_unified_attribution_trade_deal_snapshot",
+      "unit": "currency",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "canonical": "ord_user_cnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+      "canonical": "ord_user_cnt",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+      "canonical": "ord_user_cnt",
+      "unit": "pct",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "status",
+      "canonical": "status",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "message",
+      "canonical": "message",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content",
+      "canonical": "content",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.stockOutNum",
+      "canonical": "content.stockOutNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.stockOutBSNum",
+      "canonical": "content.stockOutBSNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.stockOutSaleLoseAmount",
+      "canonical": "content.stockOutSaleLoseAmount",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.beingStockOutNum",
+      "canonical": "content.beingStockOutNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.beingStockOutBSNum",
+      "canonical": "content.beingStockOutBSNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.beingStockOutHSAmount",
+      "canonical": "content.beingStockOutHSAmount",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.beingUnsaleNum",
+      "canonical": "content.beingUnsaleNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.beingUnsaleNBSNum",
+      "canonical": "content.beingUnsaleNBSNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.unsaleNum",
+      "canonical": "content.unsaleNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.unsaleNBSNum",
+      "canonical": "content.unsaleNBSNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.unsaleAmount",
+      "canonical": "content.unsaleAmount",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.nosaleNum",
+      "canonical": "content.nosaleNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.nosaleAmount",
+      "canonical": "content.nosaleAmount",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.pageNo",
+      "canonical": "content.pageNo",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.pageSize",
+      "canonical": "content.pageSize",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.total",
+      "canonical": "content.total",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.dataList",
+      "canonical": "content.dataList",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.dt",
+      "canonical": "content.dt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.score",
+      "canonical": "content.score",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.nextLevelDiff",
+      "canonical": "content.nextLevelDiff",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.scoreLevelList",
+      "canonical": "content.scoreLevelList",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.scoreLevelList.label",
+      "canonical": "content.scoreLevelList.label",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.scoreLevelList.value",
+      "canonical": "content.scoreLevelList.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.adviseList",
+      "canonical": "content.adviseList",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.turnoverRankRate",
+      "canonical": "content.turnoverRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.spotRankRate",
+      "canonical": "content.spotRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.unsaleRankRate",
+      "canonical": "content.unsaleRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.categoryTurnoverRankRate",
+      "canonical": "content.categoryTurnoverRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.categorySpotRankRate",
+      "canonical": "content.categorySpotRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.categoryUnsaleRankRate",
+      "canonical": "content.categoryUnsaleRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.pieceTurnover",
+      "canonical": "content.pieceTurnover",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.stockPieList",
+      "canonical": "content.stockPieList",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.stockPieList.label",
+      "canonical": "content.stockPieList.label",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.stockPieList.value",
+      "canonical": "content.stockPieList.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.spotRate",
+      "canonical": "content.spotRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.bestsellerSpotRate",
+      "canonical": "content.bestsellerSpotRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.unsaleRate",
+      "canonical": "content.unsaleRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.unsaleProductNumRate",
+      "canonical": "content.unsaleProductNumRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.nosaleRate",
+      "canonical": "content.nosaleRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.name",
+      "canonical": "content.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.categories",
+      "canonical": "content.categories",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.series",
+      "canonical": "content.series",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.series.name",
+      "canonical": "content.series.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.series.data",
+      "canonical": "content.series.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.children",
+      "canonical": "content.children",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.children.children",
+      "canonical": "content.children.children",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.children.children.label",
+      "canonical": "content.children.children.label",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.children.children.value",
+      "canonical": "content.children.children.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.children.label",
+      "canonical": "content.children.label",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.children.value",
+      "canonical": "content.children.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.label",
+      "canonical": "content.label",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.value",
+      "canonical": "content.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.industry",
+      "canonical": "content.industry",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.indexType",
+      "canonical": "content.indexType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.indexName",
+      "canonical": "content.indexName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.num",
+      "canonical": "content.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "length",
+      "canonical": "length",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect",
+      "canonical": "content.effect",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.new",
+      "canonical": "content.effect.new",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.new.shop",
+      "canonical": "content.effect.new.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.new.num",
+      "canonical": "content.effect.new.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.deal",
+      "canonical": "content.effect.deal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.deal.shop",
+      "canonical": "content.effect.deal.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.deal.num",
+      "canonical": "content.effect.deal.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.inShop",
+      "canonical": "content.effect.inShop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.inShop.shop",
+      "canonical": "content.effect.inShop.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.inShop.num",
+      "canonical": "content.effect.inShop.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.detail",
+      "canonical": "content.effect.detail",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.detail.shop",
+      "canonical": "content.effect.detail.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.detail.num",
+      "canonical": "content.effect.detail.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.cart",
+      "canonical": "content.effect.cart",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.cart.shop",
+      "canonical": "content.effect.cart.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.effect.cart.num",
+      "canonical": "content.effect.cart.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent",
+      "canonical": "content.percent",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.deal",
+      "canonical": "content.percent.deal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.deal.other",
+      "canonical": "content.percent.deal.other",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.deal.self",
+      "canonical": "content.percent.deal.self",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.inShop",
+      "canonical": "content.percent.inShop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.inShop.other",
+      "canonical": "content.percent.inShop.other",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.inShop.self",
+      "canonical": "content.percent.inShop.self",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.cart",
+      "canonical": "content.percent.cart",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.cart.other",
+      "canonical": "content.percent.cart.other",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.cart.self",
+      "canonical": "content.percent.cart.self",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.browse",
+      "canonical": "content.percent.browse",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.browse.other",
+      "canonical": "content.percent.browse.other",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.percent.browse.self",
+      "canonical": "content.percent.browse.self",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.startDate",
+      "canonical": "content.startDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.endDate",
+      "canonical": "content.endDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old",
+      "canonical": "content.old",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.name",
+      "canonical": "content.old.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.type",
+      "canonical": "content.old.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.value",
+      "canonical": "content.old.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.info",
+      "canonical": "content.old.info",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.member",
+      "canonical": "content.member",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans",
+      "canonical": "content.fans",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.name",
+      "canonical": "content.fans.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.type",
+      "canonical": "content.fans.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.value",
+      "canonical": "content.fans.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.info",
+      "canonical": "content.fans.info",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.new",
+      "canonical": "content.new",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice",
+      "canonical": "content.notice",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice.messageLink",
+      "canonical": "content.notice.messageLink",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice.date",
+      "canonical": "content.notice.date",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice.menuCode",
+      "canonical": "content.notice.menuCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice.messageLinkWord",
+      "canonical": "content.notice.messageLinkWord",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice.message",
+      "canonical": "content.notice.message",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.notice.title",
+      "canonical": "content.notice.title",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data",
+      "canonical": "content.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.code",
+      "canonical": "content.data.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.auth",
+      "canonical": "content.data.auth",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.level",
+      "canonical": "content.data.level",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.pid",
+      "canonical": "content.data.pid",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.isLeaf",
+      "canonical": "content.data.isLeaf",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.uri",
+      "canonical": "content.data.uri",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.cssClass",
+      "canonical": "content.data.cssClass",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.children",
+      "canonical": "content.data.children",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.name",
+      "canonical": "content.data.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.id",
+      "canonical": "content.data.id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.isVirtual",
+      "canonical": "content.data.isVirtual",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.order",
+      "canonical": "content.data.order",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.data.status",
+      "canonical": "content.data.status",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.indexShopFlag",
+      "canonical": "content.indexShopFlag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.START_TIME",
+      "canonical": "content.START_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SHOP_ID",
+      "canonical": "content.SHOP_ID",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_QUARTER_TIME",
+      "canonical": "content.PAGE_QUARTER_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_CUSTOM_TIME",
+      "canonical": "content.PAGE_CUSTOM_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.HAS_CUSTOM_TIME",
+      "canonical": "content.HAS_CUSTOM_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.TMPLOGIN",
+      "canonical": "content.TMPLOGIN",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.refundStartDate",
+      "canonical": "content.refundStartDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.bcTag",
+      "canonical": "content.bcTag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_DAY182_TIME",
+      "canonical": "content.PAGE_DAY182_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.systemTime",
+      "canonical": "content.systemTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.hasTimeExtendedModule",
+      "canonical": "content.hasTimeExtendedModule",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.isTimeSaleMenu",
+      "canonical": "content.isTimeSaleMenu",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_DAY_TIME",
+      "canonical": "content.PAGE_DAY_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_WEEK_TIME",
+      "canonical": "content.PAGE_WEEK_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SHOP_TYPE",
+      "canonical": "content.SHOP_TYPE",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SERVER_TIME",
+      "canonical": "content.SERVER_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SHOW_TO_BRAND",
+      "canonical": "content.SHOW_TO_BRAND",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.activityEndDate",
+      "canonical": "content.activityEndDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_DAY90_TIME",
+      "canonical": "content.PAGE_DAY90_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.businessModelName",
+      "canonical": "content.businessModelName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_YEAR_TIME",
+      "canonical": "content.PAGE_YEAR_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.activityStartDate",
+      "canonical": "content.activityStartDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.erpName",
+      "canonical": "content.erpName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_DAY30_TIME",
+      "canonical": "content.PAGE_DAY30_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.greyInfo",
+      "canonical": "content.greyInfo",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.USER_NAME",
+      "canonical": "content.USER_NAME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.businessModelKey",
+      "canonical": "content.businessModelKey",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.am",
+      "canonical": "content.am",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SHOP_POP_UP",
+      "canonical": "content.SHOP_POP_UP",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_MONTH_TIME",
+      "canonical": "content.PAGE_MONTH_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.VERSION_ID",
+      "canonical": "content.VERSION_ID",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.refundEndDate",
+      "canonical": "content.refundEndDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_TIME",
+      "canonical": "content.PAGE_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.USER_TYPE",
+      "canonical": "content.USER_TYPE",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.hasJdszAuth",
+      "canonical": "content.hasJdszAuth",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SHOW_SWITCH_SHOP",
+      "canonical": "content.SHOW_SWITCH_SHOP",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.VENDER_ID",
+      "canonical": "content.VENDER_ID",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.LAST_SIX_MONTH_TIME",
+      "canonical": "content.LAST_SIX_MONTH_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.videoLink",
+      "canonical": "content.videoLink",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_DAY15_TIME",
+      "canonical": "content.PAGE_DAY15_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.SURVEY_URL",
+      "canonical": "content.SURVEY_URL",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.isJingMaiOldVer",
+      "canonical": "content.isJingMaiOldVer",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.PAGE_DAY7_TIME",
+      "canonical": "content.PAGE_DAY7_TIME",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.uriedPoint",
+      "canonical": "content.uriedPoint",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.code",
+      "canonical": "content.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.desc",
+      "canonical": "content.desc",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.alias",
+      "canonical": "content.alias",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.checked",
+      "canonical": "content.checked",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.chart",
+      "canonical": "content.chart",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.chart.series",
+      "canonical": "content.chart.series",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.chart.series.data",
+      "canonical": "content.chart.series.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.chart.series.name",
+      "canonical": "content.chart.series.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.chart.categories",
+      "canonical": "content.chart.categories",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.info",
+      "canonical": "content.info",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.info.shop",
+      "canonical": "content.info.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.info.year",
+      "canonical": "content.info.year",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.info.num",
+      "canonical": "content.info.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.info.percent",
+      "canonical": "content.info.percent",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.info.day",
+      "canonical": "content.info.day",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.shopId",
+      "canonical": "content.shopId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.skuId",
+      "canonical": "content.skuId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.skuName",
+      "canonical": "content.skuName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.imgSrc",
+      "canonical": "content.imgSrc",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.proUrl",
+      "canonical": "content.proUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.rankId",
+      "canonical": "content.rankId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.browseCnt",
+      "canonical": "content.browseCnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.browseCntCycleRatio",
+      "canonical": "content.browseCntCycleRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.addCartCnt",
+      "canonical": "content.addCartCnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.purchaseCnt",
+      "canonical": "content.purchaseCnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.addCartCntCycleRatio",
+      "canonical": "content.addCartCntCycleRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.dealConversionCntRate",
+      "canonical": "content.dealConversionCntRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.dealConversionCntRateCycleRatio",
+      "canonical": "content.dealConversionCntRateCycleRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.gmv",
+      "canonical": "content.gmv",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.gmvCycleRatio",
+      "canonical": "content.gmvCycleRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.itemDisabled",
+      "canonical": "content.itemDisabled",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle",
+      "canonical": "content.lastCycle",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.shopId",
+      "canonical": "content.lastCycle.shopId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.skuId",
+      "canonical": "content.lastCycle.skuId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.rankId",
+      "canonical": "content.lastCycle.rankId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.browseCnt",
+      "canonical": "content.lastCycle.browseCnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.addCartCnt",
+      "canonical": "content.lastCycle.addCartCnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.purchaseCnt",
+      "canonical": "content.lastCycle.purchaseCnt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.dealConversionCntRate",
+      "canonical": "content.lastCycle.dealConversionCntRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.lastCycle.gmv",
+      "canonical": "content.lastCycle.gmv",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.deal",
+      "canonical": "content.old.deal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.price",
+      "canonical": "content.old.price",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.num",
+      "canonical": "content.old.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.old.isOk",
+      "canonical": "content.old.isOk",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.member.deal",
+      "canonical": "content.member.deal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.member.price",
+      "canonical": "content.member.price",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.member.num",
+      "canonical": "content.member.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.member.isOk",
+      "canonical": "content.member.isOk",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.deal",
+      "canonical": "content.fans.deal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.price",
+      "canonical": "content.fans.price",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.num",
+      "canonical": "content.fans.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.fans.isOk",
+      "canonical": "content.fans.isOk",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.new.deal",
+      "canonical": "content.new.deal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.new.price",
+      "canonical": "content.new.price",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.new.num",
+      "canonical": "content.new.num",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.new.isOk",
+      "canonical": "content.new.isOk",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data",
+      "canonical": "data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.fo_jdr_sch_industry_deal_rate##compareValue",
+      "canonical": "data.fo_jdr_sch_industry_deal_rate##compareValue",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "canonical": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+      "canonical": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.fo_jdr_sch_industry_deal_rate##compare",
+      "canonical": "data.fo_jdr_sch_industry_deal_rate##compare",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "canonical": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+      "canonical": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+      "canonical": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+      "canonical": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.fo_jdr_sch_industry_deal_rate",
+      "canonical": "data.fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "size",
+      "canonical": "size",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "cache",
+      "canonical": "cache",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.series.type",
+      "canonical": "content.series.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dt",
+      "canonical": "data.dt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.isWhiteList",
+      "canonical": "content.isWhiteList",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.sznMaxAge",
+      "canonical": "data.sznMaxAge",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.indexAd",
+      "canonical": "data.indexAd",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.indexAd.adverType",
+      "canonical": "data.indexAd.adverType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.indexAd.popUpShow",
+      "canonical": "data.indexAd.popUpShow",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.indexAd.popUpInterval",
+      "canonical": "data.indexAd.popUpInterval",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dimCode",
+      "canonical": "data.dimCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dimVals",
+      "canonical": "data.dimVals",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dimVals.code",
+      "canonical": "data.dimVals.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dimVals.max",
+      "canonical": "data.dimVals.max",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dimVals.compares",
+      "canonical": "data.dimVals.compares",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.resUri",
+      "canonical": "data.resUri",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.auth",
+      "canonical": "data.auth",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.resType",
+      "canonical": "data.resType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.name",
+      "canonical": "data.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.resCode",
+      "canonical": "data.resCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.sort",
+      "canonical": "data.sort",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.pResCode",
+      "canonical": "data.pResCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.extAttr",
+      "canonical": "data.extAttr",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.extAttr.groupTag",
+      "canonical": "data.extAttr.groupTag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.license",
+      "canonical": "data.license",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.agreement",
+      "canonical": "data.agreement",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.cancelProcess",
+      "canonical": "data.cancelProcess",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.endDate",
+      "canonical": "data.endDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.linkText",
+      "canonical": "data.linkText",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.linkAddress",
+      "canonical": "data.linkAddress",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.noticeType",
+      "canonical": "data.noticeType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.title",
+      "canonical": "data.title",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.content",
+      "canonical": "data.content",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hasLink",
+      "canonical": "data.hasLink",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.optDate",
+      "canonical": "data.optDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.id",
+      "canonical": "data.id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.startDate",
+      "canonical": "data.startDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.pin",
+      "canonical": "data.pin",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.bizName",
+      "canonical": "data.bizName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.mainAccount",
+      "canonical": "data.mainAccount",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.accountType",
+      "canonical": "data.accountType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.childAccoutAuth",
+      "canonical": "data.childAccoutAuth",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.bizId",
+      "canonical": "data.bizId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.shopId",
+      "canonical": "data.shopId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.userIdentityType",
+      "canonical": "data.userIdentityType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.id",
+      "canonical": "content.id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "success",
+      "canonical": "success",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.sysUpgrade",
+      "canonical": "content.sysUpgrade",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.img",
+      "canonical": "content.img",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.upgrade",
+      "canonical": "content.upgrade",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.upgradeText",
+      "canonical": "content.upgradeText",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.menuCode",
+      "canonical": "content.menuCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.moduleName",
+      "canonical": "content.moduleName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.moreCode",
+      "canonical": "content.moreCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.introduction",
+      "canonical": "content.introduction",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.topMsg",
+      "canonical": "content.topMsg",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.group",
+      "canonical": "content.group",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "group",
+      "canonical": "group",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.activityId",
+      "canonical": "content.activityId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.saleMode",
+      "canonical": "content.saleMode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.subType",
+      "canonical": "content.subType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.type",
+      "canonical": "content.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.partDealGoodsqtty",
+      "canonical": "content.partDealGoodsqtty",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "code",
+      "canonical": "code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summaryItems",
+      "canonical": "content.summaryItems",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summaryItems.total",
+      "canonical": "content.summaryItems.total",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summaryItems.rate",
+      "canonical": "content.summaryItems.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summaryItems.index",
+      "canonical": "content.summaryItems.index",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summaryItems.value",
+      "canonical": "content.summaryItems.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summaryItems.industryAvgNo",
+      "canonical": "content.summaryItems.industryAvgNo",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex",
+      "canonical": "content.metaIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.RankChange",
+      "canonical": "content.metaIndex.RankChange",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.ShopLink",
+      "canonical": "content.metaIndex.ShopLink",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.ShopName",
+      "canonical": "content.metaIndex.ShopName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.ProName",
+      "canonical": "content.metaIndex.ProName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.SearchClickNumIndex",
+      "canonical": "content.metaIndex.SearchClickNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.Rank",
+      "canonical": "content.metaIndex.Rank",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.UVIndex",
+      "canonical": "content.metaIndex.UVIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.OrdAmtIndex",
+      "canonical": "content.metaIndex.OrdAmtIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.SkuId",
+      "canonical": "content.metaIndex.SkuId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.OrdNumIndex",
+      "canonical": "content.metaIndex.OrdNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.Url",
+      "canonical": "content.metaIndex.Url",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.MyselfPro",
+      "canonical": "content.metaIndex.MyselfPro",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.updateTime",
+      "canonical": "content.updateTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary",
+      "canonical": "content.summary",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex",
+      "canonical": "content.summary.OrdAmtIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate",
+      "canonical": "content.summary.OrdAmtIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.median",
+      "canonical": "content.summary.OrdAmtIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.percentType",
+      "canonical": "content.summary.OrdAmtIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.left",
+      "canonical": "content.summary.OrdAmtIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.leftUnit",
+      "canonical": "content.summary.OrdAmtIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.leftPrefix",
+      "canonical": "content.summary.OrdAmtIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.dataType",
+      "canonical": "content.summary.OrdAmtIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.rightPrefix",
+      "canonical": "content.summary.OrdAmtIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.rightUnit",
+      "canonical": "content.summary.OrdAmtIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.range",
+      "canonical": "content.summary.OrdAmtIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.right",
+      "canonical": "content.summary.OrdAmtIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdAmtIndex.rate.separator",
+      "canonical": "content.summary.OrdAmtIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex",
+      "canonical": "content.summary.UVIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate",
+      "canonical": "content.summary.UVIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.median",
+      "canonical": "content.summary.UVIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.percentType",
+      "canonical": "content.summary.UVIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.left",
+      "canonical": "content.summary.UVIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.leftUnit",
+      "canonical": "content.summary.UVIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.leftPrefix",
+      "canonical": "content.summary.UVIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.dataType",
+      "canonical": "content.summary.UVIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.rightPrefix",
+      "canonical": "content.summary.UVIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.rightUnit",
+      "canonical": "content.summary.UVIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.range",
+      "canonical": "content.summary.UVIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.right",
+      "canonical": "content.summary.UVIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.type",
+      "canonical": "content.summary.UVIndex.rate.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.rate.separator",
+      "canonical": "content.summary.UVIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value",
+      "canonical": "content.summary.UVIndex.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.median",
+      "canonical": "content.summary.UVIndex.value.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.percentType",
+      "canonical": "content.summary.UVIndex.value.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.left",
+      "canonical": "content.summary.UVIndex.value.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.leftUnit",
+      "canonical": "content.summary.UVIndex.value.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.leftPrefix",
+      "canonical": "content.summary.UVIndex.value.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.dataType",
+      "canonical": "content.summary.UVIndex.value.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.rightPrefix",
+      "canonical": "content.summary.UVIndex.value.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.rightUnit",
+      "canonical": "content.summary.UVIndex.value.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.range",
+      "canonical": "content.summary.UVIndex.value.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.right",
+      "canonical": "content.summary.UVIndex.value.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.UVIndex.value.separator",
+      "canonical": "content.summary.UVIndex.value.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex",
+      "canonical": "content.summary.PVIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate",
+      "canonical": "content.summary.PVIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.median",
+      "canonical": "content.summary.PVIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.percentType",
+      "canonical": "content.summary.PVIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.left",
+      "canonical": "content.summary.PVIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.leftUnit",
+      "canonical": "content.summary.PVIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.leftPrefix",
+      "canonical": "content.summary.PVIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.dataType",
+      "canonical": "content.summary.PVIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.rightPrefix",
+      "canonical": "content.summary.PVIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.rightUnit",
+      "canonical": "content.summary.PVIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.range",
+      "canonical": "content.summary.PVIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.right",
+      "canonical": "content.summary.PVIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.type",
+      "canonical": "content.summary.PVIndex.rate.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.rate.separator",
+      "canonical": "content.summary.PVIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value",
+      "canonical": "content.summary.PVIndex.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.median",
+      "canonical": "content.summary.PVIndex.value.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.percentType",
+      "canonical": "content.summary.PVIndex.value.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.left",
+      "canonical": "content.summary.PVIndex.value.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.leftUnit",
+      "canonical": "content.summary.PVIndex.value.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.leftPrefix",
+      "canonical": "content.summary.PVIndex.value.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.dataType",
+      "canonical": "content.summary.PVIndex.value.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.rightPrefix",
+      "canonical": "content.summary.PVIndex.value.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.rightUnit",
+      "canonical": "content.summary.PVIndex.value.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.range",
+      "canonical": "content.summary.PVIndex.value.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.right",
+      "canonical": "content.summary.PVIndex.value.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.PVIndex.value.separator",
+      "canonical": "content.summary.PVIndex.value.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex",
+      "canonical": "content.summary.OrdNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate",
+      "canonical": "content.summary.OrdNumIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.median",
+      "canonical": "content.summary.OrdNumIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.percentType",
+      "canonical": "content.summary.OrdNumIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.left",
+      "canonical": "content.summary.OrdNumIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.leftUnit",
+      "canonical": "content.summary.OrdNumIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.leftPrefix",
+      "canonical": "content.summary.OrdNumIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.dataType",
+      "canonical": "content.summary.OrdNumIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.rightPrefix",
+      "canonical": "content.summary.OrdNumIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.rightUnit",
+      "canonical": "content.summary.OrdNumIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.range",
+      "canonical": "content.summary.OrdNumIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.right",
+      "canonical": "content.summary.OrdNumIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdNumIndex.rate.separator",
+      "canonical": "content.summary.OrdNumIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex",
+      "canonical": "content.summary.OrdProNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate",
+      "canonical": "content.summary.OrdProNumIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.median",
+      "canonical": "content.summary.OrdProNumIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.percentType",
+      "canonical": "content.summary.OrdProNumIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.left",
+      "canonical": "content.summary.OrdProNumIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.leftUnit",
+      "canonical": "content.summary.OrdProNumIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.leftPrefix",
+      "canonical": "content.summary.OrdProNumIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.dataType",
+      "canonical": "content.summary.OrdProNumIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.rightPrefix",
+      "canonical": "content.summary.OrdProNumIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.rightUnit",
+      "canonical": "content.summary.OrdProNumIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.range",
+      "canonical": "content.summary.OrdProNumIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.right",
+      "canonical": "content.summary.OrdProNumIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.OrdProNumIndex.rate.separator",
+      "canonical": "content.summary.OrdProNumIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex",
+      "canonical": "content.summary.SearchClickNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate",
+      "canonical": "content.summary.SearchClickNumIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.median",
+      "canonical": "content.summary.SearchClickNumIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.percentType",
+      "canonical": "content.summary.SearchClickNumIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.left",
+      "canonical": "content.summary.SearchClickNumIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.leftUnit",
+      "canonical": "content.summary.SearchClickNumIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.leftPrefix",
+      "canonical": "content.summary.SearchClickNumIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.dataType",
+      "canonical": "content.summary.SearchClickNumIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.rightPrefix",
+      "canonical": "content.summary.SearchClickNumIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.rightUnit",
+      "canonical": "content.summary.SearchClickNumIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.range",
+      "canonical": "content.summary.SearchClickNumIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.right",
+      "canonical": "content.summary.SearchClickNumIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.type",
+      "canonical": "content.summary.SearchClickNumIndex.rate.type",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.rate.separator",
+      "canonical": "content.summary.SearchClickNumIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value",
+      "canonical": "content.summary.SearchClickNumIndex.value",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.median",
+      "canonical": "content.summary.SearchClickNumIndex.value.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.percentType",
+      "canonical": "content.summary.SearchClickNumIndex.value.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.left",
+      "canonical": "content.summary.SearchClickNumIndex.value.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.leftUnit",
+      "canonical": "content.summary.SearchClickNumIndex.value.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.leftPrefix",
+      "canonical": "content.summary.SearchClickNumIndex.value.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.dataType",
+      "canonical": "content.summary.SearchClickNumIndex.value.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.rightPrefix",
+      "canonical": "content.summary.SearchClickNumIndex.value.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.rightUnit",
+      "canonical": "content.summary.SearchClickNumIndex.value.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.range",
+      "canonical": "content.summary.SearchClickNumIndex.value.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.right",
+      "canonical": "content.summary.SearchClickNumIndex.value.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.SearchClickNumIndex.value.separator",
+      "canonical": "content.summary.SearchClickNumIndex.value.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex",
+      "canonical": "content.summary.CustPriceAvgIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate",
+      "canonical": "content.summary.CustPriceAvgIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.median",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.percentType",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.left",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.leftUnit",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.leftPrefix",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.dataType",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.rightPrefix",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.rightUnit",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.range",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.right",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.CustPriceAvgIndex.rate.separator",
+      "canonical": "content.summary.CustPriceAvgIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex",
+      "canonical": "content.summary.ToOrdRateIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate",
+      "canonical": "content.summary.ToOrdRateIndex.rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.median",
+      "canonical": "content.summary.ToOrdRateIndex.rate.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.percentType",
+      "canonical": "content.summary.ToOrdRateIndex.rate.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.left",
+      "canonical": "content.summary.ToOrdRateIndex.rate.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.leftUnit",
+      "canonical": "content.summary.ToOrdRateIndex.rate.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.leftPrefix",
+      "canonical": "content.summary.ToOrdRateIndex.rate.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.dataType",
+      "canonical": "content.summary.ToOrdRateIndex.rate.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.rightPrefix",
+      "canonical": "content.summary.ToOrdRateIndex.rate.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.rightUnit",
+      "canonical": "content.summary.ToOrdRateIndex.rate.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.range",
+      "canonical": "content.summary.ToOrdRateIndex.rate.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.right",
+      "canonical": "content.summary.ToOrdRateIndex.rate.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.summary.ToOrdRateIndex.rate.separator",
+      "canonical": "content.summary.ToOrdRateIndex.rate.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend",
+      "canonical": "content.trend",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series",
+      "canonical": "content.trend.series",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex",
+      "canonical": "content.trend.series.SearchClickNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data",
+      "canonical": "content.trend.series.SearchClickNumIndex.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.median",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.percentType",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.left",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.leftUnit",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.leftPrefix",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.dataType",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.rightPrefix",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.rightUnit",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.range",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.right",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.data.separator",
+      "canonical": "content.trend.series.SearchClickNumIndex.data.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.SearchClickNumIndex.name",
+      "canonical": "content.trend.series.SearchClickNumIndex.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.OrdAmtIndex",
+      "canonical": "content.trend.series.OrdAmtIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.OrdAmtIndex.data",
+      "canonical": "content.trend.series.OrdAmtIndex.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.OrdAmtIndex.name",
+      "canonical": "content.trend.series.OrdAmtIndex.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex",
+      "canonical": "content.trend.series.UVIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data",
+      "canonical": "content.trend.series.UVIndex.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.median",
+      "canonical": "content.trend.series.UVIndex.data.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.percentType",
+      "canonical": "content.trend.series.UVIndex.data.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.left",
+      "canonical": "content.trend.series.UVIndex.data.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.leftUnit",
+      "canonical": "content.trend.series.UVIndex.data.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.leftPrefix",
+      "canonical": "content.trend.series.UVIndex.data.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.dataType",
+      "canonical": "content.trend.series.UVIndex.data.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.rightPrefix",
+      "canonical": "content.trend.series.UVIndex.data.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.rightUnit",
+      "canonical": "content.trend.series.UVIndex.data.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.range",
+      "canonical": "content.trend.series.UVIndex.data.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.right",
+      "canonical": "content.trend.series.UVIndex.data.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.data.separator",
+      "canonical": "content.trend.series.UVIndex.data.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.UVIndex.name",
+      "canonical": "content.trend.series.UVIndex.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.OrdNumIndex",
+      "canonical": "content.trend.series.OrdNumIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.OrdNumIndex.data",
+      "canonical": "content.trend.series.OrdNumIndex.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.series.OrdNumIndex.name",
+      "canonical": "content.trend.series.OrdNumIndex.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.trend.categories",
+      "canonical": "content.trend.categories",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.interval",
+      "canonical": "content.interval",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.compareTime",
+      "canonical": "content.compareTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.MyselfShop",
+      "canonical": "content.metaIndex.MyselfShop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.metaIndex.RiseUp",
+      "canonical": "content.metaIndex.RiseUp",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Rank",
+      "canonical": "content.Rank",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential",
+      "canonical": "content.Exponential",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.median",
+      "canonical": "content.Exponential.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.percentType",
+      "canonical": "content.Exponential.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.left",
+      "canonical": "content.Exponential.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.leftUnit",
+      "canonical": "content.Exponential.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.leftPrefix",
+      "canonical": "content.Exponential.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.dataType",
+      "canonical": "content.Exponential.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.rightPrefix",
+      "canonical": "content.Exponential.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.rightUnit",
+      "canonical": "content.Exponential.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.range",
+      "canonical": "content.Exponential.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.right",
+      "canonical": "content.Exponential.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "content.Exponential.separator",
+      "canonical": "content.Exponential.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.mainCode",
+      "canonical": "data.mainCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.mainSecondIndId",
+      "canonical": "data.mainSecondIndId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.mainFirstIndId",
+      "canonical": "data.mainFirstIndId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.category",
+      "canonical": "data.category",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.category.children",
+      "canonical": "data.category.children",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.category.children.name",
+      "canonical": "data.category.children.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.category.children.id",
+      "canonical": "data.category.children.id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.category.name",
+      "canonical": "data.category.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.category.id",
+      "canonical": "data.category.id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.breakupTime",
+      "canonical": "data.breakupTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.refreshInterval",
+      "canonical": "data.refreshInterval",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend",
+      "canonical": "data.trend",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "canonical": "data.trend.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.data",
+      "canonical": "data.trend.data",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.data.dt",
+      "canonical": "data.trend.data.dt",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.data.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "canonical": "data.trend.data.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list",
+      "canonical": "data.list",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.channel2Name",
+      "canonical": "data.list.channel2Name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "canonical": "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "canonical": "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.top",
+      "canonical": "data.list.top",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dateType",
+      "canonical": "data.dateType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.size",
+      "canonical": "data.size",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.requestType",
+      "canonical": "data.requestType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.flowDecline",
+      "canonical": "data.flowDecline",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.attention",
+      "canonical": "data.attention",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.flowTop",
+      "canonical": "data.flowTop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.rateDecline",
+      "canonical": "data.rateDecline",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.modalBackground",
+      "canonical": "data.modalBackground",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.mainCate2Name",
+      "canonical": "data.mainCate2Name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.mainCate2",
+      "canonical": "data.mainCate2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.shopNum",
+      "canonical": "data.shopNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.keywordNum",
+      "canonical": "data.keywordNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.productNum",
+      "canonical": "data.productNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.shop",
+      "canonical": "data.list.shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.shopName",
+      "canonical": "data.list.shopName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.rank",
+      "canonical": "data.list.rank",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.tag",
+      "canonical": "data.list.tag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.rankChange",
+      "canonical": "data.list.rankChange",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_shop",
+      "canonical": "data.list.hb_shop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "canonical": "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.code",
+      "canonical": "data.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList",
+      "canonical": "data.comparePromotionList",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.code",
+      "canonical": "data.comparePromotionList.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.endDate",
+      "canonical": "data.comparePromotionList.endDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.themeColor",
+      "canonical": "data.comparePromotionList.themeColor",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.background",
+      "canonical": "data.comparePromotionList.background",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.name",
+      "canonical": "data.comparePromotionList.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.headerBgUrl",
+      "canonical": "data.comparePromotionList.headerBgUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.headerBgUrl.code",
+      "canonical": "data.comparePromotionList.headerBgUrl.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.headerBgUrl.url",
+      "canonical": "data.comparePromotionList.headerBgUrl.url",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.shortName",
+      "canonical": "data.comparePromotionList.shortName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.comparePromotionCode",
+      "canonical": "data.comparePromotionList.comparePromotionCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.open",
+      "canonical": "data.comparePromotionList.open",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.startDate",
+      "canonical": "data.comparePromotionList.startDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate",
+      "canonical": "data.comparePromotionList.specialDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate.dateAlias",
+      "canonical": "data.comparePromotionList.specialDate.dateAlias",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate.code",
+      "canonical": "data.comparePromotionList.specialDate.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate.endDate",
+      "canonical": "data.comparePromotionList.specialDate.endDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate.name",
+      "canonical": "data.comparePromotionList.specialDate.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate.alias",
+      "canonical": "data.comparePromotionList.specialDate.alias",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionList.specialDate.startDate",
+      "canonical": "data.comparePromotionList.specialDate.startDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.headerBgUrl",
+      "canonical": "data.headerBgUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.headerBgUrl.code",
+      "canonical": "data.headerBgUrl.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.headerBgUrl.url",
+      "canonical": "data.headerBgUrl.url",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.otherConfig",
+      "canonical": "data.otherConfig",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.stopDateTime",
+      "canonical": "data.stopDateTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.themeColor",
+      "canonical": "data.themeColor",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.background",
+      "canonical": "data.background",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.shortName",
+      "canonical": "data.shortName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.comparePromotionCode",
+      "canonical": "data.comparePromotionCode",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.open",
+      "canonical": "data.open",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate",
+      "canonical": "data.specialDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate.dateAlias",
+      "canonical": "data.specialDate.dateAlias",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate.code",
+      "canonical": "data.specialDate.code",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate.endDate",
+      "canonical": "data.specialDate.endDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate.name",
+      "canonical": "data.specialDate.name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate.alias",
+      "canonical": "data.specialDate.alias",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.specialDate.startDate",
+      "canonical": "data.specialDate.startDate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isYinFengCShop",
+      "canonical": "data.isYinFengCShop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isBrandSuperShop",
+      "canonical": "data.isBrandSuperShop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.proType",
+      "canonical": "data.proType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.proPic",
+      "canonical": "data.list.proPic",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_spu_id",
+      "canonical": "data.list.hb_spu_id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.proUrl",
+      "canonical": "data.list.proUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.proName",
+      "canonical": "data.list.proName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.spu_id",
+      "canonical": "data.list.spu_id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.fo_jdr_sch_industry_deal_rate",
+      "canonical": "data.list.fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.tradeTop",
+      "canonical": "data.tradeTop",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.last7Active",
+      "canonical": "data.last7Active",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.proPic",
+      "canonical": "data.proPic",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_spu_id",
+      "canonical": "data.hb_spu_id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "canonical": "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "canonical": "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.proUrl",
+      "canonical": "data.proUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.proName",
+      "canonical": "data.proName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.spu_id",
+      "canonical": "data.spu_id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "canonical": "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_fo_jdr_sch_industry_deal_rate",
+      "canonical": "data.list.hb_fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "canonical": "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "canonical": "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "canonical": "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "canonical": "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "canonical": "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "canonical": "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "canonical": "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate",
+      "canonical": "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.calType",
+      "canonical": "data.calType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.scndCategoryName",
+      "canonical": "data.scndCategoryName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.generalAuthValidityEndTime",
+      "canonical": "data.generalAuthValidityEndTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.vaneRateLimit",
+      "canonical": "data.vaneRateLimit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.consultWeight",
+      "canonical": "data.consultWeight",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.afterServiceScore",
+      "canonical": "data.afterServiceScore",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.userEvaluateScoreRate",
+      "canonical": "data.userEvaluateScoreRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.venderId",
+      "canonical": "data.venderId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.shopName",
+      "canonical": "data.shopName",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isPassYohome",
+      "canonical": "data.isPassYohome",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.afsWeight",
+      "canonical": "data.afsWeight",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.scndCategoryId",
+      "canonical": "data.scndCategoryId",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.venderVsPrimaryTotal",
+      "canonical": "data.venderVsPrimaryTotal",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hScoreRankRateGrade",
+      "canonical": "data.hScoreRankRateGrade",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.userEvaluateScoreUD",
+      "canonical": "data.userEvaluateScoreUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.afterServiceRankRateUD",
+      "canonical": "data.afterServiceRankRateUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isPassGood",
+      "canonical": "data.isPassGood",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.hScoreRankRate",
+      "canonical": "data.hScoreRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.generalAuthValidityStartTime",
+      "canonical": "data.generalAuthValidityStartTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.scoreRankRate",
+      "canonical": "data.scoreRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.logisticsRankRateUD",
+      "canonical": "data.logisticsRankRateUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.transactionRateLimit",
+      "canonical": "data.transactionRateLimit",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.categoryGoodShopType",
+      "canonical": "data.categoryGoodShopType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.tbLimitFlag",
+      "canonical": "data.tbLimitFlag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.openTime",
+      "canonical": "data.openTime",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.commonGoodShopType",
+      "canonical": "data.commonGoodShopType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.afterServiceScoreRate",
+      "canonical": "data.afterServiceScoreRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.logisticsLvyueScore",
+      "canonical": "data.logisticsLvyueScore",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.customServiceConsultScoreRate",
+      "canonical": "data.customServiceConsultScoreRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.customServiceRankRateUD",
+      "canonical": "data.customServiceRankRateUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.dsrScoreRate",
+      "canonical": "data.dsrScoreRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isRedGreenPass",
+      "canonical": "data.isRedGreenPass",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isGreater",
+      "canonical": "data.isGreater",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.logisticsLvyueScoreUD",
+      "canonical": "data.logisticsLvyueScoreUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.scoreRankRateGrade",
+      "canonical": "data.scoreRankRateGrade",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.logisticsLvyueScoreRate",
+      "canonical": "data.logisticsLvyueScoreRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.logisticsWeight",
+      "canonical": "data.logisticsWeight",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.evaluateWeight",
+      "canonical": "data.evaluateWeight",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.isOpenMenu",
+      "canonical": "data.isOpenMenu",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.afterServiceScoreUD",
+      "canonical": "data.afterServiceScoreUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.limitFlag",
+      "canonical": "data.limitFlag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.govFlag",
+      "canonical": "data.govFlag",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.userEvaluateRankRateUD",
+      "canonical": "data.userEvaluateRankRateUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.userEvaluateScore",
+      "canonical": "data.userEvaluateScore",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.customServiceConsultScore",
+      "canonical": "data.customServiceConsultScore",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.customServiceConsultScoreUD",
+      "canonical": "data.customServiceConsultScoreUD",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.venderType",
+      "canonical": "data.venderType",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.skuStarGoodAndExRatio",
+      "canonical": "data.skuStarGoodAndExRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.notReachThresholdRatio",
+      "canonical": "data.notReachThresholdRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.notReachThresholdNum",
+      "canonical": "data.notReachThresholdNum",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.skuStarUrl",
+      "canonical": "data.skuStarUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.skuStarRankIsAhead",
+      "canonical": "data.skuStarRankIsAhead",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.serveStarRankIsAhead",
+      "canonical": "data.serveStarRankIsAhead",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.serveStarRankRate",
+      "canonical": "data.serveStarRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.serveStarUrl",
+      "canonical": "data.serveStarUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.serveStarGoodAndExRatio",
+      "canonical": "data.serveStarGoodAndExRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.skuStarRankRate",
+      "canonical": "data.skuStarRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.priceStarUrl",
+      "canonical": "data.priceStarUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.priceStarRankIsAhead",
+      "canonical": "data.priceStarRankIsAhead",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.priceStarGoodAndExRatio",
+      "canonical": "data.priceStarGoodAndExRatio",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.priceStarRankRate",
+      "canonical": "data.priceStarRankRate",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.notReachThresholdUrl",
+      "canonical": "data.notReachThresholdUrl",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.sku_id#name_cn",
+      "canonical": "data.sku_id#name_cn",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.jdr_sch_sku_main_pic_address",
+      "canonical": "data.jdr_sch_sku_main_pic_address",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.sku_id",
+      "canonical": "data.sku_id",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.sku_id_item_url",
+      "canonical": "data.sku_id_item_url",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.summary",
+      "canonical": "data.summary",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.summary.date",
+      "canonical": "data.summary.date",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.summary.level",
+      "canonical": "data.summary.level",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.summary.levelRank",
+      "canonical": "data.summary.levelRank",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.summary.mainCate2",
+      "canonical": "data.summary.mainCate2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.summary.mainCate2Name",
+      "canonical": "data.summary.mainCate2Name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.date",
+      "canonical": "data.trend.date",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.level",
+      "canonical": "data.trend.level",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.levelRank",
+      "canonical": "data.trend.levelRank",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.mainCate2",
+      "canonical": "data.trend.mainCate2",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.trend.mainCate2Name",
+      "canonical": "data.trend.mainCate2Name",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.aiEntry",
+      "canonical": "data.aiEntry",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.monthData",
+      "canonical": "data.monthData",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    },
+    {
+      "source_field": "data.yearData",
+      "canonical": "data.yearData",
+      "unit": "count",
+      "transform": "identity",
+      "confidence": 0.7
+    }
+  ]
+}

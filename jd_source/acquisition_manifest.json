@@ -1,0 +1,66 @@
+{
+  "source": "jd_smart_bi",
+  "platform": "京东商智",
+  "base_url": "https://jdsz.jd.com",
+  "shop": "祁门红茶旗舰店 (11855009)",
+  "acquisition_method": "CDP (Chrome DevTools Protocol)",
+  "cdp_port": 9222,
+  "prerequisite": "Chrome --remote-debugging-port=9222 + JD 商智 login",
+  "discovered_at": "2026-08-10",
+  "tools": {
+    "full_discovery": "python3 scripts/collect_jd_data.py --cdp-port 9222 --shop-id 11855009 --output data/jd_full_discovery.json",
+    "daily_collect": "npm run cli -- collect jd jd_shop_001 --mode live --date YYYY-MM-DD",
+    "multi_day": "npm run cli -- collect jd jd_shop_001 --mode live --date YYYY-MM-DD --days N"
+  },
+  "datasets": [
+    {
+      "name": "TransactionOverview",
+      "domain": "transaction",
+      "grain": "daily",
+      "apis": ["summary", "getSummary", "getCoreSummary", "getCoreTrend", "trend", "productTop", "summaryv2"],
+      "status": "verified",
+      "verified_metrics": ["gmv", "orders", "visitors", "customers", "conversion_rate"]
+    },
+    {
+      "name": "ProductPerformance",
+      "domain": "product",
+      "grain": "daily",
+      "apis": ["productTop", "getProductTop", "getProductList", "getProductExpress", "getGroupSummaryData", "getGroupDetailSummaryData"],
+      "status": "captured"
+    },
+    {
+      "name": "TrafficSource",
+      "domain": "traffic",
+      "grain": "daily",
+      "apis": ["getFlowDetail", "getFlowSrcTop", "getFlowTrend", "getFlowAnalysisData"],
+      "status": "captured"
+    },
+    {
+      "name": "StoreServiceMetrics",
+      "domain": "service",
+      "grain": "daily",
+      "apis": ["getServiceSummary", "getServiceTrend"],
+      "status": "captured"
+    },
+    {
+      "name": "IndustryBenchmark",
+      "domain": "industry",
+      "grain": "daily",
+      "apis": ["getBrandTable", "brandTopv2", "trendv2"],
+      "status": "captured"
+    },
+    {
+      "name": "AdvertisingPerformance",
+      "domain": "advertising",
+      "grain": "daily",
+      "apis": ["getAdSummaryAndTrend", "getAdvertAccount"],
+      "status": "captured"
+    }
+  ],
+  "api_status": {
+    "total_discovered": 49,
+    "business_data": 19,
+    "infrastructure": 30,
+    "verified_matching_page": 4
+  }
+}

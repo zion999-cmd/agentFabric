@@ -1,0 +1,2082 @@
+{
+  "交易": {
+    "title": "交易概况",
+    "url": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+    "sections": [
+      {
+        "level": 1,
+        "text": "交易概况"
+      },
+      {
+        "level": 2,
+        "text": "核心指标"
+      },
+      {
+        "level": 2,
+        "text": "品牌构成"
+      },
+      {
+        "level": 2,
+        "text": "类目构成"
+      },
+      {
+        "level": 2,
+        "text": "渠道构成"
+      },
+      {
+        "level": 2,
+        "text": "地域构成"
+      },
+      {
+        "level": 2,
+        "text": "新老客构成"
+      },
+      {
+        "level": 3,
+        "text": "指标配置"
+      },
+      {
+        "level": 3,
+        "text": "下载设置"
+      },
+      {
+        "level": 3,
+        "text": "操作成功"
+      },
+      {
+        "level": 3,
+        "text": "操作成功"
+      },
+      {
+        "level": 3,
+        "text": "操作成功"
+      },
+      {
+        "level": 3,
+        "text": "下载设置"
+      },
+      {
+        "level": 3,
+        "text": "操作成功"
+      },
+      {
+        "level": 3,
+        "text": "趋势分析"
+      }
+    ],
+    "metrics": [
+      {
+        "class": "head-metric-name",
+        "value": "--"
+      },
+      {
+        "class": "head-metric-value",
+        "value": "--"
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-163zprw",
+        "row_count": 3,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ]
+      },
+      {
+        "index": 1,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ]
+      },
+      {
+        "index": 2,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ]
+      },
+      {
+        "index": 37,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "row_count": 2,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ]
+      },
+      {
+        "index": 38,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 2,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ]
+      },
+      {
+        "index": 91,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-163zprw jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 92,
+        "tag": "DIV",
+        "class": "jmt-base-table-empty-wrapper jmt-base-table-empty-wrapper-css-163zprw jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 93,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 94,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snaps",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snap",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "0",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "0",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "area",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "product",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      }
+    ],
+    "buttons": [
+      {
+        "text": "账号中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "订购中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "退出登录",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "查询",
+        "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button"
+      },
+      {
+        "text": "重置",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "指标配置",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "趋势",
+        "class": "jmt-button jmt-button-css-1mtky8r jmtv2 jmt-button"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-"
+      },
+      {
+        "text": "成交金额",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "成交商品件数",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "成交客户数",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "成交单量",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "店铺成交转化率",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "客单价",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "店铺浏览量",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "店铺访客数",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "店铺平均停留时长",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "加购客户数",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "加购商品件数",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "加购转化率",
+        "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button"
+      },
+      {
+        "text": "取消",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button"
+      },
+      {
+        "text": "取消",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "关闭",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "关闭",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "关闭",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button"
+      },
+      {
+        "text": "取消",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "关闭",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      }
+    ],
+    "nav_links": [],
+    "embedded_data": [],
+    "all_text": "首页交易商品流量用户营销体验供应链市场报表祁门红茶官方旗舰店POP祁门红茶官方旗舰店ID: 11855009POP子账号账号中心订购中心退出登录交易概览交易概况订单明细交易概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多渠道全部查询重置核心指标对比时间真实值同行同级对比指标配置下载数据成交金额¥5,058.48对比时间¥4,431.61环比+14.15%同行同级均值¥12,313.45同行上级均值--成交商品件数42对比时间45环比-6.67%同行同级均值105同行上级均值--成交客户数24对比时间27环比-11.11%同行同级均值62同行上级均值--成交单量25对比时间29环比-13.79%同行同级均值65同行上级均值--店铺成交转化率5.12%对比时间7.54%环比-32.15%加购商品件数48对比时间-8环比+700.00%客单价¥210.77对比时间¥164.13环比+28.41%同行同级均值¥199.91同行上级均值--店铺浏览量1,778对比时间1,807环比-1.60%店铺访客数469对比时间358环比+31.01%店铺平均停留时长97.25对比时间87.29环比+11.41%加购客户数55对比时间38环比+44.74%加购转化率12.11%对比时间11.52%环比+5.21%品牌构成下载数据品牌成交金额成交金额占比成交商品件数成交单量成交客户数操作品牌成交金额成交金额占比成交商品件数成交单量成交客户数操作祁门¥5,058.48100%422524趋势类目构成店铺类目二级类目下载数据渠道构成下载数据地域构成省份城市城市级别\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  成交金额成交商品件数下载数据------排名 暂无数据 新老客构成新老客（整体）下载数据咨询反馈调研Copyright©2004-2026 JD.com 京东版权所有京ICP证070359号 北京市公安局朝阳分局备案编号110105014669用户协议|营业执照|注销流程012345678910请完成带 * 的必答题目后再提交哦~快捷选择今日昨日自定义确定自定义确定指标配置12/24已选重置清空成交指标成交金额成交商品件数成交客户数成交单量商品成交转化率店铺成交转化率客单价件单价UV价值流量指标店铺浏览量店铺访客数店铺人均浏览量店铺平均停留时长商品浏览量商品访客数商品人均浏览量商详平均停留时长加购指标加购客户数加购商品件数加购商品件数（正向）加购商品件数（负向）加购转化率下单指标下单金额下单商品件数下单单量下单客户数下单转化率下单成交转化率退款指标退款金额退款商品件数退款单量发货前-退款金额发货前-退款商品件数发货前-退款单量未收货-退款金额未收货-退款商品件数未收货-退款单量已收货-退款金额已收货-退款商品件数已收货-退款单量已收货-退货退款金额已收货-退货退款商品件数已收货-退货退款单量可拖拽指标排序成交金额成交商品件数成交客户数成交单量店铺成交转化率客单价店铺浏览量店铺访客数店铺平均停留时长加购客户数加购商品件数加购转化率\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  确定取消下载设置下载范围不包括对比时间下载的数据不包括对比时间列包括对比时间下载的数据包括对比时间列确定取消操作成功关闭操作成功关闭操作成功关闭下载设置下载范围地域排名地域下商品排名下载范围省份-成交金额-地域排名-离线-undefined确定取消操作成功关闭趋势分析 暂无数据"
+  },
+  "商品": {
+    "title": "商品概况",
+    "url": "https://jdsz.jd.com/szweb/view/product/product360.html",
+    "sections": [
+      {
+        "level": 1,
+        "text": "商品概况"
+      },
+      {
+        "level": 2,
+        "text": "核心指标"
+      },
+      {
+        "level": 3,
+        "text": "动销SPU数趋势"
+      },
+      {
+        "level": 2,
+        "text": "热销商品榜"
+      },
+      {
+        "level": 3,
+        "text": "操作成功"
+      },
+      {
+        "level": 3,
+        "text": "趋势分析"
+      }
+    ],
+    "metrics": [],
+    "tables": [
+      {
+        "index": 1,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-bm8dqx product-list-table",
+        "row_count": 2,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ]
+      },
+      {
+        "index": 2,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ]
+      },
+      {
+        "index": 3,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ]
+      },
+      {
+        "index": 11,
+        "tag": "DIV",
+        "class": "jmt-base-table-empty-wrapper jmt-base-table-empty-wrapper-css-bm8dqx jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ]
+      },
+      {
+        "index": 12,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx overflow-",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ]
+      },
+      {
+        "index": 13,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-7tiq3p j"
+      }
+    ],
+    "buttons": [
+      {
+        "text": "账号中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "订购中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "退出登录",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "查询",
+        "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button"
+      },
+      {
+        "text": "重置",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "趋势分析",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-"
+      },
+      {
+        "text": "关闭",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      }
+    ],
+    "nav_links": [],
+    "embedded_data": [],
+    "all_text": "首页交易商品流量用户营销体验供应链市场报表祁门红茶官方旗舰店POP祁门红茶官方旗舰店ID: 11855009POP子账号账号中心订购中心退出登录商品概览商品概况商品明细异常商品类目分析属性分析经营视角单品监控新品分析活动商品分析打标新品分析预约商品分析预售商品分析商品概况当前：2026-07-10对比：2026-07-09昨天近7天近30天天周月自定义环比同比更多SPUSKU\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  渠道全部查询重置核心指标同行同级对比趋势分析下载数据动销动销SPU数11环比-8.33%加购加购SPU数7环比-50.00%访问访问SPU数35环比+12.90%上架上架SPU数46环比0.00%\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  动销SPU数11环比-8.33%SPU动销率23.91%环比-8.33%成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--成交商品件数42环比-6.67%同行同级均值105同行上级均值--成交单量25环比-13.79%同行同级均值65同行上级均值--成交客户数24环比-11.11%同行同级均值62同行上级均值--成交转化率5.29%环比-35.39%同行同级均值6.29%同行上级均值--客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--件单价￥120.44环比+22.30%同行同级均值￥117.17同行上级均值--动销SPU数趋势热销商品榜全部商品排名操作排名操作 暂无数据 咨询反馈调研Copyright©2004-2026 JD.com 京东版权所有京ICP证070359号 北京市公安局朝阳分局备案编号110105014669用户协议|营业执照|注销流程012345678910请完成带 * 的必答题目后再提交哦~自定义确定操作成功关闭趋势分析2/2已选动销SPU数SPU动销率成交金额成交商品件数成交单量成交客户数成交转化率客单价件单价加购SPU数SPU加购率加购商品件数加购客户数加购金额访问SPU数商品浏览量商品访客数商品人均浏览量商详平均停留时长上架SPU数 暂无数据"
+  },
+  "流量": {
+    "title": "流量概况",
+    "url": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+    "sections": [
+      {
+        "level": 1,
+        "text": "流量概况"
+      },
+      {
+        "level": 2,
+        "text": "核心指标"
+      },
+      {
+        "level": 2,
+        "text": "来源渠道"
+      },
+      {
+        "level": 4,
+        "text": "搜索-渠道分析"
+      },
+      {
+        "level": 2,
+        "text": "商品表现"
+      },
+      {
+        "level": 3,
+        "text": "操作成功"
+      },
+      {
+        "level": 3,
+        "text": "趋势分析"
+      }
+    ],
+    "metrics": [],
+    "tables": [
+      {
+        "index": 2,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-t7z07w jmtv2 source-channel-detail",
+        "row_count": 6,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "关键词",
+          "引入访客数",
+          "引入成交金额"
+        ]
+      },
+      {
+        "index": 3,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-t7z07w",
+        "row_count": 6,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "关键词",
+          "引入访客数",
+          "引入成交金额"
+        ]
+      },
+      {
+        "index": 4,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 6,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "关键词",
+          "引入访客数",
+          "引入成交金额"
+        ]
+      },
+      {
+        "index": 80,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-t7z07w jmtv2",
+        "row_count": 6,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "商品信息",
+          "引入访客数",
+          "引入成交金额"
+        ]
+      },
+      {
+        "index": 81,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-t7z07w",
+        "row_count": 6,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "商品信息",
+          "引入访客数",
+          "引入成交金额"
+        ]
+      },
+      {
+        "index": 82,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 6,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "商品信息",
+          "引入访客数",
+          "引入成交金额"
+        ]
+      },
+      {
+        "index": 173,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-bm8dqx product-express-table",
+        "row_count": 10,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ]
+      },
+      {
+        "index": 174,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ]
+      },
+      {
+        "index": 175,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ]
+      },
+      {
+        "index": 207,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx",
+        "row_count": 9,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ]
+      },
+      {
+        "index": 208,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 9,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "whole",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "cost",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "spu",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "sku",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "spu",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "sku",
+        "class": "jmt-basic-radio-input jmt-basic-radio-input-wrappe"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      }
+    ],
+    "buttons": [
+      {
+        "text": "账号中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "订购中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "退出登录",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "查询",
+        "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button"
+      },
+      {
+        "text": "重置",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "下载数据",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "单品分析",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "一键推广",
+        "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-"
+      },
+      {
+        "text": "关闭",
+        "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-"
+      }
+    ],
+    "nav_links": [],
+    "embedded_data": [],
+    "all_text": "首页交易商品流量用户营销体验供应链市场报表祁门红茶官方旗舰店POP祁门红茶官方旗舰店ID: 11855009POP子账号账号中心订购中心退出登录流量概览流量概况流量来源实时访客搜索流量分析搜索流量运营搜索数据概览商品排名定位实时搜索词搜索词分析推荐流量分析推荐数据概况推荐诊断视频效果付费流量分析广告概况CPS联盟共增营销流量概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多渠道全部查询重置核心指标同行同级看整体看付费下载数据进店店铺访客数469环比+31.01%进商详商品访客数454环比+37.58%同行同级均值980同行上级均值--转化成交客户数24环比-11.11%同行同级均值62同行上级均值--成交成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to cancel.\n  商品浏览量1,269环比+6.55%同行同级均值3,026同行上级均值--商品人均浏览量2.80环比-22.55%商品平均停留时长75.49环比+9.70%UV价值11.14环比-17.03%同行同级均值12.57同行上级均值--客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--商品曝光次数4,003环比-1.53%商品曝光人数1,753环比+3.18%来源渠道定位重点来源渠道流量及成交贡献查看全部渠道参照指标按引入商详访客数排序方式TOP降序仅查看关注渠道下载数据搜索引入商详访客数154环比+1.99%占比47.09%引入成交金额￥2,208.17环比-2.78%占比46.40%频道引入商详访客数85环比-10.53%占比25.99%引入成交金额￥120.50环比-72.61%占比2.53%我的京东引入商详访客数32环比+28.00%占比9.79%引入成交金额￥1,841.96环比+224.20%占比38.71%商品引入商详访客数9环比+12.50%占比2.75%引入成交金额￥158.00环比-65.90%占比3.32%商详间接分发引入商详访客数1环比--占比0.31%引入成交金额￥189.00环比--占比3.97%搜索-渠道分析查看渠道详情趋势TOP5来源明细关键词引入访客数引入成交金额祁门红茶61+1.67%￥885.66-32.37%红茶19+111.11%￥478.00-祁门红茶官方旗舰店17-29.17%---安徽祁门红茶官方旗舰店10-33.33%￥249.00-茉莉祁红4+300.00%---TOP5商品SPUSKU商品信息引入访客数引入成交金额祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300gSPU:10023923194464740.00%￥559.62-33.37%祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300gSPU:1002392203308049-9.26%￥1,127.00+21.44%祁门红茶官方旗舰店茶叶端午节礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗SPU:1002396897704124-20.00%---祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100gSPU:1002470034756110+25.00%---祁门红茶官方旗舰店正宗高档红茶礼盒自己喝口粮茶叶毛峰送礼送长辈 1915祁红香螺200g（同款正装）SPU:100249310645049+28.57%---商品表现定位核心商品流量及成交贡献查看更多商品参照指标按商品访客数排序方式TOP降序SPUSKU仅查看关注商品下载数据排名商品信息商品访客数商品访客数占比成交金额成交转化率UV价值商品曝光人数商品曝光次数操作排名商品信息商品访客数商品访客数占比成交金额成交转化率UV价值商品曝光人数商品曝光次数操作祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300gSPU:10023923194464271+84.35%59.69%￥1,314.93-32.19%4.80%-52.99%4.85-63.22%1,068+9.09%1,605+8.52%单品分析一键推广祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送"
+  },
+  "体验": {
+    "title": "服务概览",
+    "url": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+    "sections": [
+      {
+        "level": 1,
+        "text": "服务概览"
+      },
+      {
+        "level": 2,
+        "text": "店铺星级"
+      },
+      {
+        "level": 2,
+        "text": "服务运营"
+      },
+      {
+        "level": 4,
+        "text": "售前"
+      },
+      {
+        "level": 4,
+        "text": "客服"
+      },
+      {
+        "level": 4,
+        "text": "售中"
+      },
+      {
+        "level": 4,
+        "text": "售后"
+      },
+      {
+        "level": 3,
+        "text": "趋势分析"
+      }
+    ],
+    "metrics": [],
+    "tables": [
+      {
+        "index": 0,
+        "tag": "TABLE",
+        "class": "el-date-table",
+        "row_count": 7,
+        "header_count": 7,
+        "headers": [
+          "日",
+          "一",
+          "二",
+          "三",
+          "四",
+          "五",
+          "六"
+        ],
+        "first_row": []
+      },
+      {
+        "index": 91,
+        "tag": "DIV",
+        "class": "el-table--fit el-table--border el-table--enable-row-hover el-table el-table--lay",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": []
+      },
+      {
+        "index": 92,
+        "tag": "DIV",
+        "class": "el-table__inner-wrapper",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": []
+      },
+      {
+        "index": 93,
+        "tag": "DIV",
+        "class": "el-table__header-wrapper",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": []
+      },
+      {
+        "index": 94,
+        "tag": "TABLE",
+        "class": "el-table__header",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": []
+      }
+    ],
+    "filters": [
+      {
+        "type": "text",
+        "placeholder": "选择日期",
+        "value": "2026-07-10",
+        "class": "el-input__inner"
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      },
+      {
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on",
+        "class": "jmt-checkbox-input jmt-checkbox-input-css-1lslhum "
+      }
+    ],
+    "buttons": [
+      {
+        "text": "账号中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "订购中心",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "退出登录",
+        "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-"
+      },
+      {
+        "text": "查看权益详情",
+        "class": "el-button el-button--text"
+      },
+      {
+        "text": "2026 年",
+        "class": "el-date-picker__header-label"
+      },
+      {
+        "text": "7 月",
+        "class": "el-date-picker__header-label"
+      },
+      {
+        "text": "此刻",
+        "class": "el-button el-button--text el-button--small el-pick"
+      },
+      {
+        "text": "确定",
+        "class": "el-button el-button--small is-plain el-picker-pane"
+      }
+    ],
+    "nav_links": [],
+    "embedded_data": [],
+    "all_text": "首页交易商品流量用户营销体验供应链市场报表祁门红茶官方旗舰店POP祁门红茶官方旗舰店ID: 11855009POP子账号账号中心订购中心退出登录服务分析服务概览店铺星级售后分析评价分析服务考核违规服务分析售后考核商品质量物流履约政企发票考核服务概览店铺星级查看详情/*! 商家后台菜单框架 v1.16.25 | (c) 2026 by FTF<ftf@jd.com> */\n/*! 商家后台菜单框架 v1.16.25 | (c) 2026 by FTF<ftf@jd.com> */\n/*! 商家后台菜单框架 v1.16.25 | (c) 2026 by FTF<ftf@jd.com> */\n/*! 商家后台菜单框架 v1.16.25 | (c) 2026 by FTF<ftf@jd.com> */@import url(//pageframe.jd.com/shop-pageframe/common/font/spp-icon.css);@font-face{font-family:JDZhengHT-Bold;src:url(https://static.360buyimg.com/bus/fonts/JDZhengHT/JDZhengHT-Bold.ttf) format(\"truetype\");font-weight:400;font-style:normal}@font-face{font-family:JDZhengHT-Regular;src:url(https://static.360buyimg.com/bus/fonts/JDZhengHT/JDZhengHT-Regular.ttf) format(\"truetype\");font-weight:400;font-style:normal}@font-face{font-family:JDZhengHT-Light;src:url(https://static.360buyimg.com/bus/fonts/JDZhengHT/JDZhengHT-Light.ttf) format(\"truetype\");font-weight:400;font-style:normal}micro-app[name=shop-experience-score] micro-app-body,html{background-color:#eef1f5;font-family:Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;font-size:12px;color:#333}micro-app[name=shop-experience-score] blockquote,micro-app[name=shop-experience-score] micro-app-body,micro-app[name=shop-experience-score] dd,micro-app[name=shop-experience-score] dl,micro-app[name=shop-experience-score] dt,micro-app[name=shop-experience-score] fieldset,micro-app[name=shop-experience-score] figure,micro-app[name=shop-experience-score] h1,micro-app[name=shop-experience-score] h2,micro-app[name=shop-experience-score] h3,micro-app[name=shop-experience-score] h4,micro-app[name=shop-experience-score] h5,micro-app[name=shop-experience-score] h6,micro-app[name=shop-experience-score] hr,html,micro-app[name=shop-experience-score] iframe,micro-app[name=shop-experience-score] legend,micro-app[name=shop-experience-score] li,micro-app[name=shop-experience-score] ol,micro-app[name=shop-experience-score] p,micro-app[name=shop-experience-scor"
+  },
+  "市场": {
+    "title": "行业大盘",
+    "url": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+    "sections": [
+      {
+        "level": 1,
+        "text": "行业大盘"
+      }
+    ],
+    "metrics": [
+      {
+        "class": "index-value",
+        "value": "-4"
+      },
+      {
+        "class": "index-value",
+        "value": "-2"
+      },
+      {
+        "class": "index-value",
+        "value": "2"
+      },
+      {
+        "class": "index-value",
+        "value": "4"
+      },
+      {
+        "class": "index-value",
+        "value": "2"
+      },
+      {
+        "class": "index-value",
+        "value": "4"
+      },
+      {
+        "class": "index-value",
+        "value": "6,000"
+      },
+      {
+        "class": "index-value",
+        "value": "8,000"
+      },
+      {
+        "class": "index-value",
+        "value": "2,000"
+      },
+      {
+        "class": "index-value",
+        "value": "4,000"
+      },
+      {
+        "class": "index-value",
+        "value": "-2"
+      },
+      {
+        "class": "index-value",
+        "value": "0"
+      },
+      {
+        "class": "index-value",
+        "value": "6"
+      },
+      {
+        "class": "index-value",
+        "value": "8"
+      },
+      {
+        "class": "index-value",
+        "value": "2"
+      },
+      {
+        "class": "index-value",
+        "value": "4"
+      }
+    ],
+    "tables": [
+      {
+        "index": 1,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-1fhcut4 jmtv2",
+        "row_count": 11,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "品牌名称",
+          "成交金额",
+          "成交单量",
+          "成交商品件数",
+          "浏览量",
+          "访客数",
+          "搜索点击次数"
+        ]
+      },
+      {
+        "index": 2,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-1fhcut4 overflow",
+        "row_count": 11,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "品牌名称",
+          "成交金额",
+          "成交单量",
+          "成交商品件数",
+          "浏览量",
+          "访客数",
+          "搜索点击次数"
+        ]
+      },
+      {
+        "index": 3,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 11,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "品牌名称",
+          "成交金额",
+          "成交单量",
+          "成交商品件数",
+          "浏览量",
+          "访客数",
+          "搜索点击次数"
+        ]
+      },
+      {
+        "index": 200,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-1fhcut4 jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 201,
+        "tag": "DIV",
+        "class": "jmt-base-table-empty-wrapper jmt-base-table-empty-wrapper-css-1fhcut4 jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 202,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-1fhcut4 overflow",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 203,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 212,
+        "tag": "DIV",
+        "class": "jmt-base-table jmt-base-table-css-1fhcut4 jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 213,
+        "tag": "DIV",
+        "class": "jmt-base-table-empty-wrapper jmt-base-table-empty-wrapper-css-1fhcut4 jmtv2",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 214,
+        "tag": "DIV",
+        "class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-1fhcut4 overflow",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      },
+      {
+        "index": 215,
+        "tag": "TABLE",
+        "class": "",
+        "row_count": 1,
+        "header_count": 0,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "segment",
+        "class": "jd-radio-button-input"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "aggregate",
+        "class": "jd-radio-button-input"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "spu",
+        "class": "jd-radio-input"
+      },
+      {
+        "type": "radio",
+        "placeholder": "",
+        "value": "sku",
+        "class": "jd-radio-input"
+      }
+    ],
+    "buttons": [
+      {
+        "text": "账号中心",
+        "class": "jd-btn jd-btn-text jd-btn-sm jd-btn-text-ghost"
+      },
+      {
+        "text": "订购中心",
+        "class": "jd-btn jd-btn-text jd-btn-sm jd-btn-text-ghost"
+      },
+      {
+        "text": "退出登录",
+        "class": "jd-btn jd-btn-text jd-btn-sm jd-btn-text-ghost"
+      },
+      {
+        "text": "查询",
+        "class": "jmt-button jmt-button-css-1ombiov jmtv2 jmt-button"
+      },
+      {
+        "text": "重置",
+        "class": "jmt-button jmt-button-css-1yhzcme jmtv2 jmt-button"
+      },
+      {
+        "text": "指标配置",
+        "class": "jd-btn jd-btn-default jd-btn-background-ghost"
+      },
+      {
+        "text": "下载数据",
+        "class": "jd-btn jd-btn-default jd-btn-background-ghost jd-d"
+      },
+      {
+        "text": "下载数据",
+        "class": "jd-btn jd-btn-default jd-btn-background-ghost"
+      },
+      {
+        "text": "下载数据",
+        "class": "jd-btn jd-btn-default jd-btn-background-ghost"
+      },
+      {
+        "text": "下载数据",
+        "class": "jd-btn jd-btn-default jd-btn-background-ghost"
+      },
+      {
+        "text": "确定",
+        "class": "jmt-button jmt-button-css-15rw0ar jmtv2 jmt-button"
+      }
+    ],
+    "nav_links": [],
+    "embedded_data": [],
+    "all_text": "首页交易商品流量用户营销体验供应链市场报表祁门红茶官方旗舰店POP祁门红茶官方旗舰店ID: 11855009POP子账号账号中心订购中心退出登录行业动态行业大盘行业卖家店铺榜单商品榜单品牌榜单品牌动态详情行业关键词热门关键词关键词查询商机推荐行业机会挖掘类目属性概况类目属性详情产品榜单产品详情行业用户动态买家分析竞争分析实时竞店监控实时竞店配置竞店概况竞店对比竞品对比竞品流失竞品监控竞争流失竞争配置行业大盘当前：2026-07-12 00:47:42对比：2026-07-11 00:47:42实时昨天近7天近30天天周月自定义环比同比更多类目茗茶渠道全部查询重置核心指标指标配置下载数据成交金额增幅-4%~-2%成交单量增幅2%~4%浏览量2万~4万环比-10.08%访客数6,000~8,000环比-8.68%搜索点击次数2,000~4,000环比+5.09%成交客单价增幅-2%~0%成交转化率增幅6%~8%成交商品件数增幅2%~4%分时累计行业品牌榜行业大盘为概览页，品牌榜仅展示TOP10，品牌明细榜菜单建设中，敬请期待。下载数据行业热销品牌TOP10行业流量品牌TOP10更新时间：2026-07-12 00:47:42排名品牌名称成交金额成交单量成交商品件数浏览量访客数搜索点击次数新入榜八马茶叶￥4,000~￥6,0000~55~1050~10010~5010~501张一元￥2,000~￥4,00010~5010~50600~800200~400100~200新入榜大益￥2,000~￥4,0000~55~10400~600100~20050~1004持平八马茶业￥2,000~￥4,00010~5010~501,000~2,000200~400100~2005持平无品牌￥2,000~￥4,000100~200100~2002,000~4,0001,000~2,000200~4006新入榜鑫凤凰￥1,000~￥2,0000~50~550~10010~500~57新入榜小范嘉茶￥1,000~￥2,0000~55~1010~500~5--8新入榜胖东来￥1,000~￥2,0005~105~10600~800200~400100~2009新入榜满叶香￥1,000~￥2,0000~510~5000--10新入榜吴裕泰￥800~￥1,0005~105~10200~40050~10010~50行业店铺榜下载数据行业热销店铺TOP100行业流量店铺TOP100更新时间：2026-07-12 00:47:42排名 暂无数据 行业商品榜下载数据行业热销商品TOP200行业流量商品TOP200SPUSKU更新时间：2026-07-12 00:47:42排名 暂无数据 子行业排名 子行业排名暂不支持实时维度，请切换至离线查看。 咨询反馈调研Copyright©2004-2026 JD.com 京东版权所有京ICP证070359号 北京市公安局朝阳分局备案编号110105014669用户协议|营业执照|注销流程012345678910请完成带 * 的必答题目后再提交哦~快捷选择2026年618大促2025年11.11大促确定"
+  }
+}

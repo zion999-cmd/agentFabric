@@ -4,7 +4,7 @@
 import type { Database as Db } from 'better-sqlite3';
 import { nowIso } from '#shared/utils/time.js';
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 const STATEMENTS: readonly string[] = [
   `CREATE TABLE IF NOT EXISTS schema_version (
@@ -57,9 +57,11 @@ const STATEMENTS: readonly string[] = [
     raw_payload TEXT,
     collector_trace_id TEXT,
     ingested_at TEXT NOT NULL,
-    UNIQUE (entity_type, entity_id, signal_name, window)
+    observed_at TEXT NOT NULL,
+    UNIQUE (entity_type, entity_id, signal_name, window, observed_at)
   )`,
   `CREATE INDEX IF NOT EXISTS idx_signals_entity ON signals(entity_type, entity_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_signals_observed ON signals(observed_at)`,
 
   `CREATE TABLE IF NOT EXISTS hourly_snapshots (
     snapshot_id TEXT PRIMARY KEY,
@@ -203,8 +205,79 @@ const STATEMENTS: readonly string[] = [
   )`,
 ];
 
+/** P0006.1.1: Migrate signals table from v2 → v3 (add observed_at, new UNIQUE constraint). */
+const migrateV3 = (db: Db): void => {
+  // Only migrate if the signals table already exists (skip for fresh DBs)
+  const tableCheck = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='signals'").get() as { name: string } | undefined;
+  if (!tableCheck) return; // Fresh DB — CREATE TABLE in STATEMENTS already has v3 schema
+
+  // Check if observed_at column already exists
+  const cols = db.prepare("PRAGMA table_info('signals')").all() as Array<{ name: string }>;
+  if (cols.some((c) => c.name === 'observed_at')) return;
+
+  // Step 1: Add observed_at column
+  db.exec("ALTER TABLE signals ADD COLUMN observed_at TEXT NOT NULL DEFAULT ''");
+
+  // Step 2: Backfill observed_at from signal_id
+  // All signal_ids contain a date in YYYY-MM-DD format. Extract the first match.
+  // For daily: jd-daily-2026-07-04-abc123 → 2026-07-04
+  // For hourly: jd-hourly-traffic-2026-07-04-20260704140000-abc123 → 2026-07-04
+  const rows = db.prepare("SELECT signal_id, signal_name, ingested_at, rowid FROM signals WHERE observed_at = ''").all() as Array<{
+    signal_id: string; signal_name: string; ingested_at: string; rowid: number;
+  }>;
+
+  const updateStmt = db.prepare('UPDATE signals SET observed_at = ? WHERE rowid = ?');
+  const migrateTx = db.transaction(() => {
+    for (const row of rows) {
+      const match = row.signal_id.match(/(\d{4}-\d{2}-\d{2})/);
+      const observedAt = match?.[1] ?? row.ingested_at.slice(0, 10);
+      updateStmt.run(observedAt, row.rowid);
+    }
+  });
+  migrateTx();
+
+  // Step 3: Rebuild table with new UNIQUE constraint (SQLite requires table rebuild for constraint changes)
+  db.exec(`
+    CREATE TABLE signals_v3 (
+      signal_id TEXT PRIMARY KEY,
+      entity_type TEXT NOT NULL,
+      entity_id TEXT NOT NULL,
+      signal_name TEXT NOT NULL,
+      signal_value REAL NOT NULL,
+      signal_unit TEXT NOT NULL,
+      signal_direction TEXT NOT NULL,
+      weight REAL NOT NULL,
+      confidence REAL NOT NULL,
+      source_platform TEXT,
+      source_dataset TEXT,
+      window TEXT NOT NULL,
+      lifecycle_status TEXT NOT NULL,
+      lifecycle_expires_at TEXT,
+      transform_hash TEXT,
+      metrics TEXT,
+      raw_payload TEXT,
+      collector_trace_id TEXT,
+      ingested_at TEXT NOT NULL,
+      observed_at TEXT NOT NULL
+    );
+    INSERT INTO signals_v3 SELECT * FROM signals;
+    DROP TABLE signals;
+    ALTER TABLE signals_v3 RENAME TO signals;
+  `);
+
+  // Re-create indexes
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS idx_signals_entity ON signals(entity_type, entity_id);
+    CREATE INDEX IF NOT EXISTS idx_signals_observed ON signals(observed_at);
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_signals_observation
+      ON signals(entity_type, entity_id, signal_name, window, observed_at);
+  `);
+};
+
 /** Apply the full schema idempotently and record the schema version. */
 export const applySchema = (db: Db): void => {
+  // Run migration before CREATE TABLE (which is IF NOT EXISTS)
+  migrateV3(db);
   db.exec(STATEMENTS.join(';\n'));
   const recorded = db
     .prepare('SELECT 1 FROM schema_version WHERE version = ?')

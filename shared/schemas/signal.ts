@@ -26,6 +26,8 @@ export const SignalSchema = z.object({
   confidence: z.number().min(0).max(1),
   source: SignalSourceSchema,
   window: z.string().min(1), // '3d' | '7d' | '14d' | '1h' | '24h' | 'campaign_duration' | 'event'
+  /** Business observation time — the moment this measurement was taken. P0006.1.1 */
+  observed_at: IsoDateString,
   lifecycle: SignalLifecycleSchema,
   trace: SignalTraceSchema,
 });

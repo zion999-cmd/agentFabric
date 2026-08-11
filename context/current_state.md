@@ -1,9 +1,10 @@
 # 当前状态
 
-|**版本**: v0.9.3 | **Hermes**: v0.18.0 | **测试**: 413 passed | **发现**: 70 APIs, 10 Business Contexts | **JD Persistence**: 4 tables
+|**版本**: v0.9.4 | **Hermes**: v0.18.0 | **测试**: 413 passed | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 573 files (Jan-Jul 2026), 全部 CDP 采集
 
 ## 已完成
 
+- [x] **P0006.2 Real Data Runtime Replay** — 验证完整闭环: Evidence Store (573 真实 CDP 文件) → Historical Acquire → Runtime Kernel (190 天逐日执行) → Signal (3,489 signals) → Workspace (Runtime Timeline). 修复 `parseAcquiredData` 证据数据包装 + `jd-schema.ts` SQL 分号. 0 errors, 全部真实 GMV 数据 (¥4,628~¥14,230/天). ADR-027
 - [x] **P0006.2 Historical Replay Runtime** — Replay Runner (日期循环→kernel.execute), Historical Acquire (evidence store + mock fallback), POST /api/runtime/replay, Workspace Replay 面板. 零修改 Kernel/Signal/Evidence/Ranking/Memory
 - [x] **P0006.1.1 Signal Observation Model Refactor** — 数据模型升级: Signal 两层模型 (Type/Observation 分离), `observed_at` 列 + 新 UNIQUE 约束 `(entity_type, entity_id, signal_name, window, observed_at)`. 三层时间轴 (Business/System/Execution). 回退小时后缀补丁, signal_name 恢复纯净类型名. Schema v3 migration
 - [x] **P0006 HermesAgent & Workspace Integration** — 4 工作流: Skill Definitions (5 skills, pattern matching + HermesAgent 意图分类), Runtime HTTP Routes (kernel.execute via HTTP, execution history), Chat Endpoint (自然语言 → 意图 → 执行 → 响应, 完整 agent loop), Workspace Runtime View (执行历史 + 详情 + Chat 接入). 24 新测试, 零修改 Kernel/Connector/Orchestrator

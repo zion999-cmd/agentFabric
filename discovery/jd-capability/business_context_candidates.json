@@ -1,0 +1,1577 @@
+{
+  "audienceInfo": {
+    "endpoints": [
+      "audienceInfo"
+    ],
+    "total_fields": 7,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.indexName",
+      "content.indexType",
+      "content.num",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "commonParam": {
+    "endpoints": [
+      "commonParam"
+    ],
+    "total_fields": 7,
+    "candidate_contexts": [
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.indexAd",
+      "data.indexAd.adverType",
+      "data.indexAd.popUpInterval",
+      "data.indexAd.popUpShow",
+      "data.sznMaxAge"
+    ]
+  },
+  "conversionEffect": {
+    "endpoints": [
+      "conversionEffect"
+    ],
+    "total_fields": 33,
+    "candidate_contexts": [
+      "TransactionContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.effect",
+      "content.effect.cart",
+      "content.effect.cart.num",
+      "content.effect.cart.shop",
+      "content.effect.deal",
+      "content.effect.deal.num",
+      "content.effect.deal.shop",
+      "content.effect.detail",
+      "content.effect.detail.num",
+      "content.effect.detail.shop",
+      "content.effect.inShop",
+      "content.effect.inShop.num",
+      "content.effect.inShop.shop",
+      "content.effect.new",
+      "content.effect.new.num",
+      "content.effect.new.shop",
+      "content.percent",
+      "content.percent.browse",
+      "content.percent.browse.other"
+    ]
+  },
+  "dateRange": {
+    "endpoints": [
+      "dateRange"
+    ],
+    "total_fields": 6,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.endDate",
+      "content.startDate",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "diagnosis": {
+    "endpoints": [
+      "diagnosis"
+    ],
+    "total_fields": 16,
+    "candidate_contexts": [
+      "CustomerContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.fans",
+      "content.fans.info",
+      "content.fans.name",
+      "content.fans.type",
+      "content.fans.value",
+      "content.member",
+      "content.new",
+      "content.old",
+      "content.old.info",
+      "content.old.name",
+      "content.old.type",
+      "content.old.value",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "emergency": {
+    "endpoints": [
+      "emergency"
+    ],
+    "total_fields": 4,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.breakupTime",
+      "data.refreshInterval"
+    ]
+  },
+  "getAlarmOverview": {
+    "endpoints": [
+      "getAlarmOverview"
+    ],
+    "total_fields": 16,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.beingStockOutBSNum",
+      "content.beingStockOutHSAmount",
+      "content.beingStockOutNum",
+      "content.beingUnsaleNBSNum",
+      "content.beingUnsaleNum",
+      "content.nosaleAmount",
+      "content.nosaleNum",
+      "content.stockOutBSNum",
+      "content.stockOutNum",
+      "content.stockOutSaleLoseAmount",
+      "content.unsaleAmount",
+      "content.unsaleNBSNum",
+      "content.unsaleNum",
+      "message",
+      "status"
+    ]
+  },
+  "getAlarmStockOut": {
+    "endpoints": [
+      "getAlarmStockOut"
+    ],
+    "total_fields": 7,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.dataList",
+      "content.pageNo",
+      "content.pageSize",
+      "content.total",
+      "message",
+      "status"
+    ]
+  },
+  "getAnnouncement": {
+    "endpoints": [
+      "getAnnouncement"
+    ],
+    "total_fields": 10,
+    "candidate_contexts": [
+      "TransactionContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.notice",
+      "content.notice.date",
+      "content.notice.menuCode",
+      "content.notice.message",
+      "content.notice.messageLink",
+      "content.notice.messageLinkWord",
+      "content.notice.title",
+      "message",
+      "status"
+    ]
+  },
+  "getCategory": {
+    "endpoints": [
+      "getCategory"
+    ],
+    "total_fields": 6,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.id",
+      "content.name",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "getChannelList": {
+    "endpoints": [
+      "getChannelList"
+    ],
+    "total_fields": 28,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.list",
+      "data.list.channel2Name",
+      "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz"
+    ]
+  },
+  "getDefaultDt": {
+    "endpoints": [
+      "getDefaultDt"
+    ],
+    "total_fields": 4,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.dt",
+      "message",
+      "status"
+    ]
+  },
+  "getDims": {
+    "endpoints": [
+      "getDims"
+    ],
+    "total_fields": 7,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.dimCode",
+      "data.dimVals",
+      "data.dimVals.code",
+      "data.dimVals.compares",
+      "data.dimVals.max"
+    ]
+  },
+  "getFlowAnalysisData": {
+    "endpoints": [
+      "getFlowAnalysisData"
+    ],
+    "total_fields": 15,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.dateType",
+      "data.list",
+      "data.list.channel2Name",
+      "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "data.requestType",
+      "data.size"
+    ]
+  },
+  "getFlowHead": {
+    "endpoints": [
+      "getFlowHead"
+    ],
+    "total_fields": 6,
+    "candidate_contexts": [
+      "TrafficContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.attention",
+      "data.flowDecline",
+      "data.flowTop",
+      "data.rateDecline"
+    ]
+  },
+  "getHealthOverview": {
+    "endpoints": [
+      "getHealthOverview"
+    ],
+    "total_fields": 15,
+    "candidate_contexts": [
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.adviseList",
+      "content.categorySpotRankRate",
+      "content.categoryTurnoverRankRate",
+      "content.categoryUnsaleRankRate",
+      "content.nextLevelDiff",
+      "content.score",
+      "content.scoreLevelList",
+      "content.scoreLevelList.label",
+      "content.scoreLevelList.value",
+      "content.spotRankRate",
+      "content.turnoverRankRate",
+      "content.unsaleRankRate",
+      "message",
+      "status"
+    ]
+  },
+  "getHomeBanner": {
+    "endpoints": [
+      "getHomeBanner"
+    ],
+    "total_fields": 13,
+    "candidate_contexts": [
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.content",
+      "data.endDate",
+      "data.hasLink",
+      "data.id",
+      "data.linkAddress",
+      "data.linkText",
+      "data.modalBackground",
+      "data.noticeType",
+      "data.optDate",
+      "data.startDate",
+      "data.title"
+    ]
+  },
+  "getHomeNotice": {
+    "endpoints": [
+      "getHomeNotice"
+    ],
+    "total_fields": 12,
+    "candidate_contexts": [
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.content",
+      "data.endDate",
+      "data.hasLink",
+      "data.id",
+      "data.linkAddress",
+      "data.linkText",
+      "data.noticeType",
+      "data.optDate",
+      "data.startDate",
+      "data.title"
+    ]
+  },
+  "getHotCate": {
+    "endpoints": [
+      "getHotCate"
+    ],
+    "total_fields": 4,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.mainCate2",
+      "data.mainCate2Name"
+    ]
+  },
+  "getIndicatorOverview": {
+    "endpoints": [
+      "getIndicatorOverview"
+    ],
+    "total_fields": 17,
+    "candidate_contexts": [
+      "ProductContext",
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.bestsellerSpotRate",
+      "content.nosaleRate",
+      "content.pieceTurnover",
+      "content.scoreLevelList",
+      "content.scoreLevelList.label",
+      "content.scoreLevelList.value",
+      "content.spotRankRate",
+      "content.spotRate",
+      "content.stockPieList",
+      "content.stockPieList.label",
+      "content.stockPieList.value",
+      "content.unsaleProductNumRate",
+      "content.unsaleRankRate",
+      "content.unsaleRate",
+      "message",
+      "status"
+    ]
+  },
+  "getIndicatorSpotRateTrend": {
+    "endpoints": [
+      "getIndicatorSpotRateTrend"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.categories",
+      "content.name",
+      "content.series",
+      "content.series.data",
+      "content.series.name",
+      "message",
+      "status"
+    ]
+  },
+  "getIndicatorTurnoverTrend": {
+    "endpoints": [
+      "getIndicatorTurnoverTrend"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.categories",
+      "content.name",
+      "content.series",
+      "content.series.data",
+      "content.series.name",
+      "message",
+      "status"
+    ]
+  },
+  "getIndicatorUnsaleTrend": {
+    "endpoints": [
+      "getIndicatorUnsaleTrend"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.categories",
+      "content.name",
+      "content.series",
+      "content.series.data",
+      "content.series.name",
+      "message",
+      "status"
+    ]
+  },
+  "getIndustryHead": {
+    "endpoints": [
+      "getIndustryHead"
+    ],
+    "total_fields": 5,
+    "candidate_contexts": [
+      "TransactionContext",
+      "ProductContext",
+      "SearchContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.keywordNum",
+      "data.productNum",
+      "data.shopNum"
+    ]
+  },
+  "getIndustryTopTable": {
+    "endpoints": [
+      "getIndustryTopTable"
+    ],
+    "total_fields": 131,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "SearchContext",
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.list",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit"
+    ]
+  },
+  "getLocalAnnouncement": {
+    "endpoints": [
+      "getLocalAnnouncement"
+    ],
+    "total_fields": 3,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "message",
+      "status"
+    ]
+  },
+  "getMarketingActivityList": {
+    "endpoints": [
+      "getMarketingActivityList"
+    ],
+    "total_fields": 10,
+    "candidate_contexts": [
+      "TransactionContext"
+    ],
+    "field_sample": [
+      "code",
+      "content",
+      "content.activityId",
+      "content.name",
+      "content.partDealGoodsqtty",
+      "content.saleMode",
+      "content.subType",
+      "content.type",
+      "message",
+      "status"
+    ]
+  },
+  "getMarketingTrend": {
+    "endpoints": [
+      "getMarketingTrend"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "code",
+      "content",
+      "content.categories",
+      "content.series",
+      "content.series.data",
+      "content.series.name",
+      "message",
+      "status"
+    ]
+  },
+  "getMenuNotice": {
+    "endpoints": [
+      "getMenuNotice"
+    ],
+    "total_fields": 2,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data"
+    ]
+  },
+  "getMenuTree": {
+    "endpoints": [
+      "getMenuTree"
+    ],
+    "total_fields": 11,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.auth",
+      "data.extAttr",
+      "data.extAttr.groupTag",
+      "data.name",
+      "data.pResCode",
+      "data.resCode",
+      "data.resType",
+      "data.resUri",
+      "data.sort"
+    ]
+  },
+  "getMenuTreeData": {
+    "endpoints": [
+      "getMenuTreeData"
+    ],
+    "total_fields": 16,
+    "candidate_contexts": [
+      "TransactionContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.data",
+      "content.data.auth",
+      "content.data.children",
+      "content.data.code",
+      "content.data.cssClass",
+      "content.data.id",
+      "content.data.isLeaf",
+      "content.data.isVirtual",
+      "content.data.level",
+      "content.data.name",
+      "content.data.order",
+      "content.data.pid",
+      "content.data.status",
+      "content.data.uri",
+      "status"
+    ]
+  },
+  "getModelFunc": {
+    "endpoints": [
+      "getModelFunc"
+    ],
+    "total_fields": 7,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.auth",
+      "data.pResCode",
+      "data.resCode",
+      "data.resType",
+      "data.sort"
+    ]
+  },
+  "getNewMenuTreeData": {
+    "endpoints": [
+      "getNewMenuTreeData"
+    ],
+    "total_fields": 17,
+    "candidate_contexts": [
+      "TransactionContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.data",
+      "content.data.auth",
+      "content.data.children",
+      "content.data.code",
+      "content.data.cssClass",
+      "content.data.id",
+      "content.data.isLeaf",
+      "content.data.isVirtual",
+      "content.data.level",
+      "content.data.name",
+      "content.data.order",
+      "content.data.pid",
+      "content.data.status",
+      "content.data.uri",
+      "message",
+      "status"
+    ]
+  },
+  "getOpenPromotionList": {
+    "endpoints": [
+      "getOpenPromotionList"
+    ],
+    "total_fields": 43,
+    "candidate_contexts": [
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.background",
+      "data.code",
+      "data.comparePromotionCode",
+      "data.comparePromotionList",
+      "data.comparePromotionList.background",
+      "data.comparePromotionList.code",
+      "data.comparePromotionList.comparePromotionCode",
+      "data.comparePromotionList.endDate",
+      "data.comparePromotionList.headerBgUrl",
+      "data.comparePromotionList.headerBgUrl.code",
+      "data.comparePromotionList.headerBgUrl.url",
+      "data.comparePromotionList.name",
+      "data.comparePromotionList.open",
+      "data.comparePromotionList.shortName",
+      "data.comparePromotionList.specialDate",
+      "data.comparePromotionList.specialDate.alias",
+      "data.comparePromotionList.specialDate.code",
+      "data.comparePromotionList.specialDate.dateAlias"
+    ]
+  },
+  "getPageFooter": {
+    "endpoints": [
+      "getPageFooter"
+    ],
+    "total_fields": 5,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.agreement",
+      "data.cancelProcess",
+      "data.license"
+    ]
+  },
+  "getPageInfo": {
+    "endpoints": [
+      "getPageInfo"
+    ],
+    "total_fields": 48,
+    "candidate_contexts": [
+      "CustomerContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.HAS_CUSTOM_TIME",
+      "content.LAST_SIX_MONTH_TIME",
+      "content.PAGE_CUSTOM_TIME",
+      "content.PAGE_DAY15_TIME",
+      "content.PAGE_DAY182_TIME",
+      "content.PAGE_DAY30_TIME",
+      "content.PAGE_DAY7_TIME",
+      "content.PAGE_DAY90_TIME",
+      "content.PAGE_DAY_TIME",
+      "content.PAGE_MONTH_TIME",
+      "content.PAGE_QUARTER_TIME",
+      "content.PAGE_TIME",
+      "content.PAGE_WEEK_TIME",
+      "content.PAGE_YEAR_TIME",
+      "content.SERVER_TIME",
+      "content.SHOP_ID",
+      "content.SHOP_POP_UP",
+      "content.SHOP_TYPE",
+      "content.SHOW_SWITCH_SHOP"
+    ]
+  },
+  "getPopBusiModel": {
+    "endpoints": [
+      "getPopBusiModel"
+    ],
+    "total_fields": 4,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.isBrandSuperShop",
+      "data.isYinFengCShop"
+    ]
+  },
+  "getProductAnalysisData": {
+    "endpoints": [
+      "getProductAnalysisData"
+    ],
+    "total_fields": 16,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.dateType",
+      "data.list",
+      "data.list.fo_jdr_sch_industry_deal_rate",
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "data.list.hb_spu_id",
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "data.list.proName",
+      "data.list.proPic",
+      "data.list.proUrl",
+      "data.list.spu_id",
+      "data.proType",
+      "data.requestType",
+      "data.size"
+    ]
+  },
+  "getProductHead": {
+    "endpoints": [
+      "getProductHead"
+    ],
+    "total_fields": 7,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.attention",
+      "data.flowDecline",
+      "data.last7Active",
+      "data.rateDecline",
+      "data.tradeTop"
+    ]
+  },
+  "getProductList": {
+    "endpoints": [
+      "getProductList"
+    ],
+    "total_fields": 26,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "CustomerContext",
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.list",
+      "data.list.fo_jdr_sch_industry_deal_rate",
+      "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "data.list.hb_fo_jdr_sch_industry_deal_rate",
+      "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate",
+      "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "data.list.hb_spu_id",
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot"
+    ]
+  },
+  "getProductListByChannel": {
+    "endpoints": [
+      "getProductListByChannel"
+    ],
+    "total_fields": 16,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.hb_spu_id",
+      "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "data.proName",
+      "data.proPic",
+      "data.proUrl",
+      "data.spu_id"
+    ]
+  },
+  "getProductRankListDetail": {
+    "endpoints": [
+      "getProductRankListDetail"
+    ],
+    "total_fields": 19,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "SearchContext",
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.data",
+      "content.metaIndex",
+      "content.metaIndex.MyselfPro",
+      "content.metaIndex.OrdAmtIndex",
+      "content.metaIndex.OrdNumIndex",
+      "content.metaIndex.ProName",
+      "content.metaIndex.Rank",
+      "content.metaIndex.RankChange",
+      "content.metaIndex.SearchClickNumIndex",
+      "content.metaIndex.ShopLink",
+      "content.metaIndex.ShopName",
+      "content.metaIndex.SkuId",
+      "content.metaIndex.UVIndex",
+      "content.metaIndex.Url",
+      "content.updateTime",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "getProductToBeActiveDiagnosisDetail": {
+    "endpoints": [
+      "getProductToBeActiveDiagnosisDetail"
+    ],
+    "total_fields": 2,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data"
+    ]
+  },
+  "getReachTypeConfig": {
+    "endpoints": [
+      "getReachTypeConfig"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.alias",
+      "content.checked",
+      "content.code",
+      "content.desc",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "getRealSeriesData": {
+    "endpoints": [
+      "getRealSeriesData"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.categories",
+      "content.series",
+      "content.series.data",
+      "content.series.name",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "getRealSummaryData": {
+    "endpoints": [
+      "getRealSummaryData"
+    ],
+    "total_fields": 188,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "CustomerContext",
+      "SearchContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.compareTime",
+      "content.interval",
+      "content.summary",
+      "content.summary.CustPriceAvgIndex",
+      "content.summary.CustPriceAvgIndex.rate",
+      "content.summary.CustPriceAvgIndex.rate.dataType",
+      "content.summary.CustPriceAvgIndex.rate.left",
+      "content.summary.CustPriceAvgIndex.rate.leftPrefix",
+      "content.summary.CustPriceAvgIndex.rate.leftUnit",
+      "content.summary.CustPriceAvgIndex.rate.median",
+      "content.summary.CustPriceAvgIndex.rate.percentType",
+      "content.summary.CustPriceAvgIndex.rate.range",
+      "content.summary.CustPriceAvgIndex.rate.right",
+      "content.summary.CustPriceAvgIndex.rate.rightPrefix",
+      "content.summary.CustPriceAvgIndex.rate.rightUnit",
+      "content.summary.CustPriceAvgIndex.rate.separator",
+      "content.summary.OrdAmtIndex",
+      "content.summary.OrdAmtIndex.rate",
+      "content.summary.OrdAmtIndex.rate.dataType"
+    ]
+  },
+  "getShopRankListDetail": {
+    "endpoints": [
+      "getShopRankListDetail"
+    ],
+    "total_fields": 30,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "SearchContext",
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.Exponential",
+      "content.Exponential.dataType",
+      "content.Exponential.left",
+      "content.Exponential.leftPrefix",
+      "content.Exponential.leftUnit",
+      "content.Exponential.median",
+      "content.Exponential.percentType",
+      "content.Exponential.range",
+      "content.Exponential.right",
+      "content.Exponential.rightPrefix",
+      "content.Exponential.rightUnit",
+      "content.Exponential.separator",
+      "content.Rank",
+      "content.data",
+      "content.metaIndex",
+      "content.metaIndex.MyselfShop",
+      "content.metaIndex.OrdAmtIndex",
+      "content.metaIndex.OrdNumIndex",
+      "content.metaIndex.Rank"
+    ]
+  },
+  "getShopStars": {
+    "endpoints": [
+      "getShopStars"
+    ],
+    "total_fields": 51,
+    "candidate_contexts": [
+      "CustomerContext",
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.afsWeight",
+      "data.afterServiceRankRateUD",
+      "data.afterServiceScore",
+      "data.afterServiceScoreRate",
+      "data.afterServiceScoreUD",
+      "data.calType",
+      "data.categoryGoodShopType",
+      "data.commonGoodShopType",
+      "data.consultWeight",
+      "data.customServiceConsultScore",
+      "data.customServiceConsultScoreRate",
+      "data.customServiceConsultScoreUD",
+      "data.customServiceRankRateUD",
+      "data.dsrScoreRate",
+      "data.evaluateWeight",
+      "data.generalAuthValidityEndTime",
+      "data.generalAuthValidityStartTime",
+      "data.govFlag"
+    ]
+  },
+  "getShopValueProposition": {
+    "endpoints": [
+      "getShopValueProposition"
+    ],
+    "total_fields": 18,
+    "candidate_contexts": [
+      "ProductContext",
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.notReachThresholdNum",
+      "data.notReachThresholdRatio",
+      "data.notReachThresholdUrl",
+      "data.priceStarGoodAndExRatio",
+      "data.priceStarRankIsAhead",
+      "data.priceStarRankRate",
+      "data.priceStarUrl",
+      "data.serveStarGoodAndExRatio",
+      "data.serveStarRankIsAhead",
+      "data.serveStarRankRate",
+      "data.serveStarUrl",
+      "data.skuStarGoodAndExRatio",
+      "data.skuStarRankIsAhead",
+      "data.skuStarRankRate",
+      "data.skuStarUrl",
+      "size"
+    ]
+  },
+  "getSystemNotice": {
+    "endpoints": [
+      "getSystemNotice"
+    ],
+    "total_fields": 12,
+    "candidate_contexts": [
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.content",
+      "data.endDate",
+      "data.hasLink",
+      "data.id",
+      "data.linkAddress",
+      "data.linkText",
+      "data.noticeType",
+      "data.optDate",
+      "data.startDate",
+      "data.title"
+    ]
+  },
+  "getUserCategoryList": {
+    "endpoints": [
+      "getUserCategoryList"
+    ],
+    "total_fields": 11,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "data",
+      "data.category",
+      "data.category.children",
+      "data.category.children.id",
+      "data.category.children.name",
+      "data.category.id",
+      "data.category.name",
+      "data.mainCode",
+      "data.mainFirstIndId",
+      "data.mainSecondIndId",
+      "size"
+    ]
+  },
+  "getUserIdentities": {
+    "endpoints": [
+      "getUserIdentities"
+    ],
+    "total_fields": 11,
+    "candidate_contexts": [
+      "CustomerContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.accountType",
+      "data.bizId",
+      "data.bizName",
+      "data.childAccoutAuth",
+      "data.mainAccount",
+      "data.pin",
+      "data.shopId",
+      "data.userIdentityType",
+      "size"
+    ]
+  },
+  "getVenderCategory": {
+    "endpoints": [
+      "getVenderCategory"
+    ],
+    "total_fields": 11,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.children",
+      "content.children.children",
+      "content.children.children.label",
+      "content.children.children.value",
+      "content.children.label",
+      "content.children.value",
+      "content.label",
+      "content.value",
+      "message",
+      "status"
+    ]
+  },
+  "getVenderIndustry": {
+    "endpoints": [
+      "getVenderIndustry"
+    ],
+    "total_fields": 4,
+    "candidate_contexts": [
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.industry",
+      "message",
+      "status"
+    ]
+  },
+  "getVenderStore": {
+    "endpoints": [
+      "getVenderStore"
+    ],
+    "total_fields": 5,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.label",
+      "content.value",
+      "message",
+      "status"
+    ]
+  },
+  "getWindowNotice": {
+    "endpoints": [
+      "getWindowNotice"
+    ],
+    "total_fields": 2,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data"
+    ]
+  },
+  "list": {
+    "endpoints": [
+      "list"
+    ],
+    "total_fields": 3,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "message",
+      "status",
+      "success"
+    ]
+  },
+  "lkActivityLists": {
+    "endpoints": [
+      "lkActivityLists"
+    ],
+    "total_fields": 2,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data"
+    ]
+  },
+  "noOrderPrompt": {
+    "endpoints": [
+      "noOrderPrompt"
+    ],
+    "total_fields": 14,
+    "candidate_contexts": [
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.group",
+      "content.img",
+      "content.introduction",
+      "content.menuCode",
+      "content.moduleName",
+      "content.moreCode",
+      "content.sysUpgrade",
+      "content.topMsg",
+      "content.upgrade",
+      "content.upgradeText",
+      "group",
+      "message",
+      "status"
+    ]
+  },
+  "overview": {
+    "endpoints": [
+      "overview"
+    ],
+    "total_fields": 11,
+    "candidate_contexts": [
+      "ProductContext",
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "code",
+      "content",
+      "content.code",
+      "content.summaryItems",
+      "content.summaryItems.index",
+      "content.summaryItems.industryAvgNo",
+      "content.summaryItems.rate",
+      "content.summaryItems.total",
+      "content.summaryItems.value",
+      "message",
+      "status"
+    ]
+  },
+  "productTop": {
+    "endpoints": [
+      "productTop"
+    ],
+    "total_fields": 8,
+    "candidate_contexts": [
+      "TransactionContext",
+      "ProductContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.jdr_sch_sku_main_pic_address",
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "data.sku_id",
+      "data.sku_id#name_cn",
+      "data.sku_id_item_url",
+      "size"
+    ]
+  },
+  "shopAsset": {
+    "endpoints": [
+      "shopAsset"
+    ],
+    "total_fields": 15,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.chart",
+      "content.chart.categories",
+      "content.chart.series",
+      "content.chart.series.data",
+      "content.chart.series.name",
+      "content.info",
+      "content.info.day",
+      "content.info.num",
+      "content.info.percent",
+      "content.info.shop",
+      "content.info.year",
+      "length",
+      "message",
+      "status"
+    ]
+  },
+  "shopGoodsList": {
+    "endpoints": [
+      "shopGoodsList"
+    ],
+    "total_fields": 29,
+    "candidate_contexts": [
+      "TransactionContext",
+      "ProductContext",
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.addCartCnt",
+      "content.addCartCntCycleRatio",
+      "content.browseCnt",
+      "content.browseCntCycleRatio",
+      "content.dealConversionCntRate",
+      "content.dealConversionCntRateCycleRatio",
+      "content.gmv",
+      "content.gmvCycleRatio",
+      "content.imgSrc",
+      "content.itemDisabled",
+      "content.lastCycle",
+      "content.lastCycle.addCartCnt",
+      "content.lastCycle.browseCnt",
+      "content.lastCycle.dealConversionCntRate",
+      "content.lastCycle.gmv",
+      "content.lastCycle.purchaseCnt",
+      "content.lastCycle.rankId",
+      "content.lastCycle.shopId",
+      "content.lastCycle.skuId"
+    ]
+  },
+  "shopLevel": {
+    "endpoints": [
+      "shopLevel"
+    ],
+    "total_fields": 14,
+    "candidate_contexts": [
+      "IndustryContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.summary",
+      "data.summary.date",
+      "data.summary.level",
+      "data.summary.levelRank",
+      "data.summary.mainCate2",
+      "data.summary.mainCate2Name",
+      "data.trend",
+      "data.trend.date",
+      "data.trend.level",
+      "data.trend.levelRank",
+      "data.trend.mainCate2",
+      "data.trend.mainCate2Name"
+    ]
+  },
+  "showAiEntry": {
+    "endpoints": [
+      "showAiEntry"
+    ],
+    "total_fields": 3,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.aiEntry"
+    ]
+  },
+  "summary": {
+    "endpoints": [
+      "summary"
+    ],
+    "total_fields": 42,
+    "candidate_contexts": [
+      "TransactionContext",
+      "TrafficContext",
+      "ProductContext",
+      "CustomerContext",
+      "IndustryContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "content",
+      "content.fans",
+      "content.fans.deal",
+      "content.fans.isOk",
+      "content.fans.num",
+      "content.fans.price",
+      "content.member",
+      "content.member.deal",
+      "content.member.isOk",
+      "content.member.num",
+      "content.member.price",
+      "content.new",
+      "content.new.deal",
+      "content.new.isOk",
+      "content.new.num",
+      "content.new.price",
+      "content.old",
+      "content.old.deal",
+      "content.old.isOk"
+    ]
+  },
+  "table": {
+    "endpoints": [
+      "table"
+    ],
+    "total_fields": 3,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "message",
+      "status",
+      "success"
+    ]
+  },
+  "targetState": {
+    "endpoints": [
+      "targetState"
+    ],
+    "total_fields": 4,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "cache",
+      "data",
+      "data.monthData",
+      "data.yearData"
+    ]
+  },
+  "trend": {
+    "endpoints": [
+      "trend"
+    ],
+    "total_fields": 15,
+    "candidate_contexts": [
+      "TransactionContext",
+      "AdvertisingContext"
+    ],
+    "field_sample": [
+      "cache",
+      "content",
+      "content.categories",
+      "content.series",
+      "content.series.data",
+      "content.series.name",
+      "content.series.type",
+      "data",
+      "data.dt",
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+      "length",
+      "message",
+      "size",
+      "status"
+    ]
+  },
+  "whiteList": {
+    "endpoints": [
+      "whiteList"
+    ],
+    "total_fields": 5,
+    "candidate_contexts": [
+      "UnknownContext"
+    ],
+    "field_sample": [
+      "content",
+      "content.isWhiteList",
+      "length",
+      "message",
+      "status"
+    ]
+  }
+}

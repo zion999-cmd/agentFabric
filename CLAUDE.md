@@ -115,6 +115,71 @@ npm run cli -- rank      # Run ranking via CLI
 8. **Runtime is replaceable.** Business logic never imports Hermes internals — only the `HermesClient` interface.
 9. **Every directory maps to a real enterprise role.** When adding a new module, ask: "Who in the business does this serve? What real asset does this represent?" If the answer is only "Runtime" or "Model capability", it belongs to Hermes.
 
+> These principles derive from [philosophy.md](philosophy.md) (design philosophy — what & why)
+> and [engineering_philosophy.md](engineering_philosophy.md) (engineering philosophy — how we build).
+> Both are required reading for every contributor.
+
+## Engineering Philosophy (from engineering_philosophy.md)
+
+These principles govern **how** we build, not just what we build. They are the engineering
+manifesto — every PR, code review, and architectural decision must align with them.
+
+### Loop Driven Development (not Feature Driven)
+
+The **Business Loop** is the product. Features are only interfaces of the Loop.
+
+Never ask: "What feature should we build?"
+Always ask: "What business loop becomes complete?"
+
+Priority order: **Business Loop → Data Flow → Contract → Workspace → Widget**
+
+### Build Contracts Before Code
+
+Before implementing any module, define: Contract, Input, Output, Responsibility, Ownership.
+Only then write code.
+
+### Every Module Must Represent Business
+
+Every directory must correspond to a business asset, business role, or business process.
+Never organize code by technical abstraction (`domains/`, `core/`, `engine/`, `service/`, `manager/`).
+Only by business capability (`skills/`, `experience/`, `review/`, `policy/`, `knowledge/`, `workspace/`).
+
+### Workspace Is A Window
+
+Workspace does not create business — it visualizes business. Workspace never owns data,
+decision, or memory. Workspace displays them.
+
+### Runtime Never Owns Business
+
+Runtime executes. Router decides. Policy constrains. Review validates. Experience remembers.
+Workspace explains. Business always belongs to AgentFabric.
+
+### Policy Controls Business
+
+Policy defines boundaries. Skill defines execution. Runtime performs execution.
+Policy always has higher priority than Skill.
+
+### Validation Creates Experience
+
+Raw AI output is never Experience. Experience only exists after validation (Human Review,
+Business KPI, Replay, Multiple Agent Agreement). Only validated knowledge becomes Experience.
+
+### Skills Are Living Assets
+
+Skill is not code — skill is business capability. Every skill has: Version, Owner,
+Success Rate, History, Review, Confidence, Retirement. Skills continuously evolve.
+
+### Single Source of Truth
+
+Every Agent (ChatGPT, Claude Code, Hermes, Codex, future agents) reads the same project
+memory. No duplicated project knowledge. No duplicated architecture. No duplicated decisions.
+
+### Confidence Builds Trust
+
+Trust is not a feature — it emerges from transparency. Every execution exposes: Decision,
+Reason, Evidence, Tool Calls, Trace, Confidence, Review. The system never asks users to
+trust AI. The system enables users to verify AI.
+
 ## Development Specification: Project Memory Maintenance
 
 The `context/` directory is AgentFabric's **own Project Memory** — the Single Source of
@@ -146,7 +211,7 @@ After updating these files, present ONLY the following to the user (1000-3000 �
 
 | File | Answers | Changes |
 |------|---------|---------|
-| `PROJECT.md` + `philosophy.md` | What is this? Why does it exist? Boundary? | Almost never |
+| `PROJECT.md` + `philosophy.md` + `engineering_philosophy.md` | What is this? Why does it exist? How do we build it? Boundary? | Almost never |
 | `context/current_state.md` | What's done? What's in progress? What's blocked? | Every session |
 | `context/decisions.md` | WHY was this designed this way? | Per decision |
 | `context/handoff.md` | What happened this session? What should I know? | Every session |

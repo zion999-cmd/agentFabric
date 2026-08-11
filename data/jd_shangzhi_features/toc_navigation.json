@@ -1,0 +1,82 @@
+[
+  {
+    "text": "首页",
+    "href": "/szweb/sz/view/index/home.html",
+    "tag": "A"
+  },
+  {
+    "text": "实时",
+    "href": "/szweb/sz/view/realTime/realSummarysNew.html",
+    "tag": "A"
+  },
+  {
+    "text": "流量",
+    "href": "/szweb/sz/view/viewflow/viewStats.html",
+    "tag": "A"
+  },
+  {
+    "text": "商品",
+    "href": "/sz/view/productAnalysis/productSummarys.html",
+    "tag": "A"
+  },
+  {
+    "text": "交易",
+    "href": "/sz/view/dealAnalysis/dealSummarys.html",
+    "tag": "A"
+  },
+  {
+    "text": "服务",
+    "href": "/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html",
+    "tag": "A"
+  },
+  {
+    "text": "营销",
+    "href": "/marketweb/sz/view/marketing/marketingOverview.html",
+    "tag": "A"
+  },
+  {
+    "text": "供应链",
+    "href": "/stockweb/sz/view/ihs/InventoryHealth.html",
+    "tag": "A"
+  },
+  {
+    "text": "客户",
+    "href": "/szweb/sz/view/growth/summary.html",
+    "tag": "A"
+  },
+  {
+    "text": "行业",
+    "href": "/szweb/sz/view/industryMarket/industryRealTimeNew.html",
+    "tag": "A"
+  },
+  {
+    "text": "竞争",
+    "href": "/sz/view/competitionAnalysis/shopOverviews.html",
+    "tag": "A"
+  },
+  {
+    "text": "揽客",
+    "href": "/sz/view/vender/shopping/activityLists.html",
+    "tag": "A"
+  },
+  {
+    "text": "报表",
+    "href": "/sz/view/selfHelp/reportLists.html",
+    "tag": "A"
+  },
+  {
+    "text": "业务专区",
+    "href": "/sz/view/businessZone/wanjia.html",
+    "tag": "A"
+  },
+  {
+    "text": "智能工具",
+    "href": "/szweb/sz/view/facilitator/smartSelection.html",
+    "tag": "A"
+  },
+  {
+    "text": "培训",
+    "href": "/sz/view/knowledgeCenter/school.html",
+    "tag": "A"
+  }
+]

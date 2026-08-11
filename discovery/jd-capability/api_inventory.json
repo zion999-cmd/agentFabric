@@ -1,0 +1,5124 @@
+{
+  "getAlarmOverview": {
+    "files": [
+      "供应链-库存预警_getAlarmOverview_7275d068a42b3080.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.stockOutNum": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.stockOutBSNum": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.stockOutSaleLoseAmount": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "content.beingStockOutNum": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.beingStockOutBSNum": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.beingStockOutHSAmount": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "content.beingUnsaleNum": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.beingUnsaleNBSNum": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.unsaleNum": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.unsaleNBSNum": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.unsaleAmount": {
+        "type": "float",
+        "example": "-1.0"
+      },
+      "content.nosaleNum": {
+        "type": "int",
+        "example": "4"
+      },
+      "content.nosaleAmount": {
+        "type": "float",
+        "example": "3565530.0"
+      }
+    },
+    "field_count": 16
+  },
+  "getAlarmStockOut": {
+    "files": [
+      "供应链-库存预警_getAlarmStockOut_e61d2e62ceba0d8e.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.pageNo": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.pageSize": {
+        "type": "int",
+        "example": "10"
+      },
+      "content.total": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.dataList": {
+        "type": "array"
+      }
+    },
+    "field_count": 7
+  },
+  "getDefaultDt": {
+    "files": [
+      "供应链-库存预警_getDefaultDt_cabe00d5d54f0349.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.dt": {
+        "type": "str",
+        "example": "2026-06-29"
+      }
+    },
+    "field_count": 4
+  },
+  "getHealthOverview": {
+    "files": [
+      "供应链-库存预警_getHealthOverview_53e1ea480e13e22d.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.score": {
+        "type": "int",
+        "example": "43"
+      },
+      "content.nextLevelDiff": {
+        "type": "int",
+        "example": "27"
+      },
+      "content.scoreLevelList": {
+        "type": "array"
+      },
+      "content.scoreLevelList.label": {
+        "type": "str",
+        "example": "差"
+      },
+      "content.scoreLevelList.value": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.adviseList": {
+        "type": "array"
+      },
+      "content.turnoverRankRate": {
+        "type": "float",
+        "example": "0.175"
+      },
+      "content.spotRankRate": {
+        "type": "float",
+        "example": "0.186"
+      },
+      "content.unsaleRankRate": {
+        "type": "float",
+        "example": "1.0"
+      },
+      "content.categoryTurnoverRankRate": {
+        "type": "float",
+        "example": "0.01"
+      },
+      "content.categorySpotRankRate": {
+        "type": "float",
+        "example": "0.2"
+      },
+      "content.categoryUnsaleRankRate": {
+        "type": "float",
+        "example": "0.001"
+      }
+    },
+    "field_count": 15
+  },
+  "getIndicatorOverview": {
+    "files": [
+      "供应链-库存预警_getIndicatorOverview_62eef037d1277676.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.pieceTurnover": {
+        "type": "float",
+        "example": "2335.76"
+      },
+      "content.stockPieList": {
+        "type": "array"
+      },
+      "content.stockPieList.label": {
+        "type": "str",
+        "example": "缺货"
+      },
+      "content.stockPieList.value": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.spotRate": {
+        "type": "float",
+        "example": "0.991"
+      },
+      "content.spotRankRate": {
+        "type": "float",
+        "example": "0.186"
+      },
+      "content.bestsellerSpotRate": {
+        "type": "float",
+        "example": "0.991"
+      },
+      "content.unsaleRate": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "content.unsaleRankRate": {
+        "type": "float",
+        "example": "1.0"
+      },
+      "content.unsaleProductNumRate": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "content.nosaleRate": {
+        "type": "float",
+        "example": "0.0419"
+      },
+      "content.scoreLevelList": {
+        "type": "array"
+      },
+      "content.scoreLevelList.label": {
+        "type": "str",
+        "example": "差"
+      },
+      "content.scoreLevelList.value": {
+        "type": "str",
+        "example": "0"
+      }
+    },
+    "field_count": 17
+  },
+  "getIndicatorSpotRateTrend": {
+    "files": [
+      "供应链-库存预警_getIndicatorSpotRateTrend_f091943acf7acecc.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.name": {
+        "type": "str",
+        "example": "现货率相关历史趋势"
+      },
+      "content.categories": {
+        "type": "array"
+      },
+      "content.series": {
+        "type": "array"
+      },
+      "content.series.name": {
+        "type": "str",
+        "example": "现货率"
+      },
+      "content.series.data": {
+        "type": "array"
+      }
+    },
+    "field_count": 8
+  },
+  "getIndicatorTurnoverTrend": {
+    "files": [
+      "供应链-库存预警_getIndicatorTurnoverTrend_817febaf9b624763.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.name": {
+        "type": "str",
+        "example": "周转相关历史趋势"
+      },
+      "content.categories": {
+        "type": "array"
+      },
+      "content.series": {
+        "type": "array"
+      },
+      "content.series.name": {
+        "type": "str",
+        "example": "件数周转"
+      },
+      "content.series.data": {
+        "type": "array"
+      }
+    },
+    "field_count": 8
+  },
+  "getIndicatorUnsaleTrend": {
+    "files": [
+      "供应链-库存预警_getIndicatorUnsaleTrend_785f0748f32a8dc1.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.name": {
+        "type": "str",
+        "example": "滞销库存相关历史趋势"
+      },
+      "content.categories": {
+        "type": "array"
+      },
+      "content.series": {
+        "type": "array"
+      },
+      "content.series.name": {
+        "type": "str",
+        "example": "滞销库存占比率"
+      },
+      "content.series.data": {
+        "type": "array"
+      }
+    },
+    "field_count": 8
+  },
+  "getVenderCategory": {
+    "files": [
+      "供应链-库存预警_getVenderCategory_b02e5e986d15cc59.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.children": {
+        "type": "array"
+      },
+      "content.children.children": {
+        "type": "array"
+      },
+      "content.children.children.label": {
+        "type": "str",
+        "example": "茉莉花茶"
+      },
+      "content.children.children.value": {
+        "type": "str",
+        "example": "39110"
+      },
+      "content.children.label": {
+        "type": "str",
+        "example": "茗茶"
+      },
+      "content.children.value": {
+        "type": "str",
+        "example": "36724"
+      },
+      "content.label": {
+        "type": "str",
+        "example": "水饮冲调"
+      },
+      "content.value": {
+        "type": "str",
+        "example": "36720"
+      }
+    },
+    "field_count": 11
+  },
+  "getVenderIndustry": {
+    "files": [
+      "供应链-库存预警_getVenderIndustry_a891cb36716602cd.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.industry": {
+        "type": "str",
+        "example": "茗茶"
+      }
+    },
+    "field_count": 4
+  },
+  "getVenderStore": {
+    "files": [
+      "供应链-库存预警_getVenderStore_327017f88cbe490c.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "操作成功"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.label": {
+        "type": "str",
+        "example": "商家仓"
+      },
+      "content.value": {
+        "type": "str",
+        "example": "0"
+      }
+    },
+    "field_count": 5
+  },
+  "audienceInfo": {
+    "files": [
+      "客户-客户总览_audienceInfo_a6616d6b23a08830.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.indexType": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.indexName": {
+        "type": "str",
+        "example": "potential"
+      },
+      "content.num": {
+        "type": "int",
+        "example": "250770"
+      },
+      "length": {
+        "type": "int",
+        "example": "7"
+      }
+    },
+    "field_count": 7
+  },
+  "conversionEffect": {
+    "files": [
+      "客户-客户总览_conversionEffect_6ad97a497ff0befd.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.effect": {
+        "type": "object"
+      },
+      "content.effect.new": {
+        "type": "object"
+      },
+      "content.effect.new.shop": {
+        "type": "float",
+        "example": "-0.558"
+      },
+      "content.effect.new.num": {
+        "type": "int",
+        "example": "251355"
+      },
+      "content.effect.deal": {
+        "type": "object"
+      },
+      "content.effect.deal.shop": {
+        "type": "float",
+        "example": "-0.1397"
+      },
+      "content.effect.deal.num": {
+        "type": "int",
+        "example": "585"
+      },
+      "content.effect.inShop": {
+        "type": "object"
+      },
+      "content.effect.inShop.shop": {
+        "type": "float",
+        "example": "-0.1165"
+      },
+      "content.effect.inShop.num": {
+        "type": "int",
+        "example": "9430"
+      },
+      "content.effect.detail": {
+        "type": "object"
+      },
+      "content.effect.detail.shop": {
+        "type": "float",
+        "example": "-0.1567"
+      },
+      "content.effect.detail.num": {
+        "type": "int",
+        "example": "8743"
+      },
+      "content.effect.cart": {
+        "type": "object"
+      },
+      "content.effect.cart.shop": {
+        "type": "float",
+        "example": "-0.2981"
+      },
+      "content.effect.cart.num": {
+        "type": "int",
+        "example": "1128"
+      },
+      "content.percent": {
+        "type": "object"
+      },
+      "content.percent.deal": {
+        "type": "object"
+      },
+      "content.percent.deal.other": {
+        "type": "float",
+        "example": "0.517"
+      },
+      "content.percent.deal.self": {
+        "type": "float",
+        "example": "0.5186170212765957"
+      },
+      "content.percent.inShop": {
+        "type": "object"
+      },
+      "content.percent.inShop.other": {
+        "type": "float",
+        "example": "0.2637"
+      },
+      "content.percent.inShop.self": {
+        "type": "float",
+        "example": "0.03751665970440214"
+      },
+      "content.percent.cart": {
+        "type": "object"
+      },
+      "content.percent.cart.other": {
+        "type": "float",
+        "example": "0.1554"
+      },
+      "content.percent.cart.self": {
+        "type": "float",
+        "example": "0.12901749971405696"
+      },
+      "content.percent.browse": {
+        "type": "object"
+      },
+      "content.percent.browse.other": {
+        "type": "float",
+        "example": "-0.0136"
+      },
+      "content.percent.browse.self": {
+        "type": "float",
+        "example": "0.9271474019088017"
+      },
+      "length": {
+        "type": "int",
+        "example": "5"
+      }
+    },
+    "field_count": 33
+  },
+  "dateRange": {
+    "files": [
+      "客户-客户总览_dateRange_d4adc3ef03f9c4dd.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.startDate": {
+        "type": "int",
+        "example": "1704038400000"
+      },
+      "content.endDate": {
+        "type": "int",
+        "example": "1782662400000"
+      },
+      "length": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 6
+  },
+  "diagnosis": {
+    "files": [
+      "客户-客户总览_diagnosis_0d4b7def75c427a1.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.old": {
+        "type": "array"
+      },
+      "content.old.name": {
+        "type": "str",
+        "example": "成交转化率"
+      },
+      "content.old.type": {
+        "type": "str",
+        "example": "percent"
+      },
+      "content.old.value": {
+        "type": "str",
+        "example": "0.013482827135963667"
+      },
+      "content.old.info": {
+        "type": "str",
+        "example": "低于65.03%的相似店铺，较上一周期排名升高了 2.19%"
+      },
+      "content.member": {
+        "type": "array"
+      },
+      "content.fans": {
+        "type": "array"
+      },
+      "content.fans.name": {
+        "type": "str",
+        "example": "进店-浏览率"
+      },
+      "content.fans.type": {
+        "type": "str",
+        "example": "percent"
+      },
+      "content.fans.value": {
+        "type": "str",
+        "example": "0.8994974874371859"
+      },
+      "content.fans.info": {
+        "type": "str",
+        "example": "低于74.32%的相似店铺，较上一周期排名升高了 7.10%"
+      },
+      "content.new": {
+        "type": "array"
+      },
+      "length": {
+        "type": "int",
+        "example": "5"
+      }
+    },
+    "field_count": 16
+  },
+  "getAnnouncement": {
+    "files": [
+      "客户-客户总览_getAnnouncement_1633eae56ec090b1.json",
+      "智能工具-智能选品_getAnnouncement_1633eae56ec090b1.json",
+      "营销-营销概览_getAnnouncement_1633eae56ec090b1.json",
+      "行业-大盘动态_getAnnouncement_1633eae56ec090b1.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.notice": {
+        "type": "array"
+      },
+      "content.notice.messageLink": {
+        "type": "str",
+        "example": "joyspace.jd.com/pages/HRx9rDqa7saLn2SIZpTR"
+      },
+      "content.notice.date": {
+        "type": "str",
+        "example": "2026-06-22 00:00"
+      },
+      "content.notice.menuCode": {
+        "type": "str",
+        "example": "system"
+      },
+      "content.notice.messageLinkWord": {
+        "type": "str",
+        "example": "查收活动白皮书"
+      },
+      "content.notice.message": {
+        "type": "str",
+        "example": "📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日，延续大促期系统推荐目标投产比，100%保收益。爆款持续拿量，好货继续起飞 🚀"
+      },
+      "content.notice.title": {
+        "type": "str",
+        "example": "【稳赚计划3.0】延期至7月20日"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 10
+  },
+  "getLocalAnnouncement": {
+    "files": [
+      "客户-客户总览_getLocalAnnouncement_e35f43864d8248f7.json",
+      "智能工具-智能选品_getLocalAnnouncement_e35f43864d8248f7.json",
+      "营销-营销概览_getLocalAnnouncement_e35f43864d8248f7.json",
+      "行业-大盘动态_getLocalAnnouncement_e35f43864d8248f7.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 3
+  },
+  "getNewMenuTreeData": {
+    "files": [
+      "客户-客户总览_getNewMenuTreeData_02747a4f28960ad4.json",
+      "智能工具-智能选品_getNewMenuTreeData_02747a4f28960ad4.json",
+      "行业-大盘动态_getNewMenuTreeData_02747a4f28960ad4.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.data": {
+        "type": "array"
+      },
+      "content.data.code": {
+        "type": "str",
+        "example": "indexDetails"
+      },
+      "content.data.auth": {
+        "type": "bool",
+        "example": "True"
+      },
+      "content.data.level": {
+        "type": "int",
+        "example": "3"
+      },
+      "content.data.pid": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.data.isLeaf": {
+        "type": "bool",
+        "example": "True"
+      },
+      "content.data.uri": {
+        "type": "str",
+        "example": "/szweb/sz/view/index/home.html"
+      },
+      "content.data.cssClass": {
+        "type": "str",
+        "example": "i-report"
+      },
+      "content.data.children": {
+        "type": "array"
+      },
+      "content.data.name": {
+        "type": "str",
+        "example": "首页"
+      },
+      "content.data.id": {
+        "type": "str",
+        "example": "119"
+      },
+      "content.data.isVirtual": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.data.order": {
+        "type": "int",
+        "example": "8"
+      },
+      "content.data.status": {
+        "type": "int",
+        "example": "1"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 17
+  },
+  "getPageInfo": {
+    "files": [
+      "客户-客户总览_getPageInfo_69b622f7c5957247.json",
+      "智能工具-智能选品_getPageInfo_72446fcc1dd6f1c8.json",
+      "营销-营销概览_getPageInfo_a77fd76aeb7a9110.json",
+      "行业-大盘动态_getPageInfo_69f5af1b47683615.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.indexShopFlag": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.START_TIME": {
+        "type": "str",
+        "example": "2025-05-26"
+      },
+      "content.SHOP_ID": {
+        "type": "str",
+        "example": "11855009"
+      },
+      "content.PAGE_QUARTER_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.PAGE_CUSTOM_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.HAS_CUSTOM_TIME": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.TMPLOGIN": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.refundStartDate": {
+        "type": "str",
+        "example": "2023-10-07 10:00:00"
+      },
+      "content.bcTag": {
+        "type": "str",
+        "example": "b"
+      },
+      "content.PAGE_DAY182_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.systemTime": {
+        "type": "int",
+        "example": "1782831279761"
+      },
+      "content.hasTimeExtendedModule": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.isTimeSaleMenu": {
+        "type": "bool",
+        "example": "True"
+      },
+      "content.PAGE_DAY_TIME": {
+        "type": "str",
+        "example": "2026-06-29"
+      },
+      "content.PAGE_WEEK_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.SHOP_TYPE": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.SERVER_TIME": {
+        "type": "str",
+        "example": "2026/06/30"
+      },
+      "content.SHOW_TO_BRAND": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.activityEndDate": {
+        "type": "str",
+        "example": "2024-01-07 23:59:59"
+      },
+      "content.PAGE_DAY90_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.businessModelName": {
+        "type": "str",
+        "example": "POP-SOP"
+      },
+      "content.PAGE_YEAR_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.activityStartDate": {
+        "type": "str",
+        "example": "2023-10-07 10:00:00"
+      },
+      "content.erpName": {
+        "type": "str",
+        "example": ""
+      },
+      "content.PAGE_DAY30_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.greyInfo": {
+        "type": "str",
+        "example": "white"
+      },
+      "content.USER_NAME": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店"
+      },
+      "content.businessModelKey": {
+        "type": "str",
+        "example": "popsop"
+      },
+      "content.am": {
+        "type": "str",
+        "example": "var _0x37e0=['div[class*=\\x22dts\\x22],div[id*=\\x22Dts\\x22],button[class*=\\x22dts\\x22]\\x20{\\x20visibility:\\x20hidden;\\x20}','parentNode','一键导出','span','style','text/css','head','innerText','display'];v"
+      },
+      "content.SHOP_POP_UP": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.PAGE_MONTH_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.VERSION_ID": {
+        "type": "str",
+        "example": "-1"
+      },
+      "content.refundEndDate": {
+        "type": "str",
+        "example": "2024-01-21 23:59:59"
+      },
+      "content.PAGE_TIME": {
+        "type": "str",
+        "example": "2026-06-29"
+      },
+      "content.USER_TYPE": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.hasJdszAuth": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.SHOW_SWITCH_SHOP": {
+        "type": "str",
+        "example": "0"
+      },
+      "content.VENDER_ID": {
+        "type": "str",
+        "example": "12140116"
+      },
+      "content.LAST_SIX_MONTH_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.videoLink": {
+        "type": "str",
+        "example": ""
+      },
+      "content.PAGE_DAY15_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.SURVEY_URL": {
+        "type": "str",
+        "example": "https://wj-dongjian.jd.com/q/67ed083351d6ac0084183907"
+      },
+      "content.isJingMaiOldVer": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.PAGE_DAY7_TIME": {
+        "type": "str",
+        "example": ""
+      },
+      "content.uriedPoint": {
+        "type": "str",
+        "example": "true"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 48
+  },
+  "getReachTypeConfig": {
+    "files": [
+      "客户-客户总览_getReachTypeConfig_fc44b0620e8672d4.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.code": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.desc": {
+        "type": "str",
+        "example": "京准通DMP"
+      },
+      "content.alias": {
+        "type": "str",
+        "example": "DMP"
+      },
+      "content.checked": {
+        "type": "bool",
+        "example": "False"
+      },
+      "length": {
+        "type": "int",
+        "example": "2"
+      }
+    },
+    "field_count": 8
+  },
+  "shopAsset": {
+    "files": [
+      "客户-客户总览_shopAsset_051b468d5563513d.json",
+      "客户-客户总览_shopAsset_46907eb343e8b588.json",
+      "客户-客户总览_shopAsset_a12ea02e09e08c1c.json",
+      "客户-客户总览_shopAsset_b2cbc80eec57f56a.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.chart": {
+        "type": "object"
+      },
+      "content.chart.series": {
+        "type": "array"
+      },
+      "content.chart.series.data": {
+        "type": "array"
+      },
+      "content.chart.series.name": {
+        "type": "str",
+        "example": "浏览量"
+      },
+      "content.chart.categories": {
+        "type": "array"
+      },
+      "content.info": {
+        "type": "object"
+      },
+      "content.info.shop": {
+        "type": "float",
+        "example": "-0.5585"
+      },
+      "content.info.year": {
+        "type": "str",
+        "example": "-0.1762"
+      },
+      "content.info.num": {
+        "type": "int",
+        "example": "250770"
+      },
+      "content.info.percent": {
+        "type": "str",
+        "example": "0.9447"
+      },
+      "content.info.day": {
+        "type": "str",
+        "example": "0.0014"
+      },
+      "length": {
+        "type": "int",
+        "example": "5"
+      }
+    },
+    "field_count": 15
+  },
+  "shopGoodsList": {
+    "files": [
+      "客户-客户总览_shopGoodsList_652ff0a2368f75cf.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.shopId": {
+        "type": "str",
+        "example": "11855009"
+      },
+      "content.skuId": {
+        "type": "str",
+        "example": "10072459153406"
+      },
+      "content.skuName": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店特级正宗2025新茶叶自己喝口粮茶送长辈父母家长 特级祁红香螺300g"
+      },
+      "content.imgSrc": {
+        "type": "str",
+        "example": "jfs/t1/427966/6/1527/441233/69eebe71F93bfac6c/0083320320b06c2f.png"
+      },
+      "content.proUrl": {
+        "type": "str",
+        "example": "https://item.jd.com/10072459153406.html"
+      },
+      "content.rankId": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.browseCnt": {
+        "type": "int",
+        "example": "2996"
+      },
+      "content.browseCntCycleRatio": {
+        "type": "float",
+        "example": "0.13657056145675273"
+      },
+      "content.addCartCnt": {
+        "type": "int",
+        "example": "304"
+      },
+      "content.purchaseCnt": {
+        "type": "int",
+        "example": "174"
+      },
+      "content.addCartCntCycleRatio": {
+        "type": "float",
+        "example": "0.1968503937007875"
+      },
+      "content.dealConversionCntRate": {
+        "type": "float",
+        "example": "0.0580774366"
+      },
+      "content.dealConversionCntRateCycleRatio": {
+        "type": "float",
+        "example": "0.1776317142691497"
+      },
+      "content.gmv": {
+        "type": "float",
+        "example": "19041.02999999998"
+      },
+      "content.gmvCycleRatio": {
+        "type": "float",
+        "example": "0.18380500603061467"
+      },
+      "content.itemDisabled": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.lastCycle": {
+        "type": "object"
+      },
+      "content.lastCycle.shopId": {
+        "type": "str",
+        "example": "11855009"
+      },
+      "content.lastCycle.skuId": {
+        "type": "str",
+        "example": "10072459153406"
+      },
+      "content.lastCycle.rankId": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.lastCycle.browseCnt": {
+        "type": "int",
+        "example": "2636"
+      },
+      "content.lastCycle.addCartCnt": {
+        "type": "int",
+        "example": "254"
+      },
+      "content.lastCycle.purchaseCnt": {
+        "type": "int",
+        "example": "130"
+      },
+      "content.lastCycle.dealConversionCntRate": {
+        "type": "float",
+        "example": "0.0493171472"
+      },
+      "content.lastCycle.gmv": {
+        "type": "float",
+        "example": "16084.599999999962"
+      },
+      "length": {
+        "type": "int",
+        "example": "10"
+      }
+    },
+    "field_count": 29
+  },
+  "summary": {
+    "files": [
+      "客户-客户总览_summary_bc7beecdf0cba25a.json",
+      "首页_summary_2dbc6f8c852812a9.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.old": {
+        "type": "object"
+      },
+      "content.old.deal": {
+        "type": "float",
+        "example": "0.2452"
+      },
+      "content.old.price": {
+        "type": "float",
+        "example": "0.2676"
+      },
+      "content.old.num": {
+        "type": "int",
+        "example": "14092"
+      },
+      "content.old.isOk": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.member": {
+        "type": "object"
+      },
+      "content.member.deal": {
+        "type": "float",
+        "example": "0.1252"
+      },
+      "content.member.price": {
+        "type": "float",
+        "example": "0.1834"
+      },
+      "content.member.num": {
+        "type": "int",
+        "example": "11357"
+      },
+      "content.member.isOk": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.fans": {
+        "type": "object"
+      },
+      "content.fans.deal": {
+        "type": "float",
+        "example": "0.1458"
+      },
+      "content.fans.price": {
+        "type": "float",
+        "example": "0.1756"
+      },
+      "content.fans.num": {
+        "type": "int",
+        "example": "68391"
+      },
+      "content.fans.isOk": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.new": {
+        "type": "object"
+      },
+      "content.new.deal": {
+        "type": "float",
+        "example": "0.7548"
+      },
+      "content.new.price": {
+        "type": "float",
+        "example": "0.7324"
+      },
+      "content.new.num": {
+        "type": "int",
+        "example": "251355"
+      },
+      "content.new.isOk": {
+        "type": "str",
+        "example": ""
+      },
+      "length": {
+        "type": "int",
+        "example": "5"
+      },
+      "data": {
+        "type": "array"
+      },
+      "data.fo_jdr_sch_industry_deal_rate##compareValue": {
+        "type": "float",
+        "example": "0.0584795321637427"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare": {
+        "type": "float",
+        "example": "0.45"
+      },
+      "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "int",
+        "example": "289"
+      },
+      "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare": {
+        "type": "float",
+        "example": "-0.15497076023391812"
+      },
+      "data.fo_jdr_sch_industry_deal_rate##compare": {
+        "type": "float",
+        "example": "0.5975778546712803"
+      },
+      "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+        "type": "int",
+        "example": "27"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot": {
+        "type": "int",
+        "example": "29"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare": {
+        "type": "float",
+        "example": "0.7553265755337258"
+      },
+      "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue": {
+        "type": "int",
+        "example": "342"
+      },
+      "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare": {
+        "type": "float",
+        "example": "0.35"
+      },
+      "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue": {
+        "type": "int",
+        "example": "20"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "4928.29"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": {
+        "type": "float",
+        "example": "2807.6200000000003"
+      },
+      "data.fo_jdr_sch_industry_deal_rate": {
+        "type": "float",
+        "example": "0.0934256055363322"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue": {
+        "type": "int",
+        "example": "20"
+      },
+      "size": {
+        "type": "int",
+        "example": "1"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 42
+  },
+  "trend": {
+    "files": [
+      "客户-客户总览_trend_460a2f22dd65ce98.json",
+      "首页_trend_26b39dcbc11bd026.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.series": {
+        "type": "array"
+      },
+      "content.series.data": {
+        "type": "array"
+      },
+      "content.series.name": {
+        "type": "str",
+        "example": "成交客户数"
+      },
+      "content.series.type": {
+        "type": "str",
+        "example": "bar"
+      },
+      "content.categories": {
+        "type": "array"
+      },
+      "length": {
+        "type": "int",
+        "example": "5"
+      },
+      "data": {
+        "type": "array"
+      },
+      "data.dt": {
+        "type": "str",
+        "example": "2026-06-30 00:00~2026-06-30 00:59"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "428.0"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "size": {
+        "type": "int",
+        "example": "23"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 15
+  },
+  "whiteList": {
+    "files": [
+      "客户-客户总览_whiteList_376b10ffaadbcbea.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.isWhiteList": {
+        "type": "bool",
+        "example": "True"
+      },
+      "length": {
+        "type": "int",
+        "example": "18"
+      }
+    },
+    "field_count": 5
+  },
+  "commonParam": {
+    "files": [
+      "揽客-购物车营销_commonParam_ed7f1827190423f9.json",
+      "首页_commonParam_4cada315ec634984.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.sznMaxAge": {
+        "type": "str",
+        "example": "2026-06-30T15:59:59Z"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      },
+      "data.indexAd": {
+        "type": "array"
+      },
+      "data.indexAd.adverType": {
+        "type": "str",
+        "example": "stableEarningMulti"
+      },
+      "data.indexAd.popUpShow": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.indexAd.popUpInterval": {
+        "type": "int",
+        "example": "24"
+      }
+    },
+    "field_count": 7
+  },
+  "getDims": {
+    "files": [
+      "揽客-购物车营销_getDims_76e24c333f5e64b1.json",
+      "首页_getDims_7585abcdbdf9c9f8.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.dimCode": {
+        "type": "str",
+        "example": "time"
+      },
+      "data.dimVals": {
+        "type": "array"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      },
+      "data.dimVals.code": {
+        "type": "str",
+        "example": "week"
+      },
+      "data.dimVals.max": {
+        "type": "str",
+        "example": "2026-06-29"
+      },
+      "data.dimVals.compares": {
+        "type": "array"
+      }
+    },
+    "field_count": 7
+  },
+  "getMenuNotice": {
+    "files": [
+      "揽客-购物车营销_getMenuNotice_784e4afba923ca67.json",
+      "首页_getMenuNotice_784e4afba923ca67.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 2
+  },
+  "getMenuTree": {
+    "files": [
+      "揽客-购物车营销_getMenuTree_c0d87b9feab61ac9.json",
+      "首页_getMenuTree_c0d87b9feab61ac9.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.resUri": {
+        "type": "str",
+        "example": "/szweb/view/index/home.html"
+      },
+      "data.auth": {
+        "type": "bool",
+        "example": "True"
+      },
+      "data.resType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.name": {
+        "type": "str",
+        "example": "首页"
+      },
+      "data.resCode": {
+        "type": "str",
+        "example": "indexSummary"
+      },
+      "data.sort": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.pResCode": {
+        "type": "str",
+        "example": "root"
+      },
+      "data.extAttr": {
+        "type": "object"
+      },
+      "data.extAttr.groupTag": {
+        "type": "str",
+        "example": "0"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 11
+  },
+  "getModelFunc": {
+    "files": [
+      "揽客-购物车营销_getModelFunc_784e4afba923ca67.json",
+      "首页_getModelFunc_1b16026ded31972b.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      },
+      "data.auth": {
+        "type": "bool",
+        "example": "True"
+      },
+      "data.resType": {
+        "type": "int",
+        "example": "3"
+      },
+      "data.resCode": {
+        "type": "str",
+        "example": "indexSummary_productDiagnosis"
+      },
+      "data.sort": {
+        "type": "int",
+        "example": "10"
+      },
+      "data.pResCode": {
+        "type": "str",
+        "example": "indexSummary"
+      }
+    },
+    "field_count": 7
+  },
+  "getPageFooter": {
+    "files": [
+      "揽客-购物车营销_getPageFooter_06817cbc4dcb4368.json",
+      "首页_getPageFooter_06817cbc4dcb4368.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.license": {
+        "type": "str",
+        "example": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      "data.agreement": {
+        "type": "str",
+        "example": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      "data.cancelProcess": {
+        "type": "str",
+        "example": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 5
+  },
+  "getSystemNotice": {
+    "files": [
+      "揽客-购物车营销_getSystemNotice_a5bfe76467af06bb.json",
+      "首页_getSystemNotice_a5bfe76467af06bb.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.endDate": {
+        "type": "str",
+        "example": "2026-06-30 23:59"
+      },
+      "data.linkText": {
+        "type": "str",
+        "example": "查收活动白皮书"
+      },
+      "data.linkAddress": {
+        "type": "str",
+        "example": "https://joyspace.jd.com/pages/HRx9rDqa7saLn2SIZpTR"
+      },
+      "data.noticeType": {
+        "type": "str",
+        "example": "system"
+      },
+      "data.title": {
+        "type": "str",
+        "example": "【稳赚计划3.0】延期至7月20日"
+      },
+      "data.content": {
+        "type": "str",
+        "example": "📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日，延续大促期系统推荐目标投产比，100%保收益。爆款持续拿量，好货继续起飞 🚀"
+      },
+      "data.hasLink": {
+        "type": "str",
+        "example": "1"
+      },
+      "data.optDate": {
+        "type": "str",
+        "example": "2026-06-22 10:44:51"
+      },
+      "data.id": {
+        "type": "str",
+        "example": "629fa7f6e45f4e819de3f3578481cd02"
+      },
+      "data.startDate": {
+        "type": "str",
+        "example": "2026-06-22 00:00"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 12
+  },
+  "getUserIdentities": {
+    "files": [
+      "揽客-购物车营销_getUserIdentities_83d2d151068946fc.json",
+      "首页_getUserIdentities_83d2d151068946fc.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.pin": {
+        "type": "str",
+        "example": "祁门红茶旗舰店_哲"
+      },
+      "data.bizName": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店"
+      },
+      "data.mainAccount": {
+        "type": "str",
+        "example": "祁门牌红茶"
+      },
+      "data.accountType": {
+        "type": "int",
+        "example": "2"
+      },
+      "data.childAccoutAuth": {
+        "type": "bool",
+        "example": "True"
+      },
+      "data.bizId": {
+        "type": "str",
+        "example": "12140116"
+      },
+      "data.shopId": {
+        "type": "str",
+        "example": "11855009"
+      },
+      "data.userIdentityType": {
+        "type": "str",
+        "example": "pop"
+      },
+      "size": {
+        "type": "int",
+        "example": "1"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 11
+  },
+  "getWindowNotice": {
+    "files": [
+      "揽客-购物车营销_getWindowNotice_784e4afba923ca67.json",
+      "首页_getWindowNotice_784e4afba923ca67.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 2
+  },
+  "lkActivityLists": {
+    "files": [
+      "揽客-购物车营销_lkActivityLists_784e4afba923ca67.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 2
+  },
+  "getCategory": {
+    "files": [
+      "智能工具-智能选品_getCategory_1df069413e79f25e.json"
+    ],
+    "fields": {
+      "length": {
+        "type": "int",
+        "example": "7"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.name": {
+        "type": "str",
+        "example": "全部类目"
+      },
+      "content.id": {
+        "type": "str",
+        "example": "999999"
+      },
+      "status": {
+        "type": "str",
+        "example": "0"
+      }
+    },
+    "field_count": 6
+  },
+  "list": {
+    "files": [
+      "智能工具-智能选品_list_e7b4628b3c488ff9.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "ajax 无权限"
+      },
+      "status": {
+        "type": "int",
+        "example": "100402"
+      },
+      "success": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 3
+  },
+  "noOrderPrompt": {
+    "files": [
+      "智能工具-智能选品_noOrderPrompt_b89dfee6414248b7.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.sysUpgrade": {
+        "type": "str",
+        "example": "系统正在维护升级，请您稍后再来访问，谢谢！"
+      },
+      "content.img": {
+        "type": "str",
+        "example": "/static/img/freeTipPic/businessZone/isv.png"
+      },
+      "content.upgrade": {
+        "type": "str",
+        "example": "http://fw.jd.com/main/detail/FW_GOODS-549810?skuId=797631&p=sz&t=sz"
+      },
+      "content.upgradeText": {
+        "type": "str",
+        "example": "立即订购"
+      },
+      "content.menuCode": {
+        "type": "str",
+        "example": "isvNew"
+      },
+      "content.moduleName": {
+        "type": "str",
+        "example": "智能选品"
+      },
+      "content.moreCode": {
+        "type": "str",
+        "example": "serviceSelect"
+      },
+      "content.introduction": {
+        "type": "str",
+        "example": "智能选品模块致力于科学输出商品运营管理策略，依托深度学习算法进行数据赋能，高效健康指导商品选品，快速发现店铺潜在爆款和商品布局问题，帮助商家能快速、及时调整商品的销售及运营策略；选品策略可应用于京东平台多营销场景，有效提升货品效率，提高店铺对流量的利用率；最终通过持续优化商品结构、选品策略与对应策略，帮助商家把控生意的长期健康发展和销售增长。"
+      },
+      "content.topMsg": {
+        "type": "str",
+        "example": "该功能已下线，不支持订购了哦~"
+      },
+      "content.group": {
+        "type": "str",
+        "example": "service"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "group": {
+        "type": "str",
+        "example": "service"
+      }
+    },
+    "field_count": 14
+  },
+  "table": {
+    "files": [
+      "智能工具-智能选品_table_e7b4628b3c488ff9.json"
+    ],
+    "fields": {
+      "message": {
+        "type": "str",
+        "example": "ajax 无权限"
+      },
+      "status": {
+        "type": "int",
+        "example": "100402"
+      },
+      "success": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 3
+  },
+  "getMarketingActivityList": {
+    "files": [
+      "营销-营销概览_getMarketingActivityList_d7a1854f51c8a2ac.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "SUCCESS"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.activityId": {
+        "type": "str",
+        "example": "32697574969"
+      },
+      "content.name": {
+        "type": "str",
+        "example": "百亿补贴(含包邮)--祁门红茶官方旗舰店特级正宗2025新茶叶自己喝口粮茶送长辈父母家长特级祁红香螺300g"
+      },
+      "content.saleMode": {
+        "type": "str",
+        "example": "POP"
+      },
+      "content.subType": {
+        "type": "str",
+        "example": "1002"
+      },
+      "content.type": {
+        "type": "str",
+        "example": "单品促销"
+      },
+      "content.partDealGoodsqtty": {
+        "type": "int",
+        "example": "9"
+      },
+      "code": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 10
+  },
+  "getMarketingTrend": {
+    "files": [
+      "营销-营销概览_getMarketingTrend_a3c4ba256cb8e3ee.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "SUCCESS"
+      },
+      "content": {
+        "type": "object"
+      },
+      "content.categories": {
+        "type": "array"
+      },
+      "content.series": {
+        "type": "array"
+      },
+      "content.series.name": {
+        "type": "str",
+        "example": "partDealPins"
+      },
+      "content.series.data": {
+        "type": "array"
+      },
+      "code": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 8
+  },
+  "getMenuTreeData": {
+    "files": [
+      "营销-营销概览_getMenuTreeData_f539760cd721cdb6.json"
+    ],
+    "fields": {
+      "content": {
+        "type": "object"
+      },
+      "content.data": {
+        "type": "array"
+      },
+      "content.data.code": {
+        "type": "str",
+        "example": "indexDetails"
+      },
+      "content.data.auth": {
+        "type": "bool",
+        "example": "True"
+      },
+      "content.data.level": {
+        "type": "int",
+        "example": "3"
+      },
+      "content.data.pid": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.data.isLeaf": {
+        "type": "bool",
+        "example": "True"
+      },
+      "content.data.uri": {
+        "type": "str",
+        "example": "/szweb/sz/view/index/home.html"
+      },
+      "content.data.cssClass": {
+        "type": "str",
+        "example": "i-report"
+      },
+      "content.data.children": {
+        "type": "array"
+      },
+      "content.data.name": {
+        "type": "str",
+        "example": "首页"
+      },
+      "content.data.id": {
+        "type": "str",
+        "example": "119"
+      },
+      "content.data.isVirtual": {
+        "type": "bool",
+        "example": "False"
+      },
+      "content.data.order": {
+        "type": "int",
+        "example": "8"
+      },
+      "content.data.status": {
+        "type": "int",
+        "example": "1"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 16
+  },
+  "overview": {
+    "files": [
+      "营销-营销概览_overview_72042803c9d96f83.json"
+    ],
+    "fields": {
+      "status": {
+        "type": "int",
+        "example": "0"
+      },
+      "message": {
+        "type": "str",
+        "example": "SUCCESS"
+      },
+      "content": {
+        "type": "array"
+      },
+      "content.code": {
+        "type": "str",
+        "example": "ordResult"
+      },
+      "content.summaryItems": {
+        "type": "array"
+      },
+      "content.summaryItems.total": {
+        "type": "int",
+        "example": "23"
+      },
+      "content.summaryItems.rate": {
+        "type": "float",
+        "example": "-0.041666666666666664"
+      },
+      "content.summaryItems.index": {
+        "type": "str",
+        "example": "partDealPins"
+      },
+      "content.summaryItems.value": {
+        "type": "int",
+        "example": "23"
+      },
+      "content.summaryItems.industryAvgNo": {
+        "type": "int",
+        "example": "15"
+      },
+      "code": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 11
+  },
+  "getProductRankListDetail": {
+    "files": [
+      "行业-大盘动态_getProductRankListDetail_0464a6c037fcf5e5.json",
+      "行业-大盘动态_getProductRankListDetail_39c9615d580bc24b.json",
+      "行业-大盘动态_getProductRankListDetail_7bd496f8c1c07523.json",
+      "行业-大盘动态_getProductRankListDetail_a0affc7a563b0783.json"
+    ],
+    "fields": {
+      "content": {
+        "type": "object"
+      },
+      "content.data": {
+        "type": "array"
+      },
+      "content.metaIndex": {
+        "type": "object"
+      },
+      "content.metaIndex.RankChange": {
+        "type": "int",
+        "example": "11"
+      },
+      "content.metaIndex.ShopLink": {
+        "type": "int",
+        "example": "10"
+      },
+      "content.metaIndex.ShopName": {
+        "type": "int",
+        "example": "9"
+      },
+      "content.metaIndex.ProName": {
+        "type": "int",
+        "example": "2"
+      },
+      "content.metaIndex.SearchClickNumIndex": {
+        "type": "int",
+        "example": "8"
+      },
+      "content.metaIndex.Rank": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.metaIndex.UVIndex": {
+        "type": "int",
+        "example": "5"
+      },
+      "content.metaIndex.OrdAmtIndex": {
+        "type": "int",
+        "example": "6"
+      },
+      "content.metaIndex.SkuId": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.metaIndex.OrdNumIndex": {
+        "type": "int",
+        "example": "7"
+      },
+      "content.metaIndex.Url": {
+        "type": "int",
+        "example": "3"
+      },
+      "content.metaIndex.MyselfPro": {
+        "type": "int",
+        "example": "4"
+      },
+      "content.updateTime": {
+        "type": "str",
+        "example": "2026-06-30 22:55:04"
+      },
+      "length": {
+        "type": "int",
+        "example": "1"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 19
+  },
+  "getRealSeriesData": {
+    "files": [
+      "行业-大盘动态_getRealSeriesData_46a42452bc0409eb.json"
+    ],
+    "fields": {
+      "content": {
+        "type": "object"
+      },
+      "content.series": {
+        "type": "array"
+      },
+      "content.series.data": {
+        "type": "array"
+      },
+      "content.series.name": {
+        "type": "str",
+        "example": "OrdAmtIndex"
+      },
+      "content.categories": {
+        "type": "array"
+      },
+      "length": {
+        "type": "int",
+        "example": "1"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 8
+  },
+  "getRealSummaryData": {
+    "files": [
+      "行业-大盘动态_getRealSummaryData_076229d6bd51c5eb.json",
+      "行业-大盘动态_getRealSummaryData_27052105ac356fcc.json",
+      "行业-大盘动态_getRealSummaryData_791d4cdb4384609c.json",
+      "行业-大盘动态_getRealSummaryData_8b8ca6a25ab9dff0.json",
+      "行业-大盘动态_getRealSummaryData_9835d7038dcac8ae.json",
+      "行业-大盘动态_getRealSummaryData_d6c9a3f9b83d7cb0.json",
+      "行业-大盘动态_getRealSummaryData_e7d5cb4a57d50149.json"
+    ],
+    "fields": {
+      "content": {
+        "type": "object"
+      },
+      "content.summary": {
+        "type": "object"
+      },
+      "content.summary.OrdAmtIndex": {
+        "type": "object"
+      },
+      "content.summary.OrdAmtIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.OrdAmtIndex.rate.median": {
+        "type": "float",
+        "example": "0.11"
+      },
+      "content.summary.OrdAmtIndex.rate.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.summary.OrdAmtIndex.rate.left": {
+        "type": "str",
+        "example": "10"
+      },
+      "content.summary.OrdAmtIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.OrdAmtIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.OrdAmtIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.OrdAmtIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.OrdAmtIndex.rate.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.OrdAmtIndex.rate.range": {
+        "type": "str",
+        "example": "0.10 ~ 0.12"
+      },
+      "content.summary.OrdAmtIndex.rate.right": {
+        "type": "str",
+        "example": "12"
+      },
+      "content.summary.OrdAmtIndex.rate.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.UVIndex": {
+        "type": "object"
+      },
+      "content.summary.UVIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.UVIndex.rate.median": {
+        "type": "float",
+        "example": "-0.04103249089013088"
+      },
+      "content.summary.UVIndex.rate.percentType": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.summary.UVIndex.rate.left": {
+        "type": "str",
+        "example": "-4.1"
+      },
+      "content.summary.UVIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.UVIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.UVIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.rate.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.rate.range": {
+        "type": "float",
+        "example": "-0.04103249089013088"
+      },
+      "content.summary.UVIndex.rate.right": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.rate.type": {
+        "type": "str",
+        "example": "real_yoy_item"
+      },
+      "content.summary.UVIndex.rate.separator": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.value": {
+        "type": "object"
+      },
+      "content.summary.UVIndex.value.median": {
+        "type": "str",
+        "example": "175000.0"
+      },
+      "content.summary.UVIndex.value.percentType": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.summary.UVIndex.value.left": {
+        "type": "str",
+        "example": "10"
+      },
+      "content.summary.UVIndex.value.leftUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.summary.UVIndex.value.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.value.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.UVIndex.value.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.UVIndex.value.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.summary.UVIndex.value.range": {
+        "type": "str",
+        "example": "100000.0 ~ 250000.0"
+      },
+      "content.summary.UVIndex.value.right": {
+        "type": "str",
+        "example": "25"
+      },
+      "content.summary.UVIndex.value.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.PVIndex": {
+        "type": "object"
+      },
+      "content.summary.PVIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.PVIndex.rate.median": {
+        "type": "float",
+        "example": "-0.05063625746706043"
+      },
+      "content.summary.PVIndex.rate.percentType": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.summary.PVIndex.rate.left": {
+        "type": "str",
+        "example": "-5.06"
+      },
+      "content.summary.PVIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.PVIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.PVIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.rate.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.rate.range": {
+        "type": "float",
+        "example": "-0.05063625746706043"
+      },
+      "content.summary.PVIndex.rate.right": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.rate.type": {
+        "type": "str",
+        "example": "real_yoy_item"
+      },
+      "content.summary.PVIndex.rate.separator": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.value": {
+        "type": "object"
+      },
+      "content.summary.PVIndex.value.median": {
+        "type": "str",
+        "example": "875000.0"
+      },
+      "content.summary.PVIndex.value.percentType": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.summary.PVIndex.value.left": {
+        "type": "str",
+        "example": "75"
+      },
+      "content.summary.PVIndex.value.leftUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.summary.PVIndex.value.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.value.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.PVIndex.value.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.PVIndex.value.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.summary.PVIndex.value.range": {
+        "type": "str",
+        "example": "750000.0 ~ 1000000.0"
+      },
+      "content.summary.PVIndex.value.right": {
+        "type": "str",
+        "example": "100"
+      },
+      "content.summary.PVIndex.value.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.OrdNumIndex": {
+        "type": "object"
+      },
+      "content.summary.OrdNumIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.OrdNumIndex.rate.median": {
+        "type": "float",
+        "example": "-0.21"
+      },
+      "content.summary.OrdNumIndex.rate.percentType": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.summary.OrdNumIndex.rate.left": {
+        "type": "str",
+        "example": "-22"
+      },
+      "content.summary.OrdNumIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.OrdNumIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.OrdNumIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.OrdNumIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.OrdNumIndex.rate.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.OrdNumIndex.rate.range": {
+        "type": "str",
+        "example": "-0.22 ~ -0.20"
+      },
+      "content.summary.OrdNumIndex.rate.right": {
+        "type": "str",
+        "example": "-20"
+      },
+      "content.summary.OrdNumIndex.rate.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.OrdProNumIndex": {
+        "type": "object"
+      },
+      "content.summary.OrdProNumIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.OrdProNumIndex.rate.median": {
+        "type": "float",
+        "example": "-0.43"
+      },
+      "content.summary.OrdProNumIndex.rate.percentType": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.summary.OrdProNumIndex.rate.left": {
+        "type": "str",
+        "example": "-44"
+      },
+      "content.summary.OrdProNumIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.OrdProNumIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.OrdProNumIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.OrdProNumIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.OrdProNumIndex.rate.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.OrdProNumIndex.rate.range": {
+        "type": "str",
+        "example": "-0.44 ~ -0.42"
+      },
+      "content.summary.OrdProNumIndex.rate.right": {
+        "type": "str",
+        "example": "-42"
+      },
+      "content.summary.OrdProNumIndex.rate.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.SearchClickNumIndex": {
+        "type": "object"
+      },
+      "content.summary.SearchClickNumIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.SearchClickNumIndex.rate.median": {
+        "type": "float",
+        "example": "-0.08613567782386754"
+      },
+      "content.summary.SearchClickNumIndex.rate.percentType": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.summary.SearchClickNumIndex.rate.left": {
+        "type": "str",
+        "example": "-8.61"
+      },
+      "content.summary.SearchClickNumIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.SearchClickNumIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.SearchClickNumIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.rate.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.rate.range": {
+        "type": "float",
+        "example": "-0.08613567782386754"
+      },
+      "content.summary.SearchClickNumIndex.rate.right": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.rate.type": {
+        "type": "str",
+        "example": "real_yoy_item"
+      },
+      "content.summary.SearchClickNumIndex.rate.separator": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.value": {
+        "type": "object"
+      },
+      "content.summary.SearchClickNumIndex.value.median": {
+        "type": "str",
+        "example": "175000.0"
+      },
+      "content.summary.SearchClickNumIndex.value.percentType": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.summary.SearchClickNumIndex.value.left": {
+        "type": "str",
+        "example": "10"
+      },
+      "content.summary.SearchClickNumIndex.value.leftUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.summary.SearchClickNumIndex.value.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.value.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.SearchClickNumIndex.value.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.SearchClickNumIndex.value.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.summary.SearchClickNumIndex.value.range": {
+        "type": "str",
+        "example": "100000.0 ~ 250000.0"
+      },
+      "content.summary.SearchClickNumIndex.value.right": {
+        "type": "str",
+        "example": "25"
+      },
+      "content.summary.SearchClickNumIndex.value.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.CustPriceAvgIndex": {
+        "type": "object"
+      },
+      "content.summary.CustPriceAvgIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.CustPriceAvgIndex.rate.median": {
+        "type": "float",
+        "example": "0.35"
+      },
+      "content.summary.CustPriceAvgIndex.rate.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.summary.CustPriceAvgIndex.rate.left": {
+        "type": "str",
+        "example": "34"
+      },
+      "content.summary.CustPriceAvgIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.CustPriceAvgIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.CustPriceAvgIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.CustPriceAvgIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.CustPriceAvgIndex.rate.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.CustPriceAvgIndex.rate.range": {
+        "type": "str",
+        "example": "0.34 ~ 0.36"
+      },
+      "content.summary.CustPriceAvgIndex.rate.right": {
+        "type": "str",
+        "example": "36"
+      },
+      "content.summary.CustPriceAvgIndex.rate.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.summary.ToOrdRateIndex": {
+        "type": "object"
+      },
+      "content.summary.ToOrdRateIndex.rate": {
+        "type": "object"
+      },
+      "content.summary.ToOrdRateIndex.rate.median": {
+        "type": "float",
+        "example": "-0.15"
+      },
+      "content.summary.ToOrdRateIndex.rate.percentType": {
+        "type": "int",
+        "example": "-1"
+      },
+      "content.summary.ToOrdRateIndex.rate.left": {
+        "type": "str",
+        "example": "-16"
+      },
+      "content.summary.ToOrdRateIndex.rate.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.ToOrdRateIndex.rate.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.ToOrdRateIndex.rate.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.summary.ToOrdRateIndex.rate.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.summary.ToOrdRateIndex.rate.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "content.summary.ToOrdRateIndex.rate.range": {
+        "type": "str",
+        "example": "-0.16 ~ -0.14"
+      },
+      "content.summary.ToOrdRateIndex.rate.right": {
+        "type": "str",
+        "example": "-14"
+      },
+      "content.summary.ToOrdRateIndex.rate.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.trend": {
+        "type": "object"
+      },
+      "content.trend.series": {
+        "type": "object"
+      },
+      "content.trend.series.SearchClickNumIndex": {
+        "type": "array"
+      },
+      "content.trend.series.SearchClickNumIndex.data": {
+        "type": "array"
+      },
+      "content.trend.series.SearchClickNumIndex.data.median": {
+        "type": "str",
+        "example": "3000.0"
+      },
+      "content.trend.series.SearchClickNumIndex.data.percentType": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.trend.series.SearchClickNumIndex.data.left": {
+        "type": "str",
+        "example": "2,000"
+      },
+      "content.trend.series.SearchClickNumIndex.data.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.SearchClickNumIndex.data.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.SearchClickNumIndex.data.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.trend.series.SearchClickNumIndex.data.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.SearchClickNumIndex.data.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.SearchClickNumIndex.data.range": {
+        "type": "str",
+        "example": "2000.0 ~ 4000.0"
+      },
+      "content.trend.series.SearchClickNumIndex.data.right": {
+        "type": "str",
+        "example": "4,000"
+      },
+      "content.trend.series.SearchClickNumIndex.data.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.trend.series.SearchClickNumIndex.name": {
+        "type": "str",
+        "example": "real"
+      },
+      "content.trend.series.OrdAmtIndex": {
+        "type": "array"
+      },
+      "content.trend.series.OrdAmtIndex.data": {
+        "type": "array"
+      },
+      "content.trend.series.OrdAmtIndex.name": {
+        "type": "str",
+        "example": "real"
+      },
+      "content.trend.series.UVIndex": {
+        "type": "array"
+      },
+      "content.trend.series.UVIndex.data": {
+        "type": "array"
+      },
+      "content.trend.series.UVIndex.data.median": {
+        "type": "str",
+        "example": "9000.0"
+      },
+      "content.trend.series.UVIndex.data.percentType": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.trend.series.UVIndex.data.left": {
+        "type": "str",
+        "example": "8,000"
+      },
+      "content.trend.series.UVIndex.data.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.UVIndex.data.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.UVIndex.data.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.trend.series.UVIndex.data.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "content.trend.series.UVIndex.data.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "content.trend.series.UVIndex.data.range": {
+        "type": "str",
+        "example": "8000.0 ~ 10000.0"
+      },
+      "content.trend.series.UVIndex.data.right": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.trend.series.UVIndex.data.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.trend.series.UVIndex.name": {
+        "type": "str",
+        "example": "real"
+      },
+      "content.trend.series.OrdNumIndex": {
+        "type": "array"
+      },
+      "content.trend.series.OrdNumIndex.data": {
+        "type": "array"
+      },
+      "content.trend.series.OrdNumIndex.name": {
+        "type": "str",
+        "example": "real"
+      },
+      "content.trend.categories": {
+        "type": "array"
+      },
+      "content.updateTime": {
+        "type": "str",
+        "example": "2026-06-30 22:55:18"
+      },
+      "content.interval": {
+        "type": "int",
+        "example": "30000"
+      },
+      "content.compareTime": {
+        "type": "str",
+        "example": "22:30"
+      },
+      "length": {
+        "type": "int",
+        "example": "4"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 188
+  },
+  "getShopRankListDetail": {
+    "files": [
+      "行业-大盘动态_getShopRankListDetail_1e855c8905cf4e96.json",
+      "行业-大盘动态_getShopRankListDetail_1f55e1cc97508fc6.json",
+      "行业-大盘动态_getShopRankListDetail_804e65fadc0eb9b7.json",
+      "行业-大盘动态_getShopRankListDetail_85380b65c970ef97.json"
+    ],
+    "fields": {
+      "content": {
+        "type": "object"
+      },
+      "content.data": {
+        "type": "array"
+      },
+      "content.metaIndex": {
+        "type": "object"
+      },
+      "content.metaIndex.RankChange": {
+        "type": "int",
+        "example": "9"
+      },
+      "content.metaIndex.MyselfShop": {
+        "type": "int",
+        "example": "4"
+      },
+      "content.metaIndex.ShopName": {
+        "type": "int",
+        "example": "1"
+      },
+      "content.metaIndex.SearchClickNumIndex": {
+        "type": "int",
+        "example": "8"
+      },
+      "content.metaIndex.Rank": {
+        "type": "int",
+        "example": "0"
+      },
+      "content.metaIndex.UVIndex": {
+        "type": "int",
+        "example": "5"
+      },
+      "content.metaIndex.OrdAmtIndex": {
+        "type": "int",
+        "example": "6"
+      },
+      "content.metaIndex.OrdNumIndex": {
+        "type": "int",
+        "example": "7"
+      },
+      "content.metaIndex.Url": {
+        "type": "int",
+        "example": "2"
+      },
+      "content.metaIndex.RiseUp": {
+        "type": "int",
+        "example": "3"
+      },
+      "content.Rank": {
+        "type": "str",
+        "example": "93"
+      },
+      "content.Exponential": {
+        "type": "object"
+      },
+      "content.Exponential.median": {
+        "type": "str",
+        "example": "5000.0"
+      },
+      "content.Exponential.percentType": {
+        "type": "str",
+        "example": "1"
+      },
+      "content.Exponential.left": {
+        "type": "str",
+        "example": "4,000"
+      },
+      "content.Exponential.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.Exponential.leftPrefix": {
+        "type": "str",
+        "example": "￥"
+      },
+      "content.Exponential.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "content.Exponential.rightPrefix": {
+        "type": "str",
+        "example": "￥"
+      },
+      "content.Exponential.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "content.Exponential.range": {
+        "type": "str",
+        "example": "4000.0 ~ 6000.0"
+      },
+      "content.Exponential.right": {
+        "type": "str",
+        "example": "6,000"
+      },
+      "content.Exponential.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "content.updateTime": {
+        "type": "str",
+        "example": "2026-06-30 22:55:04"
+      },
+      "length": {
+        "type": "int",
+        "example": "1"
+      },
+      "message": {
+        "type": "str",
+        "example": "success"
+      },
+      "status": {
+        "type": "int",
+        "example": "0"
+      }
+    },
+    "field_count": 30
+  },
+  "getUserCategoryList": {
+    "files": [
+      "行业-大盘动态_getUserCategoryList_00933d2741ececa9.json"
+    ],
+    "fields": {
+      "size": {
+        "type": "int",
+        "example": "2"
+      },
+      "data": {
+        "type": "object"
+      },
+      "data.mainCode": {
+        "type": "int",
+        "example": "36724"
+      },
+      "data.mainSecondIndId": {
+        "type": "int",
+        "example": "36724"
+      },
+      "data.mainFirstIndId": {
+        "type": "int",
+        "example": "36720"
+      },
+      "data.category": {
+        "type": "array"
+      },
+      "data.category.children": {
+        "type": "array"
+      },
+      "data.category.children.name": {
+        "type": "str",
+        "example": "花果/水果茶"
+      },
+      "data.category.children.id": {
+        "type": "int",
+        "example": "36964"
+      },
+      "data.category.name": {
+        "type": "str",
+        "example": "代用茶/花草茶/养生茶"
+      },
+      "data.category.id": {
+        "type": "int",
+        "example": "36963"
+      }
+    },
+    "field_count": 11
+  },
+  "emergency": {
+    "files": [
+      "首页_emergency_75da494e1d2868c5.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.breakupTime": {
+        "type": "int",
+        "example": "60000"
+      },
+      "data.refreshInterval": {
+        "type": "int",
+        "example": "10000"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 4
+  },
+  "getChannelList": {
+    "files": [
+      "首页_getChannelList_ab5a4e6a82ec5eac.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.trend": {
+        "type": "array"
+      },
+      "data.trend.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+        "type": "str",
+        "example": "2009"
+      },
+      "data.trend.data": {
+        "type": "array"
+      },
+      "data.trend.data.dt": {
+        "type": "str",
+        "example": "2026-06-30 00:00~2026-06-30 00:59"
+      },
+      "data.trend.data.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+        "type": "str",
+        "example": "2009"
+      },
+      "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "data.list": {
+        "type": "array"
+      },
+      "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "0.0740740740740741"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "162"
+      },
+      "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "0.112781954887218"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "float",
+        "example": "-0.17901235"
+      },
+      "data.list.channel2Name": {
+        "type": "str",
+        "example": "搜索"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+        "type": "float",
+        "example": "-0.03024911"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "0.77575744"
+      },
+      "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "3174.9300000000003"
+      },
+      "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+        "type": "str",
+        "example": "2008"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "562"
+      },
+      "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "int",
+        "example": "15"
+      },
+      "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "545"
+      },
+      "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+        "type": "str",
+        "example": "2008"
+      },
+      "data.list.top": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "133"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "0.25"
+      },
+      "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "1787.9299999999998"
+      },
+      "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "int",
+        "example": "12"
+      },
+      "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "0.52255639"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 28
+  },
+  "getFlowAnalysisData": {
+    "files": [
+      "首页_getFlowAnalysisData_8131a4db84d06a3f.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.dateType": {
+        "type": "str",
+        "example": "day"
+      },
+      "data.size": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.requestType": {
+        "type": "str",
+        "example": "flowDecline"
+      },
+      "data.list": {
+        "type": "array"
+      },
+      "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+        "type": "str",
+        "example": "2006"
+      },
+      "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "1.2"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "10"
+      },
+      "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "6.0"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "float",
+        "example": "-0.9"
+      },
+      "data.list.channel2Name": {
+        "type": "str",
+        "example": "商品"
+      },
+      "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+        "type": "str",
+        "example": "2006"
+      },
+      "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "4.0"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 15
+  },
+  "getFlowHead": {
+    "files": [
+      "首页_getFlowHead_df346523a2d5b277.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.flowDecline": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.attention": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.flowTop": {
+        "type": "int",
+        "example": "5"
+      },
+      "data.rateDecline": {
+        "type": "int",
+        "example": "2"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 6
+  },
+  "getHomeBanner": {
+    "files": [
+      "首页_getHomeBanner_433154dcf1a581af.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.modalBackground": {
+        "type": "str",
+        "example": "https://img11.360buyimg.com/sz/jfs/t1/438939/30/12667/63938/6a13a6faFa1452ae6/03042d0118289c16.png"
+      },
+      "data.endDate": {
+        "type": "str",
+        "example": "2099-12-31 23:59"
+      },
+      "data.linkText": {
+        "type": "str",
+        "example": "点击参与"
+      },
+      "data.linkAddress": {
+        "type": "str",
+        "example": "https://pro.jd.com/mall/active/3soJwVrULAi9aksx6JpBwp5mrMq6/index.html"
+      },
+      "data.noticeType": {
+        "type": "str",
+        "example": "homeBanner"
+      },
+      "data.title": {
+        "type": "str",
+        "example": "服务市场618免费权益礼包"
+      },
+      "data.content": {
+        "type": "str",
+        "example": "服务市场618免费权益礼包"
+      },
+      "data.hasLink": {
+        "type": "str",
+        "example": "1"
+      },
+      "data.optDate": {
+        "type": "str",
+        "example": "2026-05-25 09:34:14"
+      },
+      "data.id": {
+        "type": "str",
+        "example": "banner-1-jdsz-pop"
+      },
+      "data.startDate": {
+        "type": "str",
+        "example": "2024-01-01 00:00"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 13
+  },
+  "getHomeNotice": {
+    "files": [
+      "首页_getHomeNotice_0db531fcf6ffaeee.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.endDate": {
+        "type": "str",
+        "example": "2026-08-31 23:59"
+      },
+      "data.linkText": {
+        "type": "str",
+        "example": "首页宣传栏公告"
+      },
+      "data.linkAddress": {
+        "type": "str",
+        "example": "https://joyspace.jd.com/pages/HRx9rDqa7saLn2SIZpTR"
+      },
+      "data.noticeType": {
+        "type": "str",
+        "example": "indexNotice"
+      },
+      "data.title": {
+        "type": "str",
+        "example": "【稳赚计划3.0】延期至7月20日"
+      },
+      "data.content": {
+        "type": "str",
+        "example": "📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日"
+      },
+      "data.hasLink": {
+        "type": "str",
+        "example": "1"
+      },
+      "data.optDate": {
+        "type": "str",
+        "example": "2026-06-22 10:46:58"
+      },
+      "data.id": {
+        "type": "str",
+        "example": "2af80171c8214546a98ce2e2709979db"
+      },
+      "data.startDate": {
+        "type": "str",
+        "example": "2026-06-22 00:00"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 12
+  },
+  "getHotCate": {
+    "files": [
+      "首页_getHotCate_04387912d9e41cad.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.mainCate2Name": {
+        "type": "str",
+        "example": "茗茶"
+      },
+      "data.mainCate2": {
+        "type": "str",
+        "example": "36724"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 4
+  },
+  "getIndustryHead": {
+    "files": [
+      "首页_getIndustryHead_43d810a7d9a00c77.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.shopNum": {
+        "type": "int",
+        "example": "10"
+      },
+      "data.keywordNum": {
+        "type": "int",
+        "example": "10"
+      },
+      "data.productNum": {
+        "type": "int",
+        "example": "10"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 5
+  },
+  "getIndustryTopTable": {
+    "files": [
+      "首页_getIndustryTopTable_c8db3ce55604afcd.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.list": {
+        "type": "array"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": {
+        "type": "float",
+        "example": "700.0"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left": {
+        "type": "str",
+        "example": "600"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range": {
+        "type": "str",
+        "example": "600.0 ~ 800.0"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right": {
+        "type": "str",
+        "example": "800"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.shop": {
+        "type": "str",
+        "example": "12697"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": {
+        "type": "float",
+        "example": "700.0"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left": {
+        "type": "str",
+        "example": "600"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range": {
+        "type": "str",
+        "example": "600.0 ~ 800.0"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right": {
+        "type": "str",
+        "example": "800"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.shopName": {
+        "type": "str",
+        "example": "八马茶业旗舰店"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": {
+        "type": "float",
+        "example": "175000.0"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left": {
+        "type": "str",
+        "example": "10"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": "￥"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": "￥"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range": {
+        "type": "str",
+        "example": "100000.0 ~ 250000.0"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right": {
+        "type": "str",
+        "example": "25"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median": {
+        "type": "float",
+        "example": "15000.0"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left": {
+        "type": "str",
+        "example": "1"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range": {
+        "type": "str",
+        "example": "10000.0 ~ 20000.0"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right": {
+        "type": "str",
+        "example": "2"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median": {
+        "type": "float",
+        "example": "9000.0"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left": {
+        "type": "str",
+        "example": "8,000"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range": {
+        "type": "str",
+        "example": "8000.0 ~ 10000.0"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right": {
+        "type": "str",
+        "example": "1"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.rank": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.tag": {
+        "type": "str",
+        "example": "compete"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": {
+        "type": "float",
+        "example": "175000.0"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left": {
+        "type": "str",
+        "example": "10"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": "￥"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": "￥"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": "万"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range": {
+        "type": "str",
+        "example": "100000.0 ~ 250000.0"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right": {
+        "type": "str",
+        "example": "25"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+        "type": "object"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median": {
+        "type": "float",
+        "example": "5000.0"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.left": {
+        "type": "str",
+        "example": "4,000"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.range": {
+        "type": "str",
+        "example": "4000.0 ~ 6000.0"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.right": {
+        "type": "str",
+        "example": "6,000"
+      },
+      "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.rankChange": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.list.hb_shop": {
+        "type": "str",
+        "example": "12697"
+      },
+      "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+        "type": "float",
+        "example": "-0.1760735"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": {
+        "type": "float",
+        "example": "0.05"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left": {
+        "type": "str",
+        "example": "4"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range": {
+        "type": "str",
+        "example": "0.04 ~ 0.06"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right": {
+        "type": "str",
+        "example": "6"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex": {
+        "type": "object"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": {
+        "type": "float",
+        "example": "0.09"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left": {
+        "type": "str",
+        "example": "8"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+        "type": "str",
+        "example": "%"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range": {
+        "type": "str",
+        "example": "0.08 ~ 0.10"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right": {
+        "type": "str",
+        "example": "10"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+        "type": "object"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median": {
+        "type": "float",
+        "example": "5000.0"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.left": {
+        "type": "str",
+        "example": "4,000"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType": {
+        "type": "str",
+        "example": "index_range"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit": {
+        "type": "str",
+        "example": ""
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.range": {
+        "type": "str",
+        "example": "4000.0 ~ 6000.0"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.right": {
+        "type": "str",
+        "example": "6,000"
+      },
+      "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.separator": {
+        "type": "str",
+        "example": "~"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": {
+        "type": "float",
+        "example": "-0.08812187"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 131
+  },
+  "getOpenPromotionList": {
+    "files": [
+      "首页_getOpenPromotionList_f68769561eab8e86.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.code": {
+        "type": "str",
+        "example": "promotion25211"
+      },
+      "data.endDate": {
+        "type": "str",
+        "example": "2025-11-11 23:59:59"
+      },
+      "data.comparePromotionList": {
+        "type": "array"
+      },
+      "data.comparePromotionList.code": {
+        "type": "str",
+        "example": "promotion25618"
+      },
+      "data.comparePromotionList.endDate": {
+        "type": "str",
+        "example": "2025-06-18 23:59:59"
+      },
+      "data.comparePromotionList.themeColor": {
+        "type": "str",
+        "example": "#F0225F"
+      },
+      "data.comparePromotionList.background": {
+        "type": "str",
+        "example": "radial-gradient(ellipse 108.29% 89.58% at 50% -8.29%, #5c0d1d 0%, #180f0f 50%)"
+      },
+      "data.comparePromotionList.name": {
+        "type": "str",
+        "example": "2025年618大促"
+      },
+      "data.comparePromotionList.headerBgUrl": {
+        "type": "array"
+      },
+      "data.comparePromotionList.headerBgUrl.code": {
+        "type": "str",
+        "example": "ready"
+      },
+      "data.comparePromotionList.headerBgUrl.url": {
+        "type": "str",
+        "example": "https://storage.360buyimg.com/sz-assets/sz_promotionScreen/25211/ready.png"
+      },
+      "data.comparePromotionList.shortName": {
+        "type": "str",
+        "example": "2025年618"
+      },
+      "data.comparePromotionList.comparePromotionCode": {
+        "type": "array"
+      },
+      "data.comparePromotionList.open": {
+        "type": "str",
+        "example": "true"
+      },
+      "data.comparePromotionList.startDate": {
+        "type": "str",
+        "example": "2025-05-13 20:00:00"
+      },
+      "data.comparePromotionList.specialDate": {
+        "type": "array"
+      },
+      "data.comparePromotionList.specialDate.dateAlias": {
+        "type": "str",
+        "example": "05/13"
+      },
+      "data.comparePromotionList.specialDate.code": {
+        "type": "str",
+        "example": "totalCumulative"
+      },
+      "data.comparePromotionList.specialDate.endDate": {
+        "type": "str",
+        "example": "2025-06-18 23:59:59"
+      },
+      "data.comparePromotionList.specialDate.name": {
+        "type": "str",
+        "example": "活动累计"
+      },
+      "data.comparePromotionList.specialDate.alias": {
+        "type": "str",
+        "example": "起售日"
+      },
+      "data.comparePromotionList.specialDate.startDate": {
+        "type": "str",
+        "example": "2025-05-13 20:00:00"
+      },
+      "data.headerBgUrl": {
+        "type": "array"
+      },
+      "data.headerBgUrl.code": {
+        "type": "str",
+        "example": "ready"
+      },
+      "data.headerBgUrl.url": {
+        "type": "str",
+        "example": "https://storage.360buyimg.com/sz-assets/sz_promotionScreen/25211/ready.png"
+      },
+      "data.otherConfig": {
+        "type": "object"
+      },
+      "data.stopDateTime": {
+        "type": "str",
+        "example": "2025-11-30 23:59:59"
+      },
+      "data.themeColor": {
+        "type": "str",
+        "example": "#F0225F"
+      },
+      "data.background": {
+        "type": "str",
+        "example": "radial-gradient(ellipse 108.29% 89.58% at 50% -8.29%, #5c0d1d 0%, #180f0f 50%)"
+      },
+      "data.name": {
+        "type": "str",
+        "example": "2025年双十一大促"
+      },
+      "data.shortName": {
+        "type": "str",
+        "example": "2025年11.11"
+      },
+      "data.comparePromotionCode": {
+        "type": "array"
+      },
+      "data.open": {
+        "type": "str",
+        "example": "true"
+      },
+      "data.startDate": {
+        "type": "str",
+        "example": "2025-10-09 20:00:00"
+      },
+      "data.specialDate": {
+        "type": "array"
+      },
+      "data.specialDate.dateAlias": {
+        "type": "str",
+        "example": "10/09"
+      },
+      "data.specialDate.code": {
+        "type": "str",
+        "example": "totalCumulative"
+      },
+      "data.specialDate.endDate": {
+        "type": "str",
+        "example": "2025-11-11 23:59:59"
+      },
+      "data.specialDate.name": {
+        "type": "str",
+        "example": "活动累计"
+      },
+      "data.specialDate.alias": {
+        "type": "str",
+        "example": "起售日"
+      },
+      "data.specialDate.startDate": {
+        "type": "str",
+        "example": "2025-10-09 20:00:00"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 43
+  },
+  "getPopBusiModel": {
+    "files": [
+      "首页_getPopBusiModel_468ca75d3923a4af.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.isYinFengCShop": {
+        "type": "bool",
+        "example": "False"
+      },
+      "data.isBrandSuperShop": {
+        "type": "bool",
+        "example": "False"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 4
+  },
+  "getProductAnalysisData": {
+    "files": [
+      "首页_getProductAnalysisData_f605903af5fe84b6.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.proType": {
+        "type": "str",
+        "example": "spu"
+      },
+      "data.dateType": {
+        "type": "str",
+        "example": "day"
+      },
+      "data.size": {
+        "type": "int",
+        "example": "2"
+      },
+      "data.requestType": {
+        "type": "str",
+        "example": "flowDecline"
+      },
+      "data.list": {
+        "type": "array"
+      },
+      "data.list.proPic": {
+        "type": "str",
+        "example": "//img10.360buyimg.com/n3/jfs/t1/110321/32/47121/83571/6523bd00F0f0ad214/a3a9e1889740d63d.jpg"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "int",
+        "example": "6"
+      },
+      "data.list.hb_spu_id": {
+        "type": "str",
+        "example": "10024735975648"
+      },
+      "data.list.proUrl": {
+        "type": "str",
+        "example": "//item.jd.com/10084777801396.html"
+      },
+      "data.list.proName": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店特茗级自己喝奖高品质口粮茶叶金奖祁红纪念版50g 金奖祁红纪念版单听"
+      },
+      "data.list.spu_id": {
+        "type": "str",
+        "example": "10024735975648"
+      },
+      "data.list.fo_jdr_sch_industry_deal_rate": {
+        "type": "float",
+        "example": "0.1666666666666667"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "int",
+        "example": "10"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "float",
+        "example": "-0.4"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 16
+  },
+  "getProductHead": {
+    "files": [
+      "首页_getProductHead_ef44763e5a59d732.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.flowDecline": {
+        "type": "int",
+        "example": "2"
+      },
+      "data.tradeTop": {
+        "type": "int",
+        "example": "6"
+      },
+      "data.last7Active": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.attention": {
+        "type": "int",
+        "example": "3"
+      },
+      "data.rateDecline": {
+        "type": "int",
+        "example": "0"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 7
+  },
+  "getProductListByChannel": {
+    "files": [
+      "首页_getProductListByChannel_934fbd814be39bf9.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "0.0655737704918033"
+      },
+      "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "61"
+      },
+      "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "0.1166666666666667"
+      },
+      "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "float",
+        "example": "-0.01639344"
+      },
+      "data.proPic": {
+        "type": "str",
+        "example": "//img10.360buyimg.com/n3/jfs/t1/230011/1/32434/130615/67a95b00F0b14fb7a/a01caac57d1d8f36.jpg"
+      },
+      "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "1.21734358"
+      },
+      "data.hb_spu_id": {
+        "type": "str",
+        "example": "10023922033080"
+      },
+      "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "2020.0"
+      },
+      "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+        "type": "int",
+        "example": "60"
+      },
+      "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+        "type": "float",
+        "example": "911.0"
+      },
+      "data.proUrl": {
+        "type": "str",
+        "example": "//item.jd.com/10120900397848.html"
+      },
+      "data.proName": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺【2罐装】【赠礼品袋】"
+      },
+      "data.spu_id": {
+        "type": "str",
+        "example": "10023922033080"
+      },
+      "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+        "type": "float",
+        "example": "0.77916667"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 16
+  },
+  "getProductList": {
+    "files": [
+      "首页_getProductList_0c8a62446d50ac8b.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.list": {
+        "type": "array"
+      },
+      "data.list.hb_fo_jdr_sch_industry_deal_rate": {
+        "type": "float",
+        "example": "0.0514705882352941"
+      },
+      "data.list.proPic": {
+        "type": "str",
+        "example": "//img10.360buyimg.com/n3/jfs/t1/230011/1/32434/130615/67a95b00F0b14fb7a/a01caac57d1d8f36.jpg"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+        "type": "int",
+        "example": "7"
+      },
+      "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "int",
+        "example": "104"
+      },
+      "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "254.14285714285714"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "0.28571429"
+      },
+      "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+        "type": "int",
+        "example": "9"
+      },
+      "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "1779.0"
+      },
+      "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+        "type": "int",
+        "example": "7"
+      },
+      "data.list.proUrl": {
+        "type": "str",
+        "example": "//item.jd.com/10120900397848.html"
+      },
+      "data.list.proName": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺【2罐装】【赠礼品袋】"
+      },
+      "data.list.spu_id": {
+        "type": "str",
+        "example": "10023922033080"
+      },
+      "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "2483.0"
+      },
+      "data.list.fo_jdr_sch_industry_deal_rate": {
+        "type": "float",
+        "example": "0.0865384615384615"
+      },
+      "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "0.39572794"
+      },
+      "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "float",
+        "example": "-0.23529412"
+      },
+      "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+        "type": "float",
+        "example": "0.28571429"
+      },
+      "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+        "type": "int",
+        "example": "9"
+      },
+      "data.list.hb_spu_id": {
+        "type": "str",
+        "example": "10023922033080"
+      },
+      "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "0.08556617"
+      },
+      "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "275.8888888888889"
+      },
+      "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate": {
+        "type": "float",
+        "example": "0.68131868"
+      },
+      "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+        "type": "int",
+        "example": "136"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 26
+  },
+  "getProductToBeActiveDiagnosisDetail": {
+    "files": [
+      "首页_getProductToBeActiveDiagnosisDetail_784e4afba923ca67.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 2
+  },
+  "getShopStars": {
+    "files": [
+      "首页_getShopStars_950fdda8abd6ac1d.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.calType": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.scndCategoryName": {
+        "type": "str",
+        "example": "茗茶"
+      },
+      "data.generalAuthValidityEndTime": {
+        "type": "str",
+        "example": "2026-07-06"
+      },
+      "data.vaneRateLimit": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.consultWeight": {
+        "type": "float",
+        "example": "15.0"
+      },
+      "data.afterServiceScore": {
+        "type": "str",
+        "example": "8.9"
+      },
+      "data.userEvaluateScoreRate": {
+        "type": "float",
+        "example": "93.68"
+      },
+      "data.venderId": {
+        "type": "int",
+        "example": "12140116"
+      },
+      "data.shopName": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店"
+      },
+      "data.isPassYohome": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.afsWeight": {
+        "type": "float",
+        "example": "20.0"
+      },
+      "data.scndCategoryId": {
+        "type": "str",
+        "example": "36724"
+      },
+      "data.venderVsPrimaryTotal": {
+        "type": "str",
+        "example": ""
+      },
+      "data.hScoreRankRateGrade": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "data.userEvaluateScoreUD": {
+        "type": "str",
+        "example": "0.0"
+      },
+      "data.afterServiceRankRateUD": {
+        "type": "float",
+        "example": "0.01"
+      },
+      "data.isPassGood": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.hScoreRankRate": {
+        "type": "float",
+        "example": "0.17"
+      },
+      "data.generalAuthValidityStartTime": {
+        "type": "str",
+        "example": "2026-06-30"
+      },
+      "data.scoreRankRate": {
+        "type": "float",
+        "example": "69.6"
+      },
+      "data.logisticsRankRateUD": {
+        "type": "float",
+        "example": "0.38"
+      },
+      "data.transactionRateLimit": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.categoryGoodShopType": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.shopId": {
+        "type": "int",
+        "example": "11855009"
+      },
+      "data.tbLimitFlag": {
+        "type": "int",
+        "example": "1"
+      },
+      "data.openTime": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.commonGoodShopType": {
+        "type": "int",
+        "example": "1001"
+      },
+      "data.afterServiceScoreRate": {
+        "type": "float",
+        "example": "89.22"
+      },
+      "data.logisticsLvyueScore": {
+        "type": "str",
+        "example": "9.5"
+      },
+      "data.customServiceConsultScoreRate": {
+        "type": "float",
+        "example": "99.95"
+      },
+      "data.customServiceRankRateUD": {
+        "type": "float",
+        "example": "0.0"
+      },
+      "data.dsrScoreRate": {
+        "type": "str",
+        "example": ""
+      },
+      "data.isRedGreenPass": {
+        "type": "str",
+        "example": "1"
+      },
+      "data.isGreater": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.logisticsLvyueScoreUD": {
+        "type": "str",
+        "example": "0.0"
+      },
+      "data.scoreRankRateGrade": {
+        "type": "str",
+        "example": "4.6"
+      },
+      "data.logisticsLvyueScoreRate": {
+        "type": "float",
+        "example": "82.82"
+      },
+      "data.logisticsWeight": {
+        "type": "float",
+        "example": "50.0"
+      },
+      "data.evaluateWeight": {
+        "type": "float",
+        "example": "15.0"
+      },
+      "data.isOpenMenu": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.afterServiceScoreUD": {
+        "type": "str",
+        "example": "0.0"
+      },
+      "data.limitFlag": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.govFlag": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.userEvaluateRankRateUD": {
+        "type": "float",
+        "example": "0.06"
+      },
+      "data.userEvaluateScore": {
+        "type": "str",
+        "example": "9.5"
+      },
+      "data.customServiceConsultScore": {
+        "type": "str",
+        "example": "10.0"
+      },
+      "data.customServiceConsultScoreUD": {
+        "type": "str",
+        "example": "0.0"
+      },
+      "data.venderType": {
+        "type": "int",
+        "example": "0"
+      },
+      "size": {
+        "type": "int",
+        "example": "1"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 51
+  },
+  "getShopValueProposition": {
+    "files": [
+      "首页_getShopValueProposition_43edfefef91a1e7f.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.skuStarGoodAndExRatio": {
+        "type": "str",
+        "example": "7.95%"
+      },
+      "data.notReachThresholdRatio": {
+        "type": "str",
+        "example": "0.00%"
+      },
+      "data.notReachThresholdNum": {
+        "type": "int",
+        "example": "0"
+      },
+      "data.skuStarUrl": {
+        "type": "str",
+        "example": "https://shop.jd.com/jdm/cz/growup?skuStar=sku_num_avg,sku_num_bad&qdsource=glsj"
+      },
+      "data.skuStarRankIsAhead": {
+        "type": "bool",
+        "example": "False"
+      },
+      "data.serveStarRankIsAhead": {
+        "type": "bool",
+        "example": "False"
+      },
+      "data.serveStarRankRate": {
+        "type": "str",
+        "example": "34.88%"
+      },
+      "data.serveStarUrl": {
+        "type": "str",
+        "example": "https://shop.jd.com/jdm/cz/growup?serviceStar=sku_num_avg,sku_num_bad&qdsource=glsj"
+      },
+      "data.serveStarGoodAndExRatio": {
+        "type": "str",
+        "example": "22.73%"
+      },
+      "data.skuStarRankRate": {
+        "type": "str",
+        "example": "72.87%"
+      },
+      "data.priceStarUrl": {
+        "type": "str",
+        "example": "https://shop.jd.com/jdm/cz/price?competitive=sku_num_avg,sku_num_bad"
+      },
+      "data.priceStarRankIsAhead": {
+        "type": "bool",
+        "example": "True"
+      },
+      "data.priceStarGoodAndExRatio": {
+        "type": "str",
+        "example": "51.81%"
+      },
+      "data.priceStarRankRate": {
+        "type": "str",
+        "example": "81.4%"
+      },
+      "data.notReachThresholdUrl": {
+        "type": "str",
+        "example": "https://shop.jd.com/jdm/cz/growup?threshold=0&qdsource=glsj"
+      },
+      "size": {
+        "type": "int",
+        "example": "1"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 18
+  },
+  "productTop": {
+    "files": [
+      "首页_productTop_fd16413da63a9ad6.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "array"
+      },
+      "data.sku_id#name_cn": {
+        "type": "str",
+        "example": "祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺200g（特级/一等）"
+      },
+      "data.jdr_sch_sku_main_pic_address": {
+        "type": "str",
+        "example": "http://img10.360buyimg.com/n3/jfs/t1/425053/28/10312/95325/69eebe7dF2630b020/00833203202edd59.png"
+      },
+      "data.sku_id": {
+        "type": "str",
+        "example": "10072459317818"
+      },
+      "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+        "type": "float",
+        "example": "1165.0"
+      },
+      "data.sku_id_item_url": {
+        "type": "str",
+        "example": "https://item.jd.com/10072459317818.html"
+      },
+      "size": {
+        "type": "int",
+        "example": "5"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 8
+  },
+  "shopLevel": {
+    "files": [
+      "首页_shopLevel_9e3ee9fb270197f9.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.summary": {
+        "type": "object"
+      },
+      "data.summary.date": {
+        "type": "str",
+        "example": "20260629"
+      },
+      "data.summary.level": {
+        "type": "int",
+        "example": "4"
+      },
+      "data.summary.levelRank": {
+        "type": "int",
+        "example": "35"
+      },
+      "data.summary.mainCate2": {
+        "type": "str",
+        "example": "36724"
+      },
+      "data.summary.mainCate2Name": {
+        "type": "str",
+        "example": "茗茶"
+      },
+      "data.trend": {
+        "type": "array"
+      },
+      "data.trend.date": {
+        "type": "str",
+        "example": "20260623"
+      },
+      "data.trend.level": {
+        "type": "int",
+        "example": "5"
+      },
+      "data.trend.levelRank": {
+        "type": "int",
+        "example": "89"
+      },
+      "data.trend.mainCate2": {
+        "type": "str",
+        "example": "36724"
+      },
+      "data.trend.mainCate2Name": {
+        "type": "str",
+        "example": "茗茶"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 14
+  },
+  "showAiEntry": {
+    "files": [
+      "首页_showAiEntry_d6e8b58cb9be26b2.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.aiEntry": {
+        "type": "bool",
+        "example": "True"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 3
+  },
+  "targetState": {
+    "files": [
+      "首页_targetState_8eb6341bfd0a3a18.json"
+    ],
+    "fields": {
+      "data": {
+        "type": "object"
+      },
+      "data.monthData": {
+        "type": "float",
+        "example": "166658.98000000007"
+      },
+      "data.yearData": {
+        "type": "float",
+        "example": "1624736.1"
+      },
+      "cache": {
+        "type": "bool",
+        "example": "False"
+      }
+    },
+    "field_count": 4
+  }
+}

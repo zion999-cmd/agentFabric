@@ -1,0 +1,180 @@
+[
+  {
+    "url": "https://szgateway.jd.com/sz/api/announcement/getAnnouncement.ajax",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTdeEqwLXhKsCx54C0aXQnp3Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe"
+    },
+    "size": 301,
+    "timestamp": "2026-06-30T14:56:41.707394+00:00",
+    "body_hash": "1633eae56ec090b1",
+    "body_preview": "{\"message\":\"success\",\"content\":{\"notice\":[{\"messageLink\":\"joyspace.jd.com/pages/HRx9rDqa7saLn2SIZpTR\",\"date\":\"2026-06-22 00:00\",\"menuCode\":\"system\",\"messageLinkWord\":\"查收活动白皮书\",\"message\":\"📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日，延续大促期系统推荐目标投产比，100%保收益。爆款持续拿量，好货继续起飞 🚀\",\"title\":\"【稳赚计划3.0】延期至7月20日\"}]},\"status\":0}"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/announcement/getLocalAnnouncement.ajax?menuCode=isvNew",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "content-length": "45",
+      "pfinder": "EAUfx54CqZ3mTc2EqwLNhKsCx54C0fLPnp3Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 45,
+    "timestamp": "2026-06-30T14:56:41.720310+00:00",
+    "body_hash": "e35f43864d8248f7",
+    "body_preview": "{\"message\":\"success\",\"content\":{},\"status\":0}"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/common/getNewMenuTreeData.ajax?menuCode=service&path=%2Fszweb%2Fsz%2Fview%2Ffacilitator%2FsmartSelection.html",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTdGEqwLRhKsCx54CqYHSnp3Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe"
+    },
+    "size": 45798,
+    "timestamp": "2026-06-30T14:56:41.735751+00:00",
+    "body_hash": "02747a4f28960ad4",
+    "body_preview": "{\"message\":\"success\",\"content\":{\"data\":[{\"code\":\"indexDetails\",\"auth\":true,\"level\":3,\"iconCssClass\":null,\"pid\":\"1\",\"isLeaf\":true,\"uri\":\"/szweb/sz/view/index/home.html\",\"cssClass\":\"i-report\",\"children\":[],\"name\":\"首页\",\"id\":\"119\",\"isVirtual\":false,\"order\":8,\"status\":1},{\"code\":\"rtInsights\",\"auth\":true,\"level\":1,\"iconCssClass\":null,\"pid\":\"1\",\"isLeaf\":false,\"uri\":null,\"cssClass\":\"first-menu-bgcolor-for-usual-page-rtInsights\",\"children\":[{\"code\":\"realStat\",\"auth\":true,\"level\":2,\"iconCssClass\":null,\"pi"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/getPageInfo.ajax?menuCode=isvNew&path=%2Fszweb%2Fsz%2Fview%2Ffacilitator%2FsmartSelection.html",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "pragma": "no-cache",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTc+EqwLPhKsCx54Cu5rRnp3Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe",
+      "content-language": "zh-CN"
+    },
+    "size": 1897,
+    "timestamp": "2026-06-30T14:56:41.764130+00:00",
+    "body_hash": "72446fcc1dd6f1c8",
+    "body_preview": "{\"message\":\"success\",\"content\":{\"indexShopFlag\":false,\"START_TIME\":\"\",\"SHOP_ID\":\"11855009\",\"PAGE_QUARTER_TIME\":\"\",\"PAGE_CUSTOM_TIME\":\"\",\"HAS_CUSTOM_TIME\":false,\"TMPLOGIN\":\"0\",\"refundStartDate\":\"2023-10-07 10:00:00\",\"bcTag\":\"b\",\"PAGE_DAY182_TIME\":\"\",\"systemTime\":1782831401596,\"hasTimeExtendedModule\":false,\"isTimeSaleMenu\":false,\"PAGE_DAY_TIME\":\"2026-06-29\",\"PAGE_WEEK_TIME\":\"\",\"SHOP_TYPE\":\"0\",\"SERVER_TIME\":\"2026/06/30\",\"SHOW_TO_BRAND\":\"0\",\"activityEndDate\":\"2024-01-07 23:59:59\",\"PAGE_DAY90_TIME\":\""
+  },
+  {
+    "url": "https://szgateway.jd.com/szajax/sz/isv/select/list.ajax?skuType=0",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTdCEqwLQhKsCx54Cn83+n53Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 86,
+    "timestamp": "2026-06-30T14:56:41.820015+00:00",
+    "body_hash": "e7b4628b3c488ff9",
+    "body_preview": "{\"content\":null,\"jmVersion\":null,\"message\":\"ajax 无权限\",\"status\":100402,\"success\":false}"
+  },
+  {
+    "url": "https://szgateway.jd.com/szajax/sz/isv/select/table.ajax?skuType=0&shelvesDate=&startDate=2026-06-29&endDate=2026-06-29&date=2026-06-29",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTZ7d+gKe3foCx54C2a7/n53Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 86,
+    "timestamp": "2026-06-30T14:56:41.821619+00:00",
+    "body_hash": "e7b4628b3c488ff9",
+    "body_preview": "{\"content\":null,\"jmVersion\":null,\"message\":\"ajax 无权限\",\"status\":100402,\"success\":false}"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/attrAnalysis/getCategory.ajax?date=2026-06-29&startDate=2026-06-29&endDate=2026-06-29",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTdOEqwLThKsCx54C7baGoJ3Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe"
+    },
+    "size": 2021,
+    "timestamp": "2026-06-30T14:56:41.930673+00:00",
+    "body_hash": "1df069413e79f25e",
+    "body_preview": "{\"length\":7,\"message\":\"success\",\"content\":[{\"name\":\"全部类目\",\"id\":\"999999\"},{\"children\":[{\"children\":[{\"name\":\"智能手表配件\",\"id\":30915}],\"name\":\"数码配件\",\"id\":829}],\"name\":\"数码\",\"id\":652},{\"children\":[{\"children\":[{\"name\":\"有价优惠券\",\"id\":21438}],\"name\":\"其他服务\",\"id\":9700}],\"name\":\"卖家服务\",\"id\":9669},{\"children\":[{\"children\":[{\"name\":\"手机壳/保护套\",\"id\":866},{\"name\":\"手机贴膜\",\"id\":867}],\"name\":\"手机配件\",\"id\":830}],\"name\":\"手机通讯\",\"id\":9987},{\"children\":[{\"children\":[{\"name\":\"其它养生茶饮\",\"id\":27607}],\"name\":\"养生茶饮\",\"id\":27552}],\"name"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/noOrderPrompt.ajax?level3menuCode=isvNew",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTaCr+gKgq/oCx54Cqdm0oJ3Y1R8=",
+      "date": "Tue, 30 Jun 2026 14:56:41 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe"
+    },
+    "size": 554,
+    "timestamp": "2026-06-30T14:56:41.934397+00:00",
+    "body_hash": "b89dfee6414248b7",
+    "body_preview": "{\"message\":\"success\",\"content\":{\"sysUpgrade\":\"系统正在维护升级，请您稍后再来访问，谢谢！\",\"img\":\"/static/img/freeTipPic/businessZone/isv.png\",\"upgrade\":\"http://fw.jd.com/main/detail/FW_GOODS-549810?skuId=797631&p=sz&t=sz\",\"upgradeText\":\"立即订购\",\"menuCode\":\"isvNew\",\"moduleName\":\"智能选品\",\"moreCode\":\"serviceSelect\",\"introduction\":\"智能选品模块致力于科学输出商品运营管理策略，依托深度学习算法进行数据赋能，高效健康指导商品选品，快速发现店铺潜在爆款和商品布局问题，帮助商家能快速、及时调整商品的销售及运营策略；选品策略可应用于京东平台多营销场景，有效提升货品效率，提高店铺对流量的利用率；最终通过持续优化商品结构、选品策略与对应策略，帮助商家把控生意的长期健康发展和销售增长。\",\"topMsg\":\"该功能已下线，不支持订"
+  }
+]

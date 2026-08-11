@@ -22,6 +22,8 @@ interface SignalRow {
   lifecycle_expires_at: string | null;
   transform_hash: string;
   ingested_at: string;
+  observed_at: string;
+  metrics: string | null;
 }
 
 const toRow = (s: Signal): SignalRow => ({
@@ -41,6 +43,10 @@ const toRow = (s: Signal): SignalRow => ({
   lifecycle_expires_at: s.lifecycle.expires_at,
   transform_hash: s.trace.transform_hash,
   ingested_at: s.source.ingested_at,
+  observed_at: s.observed_at,
+  metrics: (s as unknown as { metrics?: Record<string, number> }).metrics
+    ? JSON.stringify((s as unknown as { metrics?: Record<string, number> }).metrics)
+    : null,
 });
 
 /** Upsert signals (replace existing on UNIQUE(entity, name, window)). */
@@ -49,17 +55,18 @@ export const storeSignals = (db: Db, signals: readonly Signal[]): number => {
     `INSERT INTO signals (
        signal_id, entity_type, entity_id, signal_name, signal_value, signal_unit,
        signal_direction, weight, confidence, source_platform, source_dataset, window,
-       lifecycle_status, lifecycle_expires_at, transform_hash, ingested_at
+       lifecycle_status, lifecycle_expires_at, transform_hash, ingested_at, observed_at, metrics
      ) VALUES (
        @signal_id, @entity_type, @entity_id, @signal_name, @signal_value, @signal_unit,
        @signal_direction, @weight, @confidence, @source_platform, @source_dataset, @window,
-       @lifecycle_status, @lifecycle_expires_at, @transform_hash, @ingested_at
+       @lifecycle_status, @lifecycle_expires_at, @transform_hash, @ingested_at, @observed_at, @metrics
      )
-     ON CONFLICT(entity_type, entity_id, signal_name, window) DO UPDATE SET
+     ON CONFLICT(entity_type, entity_id, signal_name, window, observed_at) DO UPDATE SET
        signal_value = excluded.signal_value,
        signal_direction = excluded.signal_direction,
        weight = excluded.weight,
        confidence = excluded.confidence,
+       metrics = excluded.metrics,
        lifecycle_status = excluded.lifecycle_status,
        lifecycle_expires_at = excluded.lifecycle_expires_at,
        transform_hash = excluded.transform_hash,
@@ -80,7 +87,7 @@ export const storeSignals = (db: Db, signals: readonly Signal[]): number => {
 export const listSignals = (db: Db, entityType: string, entityId: string): Signal[] => {
   const rows = db
     .prepare(
-      'SELECT * FROM signals WHERE entity_type = ? AND entity_id = ? ORDER BY ingested_at DESC',
+      'SELECT * FROM signals WHERE entity_type = ? AND entity_id = ? ORDER BY observed_at DESC',
     )
     .all(entityType, entityId) as SignalRow[];
   return rows.map(fromRow);
@@ -89,7 +96,7 @@ export const listSignals = (db: Db, entityType: string, entityId: string): Signa
 /** List signals for many entities at once (e.g. all products for ranking). */
 export const listAllSignals = (db: Db, entityType: string): Signal[] => {
   const rows = db
-    .prepare('SELECT * FROM signals WHERE entity_type = ? ORDER BY entity_id, ingested_at DESC')
+    .prepare('SELECT * FROM signals WHERE entity_type = ? ORDER BY entity_id, observed_at DESC')
     .all(entityType) as SignalRow[];
   return rows.map(fromRow);
 };
@@ -110,13 +117,15 @@ const fromRow = (r: SignalRow): Signal => ({
     ingested_at: r.ingested_at,
   },
   window: r.window,
+  observed_at: r.observed_at,
   lifecycle: {
     version: 1,
     status: r.lifecycle_status as Signal['lifecycle']['status'],
     expires_at: r.lifecycle_expires_at,
   },
   trace: { pipeline_run_id: '', transform_hash: r.transform_hash },
-});
+  metrics: r.metrics ? (JSON.parse(r.metrics) as Record<string, number>) : undefined,
+} as Signal & { metrics?: Record<string, number> });
 
 /** Record an hourly snapshot for a batch of (platform-collected) signals. */
 export const recordHourlySnapshot = (

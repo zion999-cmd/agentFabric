@@ -1,0 +1,380 @@
+{
+  "source": "jd_smart",
+  "url": "https://jdsz.jd.com/szweb/view/index/home.html",
+  "title": "首页",
+  "menus": [],
+  "links": [
+    {
+      "text": "首页",
+      "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "交易",
+      "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "商品",
+      "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "流量",
+      "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "用户",
+      "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "营销",
+      "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "体验",
+      "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "供应链",
+      "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "市场",
+      "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "报表",
+      "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "祁门红茶官方旗舰店POP",
+      "href": "https://mall.jd.com/index-11855009.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "查看更多",
+      "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+      "class": "jmt-link jmt-link-css-pfim5d jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "详情",
+      "href": "https://jdsz.jd.com/szweb/view/product/productDetail.html",
+      "class": "jmt-link jmt-link-css-112rhsd jmtv2 jmt-link-main "
+    },
+    {
+      "text": "📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日",
+      "href": "https://joyspace.jd.com/pages/HRx9rDqa7saLn2SIZpTR",
+      "class": "jmt-link jmt-link-css-112rhsd jmtv2 jmt-link-main "
+    },
+    {
+      "text": "【新商】8856立减8855，快来领取你的1元购权益~~",
+      "href": "https://fw.jd.com/market/new/detail/FW_GOODS-549810?p=fw&t=zstj&skuId=1541834",
+      "class": "jmt-link jmt-link-css-112rhsd jmtv2 jmt-link-main "
+    },
+    {
+      "text": "【体验】Q4满意度问卷收集中，动动小手指，让商智君听到你的心声",
+      "href": "https://answer.jd.com/jump/?shortCode=kKwwPwWFLCnw&surveyId=2111565",
+      "class": "jmt-link jmt-link-css-112rhsd jmtv2 jmt-link-main "
+    },
+    {
+      "text": "【报名】数智产品线下巡回宣讲会，再次启航，震撼来袭",
+      "href": "https://mtt.jd.com/article/articleView/de9b4b92-4139-476f-a1ab-f1c2e9d52416.action",
+      "class": "jmt-link jmt-link-css-112rhsd jmtv2 jmt-link-main "
+    },
+    {
+      "text": "详情",
+      "href": "https://jdsz.jd.com/szweb/view/service/shop-experience-score.html",
+      "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main j"
+    },
+    {
+      "text": "用户协议",
+      "href": "https://storage.360buyimg.com/sz-agreement/%E5%95%86%E6%99%BA%E5%BA%97%E9%93%BA%E7%89%88-%E5%9C%A8%E7%BA%BF%E4%BD%BF%E7%94%A8%E5%8D%8F%E8%AE%AEV1.pdf",
+      "class": ""
+    },
+    {
+      "text": "营业执照",
+      "href": "https://storage.360buyimg.com/sz-agreement/%E8%90%A5%E4%B8%9A%E6%89%A7%E7%85%A7.jpg",
+      "class": ""
+    },
+    {
+      "text": "注销流程",
+      "href": "https://storage.360buyimg.com/sz-agreement/%E5%95%86%E6%99%BA%E5%BA%97%E9%93%BA%E7%89%88%E7%94%A8%E6%88%B7%E6%B3%A8%E9%94%80.pdf",
+      "class": ""
+    }
+  ],
+  "nav_items": [
+    {
+      "container": "page-top-header-menu",
+      "tag": "DIV",
+      "links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "role": ""
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "role": ""
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "role": ""
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "role": ""
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "role": ""
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "role": ""
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "role": ""
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "role": ""
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "role": ""
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "menu-list",
+      "tag": "UL",
+      "links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "role": ""
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "role": ""
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "role": ""
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "role": ""
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "role": ""
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "role": ""
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "role": ""
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "role": ""
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "role": ""
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "查看更多",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "详情",
+          "href": "https://jdsz.jd.com/szweb/view/product/productDetail.html",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "目标设置",
+          "href": "",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-carousel-panel-list jmt-carousel-panel-list-css-8urtxa jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "https://pro.jd.com/mall/active/3soJwVrULAi9aksx6JpBwp5mrMq6/index.html",
+          "role": ""
+        },
+        {
+          "text": "",
+          "href": "https://joyspace.jd.com/pages/9QMIJ2vkekeqNs7kXtLK",
+          "role": ""
+        },
+        {
+          "text": "",
+          "href": "https://mtt.jd.com/article/articleView/f96f3600-0825-4e41-80d8-73ded919fe2d.action",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-carousel-panel jmt-carousel-panel-css-8urtxa jmtv2 horizonal",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "https://pro.jd.com/mall/active/3soJwVrULAi9aksx6JpBwp5mrMq6/index.html",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-carousel-panel jmt-carousel-panel-css-8urtxa jmtv2 horizonal",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "https://joyspace.jd.com/pages/9QMIJ2vkekeqNs7kXtLK",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-carousel-panel jmt-carousel-panel-css-8urtxa jmtv2 horizonal",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "https://mtt.jd.com/article/articleView/f96f3600-0825-4e41-80d8-73ded919fe2d.action",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "商品诊断",
+          "href": "",
+          "role": ""
+        },
+        {
+          "text": "渠道诊断",
+          "href": "",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "",
+          "role": ""
+        },
+        {
+          "text": "全部商品",
+          "href": "",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "",
+          "role": ""
+        },
+        {
+          "text": "全部渠道",
+          "href": "",
+          "role": ""
+        }
+      ]
+    },
+    {
+      "container": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+      "tag": "DIV",
+      "items": [
+        {
+          "text": "",
+          "href": "",
+          "role": ""
+        },
+        {
+          "text": "行业数据",
+          "href": "",
+          "role": ""
+        }
+      ]
+    }
+  ],
+  "js_variables": [],
+  "route_data": []
+}

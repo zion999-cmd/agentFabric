@@ -16,7 +16,7 @@
     <header class="workspace-header">
       <div class="header-left">
         <span class="header-brand">agentFabric</span>
-        <span class="header-version">v0.1.0</span>
+        <span class="header-version" id="headerVersion">v0.9.1</span>
       </div>
       <div class="header-center">
         <span class="header-title">Agent Workspace</span>
@@ -45,6 +45,7 @@
           <a href="#" class="sidebar-item" data-view="trend"><span class="sidebar-icon trend-icon">&#128200;</span><span data-i18n="nav.trend">趋势观察</span></a>
           <a href="#" class="sidebar-item" data-view="archive"><span class="sidebar-icon archive-icon">&#128451;</span><span data-i18n="nav.archive">历史归档</span></a>
           <a href="#" class="sidebar-item" data-view="memory"><span class="sidebar-icon memory-icon">&#129504;</span><span data-i18n="nav.memory">Memory 成长</span></a>
+          <a href="#" class="sidebar-item" data-view="runtime"><span class="sidebar-icon runtime-icon">&#9889;</span><span data-i18n="nav.runtime">Runtime 执行</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
@@ -53,7 +54,7 @@
         <div class="sidebar-footer">
           <div class="sidebar-footer-header"><span data-i18n="sidebar.agent">运营Agent</span><span class="status-badge running" data-i18n="sidebar.running">运行中</span></div>
           <div class="sidebar-footer-stats">
-            <div class="sidebar-stat-row"><span data-i18n="sidebar.version">版本</span><span>v0.1.0</span></div>
+            <div class="sidebar-stat-row"><span data-i18n="sidebar.version">版本</span><span id="sidebarVersion">v0.9.1</span></div>
             <div class="sidebar-stat-row"><span data-i18n="sidebar.dataTime">数据时间</span><span id="sidebarDataTime">--</span></div>
             <div class="sidebar-stat-row"><span data-i18n="sidebar.decisions">今日决策</span><span id="sidebarDecisions">--</span></div>
             <div class="sidebar-stat-row"><span data-i18n="sidebar.accuracy">准确率 (近7天)</span><span id="sidebarAccuracy">--</span></div>
@@ -82,16 +83,35 @@
         <div id="view-trend" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="trend.title">趋势观察</h2><span class="muted" data-i18n="trend.subtitle">信号变化与排名漂移时间轴</span></div><div id="trendContent" class="muted placeholder">加载中...</div></div>
         <div id="view-archive" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="archive.title">历史归档</h2><select id="archiveProfileSelect" class="input select" style="font-size:0.8rem;"><option value="operator_mode" data-i18n="profile.operator">运营推荐</option><option value="growth_discovery" data-i18n="profile.growth">增长发现</option><option value="sales_leaderboard" data-i18n="profile.sales">销售排行</option></select></div><div id="archiveTimeline"></div></div>
         <div id="view-memory" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="memory.title">Memory 成长</h2><span class="muted" data-i18n="memory.subtitle">Agent 从运营反馈中学习的知识积累</span></div><div id="memoryContent" class="muted placeholder">加载中...</div></div>
+        <div id="view-runtime" class="view-container"><div class="view-title-row"><h2 class="view-title">⚡ Runtime 执行</h2><span class="muted">数据采集执行历史与详情</span></div><div class="runtime-actions" style="margin-bottom:16px"><button id="runtimeCollectBtn" class="btn btn-primary" style="margin-right:8px">&#128260; 采集数据 (Mock)</button><span id="runtimeCollectStatus" class="muted" style="margin-left:8px"></span></div>
+
+          <div class="replay-panel" style="background:var(--card-bg);border-radius:8px;padding:12px 16px;margin-bottom:16px">
+            <h3 style="font-size:0.85rem;margin-bottom:8px">&#128260; Historical Replay</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <input id="replayFrom" class="input" type="date" value="2026-07-01" max="2026-07-10" style="font-size:0.8rem;width:140px" />
+              <span class="muted" style="font-size:0.8rem">→</span>
+              <input id="replayTo" class="input" type="date" value="2026-07-10" max="2026-07-10" style="font-size:0.8rem;width:140px" />
+              <button id="replayRunBtn" class="btn btn-primary" style="font-size:0.8rem">&#9654; Run Replay</button>
+              <span id="replayStatus" class="muted" style="font-size:0.78rem;margin-left:4px"></span>
+            </div>
+            <div id="replayProgress" style="display:none;margin-top:8px">
+              <div style="background:var(--border-color);border-radius:4px;height:6px;overflow:hidden">
+                <div id="replayProgressBar" style="background:var(--primary);height:100%;width:0%;transition:width 0.3s"></div>
+              </div>
+              <div id="replayProgressText" class="muted" style="font-size:0.72rem;margin-top:4px"></div>
+            </div>
+            <div id="replayResult" style="margin-top:8px;font-size:0.78rem"></div>
+          </div>
+
+          <div class="runtime-executions" style="max-height:50vh;overflow-y:auto"><h3 style="font-size:0.85rem;margin-bottom:8px;position:sticky;top:0;background:var(--bg);z-index:1;padding:4px 0">执行历史 <span id="runtimeExecCount" class="muted" style="font-size:0.72rem"></span></h3><div id="runtimeExecutionsList" class="muted placeholder">加载中...</div></div><div id="runtimeDetail" style="display:none;margin-top:16px"><h3 style="font-size:0.85rem;margin-bottom:8px">执行详情</h3><div id="runtimeDetailContent"></div></div></div>
         <div id="view-agentConfig" class="view-container"><h2 class="view-title" data-i18n="config.title">Agent 配置</h2><div class="config-section"><h3 class="config-section-title" data-i18n="config.ranking">排名权重</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.growthWeight">增长权重</label><input type="number" class="input" id="cfgGrowthWeight" value="0.35" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label data-i18n="config.competitionWeight">竞争权重</label><input type="number" class="input" id="cfgCompetitionWeight" value="0.25" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label data-i18n="config.qualityWeight">质量权重</label><input type="number" class="input" id="cfgQualityWeight" value="0.15" min="0" max="1" step="0.05" /></div></div></div><div class="config-section" style="margin-top:16px"><h3 class="config-section-title" data-i18n="config.memory">Memory 设置</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.memoryTtl">TTL (天)</label><input type="number" class="input" id="cfgMemoryTtl" value="30" min="1" step="1" /></div><div class="threshold-item"><label data-i18n="config.memoryDecay">衰减率</label><input type="number" class="input" id="cfgMemoryDecay" value="0.05" min="0" max="1" step="0.01" /></div><div class="threshold-item"><label data-i18n="config.memoryThreshold">验证阈值</label><input type="number" class="input" id="cfgMemoryThreshold" value="0.6" min="0" max="1" step="0.05" /></div></div></div><div class="config-section" style="margin-top:16px"><h3 class="config-section-title" data-i18n="config.llm">LLM 配置</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.llmProvider">Provider</label><select class="input select" id="cfgLlmProvider"><option value="anthropic">Anthropic</option><option value="openai">OpenAI</option></select></div><div class="threshold-item"><label data-i18n="config.llmModel">Model</label><input type="text" class="input" id="cfgLlmModel" value="claude-sonnet-4-6" /></div><div class="threshold-item"><label data-i18n="config.llmTemp">Temperature</label><input type="number" class="input" id="cfgLlmTemp" value="0.7" min="0" max="2" step="0.1" /></div></div></div><button class="btn btn-primary" id="saveAgentConfig" style="margin-top:16px" data-i18n="config.save">保存配置</button></div>
       </section>
 
       <aside class="decision-panel" id="decisionPanel">
         <div class="decision-header">
-          <div class="decision-header-left">
+          <div class="decision-header-row">
             <span class="decision-header-title" data-i18n="decision.title">决策依据</span>
-            <span class="decision-entity-label" id="decisionEntityLabel"></span>
-          </div>
-          <div class="mode-toggle-group" style="margin-right:8px">
+            <div class="mode-toggle-group" style="margin-right:28px">
             <span class="mode-label" data-i18n="mode.business">运营模式</span>
             <label class="mode-switch">
               <input type="checkbox" id="panelModeToggle" />
@@ -99,6 +119,8 @@
             </label>
             <span class="mode-label muted" data-i18n="mode.developer">开发模式</span>
           </div>
+          </div>
+          <span class="decision-entity-label" id="decisionEntityLabel"></span>
           <button class="btn-icon" id="decisionCloseBtn" title="Close">&#10005;</button>
         </div>
 

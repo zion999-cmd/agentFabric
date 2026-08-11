@@ -1,0 +1,933 @@
+{
+  "version": "1.0.0",
+  "platform": "jd",
+  "platform_name": "京东商智",
+  "generated_at": "2026-08-10T18:09:32.599Z",
+  "sources": [
+    "sources/jd_smart/blueprint.yaml",
+    "catalog/jd/endpoints.json",
+    "catalog/jd/capability.md",
+    "discovery/jd-capability/capability_matrix.json",
+    "jd_source/P0006-Data-Acquisition-Report.md"
+  ],
+  "capabilities": [
+    {
+      "capability": "trade.overview",
+      "domain": "trade",
+      "name": "交易概览",
+      "description": "核心经营指标：GMV、订单、访客、转化率。每日汇总 + 24小时趋势 + Top5 商品排行。",
+      "intent": [
+        "今天卖了多少",
+        "GMV涨跌分析",
+        "哪个商品卖得最好",
+        "每小时销售趋势",
+        "转化率监控",
+        "经营概览"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "time_hourly",
+          "time_daily",
+          "product_top5"
+        ]
+      },
+      "outputs": [
+        "gmv",
+        "orders",
+        "visitors",
+        "customers",
+        "conversion_rate",
+        "gmv_compare_pct",
+        "orders_compare_pct",
+        "visitors_compare_pct",
+        "gmv_hourly"
+      ],
+      "metrics": [
+        {
+          "canonical": "gmv",
+          "label": "成交金额",
+          "unit": "currency",
+          "confidence": 1,
+          "verified": true
+        },
+        {
+          "canonical": "orders",
+          "label": "成交订单数",
+          "unit": "count",
+          "confidence": 1,
+          "verified": true
+        },
+        {
+          "canonical": "visitors",
+          "label": "商品访客数",
+          "unit": "count",
+          "confidence": 1,
+          "verified": true
+        },
+        {
+          "canonical": "customers",
+          "label": "成交客户数",
+          "unit": "count",
+          "confidence": 1,
+          "verified": true
+        },
+        {
+          "canonical": "conversion_rate",
+          "label": "成交转化率",
+          "unit": "percentage",
+          "confidence": 1,
+          "verified": true
+        },
+        {
+          "canonical": "gmv_compare_pct",
+          "label": "GMV 环比",
+          "unit": "percentage",
+          "confidence": 1,
+          "verified": false
+        },
+        {
+          "canonical": "orders_compare_pct",
+          "label": "订单环比",
+          "unit": "percentage",
+          "confidence": 1,
+          "verified": false
+        },
+        {
+          "canonical": "visitors_compare_pct",
+          "label": "访客环比",
+          "unit": "percentage",
+          "confidence": 1,
+          "verified": false
+        },
+        {
+          "canonical": "gmv_hourly",
+          "label": "小时 GMV",
+          "unit": "currency",
+          "confidence": 1,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "time_hourly",
+        "time_daily",
+        "product_top5",
+        "sku"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "verified",
+        "last_verified": "2026-08-09",
+        "verified_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "domain": "trade",
+      "name": "交易构成",
+      "description": "交易构成分析：品牌构成、类目构成、渠道构成。含退款金额、客单价等细分指标。",
+      "intent": [
+        "品牌GMV贡献",
+        "退款率分析",
+        "渠道成交占比",
+        "客单价趋势",
+        "交易构成分析"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "brand",
+          "category",
+          "channel"
+        ]
+      },
+      "outputs": [
+        "gmv",
+        "orders",
+        "refunds",
+        "revenue_per_customer",
+        "brand_gmv",
+        "category_gmv"
+      ],
+      "metrics": [
+        {
+          "canonical": "gmv",
+          "label": "成交金额",
+          "unit": "currency",
+          "confidence": 0.8,
+          "verified": false
+        },
+        {
+          "canonical": "orders",
+          "label": "成交订单数",
+          "unit": "count",
+          "confidence": 0.8,
+          "verified": false
+        },
+        {
+          "canonical": "refunds",
+          "label": "退款金额",
+          "unit": "currency",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "revenue_per_customer",
+          "label": "客单价",
+          "unit": "currency",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "brand_gmv",
+          "label": "品牌成交",
+          "unit": "currency",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "category_gmv",
+          "label": "类目成交",
+          "unit": "currency",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "brand",
+        "category",
+        "channel",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "captured",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "domain": "traffic",
+      "name": "流量分析",
+      "description": "流量来源分析：各渠道访客数、UV、PV、跳失率。来源渠道归因 + 搜索关键词分析。",
+      "intent": [
+        "分析流量变化",
+        "分析访客下降",
+        "流量从哪里来",
+        "哪个渠道访客最多",
+        "搜索什么关键词进来",
+        "商品流量排行",
+        "渠道归因分析"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "channel",
+          "keyword",
+          "product"
+        ]
+      },
+      "outputs": [
+        "visitors",
+        "uv",
+        "pv",
+        "bounce_rate",
+        "avg_duration",
+        "traffic_by_channel",
+        "order_amount_by_channel",
+        "search_keyword_visitors"
+      ],
+      "metrics": [
+        {
+          "canonical": "visitors",
+          "label": "访客数",
+          "unit": "count",
+          "confidence": 0.7,
+          "verified": false
+        },
+        {
+          "canonical": "uv",
+          "label": "UV",
+          "unit": "count",
+          "confidence": 0.7,
+          "verified": false
+        },
+        {
+          "canonical": "pv",
+          "label": "PV",
+          "unit": "count",
+          "confidence": 0.7,
+          "verified": false
+        },
+        {
+          "canonical": "bounce_rate",
+          "label": "跳失率",
+          "unit": "percentage",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "avg_duration",
+          "label": "平均停留时长",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "traffic_by_channel",
+          "label": "渠道访客",
+          "unit": "count",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "order_amount_by_channel",
+          "label": "渠道成交",
+          "unit": "currency",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "search_keyword_visitors",
+          "label": "搜索词访客",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "channel",
+        "keyword",
+        "product",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "captured",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    },
+    {
+      "capability": "product.overview",
+      "domain": "product",
+      "name": "商品表现",
+      "description": "商品表现分析：SKU 排行、动销 SPU 趋势、商品转化漏斗。按 GMV/访客数/曝光量排名。",
+      "intent": [
+        "商品销售排行",
+        "SKU转化率分析",
+        "动销商品趋势",
+        "商品曝光点击漏斗",
+        "哪个商品卖得好"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "sku",
+          "spu",
+          "brand"
+        ]
+      },
+      "outputs": [
+        "gmv",
+        "visitors",
+        "exposure",
+        "conversion",
+        "sku_count",
+        "inventory_turnover"
+      ],
+      "metrics": [
+        {
+          "canonical": "gmv",
+          "label": "商品 GMV",
+          "unit": "currency",
+          "confidence": 0.7,
+          "verified": false
+        },
+        {
+          "canonical": "visitors",
+          "label": "商品访客",
+          "unit": "count",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "exposure",
+          "label": "商品曝光",
+          "unit": "count",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "conversion",
+          "label": "商品转化率",
+          "unit": "ratio",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "sku_count",
+          "label": "动销 SKU 数",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "inventory_turnover",
+          "label": "库存周转",
+          "unit": "ratio",
+          "confidence": 0.4,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "sku",
+        "spu",
+        "brand",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "captured",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    },
+    {
+      "capability": "service.overview",
+      "domain": "service",
+      "name": "服务指标",
+      "description": "店铺服务指标：店铺星级、服务运营数据、客服响应、售后满意度。",
+      "intent": [
+        "店铺星级查询",
+        "客服响应速度",
+        "售后满意度分析",
+        "服务质量评估"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": []
+      },
+      "outputs": [
+        "response_rate",
+        "resolution_time",
+        "satisfaction_score",
+        "shop_stars"
+      ],
+      "metrics": [
+        {
+          "canonical": "response_rate",
+          "label": "客服响应率",
+          "unit": "percentage",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "resolution_time",
+          "label": "平均解决时间",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "satisfaction_score",
+          "label": "满意度评分",
+          "unit": "score",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "shop_stars",
+          "label": "店铺星级",
+          "unit": "score",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "time_daily",
+        "service_type"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "captured",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    },
+    {
+      "capability": "industry.benchmark",
+      "domain": "industry",
+      "name": "行业对标",
+      "description": "行业对标分析：行业排行、品牌排行、市场趋势。注意：JD 行业数据为 indexed 值（非绝对值）。",
+      "intent": [
+        "行业排名查询",
+        "市场份额分析",
+        "同行品牌对比",
+        "行业大盘趋势"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "brand",
+          "industry"
+        ]
+      },
+      "outputs": [
+        "market_rank",
+        "market_share",
+        "industry_gmv_index",
+        "industry_uv_index"
+      ],
+      "metrics": [
+        {
+          "canonical": "market_rank",
+          "label": "市场排名",
+          "unit": "index",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "market_share",
+          "label": "市场份额",
+          "unit": "percentage",
+          "confidence": 0.4,
+          "verified": false
+        },
+        {
+          "canonical": "industry_gmv_index",
+          "label": "行业 GMV 指数",
+          "unit": "index",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "industry_uv_index",
+          "label": "行业 UV 指数",
+          "unit": "index",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "brand",
+        "industry",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "captured",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false,
+        "notes": "行业数据为 indexed 值（非绝对值），不可直接与其他平台对标"
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "domain": "customer",
+      "name": "客户资产",
+      "description": "客户资产分析：新老客、会员、粉丝、用户画像。含用户增长运营数据。",
+      "intent": [
+        "新增客户统计",
+        "复购率分析",
+        "会员增长趋势",
+        "用户画像分布"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "customer_type"
+        ]
+      },
+      "outputs": [
+        "new_customers",
+        "repeat_customers",
+        "members",
+        "fans"
+      ],
+      "metrics": [
+        {
+          "canonical": "new_customers",
+          "label": "新增客户",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "repeat_customers",
+          "label": "复购客户",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "members",
+          "label": "会员数",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "fans",
+          "label": "粉丝数",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "customer_type",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "popup_blocked",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": true,
+        "notes": "页面以弹窗形式打开，需要特殊导航处理"
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "domain": "marketing",
+      "name": "营销效果",
+      "description": "营销效果分析：广告花费、ROI、活动效果、CPA/CPC。促销工具分析 + 活动对比。",
+      "intent": [
+        "广告ROI分析",
+        "活动效果评估",
+        "获客成本分析",
+        "优惠券核销率"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "campaign",
+          "channel"
+        ]
+      },
+      "outputs": [
+        "ad_spend",
+        "roi",
+        "campaign_orders",
+        "cpa"
+      ],
+      "metrics": [
+        {
+          "canonical": "ad_spend",
+          "label": "广告花费",
+          "unit": "currency",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "roi",
+          "label": "广告 ROI",
+          "unit": "ratio",
+          "confidence": 0.6,
+          "verified": false
+        },
+        {
+          "canonical": "campaign_orders",
+          "label": "活动订单",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "cpa",
+          "label": "获客成本 CPA",
+          "unit": "currency",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "campaign",
+        "channel",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "popup_blocked",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": true,
+        "notes": "页面以弹窗形式打开，需要特殊导航处理"
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "domain": "supply_chain",
+      "name": "库存健康",
+      "description": "供应链健康：库存天数、缺货风险、周转率、滞销率。库存诊断 + 入仓模拟。",
+      "intent": [
+        "缺货预警",
+        "库存周转分析",
+        "滞销商品识别",
+        "入仓建议"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "sku",
+          "warehouse"
+        ]
+      },
+      "outputs": [
+        "stock_days",
+        "stockout_risk",
+        "turnover_rate",
+        "unsale_rate"
+      ],
+      "metrics": [
+        {
+          "canonical": "stock_days",
+          "label": "可售天数",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "stockout_risk",
+          "label": "缺货风险",
+          "unit": "count",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "turnover_rate",
+          "label": "周转率",
+          "unit": "ratio",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "unsale_rate",
+          "label": "滞销率",
+          "unit": "percentage",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "sku",
+        "warehouse",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "popup_blocked",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": true,
+        "notes": "页面以弹窗形式打开，需要特殊导航处理"
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "domain": "trade",
+      "name": "竞争分析",
+      "description": "竞店对标：竞店 GMV、市场排名、份额变化。需要 ¥8,856/年 数据尊享包。",
+      "intent": [
+        "竞店分析",
+        "市场排名查询",
+        "份额变化监控"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "competitor"
+        ]
+      },
+      "outputs": [
+        "competitor_gmv",
+        "market_position",
+        "share_change"
+      ],
+      "metrics": [
+        {
+          "canonical": "competitor_gmv",
+          "label": "竞店 GMV",
+          "unit": "currency",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "market_position",
+          "label": "市场排名",
+          "unit": "index",
+          "confidence": 0.5,
+          "verified": false
+        },
+        {
+          "canonical": "share_change",
+          "label": "份额变化",
+          "unit": "percentage",
+          "confidence": 0.5,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "competitor",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "cdp"
+      },
+      "validation": {
+        "status": "premium_required",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": true,
+        "premium_tier": "¥8,856/年 数据尊享包",
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    },
+    {
+      "capability": "trade.reports",
+      "domain": "trade",
+      "name": "数据导出",
+      "description": "批量数据导出：自定义报表、下载中心。可导出 CSV 格式的原始数据。",
+      "intent": [
+        "导出原始数据",
+        "月度报表下载"
+      ],
+      "inputs": {
+        "date_range": true,
+        "entity_id": false,
+        "dimensions": [
+          "report_type"
+        ]
+      },
+      "outputs": [
+        "custom_report_data"
+      ],
+      "metrics": [
+        {
+          "canonical": "custom_report_data",
+          "label": "自定义报表",
+          "unit": "text",
+          "confidence": 0.4,
+          "verified": false
+        }
+      ],
+      "dimensions": [
+        "report_type",
+        "time_daily"
+      ],
+      "provider": {
+        "platform": "jd",
+        "acquisition": "csv_export"
+      },
+      "validation": {
+        "status": "content_only",
+        "verified_metrics": []
+      },
+      "constraints": {
+        "requires_premium": false,
+        "requires_ad_account": false,
+        "is_popup": false
+      }
+    }
+  ],
+  "summary": {
+    "total_capabilities": 11,
+    "total_metrics": 48,
+    "verified_capabilities": 1,
+    "captured_capabilities": 6,
+    "pending_capabilities": 0,
+    "blocked_capabilities": 4,
+    "domains": [
+      "customer",
+      "industry",
+      "marketing",
+      "product",
+      "service",
+      "supply_chain",
+      "trade",
+      "traffic"
+    ]
+  }
+}

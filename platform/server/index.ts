@@ -8,6 +8,8 @@ import { healthRouter } from './routes/health.js';
 import { rankingRouter } from './routes/ranking.js';
 import { memoryRouter, reviewsRouter, traceRouter } from './routes/reviews.js';
 import { workspaceRouter } from './routes/workspace.js';
+import { chatRouter } from './routes/chat.js';
+import { runtimeRouter } from './routes/runtime.js';
 import { openDb } from '#platform/storage/connection.js';
 
 export interface ServerOptions {
@@ -28,6 +30,8 @@ export const createServer = (options: ServerOptions): Express => {
   app.use('/api', memoryRouter(db));
   app.use('/api', traceRouter(db));
   app.use('/api', workspaceRouter(db));
+  app.use('/api', chatRouter(db));
+  app.use('/api', runtimeRouter(db));
 
   // Dashboard SPA (vanilla JS). Served as static files.
   const dashDir = workspaceDir ?? resolve(process.cwd(), 'apps/ecommerce/workspace');

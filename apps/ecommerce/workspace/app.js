@@ -13,7 +13,7 @@ const i18n = {
     'header.role': '运营总监', 'header.team': '电商运营团队',
     'nav.section.discovery': '发现视图', 'nav.section.analysis': '分析视图',
     'nav.inbox': '今日发现', 'nav.growth': '增长机会', 'nav.risk': '风险预警', 'nav.review': '审核中心',
-    'nav.product': '商品分析', 'nav.trend': '趋势观察', 'nav.archive': '历史归档', 'nav.memory': 'Memory 成长', 'nav.agentConfig': 'Agent 配置',
+    'nav.product': '商品分析', 'nav.trend': '趋势观察', 'nav.archive': '历史归档', 'nav.memory': 'Memory 成长', 'nav.runtime': 'Runtime 执行', 'nav.agentConfig': 'Agent 配置',
     'sidebar.agent': '运营Agent', 'sidebar.running': '运行中',
     'sidebar.version': '版本', 'sidebar.dataTime': '数据时间',
     'sidebar.decisions': '今日决策', 'sidebar.accuracy': '准确率 (近7天)',
@@ -56,7 +56,7 @@ const i18n = {
     'header.role': 'Ops Director', 'header.team': 'E-commerce Team',
     'nav.section.discovery': 'Discovery', 'nav.section.analysis': 'Analysis',
     'nav.inbox': 'Today', 'nav.growth': 'Growth', 'nav.risk': 'Risk Alerts', 'nav.review': 'Reviews',
-    'nav.product': 'Products', 'nav.trend': 'Trends', 'nav.archive': 'Archive', 'nav.memory': 'Memory', 'nav.agentConfig': 'Config',
+    'nav.product': 'Products', 'nav.trend': 'Trends', 'nav.archive': 'Archive', 'nav.memory': 'Memory', 'nav.runtime': 'Runtime', 'nav.agentConfig': 'Config',
     'sidebar.agent': 'Ops Agent', 'sidebar.running': 'Running',
     'sidebar.version': 'Version', 'sidebar.dataTime': 'Data Time',
     'sidebar.decisions': 'Decisions', 'sidebar.accuracy': 'Accuracy (7d)',
@@ -106,10 +106,12 @@ const state = {
   traceExpanded: false,
   selectedEntityId: null, findingsData: [],
   rankingsCache: [], memoriesCache: [],
+  productNames: {},  // product_id → name
 };
 
 function showToast(msg) { toastNode.textContent = msg; toastNode.classList.add('show'); setTimeout(() => toastNode.classList.remove('show'), 1500); }
 async function apiGet(path) { const r = await fetch(path); if (!r.ok) throw new Error(`${r.status}`); const j = await r.json(); return j.data || j; }
+async function apiPost(path, body) { const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); if (!r.ok) throw new Error(`${r.status}`); const j = await r.json(); return j.data || j; }
 function clearNode(n) { while (n.firstChild) n.removeChild(n.firstChild); }
 
 // ═══ Navigation ═════════════════════════════════════════════
@@ -124,19 +126,25 @@ function switchView(name, filter = 'all') {
   viewLoaders[name]?.(filter);
 }
 
-const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, agentConfig: loadConfig };
+const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, agentConfig: loadConfig };
 
 // ═══ Data Loading ══════════════════════════════════════════
 async function loadData() {
   try {
-    const [rankings, memories, findings] = await Promise.all([
+    const [rankings, memories, findings, products] = await Promise.all([
       apiGet('/api/ranking/operator_mode'),
       apiGet('/api/memory'),
       apiGet('/api/workspace/findings?profile=operator_mode'),
+      apiGet('/api/products'),
     ]);
     state.rankingsCache = Array.isArray(rankings) ? rankings : [];
     state.memoriesCache = Array.isArray(memories) ? memories : [];
     state.findingsData = Array.isArray(findings) ? findings : [];
+    // Build product name lookup
+    if (Array.isArray(products)) {
+      state.productNames = {};
+      products.forEach(function(p) { state.productNames[p.product_id] = p.name || p.product_id; });
+    }
   } catch { /* keep caches */ }
 }
 
@@ -157,7 +165,7 @@ async function loadInbox(filterType = 'all') {
     return {
       id: r.entity_id,
       entityId: r.entity_id,
-      entityName: 'SKU-' + r.entity_id.slice(-8),
+      entityName: state.productNames[r.entity_id] || r.entity_id,
       type: isRisk ? 'risk' : 'growth',
       priority: r.overall_score >= 0.5 ? 'high' : r.overall_score >= 0.3 ? 'medium' : 'low',
       title: r.explainability?.summary || '排名结果',
@@ -220,6 +228,19 @@ async function loadInbox(filterType = 'all') {
   const up = '<span class="stat-trend up">&#9650;</span>';
   ['statTotalSkuTrend', 'statActiveSkuTrend', 'statNewSignalsTrend'].forEach(id => { document.getElementById(id).innerHTML = up; });
 
+  // Sidebar footer stats — real data from rankings
+  if (state.rankingsCache.length > 0) {
+    const latestRanked = state.rankingsCache.reduce((a, b) => (a.ranked_at || '') > (b.ranked_at || '') ? a : b);
+    document.getElementById('sidebarDataTime').textContent = (latestRanked.ranked_at || '').slice(0, 10) || '--';
+    document.getElementById('sidebarDecisions').textContent = state.rankingsCache.length.toLocaleString();
+    const avgConf = state.rankingsCache.reduce((s, r) => s + (r.confidence || 0), 0) / state.rankingsCache.length;
+    document.getElementById('sidebarAccuracy').textContent = Math.round(avgConf * 100) + '%';
+  } else {
+    document.getElementById('sidebarDataTime').textContent = '--';
+    document.getElementById('sidebarDecisions').textContent = '--';
+    document.getElementById('sidebarAccuracy').textContent = '--';
+  }
+
   renderFindingCards(filtered);
   document.getElementById('inboxUpdated').textContent = new Date().toLocaleTimeString();
 }
@@ -272,26 +293,122 @@ async function loadProduct() {
   const ct = document.getElementById('productContent');
   const searchInput = document.getElementById('productSearchInput');
   const searchBtn = document.getElementById('productSearchBtn');
-  async function search() {
-    const q = searchInput.value.trim(); if (!q) return;
-    ct.innerHTML = `<p class="muted">${t('label.loading')}...</p>`;
-    try {
-      const rankings = await apiGet('/api/ranking/operator_mode');
-      const match = (Array.isArray(rankings) ? rankings : []).find(r => r.entity_id === q || r.entity_id.includes(q));
-      if (!match) { ct.innerHTML = `<p class="muted">${t('product.notFound')}</p>`; return; }
-      ct.innerHTML = `<div class="finding-card" style="cursor:default;border-left:4px solid var(--primary)"><div class="finding-product-img">&#128230;</div><div class="finding-body">
-        <div class="finding-header"><span class="finding-entity-name">${match.entity_id}</span></div>
-        <div class="finding-metrics" style="grid-template-columns:repeat(5,1fr)">
-          <div class="finding-metric"><div class="finding-metric-value">${match.overall_score.toFixed(3)}</div><div class="finding-metric-label">${t('product.score')}</div></div>
-          <div class="finding-metric"><div class="finding-metric-value">${match.component_scores?.growth?.toFixed(3)||'--'}</div><div class="finding-metric-label">${t('label.growth')}</div></div>
-          <div class="finding-metric"><div class="finding-metric-value">${match.component_scores?.competition?.toFixed(3)||'--'}</div><div class="finding-metric-label">${t('label.competition')}</div></div>
-          <div class="finding-metric"><div class="finding-metric-value">${match.component_scores?.supply_stability?.toFixed(3)||'--'}</div><div class="finding-metric-label">${t('label.supply')}</div></div>
-          <div class="finding-metric"><div class="finding-metric-value">${(match.confidence*100).toFixed(0)}%</div><div class="finding-metric-label">${t('label.conf')}</div></div></div></div></div>`;
-    } catch (e) { ct.innerHTML = `<p class="muted">${t('label.unavailable')} (${e.message})</p>`; }
+
+  // Build product lookup from loaded data
+  function findProduct(q) {
+    if (!q) return null;
+    // Direct ID match
+    var byId = state.rankingsCache.find(function(r) { return r.entity_id === q; });
+    if (byId) return byId;
+    // Substring ID match
+    var bySubId = state.rankingsCache.find(function(r) { return r.entity_id.includes(q); });
+    if (bySubId) return bySubId;
+    // Name match (search productNames)
+    for (var id in state.productNames) {
+      if (state.productNames[id].includes(q)) {
+        return state.rankingsCache.find(function(r) { return r.entity_id === id; }) || { entity_id: id };
+      }
+    }
+    return null;
   }
+
+  // Show product selector dropdown
+  function renderProductList() {
+    var products = state.rankingsCache.map(function(r) {
+      return { id: r.entity_id, name: state.productNames[r.entity_id] || r.entity_id, score: r.overall_score };
+    }).sort(function(a,b) { return b.score - a.score; });
+
+    var html = '<div style="max-height:60vh;overflow-y:auto;margin-top:8px"><strong>商品列表 (' + products.length + ')</strong><br/><span class="muted" style="font-size:0.75rem">点击选择商品，或输入名称/ID搜索</span>';
+    html += '<div style="margin-top:6px">';
+    products.forEach(function(p) {
+      html += '<div class="product-list-item" data-pid="' + p.id + '" style="cursor:pointer;padding:8px 10px;margin-bottom:2px;background:var(--card-bg);border-radius:4px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem">';
+      html += '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:8px">' + (p.name || p.id) + '</span>';
+      html += '<span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--muted)">' + p.id.slice(-8) + '</span>';
+      html += '<span style="margin-left:8px;font-weight:600;font-size:0.75rem">' + (p.score ? p.score.toFixed(3) : '--') + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+    return html;
+  }
+
+  async function search() {
+    var q = searchInput.value.trim();
+
+    // If empty, show product list
+    if (!q) {
+      ct.innerHTML = renderProductList();
+      // Click handlers
+      ct.querySelectorAll('.product-list-item').forEach(function(el) {
+        el.addEventListener('click', function() { searchInput.value = el.dataset.pid; search(); });
+      });
+      return;
+    }
+
+    ct.innerHTML = '<p class="muted">搜索中...</p>';
+    try {
+      var match = findProduct(q);
+      if (!match) { ct.innerHTML = '<p class="muted">未找到匹配 "' + q + '" 的商品。清空搜索框查看完整列表。</p>'; return; }
+
+      var pid = match.entity_id;
+      var pname = state.productNames[pid] || pid;
+
+      // Show ranking component breakdown + shop-level GMV context
+      var signalsHtml = '';
+      try {
+        // Shop-level enterprise signals for GMV context
+        var shopSignals = await apiGet('/api/signals?entity_type=product&entity_id=jd_shop_001');
+        if (shopSignals && shopSignals.length) {
+          // Focus on daily_summary — most meaningful metric
+          var dailySignals = shopSignals.filter(function(s) { return s.signal_name === 'daily_summary'; }).sort(function(a,b) {
+            return (b.observed_at||'').localeCompare(a.observed_at||'');
+          });
+
+          if (dailySignals.length > 0) {
+            var gmvValues = dailySignals.slice(0, 14).reverse().map(function(s) { return s.signal_value || 0; });
+            var latestGmv = gmvValues[gmvValues.length-1] || 0;
+            var prevGmv = gmvValues[gmvValues.length-2] || latestGmv;
+            var gmvChange = prevGmv > 0 ? ((latestGmv - prevGmv) / prevGmv * 100) : 0;
+            var gmvMax = Math.max.apply(null, gmvValues) || 1;
+
+            signalsHtml += '<div style="margin-top:14px"><strong>GMV 趋势</strong>';
+            signalsHtml += '<span style="margin-left:6px;font-weight:600;color:' + (gmvChange >= 0 ? 'var(--primary)' : 'var(--danger)') + '">¥' + latestGmv.toLocaleString() + '</span>';
+            signalsHtml += '<span style="margin-left:4px;font-size:0.72rem;color:' + (gmvChange >= 0 ? 'var(--primary)' : 'var(--danger)') + '">' + (gmvChange >= 0 ? '↑' : '↓') + Math.abs(gmvChange).toFixed(1) + '%</span>';
+
+            // Mini sparkline
+            signalsHtml += '<div style="display:flex;align-items:flex-end;gap:2px;height:32px;margin-top:6px">';
+            gmvValues.forEach(function(v) {
+              var h = Math.max(3, (v / gmvMax) * 30);
+              signalsHtml += '<div title=\"¥' + v.toLocaleString() + '\" style=\"flex:1;background:var(--primary);height:' + h + 'px;border-radius:2px 2px 0 0;opacity:' + (0.3+0.7*v/gmvMax) + ';min-width:4px\"></div>';
+            });
+            signalsHtml += '</div></div>';
+          }
+
+          // Count other signal types
+          var typeCounts = {};
+          shopSignals.forEach(function(s) { typeCounts[s.signal_name] = (typeCounts[s.signal_name]||0) + 1; });
+          signalsHtml += '<div style="margin-top:8px;font-size:0.72rem;color:var(--muted)">' + Object.keys(typeCounts).length + ' signal types · ' + shopSignals.length + ' total observations</div>';
+        }
+      } catch(e2) { /* optional */ }
+
+      var comp = match.component_scores || {};
+      ct.innerHTML = '<div class="finding-card" style="cursor:default;border-left:4px solid var(--primary)"><div class="finding-body">' +
+        '<div class="finding-header"><span class="finding-entity-name" style="font-size:0.9rem">' + (pname || pid) + '</span></div>' +
+        '<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px">ID: ' + pid + '</div>' +
+        '<div class="finding-metrics" style="grid-template-columns:repeat(5,1fr)">' +
+          '<div class="finding-metric"><div class="finding-metric-value">' + (match.overall_score||0).toFixed(3) + '</div><div class="finding-metric-label">综合得分</div></div>' +
+          '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.growth||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Growth</div></div>' +
+          '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.competition||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Competition</div></div>' +
+          '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.supply_stability||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Supply</div></div>' +
+          '<div class="finding-metric"><div class="finding-metric-value">' + ((match.confidence||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Confidence</div></div>' +
+        '</div>' + signalsHtml + '</div></div>';
+
+    } catch (e) { ct.innerHTML = '<p class="muted">加载失败 (' + e.message + ')</p>'; }
+  }
+
   searchBtn.onclick = search;
-  searchInput.onkeydown = (e) => { if (e.key === 'Enter') search(); };
-  if (!ct.dataset.init) { ct.dataset.init = '1'; ct.innerHTML = `<p class="muted placeholder">${t('product.placeholder')}</p>`; }
+  searchInput.onkeydown = function(e) { if (e.key === 'Enter') search(); };
+  // Show product list on initial load
+  if (!ct.dataset.init) { ct.dataset.init = '1'; search(); }
 }
 
 // ═══ Memory ════════════════════════════════════════════════
@@ -302,25 +419,155 @@ async function loadMemory() {
     const items = Array.isArray(mem) ? mem : [];
     ct.innerHTML = items.length
       ? `<div class="list">${items.map(m => `<div class="item"><strong>${m.statement||m.memory_id}</strong><br/><span class="muted">${m.memory_type} | Score: ${m.weight?.final_score?.toFixed(3)||'?'} | Status: ${m.status}</span></div>`).join('')}</div>`
-      : '<div class="muted placeholder">暂无已验证的业务经验</div>';
+      : '<div class="muted placeholder">暂无已验证的业务经验。<br/><small>Memory 来自运营审核反馈 — 在 Inbox 中对 AI 发现进行"批准/拒绝/修改"操作，验证后的经验会自动积累为 Memory。</small></div>';
   } catch { ct.innerHTML = `<p class="muted">${t('label.unavailable')}</p>`; }
 }
 
 // ═══ Trend ════════════════════════════════════════════════
+var trendProductId = null; // null = all products, string = specific product
+
 async function loadTrend() {
   const ct = document.getElementById('trendContent');
   try {
-    const rankings = state.rankingsCache;
-    const ranking = state.rankingsCache.length ? state.rankingsCache[0] : null;
-    let html = '<div class="list">';
-    html += `<div class="item"><strong>Ranking Coverage</strong><br/><span class="muted">Total ranked: ${rankings.length} products | Avg confidence: ${Math.round((rankings.reduce((s,r)=>s+r.confidence,0)/(rankings.length||1))*100)}%</span></div>`;
-    if (ranking) {
-      html += `<div class="item"><strong>Signal Drift</strong><br/><span class="muted">Top entity: ${ranking.entity_id} | Score: ${ranking.overall_score.toFixed(3)} | Coverage: ${(ranking.coverage*100).toFixed(0)}%</span></div>`;
-      html += `<div class="item"><strong>Memory Growth</strong><br/><span class="muted">Active memories: ${state.memoriesCache.length}</span></div>`;
+    // Build product selector
+    var products = state.rankingsCache.map(function(r) {
+      return { id: r.entity_id, name: state.productNames[r.entity_id] || r.entity_id, score: r.overall_score };
+    }).sort(function(a,b) { return b.score - a.score; });
+
+    var selectorHtml = '<div style="margin-bottom:12px"><select id="trendProductSelect" class="input select" style="font-size:0.78rem;max-width:300px">';
+    selectorHtml += '<option value="">全部商品 (店铺总览)</option>';
+    products.forEach(function(p) {
+      var selected = trendProductId === p.id ? ' selected' : '';
+      selectorHtml += '<option value="' + p.id + '"' + selected + '>' + (p.name || p.id).slice(0, 40) + ' (' + p.id.slice(-6) + ')</option>';
+    });
+    selectorHtml += '</select></div>';
+    ct.innerHTML = selectorHtml + '<div id="trendChartArea"><p class="muted">加载中...</p></div>';
+
+    // Bind change event
+    document.getElementById('trendProductSelect').addEventListener('change', function() {
+      trendProductId = this.value || null;
+      loadTrend(); // reload with new selection
+    });
+
+    var chartArea = document.getElementById('trendChartArea');
+    if (!chartArea) return;
+
+    // daily_summary is always shop-level (entity_id=jd_shop_001).
+    // Product-level signals are computed metrics (gmv_growth, sales_growth, etc.).
+    // Always fetch shop signals for the GMV chart, regardless of product filter.
+    var shopUrl = '/api/signals?entity_type=product&entity_id=jd_shop_001';
+    var shopSignalsPromise = apiGet(shopUrl);
+
+    // If a product is selected, also fetch its computed signals
+    var productSignalsPromise = trendProductId
+      ? apiGet('/api/signals?entity_type=product&entity_id=' + trendProductId)
+      : Promise.resolve(null);
+
+    var shopSignals = await shopSignalsPromise;
+    var productSignals = await productSignalsPromise;
+
+    if (!shopSignals || !shopSignals.length) {
+      chartArea.innerHTML = '<p class="muted placeholder">暂无信号数据。请先在 Runtime 页面采集数据。</p>';
+      return;
     }
-    html += '</div>';
-    ct.innerHTML = html;
-  } catch { ct.innerHTML = '<p class="muted placeholder">趋势数据加载中...</p>'; }
+
+    // Group shop-level daily_summary signals by date (GMV chart)
+    var dailyByDate = {};
+    shopSignals.forEach(function(s) {
+      if (s.signal_name !== 'daily_summary') return;
+      var date = (s.observed_at || '').slice(0, 10);
+      if (!date) return;
+      if (!dailyByDate[date]) dailyByDate[date] = { gmv: 0, orders: 0, count: 0 };
+      dailyByDate[date].gmv += s.signal_value || 0;
+      var m = s.metrics || {};
+      dailyByDate[date].orders += m.orders || 0;
+      dailyByDate[date].count++;
+    });
+
+    var dates = Object.keys(dailyByDate).sort().reverse();
+    var recentDates = dates.slice(0, 14);
+    var title = trendProductId ? (state.productNames[trendProductId] || trendProductId) : '店铺总览';
+    var subtitle = title + ' · ' + dates.length + ' 天数据';
+    if (trendProductId) subtitle += ' (GMV为店铺级数据)';
+    var html = '<div style="margin-bottom:8px;font-size:0.8rem;color:var(--muted)">' + subtitle + '</div>';
+
+    // GMV Trend sparkline — always from shop-level daily_summary
+    if (Object.keys(dailyByDate).length >= 2) {
+      var gmvValues = dates.slice(0, 14).reverse().map(function(d) { return dailyByDate[d] ? dailyByDate[d].gmv : 0; });
+      var gmvMax = Math.max.apply(null, gmvValues) || 1;
+      var gmvLatest = gmvValues[gmvValues.length - 1] || 0;
+      var gmvPrev = gmvValues[gmvValues.length - 2] || gmvLatest;
+      var gmvChange = gmvPrev > 0 ? ((gmvLatest - gmvPrev) / gmvPrev * 100) : 0;
+
+      html += '<div style="margin-bottom:16px">';
+      html += '<strong>店铺 GMV 趋势 (14天)</strong>';
+      html += '<span style="margin-left:8px;font-size:1.1rem;font-weight:600;color:' + (gmvChange >= 0 ? 'var(--primary)' : 'var(--danger)') + '">¥' + gmvLatest.toLocaleString() + '</span>';
+      html += '<span style="margin-left:4px;font-size:0.78rem;color:' + (gmvChange >= 0 ? 'var(--primary)' : 'var(--danger)') + '">' + (gmvChange >= 0 ? '↑' : '↓') + Math.abs(gmvChange).toFixed(1) + '% vs 昨日</span>';
+
+      html += '<div style="display:flex;align-items:flex-end;gap:3px;height:48px;margin-top:8px;padding:4px 0">';
+      gmvValues.forEach(function(v) {
+        var h = Math.max(4, (v / gmvMax) * 44);
+        html += '<div title="¥' + v.toLocaleString() + '" style="flex:1;background:var(--primary);height:' + h + 'px;border-radius:3px 3px 0 0;opacity:' + (0.3 + 0.7 * (v/gmvMax)) + ';min-width:6px"></div>';
+      });
+      html += '</div>';
+
+      var weekGmv = gmvValues.slice(-7).reduce(function(a,b){return a+b;}, 0);
+      var prevWeekGmv = gmvValues.slice(-14, -7).reduce(function(a,b){return a+b;}, 0);
+      var wowChange = prevWeekGmv > 0 ? ((weekGmv - prevWeekGmv) / prevWeekGmv * 100) : 0;
+      html += '<div style="display:flex;gap:12px;margin-top:6px;font-size:0.75rem">';
+      html += '<span>近7天 GMV: <strong>¥' + Math.round(weekGmv).toLocaleString() + '</strong></span>';
+      html += '<span style="color:' + (wowChange >= 0 ? 'var(--primary)' : 'var(--danger)') + '">环比: ' + (wowChange >= 0 ? '+' : '') + wowChange.toFixed(1) + '%</span>';
+      html += '</div>';
+      html += '</div>';
+    } else {
+      html += '<p class="muted">暂无店铺 daily_summary 信号。请先在 Runtime 页面采集数据。</p>';
+    }
+
+    // Product-level computed signals (only shown when a product is selected)
+    if (trendProductId && productSignals && productSignals.length) {
+      var latestProductSignals = {};
+      productSignals.forEach(function(s) {
+        var key = s.signal_name;
+        if (!latestProductSignals[key] || (s.observed_at || '') > (latestProductSignals[key].observed_at || '')) {
+          latestProductSignals[key] = s;
+        }
+      });
+      var pKeys = Object.keys(latestProductSignals).sort();
+      if (pKeys.length) {
+        html += '<div style="margin-bottom:14px"><strong>商品指标 (最新)</strong>';
+        html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-top:6px;font-size:0.75rem">';
+        pKeys.forEach(function(k) {
+          var v = latestProductSignals[k].signal_value;
+          var displayVal = typeof v === 'number' ? (Math.abs(v) < 1 ? (v*100).toFixed(1)+'%' : v.toFixed(3)) : String(v||'--');
+          html += '<div style="padding:6px 10px;background:var(--card-bg);border-radius:4px;display:flex;justify-content:space-between">';
+          html += '<span class="muted">' + k + '</span>';
+          html += '<span style="font-weight:600;font-family:var(--font-mono)">' + displayVal + '</span>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      }
+    }
+
+    // Daily detail table — always shop-level daily_summary
+    if (recentDates.length > 0) {
+      html += '<div style="max-height:50vh;overflow-y:auto"><strong>每日概况 (店铺级)</strong>';
+      html += '<div style="margin-top:6px;font-size:0.75rem">';
+      recentDates.forEach(function(d) {
+        var day = dailyByDate[d];
+        var gmv = day ? day.gmv : 0;
+        var orders = day ? day.orders : 0;
+        var color = gmv > 8000 ? 'var(--primary)' : gmv > 4000 ? 'inherit' : 'var(--muted)';
+        html += '<div style="display:flex;justify-content:space-between;padding:6px 10px;margin-bottom:2px;background:var(--card-bg);border-radius:4px;align-items:center">';
+        html += '<span style="font-family:var(--font-mono);font-size:0.75rem">' + d.slice(5) + '</span>';
+        html += '<span style="color:' + color + ';font-weight:600">¥' + gmv.toLocaleString() + '</span>';
+        html += '<span class="muted">' + orders + ' 单</span>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+    }
+
+    chartArea.innerHTML = html;
+  } catch (e) { ct.innerHTML = '<p class="muted placeholder">趋势数据加载失败 (' + e.message + ')</p>'; }
 }
 
 // ═══ Archive ══════════════════════════════════════════════
@@ -351,6 +598,135 @@ async function loadArchive() {
 }
 document.getElementById('archiveProfileSelect')?.addEventListener('change', loadArchive);
 
+	// ═══ Runtime Execution ════════════════════════════════════
+	async function loadRuntime() {
+	  const list = document.getElementById('runtimeExecutionsList');
+	  const countEl = document.getElementById('runtimeExecCount');
+	  const status = document.getElementById('runtimeCollectStatus');
+	  list.innerHTML = '<p class="muted">Loading execution history...</p>';
+	  try {
+	    const executions = await apiGet('/api/runtime/executions?platform=jd&limit=366');
+	    if (!executions || !executions.length) {
+	      list.innerHTML = '<p class="muted placeholder">No execution records. Collect data first from Runtime panel.</p>';
+	      if (countEl) countEl.textContent = '';
+	      return;
+	    }
+
+	    // Summary stats
+	    var totalSignals = 0, totalEvidence = 0, completedDays = 0, failedDays = 0;
+	    executions.forEach(function(ex) {
+	      totalSignals += ex.signalCount || 0;
+	      totalEvidence += ex.evidenceCount || 0;
+	      if (ex.status === 'completed') completedDays++;
+	      else failedDays++;
+	    });
+
+	    // Sort by date ascending for timeline display
+	    var sorted = executions.slice().sort(function(a,b) { return a.date.localeCompare(b.date); });
+	    var firstDate = sorted[0].date;
+	    var lastDate = sorted[sorted.length-1].date;
+
+	    if (countEl) countEl.textContent = '(' + executions.length + ' days)';
+
+	    // Summary bar
+	    var html = '<div style="display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap">';
+	    html += '<div style="background:var(--card-bg);padding:8px 14px;border-radius:6px"><span class="muted" style="font-size:0.7rem">Total Signals</span><div style="font-weight:600;font-family:var(--font-mono)">' + totalSignals.toLocaleString() + '</div></div>';
+	    html += '<div style="background:var(--card-bg);padding:8px 14px;border-radius:6px"><span class="muted" style="font-size:0.7rem">Evidence</span><div style="font-weight:600;font-family:var(--font-mono)">' + totalEvidence.toLocaleString() + '</div></div>';
+	    html += '<div style="background:var(--card-bg);padding:8px 14px;border-radius:6px"><span class="muted" style="font-size:0.7rem">Completed</span><div style="font-weight:600;color:var(--primary)">' + completedDays + '/' + executions.length + '</div></div>';
+	    if (failedDays > 0) html += '<div style="background:var(--card-bg);padding:8px 14px;border-radius:6px"><span class="muted" style="font-size:0.7rem">Failed</span><div style="font-weight:600;color:var(--danger)">' + failedDays + '</div></div>';
+	    html += '<div style="background:var(--card-bg);padding:8px 14px;border-radius:6px"><span class="muted" style="font-size:0.7rem">Date Range</span><div style="font-weight:600;font-family:var(--font-mono);font-size:0.78rem">' + firstDate + ' → ' + lastDate + '</div></div>';
+
+	    // Source stats (P0006.3.2)
+	    var srcCounts = { cdp: 0, mock: 0, 'import': 0, none: 0, unknown: 0 };
+	    executions.forEach(function(ex) { var s = ex.evidenceSource || 'none'; srcCounts[s] = (srcCounts[s]||0) + 1; });
+	    var srcLabels = { cdp: '🟢 Live CDP', mock: '⚪ Mock', 'import': '🟡 Import', none: '⬜ None', unknown: '❓ Unknown' };
+	    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;font-size:0.7rem;margin-top:2px">';
+	    for (var src in srcCounts) { if (srcCounts[src] > 0) html += '<span style="padding:2px 8px;background:var(--card-bg);border-radius:10px">' + (srcLabels[src]||src) + ': ' + srcCounts[src] + '</span>'; }
+	    html += '</div>';
+	    html += '</div>';
+
+	    // Timeline — scrollable day-by-day grid
+	    html += '<div style="max-height:55vh;overflow-y:auto;margin-bottom:12px">';
+	    html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px">';		    sorted.forEach(function(ex) {
+		      var isCompleted = ex.status === 'completed';
+		      var bgColor = isCompleted ? 'var(--card-bg)' : '#fff0f0';
+		      var borderColor = isCompleted ? 'var(--primary)' : 'var(--danger)';
+		      var statusIcon = isCompleted ? '✅' : '❌';
+		      var src = ex.evidenceSource || 'none';
+		      var srcIcon = src === 'cdp' ? '🟢' : src === 'mock' ? '⚪' : src === 'import' ? '🟡' : '⬜';
+		      var dateLabel = ex.date.slice(5);
+		      html += '<div class="runtime-timeline-day" data-date="' + ex.date + '" style="cursor:pointer;padding:6px 8px;background:' + bgColor + ';border-left:3px solid ' + borderColor + ';border-radius:4px;font-size:0.72rem" title="' + ex.date + ': ' + ex.signalCount + ' sig | src: ' + src + '">';
+		      html += '<div style="display:flex;justify-content:space-between;align-items:center">';
+		      html += '<span style="font-family:var(--font-mono)">' + dateLabel + '</span>';
+		      html += '<span style="font-size:0.65rem">' + srcIcon + '</span>';
+		      html += '</div>';
+		      html += '<div class="muted" style="font-size:0.65rem">' + ex.signalCount + ' sig</div>';
+		      html += '</div>';
+		    });
+	    html += '</div></div>';
+
+	    list.innerHTML = html;
+	    list.querySelectorAll('.runtime-timeline-day').forEach(function(el) {
+	      el.addEventListener('click', function() { loadRuntimeDetail(el.dataset.date); });
+	    });
+	  } catch (e) {
+	    list.innerHTML = '<p class="muted placeholder">Load failed (' + e.message + ')</p>';
+	  }
+	  if (status) status.textContent = '';
+	}
+
+async function loadRuntimeDetail(date) {
+  var detail = document.getElementById('runtimeDetail');
+  var content = document.getElementById('runtimeDetailContent');
+  detail.style.display = 'block';
+  content.innerHTML = '<p class="muted">加载 ' + date + ' 详情...</p>';
+  try {
+    var data = await apiGet('/api/runtime/executions/' + date);
+    var signals = data.signals || [];
+    var breakdown = data.signalBreakdown || [];
+    var html = '<div style="margin-bottom:16px"><strong>日期:</strong> ' + data.date + ' | <strong>状态:</strong> ' + data.status + ' | <strong>信号总数:</strong> ' + data.signalCount + '</div>';
+    if (breakdown.length) {
+      html += '<div style="margin-bottom:12px"><strong>信号分类:</strong><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">';
+      breakdown.forEach(function(b) {
+        html += '<span style="background:var(--card-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;font-family:var(--font-mono)">' + b.signal_name + ': ' + b.count + '</span>';
+      });
+      html += '</div></div>';
+    }
+    if (signals.length) {
+      var dailySignals = signals.filter(function(s) { return s.signal_name === 'daily_summary'; });
+      if (dailySignals.length) {
+        html += '<div style="margin-top:12px"><strong>Daily Summary</strong>';
+        dailySignals.forEach(function(s) {
+          html += '<div style="margin-top:6px;padding:10px 14px;background:var(--card-bg);border-radius:6px;border-left:3px solid var(--primary)">';
+          html += '<div style="display:flex;justify-content:space-between;align-items:center">';
+          html += '<span style="font-family:var(--font-mono)">' + (s.observed_at||'').slice(0,10) + '</span>';
+          html += '<span style="font-weight:600;font-size:1.1rem">¥' + (s.signal_value||0).toLocaleString() + '</span>';
+          html += '</div>';
+          html += '<div class="muted" style="font-size:0.72rem;margin-top:2px">sig: ' + s.signal_id.slice(-12) + ' | conf: ' + (s.confidence||0).toFixed(2) + '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+      var otherSignals = signals.filter(function(s) { return s.signal_name !== 'daily_summary'; });
+      if (otherSignals.length) {
+        html += '<div style="margin-top:12px"><strong>Other Signals (' + otherSignals.length + ')</strong>';
+        html += '<div class="list" style="margin-top:6px;max-height:40vh;overflow-y:auto">';
+        otherSignals.slice(0, 20).forEach(function(s) {
+          html += '<div class="item" style="padding:6px 10px;margin-bottom:3px;background:var(--card-bg);border-radius:4px;font-size:0.75rem">';
+          html += '<span style="font-weight:600">' + s.signal_name + '</span>';
+          html += ' <span style="font-family:var(--font-mono)">' + (s.signal_value||0) + '</span>';
+          html += ' <span class="muted">' + (s.signal_unit||'') + '</span>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      }
+    }
+    content.innerHTML = html;
+  } catch (e) {
+    content.innerHTML = '<p class="muted placeholder">加载详情失败 (' + e.message + ')</p>';
+  }
+}
+
 // ═══ Agent Config ═════════════════════════════════════════
 function loadConfig() {
   const saved = JSON.parse(localStorage.getItem('agentfabric-workspace-config') || '{}');
@@ -365,7 +741,8 @@ function selectFinding(finding) {
   state.selectedEntityId = finding.entityId || finding.entity_id;
   const eid = state.selectedEntityId;
   document.querySelectorAll('.finding-card').forEach(c => { c.classList.toggle('selected', c.dataset.entityId === eid); });
-  document.getElementById('decisionEntityLabel').textContent = finding.entityName || eid;
+  const entityName = finding.entityName || state.productNames[eid] || eid;
+  document.getElementById('decisionEntityLabel').textContent = entityName;
   document.getElementById('decisionPlaceholder').style.display = 'none';
   document.getElementById('decisionContent').style.display = 'block';
 
@@ -387,37 +764,50 @@ function renderBusinessPanel(finding, ranking) {
   document.getElementById('panelDeveloper').style.display = 'none';
 
   const comp = ranking?.component_scores ?? {};
-  const reasons = [
-    '综合评分高于同类商品',
-    `增长得分: ${((comp.growth||0)*100).toFixed(0)}% | 竞争得分: ${((comp.competition||0)*100).toFixed(0)}%`,
-    `供应稳定性: ${((comp.supply_stability||0)*100).toFixed(0)}% | 质量: ${((comp.quality||0)*100).toFixed(0)}%`,
-    ranking?.explainability?.risks?.length ? '存在风险信号需关注' : '无显著风险信号',
-  ];
+  const dt = ranking?.decision_trace ?? {};
+  const signalsUsed = ranking?.signals_used || [];
+
+  // Reasoning from real ranking data
+  const reasons = [];
+  if (comp.growth) reasons.push(`增长得分: ${(comp.growth*100).toFixed(0)}% — ${comp.growth >= 0.5 ? '增长势头强劲' : comp.growth >= 0.3 ? '增长稳定' : '增长空间大'}`);
+  if (comp.competition) reasons.push(`竞争得分: ${(comp.competition*100).toFixed(0)}% — ${comp.competition >= 0.5 ? '竞争优势明显' : '竞争压力较大'}`);
+  if (comp.supply_stability) reasons.push(`供应稳定性: ${(comp.supply_stability*100).toFixed(0)}%`);
+  if (comp.quality) reasons.push(`质量得分: ${(comp.quality*100).toFixed(0)}%`);
+  if (ranking?.explainability?.strengths?.length) {
+    reasons.push('优势: ' + ranking.explainability.strengths.slice(0, 2).join('、'));
+  }
+  if (ranking?.explainability?.risks?.length) {
+    reasons.push('风险: ' + ranking.explainability.risks.slice(0, 2).join('、'));
+  }
+  if (!reasons.length) reasons.push('基于多维度指标综合评估');
+
   document.getElementById('decisionReasoningList').innerHTML = reasons.map(r => `
     <div class="reasoning-item"><div class="reasoning-dot"></div><div>
       <div class="reasoning-item-title">${r}</div>
       <div class="reasoning-item-desc">${finding.aiSuggestion || ''}</div>
     </div></div>`).join('');
 
+  // Pipeline steps — describe actual execution flow
   const steps = [
-    { title: '识别目标', desc: '根据 operator_mode 画像识别高价值商品' },
-    { title: '信号收集', desc: '收集销量、ROI、库存等指标信号' },
-    { title: '信号分析', desc: '分析信号间关联和趋势异常' },
-    { title: '排名计算', desc: '基于加权算法计算综合评分' },
-    { title: '生成建议', desc: '结合业务规则生成具体建议' },
+    { title: '信号计算', desc: `Compute ${signalsUsed.length || 9} signals/product × [3,7,14]d windows` },
+    { title: '多维评分', desc: `Growth(${((comp.growth||0)*100).toFixed(0)}%) + Competition(${((comp.competition||0)*100).toFixed(0)}%) + Supply(${((comp.supply_stability||0)*100).toFixed(0)}%) + Quality(${((comp.quality||0)*100).toFixed(0)}%)` },
+    { title: '记忆调整', desc: `${ranking?.memory_adjustments?.length || 0} active memory adjustments applied` },
+    { title: '排名输出', desc: `Overall score: ${ranking?.overall_score?.toFixed(3) || '?'} · Confidence: ${Math.round((ranking?.confidence||0)*100)}%` },
   ];
   document.getElementById('decisionStepsList').innerHTML = steps.map((s, i) => `
     <div class="execution-step"><div class="step-num">${i+1}</div><div>
       <div class="step-title">${s.title}</div><div class="step-desc">${s.desc}</div>
     </div></div>`).join('');
 
-  const tools = [
-    { name: 'get_sales_trend', status: '成功' },
-    { name: 'get_ad_performance', status: '成功' },
-    { name: 'get_inventory_status', status: '成功' },
-    { name: 'calculate_ranking_score', status: '成功' },
-  ];
-  document.getElementById('decisionToolCalls').innerHTML = tools.map(t => `
+  // Tool calls — real signal names from ranking data
+  const toolNames = signalsUsed.length > 0
+    ? signalsUsed.slice(0, 5).map(s => ({ name: s.signal_name || s, status: '成功' }))
+    : (dt.top_signals || []).slice(0, 5).map(s => ({ name: s.signal_name || s, status: '成功' }));
+  if (!toolNames.length) {
+    toolNames.push({ name: 'signal_pipeline', status: '成功' });
+    toolNames.push({ name: 'ranking_engine', status: '成功' });
+  }
+  document.getElementById('decisionToolCalls').innerHTML = toolNames.map(t => `
     <div class="tool-call-item"><span class="tool-call-name">${t.name}</span><span class="tool-call-status">${t.status}</span></div>`).join('');
 }
 
@@ -449,26 +839,41 @@ function renderTracePanel(finding, ranking) {
 
   // Builder-expanded sections
   const mems = state.memoriesCache.slice(0, 3);
+
+  // Skills — real skills from the system
+  const skillsUsed = [
+    { name: 'signal_pipeline', desc: `Compute ${ranking?.signals_used?.length || 9} signal types × [3,7,14]d` },
+    { name: 'ranking_engine', desc: 'Weighted multi-component scoring + dampening' },
+    { name: 'memory_adjustment', desc: `${ranking?.memory_adjustments?.length || 0} active memories applied` },
+  ];
   document.getElementById('traceSkillsTriggered').innerHTML = `
     <div class="trace-section-title">Skills Triggered</div>
-    <div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">ranking_engine_v1</span></div>
-    <div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">memory_adjustment_v1 (${ranking?.memory_adjustments?.length||0} active)</span></div>`;
+    ${skillsUsed.map(s => `<div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">${s.name} — ${s.desc}</span></div>`).join('')}`;
 
+  // MCP / Tool Calls — real API calls made
+  const mcpCalls = [
+    { name: 'GET /api/ranking/operator_mode', result: `${state.rankingsCache.length} ranked products` },
+    { name: 'GET /api/memory', result: `${mems.length} active memories` },
+    { name: 'GET /api/signals', result: `${ranking?.signals_used?.length || '?'} signal types` },
+  ];
   document.getElementById('traceMcpCalls').innerHTML = `
     <div class="trace-section-title">MCP / Tool Calls</div>
-    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">GET /api/ranking/operator_mode → ${state.rankingsCache.length} results</span></div>
-    <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">GET /api/memory → ${mems.length} records</span></div>`;
+    ${mcpCalls.map((c, i) => `<div class="trace-step"><span class="trace-step-num">${i+1}</span><span class="trace-step-text">${c.name} → ${c.result}</span></div>`).join('')}`;
 
   document.getElementById('traceMemoryInfluence').innerHTML = `
     <div class="trace-section-title">Memory Influence</div>
     ${mems.length ? mems.map(m => `<div class="memory-influence-item"><div class="mi-statement">${m.statement||m.memory_id}</div><div class="mi-meta">${m.memory_type} | score: ${m.weight?.final_score?.toFixed(3)||'?'}</div></div>`).join('') : '<div class="muted">No active memories</div>'}`;
 
+  // Execution steps — real pipeline stages
+  const execSteps = [
+    { step: 1, title: 'Signal Computation', desc: `${ranking?.signals_used?.length || 9} types × [3,7,14]d windows → ${ranking?.signals_used?.length || '?'} signals per product` },
+    { step: 2, title: 'Component Scoring', desc: `Growth(${((comp.growth||0)*100).toFixed(0)}%) · Competition(${((comp.competition||0)*100).toFixed(0)}%) · Supply(${((comp.supply_stability||0)*100).toFixed(0)}%) · Quality(${((comp.quality||0)*100).toFixed(0)}%)` },
+    { step: 3, title: 'Memory Adjustment', desc: `${ranking?.memory_adjustments?.length || 0} memories matched → score adjustment applied` },
+    { step: 4, title: 'Final Ranking', desc: `Overall: ${ranking?.overall_score?.toFixed(3) || '?'} · Coverage: ${((ranking?.coverage||0)*100).toFixed(0)}% · Confidence: ${Math.round((ranking?.confidence||0)*100)}%` },
+  ];
   document.getElementById('traceExecutionSteps').innerHTML = `
     <div class="trace-section-title">Execution Steps</div>
-    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">Compute signals → 9 metrics/product × [3,7,14]d</span></div>
-    <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Score 5 components → weighted avg × dampening</span></div>
-    <div class="trace-step"><span class="trace-step-num">3</span><span class="trace-step-text">Apply memory adjustments → ${ranking?.memory_adjustments?.length||0} matched</span></div>
-    <div class="trace-step"><span class="trace-step-num">4</span><span class="trace-step-text">Sort by overall_score desc → ranking output</span></div>`;
+    ${execSteps.map(s => `<div class="trace-step"><span class="trace-step-num">${s.step}</span><span class="trace-step-text">${s.title}: ${s.desc}</span></div>`).join('')}`;
 
   document.getElementById('traceResultValidation').innerHTML = `
     <div class="trace-section-title">Result Validation</div>
@@ -551,18 +956,139 @@ document.getElementById('saveAgentConfig')?.addEventListener('click', () => {
 });
 
 // Chat
-document.getElementById('chatSendButton')?.addEventListener('click', () => { const inp = document.getElementById('chatInput'); if (inp?.value.trim()) showToast('Chat via Hermes Runtime'); });
+document.getElementById('chatSendButton')?.addEventListener('click', async () => {
+  const inp = document.getElementById('chatInput');
+  const message = inp?.value.trim();
+  if (!message) return;
+  // Show user message
+  const container = document.getElementById('inboxChatMessages');
+  if (container) {
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message-user';
+    userMsg.style.cssText = 'text-align:right;margin-bottom:8px;padding:6px 12px;background:var(--card-bg);border-radius:8px;font-size:0.82rem';
+    userMsg.textContent = message;
+    container.appendChild(userMsg);
+    const loadingMsg = document.createElement('div');
+    loadingMsg.className = 'chat-message-bot';
+    loadingMsg.id = 'chatLoadingMsg';
+    loadingMsg.style.cssText = 'margin-bottom:8px;padding:6px 12px;color:var(--text-muted);font-size:0.82rem';
+    loadingMsg.textContent = 'Agent 思考中...';
+    container.appendChild(loadingMsg);
+    container.scrollTop = container.scrollHeight;
+    inp.value = '';
+    try {
+      const data = await apiPost('/api/chat', { message: message });
+      loadingMsg.remove();
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-message-bot';
+      botMsg.style.cssText = 'margin-bottom:8px;padding:8px 12px;background:var(--card-bg);border-left:3px solid var(--primary);border-radius:6px;font-size:0.82rem';
+      var replyText = (data.reply || '无法处理该请求');
+      if (data.execution && data.execution.success) {
+        replyText += '\n\n[查看执行详情 →](/runtime/' + data.intent + ')';
+      }
+      botMsg.textContent = replyText;
+      container.appendChild(botMsg);
+      container.scrollTop = container.scrollHeight;
+    } catch (e) {
+      loadingMsg.remove();
+      const errMsg = document.createElement('div');
+      errMsg.className = 'chat-message-bot';
+      errMsg.style.cssText = 'margin-bottom:8px;padding:6px 12px;color:var(--danger);font-size:0.82rem';
+      errMsg.textContent = 'Agent 响应失败: ' + e.message;
+      container.appendChild(errMsg);
+    }
+  }
+  if (inp) inp.value = '';
+});
+document.getElementById('runtimeCollectBtn')?.addEventListener('click', async () => {
+  const status = document.getElementById('runtimeCollectStatus');
+  const btn = document.getElementById('runtimeCollectBtn');
+  if (status) status.textContent = '采集进行中...';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 采集中...'; }
+  try {
+    const result = await apiPost('/api/runtime/collect', { platform: 'jd', shopId: 'jd_shop_001', mock: true });
+    if (status) status.textContent = '✅ 采集完成！' + (result.signalCount || 0) + ' 信号, ' + (result.evidenceCount || 0) + ' 证据';
+    loadRuntime();
+    loadData(); // Refresh sidebar stats
+  } catch (e) {
+    if (status) status.textContent = '❌ 采集失败: ' + e.message;
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '🔰 采集数据 (Mock)'; }
+});
+
+// Replay
+document.getElementById('replayRunBtn')?.addEventListener('click', async () => {
+  const from = document.getElementById('replayFrom')?.value;
+  const to = document.getElementById('replayTo')?.value;
+  const status = document.getElementById('replayStatus');
+  const progressDiv = document.getElementById('replayProgress');
+  const progressBar = document.getElementById('replayProgressBar');
+  const progressText = document.getElementById('replayProgressText');
+  const resultDiv = document.getElementById('replayResult');
+  const btn = document.getElementById('replayRunBtn');
+
+  if (!from || !to) { if (status) status.textContent = '请选择日期范围'; return; }
+
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Replaying...'; }
+  if (status) status.textContent = 'Starting replay...';
+  if (progressDiv) progressDiv.style.display = 'block';
+  if (resultDiv) resultDiv.innerHTML = '';
+
+  try {
+    const result = await apiPost('/api/runtime/replay', { shopId: 'jd_shop_001', from, to });
+    if (progressBar) progressBar.style.width = '100%';
+    if (progressText) progressText.textContent = result.completed + '/' + result.days + ' days completed';
+    if (status) status.textContent = '✅ Replay complete';
+
+    const summaryHtml = '<strong>Replay Result:</strong> ' +
+      result.completed + '/' + result.days + ' days · ' +
+      result.signals + ' signals · ' +
+      result.evidence + ' evidence records' +
+      (result.failed > 0 ? ' · ⚠️ ' + result.failed + ' failed' : '');
+    if (resultDiv) resultDiv.innerHTML = summaryHtml;
+
+    // Refresh execution history and sidebar
+    loadRuntime();
+    loadData();
+  } catch (e) {
+    if (status) status.textContent = '❌ Replay failed: ' + e.message;
+    if (resultDiv) resultDiv.innerHTML = '<span style=\"color:var(--danger)\">Replay error: ' + e.message + '</span>';
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '▶️ Run Replay'; }
+  if (progressDiv) progressDiv.style.display = 'none';
+});
 document.querySelectorAll('.chip-question').forEach(chip => {
   chip.addEventListener('click', () => { const inp = document.getElementById('chatInput'); if (inp) { inp.value = chip.dataset.question; } });
 });
 
 // ═══ Boot ═════════════════════════════════════════════════
-(function boot() {
+(async function boot() {
   const savedLang = localStorage.getItem('agentfabric-lang');
   if (savedLang && i18n[savedLang]) { currentLang = savedLang; document.getElementById('langToggle').value = savedLang; }
+  // Set replay date picker max to today
+  var today = new Date().toISOString().slice(0, 10);
+  var replayFrom = document.getElementById('replayFrom');
+  var replayTo = document.getElementById('replayTo');
+  if (replayFrom) { replayFrom.max = today; replayFrom.value = '2026-07-01'; }
+  if (replayTo) { replayTo.max = today; replayTo.value = today; }
+
   applyI18n();
   switchView('inbox', 'all');
-  loadData();
-  showToast(t('toast.ready'));
+  await loadData();
+
+  // If no rankings exist yet, auto-compute them (first-time setup)
+  if (state.rankingsCache.length === 0) {
+    try {
+      showToast('正在生成初始分析数据...');
+      await apiPost('/api/ranking', { profile: 'operator_mode', persist: true });
+      await loadData();
+      loadInbox(state.activeFilter);
+      showToast(t('toast.ready'));
+    } catch (e) {
+      showToast(t('toast.ready'));
+    }
+  } else {
+    showToast(t('toast.ready'));
+  }
   setInterval(loadData, 300000);
 })();

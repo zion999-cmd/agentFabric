@@ -1,0 +1,161 @@
+[
+  {
+    "url": "https://szgateway.jd.com/sz/api/announcement/getAnnouncement.ajax",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTaKt7gOire4Dx54Ct7qXmJfY1R8=",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe"
+    },
+    "size": 301,
+    "timestamp": "2026-06-30T14:53:59.150942+00:00",
+    "body_hash": "1633eae56ec090b1",
+    "body_preview": "{\"message\":\"success\",\"content\":{\"notice\":[{\"messageLink\":\"joyspace.jd.com/pages/HRx9rDqa7saLn2SIZpTR\",\"date\":\"2026-06-22 00:00\",\"menuCode\":\"system\",\"messageLinkWord\":\"查收活动白皮书\",\"message\":\"📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日，延续大促期系统推荐目标投产比，100%保收益。爆款持续拿量，好货继续起飞 🚀\",\"title\":\"【稳赚计划3.0】延期至7月20日\"}]},\"status\":0}"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/common/getMenuTreeData.ajax?menuCode=marketingtool&path=%2Fmarketweb%2Fsz%2Fview%2Fmarketing%2FmarketingOverview.html",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe"
+    },
+    "size": 45778,
+    "timestamp": "2026-06-30T14:53:59.158007+00:00",
+    "body_hash": "f539760cd721cdb6",
+    "body_preview": "{\"content\":{\"data\":[{\"code\":\"indexDetails\",\"auth\":true,\"level\":3,\"iconCssClass\":null,\"pid\":\"1\",\"isLeaf\":true,\"uri\":\"/szweb/sz/view/index/home.html\",\"cssClass\":\"i-report\",\"children\":[],\"name\":\"首页\",\"id\":\"119\",\"isVirtual\":false,\"order\":8,\"status\":1},{\"code\":\"rtInsights\",\"auth\":true,\"level\":1,\"iconCssClass\":null,\"pid\":\"1\",\"isLeaf\":false,\"uri\":null,\"cssClass\":\"first-menu-bgcolor-for-usual-page-rtInsights\",\"children\":[{\"code\":\"realStat\",\"auth\":true,\"level\":2,\"iconCssClass\":null,\"pid\":\"120\",\"isLeaf\":fa"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/announcement/getLocalAnnouncement.ajax?menuCode=marketingtoolSummary",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "content-length": "45",
+      "pfinder": "EAUfx54CqZ3mTZyt7gOcre4Dx54Cs7mYmJfY1R8=",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "text/html;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 45,
+    "timestamp": "2026-06-30T14:53:59.236128+00:00",
+    "body_hash": "e35f43864d8248f7",
+    "body_preview": "{\"message\":\"success\",\"content\":{},\"status\":0}"
+  },
+  {
+    "url": "https://szgateway.jd.com/sz/api/getPageInfo.ajax?menuCode=marketingtoolSummary&path=%2Fmarketweb%2Fsz%2Fview%2Fmarketing%2FmarketingOverview.html",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "pragma": "no-cache",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "unsafe-url",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTZit7gOYre4Dx54Cnv6XmJfY1R8=",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding",
+      "server": "jfe",
+      "content-language": "zh-CN"
+    },
+    "size": 1906,
+    "timestamp": "2026-06-30T14:53:59.237541+00:00",
+    "body_hash": "a77fd76aeb7a9110",
+    "body_preview": "{\"message\":\"success\",\"content\":{\"indexShopFlag\":false,\"START_TIME\":\"2025-05-26\",\"SHOP_ID\":\"11855009\",\"PAGE_QUARTER_TIME\":\"\",\"PAGE_CUSTOM_TIME\":\"\",\"HAS_CUSTOM_TIME\":false,\"TMPLOGIN\":\"0\",\"refundStartDate\":\"2023-10-07 10:00:00\",\"bcTag\":\"b\",\"PAGE_DAY182_TIME\":\"\",\"systemTime\":1782831239205,\"hasTimeExtendedModule\":false,\"isTimeSaleMenu\":true,\"PAGE_DAY_TIME\":\"2026-06-29\",\"PAGE_WEEK_TIME\":\"\",\"SHOP_TYPE\":\"0\",\"SERVER_TIME\":\"2026/06/30\",\"SHOW_TO_BRAND\":\"0\",\"activityEndDate\":\"2024-01-07 23:59:59\",\"PAGE_DAY9"
+  },
+  {
+    "url": "https://szgateway.jd.com/marketajax/biz/marketing/overview.ajax?skuOrSpu=1&cmpType=0&date=2026-06-29&startDate=2026-06-29&endDate=2026-06-29",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTaOt7gOjre4Dx54CstuomZfY1R8=",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 1446,
+    "timestamp": "2026-06-30T14:53:59.424491+00:00",
+    "body_hash": "72042803c9d96f83",
+    "body_preview": "{\"status\":0,\"message\":\"SUCCESS\",\"content\":[{\"code\":\"ordResult\",\"summaryItems\":[{\"total\":23,\"rate\":-0.041666666666666664,\"index\":\"partDealPins\",\"value\":23,\"industryAvgNo\":15},{\"total\":6,\"rate\":-0.4,\"index\":\"partDealGoodsnum\",\"value\":6,\"industryAvgNo\":6},{\"total\":29,\"rate\":-0.22580645161290322,\"index\":\"partDealGoodsqtty\",\"value\":24,\"industryAvgNo\":24},{\"total\":3545.580000000001,\"rate\":-0.37217369439688064,\"index\":\"partDealAmount\",\"value\":3545.5800000000004,\"industryAvgNo\":2537.3009552238836},{\"tot"
+  },
+  {
+    "url": "https://szgateway.jd.com/marketajax/biz/marketing/getMarketingTrend.ajax?skuOrSpu=1&cmpType=0&date=2026-06-29&startDate=2026-06-29&endDate=2026-06-29",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTZ6t7gOere4Dx54Cwu6omZfY1R8=",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 3059,
+    "timestamp": "2026-06-30T14:53:59.431915+00:00",
+    "body_hash": "a3c4ba256cb8e3ee",
+    "body_preview": "{\"status\":0,\"message\":\"SUCCESS\",\"content\":{\"categories\":[\"2026-05-31\",\"2026-06-01\",\"2026-06-02\",\"2026-06-03\",\"2026-06-04\",\"2026-06-05\",\"2026-06-06\",\"2026-06-07\",\"2026-06-08\",\"2026-06-09\",\"2026-06-10\",\"2026-06-11\",\"2026-06-12\",\"2026-06-13\",\"2026-06-14\",\"2026-06-15\",\"2026-06-16\",\"2026-06-17\",\"2026-06-18\",\"2026-06-19\",\"2026-06-20\",\"2026-06-21\",\"2026-06-22\",\"2026-06-23\",\"2026-06-24\",\"2026-06-25\",\"2026-06-26\",\"2026-06-27\",\"2026-06-28\",\"2026-06-29\"],\"series\":[{\"name\":\"partDealPins\",\"data\":[16,23,14,18"
+  },
+  {
+    "url": "https://szgateway.jd.com/marketajax/biz/marketing/getMarketingActivityList.ajax?skuOrSpu=1&startDate=2026-06-29&endDate=2026-06-29&date=2026-06-29&indicator=partDealGoodsqtty",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=86400",
+      "access-control-expose-headers": "Content-Disposition, Content-Type, Cache-Control",
+      "cache-control": "max-age=0",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "expires": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "access-control-allow-origin": "https://jdsz.jd.com",
+      "pfinder": "EAUfx54CqZ3mTZ2t7gOdre4Dx54Cxd6impfY1R8=",
+      "date": "Tue, 30 Jun 2026 14:53:59 GMT",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+      "server": "jfe"
+    },
+    "size": 1280,
+    "timestamp": "2026-06-30T14:53:59.618614+00:00",
+    "body_hash": "d7a1854f51c8a2ac",
+    "body_preview": "{\"status\":0,\"message\":\"SUCCESS\",\"content\":[{\"activityId\":\"32697574969\",\"name\":\"百亿补贴(含包邮)--祁门红茶官方旗舰店特级正宗2025新茶叶自己喝口粮茶送长辈父母家长特级祁红香螺300g\",\"saleMode\":\"POP\",\"subType\":\"1002\",\"type\":\"单品促销\",\"partDealGoodsqtty\":9},{\"activityId\":\"602599899\",\"name\":\"日常售卖1915\",\"saleMode\":\"POP\",\"subType\":\"2\",\"type\":\"商品券\",\"partDealGoodsqtty\":7},{\"activityId\":\"32702182945\",\"name\":\"红白品鉴包赠品促销\",\"saleMode\":\"POP\",\"subType\":\"2001\",\"type\":\"赠品促销\",\"partDealGoodsqtty\":2},{\"activityId\":\"33759089536\",\"name\":\"满2件赠礼袋\",\"saleMode\":\"POP\",\"sub"
+  }
+]

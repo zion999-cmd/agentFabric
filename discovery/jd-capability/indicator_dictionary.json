@@ -1,0 +1,86 @@
+{
+  "total_keys": 16,
+  "keys": {
+    "jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "jd_key": "jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "inferred_name": "fo traffic intr 订单 转化r 成交",
+      "verified": false
+    },
+    "jdr_sch_industry_deal_rate": {
+      "jd_key": "jdr_sch_industry_deal_rate",
+      "inferred_name": "industry 成交 rate",
+      "verified": false
+    },
+    "jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+      "jd_key": "jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "inferred_name": "search click page qtty search standard szIndex",
+      "verified": false
+    },
+    "jdr_sch_sku_main_pic_address": {
+      "jd_key": "jdr_sch_sku_main_pic_address",
+      "inferred_name": "SKU main pic address",
+      "verified": false
+    },
+    "jdr_sch_trade_cancel_refund_ord_amt": {
+      "jd_key": "jdr_sch_trade_cancel_refund_ord_amt",
+      "inferred_name": "交易 cancel refund 订单 金额",
+      "verified": false
+    },
+    "jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "inferred_name": "交易 成交 订单 金额 user 交易 成交 snapshot",
+      "verified": false
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "inferred_name": "交易 成交 订单 订单 金额 交易 成交 snapshot",
+      "verified": false
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+      "inferred_name": "交易 成交 订单 订单 qtty 交易 成交 snapshot",
+      "verified": false
+    },
+    "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "inferred_name": "交易 成交 订单 SKU qtty 交易 成交 snapshot",
+      "verified": false
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "jd_key": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "inferred_name": "traffic brow SKU  page cnt traffic plat item di bsg",
+      "verified": false
+    },
+    "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "jd_key": "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "inferred_name": "traffic brow SKU cnt jd unified attribution",
+      "verified": false
+    },
+    "jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+      "jd_key": "jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "inferred_name": "traffic brow SKU qtty jd unified attribution",
+      "verified": false
+    },
+    "jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "jd_key": "jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "inferred_name": "traffic cha last field src rmad 2",
+      "verified": false
+    },
+    "jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "jd_key": "jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "inferred_name": "traffic intr 订单 订单 金额 jd unified attribution 交易 成交 snapshot",
+      "verified": false
+    },
+    "jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "jd_key": "jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "inferred_name": "traffic intr 订单 订单 cnt jd unified attribution 交易 成交 snapshot",
+      "verified": false
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "jd_key": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "inferred_name": "user 成交 订单 user cnt user 成交 snapshot",
+      "verified": false
+    }
+  },
+  "extracted_at": "2026-06-30T14:57:01.398517+00:00"
+}

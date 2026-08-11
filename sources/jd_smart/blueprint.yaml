@@ -1,0 +1,637 @@
+$schema: https://agentfabric.dev/schemas/source-blueprint/v1
+source:
+  id: jd_smart
+  name: 京东商智
+  display_name: Jingdong Smart Business Intelligence
+  platform: jd
+  version: 1.0.0
+  discovered_at: '2026-07-12T00:00:00Z'
+  base_url: https://jdsz.jd.com
+  tech_stack:
+    framework: Vue.js (based on jmt-* component library)
+    ui_library: JD Internal Component Library (jmt-*)
+    charts:
+    - ECharts
+    - SVG charts
+    data_format: JSON API responses + DOM-rendered data
+    assets_base: https://storage.360buyimg.com/sz-resource/szweb/
+    api_endpoint: https://api.m.jd.com/
+  authentication:
+    method: Cookie-based (JD account login)
+    note: Requires active JD session; explorer connects via CDP
+  shop_info:
+    name: 祁门红茶旗舰店
+    shop_id: '11855009'
+    type: POP
+navigation:
+  top_level_menus:
+  - id: home
+    name: 首页
+    url: /szweb/view/index/home.html
+    has_data: true
+  - id: trade
+    name: 交易
+    url: /szweb/view/tradeAnalysis/tradeSummary.html
+    has_data: true
+  - id: product
+    name: 商品
+    url: /szweb/view/product/product360.html
+    has_data: true
+  - id: traffic
+    name: 流量
+    url: /szweb/view/flow/flow-summary.html
+    has_data: true
+  - id: customer
+    name: 用户
+    url: /szweb/view/customer/cust-summarys-temp.html
+    has_data: false
+    note: Opens as popup/modal
+  - id: marketing
+    name: 营销
+    url: /szweb/view/market/marketingtool-summary-temp.html
+    has_data: false
+    note: Opens as popup/modal
+  - id: service
+    name: 体验
+    url: /szweb/view/service/service-summary.html
+    has_data: true
+  - id: supply_chain
+    name: 供应链
+    url: /szweb/view/inventory/Inventory-health-temp.html
+    has_data: false
+    note: Opens as popup/modal
+  - id: industry
+    name: 市场
+    url: /szweb/view/industry/industrySummary.html
+    has_data: true
+  - id: reports
+    name: 报表
+    url: /szweb/view/reports-center/download-center.html
+    has_data: true
+  sub_menus:
+    trade:
+    - 交易概况
+    - 品牌构成
+    - 类目构成
+    - 渠道构成
+    product:
+    - 商品概况
+    - 动销SPU数趋势
+    - 热销商品榜
+    traffic:
+    - 流量概况
+    - 来源渠道
+    - 搜索-渠道分析
+    - 商品表现
+    customer:
+    - 用户概览
+    - 用户概况
+    - 用户洞察
+    - 人群列表
+    - 触达记录
+    - 用户分析
+    - 访客分析
+    - 未购访客分析
+    - 新老客分析
+    - 关注店铺用户分析
+    - 关注店铺用户概况
+    - 关注店铺用户特征
+    - 关注店铺用户质量
+    - Plus会员分析
+    - Plus会员概况
+    - 会员权益效果
+    - 品牌会员分析
+    - 会员概况
+    - 会员特征
+    - 用户增长运营
+    - 购物车营销
+    - 定向人群营销
+    - 效果定向
+    marketing:
+    - 促销工具分析
+    - 营销概览
+    - 工具效果
+    - 裂变优惠券
+    - 店铺礼包
+    - 搭配购
+    - 品牌购物卡
+    - 评价有礼
+    - 礼金促销
+    - 膨胀金搭售
+    - 活动分析
+    - 营销活动分析
+    - 活动对比
+    - 活动沉淀
+    - 大屏选择
+    - 实时大屏
+    - 频道活动分析
+    - 百亿补贴
+    - 京东拍卖概况
+    - 京东拍卖明细
+    - 便宜包邮分析
+    - 秒杀活动分析
+    - 国补核销数据
+    - 国补资金消耗
+    - 微信域排行榜分析
+    service:
+    - 服务概览
+    - 店铺星级
+    - 服务运营
+    - 售前
+    - 客服
+    supply_chain:
+    - 供应链分析
+    - 库存预警
+    - 布局诊断
+    - 入仓模拟
+    - 库存分析
+    - 库存诊断
+    - 配送分析
+    industry:
+    - 行业大盘
+    - 行业排行
+    - 品牌排行
+    reports:
+    - 下载中心
+    - 下载列表
+  discovered_sub_pages:
+  - parent: trade
+    name: 交易概况
+    url: /szweb/view/tradeAnalysis/tradeSummary.html
+  - parent: product
+    name: 商品概况
+    url: /szweb/view/product/product360.html
+  - parent: traffic
+    name: 流量概况
+    url: /szweb/view/flow/flow-summary.html
+  - parent: service
+    name: 服务概览
+    url: /szweb/view/service/service-summary.html
+  - parent: industry
+    name: 行业大盘
+    url: /szweb/view/industry/industrySummary.html
+  - parent: reports
+    name: 下载中心
+    url: /szweb/view/reports-center/download-center.html
+datasets:
+- id: ProductRanking
+  name: 热销商品排行榜
+  source_page: 首页
+  grain: sku_day
+  columns:
+  - 排名
+  - 商品信息
+  - 成交金额
+  - 访客数
+  - 成交转化率
+  row_count: 6
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: ChannelRanking
+  name: 渠道排行
+  source_page: 首页
+  grain: channel_day
+  columns:
+  - 排名
+  - 渠道名称
+  - 引入成交金额
+  - 引入商详访客数
+  - 访客-成交转化率
+  row_count: 1
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: ShopRanking
+  name: 店铺排行
+  source_page: 首页
+  grain: shop_day
+  columns:
+  - 排名
+  - 店铺
+  - 成交金额
+  - 访客数
+  - 成交单量
+  row_count: 1
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: SalesTarget
+  name: 销售目标对比
+  source_page: 首页
+  grain: month
+  columns:
+  - 月份
+  - 2025年销售额
+  - 2026年目标值
+  - 增长率
+  - 2026年销售额
+  row_count: 1
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: BrandComposition
+  name: 品牌构成
+  source_page: 交易
+  grain: brand_day
+  columns:
+  - 品牌
+  - 成交金额
+  - 成交金额占比
+  - 成交商品件数
+  - 成交单量
+  row_count: 3
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: SearchKeyword
+  name: 搜索关键词
+  source_page: 流量
+  grain: keyword_day
+  columns:
+  - 关键词
+  - 引入访客数
+  - 引入成交金额
+  row_count: 6
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: TrafficSource
+  name: 流量来源
+  source_page: 流量
+  grain: product_day
+  columns:
+  - 商品信息
+  - 引入访客数
+  - 引入成交金额
+  row_count: 6
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: ProductTrafficRanking
+  name: 商品流量排行
+  source_page: 流量
+  grain: product_day
+  columns:
+  - 排名
+  - 商品信息
+  - 商品访客数
+  - 商品访客数占比
+  - 成交金额
+  row_count: 9
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: BrandRanking
+  name: 品牌排行
+  source_page: 市场
+  grain: brand_day
+  columns:
+  - 排名
+  - 品牌名称
+  - 成交金额
+  - 成交单量
+  - 成交商品件数
+  row_count: 11
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+- id: ReportDownload
+  name: 报表下载列表
+  source_page: 报表
+  grain: report
+  columns:
+  - 文件名称
+  - 来源类型
+  - 创建时间
+  - 下载状态
+  - 操作
+  row_count: 2
+  parent_class: jmt-base-table-scroll-wrapper
+  table_class: jmt-base-table
+metrics_discovered:
+- name: 经营概览
+  page: 首页
+  class: hmt-scroll-value
+  contains_number: true
+- name: 实时销售累计
+  page: 首页
+  class: h2
+  contains_number: true
+- name: 店铺级别
+  page: 首页
+  class: h2
+  contains_number: true
+- name: 商品分析
+  page: 首页
+  class: h2
+  contains_number: true
+- name: 流量分析
+  page: 首页
+  class: h2
+  contains_number: true
+- name: 行竞分析
+  page: 首页
+  class: h2
+  contains_number: true
+- name: 趋势分析
+  page: 首页
+  class: h3
+  contains_number: true
+- name: 核心指标
+  page: 交易
+  class: h2
+  contains_number: true
+- name: 品牌构成
+  page: 交易
+  class: h2
+  contains_number: true
+- name: 类目构成
+  page: 交易
+  class: h2
+  contains_number: true
+- name: 渠道构成
+  page: 交易
+  class: h2
+  contains_number: true
+- name: 商品概况
+  page: 商品
+  class: h1
+  contains_number: true
+- name: 动销SPU数趋势
+  page: 商品
+  class: h3
+  contains_number: true
+- name: 热销商品榜
+  page: 商品
+  class: h2
+  contains_number: true
+- name: 流量概况
+  page: 流量
+  class: h1
+  contains_number: true
+- name: 来源渠道
+  page: 流量
+  class: h2
+  contains_number: true
+- name: 搜索-渠道分析
+  page: 流量
+  class: h4
+  contains_number: true
+- name: 商品表现
+  page: 流量
+  class: h2
+  contains_number: true
+- name: 服务概览
+  page: 体验
+  class: h1
+  contains_number: true
+- name: 店铺星级
+  page: 体验
+  class: h2
+  contains_number: true
+- name: 服务运营
+  page: 体验
+  class: h2
+  contains_number: true
+- name: 行业大盘
+  page: 市场
+  class: h1
+  contains_number: true
+- name: 下载中心
+  page: 报表
+  class: h1
+  contains_number: true
+dimensions_discovered:
+- name: 选择日期
+  type: date
+  page: 体验
+- name: 查询
+  type: button
+  page: 交易
+- name: 重置
+  type: button
+  page: 交易
+- name: 查询
+  type: button
+  page: 商品
+- name: 重置
+  type: button
+  page: 商品
+- name: 查询
+  type: button
+  page: 流量
+- name: 重置
+  type: button
+  page: 流量
+- name: 查询
+  type: button
+  page: 市场
+- name: 重置
+  type: button
+  page: 市场
+filters_discovered:
+- name: 日期筛选
+  type: date
+  pages:
+  - 体验
+- name: 查询/重置按钮
+  type: button_group
+  pages:
+  - 交易
+  - 商品
+  - 流量
+  - 市场
+acquisition:
+  strategy: hybrid
+  methods:
+  - type: cdp_browser
+    description: 通过 CDP 端口 9222 连接已有 Chrome 实例
+    reliable: true
+  - type: xhr_capture
+    description: 从浏览器 DevTools 捕获 XHR 响应
+    reliable: true
+  - type: csv_export
+    description: 使用内置 CSV 导出功能（需验证）
+    reliable: needs_verification
+  - type: dom_extraction
+    description: 从渲染后的 DOM 中提取表格和指标数据
+    reliable: true
+  recommended_frequency:
+    trade_summary: daily
+    product_performance: daily
+    traffic_source: daily
+    industry_trend: weekly
+    service_metrics: daily
+health:
+  status: discovering
+  pages_discovered: 10
+  pages_with_data: 7
+  pages_as_popup: 3
+  total_datasets: 10
+  total_metrics: 23
+  total_dimensions: 9
+  total_filters: 1
+  last_updated: '2026-07-12T00:00:00Z'
+  relationships_inferred: 24
+  presentation_files_generated: 5
+relationships:
+- type: metric_overlap
+  description: 成交金额出现在多个数据集
+  entities:
+  - ProductRanking
+  - ChannelRanking
+  - ShopRanking
+  - BrandComposition
+  - BrandRanking
+  shared_metric: 成交金额
+  confidence: 0.95
+- type: metric_overlap
+  description: 访客数出现在多个数据集
+  entities:
+  - ProductRanking
+  - ShopRanking
+  - SearchKeyword
+  - TrafficSource
+  - ProductTrafficRanking
+  shared_metric: 访客数
+  confidence: 0.9
+- type: metric_overlap
+  description: 引入成交金额与成交金额存在关联
+  entities:
+  - ChannelRanking
+  - SearchKeyword
+  - TrafficSource
+  shared_metric: 引入成交金额
+  confidence: 0.85
+- type: metric_overlap
+  description: 成交单量出现在多个数据集
+  entities:
+  - ShopRanking
+  - BrandComposition
+  - BrandRanking
+  shared_metric: 成交单量
+  confidence: 0.9
+- type: metric_overlap
+  description: 成交商品件数出现在多个数据集
+  entities:
+  - BrandComposition
+  - BrandRanking
+  shared_metric: 成交商品件数
+  confidence: 0.9
+- type: metric_overlap
+  description: 商品访客数与访客数存在关联
+  entities:
+  - ProductTrafficRanking
+  - ProductRanking
+  shared_metric: 商品访客数
+  confidence: 0.85
+- type: metric_overlap
+  description: 商品访客数占比与访客数存在关联
+  entities:
+  - ProductTrafficRanking
+  - ProductRanking
+  shared_metric: 商品访客数占比
+  confidence: 0.8
+- type: metric_overlap
+  description: 访客-成交转化率与成交转化率存在关联
+  entities:
+  - ChannelRanking
+  - ProductRanking
+  shared_metric: 转化率
+  confidence: 0.85
+- type: metric_overlap
+  description: 引入商详访客数与访客数存在关联
+  entities:
+  - ChannelRanking
+  - ProductRanking
+  shared_metric: 商详访客数
+  confidence: 0.8
+- type: hierarchy
+  description: 商品维度层级
+  entities:
+  - ProductRanking
+  - ProductTrafficRanking
+  entity_type: product
+  confidence: 0.9
+- type: hierarchy
+  description: 品牌维度层级
+  entities:
+  - BrandComposition
+  - BrandRanking
+  entity_type: brand
+  confidence: 0.9
+- type: hierarchy
+  description: 渠道维度层级
+  entities:
+  - ChannelRanking
+  - SearchKeyword
+  - TrafficSource
+  entity_type: channel
+  confidence: 0.85
+- type: hierarchy
+  description: 店铺维度层级
+  entities:
+  - ShopRanking
+  entity_type: shop
+  confidence: 0.95
+- type: hierarchy
+  description: 关键词维度层级
+  entities:
+  - SearchKeyword
+  entity_type: keyword
+  confidence: 0.9
+- type: cross_page_metric
+  description: 成交金额在首页、交易、商品、流量页面均有体现
+  entities:
+  - 首页
+  - 交易
+  - 商品
+  - 流量
+  shared_metric: 成交金额
+  confidence: 0.95
+- type: cross_page_metric
+  description: 访客数在首页、商品、流量页面均有体现
+  entities:
+  - 首页
+  - 商品
+  - 流量
+  shared_metric: 访客数
+  confidence: 0.9
+- type: cross_page_metric
+  description: 商品相关指标在商品和流量页面均有体现
+  entities:
+  - 商品
+  - 流量
+  shared_metric: 商品信息
+  confidence: 0.9
+- type: calculation_hypothesis
+  description: CTR = 点击数 / 曝光数
+  formula: ctr = clicks / impressions
+  confidence: 0.7
+  note: 需要验证
+- type: calculation_hypothesis
+  description: 转化率 = 成交单量 / 访客数
+  formula: cvr = orders / visitors
+  confidence: 0.75
+  note: 需要验证
+- type: calculation_hypothesis
+  description: 客单价 = 成交金额 / 成交单量
+  formula: aov = gmv / orders
+  confidence: 0.8
+  note: 需要验证
+- type: calculation_hypothesis
+  description: 增长率 = (本期 - 上期) / 上期
+  formula: growth_rate = (current - previous) / previous
+  confidence: 0.9
+  note: 标准公式
+- type: data_dependency
+  description: 商品表现依赖于商品信息和流量数据
+  entities:
+  - ProductTrafficRanking
+  - ProductRanking
+  - TrafficSource
+  confidence: 0.75
+- type: data_dependency
+  description: 品牌构成依赖于品牌和销售数据
+  entities:
+  - BrandComposition
+  - BrandRanking
+  confidence: 0.8
+- type: data_dependency
+  description: 搜索关键词依赖于流量来源数据
+  entities:
+  - SearchKeyword
+  - TrafficSource
+  confidence: 0.85

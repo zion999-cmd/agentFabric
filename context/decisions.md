@@ -1,5 +1,41 @@
 # 技术决策记录 (ADR)
 
+## ADR-027: P0006.2 Real Data Runtime Replay — Evidence Store Parsing Fix
+
+- **日期**: 2026-08-09
+- **状态**: Accepted
+- **决策**: `parseAcquiredData()` 在映射 endpoint→data type keys 时，将单对象包裹为数组 `[data]`，确保 evidence store 中 JD API envelope 格式的数据能被 parser 正确识别。
+
+### 问题
+
+Full 180-day replay (2026-01-01 ~ 2026-07-09) 执行成功 (190/190 days)，但 `parseAcquiredData()` 将 evidence store 的单对象数据传给 parser 时，`asArray()` 对非数组返回 `[]`，导致 parser 永远返回 `emptySummary()`。
+
+Evidence store 中每条数据都是单个 `{ header: { code:0 }, body: { data: [...] } }` 对象。`historical-acquire.ts` 将其返回为 `data[endpoint] = loaded.data`。`parseAcquiredData()` 将其映射到 `raw['summary'] = data`，但 parser 期望 `raw['summary']` 是数组。
+
+### 修复
+
+`runtime-executor.ts:parseAcquiredData()` — 在 endpoint→base key 映射时包裹非数组值: `const wrapped = Array.isArray(data) ? data : [data]`。
+
+### 验证
+
+- 修复前: 3 天 replay → 3 signals, 全部 `signal_value=0, metrics={}`
+- 修复后: 3 天 replay → 64 signals, `signal_value=¥12,351~¥14,229` (真实 CDP 采集数据)
+- Full replay: 190 天 → 3,489 signals, 570 evidence, 0 errors. `signal_value` 均为真实值
+
+### 已知限制
+
+`metrics` 字段（EnterpriseSignalPayload: gmv, orders, uv, cvr 等）未被 repository.toRow 持久化到 SQLite。Workspace 使用 `signal_value` 展示 GMV，功能正常。完整 metrics 持久化留待后续补齐。
+
+---
+
+## ADR-026: JD Persistence Layer — platform/storage/
+
+- **日期**: 2026-07-12
+- **状态**: Accepted
+- **决策**: JD 数据持久化层（jd-schema.ts + jd-persistence.ts）属于 platform/storage（基础设施层），不属于 connectors（业务执行层）。
+
+---
+
 ## ADR-025: Signal Observation Model — Three-Timeline Architecture (P0006.1.1)
 
 - **日期**: 2026-07-09

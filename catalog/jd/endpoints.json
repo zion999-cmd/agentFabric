@@ -1,0 +1,4020 @@
+{
+  "platform": "jd-sz",
+  "version": "0.2.0",
+  "generated_at": "2026-08-09",
+  "summary": {
+    "total_pages": 15,
+    "total_apis": 518,
+    "live_validated_pages": 1,
+    "live_data_pages": 5,
+    "capability_domains": {
+      "platform": 8,
+      "trade": 48,
+      "supply_chain": 10,
+      "product": 18,
+      "traffic": 20,
+      "customer": 20,
+      "marketing": 20
+    }
+  },
+  "capabilities": [
+    {
+      "capability": "platform.business",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "getCategory.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "getNewMenuTreeData.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_getNewMenuTreeData.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "getPageInfo.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_getPageInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "list.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_list.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "noOrderPrompt.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_noOrderPrompt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "platform.business",
+      "endpoint": "table.ajax",
+      "page": "业务专区",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/业务专区_table.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "platform_params"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "audienceInfo.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "commonParam.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "conversionEffect.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "dateRange.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "diagnosis.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "getCategory.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "trade.detail",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "交易-交易概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/交易-交易概况_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "refunds",
+          "revenue_per_customer"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "audienceInfo.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "commonParam.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "conversionEffect.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "dateRange.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "diagnosis.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "getCategory.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "supply_chain.inventory",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "供应链-库存预警",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/供应链-库存预警_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "stock_days",
+          "stockout_risk",
+          "turnover_rate",
+          "unsale_rate"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "audienceInfo.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "commonParam.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "conversionEffect.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "dateRange.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "diagnosis.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "getCategory.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "product.overview",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "商品-商品概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/商品-商品概况_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "sku_count",
+          "sku_gmv",
+          "sku_rank",
+          "inventory_turnover"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "audienceInfo.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "commonParam.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "conversionEffect.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "dateRange.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "diagnosis.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "getCategory.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.realtime",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "实时-实时总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/实时-实时总览_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "realtime_gmv",
+          "realtime_orders",
+          "realtime_visitors"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "audienceInfo.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "commonParam.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "conversionEffect.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "dateRange.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "diagnosis.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "getCategory.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "getDims.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_getDims.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "customer.overview",
+      "endpoint": "getMenuNotice.ajax",
+      "page": "客户-客户总览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/客户-客户总览_getMenuNotice.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "new_customers",
+          "repeat_customers",
+          "members",
+          "fans"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "getCategory.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "getNewMenuTreeData.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_getNewMenuTreeData.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "getPageInfo.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_getPageInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "list.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_list.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "noOrderPrompt.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_noOrderPrompt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "trade.report",
+      "endpoint": "table.ajax",
+      "page": "报表-我的报表",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/报表-我的报表_table.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "custom_report_data"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "commonParam.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getCategory.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getDims.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getDims.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getMenuNotice.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getMenuNotice.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getMenuTree.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getMenuTree.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getModelFunc.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getModelFunc.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getNewMenuTreeData.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getNewMenuTreeData.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.cart",
+      "endpoint": "getPageFooter.ajax",
+      "page": "揽客-购物车营销",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/揽客-购物车营销_getPageFooter.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "cart_abandon_rate",
+          "cart_recovery_rate"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "getCategory.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "getNewMenuTreeData.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_getNewMenuTreeData.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "getPageInfo.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_getPageInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "list.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_list.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "noOrderPrompt.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_noOrderPrompt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "product.selection",
+      "endpoint": "table.ajax",
+      "page": "智能工具-智能选品",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/智能工具-智能选品_table.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "product_recommendations",
+          "selection_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "audienceInfo.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "commonParam.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "conversionEffect.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "dateRange.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "diagnosis.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "getCategory.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "customer.service",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "服务-服务分析",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/服务-服务分析_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "response_rate",
+          "resolution_time",
+          "satisfaction_score"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "audienceInfo.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "commonParam.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "conversionEffect.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "dateRange.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "diagnosis.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "getCategory.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "traffic.overview",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "流量-流量概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/流量-流量概览_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "visitors",
+          "uv",
+          "pv",
+          "bounce_rate",
+          "avg_duration"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "commonParam.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getCategory.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getDims.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getDims.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getMenuNotice.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getMenuNotice.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getMenuTree.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getMenuTree.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getModelFunc.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getModelFunc.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getNewMenuTreeData.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getNewMenuTreeData.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "trade.competition",
+      "endpoint": "getPageFooter.ajax",
+      "page": "竞争-竞店概况",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/竞争-竞店概况_getPageFooter.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "pending",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "competitor_gmv",
+          "market_position",
+          "share_change"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "audienceInfo.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "commonParam.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "conversionEffect.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "dateRange.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "diagnosis.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "getCategory.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "marketing.overview",
+      "endpoint": "getDefaultDt.ajax",
+      "page": "营销-营销概览",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/营销-营销概览_getDefaultDt.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "ad_spend",
+          "roi",
+          "campaign_orders",
+          "cpa"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "commonParam.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getCategory.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getDims.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getDims.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getLocalAnnouncement.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getLocalAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getMenuNotice.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getMenuNotice.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getMenuTree.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getMenuTree.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getModelFunc.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getModelFunc.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getNewMenuTreeData.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getNewMenuTreeData.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.industry",
+      "endpoint": "getPageFooter.ajax",
+      "page": "行业-大盘动态",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/行业-大盘动态_getPageFooter.ajax_*.json"
+      },
+      "validation": {
+        "last_test": null,
+        "status": "live_data",
+        "sample_metrics": []
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "industry_rank",
+          "gmv_index",
+          "uv_index",
+          "market_share"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "audienceInfo.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_audienceInfo.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "commonParam.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_commonParam.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "conversionEffect.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_conversionEffect.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "dateRange.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_dateRange.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "diagnosis.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_diagnosis.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "emergency.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_emergency.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "getAlarmOverview.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_getAlarmOverview.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "getAlarmStockOut.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_getAlarmStockOut.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "getAnnouncement.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_getAnnouncement.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    },
+    {
+      "capability": "trade.overview",
+      "endpoint": "getCategory.ajax",
+      "page": "首页",
+      "source": {
+        "discovered_by": "cdp",
+        "discovered_at": "2026-06-30",
+        "evidence_path": "discovery/jd-capability/首页_getCategory.ajax_*.json"
+      },
+      "validation": {
+        "last_test": "2026-08-09",
+        "status": "verified",
+        "sample_metrics": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      },
+      "schema": {
+        "input_params": [
+          "startDate",
+          "endDate",
+          "dateType"
+        ],
+        "output_fields": [
+          "gmv",
+          "orders",
+          "visitors",
+          "customers",
+          "conversion_rate"
+        ]
+      }
+    }
+  ]
+}

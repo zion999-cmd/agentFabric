@@ -1,0 +1,2679 @@
+{
+  "source": "jd_smart",
+  "generated_at": "2026-07-12T00:00:00Z",
+  "pages": [
+    {
+      "name": "首页",
+      "url": "https://jdsz.jd.com/szweb/view/index/home.html",
+      "title": "首页",
+      "sections": [
+        {
+          "level": 1,
+          "text": "经营概览",
+          "tag": "H1",
+          "parent_text": "经营概览"
+        },
+        {
+          "level": 4,
+          "text": "热销商品",
+          "tag": "H4",
+          "parent_text": "热销商品"
+        },
+        {
+          "level": 2,
+          "text": "实时销售累计",
+          "tag": "H2",
+          "parent_text": "实时销售累计"
+        },
+        {
+          "level": 2,
+          "text": "店铺级别",
+          "tag": "H2",
+          "parent_text": "店铺级别"
+        },
+        {
+          "level": 2,
+          "text": "商品分析",
+          "tag": "H2",
+          "parent_text": "商品分析关注重点成交商品，提升流量、转化异常商品表现"
+        },
+        {
+          "level": 2,
+          "text": "流量分析",
+          "tag": "H2",
+          "parent_text": "流量分析关注重点成交渠道，提升流量、转化异常渠道表现"
+        },
+        {
+          "level": 2,
+          "text": "行竞分析",
+          "tag": "H2",
+          "parent_text": "行竞分析关注行业动向学习榜样，监控竞争对手降低生意抢夺"
+        },
+        {
+          "level": 1,
+          "text": "目标设置",
+          "tag": "H1",
+          "parent_text": "目标设置选择年份2026目标值请输入目标增长率请输入%2026年销售额-月份2025年销售额2026年目标值增长率2026年销售额目标完成率 暂无数据"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        }
+      ],
+      "metrics": [
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0 jmt-scroll-first-value",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-1",
+          "value": "1",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-2",
+          "value": "2",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-3",
+          "value": "3",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-4",
+          "value": "4",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-5 jmt-scroll-last-value",
+          "value": "5",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "jmt-scroll-value num num-0",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "score-value-number",
+          "value": "5.0",
+          "page": "首页"
+        },
+        {
+          "class": "score-compare-value",
+          "value": "持平",
+          "page": "首页"
+        },
+        {
+          "class": "value-text",
+          "value": "A+",
+          "page": "首页"
+        },
+        {
+          "class": "value-text",
+          "value": "67",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "4",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "1",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "2",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "3",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "tab-num",
+          "value": "0",
+          "page": "首页"
+        },
+        {
+          "class": "head-right-value",
+          "value": "-",
+          "page": "首页"
+        }
+      ],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "首页"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "首页"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "首页"
+        },
+        {
+          "text": "目标设置",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "商品诊断",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "首页"
+        },
+        {
+          "text": "渠道诊断",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "首页"
+        },
+        {
+          "text": "立即查看",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "立即查看",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "全部商品",
+          "class": "jmt-button jmt-button-css-1j5bcqu jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "成交TOP商品0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "流量下滑快4",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "转化率下滑快1",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "近7天上架2",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "关注商品3",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "全部渠道",
+          "class": "jmt-button jmt-button-css-1j5bcqu jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "流量TOP渠道0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "流量下滑快0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "转化率下滑快0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "关注渠道0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "行业数据",
+          "class": "jmt-button jmt-button-css-1j5bcqu jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "行业成交TOP店铺0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "行业成交TOP商品0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "行业热门搜索词TOP0",
+          "class": "jmt-button jmt-button-css-1yrqjmi jmtv2 jmt-button",
+          "page": "首页"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-qgy9ul jmtv2 jmt-button-",
+          "page": "首页"
+        },
+        {
+          "text": "取消",
+          "class": "jmt-button jmt-button-css-1cy79t7 jmtv2 jmt-button",
+          "page": "首页"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "首页"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "首页"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "首页"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "首页"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "首页"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "首页"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "首页"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "首页"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "首页"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "首页"
+        },
+        {
+          "text": "查看更多",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "首页"
+        },
+        {
+          "text": "详情",
+          "href": "https://jdsz.jd.com/szweb/view/product/productDetail.html",
+          "page": "首页"
+        },
+        {
+          "text": "详情",
+          "href": "https://jdsz.jd.com/szweb/view/service/shop-experience-score.html",
+          "page": "首页"
+        }
+      ]
+    },
+    {
+      "name": "交易",
+      "url": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+      "title": "交易概况",
+      "sections": [
+        {
+          "level": 1,
+          "text": "交易概况",
+          "tag": "H1",
+          "parent_text": "交易概况"
+        },
+        {
+          "level": 2,
+          "text": "核心指标",
+          "tag": "H2",
+          "parent_text": "核心指标"
+        },
+        {
+          "level": 2,
+          "text": "品牌构成",
+          "tag": "H2",
+          "parent_text": "品牌构成"
+        },
+        {
+          "level": 2,
+          "text": "类目构成",
+          "tag": "H2",
+          "parent_text": "类目构成"
+        },
+        {
+          "level": 2,
+          "text": "渠道构成",
+          "tag": "H2",
+          "parent_text": "渠道构成"
+        },
+        {
+          "level": 2,
+          "text": "地域构成",
+          "tag": "H2",
+          "parent_text": "地域构成"
+        },
+        {
+          "level": 2,
+          "text": "新老客构成",
+          "tag": "H2",
+          "parent_text": "新老客构成"
+        },
+        {
+          "level": 3,
+          "text": "指标配置",
+          "tag": "H3",
+          "parent_text": "指标配置"
+        },
+        {
+          "level": 3,
+          "text": "下载设置",
+          "tag": "H3",
+          "parent_text": "下载设置"
+        },
+        {
+          "level": 3,
+          "text": "操作成功",
+          "tag": "H3",
+          "parent_text": "操作成功"
+        },
+        {
+          "level": 3,
+          "text": "操作成功",
+          "tag": "H3",
+          "parent_text": "操作成功"
+        },
+        {
+          "level": 3,
+          "text": "操作成功",
+          "tag": "H3",
+          "parent_text": "操作成功"
+        },
+        {
+          "level": 3,
+          "text": "下载设置",
+          "tag": "H3",
+          "parent_text": "下载设置"
+        },
+        {
+          "level": 3,
+          "text": "操作成功",
+          "tag": "H3",
+          "parent_text": "操作成功"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        }
+      ],
+      "metrics": [
+        {
+          "class": "head-metric-value",
+          "value": "--",
+          "page": "交易"
+        }
+      ],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "查询",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "交易"
+        },
+        {
+          "text": "重置",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "指标配置",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "趋势",
+          "class": "jmt-button jmt-button-css-1mtky8r jmtv2 jmt-button",
+          "page": "交易"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "成交金额",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "成交商品件数",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "成交客户数",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "成交单量",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "店铺成交转化率",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "客单价",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "店铺浏览量",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "店铺访客数",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "店铺平均停留时长",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "加购客户数",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "加购商品件数",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "加购转化率",
+          "class": "jmt-sortable-item-wrapper jmt-sortable-item-wrappe",
+          "page": "交易"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "交易"
+        },
+        {
+          "text": "取消",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "交易"
+        },
+        {
+          "text": "取消",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "关闭",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "关闭",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "关闭",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "交易"
+        },
+        {
+          "text": "取消",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        },
+        {
+          "text": "关闭",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "交易"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "交易"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "交易"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "交易"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "交易"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "交易"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "交易"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "交易"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "交易"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "交易"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "交易"
+        },
+        {
+          "text": "交易概况",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "交易"
+        },
+        {
+          "text": "订单明细",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/orderDetails.html",
+          "page": "交易"
+        }
+      ]
+    },
+    {
+      "name": "商品",
+      "url": "https://jdsz.jd.com/szweb/view/product/product360.html",
+      "title": "商品概况",
+      "sections": [
+        {
+          "level": 1,
+          "text": "商品概况",
+          "tag": "H1",
+          "parent_text": "商品概况"
+        },
+        {
+          "level": 2,
+          "text": "核心指标",
+          "tag": "H2",
+          "parent_text": "核心指标"
+        },
+        {
+          "level": 3,
+          "text": "动销SPU数趋势",
+          "tag": "H3",
+          "parent_text": "动销SPU数趋势"
+        },
+        {
+          "level": 2,
+          "text": "热销商品榜",
+          "tag": "H2",
+          "parent_text": "热销商品榜"
+        },
+        {
+          "level": 3,
+          "text": "操作成功",
+          "tag": "H3",
+          "parent_text": "操作成功"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        }
+      ],
+      "metrics": [],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "查询",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "商品"
+        },
+        {
+          "text": "重置",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "趋势分析",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-",
+          "page": "商品"
+        },
+        {
+          "text": "关闭",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "商品"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "商品"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "商品"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "商品"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "商品"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "商品"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "商品"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "商品"
+        },
+        {
+          "text": "商品概况",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "商品"
+        },
+        {
+          "text": "商品明细",
+          "href": "https://jdsz.jd.com/szweb/view/product/productDetail.html",
+          "page": "商品"
+        },
+        {
+          "text": "异常商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/abnormal-product-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "类目分析",
+          "href": "https://jdsz.jd.com/szweb/view/product/category-analyze-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "属性分析",
+          "href": "https://jdsz.jd.com/szweb/view/product/attr-analyze-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "单品监控",
+          "href": "https://jdsz.jd.com/szweb/view/product/single-product-monitor-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "新品分析",
+          "href": "https://jdsz.jd.com/szweb/view/product/new-product-analysis-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "打标新品分析",
+          "href": "https://jdsz.jd.com/szweb/view/product/mark-new-product-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "预约商品分析",
+          "href": "https://jdsz.jd.com/szweb/view/product/order-product-temp.html",
+          "page": "商品"
+        },
+        {
+          "text": "预售商品分析",
+          "href": "https://jdsz.jd.com/szweb/view/product/presell-product-temp.html",
+          "page": "商品"
+        }
+      ]
+    },
+    {
+      "name": "流量",
+      "url": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+      "title": "流量概况",
+      "sections": [
+        {
+          "level": 1,
+          "text": "流量概况",
+          "tag": "H1",
+          "parent_text": "流量概况"
+        },
+        {
+          "level": 2,
+          "text": "核心指标",
+          "tag": "H2",
+          "parent_text": "核心指标"
+        },
+        {
+          "level": 2,
+          "text": "来源渠道",
+          "tag": "H2",
+          "parent_text": "来源渠道定位重点来源渠道流量及成交贡献"
+        },
+        {
+          "level": 4,
+          "text": "搜索-渠道分析",
+          "tag": "H4",
+          "parent_text": "搜索-渠道分析"
+        },
+        {
+          "level": 2,
+          "text": "商品表现",
+          "tag": "H2",
+          "parent_text": "商品表现定位核心商品流量及成交贡献"
+        },
+        {
+          "level": 3,
+          "text": "操作成功",
+          "tag": "H3",
+          "parent_text": "操作成功"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        }
+      ],
+      "metrics": [],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "查询",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "重置",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "下载数据",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "单品分析",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "一键推广",
+          "class": "jmt-button jmt-button-css-1vg4nn0 jmtv2 jmt-button",
+          "page": "流量"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-o19dba jmtv2 jmt-button-",
+          "page": "流量"
+        },
+        {
+          "text": "关闭",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "流量"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "流量"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "流量"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "流量"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "流量"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "流量"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "流量"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "流量"
+        },
+        {
+          "text": "流量概况",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "流量"
+        },
+        {
+          "text": "流量来源",
+          "href": "https://jdsz.jd.com/szweb/view/view-source/view-flow.html",
+          "page": "流量"
+        },
+        {
+          "text": "实时访客",
+          "href": "https://jdsz.jd.com/szweb/view/flow/real-uv-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "搜索流量运营",
+          "href": "https://jdsz.jd.com/squidweb/view/flow/searchOperationsCenter.html",
+          "page": "流量"
+        },
+        {
+          "text": "搜索数据概览",
+          "href": "https://jdsz.jd.com/squidweb/view/flow/searchOverview.html",
+          "page": "流量"
+        },
+        {
+          "text": "商品排名定位",
+          "href": "https://jdsz.jd.com/squidweb/view/flow/rankLocation.html",
+          "page": "流量"
+        },
+        {
+          "text": "实时搜索词",
+          "href": "https://jdsz.jd.com/szweb/view/flow/real-keyword-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "搜索词分析",
+          "href": "https://jdsz.jd.com/squidweb/view/flow/searchKeywordAnalysis.html",
+          "page": "流量"
+        },
+        {
+          "text": "推荐数据概况",
+          "href": "https://jdsz.jd.com/szweb/view/flow/recommend-summary-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "推荐诊断",
+          "href": "https://jdsz.jd.com/szweb/view/flow/recommend-diagnosis-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "视频效果",
+          "href": "https://jdsz.jd.com/szweb/view/flow/video-effect-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "广告概况",
+          "href": "https://jdsz.jd.com/szweb/view/market/advert-summary.html",
+          "page": "流量"
+        },
+        {
+          "text": "CPS联盟",
+          "href": "https://jdsz.jd.com/szweb/view/market/alliance-summary-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "共增营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/gzyx-temp.html",
+          "page": "流量"
+        },
+        {
+          "text": "查看全部渠道",
+          "href": "https://jdsz.jd.com/szweb/view/view-source/view-flow.html",
+          "page": "流量"
+        },
+        {
+          "text": "查看更多商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/productDetail.html",
+          "page": "流量"
+        }
+      ]
+    },
+    {
+      "name": "用户",
+      "url": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html?sz=%2Fszweb%2Fsz%2Fview%2Fgrowth%2Fsummary.html",
+      "title": "用户概况",
+      "sections": [],
+      "metrics": [],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "用户"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "用户"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "用户"
+        },
+        {
+          "text": "关闭",
+          "class": "message-close",
+          "page": "用户"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "用户"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "用户"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "用户"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "用户"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "用户"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "用户"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "用户"
+        },
+        {
+          "text": "用户概况",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "用户洞察",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cus-insight-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "人群列表",
+          "href": "https://jdsz.jd.com/szweb/view/customer/audience-list-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "触达记录",
+          "href": "https://jdsz.jd.com/szweb/view/customer/audience-reach-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "访客分析",
+          "href": "https://jdsz.jd.com/szweb/view/user/visitor-analysis-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "未购访客分析",
+          "href": "https://jdsz.jd.com/szweb/view/customer/customerpots-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "新老客分析",
+          "href": "https://jdsz.jd.com/szweb/view/customer/customer-ords-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "关注店铺用户概况",
+          "href": "https://jdsz.jd.com/szweb/view/customer/fans-summary-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "关注店铺用户特征",
+          "href": "https://jdsz.jd.com/szweb/view/customer/fans-feature-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "关注店铺用户质量",
+          "href": "https://jdsz.jd.com/szweb/view/customer/fans-quality-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "Plus会员概况",
+          "href": "https://jdsz.jd.com/szweb/view/user/plus-member-summary-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "会员权益效果",
+          "href": "https://jdsz.jd.com/szweb/view/user/member-benefits-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "会员概况",
+          "href": "https://jdsz.jd.com/szweb/view/customer/member-overview-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "会员特征",
+          "href": "https://jdsz.jd.com/szweb/view/customer/member-feature-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "购物车营销",
+          "href": "https://jdsz.jd.com/szweb/view/venders/activity-lists-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "定向人群营销效果",
+          "href": "https://jdsz.jd.com/szweb/view/venders/activity-indexs-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "定向人群营销管理",
+          "href": "https://jdsz.jd.com/szweb/view/venders/analysis-lists-temp.html",
+          "page": "用户"
+        },
+        {
+          "text": "帮助",
+          "href": "https://jdsz.jd.com/sz/view/help/indexs.html",
+          "page": "用户"
+        },
+        {
+          "text": "个人中心",
+          "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html",
+          "page": "用户"
+        },
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/sz/view/index/home.html",
+          "page": "用户"
+        },
+        {
+          "text": "实时",
+          "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSummarysNew.html",
+          "page": "用户"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/sz/view/viewflow/viewStats.html",
+          "page": "用户"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/sz/view/productAnalysis/productSummarys.html",
+          "page": "用户"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/sz/view/dealAnalysis/dealSummarys.html",
+          "page": "用户"
+        },
+        {
+          "text": "服务",
+          "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html",
+          "page": "用户"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/marketweb/sz/view/marketing/marketingOverview.html",
+          "page": "用户"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/stockweb/sz/view/ihs/InventoryHealth.html",
+          "page": "用户"
+        },
+        {
+          "text": "客户",
+          "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html",
+          "page": "用户"
+        },
+        {
+          "text": "行业",
+          "href": "https://jdsz.jd.com/szweb/sz/view/industryMarket/industryRealTimeNew.html",
+          "page": "用户"
+        },
+        {
+          "text": "竞争",
+          "href": "https://jdsz.jd.com/sz/view/competitionAnalysis/shopOverviews.html",
+          "page": "用户"
+        },
+        {
+          "text": "揽客",
+          "href": "https://jdsz.jd.com/sz/view/vender/shopping/activityLists.html",
+          "page": "用户"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/sz/view/selfHelp/reportLists.html",
+          "page": "用户"
+        },
+        {
+          "text": "业务专区",
+          "href": "https://jdsz.jd.com/sz/view/businessZone/wanjia.html",
+          "page": "用户"
+        },
+        {
+          "text": "智能工具",
+          "href": "https://jdsz.jd.com/szweb/sz/view/facilitator/smartSelection.html",
+          "page": "用户"
+        },
+        {
+          "text": "培训",
+          "href": "https://jdsz.jd.com/sz/view/knowledgeCenter/school.html",
+          "page": "用户"
+        },
+        {
+          "text": "客户概览",
+          "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html",
+          "page": "用户"
+        },
+        {
+          "text": "客户洞察",
+          "href": "https://jdsz.jd.com/szweb/sz/view/custom/customerInsight.html",
+          "page": "用户"
+        },
+        {
+          "text": "新老客户分析",
+          "href": "https://jdsz.jd.com/sz/view/cust/custs.html",
+          "page": "用户"
+        },
+        {
+          "text": "未购访客分析",
+          "href": "https://jdsz.jd.com/sz/view/cust/potcusts.html",
+          "page": "用户"
+        },
+        {
+          "text": "学生用户概况",
+          "href": "https://jdsz.jd.com/szweb/sz/view/custom/studentOverview.html",
+          "page": "用户"
+        },
+        {
+          "text": "PLUS会员概况",
+          "href": "https://jdsz.jd.com/sz/view/plusMember/memberSummary.html",
+          "page": "用户"
+        },
+        {
+          "text": "PLUS会员权益",
+          "href": "https://jdsz.jd.com/szweb/sz/view/plusMember/memberBenefits.html",
+          "page": "用户"
+        },
+        {
+          "text": "关注店铺用户概况",
+          "href": "https://jdsz.jd.com/sz/view/shopFans/fansSummary.html",
+          "page": "用户"
+        },
+        {
+          "text": "关注店铺用户特征",
+          "href": "https://jdsz.jd.com/sz/view/shopFans/fansFeature.html",
+          "page": "用户"
+        },
+        {
+          "text": "关注店铺用户质量",
+          "href": "https://jdsz.jd.com/szweb/sz/view/quality/dataBoard.html",
+          "page": "用户"
+        },
+        {
+          "text": "会员概况",
+          "href": "https://jdsz.jd.com/szweb/sz/view/brandMember/memberOverview.html",
+          "page": "用户"
+        },
+        {
+          "text": "会员特征",
+          "href": "https://jdsz.jd.com/sz/view/brandMember/memberFeature.html",
+          "page": "用户"
+        },
+        {
+          "text": "人群列表",
+          "href": "https://jdsz.jd.com/szweb/sz/view/custom/audienceList.html",
+          "page": "用户"
+        },
+        {
+          "text": "触达记录",
+          "href": "https://jdsz.jd.com/szweb/sz/view/custom/audienceReach.html",
+          "page": "用户"
+        },
+        {
+          "text": "用户协议",
+          "href": "//jdsz.jd.com/sz/common/商智店铺版-在线使用协议V1.pdf",
+          "page": "用户"
+        },
+        {
+          "text": "营业执照",
+          "href": "//jdsz.jd.com/sz/common/营业执照.jpg",
+          "page": "用户"
+        },
+        {
+          "text": "注销流程",
+          "href": "//jdsz.jd.com/sz/common/商智店铺版用户注销.pdf",
+          "page": "用户"
+        },
+        {
+          "text": "资费说明",
+          "href": "https://jdsz.jd.com/szweb/sz/view/help/tariffDess.html",
+          "page": "用户"
+        }
+      ]
+    },
+    {
+      "name": "营销",
+      "url": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html?sz=%2Fmarketweb%2Fsz%2Fview%2Fmarketing%2FmarketingOverview.html",
+      "title": "营销概览",
+      "sections": [],
+      "metrics": [],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "营销"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "营销"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "营销"
+        },
+        {
+          "text": "关闭",
+          "class": "message-close",
+          "page": "营销"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "营销"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "营销"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "营销"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "营销"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "营销"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "营销"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "营销"
+        },
+        {
+          "text": "营销概览",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "工具效果",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-effect-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "裂变优惠券",
+          "href": "https://jdsz.jd.com/szweb/view/market/coupon-share-overview-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "店铺礼包",
+          "href": "https://jdsz.jd.com/szweb/view/market/shop-gift-overview-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "搭配购",
+          "href": "https://jdsz.jd.com/szweb/view/market/match-buy-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "品牌购物卡",
+          "href": "https://jdsz.jd.com/szweb/view/market/brand-card-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "评价有礼",
+          "href": "https://jdsz.jd.com/szweb/view/market/rating-gift-reward-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "礼金促销",
+          "href": "https://jdsz.jd.com/szweb/view/market/gift-money-promotion-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "膨胀金",
+          "href": "https://jdsz.jd.com/szweb/view/market/expansion-money-overview-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "搭售活动分析",
+          "href": "https://jdsz.jd.com/szweb/view/market/bunding-sale-analysis-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "活动分析",
+          "href": "https://jdsz.jd.com/szweb/view/realtime/promotion-list-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "活动对比",
+          "href": "https://jdsz.jd.com/szweb/view/realtime/promotion-contrast-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "活动沉淀",
+          "href": "https://jdsz.jd.com/szweb/view/realtime/promotion-harvest-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "大屏选择",
+          "href": "https://jdsz.jd.com/szweb/view/realtime/screen-list-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "实时大屏",
+          "href": "https://jdsz.jd.com/szweb/view/realtime/edit-screen-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "百亿补贴",
+          "href": "https://jdsz.jd.com/szweb/view/market/subsidy-analysis-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "便宜包邮分析",
+          "href": "https://jdsz.jd.com/szweb/view/market/cheap-product-analysis-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "秒杀活动分析",
+          "href": "https://jdsz.jd.com/szweb/view/market/seckill-analysis-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "国补核销数据",
+          "href": "https://jdsz.jd.com/szweb/view/market/bg-charge-off-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "国补资金消耗",
+          "href": "https://jdsz.jd.com/szweb/view/market/gbCharge-finance-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "微信域",
+          "href": "https://jdsz.jd.com/szweb/view/market/we-chat-domain-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "排行榜分析",
+          "href": "https://jdsz.jd.com/szweb/view/market/rank-analysis-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "试用分析",
+          "href": "https://jdsz.jd.com/szweb/view/market/try-activity-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "内容概览",
+          "href": "https://jdsz.jd.com/szweb/view/market/content-summary-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "内容明细",
+          "href": "https://jdsz.jd.com/szweb/view/market/type-analyse-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "实时直播分析",
+          "href": "https://jdsz.jd.com/szweb/view/market/live-streaming-temp.html",
+          "page": "营销"
+        },
+        {
+          "text": "个人中心",
+          "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html",
+          "page": "营销"
+        },
+        {
+          "text": "用户协议",
+          "href": "//jdsz.jd.com/common/商智店铺版-在线使用协议V1.pdf",
+          "page": "营销"
+        },
+        {
+          "text": "营业执照",
+          "href": "//jdsz.jd.com/common/营业执照.jpg",
+          "page": "营销"
+        },
+        {
+          "text": "注销流程",
+          "href": "//jdsz.jd.com/common/商智店铺版用户注销.pdf",
+          "page": "营销"
+        }
+      ]
+    },
+    {
+      "name": "体验",
+      "url": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+      "title": "服务概览",
+      "sections": [
+        {
+          "level": 1,
+          "text": "服务概览",
+          "tag": "H1",
+          "parent_text": "服务概览"
+        },
+        {
+          "level": 2,
+          "text": "店铺星级",
+          "tag": "H2",
+          "parent_text": "店铺星级"
+        },
+        {
+          "level": 2,
+          "text": "服务运营",
+          "tag": "H2",
+          "parent_text": "服务运营"
+        },
+        {
+          "level": 4,
+          "text": "售前",
+          "tag": "H4",
+          "parent_text": "售前客户咨询-引导成交"
+        },
+        {
+          "level": 4,
+          "text": "客服",
+          "tag": "H4",
+          "parent_text": "客服客户咨询-客服解答"
+        },
+        {
+          "level": 4,
+          "text": "售中",
+          "tag": "H4",
+          "parent_text": "售中发货揽收-确认收货"
+        },
+        {
+          "level": 4,
+          "text": "售后",
+          "tag": "H4",
+          "parent_text": "售后申请售后-完成售后"
+        },
+        {
+          "level": 3,
+          "text": "趋势分析",
+          "tag": "H3",
+          "parent_text": "趋势分析"
+        }
+      ],
+      "metrics": [],
+      "tables": [],
+      "filters": [
+        {
+          "type": "text",
+          "tag": "INPUT",
+          "placeholder": "选择日期",
+          "class": "el-input__inner",
+          "options": [],
+          "page": "体验"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "体验"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "体验"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "体验"
+        },
+        {
+          "text": "查看权益详情",
+          "class": "el-button el-button--text",
+          "page": "体验"
+        },
+        {
+          "text": "2026 年",
+          "class": "el-date-picker__header-label",
+          "page": "体验"
+        },
+        {
+          "text": "7 月",
+          "class": "el-date-picker__header-label",
+          "page": "体验"
+        },
+        {
+          "text": "此刻",
+          "class": "el-button el-button--text el-button--small el-pick",
+          "page": "体验"
+        },
+        {
+          "text": "确定",
+          "class": "el-button el-button--small is-plain el-picker-pane",
+          "page": "体验"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "体验"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "体验"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "体验"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "体验"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "体验"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "体验"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "体验"
+        },
+        {
+          "text": "服务概览",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "体验"
+        },
+        {
+          "text": "店铺星级",
+          "href": "https://jdsz.jd.com/szweb/view/service/shop-experience-score.html",
+          "page": "体验"
+        },
+        {
+          "text": "售后分析",
+          "href": "https://jdsz.jd.com/szweb/view/service/after-sales-service-analysis-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "评价分析",
+          "href": "https://jdsz.jd.com/szweb/view/service/comment-analysis.html",
+          "page": "体验"
+        },
+        {
+          "text": "违规服务分析",
+          "href": "https://jdsz.jd.com/szweb/view/service/negative-service-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "售后考核",
+          "href": "https://jdsz.jd.com/szweb/view/service/after-sales-through-train-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "商品质量",
+          "href": "https://jdsz.jd.com/szweb/view/service/product-quality-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "物流履约",
+          "href": "https://jdsz.jd.com/szweb/view/service/logistics-quality-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "政企发票考核",
+          "href": "https://jdsz.jd.com/szweb/view/service/create-invoice-governance-temp.html",
+          "page": "体验"
+        },
+        {
+          "text": "查看详情",
+          "href": "https://jdsz.jd.com/szweb/view/service/shop-experience-score.html",
+          "page": "体验"
+        }
+      ]
+    },
+    {
+      "name": "供应链",
+      "url": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html?sz=%2Fstockweb%2Fsz%2Fview%2Fihs%2FInventoryHealth.html",
+      "title": "库存预警",
+      "sections": [],
+      "metrics": [],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "供应链"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "供应链"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "供应链"
+        },
+        {
+          "text": "关闭",
+          "class": "message-close",
+          "page": "供应链"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "供应链"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "供应链"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "供应链"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "供应链"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "供应链"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "供应链"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "供应链"
+        },
+        {
+          "text": "库存预警",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "布局诊断",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/stock-diagnosis-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "入仓模拟",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/in-store-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "库存分析",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/supplys-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "库存诊断",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/supplys-diagnosis-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "配送分析",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/deliverys-temp.html",
+          "page": "供应链"
+        },
+        {
+          "text": "个人中心",
+          "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html",
+          "page": "供应链"
+        },
+        {
+          "text": "用户协议",
+          "href": "//jdsz.jd.com/common/商智店铺版-在线使用协议V1.pdf",
+          "page": "供应链"
+        },
+        {
+          "text": "营业执照",
+          "href": "//jdsz.jd.com/common/营业执照.jpg",
+          "page": "供应链"
+        },
+        {
+          "text": "注销流程",
+          "href": "//jdsz.jd.com/common/商智店铺版用户注销.pdf",
+          "page": "供应链"
+        }
+      ]
+    },
+    {
+      "name": "市场",
+      "url": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+      "title": "行业大盘",
+      "sections": [
+        {
+          "level": 1,
+          "text": "行业大盘",
+          "tag": "H1",
+          "parent_text": "行业大盘当前：2026-07-12 00:20:46对比：2026-07-11 00:20:46实时昨天近7天近30天天周月自定义环比同比更多"
+        }
+      ],
+      "metrics": [
+        {
+          "class": "index-value",
+          "value": "-52",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "-50",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "-50",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "-48",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "1",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "2",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "4,000",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "6,000",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "1,000",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "2,000",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "-2",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "0",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "0",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "2",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "-52",
+          "page": "市场"
+        },
+        {
+          "class": "index-value",
+          "value": "-50",
+          "page": "市场"
+        }
+      ],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jd-btn jd-btn-text jd-btn-sm jd-btn-text-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "订购中心",
+          "class": "jd-btn jd-btn-text jd-btn-sm jd-btn-text-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "退出登录",
+          "class": "jd-btn jd-btn-text jd-btn-sm jd-btn-text-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "查询",
+          "class": "jmt-button jmt-button-css-1ombiov jmtv2 jmt-button",
+          "page": "市场"
+        },
+        {
+          "text": "重置",
+          "class": "jmt-button jmt-button-css-1yhzcme jmtv2 jmt-button",
+          "page": "市场"
+        },
+        {
+          "text": "指标配置",
+          "class": "jd-btn jd-btn-default jd-btn-background-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "下载数据",
+          "class": "jd-btn jd-btn-default jd-btn-background-ghost jd-d",
+          "page": "市场"
+        },
+        {
+          "text": "下载数据",
+          "class": "jd-btn jd-btn-default jd-btn-background-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "下载数据",
+          "class": "jd-btn jd-btn-default jd-btn-background-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "下载数据",
+          "class": "jd-btn jd-btn-default jd-btn-background-ghost",
+          "page": "市场"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-15rw0ar jmtv2 jmt-button",
+          "page": "市场"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "市场"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "市场"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "市场"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "市场"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "市场"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "市场"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "市场"
+        },
+        {
+          "text": "行业大盘",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "市场"
+        },
+        {
+          "text": "行业卖家",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industry-shop-analysis-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "店铺榜单",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industry-shop-rank-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "商品榜单",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industry-product-rank-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "品牌榜单",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industry-brand-rank-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "品牌动态详情",
+          "href": "https://jdsz.jd.com/szweb/view/industry/brand-rank-detail-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "热门关键词",
+          "href": "https://jdsz.jd.com/squidweb/view/industry/hotKeywords.html",
+          "page": "市场"
+        },
+        {
+          "text": "关键词查询",
+          "href": "https://jdsz.jd.com/squidweb/view/industry/keywordQuery.html",
+          "page": "市场"
+        },
+        {
+          "text": "商机推荐",
+          "href": "https://jdsz.jd.com/szweb/view/industry/business-recommend.html/chance",
+          "page": "市场"
+        },
+        {
+          "text": "类目属性概况",
+          "href": "https://jdsz.jd.com/szweb/view/industry/attr-summary-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "类目属性详情",
+          "href": "https://jdsz.jd.com/szweb/view/industry/attr-detail-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "产品榜单",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industry-product-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "产品详情",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industry-product-detail-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "买家分析",
+          "href": "https://jdsz.jd.com/szweb/view/industry/deal-cust-analysis-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "实时竞店监控",
+          "href": "https://jdsz.jd.com/szweb/view/compete/compete-shop-monitor-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "实时竞店配置",
+          "href": "https://jdsz.jd.com/szweb/view/compete/compete-shop-config-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞店概况",
+          "href": "https://jdsz.jd.com/szweb/view/compete/compete-shop-overview-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞店对比",
+          "href": "https://jdsz.jd.com/szweb/view/industry/competeShop.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞品对比",
+          "href": "https://jdsz.jd.com/szweb/view/industry/compete-product.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞品流失",
+          "href": "https://jdsz.jd.com/szweb/view/compete/compete-product-loss.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞品监控",
+          "href": "https://jdsz.jd.com/szweb/view/industry/compete-monitor.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞争流失",
+          "href": "https://jdsz.jd.com/szweb/view/compete/compete-loss-temp.html",
+          "page": "市场"
+        },
+        {
+          "text": "竞争配置",
+          "href": "https://jdsz.jd.com/szweb/view/compete/compete-config-temp.html",
+          "page": "市场"
+        }
+      ]
+    },
+    {
+      "name": "报表",
+      "url": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+      "title": "下载中心",
+      "sections": [
+        {
+          "level": 1,
+          "text": "下载中心",
+          "tag": "H1",
+          "parent_text": "下载中心根据创建时间由近到远进行排列，只保留30天内最新的100份文件"
+        },
+        {
+          "level": 2,
+          "text": "下载列表",
+          "tag": "H2",
+          "parent_text": "下载列表"
+        },
+        {
+          "level": 3,
+          "text": "删除确认",
+          "tag": "H3",
+          "parent_text": "删除确认"
+        }
+      ],
+      "metrics": [],
+      "tables": [],
+      "filters": [],
+      "buttons": [
+        {
+          "text": "账号中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "报表"
+        },
+        {
+          "text": "订购中心",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "报表"
+        },
+        {
+          "text": "退出登录",
+          "class": "jmt-button jmt-button-css-wln6s3 jmtv2 jmt-button-",
+          "page": "报表"
+        },
+        {
+          "text": "刷新",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "报表"
+        },
+        {
+          "text": "确定",
+          "class": "jmt-button jmt-button-css-1k90k71 jmtv2 jmt-button",
+          "page": "报表"
+        },
+        {
+          "text": "取消",
+          "class": "jmt-button jmt-button-css-fae3df jmtv2 jmt-button-",
+          "page": "报表"
+        }
+      ],
+      "nav_links": [
+        {
+          "text": "首页",
+          "href": "https://jdsz.jd.com/szweb/view/index/home.html",
+          "page": "报表"
+        },
+        {
+          "text": "交易",
+          "href": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+          "page": "报表"
+        },
+        {
+          "text": "商品",
+          "href": "https://jdsz.jd.com/szweb/view/product/product360.html",
+          "page": "报表"
+        },
+        {
+          "text": "流量",
+          "href": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+          "page": "报表"
+        },
+        {
+          "text": "用户",
+          "href": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html",
+          "page": "报表"
+        },
+        {
+          "text": "营销",
+          "href": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html",
+          "page": "报表"
+        },
+        {
+          "text": "体验",
+          "href": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+          "page": "报表"
+        },
+        {
+          "text": "供应链",
+          "href": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html",
+          "page": "报表"
+        },
+        {
+          "text": "市场",
+          "href": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+          "page": "报表"
+        },
+        {
+          "text": "报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "报表"
+        },
+        {
+          "text": "下载中心",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+          "page": "报表"
+        },
+        {
+          "text": "推荐报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/recommend-report-temp.html",
+          "page": "报表"
+        },
+        {
+          "text": "我的报表",
+          "href": "https://jdsz.jd.com/szweb/view/reports-center/my-report-temp.html",
+          "page": "报表"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_pages": 10,
+    "total_metrics": 48,
+    "total_tables": 0,
+    "total_filters": 1,
+    "total_buttons": 134,
+    "total_nav_links": 260
+  }
+}

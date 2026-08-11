@@ -1,0 +1,4441 @@
+{
+  "generated_at": "2026-07-03T17:12:07.987Z",
+  "total_keys": 887,
+  "keys": {
+    "fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "sch_traffic_intr_ord_cvr_deal",
+      "unit": "ratio",
+      "confidence": 0.2
+    },
+    "fo_jdr_sch_industry_deal_rate": {
+      "canonical": "deal",
+      "unit": "ratio",
+      "confidence": 0.5
+    },
+    "fo_jdr_sch_industry_deal_rate##compare": {
+      "canonical": "deal",
+      "unit": "pct",
+      "confidence": 0.5
+    },
+    "fo_jdr_sch_industry_deal_rate##compareValue": {
+      "canonical": "deal",
+      "unit": "pct",
+      "confidence": 0.5
+    },
+    "fo_jdr_sch_trade_cancel_refund_ord_amt": {
+      "canonical": "refund",
+      "unit": "currency",
+      "confidence": 0.5
+    },
+    "fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+      "canonical": "ord_amt_user",
+      "unit": "currency",
+      "confidence": 0.7
+    },
+    "jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+      "canonical": "page_qtty",
+      "unit": "count",
+      "confidence": 0.5
+    },
+    "jdr_sch_sku_main_pic_address": {
+      "canonical": "pic",
+      "unit": "count",
+      "confidence": 0.5
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "canonical": "gmv",
+      "unit": "currency",
+      "confidence": 1
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare": {
+      "canonical": "gmv",
+      "unit": "pct",
+      "confidence": 1
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": {
+      "canonical": "gmv",
+      "unit": "pct",
+      "confidence": 1
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot": {
+      "canonical": "orders",
+      "unit": "count",
+      "confidence": 1
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare": {
+      "canonical": "orders",
+      "unit": "pct",
+      "confidence": 1
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue": {
+      "canonical": "orders",
+      "unit": "pct",
+      "confidence": 1
+    },
+    "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+      "canonical": "items_sold",
+      "unit": "count",
+      "confidence": 1
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "canonical": "sku_page_cnt_traffic_plat_item_di",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare": {
+      "canonical": "sku_page_cnt_traffic_plat_item_di",
+      "unit": "pct",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue": {
+      "canonical": "sku_page_cnt_traffic_plat_item_di",
+      "unit": "pct",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "sku_cnt_jd_unified_attribution",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+      "canonical": "sku_qtty_jd_unified_attribution",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "canonical": "last_field_src_rmad",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "ord_ord_amt_jd_unified_attribution_trade_deal_snapshot",
+      "unit": "currency",
+      "confidence": 0.7
+    },
+    "jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "canonical": "ord_user_cnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare": {
+      "canonical": "ord_user_cnt",
+      "unit": "pct",
+      "confidence": 0.7
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue": {
+      "canonical": "ord_user_cnt",
+      "unit": "pct",
+      "confidence": 0.7
+    },
+    "status": {
+      "canonical": "status",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "message": {
+      "canonical": "message",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content": {
+      "canonical": "content",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.stockOutNum": {
+      "canonical": "content.stockOutNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.stockOutBSNum": {
+      "canonical": "content.stockOutBSNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.stockOutSaleLoseAmount": {
+      "canonical": "content.stockOutSaleLoseAmount",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.beingStockOutNum": {
+      "canonical": "content.beingStockOutNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.beingStockOutBSNum": {
+      "canonical": "content.beingStockOutBSNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.beingStockOutHSAmount": {
+      "canonical": "content.beingStockOutHSAmount",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.beingUnsaleNum": {
+      "canonical": "content.beingUnsaleNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.beingUnsaleNBSNum": {
+      "canonical": "content.beingUnsaleNBSNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.unsaleNum": {
+      "canonical": "content.unsaleNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.unsaleNBSNum": {
+      "canonical": "content.unsaleNBSNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.unsaleAmount": {
+      "canonical": "content.unsaleAmount",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.nosaleNum": {
+      "canonical": "content.nosaleNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.nosaleAmount": {
+      "canonical": "content.nosaleAmount",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.pageNo": {
+      "canonical": "content.pageNo",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.pageSize": {
+      "canonical": "content.pageSize",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.total": {
+      "canonical": "content.total",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.dataList": {
+      "canonical": "content.dataList",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.dt": {
+      "canonical": "content.dt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.score": {
+      "canonical": "content.score",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.nextLevelDiff": {
+      "canonical": "content.nextLevelDiff",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.scoreLevelList": {
+      "canonical": "content.scoreLevelList",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.scoreLevelList.label": {
+      "canonical": "content.scoreLevelList.label",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.scoreLevelList.value": {
+      "canonical": "content.scoreLevelList.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.adviseList": {
+      "canonical": "content.adviseList",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.turnoverRankRate": {
+      "canonical": "content.turnoverRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.spotRankRate": {
+      "canonical": "content.spotRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.unsaleRankRate": {
+      "canonical": "content.unsaleRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.categoryTurnoverRankRate": {
+      "canonical": "content.categoryTurnoverRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.categorySpotRankRate": {
+      "canonical": "content.categorySpotRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.categoryUnsaleRankRate": {
+      "canonical": "content.categoryUnsaleRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.pieceTurnover": {
+      "canonical": "content.pieceTurnover",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.stockPieList": {
+      "canonical": "content.stockPieList",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.stockPieList.label": {
+      "canonical": "content.stockPieList.label",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.stockPieList.value": {
+      "canonical": "content.stockPieList.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.spotRate": {
+      "canonical": "content.spotRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.bestsellerSpotRate": {
+      "canonical": "content.bestsellerSpotRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.unsaleRate": {
+      "canonical": "content.unsaleRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.unsaleProductNumRate": {
+      "canonical": "content.unsaleProductNumRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.nosaleRate": {
+      "canonical": "content.nosaleRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.name": {
+      "canonical": "content.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.categories": {
+      "canonical": "content.categories",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.series": {
+      "canonical": "content.series",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.series.name": {
+      "canonical": "content.series.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.series.data": {
+      "canonical": "content.series.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.children": {
+      "canonical": "content.children",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.children.children": {
+      "canonical": "content.children.children",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.children.children.label": {
+      "canonical": "content.children.children.label",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.children.children.value": {
+      "canonical": "content.children.children.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.children.label": {
+      "canonical": "content.children.label",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.children.value": {
+      "canonical": "content.children.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.label": {
+      "canonical": "content.label",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.value": {
+      "canonical": "content.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.industry": {
+      "canonical": "content.industry",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.indexType": {
+      "canonical": "content.indexType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.indexName": {
+      "canonical": "content.indexName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.num": {
+      "canonical": "content.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "length": {
+      "canonical": "length",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect": {
+      "canonical": "content.effect",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.new": {
+      "canonical": "content.effect.new",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.new.shop": {
+      "canonical": "content.effect.new.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.new.num": {
+      "canonical": "content.effect.new.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.deal": {
+      "canonical": "content.effect.deal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.deal.shop": {
+      "canonical": "content.effect.deal.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.deal.num": {
+      "canonical": "content.effect.deal.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.inShop": {
+      "canonical": "content.effect.inShop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.inShop.shop": {
+      "canonical": "content.effect.inShop.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.inShop.num": {
+      "canonical": "content.effect.inShop.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.detail": {
+      "canonical": "content.effect.detail",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.detail.shop": {
+      "canonical": "content.effect.detail.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.detail.num": {
+      "canonical": "content.effect.detail.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.cart": {
+      "canonical": "content.effect.cart",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.cart.shop": {
+      "canonical": "content.effect.cart.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.effect.cart.num": {
+      "canonical": "content.effect.cart.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent": {
+      "canonical": "content.percent",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.deal": {
+      "canonical": "content.percent.deal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.deal.other": {
+      "canonical": "content.percent.deal.other",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.deal.self": {
+      "canonical": "content.percent.deal.self",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.inShop": {
+      "canonical": "content.percent.inShop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.inShop.other": {
+      "canonical": "content.percent.inShop.other",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.inShop.self": {
+      "canonical": "content.percent.inShop.self",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.cart": {
+      "canonical": "content.percent.cart",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.cart.other": {
+      "canonical": "content.percent.cart.other",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.cart.self": {
+      "canonical": "content.percent.cart.self",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.browse": {
+      "canonical": "content.percent.browse",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.browse.other": {
+      "canonical": "content.percent.browse.other",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.percent.browse.self": {
+      "canonical": "content.percent.browse.self",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.startDate": {
+      "canonical": "content.startDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.endDate": {
+      "canonical": "content.endDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old": {
+      "canonical": "content.old",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.name": {
+      "canonical": "content.old.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.type": {
+      "canonical": "content.old.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.value": {
+      "canonical": "content.old.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.info": {
+      "canonical": "content.old.info",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.member": {
+      "canonical": "content.member",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans": {
+      "canonical": "content.fans",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.name": {
+      "canonical": "content.fans.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.type": {
+      "canonical": "content.fans.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.value": {
+      "canonical": "content.fans.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.info": {
+      "canonical": "content.fans.info",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.new": {
+      "canonical": "content.new",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice": {
+      "canonical": "content.notice",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice.messageLink": {
+      "canonical": "content.notice.messageLink",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice.date": {
+      "canonical": "content.notice.date",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice.menuCode": {
+      "canonical": "content.notice.menuCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice.messageLinkWord": {
+      "canonical": "content.notice.messageLinkWord",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice.message": {
+      "canonical": "content.notice.message",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.notice.title": {
+      "canonical": "content.notice.title",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data": {
+      "canonical": "content.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.code": {
+      "canonical": "content.data.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.auth": {
+      "canonical": "content.data.auth",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.level": {
+      "canonical": "content.data.level",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.pid": {
+      "canonical": "content.data.pid",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.isLeaf": {
+      "canonical": "content.data.isLeaf",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.uri": {
+      "canonical": "content.data.uri",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.cssClass": {
+      "canonical": "content.data.cssClass",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.children": {
+      "canonical": "content.data.children",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.name": {
+      "canonical": "content.data.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.id": {
+      "canonical": "content.data.id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.isVirtual": {
+      "canonical": "content.data.isVirtual",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.order": {
+      "canonical": "content.data.order",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.data.status": {
+      "canonical": "content.data.status",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.indexShopFlag": {
+      "canonical": "content.indexShopFlag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.START_TIME": {
+      "canonical": "content.START_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SHOP_ID": {
+      "canonical": "content.SHOP_ID",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_QUARTER_TIME": {
+      "canonical": "content.PAGE_QUARTER_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_CUSTOM_TIME": {
+      "canonical": "content.PAGE_CUSTOM_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.HAS_CUSTOM_TIME": {
+      "canonical": "content.HAS_CUSTOM_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.TMPLOGIN": {
+      "canonical": "content.TMPLOGIN",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.refundStartDate": {
+      "canonical": "content.refundStartDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.bcTag": {
+      "canonical": "content.bcTag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_DAY182_TIME": {
+      "canonical": "content.PAGE_DAY182_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.systemTime": {
+      "canonical": "content.systemTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.hasTimeExtendedModule": {
+      "canonical": "content.hasTimeExtendedModule",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.isTimeSaleMenu": {
+      "canonical": "content.isTimeSaleMenu",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_DAY_TIME": {
+      "canonical": "content.PAGE_DAY_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_WEEK_TIME": {
+      "canonical": "content.PAGE_WEEK_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SHOP_TYPE": {
+      "canonical": "content.SHOP_TYPE",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SERVER_TIME": {
+      "canonical": "content.SERVER_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SHOW_TO_BRAND": {
+      "canonical": "content.SHOW_TO_BRAND",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.activityEndDate": {
+      "canonical": "content.activityEndDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_DAY90_TIME": {
+      "canonical": "content.PAGE_DAY90_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.businessModelName": {
+      "canonical": "content.businessModelName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_YEAR_TIME": {
+      "canonical": "content.PAGE_YEAR_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.activityStartDate": {
+      "canonical": "content.activityStartDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.erpName": {
+      "canonical": "content.erpName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_DAY30_TIME": {
+      "canonical": "content.PAGE_DAY30_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.greyInfo": {
+      "canonical": "content.greyInfo",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.USER_NAME": {
+      "canonical": "content.USER_NAME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.businessModelKey": {
+      "canonical": "content.businessModelKey",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.am": {
+      "canonical": "content.am",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SHOP_POP_UP": {
+      "canonical": "content.SHOP_POP_UP",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_MONTH_TIME": {
+      "canonical": "content.PAGE_MONTH_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.VERSION_ID": {
+      "canonical": "content.VERSION_ID",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.refundEndDate": {
+      "canonical": "content.refundEndDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_TIME": {
+      "canonical": "content.PAGE_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.USER_TYPE": {
+      "canonical": "content.USER_TYPE",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.hasJdszAuth": {
+      "canonical": "content.hasJdszAuth",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SHOW_SWITCH_SHOP": {
+      "canonical": "content.SHOW_SWITCH_SHOP",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.VENDER_ID": {
+      "canonical": "content.VENDER_ID",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.LAST_SIX_MONTH_TIME": {
+      "canonical": "content.LAST_SIX_MONTH_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.videoLink": {
+      "canonical": "content.videoLink",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_DAY15_TIME": {
+      "canonical": "content.PAGE_DAY15_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.SURVEY_URL": {
+      "canonical": "content.SURVEY_URL",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.isJingMaiOldVer": {
+      "canonical": "content.isJingMaiOldVer",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.PAGE_DAY7_TIME": {
+      "canonical": "content.PAGE_DAY7_TIME",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.uriedPoint": {
+      "canonical": "content.uriedPoint",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.code": {
+      "canonical": "content.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.desc": {
+      "canonical": "content.desc",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.alias": {
+      "canonical": "content.alias",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.checked": {
+      "canonical": "content.checked",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.chart": {
+      "canonical": "content.chart",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.chart.series": {
+      "canonical": "content.chart.series",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.chart.series.data": {
+      "canonical": "content.chart.series.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.chart.series.name": {
+      "canonical": "content.chart.series.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.chart.categories": {
+      "canonical": "content.chart.categories",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.info": {
+      "canonical": "content.info",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.info.shop": {
+      "canonical": "content.info.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.info.year": {
+      "canonical": "content.info.year",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.info.num": {
+      "canonical": "content.info.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.info.percent": {
+      "canonical": "content.info.percent",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.info.day": {
+      "canonical": "content.info.day",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.shopId": {
+      "canonical": "content.shopId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.skuId": {
+      "canonical": "content.skuId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.skuName": {
+      "canonical": "content.skuName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.imgSrc": {
+      "canonical": "content.imgSrc",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.proUrl": {
+      "canonical": "content.proUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.rankId": {
+      "canonical": "content.rankId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.browseCnt": {
+      "canonical": "content.browseCnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.browseCntCycleRatio": {
+      "canonical": "content.browseCntCycleRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.addCartCnt": {
+      "canonical": "content.addCartCnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.purchaseCnt": {
+      "canonical": "content.purchaseCnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.addCartCntCycleRatio": {
+      "canonical": "content.addCartCntCycleRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.dealConversionCntRate": {
+      "canonical": "content.dealConversionCntRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.dealConversionCntRateCycleRatio": {
+      "canonical": "content.dealConversionCntRateCycleRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.gmv": {
+      "canonical": "content.gmv",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.gmvCycleRatio": {
+      "canonical": "content.gmvCycleRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.itemDisabled": {
+      "canonical": "content.itemDisabled",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle": {
+      "canonical": "content.lastCycle",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.shopId": {
+      "canonical": "content.lastCycle.shopId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.skuId": {
+      "canonical": "content.lastCycle.skuId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.rankId": {
+      "canonical": "content.lastCycle.rankId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.browseCnt": {
+      "canonical": "content.lastCycle.browseCnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.addCartCnt": {
+      "canonical": "content.lastCycle.addCartCnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.purchaseCnt": {
+      "canonical": "content.lastCycle.purchaseCnt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.dealConversionCntRate": {
+      "canonical": "content.lastCycle.dealConversionCntRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.lastCycle.gmv": {
+      "canonical": "content.lastCycle.gmv",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.deal": {
+      "canonical": "content.old.deal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.price": {
+      "canonical": "content.old.price",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.num": {
+      "canonical": "content.old.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.old.isOk": {
+      "canonical": "content.old.isOk",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.member.deal": {
+      "canonical": "content.member.deal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.member.price": {
+      "canonical": "content.member.price",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.member.num": {
+      "canonical": "content.member.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.member.isOk": {
+      "canonical": "content.member.isOk",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.deal": {
+      "canonical": "content.fans.deal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.price": {
+      "canonical": "content.fans.price",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.num": {
+      "canonical": "content.fans.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.fans.isOk": {
+      "canonical": "content.fans.isOk",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.new.deal": {
+      "canonical": "content.new.deal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.new.price": {
+      "canonical": "content.new.price",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.new.num": {
+      "canonical": "content.new.num",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.new.isOk": {
+      "canonical": "content.new.isOk",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data": {
+      "canonical": "data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.fo_jdr_sch_industry_deal_rate##compareValue": {
+      "canonical": "data.fo_jdr_sch_industry_deal_rate##compareValue",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare": {
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "canonical": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare": {
+      "canonical": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.fo_jdr_sch_industry_deal_rate##compare": {
+      "canonical": "data.fo_jdr_sch_industry_deal_rate##compare",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "canonical": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot": {
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare": {
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue": {
+      "canonical": "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare": {
+      "canonical": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue": {
+      "canonical": "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": {
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.fo_jdr_sch_industry_deal_rate": {
+      "canonical": "data.fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue": {
+      "canonical": "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "size": {
+      "canonical": "size",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "cache": {
+      "canonical": "cache",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.series.type": {
+      "canonical": "content.series.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dt": {
+      "canonical": "data.dt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.isWhiteList": {
+      "canonical": "content.isWhiteList",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.sznMaxAge": {
+      "canonical": "data.sznMaxAge",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.indexAd": {
+      "canonical": "data.indexAd",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.indexAd.adverType": {
+      "canonical": "data.indexAd.adverType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.indexAd.popUpShow": {
+      "canonical": "data.indexAd.popUpShow",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.indexAd.popUpInterval": {
+      "canonical": "data.indexAd.popUpInterval",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dimCode": {
+      "canonical": "data.dimCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dimVals": {
+      "canonical": "data.dimVals",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dimVals.code": {
+      "canonical": "data.dimVals.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dimVals.max": {
+      "canonical": "data.dimVals.max",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dimVals.compares": {
+      "canonical": "data.dimVals.compares",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.resUri": {
+      "canonical": "data.resUri",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.auth": {
+      "canonical": "data.auth",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.resType": {
+      "canonical": "data.resType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.name": {
+      "canonical": "data.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.resCode": {
+      "canonical": "data.resCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.sort": {
+      "canonical": "data.sort",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.pResCode": {
+      "canonical": "data.pResCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.extAttr": {
+      "canonical": "data.extAttr",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.extAttr.groupTag": {
+      "canonical": "data.extAttr.groupTag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.license": {
+      "canonical": "data.license",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.agreement": {
+      "canonical": "data.agreement",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.cancelProcess": {
+      "canonical": "data.cancelProcess",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.endDate": {
+      "canonical": "data.endDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.linkText": {
+      "canonical": "data.linkText",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.linkAddress": {
+      "canonical": "data.linkAddress",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.noticeType": {
+      "canonical": "data.noticeType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.title": {
+      "canonical": "data.title",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.content": {
+      "canonical": "data.content",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hasLink": {
+      "canonical": "data.hasLink",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.optDate": {
+      "canonical": "data.optDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.id": {
+      "canonical": "data.id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.startDate": {
+      "canonical": "data.startDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.pin": {
+      "canonical": "data.pin",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.bizName": {
+      "canonical": "data.bizName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.mainAccount": {
+      "canonical": "data.mainAccount",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.accountType": {
+      "canonical": "data.accountType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.childAccoutAuth": {
+      "canonical": "data.childAccoutAuth",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.bizId": {
+      "canonical": "data.bizId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.shopId": {
+      "canonical": "data.shopId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.userIdentityType": {
+      "canonical": "data.userIdentityType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.id": {
+      "canonical": "content.id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "success": {
+      "canonical": "success",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.sysUpgrade": {
+      "canonical": "content.sysUpgrade",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.img": {
+      "canonical": "content.img",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.upgrade": {
+      "canonical": "content.upgrade",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.upgradeText": {
+      "canonical": "content.upgradeText",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.menuCode": {
+      "canonical": "content.menuCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.moduleName": {
+      "canonical": "content.moduleName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.moreCode": {
+      "canonical": "content.moreCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.introduction": {
+      "canonical": "content.introduction",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.topMsg": {
+      "canonical": "content.topMsg",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.group": {
+      "canonical": "content.group",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "group": {
+      "canonical": "group",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.activityId": {
+      "canonical": "content.activityId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.saleMode": {
+      "canonical": "content.saleMode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.subType": {
+      "canonical": "content.subType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.type": {
+      "canonical": "content.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.partDealGoodsqtty": {
+      "canonical": "content.partDealGoodsqtty",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "code": {
+      "canonical": "code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summaryItems": {
+      "canonical": "content.summaryItems",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summaryItems.total": {
+      "canonical": "content.summaryItems.total",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summaryItems.rate": {
+      "canonical": "content.summaryItems.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summaryItems.index": {
+      "canonical": "content.summaryItems.index",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summaryItems.value": {
+      "canonical": "content.summaryItems.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summaryItems.industryAvgNo": {
+      "canonical": "content.summaryItems.industryAvgNo",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex": {
+      "canonical": "content.metaIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.RankChange": {
+      "canonical": "content.metaIndex.RankChange",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.ShopLink": {
+      "canonical": "content.metaIndex.ShopLink",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.ShopName": {
+      "canonical": "content.metaIndex.ShopName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.ProName": {
+      "canonical": "content.metaIndex.ProName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.SearchClickNumIndex": {
+      "canonical": "content.metaIndex.SearchClickNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.Rank": {
+      "canonical": "content.metaIndex.Rank",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.UVIndex": {
+      "canonical": "content.metaIndex.UVIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.OrdAmtIndex": {
+      "canonical": "content.metaIndex.OrdAmtIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.SkuId": {
+      "canonical": "content.metaIndex.SkuId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.OrdNumIndex": {
+      "canonical": "content.metaIndex.OrdNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.Url": {
+      "canonical": "content.metaIndex.Url",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.MyselfPro": {
+      "canonical": "content.metaIndex.MyselfPro",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.updateTime": {
+      "canonical": "content.updateTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary": {
+      "canonical": "content.summary",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex": {
+      "canonical": "content.summary.OrdAmtIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate": {
+      "canonical": "content.summary.OrdAmtIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.median": {
+      "canonical": "content.summary.OrdAmtIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.percentType": {
+      "canonical": "content.summary.OrdAmtIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.left": {
+      "canonical": "content.summary.OrdAmtIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.leftUnit": {
+      "canonical": "content.summary.OrdAmtIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.leftPrefix": {
+      "canonical": "content.summary.OrdAmtIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.dataType": {
+      "canonical": "content.summary.OrdAmtIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.rightPrefix": {
+      "canonical": "content.summary.OrdAmtIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.rightUnit": {
+      "canonical": "content.summary.OrdAmtIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.range": {
+      "canonical": "content.summary.OrdAmtIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.right": {
+      "canonical": "content.summary.OrdAmtIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdAmtIndex.rate.separator": {
+      "canonical": "content.summary.OrdAmtIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex": {
+      "canonical": "content.summary.UVIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate": {
+      "canonical": "content.summary.UVIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.median": {
+      "canonical": "content.summary.UVIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.percentType": {
+      "canonical": "content.summary.UVIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.left": {
+      "canonical": "content.summary.UVIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.leftUnit": {
+      "canonical": "content.summary.UVIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.leftPrefix": {
+      "canonical": "content.summary.UVIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.dataType": {
+      "canonical": "content.summary.UVIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.rightPrefix": {
+      "canonical": "content.summary.UVIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.rightUnit": {
+      "canonical": "content.summary.UVIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.range": {
+      "canonical": "content.summary.UVIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.right": {
+      "canonical": "content.summary.UVIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.type": {
+      "canonical": "content.summary.UVIndex.rate.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.rate.separator": {
+      "canonical": "content.summary.UVIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value": {
+      "canonical": "content.summary.UVIndex.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.median": {
+      "canonical": "content.summary.UVIndex.value.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.percentType": {
+      "canonical": "content.summary.UVIndex.value.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.left": {
+      "canonical": "content.summary.UVIndex.value.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.leftUnit": {
+      "canonical": "content.summary.UVIndex.value.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.leftPrefix": {
+      "canonical": "content.summary.UVIndex.value.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.dataType": {
+      "canonical": "content.summary.UVIndex.value.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.rightPrefix": {
+      "canonical": "content.summary.UVIndex.value.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.rightUnit": {
+      "canonical": "content.summary.UVIndex.value.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.range": {
+      "canonical": "content.summary.UVIndex.value.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.right": {
+      "canonical": "content.summary.UVIndex.value.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.UVIndex.value.separator": {
+      "canonical": "content.summary.UVIndex.value.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex": {
+      "canonical": "content.summary.PVIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate": {
+      "canonical": "content.summary.PVIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.median": {
+      "canonical": "content.summary.PVIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.percentType": {
+      "canonical": "content.summary.PVIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.left": {
+      "canonical": "content.summary.PVIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.leftUnit": {
+      "canonical": "content.summary.PVIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.leftPrefix": {
+      "canonical": "content.summary.PVIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.dataType": {
+      "canonical": "content.summary.PVIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.rightPrefix": {
+      "canonical": "content.summary.PVIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.rightUnit": {
+      "canonical": "content.summary.PVIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.range": {
+      "canonical": "content.summary.PVIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.right": {
+      "canonical": "content.summary.PVIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.type": {
+      "canonical": "content.summary.PVIndex.rate.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.rate.separator": {
+      "canonical": "content.summary.PVIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value": {
+      "canonical": "content.summary.PVIndex.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.median": {
+      "canonical": "content.summary.PVIndex.value.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.percentType": {
+      "canonical": "content.summary.PVIndex.value.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.left": {
+      "canonical": "content.summary.PVIndex.value.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.leftUnit": {
+      "canonical": "content.summary.PVIndex.value.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.leftPrefix": {
+      "canonical": "content.summary.PVIndex.value.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.dataType": {
+      "canonical": "content.summary.PVIndex.value.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.rightPrefix": {
+      "canonical": "content.summary.PVIndex.value.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.rightUnit": {
+      "canonical": "content.summary.PVIndex.value.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.range": {
+      "canonical": "content.summary.PVIndex.value.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.right": {
+      "canonical": "content.summary.PVIndex.value.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.PVIndex.value.separator": {
+      "canonical": "content.summary.PVIndex.value.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex": {
+      "canonical": "content.summary.OrdNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate": {
+      "canonical": "content.summary.OrdNumIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.median": {
+      "canonical": "content.summary.OrdNumIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.percentType": {
+      "canonical": "content.summary.OrdNumIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.left": {
+      "canonical": "content.summary.OrdNumIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.leftUnit": {
+      "canonical": "content.summary.OrdNumIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.leftPrefix": {
+      "canonical": "content.summary.OrdNumIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.dataType": {
+      "canonical": "content.summary.OrdNumIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.rightPrefix": {
+      "canonical": "content.summary.OrdNumIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.rightUnit": {
+      "canonical": "content.summary.OrdNumIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.range": {
+      "canonical": "content.summary.OrdNumIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.right": {
+      "canonical": "content.summary.OrdNumIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdNumIndex.rate.separator": {
+      "canonical": "content.summary.OrdNumIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex": {
+      "canonical": "content.summary.OrdProNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate": {
+      "canonical": "content.summary.OrdProNumIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.median": {
+      "canonical": "content.summary.OrdProNumIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.percentType": {
+      "canonical": "content.summary.OrdProNumIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.left": {
+      "canonical": "content.summary.OrdProNumIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.leftUnit": {
+      "canonical": "content.summary.OrdProNumIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.leftPrefix": {
+      "canonical": "content.summary.OrdProNumIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.dataType": {
+      "canonical": "content.summary.OrdProNumIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.rightPrefix": {
+      "canonical": "content.summary.OrdProNumIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.rightUnit": {
+      "canonical": "content.summary.OrdProNumIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.range": {
+      "canonical": "content.summary.OrdProNumIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.right": {
+      "canonical": "content.summary.OrdProNumIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.OrdProNumIndex.rate.separator": {
+      "canonical": "content.summary.OrdProNumIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex": {
+      "canonical": "content.summary.SearchClickNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate": {
+      "canonical": "content.summary.SearchClickNumIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.median": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.percentType": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.left": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.leftUnit": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.leftPrefix": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.dataType": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.rightPrefix": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.rightUnit": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.range": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.right": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.type": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.type",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.rate.separator": {
+      "canonical": "content.summary.SearchClickNumIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value": {
+      "canonical": "content.summary.SearchClickNumIndex.value",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.median": {
+      "canonical": "content.summary.SearchClickNumIndex.value.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.percentType": {
+      "canonical": "content.summary.SearchClickNumIndex.value.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.left": {
+      "canonical": "content.summary.SearchClickNumIndex.value.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.leftUnit": {
+      "canonical": "content.summary.SearchClickNumIndex.value.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.leftPrefix": {
+      "canonical": "content.summary.SearchClickNumIndex.value.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.dataType": {
+      "canonical": "content.summary.SearchClickNumIndex.value.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.rightPrefix": {
+      "canonical": "content.summary.SearchClickNumIndex.value.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.rightUnit": {
+      "canonical": "content.summary.SearchClickNumIndex.value.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.range": {
+      "canonical": "content.summary.SearchClickNumIndex.value.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.right": {
+      "canonical": "content.summary.SearchClickNumIndex.value.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.SearchClickNumIndex.value.separator": {
+      "canonical": "content.summary.SearchClickNumIndex.value.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex": {
+      "canonical": "content.summary.CustPriceAvgIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.median": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.percentType": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.left": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.leftUnit": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.leftPrefix": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.dataType": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.rightPrefix": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.rightUnit": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.range": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.right": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.CustPriceAvgIndex.rate.separator": {
+      "canonical": "content.summary.CustPriceAvgIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex": {
+      "canonical": "content.summary.ToOrdRateIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate": {
+      "canonical": "content.summary.ToOrdRateIndex.rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.median": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.percentType": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.left": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.leftUnit": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.leftPrefix": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.dataType": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.rightPrefix": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.rightUnit": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.range": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.right": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.summary.ToOrdRateIndex.rate.separator": {
+      "canonical": "content.summary.ToOrdRateIndex.rate.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend": {
+      "canonical": "content.trend",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series": {
+      "canonical": "content.trend.series",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex": {
+      "canonical": "content.trend.series.SearchClickNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.median": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.percentType": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.left": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.leftUnit": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.leftPrefix": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.dataType": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.rightPrefix": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.rightUnit": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.range": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.right": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.data.separator": {
+      "canonical": "content.trend.series.SearchClickNumIndex.data.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.SearchClickNumIndex.name": {
+      "canonical": "content.trend.series.SearchClickNumIndex.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.OrdAmtIndex": {
+      "canonical": "content.trend.series.OrdAmtIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.OrdAmtIndex.data": {
+      "canonical": "content.trend.series.OrdAmtIndex.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.OrdAmtIndex.name": {
+      "canonical": "content.trend.series.OrdAmtIndex.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex": {
+      "canonical": "content.trend.series.UVIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data": {
+      "canonical": "content.trend.series.UVIndex.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.median": {
+      "canonical": "content.trend.series.UVIndex.data.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.percentType": {
+      "canonical": "content.trend.series.UVIndex.data.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.left": {
+      "canonical": "content.trend.series.UVIndex.data.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.leftUnit": {
+      "canonical": "content.trend.series.UVIndex.data.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.leftPrefix": {
+      "canonical": "content.trend.series.UVIndex.data.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.dataType": {
+      "canonical": "content.trend.series.UVIndex.data.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.rightPrefix": {
+      "canonical": "content.trend.series.UVIndex.data.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.rightUnit": {
+      "canonical": "content.trend.series.UVIndex.data.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.range": {
+      "canonical": "content.trend.series.UVIndex.data.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.right": {
+      "canonical": "content.trend.series.UVIndex.data.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.data.separator": {
+      "canonical": "content.trend.series.UVIndex.data.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.UVIndex.name": {
+      "canonical": "content.trend.series.UVIndex.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.OrdNumIndex": {
+      "canonical": "content.trend.series.OrdNumIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.OrdNumIndex.data": {
+      "canonical": "content.trend.series.OrdNumIndex.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.series.OrdNumIndex.name": {
+      "canonical": "content.trend.series.OrdNumIndex.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.trend.categories": {
+      "canonical": "content.trend.categories",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.interval": {
+      "canonical": "content.interval",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.compareTime": {
+      "canonical": "content.compareTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.MyselfShop": {
+      "canonical": "content.metaIndex.MyselfShop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.metaIndex.RiseUp": {
+      "canonical": "content.metaIndex.RiseUp",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Rank": {
+      "canonical": "content.Rank",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential": {
+      "canonical": "content.Exponential",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.median": {
+      "canonical": "content.Exponential.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.percentType": {
+      "canonical": "content.Exponential.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.left": {
+      "canonical": "content.Exponential.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.leftUnit": {
+      "canonical": "content.Exponential.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.leftPrefix": {
+      "canonical": "content.Exponential.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.dataType": {
+      "canonical": "content.Exponential.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.rightPrefix": {
+      "canonical": "content.Exponential.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.rightUnit": {
+      "canonical": "content.Exponential.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.range": {
+      "canonical": "content.Exponential.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.right": {
+      "canonical": "content.Exponential.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "content.Exponential.separator": {
+      "canonical": "content.Exponential.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.mainCode": {
+      "canonical": "data.mainCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.mainSecondIndId": {
+      "canonical": "data.mainSecondIndId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.mainFirstIndId": {
+      "canonical": "data.mainFirstIndId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.category": {
+      "canonical": "data.category",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.category.children": {
+      "canonical": "data.category.children",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.category.children.name": {
+      "canonical": "data.category.children.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.category.children.id": {
+      "canonical": "data.category.children.id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.category.name": {
+      "canonical": "data.category.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.category.id": {
+      "canonical": "data.category.id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.breakupTime": {
+      "canonical": "data.breakupTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.refreshInterval": {
+      "canonical": "data.refreshInterval",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend": {
+      "canonical": "data.trend",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "canonical": "data.trend.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.data": {
+      "canonical": "data.trend.data",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.data.dt": {
+      "canonical": "data.trend.data.dt",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.data.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "canonical": "data.trend.data.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list": {
+      "canonical": "data.list",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.channel2Name": {
+      "canonical": "data.list.channel2Name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "canonical": "data.list.hb_jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "canonical": "data.list.jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.top": {
+      "canonical": "data.list.top",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dateType": {
+      "canonical": "data.dateType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.size": {
+      "canonical": "data.size",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.requestType": {
+      "canonical": "data.requestType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.flowDecline": {
+      "canonical": "data.flowDecline",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.attention": {
+      "canonical": "data.attention",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.flowTop": {
+      "canonical": "data.flowTop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.rateDecline": {
+      "canonical": "data.rateDecline",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.modalBackground": {
+      "canonical": "data.modalBackground",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.mainCate2Name": {
+      "canonical": "data.mainCate2Name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.mainCate2": {
+      "canonical": "data.mainCate2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.shopNum": {
+      "canonical": "data.shopNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.keywordNum": {
+      "canonical": "data.keywordNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.productNum": {
+      "canonical": "data.productNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.shop": {
+      "canonical": "data.list.shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.shopName": {
+      "canonical": "data.list.shopName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.rank": {
+      "canonical": "data.list.rank",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.tag": {
+      "canonical": "data.list.tag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.left": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.range": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.right": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.separator": {
+      "canonical": "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.rankChange": {
+      "canonical": "data.list.rankChange",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_shop": {
+      "canonical": "data.list.hb_shop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+      "canonical": "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.left": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.left",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.leftPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.dataType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightPrefix",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.rightUnit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.range": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.range",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.right": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.right",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.separator": {
+      "canonical": "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.separator",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": {
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.code": {
+      "canonical": "data.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList": {
+      "canonical": "data.comparePromotionList",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.code": {
+      "canonical": "data.comparePromotionList.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.endDate": {
+      "canonical": "data.comparePromotionList.endDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.themeColor": {
+      "canonical": "data.comparePromotionList.themeColor",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.background": {
+      "canonical": "data.comparePromotionList.background",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.name": {
+      "canonical": "data.comparePromotionList.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.headerBgUrl": {
+      "canonical": "data.comparePromotionList.headerBgUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.headerBgUrl.code": {
+      "canonical": "data.comparePromotionList.headerBgUrl.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.headerBgUrl.url": {
+      "canonical": "data.comparePromotionList.headerBgUrl.url",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.shortName": {
+      "canonical": "data.comparePromotionList.shortName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.comparePromotionCode": {
+      "canonical": "data.comparePromotionList.comparePromotionCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.open": {
+      "canonical": "data.comparePromotionList.open",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.startDate": {
+      "canonical": "data.comparePromotionList.startDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate": {
+      "canonical": "data.comparePromotionList.specialDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate.dateAlias": {
+      "canonical": "data.comparePromotionList.specialDate.dateAlias",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate.code": {
+      "canonical": "data.comparePromotionList.specialDate.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate.endDate": {
+      "canonical": "data.comparePromotionList.specialDate.endDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate.name": {
+      "canonical": "data.comparePromotionList.specialDate.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate.alias": {
+      "canonical": "data.comparePromotionList.specialDate.alias",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionList.specialDate.startDate": {
+      "canonical": "data.comparePromotionList.specialDate.startDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.headerBgUrl": {
+      "canonical": "data.headerBgUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.headerBgUrl.code": {
+      "canonical": "data.headerBgUrl.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.headerBgUrl.url": {
+      "canonical": "data.headerBgUrl.url",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.otherConfig": {
+      "canonical": "data.otherConfig",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.stopDateTime": {
+      "canonical": "data.stopDateTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.themeColor": {
+      "canonical": "data.themeColor",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.background": {
+      "canonical": "data.background",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.shortName": {
+      "canonical": "data.shortName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.comparePromotionCode": {
+      "canonical": "data.comparePromotionCode",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.open": {
+      "canonical": "data.open",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate": {
+      "canonical": "data.specialDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate.dateAlias": {
+      "canonical": "data.specialDate.dateAlias",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate.code": {
+      "canonical": "data.specialDate.code",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate.endDate": {
+      "canonical": "data.specialDate.endDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate.name": {
+      "canonical": "data.specialDate.name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate.alias": {
+      "canonical": "data.specialDate.alias",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.specialDate.startDate": {
+      "canonical": "data.specialDate.startDate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isYinFengCShop": {
+      "canonical": "data.isYinFengCShop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isBrandSuperShop": {
+      "canonical": "data.isBrandSuperShop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.proType": {
+      "canonical": "data.proType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.proPic": {
+      "canonical": "data.list.proPic",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "canonical": "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_spu_id": {
+      "canonical": "data.list.hb_spu_id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.proUrl": {
+      "canonical": "data.list.proUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.proName": {
+      "canonical": "data.list.proName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.spu_id": {
+      "canonical": "data.list.spu_id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.fo_jdr_sch_industry_deal_rate": {
+      "canonical": "data.list.fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "canonical": "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "canonical": "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.tradeTop": {
+      "canonical": "data.tradeTop",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.last7Active": {
+      "canonical": "data.last7Active",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.proPic": {
+      "canonical": "data.proPic",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_spu_id": {
+      "canonical": "data.hb_spu_id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "canonical": "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "canonical": "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.proUrl": {
+      "canonical": "data.proUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.proName": {
+      "canonical": "data.proName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.spu_id": {
+      "canonical": "data.spu_id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "canonical": "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_fo_jdr_sch_industry_deal_rate": {
+      "canonical": "data.list.hb_fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+      "canonical": "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "canonical": "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "canonical": "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "canonical": "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "canonical": "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "canonical": "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+      "canonical": "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+      "canonical": "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+      "canonical": "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate": {
+      "canonical": "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.calType": {
+      "canonical": "data.calType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.scndCategoryName": {
+      "canonical": "data.scndCategoryName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.generalAuthValidityEndTime": {
+      "canonical": "data.generalAuthValidityEndTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.vaneRateLimit": {
+      "canonical": "data.vaneRateLimit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.consultWeight": {
+      "canonical": "data.consultWeight",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.afterServiceScore": {
+      "canonical": "data.afterServiceScore",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.userEvaluateScoreRate": {
+      "canonical": "data.userEvaluateScoreRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.venderId": {
+      "canonical": "data.venderId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.shopName": {
+      "canonical": "data.shopName",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isPassYohome": {
+      "canonical": "data.isPassYohome",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.afsWeight": {
+      "canonical": "data.afsWeight",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.scndCategoryId": {
+      "canonical": "data.scndCategoryId",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.venderVsPrimaryTotal": {
+      "canonical": "data.venderVsPrimaryTotal",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hScoreRankRateGrade": {
+      "canonical": "data.hScoreRankRateGrade",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.userEvaluateScoreUD": {
+      "canonical": "data.userEvaluateScoreUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.afterServiceRankRateUD": {
+      "canonical": "data.afterServiceRankRateUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isPassGood": {
+      "canonical": "data.isPassGood",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.hScoreRankRate": {
+      "canonical": "data.hScoreRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.generalAuthValidityStartTime": {
+      "canonical": "data.generalAuthValidityStartTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.scoreRankRate": {
+      "canonical": "data.scoreRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.logisticsRankRateUD": {
+      "canonical": "data.logisticsRankRateUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.transactionRateLimit": {
+      "canonical": "data.transactionRateLimit",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.categoryGoodShopType": {
+      "canonical": "data.categoryGoodShopType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.tbLimitFlag": {
+      "canonical": "data.tbLimitFlag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.openTime": {
+      "canonical": "data.openTime",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.commonGoodShopType": {
+      "canonical": "data.commonGoodShopType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.afterServiceScoreRate": {
+      "canonical": "data.afterServiceScoreRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.logisticsLvyueScore": {
+      "canonical": "data.logisticsLvyueScore",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.customServiceConsultScoreRate": {
+      "canonical": "data.customServiceConsultScoreRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.customServiceRankRateUD": {
+      "canonical": "data.customServiceRankRateUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.dsrScoreRate": {
+      "canonical": "data.dsrScoreRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isRedGreenPass": {
+      "canonical": "data.isRedGreenPass",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isGreater": {
+      "canonical": "data.isGreater",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.logisticsLvyueScoreUD": {
+      "canonical": "data.logisticsLvyueScoreUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.scoreRankRateGrade": {
+      "canonical": "data.scoreRankRateGrade",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.logisticsLvyueScoreRate": {
+      "canonical": "data.logisticsLvyueScoreRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.logisticsWeight": {
+      "canonical": "data.logisticsWeight",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.evaluateWeight": {
+      "canonical": "data.evaluateWeight",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.isOpenMenu": {
+      "canonical": "data.isOpenMenu",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.afterServiceScoreUD": {
+      "canonical": "data.afterServiceScoreUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.limitFlag": {
+      "canonical": "data.limitFlag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.govFlag": {
+      "canonical": "data.govFlag",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.userEvaluateRankRateUD": {
+      "canonical": "data.userEvaluateRankRateUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.userEvaluateScore": {
+      "canonical": "data.userEvaluateScore",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.customServiceConsultScore": {
+      "canonical": "data.customServiceConsultScore",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.customServiceConsultScoreUD": {
+      "canonical": "data.customServiceConsultScoreUD",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.venderType": {
+      "canonical": "data.venderType",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.skuStarGoodAndExRatio": {
+      "canonical": "data.skuStarGoodAndExRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.notReachThresholdRatio": {
+      "canonical": "data.notReachThresholdRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.notReachThresholdNum": {
+      "canonical": "data.notReachThresholdNum",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.skuStarUrl": {
+      "canonical": "data.skuStarUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.skuStarRankIsAhead": {
+      "canonical": "data.skuStarRankIsAhead",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.serveStarRankIsAhead": {
+      "canonical": "data.serveStarRankIsAhead",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.serveStarRankRate": {
+      "canonical": "data.serveStarRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.serveStarUrl": {
+      "canonical": "data.serveStarUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.serveStarGoodAndExRatio": {
+      "canonical": "data.serveStarGoodAndExRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.skuStarRankRate": {
+      "canonical": "data.skuStarRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.priceStarUrl": {
+      "canonical": "data.priceStarUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.priceStarRankIsAhead": {
+      "canonical": "data.priceStarRankIsAhead",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.priceStarGoodAndExRatio": {
+      "canonical": "data.priceStarGoodAndExRatio",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.priceStarRankRate": {
+      "canonical": "data.priceStarRankRate",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.notReachThresholdUrl": {
+      "canonical": "data.notReachThresholdUrl",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.sku_id#name_cn": {
+      "canonical": "data.sku_id#name_cn",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.jdr_sch_sku_main_pic_address": {
+      "canonical": "data.jdr_sch_sku_main_pic_address",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.sku_id": {
+      "canonical": "data.sku_id",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.sku_id_item_url": {
+      "canonical": "data.sku_id_item_url",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.summary": {
+      "canonical": "data.summary",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.summary.date": {
+      "canonical": "data.summary.date",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.summary.level": {
+      "canonical": "data.summary.level",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.summary.levelRank": {
+      "canonical": "data.summary.levelRank",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.summary.mainCate2": {
+      "canonical": "data.summary.mainCate2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.summary.mainCate2Name": {
+      "canonical": "data.summary.mainCate2Name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.date": {
+      "canonical": "data.trend.date",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.level": {
+      "canonical": "data.trend.level",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.levelRank": {
+      "canonical": "data.trend.levelRank",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.mainCate2": {
+      "canonical": "data.trend.mainCate2",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.trend.mainCate2Name": {
+      "canonical": "data.trend.mainCate2Name",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.aiEntry": {
+      "canonical": "data.aiEntry",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.monthData": {
+      "canonical": "data.monthData",
+      "unit": "count",
+      "confidence": 0.7
+    },
+    "data.yearData": {
+      "canonical": "data.yearData",
+      "unit": "count",
+      "confidence": 0.7
+    }
+  }
+}

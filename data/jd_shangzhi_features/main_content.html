@@ -1,0 +1,268 @@
+<body ng-controller="coreCtrl" style="" class="ng-scope">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="systemNotice ng-hide" ng-show="noticeShow"><ul><!-- ngRepeat: item in sysNotice --></ul><span class="bi-close close" ng-click="closeNotice()"></span></div>
+
+<!-- <div class="shadow" style="position: absolute; top: 70px; z-index: 1;"></div> -->
+<!-- 退款入口 -->
+<div class="refund-wrapper open hide">
+    <div class="refund-open">
+        <div class="refund-entry" clstag="pageclick|keycount|sz_jd_tuifei_1627615792766|1"></div>
+        <div class="refund-close-btn"></div>
+    </div>
+    <div class="refund-close">
+        <div class="refund-show"></div>
+    </div>
+</div>
+<!-- 菜单导览弹出层 -->
+<div class="jmtd-popover-portal"></div>
+
+
+<div class="sub-header">
+    <div class="sub-page-top-header">
+        <div class="fl title"><a href="/sz/view/help/productDess.html">功能介绍</a></div>
+        <div class="fr">
+            
+
+            <a href="/sz/view/help/problemLists.html">常见问题</a>
+            <a href="/sz/view/help/indexsDess.html">指标说明</a>
+            <a class="active">功能介绍</a>
+            <!-- ngIf: userType==0 --><a ng-if="userType==0" href="/szweb/sz/view/help/tariffDess.html" class="ng-scope">资费说明</a><!-- end ngIf: userType==0 -->
+            <a href="/sz/view/knowledgeCenter/versionNotes.html">版本更新<!-- ngIf: showIcon --><span class="version-icon-badge ng-scope" ng-if="showIcon"></span><!-- end ngIf: showIcon --></a>
+        </div>
+    </div>
+</div>
+
+<div id="container" class="container bj-color-fff">
+    <div class="help-tags html-text-areas">
+        <div class="grace-search-conditions clearfix ng-isolate-scope ng-valid ng-not-empty ng-dirty ng-valid-parse" data="features" ismult="false" ng-model="featuresTag" autofold="true">
+   <div class="search-item-title clearfix">
+       <span class="search-title ng-binding" code="category" ng-style="config.label.style">类别:</span> <!--<span class="semicolon-right">:</span>-->
+   </div>
+   <div class="search-list heightfix" ng-class="{heightfix:heightFix, heightinherit:heightInherit}">
+    <div class="flod" ng-click="flod($event)" ng-show="isShowflod">
+        <div class="up-down-icon grace-icon-angle-up grace-icon-angle-down" ng-class="{'grace-icon-angle-up':isIconUp, 'grace-icon-angle-down': isIconDown}"></div>
+        <div class="up-down-text ng-binding">更多</div>
+      </div>
+    <div class="margin-rignt-80">
+      <!-- ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="indexDets" class="ng-binding active2 active3">
+            <!-- ngIf: isMult --> 首页
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="realStat" class="ng-binding active3">
+            <!-- ngIf: isMult --> 实时总览
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="realScreen" class="ng-binding active3">
+            <!-- ngIf: isMult --> 实时大屏
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="realWatch" class="ng-binding active3">
+            <!-- ngIf: isMult --> 实时监控
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="promotionAnalysis" class="ng-binding active3">
+            <!-- ngIf: isMult --> 活动分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="viewSummary" class="ng-binding active3">
+            <!-- ngIf: isMult --> 流量概览
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="hotPageAnalys" class="ng-binding active3">
+            <!-- ngIf: isMult --> 热力图
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="searchRecoAnaysis" class="ng-binding active3">
+            <!-- ngIf: isMult --> 推荐分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="searchAnalys" class="ng-binding active3">
+            <!-- ngIf: isMult --> 搜索分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="contentMarket" class="ng-binding active3">
+            <!-- ngIf: isMult --> 内容营销
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="productAnalys" class="ng-binding active3">
+            <!-- ngIf: isMult --> 商品分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="explosions" class="ng-binding active3">
+            <!-- ngIf: isMult --> 爆款孵化
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="plusMember" class="ng-binding active3">
+            <!-- ngIf: isMult --> PLUS会员
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="dealAnalysiss" class="ng-binding active3">
+            <!-- ngIf: isMult --> 交易分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="serviceAnalysis" class="ng-binding active3">
+            <!-- ngIf: isMult --> 服务分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="marketingtoolAnalysis" class="ng-binding active3">
+            <!-- ngIf: isMult --> 营销分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="supplyChains" class="ng-binding active3">
+            <!-- ngIf: isMult --> 供应链分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="custSummary" class="ng-binding active3">
+            <!-- ngIf: isMult --> 客户总览
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="customerAnalysiss" class="ng-binding active3">
+            <!-- ngIf: isMult --> 客户分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="shopFans" class="ng-binding active3">
+            <!-- ngIf: isMult --> 关注店铺用户
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="brandMember" class="ng-binding active3">
+            <!-- ngIf: isMult --> 品牌会员
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="industryPans" class="ng-binding active3">
+            <!-- ngIf: isMult --> 大盘动态
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="industryKeyWords" class="ng-binding active3">
+            <!-- ngIf: isMult --> 行业关键词
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="brandAnalysiss" class="ng-binding active3">
+            <!-- ngIf: isMult --> 品牌分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="attrAnalysiss" class="ng-binding active3">
+            <!-- ngIf: isMult --> 属性分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="productAnalysiss" class="ng-binding active3">
+            <!-- ngIf: isMult --> 产品分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="industryCustomers" class="ng-binding active3">
+            <!-- ngIf: isMult --> 行业客户
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="competeAnalysiss" class="ng-binding active3">
+            <!-- ngIf: isMult --> 竞争分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="venderPlans" class="ng-binding active3">
+            <!-- ngIf: isMult --> 购物车营销
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="customerMarkets" class="ng-binding active3">
+            <!-- ngIf: isMult --> 客户营销
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="selfHelps" class="ng-binding active3">
+            <!-- ngIf: isMult --> 报表分析
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="businessCenter" class="ng-binding active3">
+            <!-- ngIf: isMult --> 业务专区
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="serviceSelect" class="ng-binding active3">
+            <!-- ngIf: isMult --> 智能选品
+           </span>
+       </div><!-- end ngRepeat: di in data.detail --><div class="search-label ng-scope" ng-class="{hidelist:hideList}" ng-repeat="di in data.detail">
+           <span ng-class="{active:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; isMult), active2:(selStatus.indexOf(di.code)&gt;-1 &amp;&amp; !isMult), active3:!isMult}" ng-click="select(di,$index)" code="jingsuitui" class="ng-binding active3">
+            <!-- ngIf: isMult --> 京速推
+           </span>
+       </div><!-- end ngRepeat: di in data.detail -->
+       <div class="search-custom" ng-class="{showcustom:hideList}">
+           <input class="city-input" placeholder="搜索省份及城市" ng-keyup="keyUp($event)">
+           <span class="cancel-button" ng-click="return()">取消</span>
+       </div>
+    </div>
+   </div>
+    <input type="text" style="display: none;" ng-model="selStatus" ng-list="," class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty">
+</div>
+    </div>
+    <div class="answer-content" id="answer"><h2 style="text-align: center;"><span style="font-size: 14px;"><strong><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">京东商智首页用户手册</span></strong></span></h2><p><span style="font-family: 微软雅黑, sans-serif; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; 京东商智首页，是店铺运营的核心数据的集中展示，便于您快速了解店铺的整体运营状况。</span></p><p><span style="font-family: 微软雅黑, sans-serif; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;</span></p><p><span style="font-family: 微软雅黑, sans-serif; font-size: 14px;"></span></p></div>
+
+</div>
+<div class="back-to-top"><div class="help-email"><div class="help-email-list"><ul><!-- ngRepeat: item in feedback --><li ng-repeat="item in feedback" ng-bind="item" class="ng-binding ng-scope">需求和意见反馈邮箱</li><!-- end ngRepeat: item in feedback --><li ng-repeat="item in feedback" ng-bind="item" class="ng-binding ng-scope">opendata@jd.com</li><!-- end ngRepeat: item in feedback --></ul></div></div><div class="help-people"><div class="help-people-list"><ul><!-- ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">京东商智商家反馈群一</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">550683180(可加)</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">全球购数据罗盘商家群</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">463369960</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">数据罗盘商家反馈群三</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">230548306(可加)</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">数据罗盘商家反馈群二</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">203061939(已满)</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">数据罗盘商家反馈群一</li><!-- end ngRepeat: item in contact --><li ng-repeat="item in contact" ng-bind="item" class="ng-binding ng-scope">317699703(已满)</li><!-- end ngRepeat: item in contact --></ul></div></div><div class="backTop-action" ng-click="goToTop()"></div></div>
+
+    
+        
+            
+                <div class="footer-wrap">
+                    <div class="copyright">
+                        <p id="copyrigh-content">Copyright©2004-2026 JD.com 京东版权所有</p>
+                        <p>京ICP证070359号 北京市公安局朝阳分局备案编号110105014669</p>
+                        <p>
+                            <a target="_blank" href="/sz/common/商智店铺版-在线使用协议V1.pdf">用户协议</a>
+                            <span class="separator">|</span>
+                            <a target="_blank" href="/sz/common/营业执照.jpg">营业执照</a>
+                            <span class="separator">|</span>
+                            <a target="_blank" href="/sz/common/商智店铺版用户注销.pdf">注销流程</a>
+                        </p>
+                    </div>
+                </div>
+                <div id="openWin"></div>
+                
+                    
+                            
+                            
+                                
+                                
+                                    
+                                    
+                                    
+                                    <!-- /ngrc/static/js/main.js -->
+                                    
+
+                                    <!-- test -->
+                                    <!-- <script type="text/javascript" src="/ngrc/static/js/main.js"></script> -->
+
+                                    
+                                    
+
+                                    <!-- 区间指数化灰度 -->
+                                    
+                                    
+                                    <!-- 监听浏览器内容高度变化，通过 window.postMessage 给 check-jdsz.jd.com 和 jdsz.jd.com 两个域名下的页面发送内容区域高度新 -->
+                                    
+
+
+
+
+<div id="usualCommonModal" class="grace-modal"><span class="usual-page-modal-main usual-page-modal-text awe-check-circle"></span></div></body>

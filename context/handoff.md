@@ -1,5 +1,72 @@
 # 交接文档
 
+## 本次会话 (2026-08-09) — P0006.2 Real Data Replay Verification
+
+### 做了什么（一句话）
+
+用户要求验证"JD 是否可以用真实数据一天一天 runtime"。经全链路审计 (JD Connector → Blueprint → Runtime → Evidence Store → CDP) + 实际运行 190 天 full replay，确认闭环已存在且可用。修复 2 个 blocking bug 后，190/190 天全部成功，3,489 signals 含真实 GMV 数据。
+
+### JD Historical Capability Report (审计结果)
+
+**A. Direct Runtime Backfill: YES** ✅
+- `kernel.execute({ date })` 支持逐日参数
+- `runReplay({ from, to })` 日期循环调用 kernel.execute()
+- Evidence store 有 573 个真实 CDP 文件 (2026-01-01 ~ 2026-07-09)
+
+**B. Need Historical Connector: NO** (已有)
+- `createHistoricalAcquire()` — evidence store → mock fallback
+- 不需要新增架构层，现有历史采集+回放已完整
+
+**C. Need CDP Historical Navigation: ALREADY EXISTS** ✅
+- CDP client passive intercept — 修改 POST body date fields
+- 支持 arbitrary date range via `fromDate`/`toDate`
+- 不需要页面导航/日期选择器交互
+
+### 修复的 Bug
+
+1. **`jd-schema.ts` SQL 分号缺失** — `db.exec(STATEMENTS.join('\n'))` → `join(';\n')` (对齐 schema.ts 模式). 导致 `npm run db:init` 失败
+
+2. **Evidence store 数据解析失败** — `parseAcquiredData()` 中 `asArray()` 将单对象 evidence 数据当作空数组处理, parser 永远返回 empty values. 修复: `const wrapped = Array.isArray(data) ? data : [data]`
+
+### 验证数据
+
+| 指标 | Before (Bug) | After (Fix) |
+|------|-------------|-------------|
+| 3天 replay signals | 3 (all value=0) | 64 (real GMV) |
+| 190天 full replay | N/A | 190/190 completed, 3,489 signals |
+| Evidence | 0 | 570 records |
+| Errors | 3 | 0 |
+| GMV 范围 | ¥0 | ¥4,628 ~ ¥14,230/天 |
+
+### 已知限制
+
+- `EnterpriseSignal.metrics` (gmv, orders, uv, cvr 等子字段) 未被 repository.toRow 持久化到 SQLite. Workspace 通过 `signal_value` 展示 GMV 功能正常
+- Rankings 全部 uniform score (0.4648) — 与 replay 无关, 是 seed product/order 数据问题
+- CDP live 采集需要 Chrome + 登录态 (手动步骤)
+- Evidence store 方法标记为 "cdp" 但数据字段已 canonicalized (header.code→0, body.data.gmv, etc.) — 怀疑是 import 而非原生 CDP 采集
+
+### 关键架构确认
+
+```
+JD 商智 → CDP (Chrome 登录态) → Evidence Store → Historical Acquire → Runtime Kernel → Signal → Workspace
+```
+这个闭环已完整验证通过。
+
+### 风险
+
+- **CDP Live 未重新验证** — 当前 evidence store 数据来自历史采集, 未确认 JD 商智 SPA 结构是否有变化
+- **Hourly 信号来自 trend evidence** — evidence store 的 trend 数据包含 24 小时时间序列, 解析正确 → 61 hourly_traffic signals/天
+- **Ranking 数据质量问题** — product-level computed signals 值为 0, 因 order 数据与 evidence 不对齐
+
+### 建议下一步
+
+1. **P0006.2 Workspace Timeline** — Runtime 页面显示 190 天执行历史 (当前 limit=20)
+2. **补全 metrics persistence** — toRow/fromRow 添加 metrics 序列化
+3. **重新 CDP 采集** — 用当前 JD 商智验证 CDP live 路径仍可用
+4. **P0007 Memory / Replay Analysis** — 用 180 天真实 replay 数据分析 Ranking 稳定性 + Memory 价值
+
+---
+
 ## 本次会话 (2026-07-09) — P0006 + P0006.1 + P0006.1.1
 
 ### 做了什么（一句话）

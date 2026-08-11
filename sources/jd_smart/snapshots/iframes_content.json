@@ -1,0 +1,55 @@
+{
+  "用户": {
+    "title": "",
+    "sections": [],
+    "metrics": [
+      {
+        "value": "还能添加12个常用功能 （长按图标可拖拽排序）",
+        "class": "usual-title",
+        "parent_tag": "DIV"
+      }
+    ],
+    "tables": [],
+    "filters": [],
+    "buttons": [
+      {
+        "text": "保存配置",
+        "class": "save"
+      },
+      {
+        "text": "取消",
+        "class": "cancle"
+      }
+    ],
+    "all_text": "常用功能实时概况流量概况店铺来源交易概况最近访问异常商品单品分析我的报表竞店概况行业实时交易概况商品概况没有找到与 “” 有关的功能模块还能添加12个常用功能 （长按图标可拖拽排序）实时概况流量概况店铺来源交易概况全部实时流量商品交易服务营销供应链客户行业竞争报表实时榜单实时访客实时来源实时关键词实时看板大屏选择实时单品监控实时竞店监控实时竞店配置活动分析活动对比活动沉淀关键词分析商品概况商品明细单品分析类目分析异常商品交易特征订单明细体检中心服务分析评价分析平台风向标工具效果内容概览内容明细库存分析配送分析新老客户分析未购访客分析行业实时行业大盘商家榜单商品榜单热门关键词关键词查询(旧)品牌榜单品牌详情属性概况属性详情产品榜单产品详情搜索人群客户分析卖家分析竞店概况竞店对比竞品概况竞品对比竞争流失竞争配置我的报表推荐报表保存配置取消",
+    "html_preview": "\n    <div id=\"main\" style=\"height: 100%;\"><div class=\"grace-sz usual-page\"><div class=\"query-button-group\"><button title=\"关闭\" class=\"fr close-btn\"></button><button title=\"配置\" class=\"fr setting-btn\"></button></div><div class=\"width1200\"><div class=\"query-block\"><div class=\"query-input\"><button class=\"fl icon query\"></button><button class=\"fr icon close  hide\"></button><input placeholder=\"请输入功能模块的关键字…\"></div><div class=\"usual\"><div class=\"\"><p class=\"usual-title\">常用功能</p><div class=\"message-panel\"><ul class=\"usual-list\"><li class=\"0 fl\" draggable=\"false\"><div class=\"0 page-icon first-menu-bgcolor-for-usual-page-rtInsights realTime cur-pointer\" index=\"0\" title=\"实时 / 实时总览 / 实时概况\"></div><div class=\"0 page-text\">实时概况</div></li><li class=\"1 fl\" draggable=\"false\"><div class=\"1 page-icon first-menu-bgcolor-for-usual-page-flow flow cur-pointer\" index=\"1\" title=\"流量 / 流量概览 / 流量概况\"></div><div class=\"1 page-text\">流量概况</div></li><li class=\"2 fl\" draggable=\"false\"><div class=\"2 page-icon first-menu-bgcolor-for-usual-page-flow flow cur-pointer\" index=\"2\" title=\"流量 / 流量概览 / 店铺来源\"></div><div class=\"2 page-text\">店铺来源</div></li><li class=\"3 fl\" draggable=\"false\"><div class=\"3 page-icon first-menu-bgcolor-for-usual-page-deal deal cur-pointer\" index=\"3\" title=\"交易 / 交易分析 / 交易概况\"></div><div class=\"3 page-text\">交易概况</div></li><li class=\"4 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"4 page-text\"></div></li><li class=\"5 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"5 page-text\"></div></li><li class=\"6 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"6 page-text\"></div></li><li class=\"7 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"7 page-text\"></div></li><li class=\"8 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"8 page-text\"></div></li><li class=\"9 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"9 page-text\"></div></li><li class=\"10 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"10 page-text\"></div></li><li class=\"11 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"11 page-text\"></div></li><li class=\"12 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"12 page-text\"></div></li><li class=\"13 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"13 page-text\"></div></li><li class=\"14 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"14 page-text\"></div></li><li class=\"15 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"15 page-text\"></div></li></ul></div></div><div class=\"recent-list\"><p class=\"usual-title\">最近访问</p><div class=\"message-panel\"><ul class=\"usual-list\"><li class=\"0 fl\" draggable=\"false\"><div class=\"0 page-icon first-menu-bgcolor-for-usual-page-products product cur-p"
+  },
+  "营销": {
+    "title": "",
+    "sections": [],
+    "metrics": [
+      {
+        "value": "还能添加12个常用功能 （长按图标可拖拽排序）",
+        "class": "usual-title",
+        "parent_tag": "DIV"
+      }
+    ],
+    "tables": [],
+    "filters": [],
+    "buttons": [
+      {
+        "text": "保存配置",
+        "class": "save"
+      },
+      {
+        "text": "取消",
+        "class": "cancle"
+      }
+    ],
+    "all_text": "常用功能实时概况流量概况店铺来源交易概况最近访问异常商品单品分析我的报表竞店概况行业实时交易概况商品概况没有找到与 “” 有关的功能模块还能添加12个常用功能 （长按图标可拖拽排序）实时概况流量概况店铺来源交易概况全部实时流量商品交易服务营销供应链客户行业竞争报表实时榜单实时访客实时来源实时关键词实时看板大屏选择实时单品监控实时竞店监控实时竞店配置活动分析活动对比活动沉淀关键词分析商品概况商品明细单品分析类目分析异常商品交易特征订单明细体检中心服务分析评价分析平台风向标工具效果内容概览内容明细库存分析配送分析新老客户分析未购访客分析行业实时行业大盘商家榜单商品榜单热门关键词关键词查询(旧)品牌榜单品牌详情属性概况属性详情产品榜单产品详情搜索人群客户分析卖家分析竞店概况竞店对比竞品概况竞品对比竞争流失竞争配置我的报表推荐报表保存配置取消",
+    "html_preview": "\n    <div id=\"main\" style=\"height: 100%;\"><div class=\"grace-sz usual-page\"><div class=\"query-button-group\"><button title=\"关闭\" class=\"fr close-btn\"></button><button title=\"配置\" class=\"fr setting-btn\"></button></div><div class=\"width1200\"><div class=\"query-block\"><div class=\"query-input\"><button class=\"fl icon query\"></button><button class=\"fr icon close  hide\"></button><input placeholder=\"请输入功能模块的关键字…\"></div><div class=\"usual\"><div class=\"\"><p class=\"usual-title\">常用功能</p><div class=\"message-panel\"><ul class=\"usual-list\"><li class=\"0 fl\" draggable=\"false\"><div class=\"0 page-icon first-menu-bgcolor-for-usual-page-rtInsights realTime cur-pointer\" index=\"0\" title=\"实时 / 实时总览 / 实时概况\"></div><div class=\"0 page-text\">实时概况</div></li><li class=\"1 fl\" draggable=\"false\"><div class=\"1 page-icon first-menu-bgcolor-for-usual-page-flow flow cur-pointer\" index=\"1\" title=\"流量 / 流量概览 / 流量概况\"></div><div class=\"1 page-text\">流量概况</div></li><li class=\"2 fl\" draggable=\"false\"><div class=\"2 page-icon first-menu-bgcolor-for-usual-page-flow flow cur-pointer\" index=\"2\" title=\"流量 / 流量概览 / 店铺来源\"></div><div class=\"2 page-text\">店铺来源</div></li><li class=\"3 fl\" draggable=\"false\"><div class=\"3 page-icon first-menu-bgcolor-for-usual-page-deal deal cur-pointer\" index=\"3\" title=\"交易 / 交易分析 / 交易概况\"></div><div class=\"3 page-text\">交易概况</div></li><li class=\"4 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"4 page-text\"></div></li><li class=\"5 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"5 page-text\"></div></li><li class=\"6 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"6 page-text\"></div></li><li class=\"7 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"7 page-text\"></div></li><li class=\"8 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"8 page-text\"></div></li><li class=\"9 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"9 page-text\"></div></li><li class=\"10 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"10 page-text\"></div></li><li class=\"11 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"11 page-text\"></div></li><li class=\"12 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"12 page-text\"></div></li><li class=\"13 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"13 page-text\"></div></li><li class=\"14 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"14 page-text\"></div></li><li class=\"15 fl\" draggable=\"false\"><div class=\"page-icon dashed cur-pointer\"></div><div class=\"15 page-text\"></div></li></ul></div></div><div class=\"recent-list\"><p class=\"usual-title\">最近访问</p><div class=\"message-panel\"><ul class=\"usual-list\"><li class=\"0 fl\" draggable=\"false\"><div class=\"0 page-icon first-menu-bgcolor-for-usual-page-products product cur-p"
+  },
+  "供应链": {
+    "error": "No iframe found"
+  }
+}

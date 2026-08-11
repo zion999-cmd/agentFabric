@@ -17,6 +17,7 @@ import { MemoryFacade } from '#app/experience/facade.js';
 import { createHermesClient } from '#platform/runtime/hermes/index.js';
 import { HermesOneShotRequestSchema } from '#platform/runtime/hermes/types.js';
 import type { HermesClient } from '#platform/runtime/hermes/types.js';
+import type { Router } from '#platform/runtime/router.js';
 import type { Product, Order } from '#shared/schemas/ecommerce.js';
 
 export interface RankCompositionInput {
@@ -32,6 +33,8 @@ export interface RankCompositionInput {
   agentId?: string;
   /** Injected Hermes client for the AI summary (defaults to the factory). */
   hermes?: HermesClient;
+  /** Injected Router for Runtime dispatch (preferred). Takes precedence over `hermes`. */
+  router?: Router;
 }
 
 export interface RankCompositionResult {
@@ -51,7 +54,7 @@ export interface RankCompositionResult {
 export const rankProductsComposition = async (
   input: RankCompositionInput,
 ): Promise<RankCompositionResult> => {
-  const { products, orders, profile, memoryAdjustments, memories, replayConsistency, now, db, agentId, hermes } = input;
+  const { products, orders, profile, memoryAdjustments, memories, replayConsistency, now, db, agentId, hermes, router } = input;
 
   const { signals } = SignalFacade.compute(
     { products, orders },
@@ -94,11 +97,42 @@ export const rankProductsComposition = async (
     rank: 1,
   });
 
-  // AI summary via Hermes one-shot — structured business context, not a longer prompt.
-  const client = hermes ?? createHermesClient();
-  const aiSummary = await summarizeTopResult(client, top, topTrace, products);
+  // AI summary via Router (preferred) or direct Hermes one-shot.
+  const aiSummary = router
+    ? await summarizeViaRouter(router, top, topTrace, products)
+    : await summarizeTopResult(hermes ?? createHermesClient(), top, topTrace, products);
 
   return { signals, rankings, topTrace, aiSummary };
+};
+
+/** Dispatch through the Router for a business summary. */
+const summarizeViaRouter = async (
+  router: Router,
+  top: ReturnType<typeof RankingFacade.rank>[number],
+  trace: BusinessConclusionTrace,
+  products: readonly Product[],
+): Promise<string> => {
+  const productName = products.find((p) => p.product_id === top.entity_id)?.name ?? top.entity_id;
+  const context: Record<string, unknown> = {
+    product_name: productName,
+    summary: top.explainability.summary,
+    overall_score: top.overall_score,
+    confidence: top.confidence,
+    coverage: top.coverage,
+    trust_score: trace.alignment.trust_score,
+    strengths: top.explainability.strengths.join('、') || '无',
+    risks: top.explainability.risks.join('、') || '无',
+  };
+  try {
+    const result = await router.dispatch({
+      action: 'summarize_top_ranking',
+      context,
+      policyIds: ['operator_summary_policy'],
+    });
+    return result.step_results[0]?.output ?? top.explainability.summary;
+  } catch {
+    return top.explainability.summary;
+  }
 };
 
 /** Build a structured-context prompt and call Hermes for a business summary. */

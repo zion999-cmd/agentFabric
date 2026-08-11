@@ -1,0 +1,46 @@
+$schema: https://agentfabric.dev/schemas/source-blueprint/v1
+source:
+  id: PLACEHOLDER_SOURCE_ID
+  name: PLACEHOLDER_NAME
+  display_name: PLACEHOLDER_DISPLAY_NAME
+  platform: PLACEHOLDER_PLATFORM
+  version: "1.0.0"
+  discovered_at: PLACEHOLDER_DISCOVERED_AT
+  base_url: PLACEHOLDER_BASE_URL
+  tech_stack: {}
+  authentication:
+    method: Cookie-based
+    note: Requires active session; explorer connects via CDP
+  shop_info: {}
+navigation:
+  top_level_menus: []
+  sub_menus: {}
+  discovered_pages: []
+datasets: []
+metrics_discovered: []
+dimensions_discovered: []
+filters_discovered: []
+relationships: []
+acquisition:
+  strategy: hybrid
+  methods:
+    - type: cdp_browser
+      description: Connect to existing Chrome instance via CDP
+      reliable: true
+    - type: dom_extraction
+      description: Extract data from rendered DOM
+      reliable: true
+    - type: xhr_capture
+      description: Capture XHR/Fetch responses
+      reliable: true
+  recommended_frequency: {}
+health:
+  status: discovering
+  pages_discovered: 0
+  pages_with_data: 0
+  total_datasets: 0
+  total_metrics: 0
+  total_dimensions: 0
+  total_filters: 0
+  relationships_inferred: 0
+  last_updated: PLACEHOLDER_LAST_UPDATED

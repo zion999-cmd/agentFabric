@@ -1,0 +1,1482 @@
+{
+  "generated_at": "2026-07-03T17:12:07.949Z",
+  "source": "discovery/jd-capability",
+  "rules": [
+    {
+      "endpoint": "getAlarmOverview",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.stockOutNum",
+        "content.stockOutBSNum",
+        "content.stockOutSaleLoseAmount",
+        "content.beingStockOutNum",
+        "content.beingStockOutBSNum",
+        "content.beingStockOutHSAmount",
+        "content.beingUnsaleNum",
+        "content.beingUnsaleNBSNum",
+        "content.unsaleNum",
+        "content.unsaleNBSNum",
+        "content.unsaleAmount",
+        "content.nosaleNum",
+        "content.nosaleAmount"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.stockOutNum": "content_stockOutNum",
+        "content.stockOutBSNum": "content_stockOutBSNum",
+        "content.stockOutSaleLoseAmount": "content_stockOutSaleLoseAmount",
+        "content.beingStockOutNum": "content_beingStockOutNum",
+        "content.beingStockOutBSNum": "content_beingStockOutBSNum",
+        "content.beingStockOutHSAmount": "content_beingStockOutHSAmount",
+        "content.beingUnsaleNum": "content_beingUnsaleNum",
+        "content.beingUnsaleNBSNum": "content_beingUnsaleNBSNum",
+        "content.unsaleNum": "content_unsaleNum",
+        "content.unsaleNBSNum": "content_unsaleNBSNum",
+        "content.unsaleAmount": "content_unsaleAmount",
+        "content.nosaleNum": "content_nosaleNum",
+        "content.nosaleAmount": "content_nosaleAmount"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getAlarmStockOut",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.pageNo",
+        "content.pageSize",
+        "content.total"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.pageNo": "content_pageNo",
+        "content.pageSize": "content_pageSize",
+        "content.total": "content_total"
+      },
+      "is_paginated": true,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getDefaultDt",
+      "strategy": "time_series",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": true,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getHealthOverview",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.score",
+        "content.nextLevelDiff",
+        "content.turnoverRankRate",
+        "content.spotRankRate",
+        "content.unsaleRankRate",
+        "content.categoryTurnoverRankRate",
+        "content.categorySpotRankRate",
+        "content.categoryUnsaleRankRate"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.score": "content_score",
+        "content.nextLevelDiff": "content_nextLevelDiff",
+        "content.turnoverRankRate": "content_turnoverRankRate",
+        "content.spotRankRate": "content_spotRankRate",
+        "content.unsaleRankRate": "content_unsaleRankRate",
+        "content.categoryTurnoverRankRate": "content_categoryTurnoverRankRate",
+        "content.categorySpotRankRate": "content_categorySpotRankRate",
+        "content.categoryUnsaleRankRate": "content_categoryUnsaleRankRate"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getIndicatorOverview",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.pieceTurnover",
+        "content.spotRate",
+        "content.spotRankRate",
+        "content.bestsellerSpotRate",
+        "content.unsaleRate",
+        "content.unsaleRankRate",
+        "content.unsaleProductNumRate",
+        "content.nosaleRate"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.pieceTurnover": "content_pieceTurnover",
+        "content.spotRate": "content_spotRate",
+        "content.spotRankRate": "content_spotRankRate",
+        "content.bestsellerSpotRate": "content_bestsellerSpotRate",
+        "content.unsaleRate": "content_unsaleRate",
+        "content.unsaleRankRate": "content_unsaleRankRate",
+        "content.unsaleProductNumRate": "content_unsaleProductNumRate",
+        "content.nosaleRate": "content_nosaleRate"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getIndicatorSpotRateTrend",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getIndicatorTurnoverTrend",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getIndicatorUnsaleTrend",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getVenderCategory",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getVenderIndustry",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getVenderStore",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "audienceInfo",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.indexType",
+        "content.num",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.indexType": "content_indexType",
+        "content.num": "content_num",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "conversionEffect",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.effect.new.shop",
+        "content.effect.new.num",
+        "content.effect.deal.shop",
+        "content.effect.deal.num",
+        "content.effect.inShop.shop",
+        "content.effect.inShop.num",
+        "content.effect.detail.shop",
+        "content.effect.detail.num",
+        "content.effect.cart.shop",
+        "content.effect.cart.num",
+        "content.percent.deal.other",
+        "content.percent.deal.self",
+        "content.percent.inShop.other",
+        "content.percent.inShop.self",
+        "content.percent.cart.other",
+        "content.percent.cart.self",
+        "content.percent.browse.other",
+        "content.percent.browse.self",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.effect.new.shop": "content_effect_new_shop",
+        "content.effect.new.num": "content_effect_new_num",
+        "content.effect.deal.shop": "content_effect_deal_shop",
+        "content.effect.deal.num": "content_effect_deal_num",
+        "content.effect.inShop.shop": "content_effect_inShop_shop",
+        "content.effect.inShop.num": "content_effect_inShop_num",
+        "content.effect.detail.shop": "content_effect_detail_shop",
+        "content.effect.detail.num": "content_effect_detail_num",
+        "content.effect.cart.shop": "content_effect_cart_shop",
+        "content.effect.cart.num": "content_effect_cart_num",
+        "content.percent.deal.other": "content_percent_deal_other",
+        "content.percent.deal.self": "content_percent_deal_self",
+        "content.percent.inShop.other": "content_percent_inShop_other",
+        "content.percent.inShop.self": "content_percent_inShop_self",
+        "content.percent.cart.other": "content_percent_cart_other",
+        "content.percent.cart.self": "content_percent_cart_self",
+        "content.percent.browse.other": "content_percent_browse_other",
+        "content.percent.browse.self": "content_percent_browse_self",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "dateRange",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.startDate",
+        "content.endDate",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.startDate": "content_startDate",
+        "content.endDate": "content_endDate",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "diagnosis",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getAnnouncement",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getLocalAnnouncement",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getNewMenuTreeData",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "content.data.level",
+        "content.data.order",
+        "content.data.status",
+        "status"
+      ],
+      "field_mapping": {
+        "content.data.level": "content_data_level",
+        "content.data.order": "content_data_order",
+        "content.data.status": "content_data_status",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getPageInfo",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "content.systemTime",
+        "content.hasJdszAuth",
+        "status"
+      ],
+      "field_mapping": {
+        "content.systemTime": "content_systemTime",
+        "content.hasJdszAuth": "content_hasJdszAuth",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getReachTypeConfig",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.code",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.code": "content_code",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "shopAsset",
+      "strategy": "time_series",
+      "fields_to_parse": [
+        "status",
+        "content.info.shop",
+        "content.info.num",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.info.shop": "content_info_shop",
+        "content.info.num": "content_info_num",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": true,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "shopGoodsList",
+      "strategy": "ranking",
+      "fields_to_parse": [
+        "status",
+        "content.rankId",
+        "content.browseCnt",
+        "content.browseCntCycleRatio",
+        "content.addCartCnt",
+        "content.purchaseCnt",
+        "content.addCartCntCycleRatio",
+        "content.dealConversionCntRate",
+        "content.dealConversionCntRateCycleRatio",
+        "content.gmv",
+        "content.gmvCycleRatio",
+        "content.lastCycle.rankId",
+        "content.lastCycle.browseCnt",
+        "content.lastCycle.addCartCnt",
+        "content.lastCycle.purchaseCnt",
+        "content.lastCycle.dealConversionCntRate",
+        "content.lastCycle.gmv",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.rankId": "content_rankId",
+        "content.browseCnt": "content_browseCnt",
+        "content.browseCntCycleRatio": "content_browseCntCycleRatio",
+        "content.addCartCnt": "content_addCartCnt",
+        "content.purchaseCnt": "content_purchaseCnt",
+        "content.addCartCntCycleRatio": "content_addCartCntCycleRatio",
+        "content.dealConversionCntRate": "content_dealConversionCntRate",
+        "content.dealConversionCntRateCycleRatio": "content_dealConversionCntRateCycleRatio",
+        "content.gmv": "content_gmv",
+        "content.gmvCycleRatio": "content_gmvCycleRatio",
+        "content.lastCycle.rankId": "content_lastCycle_rankId",
+        "content.lastCycle.browseCnt": "content_lastCycle_browseCnt",
+        "content.lastCycle.addCartCnt": "content_lastCycle_addCartCnt",
+        "content.lastCycle.purchaseCnt": "content_lastCycle_purchaseCnt",
+        "content.lastCycle.dealConversionCntRate": "content_lastCycle_dealConversionCntRate",
+        "content.lastCycle.gmv": "content_lastCycle_gmv",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "summary",
+      "strategy": "aggregate",
+      "fields_to_parse": [
+        "status",
+        "content.old.deal",
+        "content.old.price",
+        "content.old.num",
+        "content.old.isOk",
+        "content.member.deal",
+        "content.member.price",
+        "content.member.num",
+        "content.member.isOk",
+        "content.fans.deal",
+        "content.fans.price",
+        "content.fans.num",
+        "content.fans.isOk",
+        "content.new.deal",
+        "content.new.price",
+        "content.new.num",
+        "length",
+        "data.fo_jdr_sch_industry_deal_rate##compareValue",
+        "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+        "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+        "data.fo_jdr_sch_industry_deal_rate##compare",
+        "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+        "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+        "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+        "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+        "data.fo_jdr_sch_industry_deal_rate",
+        "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+        "size"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.old.deal": "content_old_deal",
+        "content.old.price": "content_old_price",
+        "content.old.num": "content_old_num",
+        "content.old.isOk": "content_old_isOk",
+        "content.member.deal": "content_member_deal",
+        "content.member.price": "content_member_price",
+        "content.member.num": "content_member_num",
+        "content.member.isOk": "content_member_isOk",
+        "content.fans.deal": "content_fans_deal",
+        "content.fans.price": "content_fans_price",
+        "content.fans.num": "content_fans_num",
+        "content.fans.isOk": "content_fans_isOk",
+        "content.new.deal": "content_new_deal",
+        "content.new.price": "content_new_price",
+        "content.new.num": "content_new_num",
+        "length": "length",
+        "data.fo_jdr_sch_industry_deal_rate##compareValue": "data_fo_jdr_sch_industry_deal_rate##compareValue",
+        "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare": "data_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+        "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare": "data_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+        "data.fo_jdr_sch_industry_deal_rate##compare": "data_fo_jdr_sch_industry_deal_rate##compare",
+        "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": "data_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot": "data_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare": "data_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+        "data.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue": "data_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+        "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare": "data_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+        "data.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue": "data_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": "data_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": "data_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+        "data.fo_jdr_sch_industry_deal_rate": "data_fo_jdr_sch_industry_deal_rate",
+        "data.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue": "data_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+        "size": "size"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "trend",
+      "strategy": "time_series",
+      "fields_to_parse": [
+        "status",
+        "length",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+        "size"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "length": "length",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": "data_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": "data_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+        "size": "size"
+      },
+      "is_paginated": false,
+      "is_time_series": true,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "whiteList",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "length"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "commonParam",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.indexAd.popUpShow",
+        "data.indexAd.popUpInterval"
+      ],
+      "field_mapping": {
+        "data.indexAd.popUpShow": "data_indexAd_popUpShow",
+        "data.indexAd.popUpInterval": "data_indexAd_popUpInterval"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getDims",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getMenuNotice",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "low"
+    },
+    {
+      "endpoint": "getMenuTree",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.resType",
+        "data.sort"
+      ],
+      "field_mapping": {
+        "data.resType": "data_resType",
+        "data.sort": "data_sort"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getModelFunc",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.resType",
+        "data.sort"
+      ],
+      "field_mapping": {
+        "data.resType": "data_resType",
+        "data.sort": "data_sort"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getPageFooter",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getSystemNotice",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getUserIdentities",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.accountType",
+        "size"
+      ],
+      "field_mapping": {
+        "data.accountType": "data_accountType",
+        "size": "size"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getWindowNotice",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "low"
+    },
+    {
+      "endpoint": "lkActivityLists",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "low"
+    },
+    {
+      "endpoint": "getCategory",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "length"
+      ],
+      "field_mapping": {
+        "length": "length"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "list",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "noOrderPrompt",
+      "strategy": "ranking",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "table",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status"
+      ],
+      "field_mapping": {
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getMarketingActivityList",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "content.partDealGoodsqtty",
+        "code"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.partDealGoodsqtty": "content_partDealGoodsqtty",
+        "code": "code"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getMarketingTrend",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "status",
+        "code"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "code": "code"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getMenuTreeData",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "content.data.level",
+        "content.data.order",
+        "content.data.status",
+        "status"
+      ],
+      "field_mapping": {
+        "content.data.level": "content_data_level",
+        "content.data.order": "content_data_order",
+        "content.data.status": "content_data_status",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "overview",
+      "strategy": "aggregate",
+      "fields_to_parse": [
+        "status",
+        "content.summaryItems.total",
+        "content.summaryItems.rate",
+        "content.summaryItems.value",
+        "content.summaryItems.industryAvgNo",
+        "code"
+      ],
+      "field_mapping": {
+        "status": "status",
+        "content.summaryItems.total": "content_summaryItems_total",
+        "content.summaryItems.rate": "content_summaryItems_rate",
+        "content.summaryItems.value": "content_summaryItems_value",
+        "content.summaryItems.industryAvgNo": "content_summaryItems_industryAvgNo",
+        "code": "code"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getProductRankListDetail",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "content.metaIndex.RankChange",
+        "content.metaIndex.ShopLink",
+        "content.metaIndex.ShopName",
+        "content.metaIndex.ProName",
+        "content.metaIndex.SearchClickNumIndex",
+        "content.metaIndex.Rank",
+        "content.metaIndex.UVIndex",
+        "content.metaIndex.OrdAmtIndex",
+        "content.metaIndex.SkuId",
+        "content.metaIndex.OrdNumIndex",
+        "content.metaIndex.Url",
+        "content.metaIndex.MyselfPro",
+        "length",
+        "status"
+      ],
+      "field_mapping": {
+        "content.metaIndex.RankChange": "content_metaIndex_RankChange",
+        "content.metaIndex.ShopLink": "content_metaIndex_ShopLink",
+        "content.metaIndex.ShopName": "content_metaIndex_ShopName",
+        "content.metaIndex.ProName": "content_metaIndex_ProName",
+        "content.metaIndex.SearchClickNumIndex": "content_metaIndex_SearchClickNumIndex",
+        "content.metaIndex.Rank": "content_metaIndex_Rank",
+        "content.metaIndex.UVIndex": "content_metaIndex_UVIndex",
+        "content.metaIndex.OrdAmtIndex": "content_metaIndex_OrdAmtIndex",
+        "content.metaIndex.SkuId": "content_metaIndex_SkuId",
+        "content.metaIndex.OrdNumIndex": "content_metaIndex_OrdNumIndex",
+        "content.metaIndex.Url": "content_metaIndex_Url",
+        "content.metaIndex.MyselfPro": "content_metaIndex_MyselfPro",
+        "length": "length",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getRealSeriesData",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "length",
+        "status"
+      ],
+      "field_mapping": {
+        "length": "length",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getRealSummaryData",
+      "strategy": "time_series",
+      "fields_to_parse": [
+        "content.summary.OrdAmtIndex.rate.median",
+        "content.summary.OrdAmtIndex.rate.percentType",
+        "content.summary.UVIndex.rate.median",
+        "content.summary.UVIndex.rate.percentType",
+        "content.summary.UVIndex.rate.range",
+        "content.summary.PVIndex.rate.median",
+        "content.summary.PVIndex.rate.percentType",
+        "content.summary.PVIndex.rate.range",
+        "content.summary.OrdNumIndex.rate.median",
+        "content.summary.OrdNumIndex.rate.percentType",
+        "content.summary.OrdProNumIndex.rate.median",
+        "content.summary.OrdProNumIndex.rate.percentType",
+        "content.summary.SearchClickNumIndex.rate.median",
+        "content.summary.SearchClickNumIndex.rate.percentType",
+        "content.summary.SearchClickNumIndex.rate.range",
+        "content.summary.CustPriceAvgIndex.rate.median",
+        "content.summary.CustPriceAvgIndex.rate.percentType",
+        "content.summary.ToOrdRateIndex.rate.median",
+        "content.summary.ToOrdRateIndex.rate.percentType",
+        "content.interval",
+        "length",
+        "status"
+      ],
+      "field_mapping": {
+        "content.summary.OrdAmtIndex.rate.median": "content_summary_OrdAmtIndex_rate_median",
+        "content.summary.OrdAmtIndex.rate.percentType": "content_summary_OrdAmtIndex_rate_percentType",
+        "content.summary.UVIndex.rate.median": "content_summary_UVIndex_rate_median",
+        "content.summary.UVIndex.rate.percentType": "content_summary_UVIndex_rate_percentType",
+        "content.summary.UVIndex.rate.range": "content_summary_UVIndex_rate_range",
+        "content.summary.PVIndex.rate.median": "content_summary_PVIndex_rate_median",
+        "content.summary.PVIndex.rate.percentType": "content_summary_PVIndex_rate_percentType",
+        "content.summary.PVIndex.rate.range": "content_summary_PVIndex_rate_range",
+        "content.summary.OrdNumIndex.rate.median": "content_summary_OrdNumIndex_rate_median",
+        "content.summary.OrdNumIndex.rate.percentType": "content_summary_OrdNumIndex_rate_percentType",
+        "content.summary.OrdProNumIndex.rate.median": "content_summary_OrdProNumIndex_rate_median",
+        "content.summary.OrdProNumIndex.rate.percentType": "content_summary_OrdProNumIndex_rate_percentType",
+        "content.summary.SearchClickNumIndex.rate.median": "content_summary_SearchClickNumIndex_rate_median",
+        "content.summary.SearchClickNumIndex.rate.percentType": "content_summary_SearchClickNumIndex_rate_percentType",
+        "content.summary.SearchClickNumIndex.rate.range": "content_summary_SearchClickNumIndex_rate_range",
+        "content.summary.CustPriceAvgIndex.rate.median": "content_summary_CustPriceAvgIndex_rate_median",
+        "content.summary.CustPriceAvgIndex.rate.percentType": "content_summary_CustPriceAvgIndex_rate_percentType",
+        "content.summary.ToOrdRateIndex.rate.median": "content_summary_ToOrdRateIndex_rate_median",
+        "content.summary.ToOrdRateIndex.rate.percentType": "content_summary_ToOrdRateIndex_rate_percentType",
+        "content.interval": "content_interval",
+        "length": "length",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": true,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getShopRankListDetail",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "content.metaIndex.RankChange",
+        "content.metaIndex.MyselfShop",
+        "content.metaIndex.ShopName",
+        "content.metaIndex.SearchClickNumIndex",
+        "content.metaIndex.Rank",
+        "content.metaIndex.UVIndex",
+        "content.metaIndex.OrdAmtIndex",
+        "content.metaIndex.OrdNumIndex",
+        "content.metaIndex.Url",
+        "content.metaIndex.RiseUp",
+        "length",
+        "status"
+      ],
+      "field_mapping": {
+        "content.metaIndex.RankChange": "content_metaIndex_RankChange",
+        "content.metaIndex.MyselfShop": "content_metaIndex_MyselfShop",
+        "content.metaIndex.ShopName": "content_metaIndex_ShopName",
+        "content.metaIndex.SearchClickNumIndex": "content_metaIndex_SearchClickNumIndex",
+        "content.metaIndex.Rank": "content_metaIndex_Rank",
+        "content.metaIndex.UVIndex": "content_metaIndex_UVIndex",
+        "content.metaIndex.OrdAmtIndex": "content_metaIndex_OrdAmtIndex",
+        "content.metaIndex.OrdNumIndex": "content_metaIndex_OrdNumIndex",
+        "content.metaIndex.Url": "content_metaIndex_Url",
+        "content.metaIndex.RiseUp": "content_metaIndex_RiseUp",
+        "length": "length",
+        "status": "status"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getUserCategoryList",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "size",
+        "data.mainCode",
+        "data.mainSecondIndId",
+        "data.mainFirstIndId",
+        "data.category.children.id",
+        "data.category.id"
+      ],
+      "field_mapping": {
+        "size": "size",
+        "data.mainCode": "data_mainCode",
+        "data.mainSecondIndId": "data_mainSecondIndId",
+        "data.mainFirstIndId": "data_mainFirstIndId",
+        "data.category.children.id": "data_category_children_id",
+        "data.category.id": "data_category_id"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "emergency",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.breakupTime",
+        "data.refreshInterval"
+      ],
+      "field_mapping": {
+        "data.breakupTime": "data_breakupTime",
+        "data.refreshInterval": "data_refreshInterval"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getChannelList",
+      "strategy": "time_series",
+      "fields_to_parse": [
+        "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+        "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+        "data.list.top",
+        "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz"
+      ],
+      "field_mapping": {
+        "data.trend.data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_trend_data_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_list_hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_list_hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_list_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_list_hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": "data_list_hb_ratio_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_list_hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_list_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": "data_list_hb_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+        "data.list.jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": "data_list_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": "data_list_jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+        "data.list.top": "data_list_top",
+        "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_list_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": "data_list_hb_ratio_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_list_hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": "data_list_hb_jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_list_hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz"
+      },
+      "is_paginated": false,
+      "is_time_series": true,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getFlowAnalysisData",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.size",
+        "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz"
+      ],
+      "field_mapping": {
+        "data.size": "data_size",
+        "data.list.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_list_hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_list_hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_list_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_list_hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_list_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.list.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_list_hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getFlowHead",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.flowDecline",
+        "data.attention",
+        "data.flowTop",
+        "data.rateDecline"
+      ],
+      "field_mapping": {
+        "data.flowDecline": "data_flowDecline",
+        "data.attention": "data_attention",
+        "data.flowTop": "data_flowTop",
+        "data.rateDecline": "data_rateDecline"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getHomeBanner",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getHomeNotice",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getHotCate",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getIndustryHead",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.shopNum",
+        "data.keywordNum",
+        "data.productNum"
+      ],
+      "field_mapping": {
+        "data.shopNum": "data_shopNum",
+        "data.keywordNum": "data_keywordNum",
+        "data.productNum": "data_productNum"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getIndustryTopTable",
+      "strategy": "ranking",
+      "fields_to_parse": [
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+        "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+        "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType",
+        "data.list.rank",
+        "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+        "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+        "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+        "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+        "data.list.rankChange",
+        "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType",
+        "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median",
+        "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex"
+      ],
+      "field_mapping": {
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": "data_list_hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex_median",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": "data_list_hb_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex_percentType",
+        "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": "data_list_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex_median",
+        "data.list.jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": "data_list_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex_percentType",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": "data_list_hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex_median",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": "data_list_hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex_percentType",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median": "data_list_hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex_median",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType": "data_list_hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex_percentType",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.median": "data_list_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex_median",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex.percentType": "data_list_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex_percentType",
+        "data.list.rank": "data_list_rank",
+        "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": "data_list_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex_median",
+        "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": "data_list_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex_percentType",
+        "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.median": "data_list_hb_jdr_sch_search_click_page_qtty_search_standard_szIndex_median",
+        "data.list.hb_jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType": "data_list_hb_jdr_sch_search_click_page_qtty_search_standard_szIndex_percentType",
+        "data.list.rankChange": "data_list_rankChange",
+        "data.list.hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex": "data_list_hb_ratio_jdr_sch_search_click_page_qtty_search_standard_szIndex",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.median": "data_list_hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex_median",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex.percentType": "data_list_hb_ratio_jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot@valid_shopIndex_percentType",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.median": "data_list_hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex_median",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex.percentType": "data_list_hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot@valid_shopIndex_percentType",
+        "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.median": "data_list_jdr_sch_search_click_page_qtty_search_standard_szIndex_median",
+        "data.list.jdr_sch_search_click_page_qtty_search_standard_szIndex.percentType": "data_list_jdr_sch_search_click_page_qtty_search_standard_szIndex_percentType",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex": "data_list_hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg@valid_shopIndex"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getOpenPromotionList",
+      "strategy": "ranking",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getPopBusiModel",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getProductAnalysisData",
+      "strategy": "aggregate",
+      "fields_to_parse": [
+        "data.size",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg"
+      ],
+      "field_mapping": {
+        "data.size": "data_size",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_list_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.fo_jdr_sch_industry_deal_rate": "data_list_fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_list_hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_list_hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getProductHead",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.flowDecline",
+        "data.tradeTop",
+        "data.last7Active",
+        "data.attention",
+        "data.rateDecline"
+      ],
+      "field_mapping": {
+        "data.flowDecline": "data_flowDecline",
+        "data.tradeTop": "data_tradeTop",
+        "data.last7Active": "data_last7Active",
+        "data.attention": "data_attention",
+        "data.rateDecline": "data_rateDecline"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "getProductListByChannel",
+      "strategy": "aggregate",
+      "fields_to_parse": [
+        "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz"
+      ],
+      "field_mapping": {
+        "data.hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_hb_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+        "data.hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_hb_ratio_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_hb_ratio_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": "data_jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+        "data.hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": "data_hb_jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+        "data.hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": "data_hb_ratio_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getProductList",
+      "strategy": "aggregate",
+      "fields_to_parse": [
+        "data.list.hb_fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+        "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.list.fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+        "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg"
+      ],
+      "field_mapping": {
+        "data.list.hb_fo_jdr_sch_industry_deal_rate": "data_list_hb_fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": "data_list_hb_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+        "data.list.jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_list_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": "data_list_hb_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": "data_list_hb_ratio_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+        "data.list.jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": "data_list_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.list.hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": "data_list_hb_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.list.hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": "data_list_hb_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.list.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": "data_list_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.list.fo_jdr_sch_industry_deal_rate": "data_list_fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": "data_list_hb_ratio_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_list_hb_ratio_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+        "data.list.hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": "data_list_hb_ratio_jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+        "data.list.jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": "data_list_jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": "data_list_hb_ratio_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+        "data.list.fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": "data_list_fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+        "data.list.hb_ratio_fo_jdr_sch_industry_deal_rate": "data_list_hb_ratio_fo_jdr_sch_industry_deal_rate",
+        "data.list.hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": "data_list_hb_jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getProductToBeActiveDiagnosisDetail",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "low"
+    },
+    {
+      "endpoint": "getShopStars",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.calType",
+        "data.vaneRateLimit",
+        "data.consultWeight",
+        "data.userEvaluateScoreRate",
+        "data.venderId",
+        "data.isPassYohome",
+        "data.afsWeight",
+        "data.hScoreRankRateGrade",
+        "data.afterServiceRankRateUD",
+        "data.isPassGood",
+        "data.hScoreRankRate",
+        "data.scoreRankRate",
+        "data.logisticsRankRateUD",
+        "data.transactionRateLimit",
+        "data.categoryGoodShopType",
+        "data.shopId",
+        "data.tbLimitFlag",
+        "data.openTime",
+        "data.commonGoodShopType",
+        "data.afterServiceScoreRate",
+        "data.customServiceConsultScoreRate",
+        "data.customServiceRankRateUD",
+        "data.isGreater",
+        "data.logisticsLvyueScoreRate",
+        "data.logisticsWeight",
+        "data.evaluateWeight",
+        "data.isOpenMenu",
+        "data.limitFlag",
+        "data.govFlag",
+        "data.userEvaluateRankRateUD",
+        "data.venderType",
+        "size"
+      ],
+      "field_mapping": {
+        "data.calType": "data_calType",
+        "data.vaneRateLimit": "data_vaneRateLimit",
+        "data.consultWeight": "data_consultWeight",
+        "data.userEvaluateScoreRate": "data_userEvaluateScoreRate",
+        "data.venderId": "data_venderId",
+        "data.isPassYohome": "data_isPassYohome",
+        "data.afsWeight": "data_afsWeight",
+        "data.hScoreRankRateGrade": "data_hScoreRankRateGrade",
+        "data.afterServiceRankRateUD": "data_afterServiceRankRateUD",
+        "data.isPassGood": "data_isPassGood",
+        "data.hScoreRankRate": "data_hScoreRankRate",
+        "data.scoreRankRate": "data_scoreRankRate",
+        "data.logisticsRankRateUD": "data_logisticsRankRateUD",
+        "data.transactionRateLimit": "data_transactionRateLimit",
+        "data.categoryGoodShopType": "data_categoryGoodShopType",
+        "data.shopId": "data_shopId",
+        "data.tbLimitFlag": "data_tbLimitFlag",
+        "data.openTime": "data_openTime",
+        "data.commonGoodShopType": "data_commonGoodShopType",
+        "data.afterServiceScoreRate": "data_afterServiceScoreRate",
+        "data.customServiceConsultScoreRate": "data_customServiceConsultScoreRate",
+        "data.customServiceRankRateUD": "data_customServiceRankRateUD",
+        "data.isGreater": "data_isGreater",
+        "data.logisticsLvyueScoreRate": "data_logisticsLvyueScoreRate",
+        "data.logisticsWeight": "data_logisticsWeight",
+        "data.evaluateWeight": "data_evaluateWeight",
+        "data.isOpenMenu": "data_isOpenMenu",
+        "data.limitFlag": "data_limitFlag",
+        "data.govFlag": "data_govFlag",
+        "data.userEvaluateRankRateUD": "data_userEvaluateRankRateUD",
+        "data.venderType": "data_venderType",
+        "size": "size"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "getShopValueProposition",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.notReachThresholdNum",
+        "size"
+      ],
+      "field_mapping": {
+        "data.notReachThresholdNum": "data_notReachThresholdNum",
+        "size": "size"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "productTop",
+      "strategy": "ranking",
+      "fields_to_parse": [
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "size"
+      ],
+      "field_mapping": {
+        "data.jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": "data_jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+        "size": "size"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "shopLevel",
+      "strategy": "time_series",
+      "fields_to_parse": [
+        "data.summary.level",
+        "data.summary.levelRank",
+        "data.trend.level",
+        "data.trend.levelRank"
+      ],
+      "field_mapping": {
+        "data.summary.level": "data_summary_level",
+        "data.summary.levelRank": "data_summary_levelRank",
+        "data.trend.level": "data_trend_level",
+        "data.trend.levelRank": "data_trend_levelRank"
+      },
+      "is_paginated": false,
+      "is_time_series": true,
+      "data_quality": "high"
+    },
+    {
+      "endpoint": "showAiEntry",
+      "strategy": "raw",
+      "fields_to_parse": [],
+      "field_mapping": {},
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    },
+    {
+      "endpoint": "targetState",
+      "strategy": "raw",
+      "fields_to_parse": [
+        "data.monthData",
+        "data.yearData"
+      ],
+      "field_mapping": {
+        "data.monthData": "data_monthData",
+        "data.yearData": "data_yearData"
+      },
+      "is_paginated": false,
+      "is_time_series": false,
+      "data_quality": "medium"
+    }
+  ]
+}

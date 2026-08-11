@@ -5,6 +5,7 @@ import { dirname } from 'node:path';
 import type { Database as Db } from 'better-sqlite3';
 import { applySchema } from './schema.js';
 import { applyJdSchema } from './jd-persistence.js';
+import { initMemoryStore } from '#app/memory/store.js';
 import { DEFAULT_SIGNAL_WEIGHTS, RANKING_PROFILES } from './seed.js';
 import { nowIso } from '#shared/utils/time.js';
 import { openDb } from './connection.js';
@@ -169,6 +170,7 @@ const seedRankingProfiles = (db: Db): void => {
 export const initDatabase = (db: Db): void => {
   applySchema(db);
   applyJdSchema(db);
+  initMemoryStore(db); // P0007.3.1
 
   const seedWeights = db.prepare('SELECT 1 FROM signal_weights LIMIT 1').get();
   if (!seedWeights) seedSignalWeights(db);

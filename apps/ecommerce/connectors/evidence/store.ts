@@ -1,0 +1,211 @@
+// Evidence Store — file-based immutable storage for all acquired data.
+// Organizes evidence as: data/evidence/{platform}/{year}/{month}/{date}_{type}.json
+// Every write also writes a companion .meta.json with EvidenceMetadata.
+
+import { resolve, dirname } from 'node:path';
+import { writeFileSync, mkdirSync, readFileSync, existsSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { EvidenceMetadataSchema, EvidenceRecordSchema } from './types.js';
+import type { EvidenceMetadata, EvidenceRecord, EvidenceListOptions } from './types.js';
+import { uuid } from '#shared/utils/crypto.js';
+
+const EVIDENCE_ROOT = resolve(process.cwd(), 'data', 'evidence');
+
+/** Build the evidence file path for a given platform, date, and data type. */
+const evidencePath = (
+  platform: string,
+  dateStr: string,
+  dataType: string,
+  suffix: string,
+): string => {
+  const d = new Date(dateStr);
+  const year = d.getFullYear().toString();
+  const month = (d.getMonth() + 1).toString().padStart(2, '0');
+  const day = d.getDate().toString().padStart(2, '0');
+  return resolve(EVIDENCE_ROOT, platform, year, month, `${day}_${dataType}${suffix}`);
+};
+
+/** Compute SHA-256 hash of a JSON-serializable payload. */
+const hashPayload = (payload: unknown): string => {
+  const json = JSON.stringify(payload);
+  return createHash('sha256').update(json).digest('hex');
+};
+
+/**
+ * Save raw evidence to the file system.
+ * Returns the EvidenceRecord for the saved evidence.
+ */
+export const saveEvidence = (
+  platform: string,
+  shopId: string,
+  dateStr: string,
+  dataType: string,
+  payload: unknown,
+  overrides: Partial<EvidenceMetadata> = {},
+): EvidenceRecord => {
+  const evidenceId = uuid();
+  const contentHash = hashPayload(payload);
+
+  // Build metadata with P0006.3.2.1 provenance (acquisition_method + processing_method).
+  // Backward compat: if old 'method' is passed in overrides, derive new fields from it.
+  const baseMetadata: Record<string, unknown> = {
+    source: platform,
+    shop_id: shopId,
+    data_type: dataType,
+    acquired_at: new Date().toISOString(),
+    acquisition_method: 'unknown' as const,
+    processing_method: 'none' as const,
+    version: '1.0.0',
+    operator: 'system',
+    runtime: 'node',
+    connector: platform,
+    content_hash: contentHash,
+    mime_type: 'application/json',
+    tags: [],
+  };
+
+  // Merge overrides
+  const merged = { ...baseMetadata, ...overrides };
+
+  // If old 'method' was passed but no new provenance fields, derive them
+  if (overrides.method && !overrides.acquisition_method) {
+    const legacyMethod = overrides.method as string;
+    if (legacyMethod === 'cdp' || legacyMethod === 'mock' || legacyMethod === 'import-agentcms') {
+      merged.acquisition_method = legacyMethod;
+    }
+    if (legacyMethod === 'import-agentcms') {
+      merged.processing_method = 'import';
+    }
+  }
+
+  // Ensure backward-compat 'method' field is present
+  if (!merged.method) {
+    merged.method = merged.acquisition_method;
+  }
+
+  const metadata = EvidenceMetadataSchema.parse(merged);
+
+  const dataPath = evidencePath(platform, dateStr, dataType, '.json');
+  const metaPath = evidencePath(platform, dateStr, dataType, '.meta.json');
+
+  // Ensure directory exists
+  mkdirSync(dirname(dataPath), { recursive: true });
+
+  // Write data and metadata
+  writeFileSync(dataPath, JSON.stringify(payload, null, 2), 'utf-8');
+  writeFileSync(metaPath, JSON.stringify(metadata, null, 2), 'utf-8');
+
+  const fileSize = Buffer.byteLength(JSON.stringify(payload), 'utf-8');
+
+  return EvidenceRecordSchema.parse({
+    evidence_id: evidenceId,
+    metadata,
+    file_path: dataPath,
+    file_size: fileSize,
+  });
+};
+
+/**
+ * Load an evidence record by reading its metadata file.
+ * Returns null if the evidence does not exist.
+ */
+export const loadEvidence = (
+  platform: string,
+  dateStr: string,
+  dataType: string,
+): { record: EvidenceRecord; data: unknown } | null => {
+  const dataPath = evidencePath(platform, dateStr, dataType, '.json');
+  const metaPath = evidencePath(platform, dateStr, dataType, '.meta.json');
+
+  if (!existsSync(dataPath) || !existsSync(metaPath)) return null;
+
+  const metadata = EvidenceMetadataSchema.parse(
+    JSON.parse(readFileSync(metaPath, 'utf-8')),
+  );
+  const data = JSON.parse(readFileSync(dataPath, 'utf-8'));
+
+  const fileSize = Buffer.byteLength(JSON.stringify(data), 'utf-8');
+
+  return {
+    record: EvidenceRecordSchema.parse({
+      evidence_id: uuid(), // regenerated on load — id is for runtime tracking, not persistence
+      metadata,
+      file_path: dataPath,
+      file_size: fileSize,
+    }),
+    data,
+  };
+};
+
+/**
+ * List evidence records matching the given filters.
+ * Walks the file system under data/evidence/.
+ */
+export const listEvidence = (options: Partial<EvidenceListOptions> = {}): EvidenceRecord[] => {
+  const { source, shopId, dataType, fromDate, toDate, limit = 100 } = options;
+  const results: EvidenceRecord[] = [];
+
+  if (!existsSync(EVIDENCE_ROOT)) return results;
+
+  const platforms = source ? [source] : readdirSync(EVIDENCE_ROOT, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
+
+  for (const platform of platforms) {
+    const platformDir = resolve(EVIDENCE_ROOT, platform);
+    if (!existsSync(platformDir)) continue;
+
+    const years = readdirSync(platformDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
+
+    for (const year of years) {
+      const yearDir = resolve(platformDir, year);
+      const months = readdirSync(yearDir, { withFileTypes: true })
+        .filter((d) => d.isDirectory())
+        .map((d) => d.name);
+
+      for (const month of months) {
+        const monthDir = resolve(yearDir, month);
+        const files = readdirSync(monthDir, { withFileTypes: true })
+          .filter((f) => f.isFile() && f.name.endsWith('.meta.json'))
+          .map((f) => f.name);
+
+        for (const metaFile of files) {
+          if (results.length >= limit) break;
+
+          const metaPath = resolve(monthDir, metaFile);
+          try {
+            const metadata = EvidenceMetadataSchema.parse(
+              JSON.parse(readFileSync(metaPath, 'utf-8')),
+            );
+
+            // Apply filters
+            if (shopId && metadata.shop_id !== shopId) continue;
+            if (dataType && metadata.data_type !== dataType) continue;
+
+            const dateStr = `${year}-${month}-${metaFile.slice(0, 2)}`;
+            if (fromDate && dateStr < fromDate) continue;
+            if (toDate && dateStr > toDate) continue;
+
+            results.push(
+              EvidenceRecordSchema.parse({
+                evidence_id: uuid(),
+                metadata,
+                file_path: resolve(monthDir, metaFile.replace('.meta.json', '.json')),
+                file_size: 0, // not computed for listings
+              }),
+            );
+          } catch {
+            // Skip invalid metadata files
+          }
+        }
+      }
+    }
+  }
+
+  return results;
+};
+
+/** Get the absolute root path of the evidence store. */
+export const evidenceRoot = (): string => EVIDENCE_ROOT;

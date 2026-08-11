@@ -6,6 +6,7 @@ import { StubHermesClient } from './stub-client.js';
 import type { HermesClient } from './types.js';
 
 export * from './types.js';
+export { HermesRuntimeAdapter } from './adapter.js';
 
 const isTest = process.env.NODE_ENV === 'test' || process.env.VITEST === 'true';
 

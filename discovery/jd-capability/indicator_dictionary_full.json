@@ -1,0 +1,261 @@
+{
+  "extracted_at": "2026-06-30T14:50:00Z",
+  "total_unique_keys": 26,
+  "by_category": {
+    "Traffic": 6,
+    "Transaction": 18,
+    "Search": 1,
+    "Product": 1
+  },
+  "keys": {
+    "fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz": {
+      "jd_key": "fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+      "category": "Transaction",
+      "example_value": "0.1127819548872180",
+      "occurrence_count": 13,
+      "source_files": [
+        "首页_getChannelList_ab5a4e6a82ec5eac",
+        "首页_getFlowAnalysisData_8131a4db84d06a3f",
+        "首页_getProductListByChannel_934fbd814be39bf9"
+      ]
+    },
+    "fo_jdr_sch_industry_deal_rate": {
+      "jd_key": "fo_jdr_sch_industry_deal_rate",
+      "category": "Transaction",
+      "example_value": "0.1666666666666667",
+      "occurrence_count": 11,
+      "source_files": [
+        "首页_getProductAnalysisData_f605903af5fe84b6",
+        "首页_getProductList_0c8a62446d50ac8b",
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "fo_jdr_sch_industry_deal_rate##compare": {
+      "jd_key": "fo_jdr_sch_industry_deal_rate##compare",
+      "category": "Transaction",
+      "example_value": "0.5975778546712803",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "fo_jdr_sch_industry_deal_rate##compareValue": {
+      "jd_key": "fo_jdr_sch_industry_deal_rate##compareValue",
+      "category": "Transaction",
+      "example_value": "0.0584795321637427",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "fo_jdr_sch_trade_cancel_refund_ord_amt": {
+      "jd_key": "fo_jdr_sch_trade_cancel_refund_ord_amt",
+      "category": "Transaction",
+      "example_value": "null",
+      "occurrence_count": 6,
+      "source_files": [
+        "首页_getProductList_0c8a62446d50ac8b"
+      ]
+    },
+    "fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot": {
+      "jd_key": "fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+      "category": "Transaction",
+      "example_value": "275.8888888888888889",
+      "occurrence_count": 6,
+      "source_files": [
+        "首页_getProductList_0c8a62446d50ac8b"
+      ]
+    },
+    "jdr_sch_search_click_page_qtty_search_standard_szIndex": {
+      "jd_key": "jdr_sch_search_click_page_qtty_search_standard_szIndex",
+      "category": "Search",
+      "example_value": "{\"median\":5000.0",
+      "occurrence_count": 10,
+      "source_files": [
+        "首页_getIndustryTopTable_c8db3ce55604afcd"
+      ]
+    },
+    "jdr_sch_sku_main_pic_address": {
+      "jd_key": "jdr_sch_sku_main_pic_address",
+      "category": "Product",
+      "example_value": "http://img10.360buyimg.com/n3/jfs/t1/425053/28/10312/95325/69eebe7dF2630b020/008",
+      "occurrence_count": 5,
+      "source_files": [
+        "首页_productTop_fd16413da63a9ad6"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+      "category": "Transaction",
+      "example_value": "2483.0",
+      "occurrence_count": 36,
+      "source_files": [
+        "首页_getProductList_0c8a62446d50ac8b",
+        "首页_productTop_fd16413da63a9ad6",
+        "首页_summary_2dbc6f8c852812a9",
+        "首页_trend_26b39dcbc11bd026"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compare",
+      "category": "Transaction",
+      "example_value": "0.7553265755337258",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot##compareValue",
+      "category": "Transaction",
+      "example_value": "2807.6200000000003",
+      "occurrence_count": 25,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9",
+        "首页_trend_26b39dcbc11bd026"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+      "category": "Transaction",
+      "example_value": "29",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compare",
+      "category": "Transaction",
+      "example_value": "0.45",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue": {
+      "jd_key": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot##compareValue",
+      "category": "Transaction",
+      "example_value": "20",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot": {
+      "jd_key": "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+      "category": "Transaction",
+      "example_value": "9",
+      "occurrence_count": 6,
+      "source_files": [
+        "首页_getProductList_0c8a62446d50ac8b"
+      ]
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg": {
+      "jd_key": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+      "category": "Traffic",
+      "example_value": "6",
+      "occurrence_count": 11,
+      "source_files": [
+        "首页_getProductAnalysisData_f605903af5fe84b6",
+        "首页_getProductList_0c8a62446d50ac8b",
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare": {
+      "jd_key": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compare",
+      "category": "Traffic",
+      "example_value": "-0.15497076023391812",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue": {
+      "jd_key": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg##compareValue",
+      "category": "Traffic",
+      "example_value": "342",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz": {
+      "jd_key": "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+      "category": "Traffic",
+      "example_value": "133",
+      "occurrence_count": 13,
+      "source_files": [
+        "首页_getChannelList_ab5a4e6a82ec5eac",
+        "首页_getFlowAnalysisData_8131a4db84d06a3f",
+        "首页_getProductListByChannel_934fbd814be39bf9"
+      ]
+    },
+    "jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz": {
+      "jd_key": "jdr_sch_traffic_brow_sku_qtty_jd_unified_attribution_sz",
+      "category": "Traffic",
+      "example_value": "545",
+      "occurrence_count": 5,
+      "source_files": [
+        "首页_getChannelList_ab5a4e6a82ec5eac"
+      ]
+    },
+    "jdr_sch_traffic_cha_last_field_src_rmad_sz_2": {
+      "jd_key": "jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+      "category": "Traffic",
+      "example_value": "2009",
+      "occurrence_count": 128,
+      "source_files": [
+        "首页_getChannelList_ab5a4e6a82ec5eac",
+        "首页_getFlowAnalysisData_8131a4db84d06a3f"
+      ]
+    },
+    "jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "jd_key": "jdr_sch_traffic_intr_ord_ord_amt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "category": "Transaction",
+      "example_value": "0.0",
+      "occurrence_count": 125,
+      "source_files": [
+        "首页_getChannelList_ab5a4e6a82ec5eac",
+        "首页_getProductListByChannel_934fbd814be39bf9"
+      ]
+    },
+    "jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz": {
+      "jd_key": "jdr_sch_traffic_intr_ord_ord_cnt_jd_unified_attribution_trade_deal_snapshot_sz",
+      "category": "Transaction",
+      "example_value": "15",
+      "occurrence_count": 5,
+      "source_files": [
+        "首页_getChannelList_ab5a4e6a82ec5eac"
+      ]
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot": {
+      "jd_key": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+      "category": "Transaction",
+      "example_value": "9",
+      "occurrence_count": 7,
+      "source_files": [
+        "首页_getProductList_0c8a62446d50ac8b",
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare": {
+      "jd_key": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compare",
+      "category": "Transaction",
+      "example_value": "0.35",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    },
+    "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue": {
+      "jd_key": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot##compareValue",
+      "category": "Transaction",
+      "example_value": "20",
+      "occurrence_count": 1,
+      "source_files": [
+        "首页_summary_2dbc6f8c852812a9"
+      ]
+    }
+  }
+}

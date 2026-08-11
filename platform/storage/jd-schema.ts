@@ -83,5 +83,5 @@ const STATEMENTS = [
 ];
 
 export const applyJdSchema = (db: Db): void => {
-  db.exec(STATEMENTS.join('\n'));
+  db.exec(STATEMENTS.join(';\n'));
 };

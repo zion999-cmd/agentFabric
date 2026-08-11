@@ -1,0 +1,1467 @@
+{
+  "report_title": "D0002 — JD Capability Discovery Report",
+  "generated_at": "2026-06-30T14:59:09.548633+00:00",
+  "methodology": "CDP-based automated crawl of JD 商智 SPA. All conclusions from REAL API responses, not page names.",
+  "summary": {
+    "pages_crawled": 15,
+    "pages_with_live_api_data": 5,
+    "pages_with_rendered_content": 14,
+    "total_api_endpoints_discovered": 70,
+    "total_api_calls_captured": 1060,
+    "unique_jdr_indicator_keys": 26,
+    "business_contexts_verified": 8,
+    "business_contexts_blocked": 1
+  },
+  "api_modules": {
+    "indexSummary (首页+核心指标)": {
+      "base_path": "szgateway.jd.com/api/lowcode/indexSummary/",
+      "endpoints": [],
+      "auth_required": false,
+      "data_format": "Flat key-value with jdr_xxx indicator keys + ##compare/##compareValue variants",
+      "note": "主要业务数据来源。Summary API返回当日GMV/订单/访客等核心指标。所有指标均带周期对比值。"
+    },
+    "industry/industryMarket (行业市场)": {
+      "base_path": "szgateway.jd.com/szajax/sz/industry/industryMarket/",
+      "endpoints": [],
+      "auth_required": false,
+      "data_format": "{ status, message, content: { summary, trend }, interval, length }",
+      "note": "行业数据均为指数化(INDEXED)格式，京东不暴露绝对GMV/销量值。需通过指数变化推断趋势。"
+    },
+    "cust/growthSummary (客户增长)": {
+      "base_path": "szgateway.jd.com/szajax/sz/cust/growthSummary/",
+      "endpoints": [],
+      "auth_required": false,
+      "data_format": "{ status, message, content: {...} }",
+      "note": "客户分层数据：新客/老客/会员/粉丝。含成交占比、客单价、数量等。"
+    },
+    "biz/marketing (营销)": {
+      "base_path": "szgateway.jd.com/marketajax/biz/marketing/",
+      "endpoints": [],
+      "auth_required": false,
+      "data_format": "Variable",
+      "note": "营销活动效果数据，含活动列表、趋势、概览。"
+    },
+    "stock (供应链)": {
+      "base_path": "szgateway.jd.com/stockweb/...",
+      "endpoints": [
+        "getAlarmOverview",
+        "getAlarmStockOut",
+        "getDefaultDt",
+        "getHealthOverview",
+        "getIndicatorOverview",
+        "getIndicatorSpotRateTrend",
+        "getIndicatorTurnoverTrend",
+        "getIndicatorUnsaleTrend",
+        "getVenderCategory",
+        "getVenderIndustry",
+        "getVenderStore"
+      ],
+      "auth_required": false,
+      "note": "库存健康、预警、周转、滞销分析。"
+    },
+    "common (平台基础设施)": {
+      "base_path": "szgateway.jd.com/api/lowcode/common/ + szgateway.jd.com/szajax/sz/common/",
+      "endpoints": [
+        "getPageInfo",
+        "commonParam",
+        "getMenuNotice",
+        "getMenuTree",
+        "getPageFooter",
+        "getMenuTreeData"
+      ],
+      "auth_required": false,
+      "note": "菜单树、公告、页面信息、用户身份、系统通知等平台级API。"
+    }
+  },
+  "verified_business_contexts": {
+    "Store Context": {
+      "description": "店铺核心经营数据",
+      "apis": [
+        "indexSummary/summary.ajax",
+        "indexSummary/trend.ajax",
+        "indexSummary/shopLevel.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "GMV",
+          "jd_key": "jdr_sch_trade_deal_ord_ord_amt_sz_trade_deal_snapshot",
+          "unit": "元",
+          "verified": true
+        },
+        {
+          "field": "订单量",
+          "jd_key": "jdr_sch_trade_deal_ord_ord_qtty_sz_trade_deal_snapshot",
+          "unit": "单",
+          "verified": true
+        },
+        {
+          "field": "成交客户数",
+          "jd_key": "jdr_sch_user_deal_ord_user_cnt_sz_user_deal_snapshot",
+          "unit": "人",
+          "verified": true
+        },
+        {
+          "field": "浏览量",
+          "jd_key": "jdr_sch_traffic_brow_sku__page_cnt_traffic_plat_item_di_sz_bsg",
+          "unit": "次",
+          "verified": true
+        },
+        {
+          "field": "成交商品件数",
+          "jd_key": "jdr_sch_trade_deal_ord_sku_qtty_sz_trade_deal_snapshot",
+          "unit": "件",
+          "verified": true
+        },
+        {
+          "field": "行业成交率",
+          "jd_key": "fo_jdr_sch_industry_deal_rate",
+          "unit": "%",
+          "verified": true
+        },
+        {
+          "field": "客单价",
+          "jd_key": "fo_jdr_sch_trade_deal_ord_amt_user_sz_trade_deal_snapshot",
+          "unit": "元",
+          "verified": true
+        },
+        {
+          "field": "SKU引流数",
+          "jd_key": "jdr_sch_traffic_brow_sku_cnt_jd_unified_attribution_sz",
+          "unit": "次",
+          "verified": true
+        },
+        {
+          "field": "转化率",
+          "jd_key": "fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+          "unit": "%",
+          "verified": true
+        },
+        {
+          "field": "店铺排名",
+          "jd_key": "shopLevel",
+          "unit": "级别",
+          "verified": true
+        }
+      ]
+    },
+    "Traffic Context": {
+      "description": "流量来源与渠道分析",
+      "apis": [
+        "indexSummary/analysis/getFlowHead.ajax",
+        "indexSummary/analysis/getFlowAnalysisData.ajax",
+        "indexSummary/analysis/getChannelList.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "渠道流量",
+          "jd_key": "jdr_sch_traffic_cha_last_field_src_rmad_sz_2",
+          "unit": "次",
+          "verified": true
+        },
+        {
+          "field": "渠道来源明细",
+          "jd_key": "getChannelList → data.list[] per channel",
+          "unit": "渠道",
+          "verified": true
+        },
+        {
+          "field": "流量趋势",
+          "jd_key": "getFlowHead → 环比数据",
+          "unit": "%",
+          "verified": true
+        },
+        {
+          "field": "渠道转化",
+          "jd_key": "hb_fo_jdr_sch_fo_jdr_sch_traffic_intr_ord_cvr_deal_sz",
+          "unit": "%",
+          "verified": true
+        }
+      ]
+    },
+    "Product Context": {
+      "description": "商品分析与销售排行",
+      "apis": [
+        "indexSummary/productTop.ajax",
+        "indexSummary/analysis/getProductAnalysisData.ajax",
+        "indexSummary/analysis/getProductList.ajax",
+        "indexSummary/analysis/getProductHead.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "热销商品排名",
+          "jd_key": "productTop → data[] per SKU",
+          "unit": "排名",
+          "verified": true
+        },
+        {
+          "field": "商品SKU ID",
+          "jd_key": "sku_id (from productTop)",
+          "unit": "ID",
+          "verified": true
+        },
+        {
+          "field": "商品GMV",
+          "jd_key": "gmv per SKU",
+          "unit": "元",
+          "verified": true
+        },
+        {
+          "field": "商品主图",
+          "jd_key": "jdr_sch_sku_main_pic_address",
+          "unit": "URL",
+          "verified": true
+        }
+      ]
+    },
+    "Customer Context": {
+      "description": "客户分层与增长分析",
+      "apis": [
+        "cust/growthSummary/summary.ajax",
+        "cust/growthSummary/shopGoodsList.ajax",
+        "cust/growthSummary/audienceInfo.ajax",
+        "cust/growthSummary/diagnosis.ajax",
+        "cust/growthSummary/conversionEffect.ajax",
+        "cust/growthSummary/trend.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "新客成交占比",
+          "jd_key": "summary.content.new.deal",
+          "unit": "%",
+          "verified": true,
+          "example": "75.48%"
+        },
+        {
+          "field": "老客成交占比",
+          "jd_key": "summary.content.old.deal",
+          "unit": "%",
+          "verified": true,
+          "example": "24.52%"
+        },
+        {
+          "field": "会员成交占比",
+          "jd_key": "summary.content.member.deal",
+          "unit": "%",
+          "verified": true,
+          "example": "12.52%"
+        },
+        {
+          "field": "粉丝数",
+          "jd_key": "summary.content.fans.num",
+          "unit": "人",
+          "verified": true,
+          "example": "68,391"
+        },
+        {
+          "field": "新客数",
+          "jd_key": "summary.content.new.num",
+          "unit": "人",
+          "verified": true,
+          "example": "251,355"
+        },
+        {
+          "field": "商品浏览数",
+          "jd_key": "shopGoodsList.content[].browseCnt",
+          "unit": "次",
+          "verified": true
+        },
+        {
+          "field": "商品加购数",
+          "jd_key": "shopGoodsList.content[].addCartCnt",
+          "unit": "次",
+          "verified": true
+        },
+        {
+          "field": "商品成交转化率",
+          "jd_key": "shopGoodsList.content[].dealConversionCntRate",
+          "unit": "%",
+          "verified": true
+        },
+        {
+          "field": "商品GMV",
+          "jd_key": "shopGoodsList.content[].gmv",
+          "unit": "元",
+          "verified": true
+        }
+      ]
+    },
+    "Industry Context": {
+      "description": "行业大盘与市场分析（指数化数据）",
+      "apis": [
+        "industry/industryMarket/getRealSummaryData.ajax",
+        "industry/industryMarket/getRealSeriesData.ajax",
+        "industry/industryMarket/getProductRankListDetail.ajax",
+        "industry/industryMarket/getShopRankListDetail.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "成交金额指数",
+          "jd_key": "OrdAmtIndex",
+          "unit": "指数",
+          "verified": true,
+          "note": "JD屏蔽绝对值，仅提供指数"
+        },
+        {
+          "field": "访客指数",
+          "jd_key": "UVIndex",
+          "unit": "指数",
+          "verified": true
+        },
+        {
+          "field": "浏览指数",
+          "jd_key": "PVIndex",
+          "unit": "指数",
+          "verified": true
+        },
+        {
+          "field": "订单量指数",
+          "jd_key": "OrdNumIndex",
+          "unit": "指数",
+          "verified": true
+        },
+        {
+          "field": "搜索点击指数",
+          "jd_key": "SearchClickNumIndex",
+          "unit": "指数",
+          "verified": true
+        },
+        {
+          "field": "客单价指数",
+          "jd_key": "CustPriceAvgIndex",
+          "unit": "指数",
+          "verified": true
+        },
+        {
+          "field": "转化率指数",
+          "jd_key": "ToOrdRateIndex",
+          "unit": "指数",
+          "verified": true
+        },
+        {
+          "field": "商品排行",
+          "jd_key": "getProductRankListDetail → content[]",
+          "unit": "排名",
+          "verified": true,
+          "note": "含商品ID、名称、成交指数等"
+        },
+        {
+          "field": "店铺排行",
+          "jd_key": "getShopRankListDetail → content[]",
+          "unit": "排名",
+          "verified": true,
+          "note": "含店铺名、成交指数、排名等"
+        }
+      ]
+    },
+    "Marketing Context": {
+      "description": "营销活动效果分析",
+      "apis": [
+        "biz/marketing/overview.ajax",
+        "biz/marketing/getMarketingTrend.ajax",
+        "biz/marketing/getMarketingActivityList.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "营销活动列表",
+          "jd_key": "getMarketingActivityList",
+          "unit": "列表",
+          "verified": true
+        },
+        {
+          "field": "营销趋势",
+          "jd_key": "getMarketingTrend",
+          "unit": "趋势",
+          "verified": true
+        },
+        {
+          "field": "营销概览",
+          "jd_key": "overview",
+          "unit": "概览",
+          "verified": true
+        }
+      ]
+    },
+    "Supply Chain Context": {
+      "description": "库存健康与供应链分析",
+      "apis": [
+        "stock/getAlarmOverview.ajax",
+        "stock/getHealthOverview.ajax",
+        "stock/getIndicatorOverview.ajax",
+        "stock/getIndicatorSpotRateTrend.ajax",
+        "stock/getIndicatorTurnoverTrend.ajax",
+        "stock/getIndicatorUnsaleTrend.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "库存预警概览",
+          "jd_key": "getAlarmOverview",
+          "unit": "概览",
+          "verified": true
+        },
+        {
+          "field": "库存健康概览",
+          "jd_key": "getHealthOverview",
+          "unit": "概览",
+          "verified": true
+        },
+        {
+          "field": "现货率趋势",
+          "jd_key": "getIndicatorSpotRateTrend",
+          "unit": "%",
+          "verified": true
+        },
+        {
+          "field": "周转趋势",
+          "jd_key": "getIndicatorTurnoverTrend",
+          "unit": "天",
+          "verified": true
+        },
+        {
+          "field": "滞销趋势",
+          "jd_key": "getIndicatorUnsaleTrend",
+          "unit": "趋势",
+          "verified": true
+        }
+      ]
+    },
+    "Competition Context": {
+      "description": "竞争分析（需要开通数据尊享包）",
+      "apis": [],
+      "verified_fields": [],
+      "status": "subscription_required",
+      "note": "竞争分析页面加载但API需数据尊享包订阅。帮助文档显示支持：竞店概况、竞店对比、竞品概况、竞品对比、竞争流失、竞争配置"
+    },
+    "Advertising Context": {
+      "description": "广告投放ROI分析",
+      "apis": [
+        "indexSummary/analysis/getIndustryTopTable.ajax"
+      ],
+      "verified_fields": [
+        {
+          "field": "行业热销排行",
+          "jd_key": "getIndustryTopTable → data[]",
+          "unit": "排行",
+          "verified": true
+        }
+      ],
+      "status": "partial",
+      "note": "广告模块(京准通)有独立入口，当前采集未覆盖。帮助文档显示：广告概况、联动分析(营销联动概览、商品联动效果)"
+    }
+  },
+  "api_relationship_graph": {
+    "common/getUserIdentities.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 3731
+    },
+    "common/getMenuTree.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 602953
+    },
+    "common/getDims.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 2291
+    },
+    "common/getModelFunc.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 1815
+    },
+    "lowcode/common/commonParam.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 2203
+    },
+    "lowcode/common/getOpenPromotionList.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 7107
+    },
+    "common/authCheck/getPopBusiModel.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 171
+    },
+    "lowcode/indexSummary/showAiEntry.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 138
+    },
+    "lowcode/indexSummary/getShopValueProposition.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 817
+    },
+    "lowcode/common/getHomeNotice.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 5406
+    },
+    "lowcode/indexSummary/shopLevel.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 1015
+    },
+    "common/getPageFooter.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 4394
+    },
+    "lowcode/indexSummary/targetState.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 245
+    },
+    "lowcode/common/getSystemNotice.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 7501
+    },
+    "lowcode/common/getMenuNotice.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 1612
+    },
+    "lowcode/indexSummary/getProductToBeActiveDiagnosisDetail.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 124
+    },
+    "lowcode/common/getWindowNotice.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 13,
+      "total_response_size": 1612
+    },
+    "lowcode/common/getHomeBanner.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 1542
+    },
+    "lowcode/indexSummary/getShopStars.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 1283
+    },
+    "lowcode/indexSummary/summary.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 3,
+      "total_response_size": 3558
+    },
+    "lowcode/indexSummary/trend.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 3,
+      "total_response_size": 13413
+    },
+    "lowcode/indexSummary/productTop.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 3,
+      "total_response_size": 5559
+    },
+    "lowcode/indexSummary/analysis/getFlowAnalysisData.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 1929
+    },
+    "lowcode/indexSummary/analysis/getProductHead.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 198
+    },
+    "lowcode/indexSummary/analysis/getProductList.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 9772
+    },
+    "lowcode/indexSummary/analysis/getProductAnalysisData.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 2794
+    },
+    "lowcode/indexSummary/industry/getHotCate.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 164
+    },
+    "lowcode/indexSummary/analysis/getFlowHead.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 181
+    },
+    "lowcode/indexSummary/analysis/getChannelList.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 28017
+    },
+    "lowcode/indexSummary/analysis/getIndustryTopTable.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 28477
+    },
+    "lowcode/indexSummary/analysis/getProductListByChannel.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 4890
+    },
+    "lowcode/indexSummary/analysis/getIndustryHead.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 1,
+      "total_response_size": 168
+    },
+    "lowcode/common/emergency.ajax": {
+      "pages": [
+        "首页"
+      ],
+      "total_calls": 2,
+      "total_response_size": 368
+    },
+    "announcement/getAnnouncement.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 41,
+      "total_response_size": 12341
+    },
+    "common/getMenuTreeData.ajax": {
+      "pages": [
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 7,
+      "total_response_size": 320446
+    },
+    "announcement/getLocalAnnouncement.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 41,
+      "total_response_size": 1845
+    },
+    "getPageInfo.ajax?menuCode=marketingtoolSummary&path=%2Fmarketweb%2Fsz%2Fview%2Fmarketing%2FmarketingOverview.html/getPageInfo.ajax": {
+      "pages": [
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 7,
+      "total_response_size": 13342
+    },
+    "other/overview.ajax": {
+      "pages": [
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 7,
+      "total_response_size": 10122
+    },
+    "other/getMarketingTrend.ajax": {
+      "pages": [
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 7,
+      "total_response_size": 21413
+    },
+    "other/getMarketingActivityList.ajax": {
+      "pages": [
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 7,
+      "total_response_size": 8960
+    },
+    "getDefaultDt.ajax?tenantId=3/getDefaultDt.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 16,
+      "total_response_size": 944
+    },
+    "getVenderCategory.ajax?dt=2026-06-29&tenantId=3/getVenderCategory.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 2264
+    },
+    "getIndicatorOverview.ajax?dt=2026-06-29&tenantId=3/getIndicatorOverview.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 4336
+    },
+    "getAlarmStockOut.ajax/getAlarmStockOut.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 720
+    },
+    "getIndicatorSpotRateTrend.ajax?dt=2026-06-29&tenantId=3/getIndicatorSpotRateTrend.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 7064
+    },
+    "getIndicatorUnsaleTrend.ajax?dt=2026-06-29&tenantId=3/getIndicatorUnsaleTrend.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 8040
+    },
+    "getVenderIndustry.ajax?dt=2026-06-29&tenantId=3/getVenderIndustry.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 456
+    },
+    "getHealthOverview.ajax?dt=2026-06-29&tenantId=3/getHealthOverview.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 3360
+    },
+    "getVenderStore.ajax?dt=2026-06-29&tenantId=3/getVenderStore.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 552
+    },
+    "getAlarmOverview.ajax?areaType=0&dt=2026-06-29&tenantId=3/getAlarmOverview.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 2488
+    },
+    "getIndicatorTurnoverTrend.ajax?dt=2026-06-29&tenantId=3/getIndicatorTurnoverTrend.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览"
+      ],
+      "total_calls": 8,
+      "total_response_size": 5880
+    },
+    "common/getNewMenuTreeData.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 34,
+      "total_response_size": 1557132
+    },
+    "getPageInfo.ajax?menuCode=custSummarys&path=%2Fszweb%2Fsz%2Fview%2Fgrowth%2Fsummary.html/getPageInfo.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 17154
+    },
+    "other/whiteList.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 1143
+    },
+    "other/getReachTypeConfig.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 2016
+    },
+    "other/dateRange.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 1413
+    },
+    "other/summary.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 3105
+    },
+    "other/shopAsset.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 36,
+      "total_response_size": 13860
+    },
+    "other/diagnosis.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 6003
+    },
+    "other/trend.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 8091
+    },
+    "other/conversionEffect.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 5940
+    },
+    "other/shopGoodsList.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 83178
+    },
+    "other/audienceInfo.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 9,
+      "total_response_size": 3951
+    },
+    "getPageInfo.ajax?menuCode=industryRealtimes&path=%2Fszweb%2Fsz%2Fview%2FindustryMarket%2FindustryRealTimeNew.html/getPageInfo.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 10,
+      "total_response_size": 19070
+    },
+    "other/getUserCategoryList.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 10,
+      "total_response_size": 7650
+    },
+    "other/getRealSeriesData.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 90,
+      "total_response_size": 1259910
+    },
+    "other/getRealSummaryData.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 90,
+      "total_response_size": 1924140
+    },
+    "other/getProductRankListDetail.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 120,
+      "total_response_size": 10904820
+    },
+    "other/getShopRankListDetail.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "流量-流量概览",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 120,
+      "total_response_size": 10075020
+    },
+    "common/authCheck/lkActivityLists.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "客户-客户总览"
+      ],
+      "total_calls": 24,
+      "total_response_size": 2976
+    },
+    "getPageInfo.ajax?menuCode=isvNew&path=%2Fszweb%2Fsz%2Fview%2Ffacilitator%2FsmartSelection.html/getPageInfo.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 15,
+      "total_response_size": 28455
+    },
+    "other/list.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 15,
+      "total_response_size": 1290
+    },
+    "other/table.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 15,
+      "total_response_size": 1290
+    },
+    "attrAnalysis/getCategory.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 15,
+      "total_response_size": 30315
+    },
+    "noOrderPrompt.ajax?level3menuCode=isvNew/noOrderPrompt.ajax": {
+      "pages": [
+        "供应链-库存预警",
+        "实时-实时总览",
+        "首页",
+        "报表-我的报表",
+        "交易-交易概况",
+        "服务-服务分析",
+        "行业-大盘动态",
+        "揽客-购物车营销",
+        "流量-流量概览",
+        "竞争-竞店概况",
+        "商品-商品概况",
+        "营销-营销概览",
+        "业务专区",
+        "客户-客户总览",
+        "智能工具-智能选品"
+      ],
+      "total_calls": 15,
+      "total_response_size": 8310
+    }
+  },
+  "key_findings": [
+    "✅ 首页(summary.ajax)是最丰富的数据源 — GMV、订单、访客、转化率、客单价全部可获取",
+    "✅ 行业数据均为指数化 — 无法获取行业绝对GMV，但指数趋势可用于分析",
+    "✅ 客户增长API暴露新老客分层 — 可用于客户生命周期分析",
+    "⚠️ 竞争分析模块需要数据尊享包订阅 — 当前无API数据返回",
+    "⚠️ 广告模块(京准通)有独立域名入口 — 当前采集未完全覆盖",
+    "⚠️ 实时/流量/服务页面API域名特殊 — SPA导航可能跨子域名，导致当前页面未能捕获API",
+    "⚠️ 揽客页面返回空数据(196B可见文本) — 可能需要特定店铺权限",
+    "📊 JDR指标键命名规律: jdr_sch_{domain}_{metric}_{source} — 可按规律解析",
+    "📊 所有核心指标均带 ##compare (环比) 和 ##compareValue (对比值) 变体"
+  ],
+  "next_actions": [
+    "P0005.1-extend: 扩展CDP Connector覆盖行业、客户、营销、供应链API",
+    "D0002.1: 深入解析indexSummary API的完整JDR指标映射(需要多天数据对比)",
+    "D0002.2: 订阅数据尊享包后复采竞争分析模块",
+    "D0002.3: 分析跨子域名SPA路由机制，修复实时/流量/服务页面API捕获",
+    "D0002.4: 建立JDR Key → Canonical Name自动映射规则引擎"
+  ]
+}

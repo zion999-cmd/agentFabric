@@ -1,0 +1,422 @@
+{
+  "resources": [
+    {
+      "name": "https://jm-static.jd.com/lib/jmsdk-pc/jmsdkPC.min.js",
+      "type": "script",
+      "duration": 44.69999998807907
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/runtime-dbcd5248.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/jdPkg-d2b070c0-c5079343.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/jdPkg-0c59504d-676c9adc.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/jdPkg-33c6ff4f-f3a6c28d.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/jdPkg-8963f1d6-c72a9b5d.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/jdPkg-1504318c-738e5b72.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/jdPkg-8e9e0de0-31e0401b.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/chartPkg-51c34a3e.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/vendors-d5f52041.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/5177-9a505740.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/js/index/home-26898743.js",
+      "type": "script",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/css/index/home-c898ba1d.css",
+      "type": "link",
+      "duration": 0
+    },
+    {
+      "name": "https://sgm-static.jd.com/sgm-web-4.2.0.js",
+      "type": "script",
+      "duration": 10.199999988079071
+    },
+    {
+      "name": "https://ux-listen.s3-cache-accelerate.cn-north-1.jdcloud-oss.com/pc-scene-research/ux-scene-research-v3.js",
+      "type": "script",
+      "duration": 16.19999998807907
+    },
+    {
+      "name": "https://wlssl.jd.com/joya.js",
+      "type": "script",
+      "duration": 12.600000023841858
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/font/JINGDONGLangZhengTi2-Regular-2991fd27.ttf",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/font/Roboto-b4f3b86c.woff",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/20260623210147/static/font/JINGDONGLangZhengTi2-Light-f2640062.ttf",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://sgm-static.jd.com/sgm-web-main-4.2.0.js",
+      "type": "script",
+      "duration": 2.300000011920929
+    },
+    {
+      "name": "https://mercury.jd.com/log.gif?t=www.100000&m=JA2024_135017&pin=%25E7%25A5%2581%25E9%2597%25A8%25E7%25BA%25A2%25E8%258C%25B6%25E6%2597%2597%25E8%2588%25B0%25E5%25BA%2597_%25E5%2593%25B2&uid=1782267853328384712265&sid=1782267853328384712265|8",
+      "type": "beacon",
+      "duration": 50.400000005960464
+    },
+    {
+      "name": "https://stream-outside.jd.com/checkWhiteList?code=JA2024_135017",
+      "type": "xmlhttprequest",
+      "duration": 66.59999999403954
+    },
+    {
+      "name": "https://storage.360buyimg.com/jmt/JDZhengHT-EN-Regular.woff",
+      "type": "css",
+      "duration": 5.4000000059604645
+    },
+    {
+      "name": "https://storage.360buyimg.com/jmt/JDRoboto.woff",
+      "type": "css",
+      "duration": 1.600000023841858
+    },
+    {
+      "name": "https://mercury.jd.com/log.gif?t=exp_log.100000&m=JA2024_135017&pin=%25E7%25A5%2581%25E9%2597%25A8%25E7%25BA%25A2%25E8%258C%25B6%25E6%2597%2597%25E8%2588%25B0%25E5%25BA%2597_%25E5%2593%25B2&uid=1782267853328384712265&sid=1782267853328384712265|8",
+      "type": "beacon",
+      "duration": 32.099999994039536
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-brand-m-test/svgs/loading-dot-primary.svg",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://szgateway.jd.com/api/common/getUserIdentities.ajax",
+      "type": "xmlhttprequest",
+      "duration": 130.90000000596046
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/favicon-29929a73.ico",
+      "type": "other",
+      "duration": 231.80000001192093
+    },
+    {
+      "name": "https://szgateway.jd.com/api/common/getMenuTree.ajax",
+      "type": "xmlhttprequest",
+      "duration": 77.5
+    },
+    {
+      "name": "https://szgateway.jd.com/api/common/getDims.ajax?menuCode=indexSummary",
+      "type": "xmlhttprequest",
+      "duration": 84.09999999403954
+    },
+    {
+      "name": "https://szgateway.jd.com/api/common/getModelFunc.ajax?menuCode=indexSummary",
+      "type": "xmlhttprequest",
+      "duration": 71.80000001192093
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/commonParam.ajax?menuCode=indexSummary",
+      "type": "xmlhttprequest",
+      "duration": 78.59999999403954
+    },
+    {
+      "name": "https://api.m.jd.com/?appid=listen&functionId=getComponentSceneSatisfaction&loginType=3",
+      "type": "fetch",
+      "duration": 51.400000005960464
+    },
+    {
+      "name": "https://jzt.jd.com/lite/js/jzt-lite-ctr.js",
+      "type": "script",
+      "duration": 43.599999994039536
+    },
+    {
+      "name": "https://img14.360buyimg.com/img/jfs/t1/315358/20/23631/5138/689450d4F67561ae4/484fba9d2e82144e.webp",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img20.360buyimg.com/img/jfs/t1/303747/29/24290/10926/68946d43F78f70151/04586418d31bb488.webp",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img13.360buyimg.com/img/jfs/t1/288704/1/22952/11040/68946daeF813eac0e/b0e08628a4845c56.webp",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img14.360buyimg.com/img/jfs/t1/312891/34/23611/11402/68946dcdFeecdac2a/fcd548f48e203f6b.webp",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img13.360buyimg.com/img/jfs/t1/324582/25/1809/5968/689450c0F5e20aa45/cf2ee27af1cae0c9.webp",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/getOpenPromotionList.ajax",
+      "type": "xmlhttprequest",
+      "duration": 88.59999999403954
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/productTitleImg-daf5209a.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/viewflowTitleImg-babb937f.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/industryTitleImg-32332f75.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/businessTitleImg-88789abd.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/shop-bg-6ef76bc7.png",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/shop-star-text1-3c285aa6.png",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/shop-star-text2-b008b5c5.png",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/shop-right-7d7a89b4.png",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/themeTabBackground-f45c8aee.png",
+      "type": "css",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/crypto-js.min.js",
+      "type": "script",
+      "duration": 1.300000011920929
+    },
+    {
+      "name": "https://img10.360buyimg.com/imgcloud/jfs/t1/237210/27/15759/18568/66262c3aF22be2182/610c0538879938c8.png",
+      "type": "img",
+      "duration": 2
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/getProductToBeActiveDiagnosisDetail.ajax",
+      "type": "xmlhttprequest",
+      "duration": 96.80000001192093
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/getHomeBanner.ajax",
+      "type": "xmlhttprequest",
+      "duration": 86.90000000596046
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/getHomeNotice.ajax",
+      "type": "xmlhttprequest",
+      "duration": 89.40000000596046
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/targetState.ajax",
+      "type": "xmlhttprequest",
+      "duration": 96.7000000178814
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/showAiEntry.ajax",
+      "type": "xmlhttprequest",
+      "duration": 89
+    },
+    {
+      "name": "https://szgateway.jd.com/api/common/authCheck/getPopBusiModel.ajax",
+      "type": "xmlhttprequest",
+      "duration": 85.59999999403954
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/getShopStars.ajax",
+      "type": "xmlhttprequest",
+      "duration": 102.30000001192093
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/getShopValueProposition.ajax",
+      "type": "xmlhttprequest",
+      "duration": 85.69999998807907
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/shopLevel.ajax",
+      "type": "xmlhttprequest",
+      "duration": 90.2999999821186
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/analysis/getProductAnalysisData.ajax",
+      "type": "xmlhttprequest",
+      "duration": 396
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/analysis/getFlowAnalysisData.ajax",
+      "type": "xmlhttprequest",
+      "duration": 289.69999998807907
+    },
+    {
+      "name": "https://szgateway.jd.com/api/common/getPageFooter.ajax",
+      "type": "xmlhttprequest",
+      "duration": 86.09999999403954
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/getWindowNotice.ajax",
+      "type": "xmlhttprequest",
+      "duration": 87.09999999403954
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/getSystemNotice.ajax",
+      "type": "xmlhttprequest",
+      "duration": 86
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/common/getMenuNotice.ajax?menuCode=indexSummary",
+      "type": "xmlhttprequest",
+      "duration": 103.5
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/summary.ajax",
+      "type": "xmlhttprequest",
+      "duration": 96.89999997615814
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/productTop.ajax",
+      "type": "xmlhttprequest",
+      "duration": 89.2000000178814
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/trend.ajax",
+      "type": "xmlhttprequest",
+      "duration": 96.60000002384186
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/ai-button-600174a3.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img11.360buyimg.com/sz/jfs/t1/468440/2/20345/40244/6a506556F439168c7/03042d011894942d.jpg",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img11.360buyimg.com/sz/jfs/t1/435465/22/11292/56225/6a0bc3b8Fb47bb043/03042d011856dcd2.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img11.360buyimg.com/sz/jfs/t1/440657/36/10670/23015/6a17aaa1Fcf65aff5/03042d0118662589.jpg",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/analysis/getProductHead.ajax",
+      "type": "xmlhttprequest",
+      "duration": 102.2999999821186
+    },
+    {
+      "name": "https://szgateway.jd.com/api/lowcode/indexSummary/analysis/getProductList.ajax",
+      "type": "xmlhttprequest",
+      "duration": 208.90000000596046
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/hotProductRank1-7fedaf85.svg",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://storage.360buyimg.com/sz-resource/szweb/static/img/hotProductRank2-90b6ee35.svg",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img10.360buyimg.com/n3/jfs/t1/422105/5/11485/454148/69eebe94F5c45340f/0083320320700a17.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img10.360buyimg.com/n3/jfs/t1/204039/2/51786/92018/674ed0b1Ff62b0577/ea519b059ce448fc.png",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://img10.360buyimg.com/n3/jfs/t1/226888/10/30121/115640/67a95b0aF49c96de7/a74fe20de01ee22c.jpg",
+      "type": "img",
+      "duration": 0
+    },
+    {
+      "name": "https://sgm-w.jd.com/h5",
+      "type": "fetch",
+      "duration": 49.30000001192093
+    },
+    {
+      "name": "https://sgm-w.jd.com/h5",
+      "type": "fetch",
+      "duration": 97.7000000178814
+    }
+  ],
+  "api_calls": [
+    {
+      "name": "https://api.m.jd.com/?appid=listen&functionId=getComponentSceneSatisfaction&loginType=3",
+      "type": "fetch",
+      "duration": 51.400000005960464
+    }
+  ],
+  "data_stores": {}
+}

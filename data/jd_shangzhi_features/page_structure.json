@@ -1,0 +1,48 @@
+{
+  "headings": [
+    {
+      "level": "H1",
+      "text": ""
+    },
+    {
+      "level": "H3",
+      "text": ""
+    },
+    {
+      "level": "H2",
+      "text": "京东商智首页用户手册"
+    }
+  ],
+  "images": [
+    {
+      "src": "//bidstatic.jd.com/ibd/sz/build/static/img/try_new_sz-d36d0c0ea1d.png",
+      "alt": "体验新版"
+    }
+  ],
+  "tables": [],
+  "lists": [
+    {
+      "tag": "UL",
+      "items": 16,
+      "preview": [
+        "首页",
+        "实时",
+        "流量",
+        "商品",
+        "交易"
+      ]
+    },
+    {
+      "tag": "UL",
+      "items": 10,
+      "preview": [
+        "京东商智商家反馈群一",
+        "550683180(可加)",
+        "全球购数据罗盘商家群",
+        "463369960",
+        "数据罗盘商家反馈群三"
+      ]
+    }
+  ],
+  "iframes": []
+}

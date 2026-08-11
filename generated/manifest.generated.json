@@ -1,0 +1,35 @@
+{
+  "platform": "--platform",
+  "generated_at": "2026-07-03T17:12:07.987Z",
+  "signal_types": [
+    "daily_summary",
+    "campaign_performance",
+    "hourly_traffic"
+  ],
+  "business_context": [
+    "advertising",
+    "customer",
+    "industry",
+    "marketing",
+    "product",
+    "search",
+    "store",
+    "supply_chain",
+    "traffic",
+    "transaction"
+  ],
+  "evidence_chain": [
+    "Screenshot (page capture)",
+    "DOM snapshot (page state)",
+    "Raw API JSON (platform response)",
+    "Parsed metrics (indicator → canonical)",
+    "Normalized Business Object (EnterpriseSignalPayload)"
+  ],
+  "supported_actions": [
+    "summarize_top_ranking",
+    "analyze_trends",
+    "detect_anomalies"
+  ],
+  "total_apis_discovered": 70,
+  "apis_in_blueprint": 70
+}

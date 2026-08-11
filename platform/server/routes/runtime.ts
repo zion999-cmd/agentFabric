@@ -1,0 +1,339 @@
+// Runtime HTTP Routes — expose Runtime Kernel operations via HTTP.
+// P0006: The Runtime Kernel is currently CLI-only. These routes make it accessible
+// to the Workspace UI and Chat endpoint via HTTP.
+//
+// Thin wrappers — all business logic stays in the kernel. These routes are
+// HTTP adapters that parse requests, call kernel methods, and return JSON.
+
+import { Router } from 'express';
+import type { Database as Db } from 'better-sqlite3';
+import { z } from 'zod';
+import { fail, ok } from '../envelope.js';
+import { createRuntimeKernel, createEmptyBlueprint } from '#app/runtime/kernel/index.js';
+import type { RuntimeKernel } from '#app/runtime/kernel/index.js';
+import { loadBlueprint } from '#app/connectors/binding/loader.js';
+import { acquireJdMultiPage } from '#app/connectors/jd/acquisition/cdp-client.js';
+import { getDataPages } from '#app/connectors/jd/blueprint.js';
+import { saveEvidence } from '#app/connectors/evidence/store.js';
+import { parseJdPayload } from '#app/connectors/jd/parsers/index.js';
+import { SignalFacade } from '#app/analysis/metrics/facade.js';
+import { loadEvidence } from '#app/connectors/evidence/store.js';
+
+// ---- Request Schemas ----
+
+const CollectRequestSchema = z.object({
+  platform: z.string().default('jd'),
+  shopId: z.string().min(1),
+  date: z.string().optional(),
+  mock: z.boolean().default(true),
+  capabilities: z.array(z.string()).optional(),
+  shopName: z.string().optional(),
+});
+
+const ReplayRequestSchema = z.object({
+  shopId: z.string().min(1).default('jd_shop_001'),
+  from: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'from must be YYYY-MM-DD'),
+  to: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'to must be YYYY-MM-DD'),
+});
+
+// ---- Kernel Lazy Initialization ----
+
+let _kernel: RuntimeKernel | null = null;
+
+/** Get or create the RuntimeKernel singleton, with empty blueprint fallback. */
+const getKernel = (db: Db): RuntimeKernel => {
+  if (_kernel) return _kernel;
+  let blueprint;
+  try {
+    blueprint = loadBlueprint('jd');
+  } catch {
+    blueprint = createEmptyBlueprint('jd');
+  }
+  _kernel = createRuntimeKernel(db, blueprint);
+  return _kernel;
+};
+
+/** Reset the kernel singleton (for testing). */
+export const resetKernel = (): void => {
+  _kernel = null;
+};
+
+// ---- Router ----
+
+export const runtimeRouter = (db: Db): Router => {
+  const router = Router();
+
+  // POST /api/runtime/collect — trigger a single-day runtime execution.
+  router.post('/runtime/collect', async (req, res) => {
+    const parsed = CollectRequestSchema.safeParse(req.body ?? {});
+    if (!parsed.success) {
+      fail(res, 400, `Invalid request: ${parsed.error.message}`);
+      return;
+    }
+
+    try {
+      const { shopId, date, mock, capabilities, shopName } = parsed.data;
+
+      // Reject future dates — business data cannot exist in the future
+      const today = new Date().toISOString().slice(0, 10);
+      if (date && date > today) {
+        fail(res, 400, `Cannot collect future date: ${date}. Today is ${today}.`);
+        return;
+      }
+
+      const kernel = getKernel(db);
+
+      const execOpts: Parameters<typeof kernel.execute>[0] = {
+        shopId,
+        mock,
+      };
+      if (date !== undefined) execOpts.date = date;
+      if (capabilities !== undefined) execOpts.capabilities = capabilities;
+      if (shopName !== undefined) execOpts.shopName = shopName;
+
+      const result = await kernel.execute(execOpts);
+
+      ok(res, {
+        success: result.success,
+        platform: result.platform,
+        shopId: result.shopId,
+        date: result.date,
+        signalCount: result.signals.length,
+        evidenceCount: result.evidence.length,
+        signals: result.signals,
+        evidence: result.evidence,
+        errors: result.errors,
+        blueprintDriven: result.blueprintDriven,
+      });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Runtime execution failed');
+    }
+  });
+
+  // GET /api/runtime/executions — list recent executions.
+  // Query params: ?platform=jd&limit=20
+  router.get('/runtime/executions', (req, res) => {
+    try {
+      const platform = (req.query['platform'] as string | undefined) ?? 'jd';
+      const limit = Math.min(
+        Number(req.query['limit']) || 200,
+        366,
+      );
+
+      // An "execution" is a set of signals + evidence for a given date.
+      // We group signals by date to reconstruct execution history.
+      const allSignals = SignalFacade.listAll(db, 'product');
+
+      // Group by date
+      const byDate = new Map<string, { signals: number; evidence: number }>();
+      for (const signal of allSignals) {
+        const date = signal.observed_at?.slice(0, 10);
+        if (!date) continue;
+        const entry = byDate.get(date) ?? { signals: 0, evidence: 0 };
+        entry.signals++;
+        byDate.set(date, entry);
+      }
+
+      // Resolve evidence source for each date (P0006.3.2.1 — provenance-aware).
+      const evidenceSource = (date: string): string => {
+        try {
+          const ev = loadEvidence('jd', date, 'summary');
+          if (!ev) return 'none';
+          const m = ev.record.metadata;
+          // P0006.3.2.1: prefer acquisition_method, fall back to deprecated method
+          const acq = m.acquisition_method ?? m.method;
+          if (acq === 'cdp') return 'cdp';
+          if (acq === 'mock') return 'mock';
+          if (acq === 'import-agentcms') return 'import';
+          return acq ?? 'unknown';
+        } catch { return 'unknown'; }
+      };
+
+      // Convert to execution list, sorted by date desc
+      const executions = [...byDate.entries()]
+        .sort(([a], [b]) => b.localeCompare(a))
+        .slice(0, limit)
+        .map(([date, counts]) => ({
+          date,
+          platform,
+          shopId: 'jd_shop_001',
+          signalCount: counts.signals,
+          evidenceCount: counts.evidence,
+          evidenceSource: evidenceSource(date),
+          status: 'completed' as const,
+        }));
+
+      ok(res, executions, { total: executions.length, page: 1, limit });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to list executions');
+    }
+  });
+
+  // GET /api/runtime/executions/:date — get execution detail for a specific date.
+  router.get('/runtime/executions/:date', (req, res) => {
+    try {
+      const executionDate = req.params['date'];
+      if (!executionDate || !/^\d{4}-\d{2}-\d{2}$/.test(executionDate)) {
+        fail(res, 400, 'Invalid date format. Use YYYY-MM-DD.');
+        return;
+      }
+
+      // Load signals for this date
+      const allSignals = SignalFacade.listAll(db, 'product');
+      const dateSignals = allSignals.filter(
+        (s) => s.observed_at?.startsWith(executionDate),
+      );
+
+      // Count by signal type
+      const signalTypes = new Map<string, number>();
+      for (const s of dateSignals) {
+        const name = s.signal_name;
+        signalTypes.set(name, (signalTypes.get(name) ?? 0) + 1);
+      }
+
+      ok(res, {
+        date: executionDate,
+        platform: 'jd',
+        shopId: 'jd_shop_001',
+        signalCount: dateSignals.length,
+        signals: dateSignals,
+        signalBreakdown: [...signalTypes.entries()].map(([name, count]) => ({
+          signal_name: name,
+          count,
+        })),
+        evidenceCount: 0, // Evidence records are tracked separately
+        status: dateSignals.length > 0 ? 'completed' : 'not_found',
+      });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to load execution detail');
+    }
+  });
+
+  // GET /api/runtime/status — runtime availability and blueprint info.
+  router.get('/runtime/status', (_req, res) => {
+    try {
+      const kernel = getKernel(db);
+      ok(res, {
+        available: true,
+        platform: kernel.platform,
+        blueprint: {
+          generated_at: kernel.blueprint.generated_at,
+          discovery_api_count: kernel.blueprint.discovery_api_count,
+          signal_types: kernel.blueprint.manifest.signal_types,
+          supported_actions: kernel.blueprint.manifest.supported_actions,
+          total_apis_discovered: kernel.blueprint.manifest.total_apis_discovered,
+        },
+      });
+    } catch (err) {
+      ok(res, {
+        available: false,
+        error: err instanceof Error ? err.message : 'Runtime unavailable',
+      });
+    }
+  });
+
+  // POST /api/runtime/replay — replay historical data over a date range.
+  // P0006.2: Loops over dates and calls kernel.execute() for each.
+  // Kernel, Signal, Evidence, Ranking all unchanged.
+  router.post('/runtime/replay', async (req, res) => {
+    const parsed = ReplayRequestSchema.safeParse(req.body ?? {});
+    if (!parsed.success) {
+      fail(res, 400, `Invalid request: ${parsed.error.message}`);
+      return;
+    }
+
+    try {
+      const { shopId, from, to } = parsed.data;
+
+      // Validate date range
+      const fromDate = new Date(from);
+      const toDate = new Date(to);
+      if (fromDate > toDate) {
+        fail(res, 400, 'from date must be before or equal to to date');
+        return;
+      }
+
+      // Reject future dates
+      const today = new Date().toISOString().slice(0, 10);
+      if (from > today || to > today) {
+        fail(res, 400, `Cannot replay future dates. Today is ${today}.`);
+        return;
+      }
+
+      // Limit range to prevent accidentally replaying years of data
+      const dayCount = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+      if (dayCount > 366) {
+        fail(res, 400, `Date range too large (${dayCount} days). Maximum 366 days.`);
+        return;
+      }
+
+      const { runReplay } = await import('#app/runtime/replay/replay-runner.js');
+      const kernel = getKernel(db);
+      const result = await runReplay(db, kernel.blueprint, { shopId, from, to });
+
+      ok(res, {
+        days: result.days,
+        completed: result.completed,
+        failed: result.failed,
+        signals: result.signals,
+        evidence: result.evidence,
+        executions: result.executions,
+        errors: result.errors.slice(0, 10), // Only return first 10 errors
+      });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Replay failed');
+    }
+  });
+
+  // POST /api/runtime/discover — full JD 商智 multi-page discovery (P0005.3).
+  router.post('/runtime/discover', async (_req, res) => {
+    try {
+      const date = new Date().toISOString().slice(0, 10);
+      const pages = getDataPages();
+      const result = await acquireJdMultiPage({ pages, date });
+
+      // Save evidence and generate signals per page
+      const perPage: Record<string, unknown>[] = [];
+      for (const r of result.results) {
+        const entry: Record<string, unknown> = {
+          page: r.page,
+          success: r.success,
+          apiCount: r.apiCount,
+        };
+        if (r.success && r.payload) {
+          const now = new Date().toISOString();
+          let evidenceCount = 0;
+          for (const [dtype, data] of [['summary', r.payload.summary], ['trend', r.payload.trend], ['productTop', r.payload.productTop]] as const) {
+            if (data && Array.isArray(data) && data.length > 0) {
+              saveEvidence('jd', 'jd_shop_001', date, `${r.page.id}_${dtype}`, data, {
+                acquisition_method: 'cdp', processing_method: 'runtime', processed_at: now,
+                tags: [`page:${r.page.id}`],
+              });
+              evidenceCount++;
+            }
+          }
+          try {
+            const parsed = parseJdPayload({ date, summary: r.payload.summary||[], trend: r.payload.trend||[], productTop: r.payload.productTop||[] });
+            entry['gmv'] = parsed.summary.gmv;
+            entry['orders'] = parsed.summary.orders;
+            entry['visitors'] = parsed.summary.visitors;
+          } catch { /* page doesn't have summary format */ }
+          entry['evidenceCount'] = evidenceCount;
+        }
+        if (r.error) entry['error'] = r.error;
+        perPage.push(entry);
+      }
+
+      ok(res, {
+        pagesVisited: result.pagesVisited,
+        pagesWithData: result.pagesWithData,
+        results: perPage,
+        errors: result.errors,
+      });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Discovery failed');
+    }
+  });
+
+  return router;
+};

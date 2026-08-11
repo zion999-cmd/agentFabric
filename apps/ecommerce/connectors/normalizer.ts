@@ -44,6 +44,10 @@ const mapBySpec = (
   return out as unknown as EnterpriseSignalPayload;
 };
 
+// P0005.4: JD_SPEC / TMALL_SPEC remain as authoritative fallbacks.
+// When the binding layer is initialized, it can override via loadNormalizerPlan.
+// These hand-written specs guarantee correctness for business-critical metrics.
+
 const JD_SPEC: Readonly<Record<string, readonly string[]>> = {
   gmv: ['gmv', 'totalGMV', 'turnover'],
   orders: ['orders', 'orderCount', 'totalOrders'],
@@ -160,7 +164,7 @@ export const normalizeSignal = (input: SignalCollectorInput): EnterpriseSignal =
     timestamp: input.timestamp,
   });
   const ingestedAt = nowIso();
-  return {
+  const signal: EnterpriseSignal = {
     signal_id: input.signal_id,
     entity_type: inferEntityType(signalType),
     entity_id: input.shop_id,
@@ -176,6 +180,7 @@ export const normalizeSignal = (input: SignalCollectorInput): EnterpriseSignal =
       ingested_at: ingestedAt,
     },
     window: inferWindow(signalType),
+    observed_at: input.timestamp,  // P0006.1.1: business observation time
     lifecycle: {
       version: 1,
       status: 'active',
@@ -183,7 +188,8 @@ export const normalizeSignal = (input: SignalCollectorInput): EnterpriseSignal =
     },
     trace: { pipeline_run_id: uuid(), transform_hash: transformHash },
     metrics,
-    ...(input.raw_payload ? { raw_payload: input.raw_payload } : {}),
-    ...(input.trace_id ? { collector_trace_id: input.trace_id } : {}),
   };
+  if (input.raw_payload !== undefined) { signal.raw_payload = input.raw_payload; }
+  if (input.trace_id !== undefined) { signal.collector_trace_id = input.trace_id; }
+  return signal;
 };

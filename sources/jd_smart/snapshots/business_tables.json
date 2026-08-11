@@ -1,0 +1,3136 @@
+{
+  "首页": {
+    "business_tables": [
+      {
+        "index": 0,
+        "header_count": 0,
+        "row_count": 2,
+        "headers": [],
+        "first_row": [
+          "祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 特级红香螺100gSKU: 10103006726696",
+          "￥82.15"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-t7z07w overflow-",
+        "table_class": ""
+      },
+      {
+        "index": 1,
+        "header_count": 0,
+        "row_count": 2,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "成交金额",
+          "访客数",
+          "成交转化率",
+          "客单价",
+          "成交客户数",
+          "成交商品件数",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw",
+        "table_class": ""
+      },
+      {
+        "index": 2,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "渠道名称",
+          "引入成交金额",
+          "引入商详访客数",
+          "访客-成交转化率",
+          "引入成交客户数",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "table_class": ""
+      },
+      {
+        "index": 3,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "店铺",
+          "成交金额",
+          "访客数",
+          "成交单量",
+          "搜索点击次数"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "table_class": ""
+      },
+      {
+        "index": 4,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "月份",
+          "2025年销售额",
+          "2026年目标值",
+          "增长率",
+          "2026年销售额",
+          "目标完成率"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "table_class": ""
+      }
+    ],
+    "metric_groups": [
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1dg2lwm jmtv2",
+        "text": "成交金额￥801234567880358146925703681469257036814792.8086531986421975420875310864319764209753208653180741852852963074185185296307417418529630741741852963074074185环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "商品访客数8012345环比-28.57%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交客户数801环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交转化率80128012345678901234567890.8073073073073073073073073073073080493827160493827160493827160493827160493827160%环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交单量801环比--"
+      }
+    ],
+    "filter_panels": [],
+    "chart_titles": [],
+    "card_labels": [
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2 summary-title",
+        "text": "经营概览当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天天周月环比同比查看更多"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "经营概览当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天天周月环比同比查看更多"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天天周月环比同比查看更多"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1dg2lwm jmtv2",
+        "text": "成交金额￥801234567880358146925703681469257036814792.8086531986421975420875310864319764209753208653180741852852963074185185296307417418529630741741852963074074185环比--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1dg2lwm jmtv2 jmt-summary-card-s",
+        "text": "成交金额￥801234567880358146925703681469257036814792.8086531986421975420875310864319764209753208653180741852852963074185185296307417418529630741741852963074074185环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1dg2lwm jmtv2",
+        "text": "成交金额￥801234567880358146925703681469257036814792.8086531986421975420875310864319764209753208653180741852852963074185185296307417418529630741741852963074074185环比--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥801234567880358146925703681469257036814792.8086531986421975420875310864319764209753208653180741852852963074185185296307417418529630741741852963074074185"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥801234567880358146925703681469257036814792.8086531986421975420875310864319764209753208653180741852852963074185185296307417418529630741741852963074074185"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "商品访客数8012345环比-28.57%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "商品访客数8012345环比-28.57%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "商品访客数8012345环比-28.57%"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "8012345"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "8012345"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-28.57%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-28.57%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交客户数801环比--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交客户数801环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交客户数801环比--"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交转化率80128012345678901234567890.8073073073073073073073073073073080493827160493827160493827160493827160493827160%环比--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交转化率80128012345678901234567890.8073073073073073073073073073073080493827160493827160493827160493827160493827160%环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交转化率80128012345678901234567890.8073073073073073073073073073073080493827160493827160493827160493827160493827160%环比--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "80128012345678901234567890.8073073073073073073073073073073080493827160493827160493827160493827160493827160%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "80128012345678901234567890.8073073073073073073073073073073080493827160493827160493827160493827160493827160%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交单量801环比--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交单量801环比--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交单量801环比--"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2 header",
+        "text": "热销商品详情"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "热销商品详情"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "实时销售累计目标设置-月至今¥56,195.31月目标未设置-年至今¥1,681,620.31年目标未设置"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "实时销售累计目标设置"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "实时销售累计目标设置"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "实时销售累计"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "公告模块📢 618投产比红利不降温！【稳赚计划3.0】延期至7月20日06-22【新商】8856立减8855，快来领取你的1元购权益~~05-25【体验】Q4满意度问卷收集中，动动小手指，让商智君听到你的心声12-02【报名】数智产品线下巡回宣讲会，再次启航，震撼来袭11-25"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "商品诊断渠道诊断您昨天有4个SPU流量下滑快立即查看您昨天有1个SPU成交转化率下滑快立即查看店铺星级星级运营店铺星级我的店铺星级5.0详情较昨日持平店铺级别我的行业：茗茶我的等级A+同级内排名67"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "商品诊断渠道诊断您昨天有4个SPU流量下滑快立即查看您昨天有1个SPU成交转化率下滑快立即查看"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2 shop-review-head",
+        "text": "商品诊断渠道诊断"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "商品诊断渠道诊断"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "商品诊断渠道诊断"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "店铺星级星级运营店铺星级我的店铺星级5.0详情较昨日持平"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2 shop-stars-head",
+        "text": "店铺星级星级运营"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "店铺星级星级运营"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "店铺星级星级运营"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "店铺级别我的行业：茗茶我的等级A+同级内排名67"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2 shop-grades-head",
+        "text": "店铺级别我的行业：茗茶"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "店铺级别我的行业：茗茶"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "我的行业：茗茶"
+      },
+      {
+        "class": "card-header-description",
+        "text": "我的行业：茗茶"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "商品分析流量分析行竞分析经营建议\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press esc"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "商品分析关注重点成交商品，提升流量、转化异常商品表现SPUSKU当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部商品成交TOP商品1流量下滑快4转化率下滑快1近7天上架2关注商品3排名商品信息成交金额访客数成交转化率客单价成交客户数成交商品件数操作祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "商品分析关注重点成交商品，提升流量、转化异常商品表现SPUSKU当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部商品"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "商品分析关注重点成交商品，提升流量、转化异常商品表现SPUSKU当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部商品"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "商品分析关注重点成交商品，提升流量、转化异常商品表现"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "SPUSKU当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部商品"
+      },
+      {
+        "class": "jmt-space jmt-space-css-1vh79s3 jmtv2 theme-analysis-card-product-head-right-rea",
+        "text": "SPUSKU当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部商品"
+      },
+      {
+        "class": "jmt-combo-date-picker jmt-combo-date-picker-css-uhmx12 jmtv2 theme-analysis-card",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "成交TOP商品1流量下滑快4转化率下滑快1近7天上架2关注商品3"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "排名商品信息成交金额访客数成交转化率客单价成交客户数成交商品件数操作祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300g*2【两罐装送礼袋】SPU: 10023923194464￥82.15昨日 ￥1,314.932昨日 27150.00%昨日 4.80%¥82.15昨日 ¥101.151昨日 131昨日 17详情"
+      },
+      {
+        "class": "theme-analysis-card-product-wrap",
+        "text": "排名商品信息成交金额访客数成交转化率客单价成交客户数成交商品件数操作祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300g*2【两罐装送礼袋】SPU: 10023923194464￥82.15昨日 ￥1,314.932昨日 27150.00%昨日 4.80%¥82.15昨日 ¥101.151昨日 131昨日 17详情"
+      },
+      {
+        "class": "theme-analysis-card-product-all",
+        "text": "排名商品信息成交金额访客数成交转化率客单价成交客户数成交商品件数操作祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300g*2【两罐装送礼袋】SPU: 10023923194464￥82.15昨日 ￥1,314.932昨日 27150.00%昨日 4.80%¥82.15昨日 ¥101.151昨日 131昨日 17详情"
+      },
+      {
+        "class": "jmt-base-table jmt-base-table-css-163zprw jmtv2 theme-analysis-card-product-tabl",
+        "text": "排名商品信息成交金额访客数成交转化率客单价成交客户数成交商品件数操作祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300g*2【两罐装送礼袋】SPU: 10023923194464￥82.15昨日 ￥1,314.932昨日 27150.00%昨日 4.80%¥82.15昨日 ¥101.151昨日 131昨日 17详情"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "流量分析关注重点成交渠道，提升流量、转化异常渠道表现当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部渠道流量TOP渠道0流量下滑快0转化率下滑快0关注渠道0排名渠道名称引入成交金额引入商详访客数访客-成交转化率引入成交客户数操作 暂无数据"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "流量分析关注重点成交渠道，提升流量、转化异常渠道表现当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部渠道"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "流量分析关注重点成交渠道，提升流量、转化异常渠道表现当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部渠道"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "流量分析关注重点成交渠道，提升流量、转化异常渠道表现"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比全部渠道"
+      },
+      {
+        "class": "jmt-combo-date-picker jmt-combo-date-picker-css-uhmx12 jmtv2 theme-analysis-card",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "流量TOP渠道0流量下滑快0转化率下滑快0关注渠道0"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "排名渠道名称引入成交金额引入商详访客数访客-成交转化率引入成交客户数操作 暂无数据"
+      },
+      {
+        "class": "theme-analysis-card-viewflow-wrap",
+        "text": "排名渠道名称引入成交金额引入商详访客数访客-成交转化率引入成交客户数操作 暂无数据"
+      },
+      {
+        "class": "theme-analysis-card-viewflow-all",
+        "text": "排名渠道名称引入成交金额引入商详访客数访客-成交转化率引入成交客户数操作 暂无数据"
+      },
+      {
+        "class": "jmt-base-table jmt-base-table-css-163zprw jmtv2 theme-analysis-card-viewflow-tab",
+        "text": "排名渠道名称引入成交金额引入商详访客数访客-成交转化率引入成交客户数操作 暂无数据"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "行竞分析关注行业动向学习榜样，监控竞争对手降低生意抢夺当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比行业数据行业成交TOP店铺0行业成交TOP商品0行业热门搜索词TOP0排名店铺成交金额访客数成交单量搜索点击次数 暂无数据"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "行竞分析关注行业动向学习榜样，监控竞争对手降低生意抢夺当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比行业数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "行竞分析关注行业动向学习榜样，监控竞争对手降低生意抢夺当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比行业数据"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "行竞分析关注行业动向学习榜样，监控竞争对手降低生意抢夺"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比行业数据"
+      },
+      {
+        "class": "jmt-space jmt-space-css-1vh79s3 jmtv2 theme-analysis-card-industry-head-right-re",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比行业数据"
+      },
+      {
+        "class": "jmt-combo-date-picker jmt-combo-date-picker-css-uhmx12 jmtv2 theme-analysis-card",
+        "text": "当前：2026-07-12 00:24:30对比：2026-07-11 00:24:30实时昨天近7天近30天环比"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "行业成交TOP店铺0行业成交TOP商品0行业热门搜索词TOP0"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "排名店铺成交金额访客数成交单量搜索点击次数 暂无数据"
+      },
+      {
+        "class": "jmt-base-table jmt-base-table-css-163zprw jmtv2 theme-analysis-card-industry-tab",
+        "text": "排名店铺成交金额访客数成交单量搜索点击次数 暂无数据"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "经营建议您当前表现良好，暂无优化建议，请继续保持～"
+      }
+    ]
+  },
+  "交易": {
+    "business_tables": [
+      {
+        "index": 0,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw jmtv2",
+        "table_class": ""
+      },
+      {
+        "index": 1,
+        "header_count": 0,
+        "row_count": 2,
+        "headers": [],
+        "first_row": [
+          "品牌",
+          "成交金额",
+          "成交金额占比",
+          "成交商品件数",
+          "成交单量",
+          "成交客户数",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "table_class": ""
+      },
+      {
+        "index": 2,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-163zprw overflow",
+        "table_class": ""
+      }
+    ],
+    "metric_groups": [
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-xh1tkp jmtv2",
+        "text": "成交金额¥5,058.48对比时间¥4,431.61环比+14.15%同行同级均值¥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "成交商品件数42对比时间45环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "成交客户数24对比时间27环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "成交单量25对比时间29环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺成交转化率5.12%对比时间7.54%环比-32.15%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "加购商品件数48对比时间-8环比+700.00%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "客单价¥210.77对比时间¥164.13环比+28.41%同行同级均值¥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺浏览量1,778对比时间1,807环比-1.60%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺访客数469对比时间358环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺平均停留时长97.25对比时间87.29环比+11.41%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "加购客户数55对比时间38环比+44.74%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "加购转化率12.11%对比时间11.52%环比+5.21%"
+      },
+      {
+        "class": "head-metric-name",
+        "text": "--"
+      },
+      {
+        "class": "head-metric-value",
+        "text": "--"
+      }
+    ],
+    "filter_panels": [],
+    "chart_titles": [],
+    "card_labels": [
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "交易概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多渠道全部查询重置"
+      },
+      {
+        "class": "sz-affix-card-head",
+        "text": "交易概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "交易概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "交易概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "sz-affix-card-content",
+        "text": "渠道全部查询重置"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "渠道全部查询重置"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "核心指标对比时间真实值同行同级对比指标配置下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "核心指标对比时间真实值同行同级对比指标配置下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "对比时间真实值同行同级对比指标配置下载数据"
+      },
+      {
+        "class": "jmt-basic-summary-card-wrapper jmt-basic-summary-card-wrapper-css-1msfslc jmtv2",
+        "text": "成交金额¥5,058.48对比时间¥4,431.61环比+14.15%同行同级均值¥12,313.45同行上级均值--成交商品件数42对比时间45环比-6.67%同行同级均值105同行上级均值--成交客户数24对比时间27环比-11.11%同行同级均值62同行上级均值--成交单量25对比时间29环比-13.79%同行同级均值65同行上级均值--店铺成交转化率5.12%对比时间7.54%环比-32."
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-xh1tkp jmtv2",
+        "text": "成交金额¥5,058.48对比时间¥4,431.61环比+14.15%同行同级均值¥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-xh1tkp jmtv2 jmt-summary-card-sm",
+        "text": "成交金额¥5,058.48对比时间¥4,431.61环比+14.15%同行同级均值¥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-xh1tkp jmtv2",
+        "text": "成交金额¥5,058.48对比时间¥4,431.61环比+14.15%同行同级均值¥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "¥5,058.48"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "¥5,058.48"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间¥4,431.61"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "¥4,431.61"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+14.15%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+14.15%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值¥12,313.45"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "¥12,313.45"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "成交商品件数42对比时间45环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "成交商品件数42对比时间45环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "成交商品件数42对比时间45环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "成交商品件数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "成交商品件数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间45"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-6.67%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-6.67%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值105"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "成交客户数24对比时间27环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "成交客户数24对比时间27环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "成交客户数24对比时间27环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间27"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-11.11%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-11.11%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值62"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "成交单量25对比时间29环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "成交单量25对比时间29环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "成交单量25对比时间29环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间29"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-13.79%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-13.79%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值65"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "店铺成交转化率5.12%对比时间7.54%环比-32.15%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "店铺成交转化率5.12%对比时间7.54%环比-32.15%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺成交转化率5.12%对比时间7.54%环比-32.15%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "店铺成交转化率"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "店铺成交转化率"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间7.54%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-32.15%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-32.15%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "加购商品件数48对比时间-8环比+700.00%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "加购商品件数48对比时间-8环比+700.00%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "加购商品件数48对比时间-8环比+700.00%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "加购商品件数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "加购商品件数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间-8"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+700.00%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+700.00%"
+      },
+      {
+        "class": "jmt-basic-summary-card-wrapper jmt-basic-summary-card-wrapper-css-1msfslc jmtv2",
+        "text": "客单价¥210.77对比时间¥164.13环比+28.41%同行同级均值¥199.91同行上级均值--店铺浏览量1,778对比时间1,807环比-1.60%店铺访客数469对比时间358环比+31.01%店铺平均停留时长97.25对比时间87.29环比+11.41%加购客户数55对比时间38环比+44.74%加购转化率12.11%对比时间11.52%环比+5.21%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "客单价¥210.77对比时间¥164.13环比+28.41%同行同级均值¥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "客单价¥210.77对比时间¥164.13环比+28.41%同行同级均值¥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "客单价¥210.77对比时间¥164.13环比+28.41%同行同级均值¥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "¥210.77"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "¥210.77"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间¥164.13"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "¥164.13"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+28.41%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+28.41%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值¥199.91"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "¥199.91"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "店铺浏览量1,778对比时间1,807环比-1.60%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "店铺浏览量1,778对比时间1,807环比-1.60%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺浏览量1,778对比时间1,807环比-1.60%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间1,807"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-1.60%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-1.60%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "店铺访客数469对比时间358环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "店铺访客数469对比时间358环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺访客数469对比时间358环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间358"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "店铺平均停留时长97.25对比时间87.29环比+11.41%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "店铺平均停留时长97.25对比时间87.29环比+11.41%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "店铺平均停留时长97.25对比时间87.29环比+11.41%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "店铺平均停留时长"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "店铺平均停留时长"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间87.29"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+11.41%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+11.41%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "加购客户数55对比时间38环比+44.74%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "加购客户数55对比时间38环比+44.74%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "加购客户数55对比时间38环比+44.74%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间38"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+44.74%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+44.74%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1b6zadg jmtv2",
+        "text": "加购转化率12.11%对比时间11.52%环比+5.21%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1b6zadg jmtv2 jmt-summary-card-s",
+        "text": "加购转化率12.11%对比时间11.52%环比+5.21%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1b6zadg jmtv2",
+        "text": "加购转化率12.11%对比时间11.52%环比+5.21%"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "12.11%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "12.11%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "对比时间11.52%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "11.52%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+5.21%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+5.21%"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "品牌构成下载数据品牌成交金额成交金额占比成交商品件数成交单量成交客户数操作品牌成交金额成交金额占比成交商品件数成交单量成交客户数操作祁门¥5,058.48100%422524趋势"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "品牌构成下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "品牌构成下载数据"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "品牌成交金额成交金额占比成交商品件数成交单量成交客户数操作品牌成交金额成交金额占比成交商品件数成交单量成交客户数操作祁门¥5,058.48100%422524趋势"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "类目构成店铺类目二级类目下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "类目构成店铺类目二级类目下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "类目构成店铺类目二级类目下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "店铺类目二级类目下载数据"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "渠道构成下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "渠道构成下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "渠道构成下载数据"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "地域构成省份城市城市级别\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape "
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "省份城市城市级别\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to c"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "新老客构成新老客（整体）下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "新老客构成新老客（整体）下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "新老客构成新老客（整体）下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "新老客（整体）下载数据"
+      },
+      {
+        "class": "jmt-dropdown-panel jmt-dropdown-panel-css-1y32yur jmtv2",
+        "text": "快捷选择今日昨日自定义确定"
+      },
+      {
+        "class": "jmt-date-picker-switch-panel jmt-date-picker-switch-panel-css-xaywrp jmtv2",
+        "text": "快捷选择今日昨日自定义"
+      },
+      {
+        "class": "trade-summary-download-panel",
+        "text": "下载范围地域排名地域下商品排名下载范围省份-成交金额-地域排名-离线-undefined"
+      }
+    ]
+  },
+  "商品": {
+    "business_tables": [
+      {
+        "index": 0,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx jmtv2",
+        "table_class": ""
+      },
+      {
+        "index": 1,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx overflow-",
+        "table_class": ""
+      }
+    ],
+    "metric_groups": [
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-s8lqso jmtv2",
+        "text": "动销动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "加购加购SPU数7环比-50.00%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "访问访问SPU数35环比+12.90%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "上架上架SPU数46环比0.00%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1dg2lwm jmtv2",
+        "text": "动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "SPU动销率23.91%环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交商品件数42环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交单量25环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交转化率5.29%环比-35.39%同行同级均值6.29%同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "件单价￥120.44环比+22.30%同行同级均值￥117.17同行上级均值--"
+      }
+    ],
+    "filter_panels": [],
+    "chart_titles": [],
+    "card_labels": [
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "商品概况当前：2026-07-10对比：2026-07-09昨天近7天近30天天周月自定义环比同比更多SPUSKU\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop t"
+      },
+      {
+        "class": "sz-affix-card-head",
+        "text": "商品概况当前：2026-07-10对比：2026-07-09昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "商品概况当前：2026-07-10对比：2026-07-09昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "商品概况当前：2026-07-10对比：2026-07-09昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "当前：2026-07-10对比：2026-07-09昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "sz-affix-card-content",
+        "text": "SPUSKU\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to can"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "SPUSKU\n    To pick up a draggable item, press the space bar.\n    While dragging, use the arrow keys to move the item.\n    Press space again to drop the item in its new position, or press escape to can"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "核心指标同行同级对比趋势分析下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "核心指标同行同级对比趋势分析下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "同行同级对比趋势分析下载数据"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-s8lqso jmtv2",
+        "text": "动销动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-s8lqso jmtv2 jmt-summary-card-sm",
+        "text": "动销动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-s8lqso jmtv2",
+        "text": "动销动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "动销SPU数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "动销SPU数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1615sfz jmtv2",
+        "text": "加购加购SPU数7环比-50.00%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1615sfz jmtv2 jmt-summary-card-s",
+        "text": "加购加购SPU数7环比-50.00%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "加购加购SPU数7环比-50.00%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "加购SPU数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "加购SPU数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-50.00%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-50.00%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1615sfz jmtv2",
+        "text": "访问访问SPU数35环比+12.90%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1615sfz jmtv2 jmt-summary-card-s",
+        "text": "访问访问SPU数35环比+12.90%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "访问访问SPU数35环比+12.90%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "访问SPU数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "访问SPU数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+12.90%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+12.90%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1615sfz jmtv2",
+        "text": "上架上架SPU数46环比0.00%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1615sfz jmtv2 jmt-summary-card-s",
+        "text": "上架上架SPU数46环比0.00%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "上架上架SPU数46环比0.00%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "上架SPU数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "上架SPU数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比0.00%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1dg2lwm jmtv2",
+        "text": "动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1dg2lwm jmtv2 jmt-summary-card-s",
+        "text": "动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1dg2lwm jmtv2",
+        "text": "动销SPU数11环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "动销SPU数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "动销SPU数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "SPU动销率23.91%环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "SPU动销率23.91%环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "SPU动销率23.91%环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "SPU动销率"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "SPU动销率"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "23.91%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "23.91%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-8.33%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥5,058.48"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥5,058.48"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+14.15%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+14.15%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值￥12,313.45"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "￥12,313.45"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交商品件数42环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交商品件数42环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交商品件数42环比-6.67%同行同级均值105同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "成交商品件数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "成交商品件数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-6.67%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-6.67%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值105"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交单量25环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交单量25环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交单量25环比-13.79%同行同级均值65同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-13.79%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-13.79%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值65"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-11.11%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-11.11%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值62"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "成交转化率5.29%环比-35.39%同行同级均值6.29%同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "成交转化率5.29%环比-35.39%同行同级均值6.29%同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "成交转化率5.29%环比-35.39%同行同级均值6.29%同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-35.39%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-35.39%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值6.29%"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥210.77"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥210.77"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+28.41%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+28.41%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值￥199.91"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "￥199.91"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "件单价￥120.44环比+22.30%同行同级均值￥117.17同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "件单价￥120.44环比+22.30%同行同级均值￥117.17同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "件单价￥120.44环比+22.30%同行同级均值￥117.17同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥120.44"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥120.44"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+22.30%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+22.30%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值￥117.17"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "￥117.17"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "热销商品榜全部商品排名操作排名操作 暂无数据"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "热销商品榜全部商品"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "热销商品榜全部商品"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "排名操作排名操作 暂无数据"
+      }
+    ]
+  },
+  "流量": {
+    "business_tables": [
+      {
+        "index": 0,
+        "header_count": 0,
+        "row_count": 6,
+        "headers": [],
+        "first_row": [
+          "关键词",
+          "引入访客数",
+          "引入成交金额"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-t7z07w",
+        "table_class": ""
+      },
+      {
+        "index": 1,
+        "header_count": 0,
+        "row_count": 6,
+        "headers": [],
+        "first_row": [
+          "商品信息",
+          "引入访客数",
+          "引入成交金额"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-t7z07w",
+        "table_class": ""
+      },
+      {
+        "index": 2,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx jmtv2",
+        "table_class": ""
+      },
+      {
+        "index": 3,
+        "header_count": 0,
+        "row_count": 9,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "商品信息",
+          "商品访客数",
+          "商品访客数占比",
+          "成交金额",
+          "成交转化率",
+          "UV价值",
+          "商品曝光人数",
+          "商品曝光次数",
+          "操作"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-bm8dqx",
+        "table_class": ""
+      }
+    ],
+    "metric_groups": [
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "核心指标同行同级看整体看付费下载数据进店店铺访客数469环比+31.01%进商详商品访客数454环比+37.58%同行同级均值980同行上级均值--转化成交客户数24环比-11.11%同行同级均值62同行上级均值--成交成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--\n    To pick up a draggable item, press the "
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "进店店铺访客数469环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-s8lqso jmtv2",
+        "text": "进商详商品访客数454环比+37.58%同行同级均值980同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "转化成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-5odhnz jmtv2",
+        "text": "成交成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品浏览量1,269环比+6.55%同行同级均值3,026同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品人均浏览量2.80环比-22.55%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品平均停留时长75.49环比+9.70%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "UV价值11.14环比-17.03%同行同级均值12.57同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品曝光次数4,003环比-1.53%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品曝光人数1,753环比+3.18%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1dg2lwm jmtv2",
+        "text": "搜索引入商详访客数154环比+1.99%占比47.09%引入成交金额￥2,208.17环比-2.78%占比46.40%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "频道引入商详访客数85环比-10.53%占比25.99%引入成交金额￥120.50环比-72.61%占比2.53%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "我的京东引入商详访客数32环比+28.00%占比9.79%引入成交金额￥1,841.96环比+224.20%占比38.71%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "商品引入商详访客数9环比+12.50%占比2.75%引入成交金额￥158.00环比-65.90%占比3.32%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "商详间接分发引入商详访客数1环比--占比0.31%引入成交金额￥189.00环比--占比3.97%"
+      },
+      {
+        "class": "jmt-portal jmt-portal-css-1nrmhc jmtv2 jmt-dialog-portal jmt-dialog-hidden jmt-d",
+        "text": "趋势分析0/2已选重置清空进店店铺访客数店铺浏览量店铺平均停留时长进商详商品访客数商品浏览量商品人均浏览量商品平均停留时长UV价值客单价商品曝光次数商品曝光人数转化成交客户数加购客户数加购转化率加购金额成交转化率成交商品件数成交单量成交金额付费广告花费-非全站营销广告展现数-非全站营销广告点击数-非全站营销投产比-非全站营销广告花费-全站营销核心位置展现数-全站营销核心位置点击数-全站营销投产比-"
+      }
+    ],
+    "filter_panels": [
+      {
+        "class": "jmt-space jmt-space-css-13ygfii jmtv2 filter",
+        "text": "参照指标按引入商详访客数排序方式TOP降序仅查看关注渠道下载数据",
+        "input_count": 1,
+        "button_count": 1,
+        "inputs": [
+          {
+            "type": "checkbox",
+            "name": "",
+            "placeholder": "",
+            "value": "on"
+          }
+        ]
+      },
+      {
+        "class": "filter-item",
+        "text": "参照指标按引入商详访客数",
+        "input_count": 0,
+        "button_count": 0,
+        "inputs": []
+      },
+      {
+        "class": "filter-item",
+        "text": "排序方式TOP降序",
+        "input_count": 0,
+        "button_count": 0,
+        "inputs": []
+      },
+      {
+        "class": "filter-item",
+        "text": "仅查看关注渠道",
+        "input_count": 1,
+        "button_count": 0,
+        "inputs": [
+          {
+            "type": "checkbox",
+            "name": "",
+            "placeholder": "",
+            "value": "on"
+          }
+        ]
+      },
+      {
+        "class": "jmt-space jmt-space-css-13ygfii jmtv2 filter",
+        "text": "参照指标按商品访客数排序方式TOP降序SPUSKU仅查看关注商品下载数据",
+        "input_count": 3,
+        "button_count": 1,
+        "inputs": [
+          {
+            "type": "radio",
+            "name": "",
+            "placeholder": "",
+            "value": "spu"
+          },
+          {
+            "type": "radio",
+            "name": "",
+            "placeholder": "",
+            "value": "sku"
+          },
+          {
+            "type": "checkbox",
+            "name": "",
+            "placeholder": "",
+            "value": "on"
+          }
+        ]
+      },
+      {
+        "class": "filter-item",
+        "text": "参照指标按商品访客数",
+        "input_count": 0,
+        "button_count": 0,
+        "inputs": []
+      },
+      {
+        "class": "filter-item",
+        "text": "排序方式TOP降序",
+        "input_count": 0,
+        "button_count": 0,
+        "inputs": []
+      },
+      {
+        "class": "filter-item",
+        "text": "SPUSKU",
+        "input_count": 2,
+        "button_count": 0,
+        "inputs": [
+          {
+            "type": "radio",
+            "name": "",
+            "placeholder": "",
+            "value": "spu"
+          },
+          {
+            "type": "radio",
+            "name": "",
+            "placeholder": "",
+            "value": "sku"
+          }
+        ]
+      },
+      {
+        "class": "filter-item",
+        "text": "仅查看关注商品",
+        "input_count": 1,
+        "button_count": 0,
+        "inputs": [
+          {
+            "type": "checkbox",
+            "name": "",
+            "placeholder": "",
+            "value": "on"
+          }
+        ]
+      }
+    ],
+    "chart_titles": [],
+    "card_labels": [
+      {
+        "class": "jmt-card-v2 jmt-card-v2-css-rohmnp jmtv2 jmt-card-v2-card-padding jmt-card-v2-ca",
+        "text": "流量概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多渠道全部查询重置"
+      },
+      {
+        "class": "sz-affix-card-head",
+        "text": "流量概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "流量概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "流量概况当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "当前：2026-07-10对比：2026-07-09实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "sz-affix-card-content",
+        "text": "渠道全部查询重置"
+      },
+      {
+        "class": "jmt-card-section-v2 jmt-card-section-v2-css-1be0iqt jmtv2",
+        "text": "渠道全部查询重置"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "核心指标同行同级看整体看付费下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "核心指标同行同级看整体看付费下载数据"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "同行同级看整体看付费下载数据"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1615sfz jmtv2",
+        "text": "进店店铺访客数469环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1615sfz jmtv2 jmt-summary-card-s",
+        "text": "进店店铺访客数469环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "进店店铺访客数469环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+31.01%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-s8lqso jmtv2",
+        "text": "进商详商品访客数454环比+37.58%同行同级均值980同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-s8lqso jmtv2 jmt-summary-card-sm",
+        "text": "进商详商品访客数454环比+37.58%同行同级均值980同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-s8lqso jmtv2",
+        "text": "进商详商品访客数454环比+37.58%同行同级均值980同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+37.58%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+37.58%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值980"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1615sfz jmtv2",
+        "text": "转化成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1615sfz jmtv2 jmt-summary-card-s",
+        "text": "转化成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1615sfz jmtv2",
+        "text": "转化成交客户数24环比-11.11%同行同级均值62同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-11.11%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-11.11%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值62"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-5odhnz jmtv2",
+        "text": "成交成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-5odhnz jmtv2 jmt-summary-card-sm",
+        "text": "成交成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-5odhnz jmtv2",
+        "text": "成交成交金额￥5,058.48环比+14.15%同行同级均值￥12,313.45同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-13b3lya jmtv2 jmt-su",
+        "text": "￥5,058.48"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-13b3lya jm",
+        "text": "￥5,058.48"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+14.15%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+14.15%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值￥12,313.45"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "￥12,313.45"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "商品浏览量1,269环比+6.55%同行同级均值3,026同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "商品浏览量1,269环比+6.55%同行同级均值3,026同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品浏览量1,269环比+6.55%同行同级均值3,026同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+6.55%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+6.55%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值3,026"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "商品人均浏览量2.80环比-22.55%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "商品人均浏览量2.80环比-22.55%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品人均浏览量2.80环比-22.55%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "商品人均浏览量"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "商品人均浏览量"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-22.55%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-22.55%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "商品平均停留时长75.49环比+9.70%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "商品平均停留时长75.49环比+9.70%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品平均停留时长75.49环比+9.70%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "商品平均停留时长"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "商品平均停留时长"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+9.70%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+9.70%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "UV价值11.14环比-17.03%同行同级均值12.57同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "UV价值11.14环比-17.03%同行同级均值12.57同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "UV价值11.14环比-17.03%同行同级均值12.57同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-17.03%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-17.03%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值12.57"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "客单价￥210.77环比+28.41%同行同级均值￥199.91同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-13b3lya jmtv2 jmt-su",
+        "text": "￥210.77"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-13b3lya jm",
+        "text": "￥210.77"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+28.41%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+28.41%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行同级均值￥199.91"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行同级均值"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "￥199.91"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "同行上级均值--"
+      },
+      {
+        "class": "jmt-summary-card-description-left jmt-summary-card-description-left-css-1atbqmn ",
+        "text": "同行上级均值"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "商品曝光次数4,003环比-1.53%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "商品曝光次数4,003环比-1.53%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品曝光次数4,003环比-1.53%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "商品曝光次数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "商品曝光次数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-1.53%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-1.53%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-p8uz65 jmtv2",
+        "text": "商品曝光人数1,753环比+3.18%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-p8uz65 jmtv2 jmt-summary-card-sm",
+        "text": "商品曝光人数1,753环比+3.18%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-p8uz65 jmtv2",
+        "text": "商品曝光人数1,753环比+3.18%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "商品曝光人数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "商品曝光人数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+3.18%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+3.18%"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "来源渠道定位重点来源渠道流量及成交贡献查看全部渠道"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "来源渠道定位重点来源渠道流量及成交贡献查看全部渠道"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "来源渠道定位重点来源渠道流量及成交贡献"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "查看全部渠道"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1dg2lwm jmtv2",
+        "text": "搜索引入商详访客数154环比+1.99%占比47.09%引入成交金额￥2,208.17环比-2.78%占比46.40%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1dg2lwm jmtv2 jmt-summary-card-s",
+        "text": "搜索引入商详访客数154环比+1.99%占比47.09%引入成交金额￥2,208.17环比-2.78%占比46.40%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1dg2lwm jmtv2",
+        "text": "搜索引入商详访客数154环比+1.99%占比47.09%引入成交金额￥2,208.17环比-2.78%占比46.40%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+1.99%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+1.99%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比47.09%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "47.09%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥2,208.17"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥2,208.17"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-2.78%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-2.78%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比46.40%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "46.40%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "频道引入商详访客数85环比-10.53%占比25.99%引入成交金额￥120.50环比-72.61%占比2.53%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "频道引入商详访客数85环比-10.53%占比25.99%引入成交金额￥120.50环比-72.61%占比2.53%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "频道引入商详访客数85环比-10.53%占比25.99%引入成交金额￥120.50环比-72.61%占比2.53%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-10.53%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-10.53%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比25.99%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "25.99%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥120.50"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥120.50"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-72.61%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-72.61%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比2.53%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "我的京东引入商详访客数32环比+28.00%占比9.79%引入成交金额￥1,841.96环比+224.20%占比38.71%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "我的京东引入商详访客数32环比+28.00%占比9.79%引入成交金额￥1,841.96环比+224.20%占比38.71%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "我的京东引入商详访客数32环比+28.00%占比9.79%引入成交金额￥1,841.96环比+224.20%占比38.71%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+28.00%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+28.00%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比9.79%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥1,841.96"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥1,841.96"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+224.20%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+224.20%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比38.71%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "38.71%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "商品引入商详访客数9环比+12.50%占比2.75%引入成交金额￥158.00环比-65.90%占比3.32%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "商品引入商详访客数9环比+12.50%占比2.75%引入成交金额￥158.00环比-65.90%占比3.32%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "商品引入商详访客数9环比+12.50%占比2.75%引入成交金额￥158.00环比-65.90%占比3.32%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比+12.50%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "+12.50%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比2.75%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥158.00"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥158.00"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "环比-65.90%"
+      },
+      {
+        "class": "jmt-summary-card-description-right jmt-summary-card-description-right-css-1atbqm",
+        "text": "-65.90%"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比3.32%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1ix3y34 jmtv2",
+        "text": "商详间接分发引入商详访客数1环比--占比0.31%引入成交金额￥189.00环比--占比3.97%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1ix3y34 jmtv2 jmt-summary-card-s",
+        "text": "商详间接分发引入商详访客数1环比--占比0.31%引入成交金额￥189.00环比--占比3.97%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1ix3y34 jmtv2",
+        "text": "商详间接分发引入商详访客数1环比--占比0.31%引入成交金额￥189.00环比--占比3.97%"
+      },
+      {
+        "class": "jmt-summary-card-outer-title-main jmt-summary-card-outer-title-main-css-1258vyr ",
+        "text": "商详间接分发"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入商详访客数"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比0.31%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1mvveiu jmtv2 jmt-su",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1mvveiu jmtv2",
+        "text": "引入成交金额"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-1a907pk jmtv2 jmt-su",
+        "text": "￥189.00"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-1a907pk jm",
+        "text": "￥189.00"
+      },
+      {
+        "class": "jmt-summary-card-description jmt-summary-card-description-css-1atbqmn jmtv2",
+        "text": "占比3.97%"
+      },
+      {
+        "class": "jmt-card-header-v2 jmt-card-header-v2-css-7xtxm5 jmtv2",
+        "text": "商品表现定位核心商品流量及成交贡献查看更多商品"
+      },
+      {
+        "class": "jmt-card-header-v2-card-header-wrap jmt-card-header-v2-card-header-wrap-css-7xtx",
+        "text": "商品表现定位核心商品流量及成交贡献查看更多商品"
+      },
+      {
+        "class": "jmt-card-header-v2-left-panel jmt-card-header-v2-left-panel-css-7xtxm5 jmtv2",
+        "text": "商品表现定位核心商品流量及成交贡献"
+      },
+      {
+        "class": "jmt-card-header-v2-right-panel jmt-card-header-v2-right-panel-css-7xtxm5 jmtv2",
+        "text": "查看更多商品"
+      }
+    ]
+  },
+  "市场": {
+    "business_tables": [
+      {
+        "index": 0,
+        "header_count": 0,
+        "row_count": 11,
+        "headers": [],
+        "first_row": [
+          "排名",
+          "品牌名称",
+          "成交金额",
+          "成交单量",
+          "成交商品件数",
+          "浏览量",
+          "访客数",
+          "搜索点击次数"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-1fhcut4 overflow",
+        "table_class": ""
+      },
+      {
+        "index": 1,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-1fhcut4 overflow",
+        "table_class": ""
+      },
+      {
+        "index": 2,
+        "header_count": 0,
+        "row_count": 1,
+        "headers": [],
+        "first_row": [
+          "排名"
+        ],
+        "parent_class": "jmt-base-table-scroll-wrapper jmt-base-table-scroll-wrapper-css-1fhcut4 overflow",
+        "table_class": ""
+      }
+    ],
+    "metric_groups": [
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交金额增幅-48%~-46%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交单量增幅-44%~-42%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-15ozivh jmtv2",
+        "text": "浏览量1万~2万环比-49.38%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1qn3nzg jmtv2",
+        "text": "访客数4,000~6,000环比-44.30%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-15ozivh jmtv2",
+        "text": "搜索点击次数2,000~4,000环比+4.34%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交客单价增幅-8%~-6%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交转化率增幅0%~2%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交商品件数增幅-46%~-44%"
+      }
+    ],
+    "filter_panels": [],
+    "chart_titles": [],
+    "card_labels": [
+      {
+        "class": "jd-card jd-card-bordered is-always-shadow sz-affix-card",
+        "text": "行业大盘当前：2026-07-12 00:24:43对比：2026-07-11 00:24:43实时昨天近7天近30天天周月自定义环比同比更多类目茗茶渠道全部查询重置"
+      },
+      {
+        "class": "jd-card-body",
+        "text": "行业大盘当前：2026-07-12 00:24:43对比：2026-07-11 00:24:43实时昨天近7天近30天天周月自定义环比同比更多类目茗茶渠道全部查询重置"
+      },
+      {
+        "class": "sz-affix-card-head",
+        "text": "行业大盘当前：2026-07-12 00:24:43对比：2026-07-11 00:24:43实时昨天近7天近30天天周月自定义环比同比更多"
+      },
+      {
+        "class": "sz-affix-card-content",
+        "text": "类目茗茶渠道全部查询重置"
+      },
+      {
+        "class": "jd-card jd-card-bordered is-always-shadow",
+        "text": "核心指标指标配置下载数据成交金额增幅-48%~-46%成交单量增幅-44%~-42%浏览量1万~2万环比-49.38%访客数4,000~6,000环比-44.30%搜索点击次数2,000~4,000环比+4.34%成交客单价增幅-8%~-6%成交转化率增幅0%~2%成交商品件数增幅-46%~-44%分时累计"
+      },
+      {
+        "class": "jd-card-head",
+        "text": "核心指标指标配置下载数据"
+      },
+      {
+        "class": "jd-card-head-wrapper",
+        "text": "核心指标指标配置下载数据"
+      },
+      {
+        "class": "jd-card-extra",
+        "text": "指标配置下载数据"
+      },
+      {
+        "class": "jd-card-body",
+        "text": "成交金额增幅-48%~-46%成交单量增幅-44%~-42%浏览量1万~2万环比-49.38%访客数4,000~6,000环比-44.30%搜索点击次数2,000~4,000环比+4.34%成交客单价增幅-8%~-6%成交转化率增幅0%~2%成交商品件数增幅-46%~-44%分时累计"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-lecgoc jmtv2",
+        "text": "成交金额增幅-48%~-46%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-lecgoc jmtv2 jmt-summary-card-sm",
+        "text": "成交金额增幅-48%~-46%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交金额增幅-48%~-46%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1ym5sjx jmtv2 jmt-su",
+        "text": "成交金额增幅"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1ym5sjx jmtv2",
+        "text": "成交金额增幅"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-7m3pbf jmtv2 jmt-sum",
+        "text": "-48%~-46%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-7m3pbf jmt",
+        "text": "-48%~-46%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-lecgoc jmtv2",
+        "text": "成交单量增幅-44%~-42%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-lecgoc jmtv2 jmt-summary-card-sm",
+        "text": "成交单量增幅-44%~-42%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交单量增幅-44%~-42%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1ym5sjx jmtv2 jmt-su",
+        "text": "成交单量增幅"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1ym5sjx jmtv2",
+        "text": "成交单量增幅"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-7m3pbf jmtv2 jmt-sum",
+        "text": "-44%~-42%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-7m3pbf jmt",
+        "text": "-44%~-42%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-15ozivh jmtv2",
+        "text": "浏览量1万~2万环比-49.38%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-15ozivh jmtv2 jmt-summary-card-s",
+        "text": "浏览量1万~2万环比-49.38%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-15ozivh jmtv2",
+        "text": "浏览量1万~2万环比-49.38%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-1qn3nzg jmtv2",
+        "text": "访客数4,000~6,000环比-44.30%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-1qn3nzg jmtv2 jmt-summary-card-s",
+        "text": "访客数4,000~6,000环比-44.30%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-1qn3nzg jmtv2",
+        "text": "访客数4,000~6,000环比-44.30%"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-7m3pbf jmtv2 jmt-sum",
+        "text": "4,000~6,000"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-7m3pbf jmt",
+        "text": "4,000~6,000"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-15ozivh jmtv2",
+        "text": "搜索点击次数2,000~4,000环比+4.34%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-15ozivh jmtv2 jmt-summary-card-s",
+        "text": "搜索点击次数2,000~4,000环比+4.34%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-15ozivh jmtv2",
+        "text": "搜索点击次数2,000~4,000环比+4.34%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1ym5sjx jmtv2 jmt-su",
+        "text": "搜索点击次数"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1ym5sjx jmtv2",
+        "text": "搜索点击次数"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-7m3pbf jmtv2 jmt-sum",
+        "text": "2,000~4,000"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-7m3pbf jmt",
+        "text": "2,000~4,000"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-lecgoc jmtv2",
+        "text": "成交客单价增幅-8%~-6%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-lecgoc jmtv2 jmt-summary-card-sm",
+        "text": "成交客单价增幅-8%~-6%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交客单价增幅-8%~-6%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1ym5sjx jmtv2 jmt-su",
+        "text": "成交客单价增幅"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1ym5sjx jmtv2",
+        "text": "成交客单价增幅"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-7m3pbf jmtv2 jmt-sum",
+        "text": "-8%~-6%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-7m3pbf jmt",
+        "text": "-8%~-6%"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-lecgoc jmtv2",
+        "text": "成交转化率增幅0%~2%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-lecgoc jmtv2 jmt-summary-card-sm",
+        "text": "成交转化率增幅0%~2%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交转化率增幅0%~2%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1ym5sjx jmtv2 jmt-su",
+        "text": "成交转化率增幅"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1ym5sjx jmtv2",
+        "text": "成交转化率增幅"
+      },
+      {
+        "class": "jmt-summary-card-wrapper jmt-summary-card-wrapper-css-lecgoc jmtv2",
+        "text": "成交商品件数增幅-46%~-44%"
+      },
+      {
+        "class": "jmt-summary-card-main jmt-summary-card-main-css-lecgoc jmtv2 jmt-summary-card-sm",
+        "text": "成交商品件数增幅-46%~-44%"
+      },
+      {
+        "class": "jmt-summary-card-indicator jmt-summary-card-indicator-css-lecgoc jmtv2",
+        "text": "成交商品件数增幅-46%~-44%"
+      },
+      {
+        "class": "jmt-summary-card-title-main jmt-summary-card-title-main-css-1ym5sjx jmtv2 jmt-su",
+        "text": "成交商品件数增幅"
+      },
+      {
+        "class": "jmt-summary-card-title-left jmt-summary-card-title-left-css-1ym5sjx jmtv2",
+        "text": "成交商品件数增幅"
+      },
+      {
+        "class": "jmt-summary-card-index-main jmt-summary-card-index-main-css-7m3pbf jmtv2 jmt-sum",
+        "text": "-46%~-44%"
+      },
+      {
+        "class": "jmt-summary-card-index-main-info jmt-summary-card-index-main-info-css-7m3pbf jmt",
+        "text": "-46%~-44%"
+      },
+      {
+        "class": "jd-card-head",
+        "text": "行业品牌榜行业大盘为概览页，品牌榜仅展示TOP10，品牌明细榜菜单建设中，敬请期待。下载数据"
+      },
+      {
+        "class": "jd-card-head-wrapper",
+        "text": "行业品牌榜行业大盘为概览页，品牌榜仅展示TOP10，品牌明细榜菜单建设中，敬请期待。下载数据"
+      },
+      {
+        "class": "jd-card-head-title",
+        "text": "行业品牌榜行业大盘为概览页，品牌榜仅展示TOP10，品牌明细榜菜单建设中，敬请期待。"
+      },
+      {
+        "class": "jd-tabs jd-tabs-top jd-tabs-card",
+        "text": "行业热销品牌TOP10行业流量品牌TOP10"
+      },
+      {
+        "class": "jd-card jd-card-bordered is-always-shadow",
+        "text": "行业店铺榜下载数据行业热销店铺TOP100行业流量店铺TOP100更新时间：2026-07-12 00:24:43排名 暂无数据"
+      },
+      {
+        "class": "jd-card-head",
+        "text": "行业店铺榜下载数据"
+      },
+      {
+        "class": "jd-card-head-wrapper",
+        "text": "行业店铺榜下载数据"
+      },
+      {
+        "class": "jd-card-body",
+        "text": "行业热销店铺TOP100行业流量店铺TOP100更新时间：2026-07-12 00:24:43排名 暂无数据"
+      },
+      {
+        "class": "jd-tabs jd-tabs-top jd-tabs-card",
+        "text": "行业热销店铺TOP100行业流量店铺TOP100"
+      },
+      {
+        "class": "jd-card jd-card-bordered is-always-shadow",
+        "text": "行业商品榜下载数据行业热销商品TOP200行业流量商品TOP200SPUSKU更新时间：2026-07-12 00:24:43排名 暂无数据"
+      },
+      {
+        "class": "jd-card-head",
+        "text": "行业商品榜下载数据"
+      },
+      {
+        "class": "jd-card-head-wrapper",
+        "text": "行业商品榜下载数据"
+      },
+      {
+        "class": "jd-card-body",
+        "text": "行业热销商品TOP200行业流量商品TOP200SPUSKU更新时间：2026-07-12 00:24:43排名 暂无数据"
+      },
+      {
+        "class": "jd-tabs jd-tabs-top jd-tabs-card",
+        "text": "行业热销商品TOP200行业流量商品TOP200"
+      },
+      {
+        "class": "jd-card jd-card-bordered is-always-shadow",
+        "text": "子行业排名 子行业排名暂不支持实时维度，请切换至离线查看。"
+      },
+      {
+        "class": "jd-card-body",
+        "text": "子行业排名暂不支持实时维度，请切换至离线查看。"
+      },
+      {
+        "class": "jmt-dropdown-panel jmt-dropdown-panel-css-1hm9i2m jmtv2",
+        "text": "快捷选择2026年618大促2025年11.11大促确定"
+      },
+      {
+        "class": "jmt-date-picker-switch-panel jmt-date-picker-switch-panel-css-ehs8dv jmtv2",
+        "text": "快捷选择2026年618大促2025年11.11大促"
+      },
+      {
+        "class": "jmt-date-picker-switch-panel-item jmt-date-picker-switch-panel-item-css-ehs8dv j",
+        "text": "2026年618大促"
+      },
+      {
+        "class": "jmt-date-picker-switch-panel-item jmt-date-picker-switch-panel-item-css-ehs8dv j",
+        "text": "2025年11.11大促"
+      }
+    ]
+  }
+}

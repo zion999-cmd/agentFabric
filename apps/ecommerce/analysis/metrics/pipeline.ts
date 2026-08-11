@@ -119,6 +119,7 @@ const buildSignal = (
     confidence,
     source,
     window: `${windowDays}d`,
+    observed_at: source.ingested_at,  // P0006.1.1: computed signals use pipeline run time
     lifecycle,
     trace,
   };

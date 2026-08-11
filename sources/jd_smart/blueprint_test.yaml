@@ -1,0 +1,826 @@
+$schema: https://agentfabric.dev/schemas/source-blueprint/v1
+source:
+  id: jd_smart
+  name: JD Smart
+  display_name: Jingdong Smart Business Intelligence
+  platform: jd
+  version: 1.0.0
+  discovered_at: '2026-07-11T19:13:14.608137+00:00'
+  base_url: ''
+  tech_stack: {}
+  authentication:
+    method: Cookie-based
+    note: Requires active session; explorer connects via CDP
+  shop_info: {}
+navigation:
+  top_level_menus: []
+  sub_menus: {}
+  discovered_pages: []
+datasets:
+- id: 首页_table_0
+  name: '祁门Keemun祁门红茶特级茶叶自己喝口粮茶祁红毛峰送礼送长辈 茉莉王妃特级80g/听SKU: 10072458070083'
+  source_page: 首页
+  grain: unknown
+  columns:
+  - '祁门Keemun祁门红茶特级茶叶自己喝口粮茶祁红毛峰送礼送长辈 茉莉王妃特级80g/听SKU: 10072458070083'
+  row_count: 2
+  parent_class: ''
+  table_class: ''
+- id: 首页_table_1
+  name: '祁门Keemun祁门红茶特级茶叶自己喝口粮茶祁红毛峰送礼送长辈 茉莉王妃一级160g【特惠两罐装】SKU: 10125976826630'
+  source_page: 首页
+  grain: unknown
+  columns:
+  - '祁门Keemun祁门红茶特级茶叶自己喝口粮茶祁红毛峰送礼送长辈 茉莉王妃一级160g【特惠两罐装】SKU: 10125976826630'
+  row_count: 2
+  parent_class: ''
+  table_class: ''
+- id: 首页_table_2
+  name: 排名
+  source_page: 首页
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 9
+  parent_class: ''
+  table_class: ''
+- id: 首页_table_3
+  name: 排名
+  source_page: 首页
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 首页_table_4
+  name: 排名
+  source_page: 首页
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 6
+  parent_class: ''
+  table_class: ''
+- id: 首页_table_5
+  name: 月份
+  source_page: 首页
+  grain: unknown
+  columns:
+  - 月份
+  row_count: 6
+  parent_class: ''
+  table_class: ''
+- id: 交易_table_0
+  name: 品牌
+  source_page: 交易
+  grain: unknown
+  columns:
+  - 品牌
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 交易_table_1
+  name: 品牌
+  source_page: 交易
+  grain: unknown
+  columns:
+  - 品牌
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 交易_table_2
+  name: 祁门
+  source_page: 交易
+  grain: unknown
+  columns:
+  - 祁门
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 交易_table_3
+  name: 排名
+  source_page: 交易
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 1
+  parent_class: ''
+  table_class: ''
+- id: 商品_table_0
+  name: 排名
+  source_page: 商品
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 2
+  parent_class: ''
+  table_class: ''
+- id: 商品_table_1
+  name: 排名
+  source_page: 商品
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 2
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_0
+  name: 关键词
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 关键词
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_1
+  name: 祁门红茶
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_2
+  name: 红茶
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 红茶
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_3
+  name: 祁门红茶官方旗舰店
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_4
+  name: 安徽祁门红茶官方旗舰店
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 安徽祁门红茶官方旗舰店
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_5
+  name: 茉莉祁红
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 茉莉祁红
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_6
+  name: 商品信息
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 商品信息
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_7
+  name: 祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300gSPU:10023923194464
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300gSPU:10023923194464
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_8
+  name: 祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300gSPU:10023922033080
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300gSPU:10023922033080
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_9
+  name: 祁门红茶官方旗舰店茶叶端午节礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗SPU:10023968977041
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店茶叶端午节礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗SPU:10023968977041
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_10
+  name: 祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100gSPU:10024700347561
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100gSPU:10024700347561
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_11
+  name: 祁门红茶官方旗舰店正宗高档红茶礼盒自己喝口粮茶叶毛峰送礼送长辈 1915祁红香螺200g（同款正装）SPU:10024931064504
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店正宗高档红茶礼盒自己喝口粮茶叶毛峰送礼送长辈 1915祁红香螺200g（同款正装）SPU:10024931064504
+  row_count: 3
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_12
+  name: 排名
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_13
+  name: 排名
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_14
+  name: 祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300gSPU:10023923194464
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300gSPU:10023923194464
+  row_count: 9
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_15
+  name: 祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300gSPU:10023922033080
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300gSPU:10023922033080
+  row_count: 9
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_16
+  name: 祁门红茶官方旗舰店茶叶端午节礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗SPU:10023968977041
+  source_page: 流量
+  grain: unknown
+  columns:
+  - 祁门红茶官方旗舰店茶叶端午节礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗SPU:10023968977041
+  row_count: 9
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_17
+  name: '4'
+  source_page: 流量
+  grain: unknown
+  columns:
+  - '4'
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_18
+  name: '5'
+  source_page: 流量
+  grain: unknown
+  columns:
+  - '5'
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_19
+  name: '6'
+  source_page: 流量
+  grain: unknown
+  columns:
+  - '6'
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_20
+  name: '7'
+  source_page: 流量
+  grain: unknown
+  columns:
+  - '7'
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 流量_table_21
+  name: '8'
+  source_page: 流量
+  grain: unknown
+  columns:
+  - '8'
+  row_count: 10
+  parent_class: ''
+  table_class: ''
+- id: 体验_table_0
+  name: '28'
+  source_page: 体验
+  grain: unknown
+  columns:
+  - '28'
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 体验_table_1
+  name: '5'
+  source_page: 体验
+  grain: unknown
+  columns:
+  - '5'
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 体验_table_2
+  name: '12'
+  source_page: 体验
+  grain: unknown
+  columns:
+  - '12'
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 体验_table_3
+  name: '19'
+  source_page: 体验
+  grain: unknown
+  columns:
+  - '19'
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 体验_table_4
+  name: '26'
+  source_page: 体验
+  grain: unknown
+  columns:
+  - '26'
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 体验_table_5
+  name: '2'
+  source_page: 体验
+  grain: unknown
+  columns:
+  - '2'
+  row_count: 7
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_0
+  name: 排名
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_1
+  name: 新入榜
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 新入榜
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_2
+  name: '1'
+  source_page: 市场
+  grain: unknown
+  columns:
+  - '1'
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_3
+  name: '2'
+  source_page: 市场
+  grain: unknown
+  columns:
+  - '2'
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_4
+  name: 4新入榜
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 4新入榜
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_5
+  name: '53'
+  source_page: 市场
+  grain: unknown
+  columns:
+  - '53'
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_6
+  name: 6新入榜
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 6新入榜
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_7
+  name: '73'
+  source_page: 市场
+  grain: unknown
+  columns:
+  - '73'
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_8
+  name: '81'
+  source_page: 市场
+  grain: unknown
+  columns:
+  - '81'
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_9
+  name: '98'
+  source_page: 市场
+  grain: unknown
+  columns:
+  - '98'
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_10
+  name: 10新入榜
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 10新入榜
+  row_count: 8
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_11
+  name: 排名
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 1
+  parent_class: ''
+  table_class: ''
+- id: 市场_table_12
+  name: 排名
+  source_page: 市场
+  grain: unknown
+  columns:
+  - 排名
+  row_count: 1
+  parent_class: ''
+  table_class: ''
+- id: 报表_table_0
+  name: 文件名称
+  source_page: 报表
+  grain: unknown
+  columns:
+  - 文件名称
+  row_count: 5
+  parent_class: ''
+  table_class: ''
+- id: 报表_table_1
+  name: 文件名称
+  source_page: 报表
+  grain: unknown
+  columns:
+  - 文件名称
+  row_count: 5
+  parent_class: ''
+  table_class: ''
+metrics_discovered:
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0 jmt-scroll-first-value
+  page: 首页
+  class: jmt-scroll-value num num-0 jmt-scroll-first-value
+  contains_number: true
+- name: jmt-scroll-value num num-1
+  page: 首页
+  class: jmt-scroll-value num num-1
+  contains_number: true
+- name: jmt-scroll-value num num-2
+  page: 首页
+  class: jmt-scroll-value num num-2
+  contains_number: true
+- name: jmt-scroll-value num num-3
+  page: 首页
+  class: jmt-scroll-value num num-3
+  contains_number: true
+- name: jmt-scroll-value num num-4
+  page: 首页
+  class: jmt-scroll-value num num-4
+  contains_number: true
+- name: jmt-scroll-value num num-5 jmt-scroll-last-value
+  page: 首页
+  class: jmt-scroll-value num num-5 jmt-scroll-last-value
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: jmt-scroll-value num num-0
+  page: 首页
+  class: jmt-scroll-value num num-0
+  contains_number: true
+- name: score-value-number
+  page: 首页
+  class: score-value-number
+  contains_number: true
+- name: score-compare-value
+  page: 首页
+  class: score-compare-value
+  contains_number: false
+- name: value-text
+  page: 首页
+  class: value-text
+  contains_number: false
+- name: value-text
+  page: 首页
+  class: value-text
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: tab-num
+  page: 首页
+  class: tab-num
+  contains_number: true
+- name: head-right-value
+  page: 首页
+  class: head-right-value
+  contains_number: false
+- name: head-metric-value
+  page: 交易
+  class: head-metric-value
+  contains_number: false
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+- name: index-value
+  page: 市场
+  class: index-value
+  contains_number: true
+dimensions_discovered:
+- name: 选择日期
+  type: text
+  page: 体验
+filters_discovered:
+- name: 查询
+  type: button
+  page: 交易
+- name: 重置
+  type: button
+  page: 交易
+- name: 查询
+  type: button
+  page: 商品
+- name: 重置
+  type: button
+  page: 商品
+- name: 查询
+  type: button
+  page: 流量
+- name: 重置
+  type: button
+  page: 流量
+- name: 查询
+  type: button
+  page: 市场
+- name: 重置
+  type: button
+  page: 市场
+- name: 刷新
+  type: button
+  page: 报表
+relationships:
+- type: metric_overlap
+  description: Metric 'jmt-scroll-value num num-0' appears in multiple pages
+  entities:
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  shared_metric: jmt-scroll-value num num-0
+  confidence: 0.85
+- type: metric_overlap
+  description: Metric 'value-text' appears in multiple pages
+  entities:
+  - 首页
+  - 首页
+  shared_metric: value-text
+  confidence: 0.85
+- type: metric_overlap
+  description: Metric 'tab-num' appears in multiple pages
+  entities:
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  - 首页
+  shared_metric: tab-num
+  confidence: 0.85
+- type: metric_overlap
+  description: Metric 'index-value' appears in multiple pages
+  entities:
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  - 市场
+  shared_metric: index-value
+  confidence: 0.85
+acquisition:
+  strategy: hybrid
+  methods:
+  - type: cdp_browser
+    description: Connect to existing Chrome instance via CDP
+    reliable: true
+  - type: dom_extraction
+    description: Extract data from rendered DOM
+    reliable: true
+  - type: xhr_capture
+    description: Capture XHR/Fetch responses
+    reliable: true
+  recommended_frequency:
+    trade_summary: daily
+    product_performance: daily
+    traffic_source: daily
+    industry_trend: weekly
+    service_metrics: daily
+health:
+  status: discovering
+  pages_discovered: 10
+  pages_with_data: 10
+  total_datasets: 55
+  total_metrics: 48
+  total_dimensions: 1
+  total_filters: 9
+  relationships_inferred: 4
+  last_updated: '2026-07-11T19:13:14.607686+00:00'

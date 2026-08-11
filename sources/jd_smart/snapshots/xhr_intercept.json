@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://jdsz.jd.com/szweb/view/index/home.html",
+    "method": "GET",
+    "status": 200,
+    "body_len": 8262,
+    "body_preview": "<!doctype html><html><head><meta charset=\"UTF-8\"/><title>京东商智</title><meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-revalidate\"/><meta http-equiv=\"Pragma\" content=\"no-cache\"/><meta http-equiv=\"Expires\" content=\"0\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><link rel=\"dns-prefetch\" href=\"https://storage.360buyimg.com\"/><link rel=\"dns-prefetch\" href=\"https://bidstatic.jd.com\"/><link rel=\"preconnect\" href=\"https://storage.360buyimg.com\" crossorigin/><li"
+  },
+  {
+    "url": "https://api.m.jd.com/?appid=listen&functionId=getComponentSceneSatisfaction&loginType=3",
+    "method": "POST",
+    "status": 200,
+    "body_len": 173,
+    "body_preview": "{\"code\":\"LING_LISTEN_QUESTION_COMPONENT_SCENE_SATISFACTION_GROUP_VALID_ERROR\",\"message\":\"场景满意度分组ID:1950746332779323393, 已达到最大次数\",\"class\":\"com.jd.exa.common.vo.CommonResult\"}"
+  }
+]
