@@ -32,11 +32,22 @@
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand"><span class="brand-icon">&#9729;</span><span class="brand-text">agentFabric</span></div>
         <div class="sidebar-section">
+          <div class="sidebar-section-label" data-i18n="nav.section.agent">AGENT</div>
+          <a href="#" class="sidebar-item active" data-view="agentSession"><span class="sidebar-icon">🤖</span><span data-i18n="nav.agentSession">Agent Session</span></a>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">
           <div class="sidebar-section-label" data-i18n="nav.section.discovery">发现视图</div>
-          <a href="#" class="sidebar-item active" data-view="inbox" data-filter="all"><span class="sidebar-icon">&#128269;</span><span data-i18n="nav.inbox">今日发现</span><span class="sidebar-badge" id="badgeAll">--</span></a>
+          <a href="#" class="sidebar-item" data-view="inbox" data-filter="all"><span class="sidebar-icon">&#128269;</span><span data-i18n="nav.inbox">今日发现</span><span class="sidebar-badge" id="badgeAll">--</span></a>
           <a href="#" class="sidebar-item" data-view="inbox" data-filter="growth"><span class="sidebar-icon growth-icon">&#128293;</span><span data-i18n="nav.growth">增长机会</span><span class="sidebar-badge" id="badgeGrowth">--</span></a>
           <a href="#" class="sidebar-item" data-view="inbox" data-filter="risk"><span class="sidebar-icon risk-icon">&#9888;</span><span data-i18n="nav.risk">风险预警</span><span class="sidebar-badge" id="badgeRisk">--</span></a>
           <a href="#" class="sidebar-item" data-view="inbox" data-filter="review"><span class="sidebar-icon review-icon">&#9745;</span><span data-i18n="nav.review">审核中心</span><span class="sidebar-badge" id="badgeReview">--</span></a>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-label" data-i18n="nav.section.capability">CAPABILITY</div>
+          <a href="#" class="sidebar-item" data-view="capabilityExplorer"><span class="sidebar-icon">📋</span><span data-i18n="nav.capabilityExplorer">Capability Explorer</span></a>
+          <a href="#" class="sidebar-item" data-view="evidenceViewer"><span class="sidebar-icon">🔗</span><span data-i18n="nav.evidenceViewer">Evidence Viewer</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section">
@@ -105,6 +116,112 @@
 
           <div class="runtime-executions" style="max-height:50vh;overflow-y:auto"><h3 style="font-size:0.85rem;margin-bottom:8px;position:sticky;top:0;background:var(--bg);z-index:1;padding:4px 0">执行历史 <span id="runtimeExecCount" class="muted" style="font-size:0.72rem"></span></h3><div id="runtimeExecutionsList" class="muted placeholder">加载中...</div></div><div id="runtimeDetail" style="display:none;margin-top:16px"><h3 style="font-size:0.85rem;margin-bottom:8px">执行详情</h3><div id="runtimeDetailContent"></div></div></div>
         <div id="view-agentConfig" class="view-container"><h2 class="view-title" data-i18n="config.title">Agent 配置</h2><div class="config-section"><h3 class="config-section-title" data-i18n="config.ranking">排名权重</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.growthWeight">增长权重</label><input type="number" class="input" id="cfgGrowthWeight" value="0.35" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label data-i18n="config.competitionWeight">竞争权重</label><input type="number" class="input" id="cfgCompetitionWeight" value="0.25" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label data-i18n="config.qualityWeight">质量权重</label><input type="number" class="input" id="cfgQualityWeight" value="0.15" min="0" max="1" step="0.05" /></div></div></div><div class="config-section" style="margin-top:16px"><h3 class="config-section-title" data-i18n="config.memory">Memory 设置</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.memoryTtl">TTL (天)</label><input type="number" class="input" id="cfgMemoryTtl" value="30" min="1" step="1" /></div><div class="threshold-item"><label data-i18n="config.memoryDecay">衰减率</label><input type="number" class="input" id="cfgMemoryDecay" value="0.05" min="0" max="1" step="0.01" /></div><div class="threshold-item"><label data-i18n="config.memoryThreshold">验证阈值</label><input type="number" class="input" id="cfgMemoryThreshold" value="0.6" min="0" max="1" step="0.05" /></div></div></div><div class="config-section" style="margin-top:16px"><h3 class="config-section-title" data-i18n="config.llm">LLM 配置</h3><div class="threshold-row"><div class="threshold-item"><label data-i18n="config.llmProvider">Provider</label><select class="input select" id="cfgLlmProvider"><option value="anthropic">Anthropic</option><option value="openai">OpenAI</option></select></div><div class="threshold-item"><label data-i18n="config.llmModel">Model</label><input type="text" class="input" id="cfgLlmModel" value="claude-sonnet-4-6" /></div><div class="threshold-item"><label data-i18n="config.llmTemp">Temperature</label><input type="number" class="input" id="cfgLlmTemp" value="0.7" min="0" max="2" step="0.1" /></div></div></div><button class="btn btn-primary" id="saveAgentConfig" style="margin-top:16px" data-i18n="config.save">保存配置</button></div>
+
+        <!-- v0.2 Phase 2: Agent Session — primary workspace view -->
+        <div id="view-agentSession" class="view-container active">
+          <div class="view-scroll">
+            <div class="session-header">
+              <div class="session-header-left">
+                <h2 class="session-title">🤖 HermesAgent · Agent Session</h2>
+                <span class="session-subtitle" id="sessionSubtitle">2026-08-11</span>
+              </div>
+              <div class="session-header-right">
+                <span class="session-status-badge unavailable" id="sessionStatusBadge">Runtime integration unavailable</span>
+              </div>
+            </div>
+
+            <div class="session-notice" id="sessionNotice">
+              <div class="session-notice-icon">⚠️</div>
+              <div class="session-notice-body">
+                <strong>Runtime integration unavailable</strong>
+                <p>HermesAgent events not connected. Agent Activity display requires HermesAgent integration (Phase 3).</p>
+                <p class="session-notice-hint">Agent Session defines the UI contract for observable events (intent.resolved, capability.selected, data.requested, acquisition.completed, response.ready). These event slots will be populated when HermesAgent integration is complete.</p>
+              </div>
+            </div>
+
+            <div class="session-conversation" id="sessionConversation">
+              <!-- Messages rendered here by AgentSession module -->
+              <div class="session-placeholder">
+                <div class="session-placeholder-icon">🤖</div>
+                <p>Agent Session 是您与 HermesAgent 协作的工作视图。</p>
+                <p class="muted" style="margin-top:8px">完整功能需要 HermesAgent Runtime 集成 (Phase 3)。当前展示 UI boundary 和 event contract。</p>
+              </div>
+            </div>
+
+            <!-- Observable Event Slots (defined but not populated in Phase 2) -->
+            <div class="session-activity-slots" id="sessionActivitySlots">
+              <h3 class="session-activity-title">Agent Activity (observable events)</h3>
+              <div class="activity-slot" data-slot="intent.resolved">
+                <span class="activity-slot-label">intent.resolved</span>
+                <span class="activity-slot-status pending">— awaiting HermesAgent integration</span>
+              </div>
+              <div class="activity-slot" data-slot="capability.selected">
+                <span class="activity-slot-label">capability.selected</span>
+                <span class="activity-slot-status pending">— awaiting HermesAgent integration</span>
+              </div>
+              <div class="activity-slot" data-slot="data.requested">
+                <span class="activity-slot-label">data.requested</span>
+                <span class="activity-slot-status pending">— awaiting HermesAgent integration</span>
+              </div>
+              <div class="activity-slot" data-slot="acquisition.completed">
+                <span class="activity-slot-label">acquisition.completed</span>
+                <span class="activity-slot-status pending">— awaiting HermesAgent integration</span>
+              </div>
+              <div class="activity-slot" data-slot="response.ready">
+                <span class="activity-slot-label">response.ready</span>
+                <span class="activity-slot-status pending">— awaiting HermesAgent integration</span>
+              </div>
+            </div>
+
+            <div class="session-input-row">
+              <input id="agentSessionInput" class="input session-input-main" placeholder="Type a question for HermesAgent... (Phase 3)" disabled />
+              <button id="agentSessionSendBtn" class="btn btn-primary session-send-btn" disabled>➤</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- v0.2 Phase 2: Capability Explorer -->
+        <div id="view-capabilityExplorer" class="view-container">
+          <div class="view-scroll">
+            <div class="capability-header">
+              <h2 class="view-title">📋 Capability Explorer</h2>
+              <span class="muted">agentFabric 现在能获取什么数据？</span>
+            </div>
+            <div class="capability-filters">
+              <div class="capability-domain-filters" id="capabilityDomainFilters">
+                <!-- Domain filter chips rendered by JS -->
+              </div>
+              <div class="capability-search-row">
+                <input id="capabilitySearchInput" class="input" style="flex:1" placeholder="🔍 Search intents...（搜索"分析流量"等）" />
+              </div>
+            </div>
+            <div id="capabilityCardsList" class="capability-cards-grid">
+              <p class="muted placeholder">Loading capabilities...</p>
+            </div>
+            <div id="capabilityDetail" class="capability-detail-view" style="display:none"></div>
+            <div class="capability-summary-footer" id="capabilitySummaryFooter"></div>
+          </div>
+        </div>
+
+        <!-- v0.2 Phase 2: Evidence Viewer -->
+        <div id="view-evidenceViewer" class="view-container">
+          <div class="view-scroll">
+            <div class="evidence-header">
+              <h2 class="view-title">🔗 Evidence Viewer</h2>
+              <span class="muted">数据从哪里来，能信吗？</span>
+            </div>
+            <div class="evidence-select-row">
+              <label style="font-size:0.82rem;font-weight:600">Select Capability:</label>
+              <select id="evidenceCapabilitySelect" class="input select" style="flex:1;max-width:320px">
+                <option value="">— Choose a capability —</option>
+              </select>
+              <button id="evidenceLoadBtn" class="btn btn-primary">Load Evidence</button>
+            </div>
+            <div id="evidenceContent" class="evidence-content-area">
+              <p class="muted placeholder">Select a capability to view its evidence provenance chain.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <aside class="decision-panel" id="decisionPanel">

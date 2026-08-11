@@ -50,6 +50,35 @@ const i18n = {
     'label.supply': 'Supply', 'label.quality': 'Quality', 'label.conf': 'Conf', 'label.none': '--',
     'label.updated': 'Updated {time}', 'label.loading': 'Loading...', 'label.unavailable': 'Unavailable',
     'toast.ready': 'Agent Workspace 就绪', 'toast.refreshed': '已刷新', 'toast.configSaved': '配置已保存',
+    // Phase 2
+    'nav.section.agent': 'AGENT', 'nav.agentSession': 'Agent Session',
+    'nav.section.capability': 'CAPABILITY', 'nav.capabilityExplorer': 'Capability Explorer', 'nav.evidenceViewer': 'Evidence Viewer',
+    'session.runtimeUnavailable': 'Runtime integration unavailable', 'session.hermesNotConnected': 'HermesAgent events not connected. Agent Activity display requires HermesAgent integration (Phase 3).',
+    'session.contractHint': 'Agent Session defines the UI contract for observable events (intent.resolved, capability.selected, data.requested, acquisition.completed, response.ready). These event slots will be populated when HermesAgent integration is complete.',
+    'session.placeholder': 'Agent Session 是您与 HermesAgent 协作的工作视图。',
+    'session.placeholderHint': '完整功能需要 HermesAgent Runtime 集成 (Phase 3)。当前展示 UI boundary 和 event contract。',
+    'session.activityTitle': 'Agent Activity (observable events)',
+    'session.awaitingIntegration': '— awaiting HermesAgent integration',
+    'session.inputDisabled': 'Type a question for HermesAgent... (Phase 3)',
+    'capability.title': 'agentFabric 现在能获取什么数据？',
+    'capability.searchPlaceholder': '搜索能力意图...',
+    'capability.domainAll': '全部', 'capability.useInSession': '在 Session 中使用',
+    'capability.viewDetail': '查看详情', 'capability.backToList': '← 返回列表',
+    'capability.canAnswer': '可以回答', 'capability.metrics': '提供指标',
+    'capability.provider': '数据来源', 'capability.constraints': '约束',
+    'capability.evidence': 'Evidence', 'capability.openEvidence': '查看 Evidence 链 →',
+    'capability.footer': '{total} capabilities · {verified} verified · {blocked} blocked',
+    'evidence.title': '数据从哪里来，能信吗？',
+    'evidence.selectCapability': 'Select Capability:', 'evidence.load': 'Load Evidence',
+    'evidence.placeholder': '选择一个 Capability 查看其证据溯源链。',
+    'evidence.notFound': '未找到该 Capability',
+    'evidence.provenanceCapability': 'Capability', 'evidence.provenancePlatform': '平台页面',
+    'evidence.provenanceCapture': '数据采集', 'evidence.provenanceRaw': '原始响应',
+    'evidence.provenanceMapping': '语义映射', 'evidence.provenanceMetrics': '指标',
+    'evidence.provenanceContract': 'Capability Contract',
+    'evidence.expand': '▸ 展开', 'evidence.collapse': '▾ 收起',
+    'evidence.viewRawJson': '查看原始 JSON', 'evidence.viewMappings': '查看全部 {count} 条映射',
+    'evidence.supports': '此 Evidence 验证: {id}',
   },
   en: {
     'mode.business': 'Business', 'mode.developer': 'Developer', 'mode.operator': 'Operator', 'mode.builder': 'Builder',
@@ -89,6 +118,35 @@ const i18n = {
     'label.supply': 'Supply', 'label.quality': 'Quality', 'label.conf': 'Conf', 'label.none': '--',
     'label.updated': 'Updated {time}', 'label.loading': 'Loading...', 'label.unavailable': 'Unavailable',
     'toast.ready': 'Agent Workspace ready', 'toast.refreshed': 'Refreshed', 'toast.configSaved': 'Config saved',
+    // Phase 2
+    'nav.section.agent': 'AGENT', 'nav.agentSession': 'Agent Session',
+    'nav.section.capability': 'CAPABILITY', 'nav.capabilityExplorer': 'Capability Explorer', 'nav.evidenceViewer': 'Evidence Viewer',
+    'session.runtimeUnavailable': 'Runtime integration unavailable', 'session.hermesNotConnected': 'HermesAgent events not connected. Agent Activity display requires HermesAgent integration (Phase 3).',
+    'session.contractHint': 'Agent Session defines the UI contract for observable events (intent.resolved, capability.selected, data.requested, acquisition.completed, response.ready). These event slots will be populated when HermesAgent integration is complete.',
+    'session.placeholder': 'Agent Session is your workspace for collaborating with HermesAgent.',
+    'session.placeholderHint': 'Full functionality requires HermesAgent Runtime integration (Phase 3). Currently displaying UI boundary and event contract.',
+    'session.activityTitle': 'Agent Activity (observable events)',
+    'session.awaitingIntegration': '— awaiting HermesAgent integration',
+    'session.inputDisabled': 'Type a question for HermesAgent... (Phase 3)',
+    'capability.title': 'What data can agentFabric fetch?',
+    'capability.searchPlaceholder': 'Search capability intents...',
+    'capability.domainAll': 'All', 'capability.useInSession': 'Use in Session',
+    'capability.viewDetail': 'View Details', 'capability.backToList': '← Back to list',
+    'capability.canAnswer': 'Can answer', 'capability.metrics': 'Metrics',
+    'capability.provider': 'Provider', 'capability.constraints': 'Constraints',
+    'capability.evidence': 'Evidence', 'capability.openEvidence': 'Open Evidence Chain →',
+    'capability.footer': '{total} capabilities · {verified} verified · {blocked} blocked',
+    'evidence.title': 'Where does the data come from? Can it be trusted?',
+    'evidence.selectCapability': 'Select Capability:', 'evidence.load': 'Load Evidence',
+    'evidence.placeholder': 'Select a capability to view its evidence provenance chain.',
+    'evidence.notFound': 'Capability not found',
+    'evidence.provenanceCapability': 'Capability', 'evidence.provenancePlatform': 'Platform Page',
+    'evidence.provenanceCapture': 'Capture', 'evidence.provenanceRaw': 'Raw Response',
+    'evidence.provenanceMapping': 'Semantic Mapping', 'evidence.provenanceMetrics': 'Metrics',
+    'evidence.provenanceContract': 'Capability Contract',
+    'evidence.expand': '▸ Expand', 'evidence.collapse': '▾ Collapse',
+    'evidence.viewRawJson': 'View Raw JSON', 'evidence.viewMappings': 'View all {count} mappings',
+    'evidence.supports': 'This evidence supports: {id}',
   },
 };
 
@@ -126,7 +184,8 @@ function switchView(name, filter = 'all') {
   viewLoaders[name]?.(filter);
 }
 
-const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, agentConfig: loadConfig };
+const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, agentConfig: loadConfig,
+  agentSession: loadAgentSession, capabilityExplorer: loadCapabilityExplorer, evidenceViewer: loadEvidenceViewer };
 
 // ═══ Data Loading ══════════════════════════════════════════
 async function loadData() {
@@ -736,6 +795,339 @@ function loadConfig() {
   applyI18n();
 }
 
+// ═══ Agent Session (Phase 2) ══════════════════════════════
+// Static shell only. The HTML contains the full UI (notice + event slots + disabled input).
+// Phase 2: no runtime data loading — the placeholder state is the correct state.
+// Phase 3: will connect to HermesAgent and populate event slots dynamically.
+function loadAgentSession() {
+  // No dynamic data to load in Phase 2.
+  // The static HTML already shows: "Runtime integration unavailable" + event contract slots + disabled input.
+  // This function satisfies the viewLoader contract; future Phase 3 will add event stream subscription.
+  var notice = document.getElementById('sessionNotice');
+  if (notice) notice.style.display = 'flex';
+  var slots = document.getElementById('sessionActivitySlots');
+  if (slots) slots.style.display = 'block';
+}
+
+// ═══ Capability Explorer (Phase 2) ═══════════════════════
+async function loadCapabilityExplorer() {
+  var cardsList = document.getElementById('capabilityCardsList');
+  var domainFilters = document.getElementById('capabilityDomainFilters');
+  var searchInput = document.getElementById('capabilitySearchInput');
+  var summaryFooter = document.getElementById('capabilitySummaryFooter');
+  var detailView = document.getElementById('capabilityDetail');
+
+  cardsList.innerHTML = '<p class="muted placeholder">Loading capabilities...</p>';
+
+  try {
+    var data = await apiGet('/api/capabilities');
+    var capabilities = data.capabilities || [];
+    var summary = data.summary || {};
+    var domains = data.domains || [];
+
+    // Render domain filter chips
+    var allCapabilities = capabilities;
+    renderDomainFilters(domainFilters, domains);
+    // Render cards
+    renderCapabilityCards(cardsList, capabilities, summaryFooter, summary);
+
+    // Domain filter click handler
+    domainFilters.addEventListener('click', function(e) {
+      var chip = e.target.closest('.capability-domain-chip');
+      if (!chip) return;
+      var domain = chip.dataset.domain;
+      // Toggle active
+      domainFilters.querySelectorAll('.capability-domain-chip').forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      // Filter
+      var filtered = domain === 'all' ? allCapabilities : allCapabilities.filter(function(c) { return c.domain === domain; });
+      renderCapabilityCards(cardsList, filtered, summaryFooter, { total_capabilities: filtered.length });
+    });
+
+    // Search handler
+    searchInput.addEventListener('input', function() {
+      var q = searchInput.value.trim().toLowerCase();
+      if (!q) {
+        renderCapabilityCards(cardsList, allCapabilities, summaryFooter, summary);
+        return;
+      }
+      var filtered = allCapabilities.filter(function(c) {
+        var inIntent = (c.intent || []).some(function(i) { return i.toLowerCase().includes(q); });
+        var inName = (c.name || '').toLowerCase().includes(q);
+        var inDesc = (c.description || '').toLowerCase().includes(q);
+        var inOutput = (c.outputs || []).some(function(o) { return o.toLowerCase().includes(q); });
+        return inIntent || inName || inDesc || inOutput;
+      });
+      renderCapabilityCards(cardsList, filtered, summaryFooter, { total_capabilities: filtered.length });
+    });
+
+    // Card click → detail view
+    cardsList.addEventListener('click', function(e) {
+      var card = e.target.closest('.capability-card');
+      if (!card) return;
+      var capId = card.dataset.capabilityId;
+      var cap = allCapabilities.find(function(c) { return c.capability === capId; });
+      if (cap && detailView) showCapabilityDetail(detailView, cap, cardsList);
+    });
+
+  } catch (e) {
+    cardsList.innerHTML = '<p class="muted placeholder">Failed to load capabilities (' + e.message + '). Run <code>npm run cli -- generate-contract</code> first.</p>';
+  }
+}
+
+function renderDomainFilters(container, domains) {
+  var html = '<span class="capability-domain-chip active" data-domain="all">All</span>';
+  domains.forEach(function(d) {
+    html += '<span class="capability-domain-chip" data-domain="' + d + '">' + d + '</span>';
+  });
+  container.innerHTML = html;
+}
+
+function renderCapabilityCards(container, capabilities, footer, summary) {
+  if (!capabilities || capabilities.length === 0) {
+    container.innerHTML = '<p class="muted placeholder">No capabilities found.</p>';
+    if (footer) footer.innerHTML = '';
+    return;
+  }
+
+  var statusIcon = { verified: '&#9989;', captured: '&#9888;&#65039;', content_only: '&#9888;&#65039;', pending: '&#11035;', premium_required: '&#128176;', popup_blocked: '&#128683;' };
+  var statusClass = { verified: 'verified', captured: 'captured', content_only: 'contracted', pending: 'contracted', premium_required: 'blocked', popup_blocked: 'blocked' };
+
+  var html = '';
+  capabilities.forEach(function(cap) {
+    var vStatus = (cap.validation && cap.validation.status) || 'pending';
+    var icon = statusIcon[vStatus] || '&#11035;';
+    var cls = statusClass[vStatus] || '';
+    var provider = cap.provider || {};
+    var verifiedMetrics = (cap.validation && cap.validation.verified_metrics) || [];
+    var verifiedSet = {};
+    verifiedMetrics.forEach(function(m) { verifiedSet[m] = true; });
+
+    var intentsHtml = '';
+    var intents = (cap.intent || []).slice(0, 3);
+    if (intents.length) {
+      intentsHtml = '<div class="capability-card-intents"><strong>Intents:</strong><ul>';
+      intents.forEach(function(i) { intentsHtml += '<li>' + escHtml(i) + '</li>'; });
+      intentsHtml += '</ul></div>';
+    }
+
+    var metricsHtml = '';
+    var metrics = cap.metrics || [];
+    if (metrics.length) {
+      metricsHtml = '<div class="capability-card-metrics">';
+      metrics.slice(0, 6).forEach(function(m) {
+        var tagClass = verifiedSet[m.canonical] ? ' verified' : '';
+        metricsHtml += '<span class="capability-card-metric-tag' + tagClass + '">' + escHtml(m.canonical) + '</span>';
+      });
+      if (metrics.length > 6) metricsHtml += '<span class="capability-card-metric-tag">+' + (metrics.length - 6) + '</span>';
+      metricsHtml += '</div>';
+    }
+
+    html += '<div class="capability-card" data-capability-id="' + escHtml(cap.capability) + '">' +
+      '<div class="capability-card-header">' +
+        '<span class="capability-card-status ' + cls + '">' + icon + '</span>' +
+        '<span class="capability-card-name">' + escHtml(cap.name) + '</span>' +
+      '</div>' +
+      '<div class="capability-card-id">' + escHtml(cap.capability) + '</div>' +
+      '<div class="capability-card-desc">' + escHtml(cap.description) + '</div>' +
+      intentsHtml +
+      metricsHtml +
+      '<div class="capability-card-footer">' +
+        '<span><span class="capability-card-platform">' + escHtml(provider.platform || '') + '</span> &middot; <span class="capability-card-acquisition">' + escHtml(provider.acquisition || '') + '</span></span>' +
+        '<button class="capability-card-action">View Details</button>' +
+      '</div>' +
+    '</div>';
+  });
+  container.innerHTML = html;
+
+  if (footer) {
+    var total = summary.total_capabilities || capabilities.length;
+    var verified = summary.verified_capabilities || 0;
+    var blocked = summary.blocked_capabilities || 0;
+    footer.innerHTML = '<span class="muted" style="font-size:0.72rem">' + total + ' capabilities &middot; ' +
+      '<span style="color:var(--success)">' + verified + ' verified</span> &middot; ' +
+      '<span style="color:var(--danger)">' + blocked + ' blocked</span></span>';
+  }
+}
+
+function showCapabilityDetail(container, cap, cardsList) {
+  var vStatus = (cap.validation && cap.validation.status) || 'pending';
+  var provider = cap.provider || {};
+  var verifiedMetrics = (cap.validation && cap.validation.verified_metrics) || [];
+  var lastVerified = (cap.validation && cap.validation.last_verified) || '';
+
+  var metricsHtml = '';
+  (cap.metrics || []).forEach(function(m) {
+    var verifiedBadge = verifiedMetrics.indexOf(m.canonical) >= 0 ? ' &#9989;' : '';
+    metricsHtml += '<span style="display:inline-block;padding:4px 10px;background:var(--bg-strong);border-radius:10px;font-family:var(--font-mono);font-size:0.7rem;margin:2px">' + escHtml(m.canonical) + ' <span class="muted">(' + m.unit + ')</span>' + verifiedBadge + '</span>';
+  });
+
+  var intentsHtml = '';
+  (cap.intent || []).forEach(function(i) {
+    intentsHtml += '<li>' + escHtml(i) + '</li>';
+  });
+
+  var constraints = cap.constraints || {};
+  var constraintNotes = [];
+  if (constraints.requires_premium) constraintNotes.push('<span style="color:var(--danger)">&#128176; Requires: ' + escHtml(constraints.premium_tier || 'premium subscription') + '</span>');
+  if (constraints.requires_ad_account) constraintNotes.push('<span style="color:var(--warning)">&#9888; Requires ad account</span>');
+  if (constraints.is_popup) constraintNotes.push('<span style="color:var(--warning)">&#128683; Opens as popup/modal</span>');
+  if (constraints.notes) constraintNotes.push('<span style="color:var(--muted)">' + escHtml(constraints.notes) + '</span>');
+
+  var html = '<div style="position:sticky;top:0;background:var(--bg);z-index:1;padding:8px 0;margin-bottom:16px">' +
+    '<button class="btn-icon" onclick="document.getElementById(\'capabilityDetail\').style.display=\'none\';document.getElementById(\'capabilityCardsList\').style.display=\'\';document.getElementById(\'capabilitySummaryFooter\').style.display=\'\'">&#8592; Back to list</button>' +
+    '</div>' +
+    '<div style="max-width:720px">' +
+    '<h2 style="font-family:var(--font-display)">' + escHtml(cap.name) + '</h2>' +
+    '<p class="muted" style="font-family:var(--font-mono);font-size:0.8rem;margin-bottom:12px">' + escHtml(cap.capability) + ' &middot; Status: ' + vStatus + '</p>' +
+    '<p style="line-height:1.6;margin-bottom:16px">' + escHtml(cap.description) + '</p>' +
+
+    '<h3 style="font-size:0.9rem;margin-bottom:8px">Intents (Agent queries this capability for)</h3>' +
+    '<ul style="margin-bottom:16px;line-height:1.6">' + intentsHtml + '</ul>' +
+
+    '<h3 style="font-size:0.9rem;margin-bottom:8px">Metrics (' + (cap.outputs || []).length + ' total)</h3>' +
+    '<div style="margin-bottom:16px">' + metricsHtml + '</div>' +
+
+    '<h3 style="font-size:0.9rem;margin-bottom:8px">Dimensions</h3>' +
+    '<div style="margin-bottom:16px">' + (cap.dimensions || []).map(function(d) { return '<span style="padding:2px 8px;background:var(--bg-strong);border-radius:8px;font-size:0.72rem;margin:2px">' + escHtml(d) + '</span>'; }).join(' ') + '</div>' +
+
+    '<h3 style="font-size:0.9rem;margin-bottom:8px">Provider</h3>' +
+    '<p style="margin-bottom:4px"><strong>Platform:</strong> ' + escHtml(provider.platform || '') + '</p>' +
+    '<p style="margin-bottom:4px"><strong>Acquisition:</strong> ' + escHtml(provider.acquisition || '') + '</p>' +
+    (lastVerified ? '<p style="margin-bottom:4px"><strong>Last verified:</strong> ' + escHtml(lastVerified) + '</p>' : '') +
+    (constraintNotes.length ? '<div style="margin-top:8px">' + constraintNotes.join('<br>') + '</div>' : '') +
+    '</div>';
+
+  container.innerHTML = html;
+  container.style.display = 'block';
+  cardsList.style.display = 'none';
+  if (document.getElementById('capabilitySummaryFooter')) document.getElementById('capabilitySummaryFooter').style.display = 'none';
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ═══ Evidence Viewer (Phase 2) ══════════════════════════
+async function loadEvidenceViewer() {
+  var select = document.getElementById('evidenceCapabilitySelect');
+  var content = document.getElementById('evidenceContent');
+  var loadBtn = document.getElementById('evidenceLoadBtn');
+
+  // Populate capability dropdown
+  select.innerHTML = '<option value="">— Choose a capability —</option>';
+  try {
+    var data = await apiGet('/api/capabilities');
+    var capabilities = data.capabilities || [];
+    capabilities.forEach(function(cap) {
+      var label = cap.name + ' (' + cap.capability + ')';
+      select.innerHTML += '<option value="' + escHtml(cap.capability) + '">' + escHtml(label) + '</option>';
+    });
+  } catch (e) {
+    select.innerHTML = '<option value="">— Failed to load capabilities —</option>';
+  }
+
+  content.innerHTML = '<p class="muted placeholder">Select a capability to view its evidence provenance chain.</p>';
+
+  // Load evidence on button click
+  loadBtn.addEventListener('click', async function() {
+    var capId = select.value;
+    if (!capId) { content.innerHTML = '<p class="muted placeholder">Please select a capability first.</p>'; return; }
+    content.innerHTML = '<p class="muted">Loading evidence for ' + escHtml(capId) + '...</p>';
+    try {
+      var evidence = await apiGet('/api/evidence/' + capId);
+      renderProvenanceChain(content, evidence, capId);
+    } catch (e) {
+      content.innerHTML = '<p class="muted placeholder">Failed to load evidence (' + e.message + ')</p>';
+    }
+  });
+}
+
+function renderProvenanceChain(container, evidence, capId) {
+  var cap = evidence.capability || {};
+  var provider = evidence.provider || {};
+  var artifacts = evidence.artifacts || {};
+  var records = evidence.evidence_records || [];
+  var summary = evidence.summary || {};
+
+  var html = '<div class="evidence-breadcrumb">' +
+    '<span>Agent Session</span> <span class="sep">&gt;</span> ' +
+    '<span>' + escHtml(capId) + '</span> <span class="sep">&gt;</span> ' +
+    '<span>Evidence</span>' +
+    '</div>';
+
+  // Provenance chain
+  html += '<div class="provenance-chain">';
+
+  // Node 1: Capability
+  html += '<div class="provenance-node">' +
+    '<div class="provenance-node-icon">&#128269;</div>' +
+    '<div class="provenance-node-body">' +
+      '<div class="provenance-node-title">' + escHtml(cap.name || capId) + '</div>' +
+      '<div class="provenance-node-subtitle">Capability: ' + escHtml(cap.domain || '') + '</div>' +
+      '<div class="provenance-node-detail">' + escHtml(cap.description || '') + '</div>' +
+    '</div>' +
+    '<span class="provenance-status verified">' + escHtml(provider.platform || '') + ' &middot; ' + escHtml(provider.acquisition || '') + '</span>' +
+  '</div>';
+
+  // Node 2: Discovery artifacts
+  var discoveryKeys = Object.keys(artifacts).filter(function(k) { return artifacts[k]; });
+  if (discoveryKeys.length) {
+    html += '<div class="provenance-node-connector"></div>';
+    html += '<div class="provenance-node">' +
+      '<div class="provenance-node-icon">&#128218;</div>' +
+      '<div class="provenance-node-body">' +
+        '<div class="provenance-node-title">Discovery Artifacts</div>' +
+        '<div class="provenance-node-subtitle">' + discoveryKeys.length + ' discovery files</div>' +
+        '<div class="provenance-node-meta">' + discoveryKeys.map(function(k) { return escHtml(k); }).join(', ') + '</div>';
+    discoveryKeys.forEach(function(k) {
+      var art = artifacts[k];
+      var preview = typeof art === 'object' ? JSON.stringify(art).slice(0, 300) : String(art).slice(0, 300);
+      html += '<span class="provenance-node-expand" onclick="var el=this.nextElementSibling;el.style.display=el.style.display===\'block\'?\'none\':\'block\'">&#9654; View ' + escHtml(k) + '</span>' +
+        '<pre class="provenance-node-expanded" style="display:none">' + escHtml(preview) + '...</pre>';
+    });
+    html += '</div></div>';
+  }
+
+  // Node 3: Evidence records
+  if (records.length) {
+    html += '<div class="provenance-node-connector"></div>';
+    html += '<div class="provenance-node">' +
+      '<div class="provenance-node-icon">&#128260;</div>' +
+      '<div class="provenance-node-body">' +
+        '<div class="provenance-node-title">Evidence Records</div>' +
+        '<div class="provenance-node-subtitle">' + records.length + ' evidence files</div>';
+
+    // Evidence timeline
+    html += '<div class="evidence-timeline"><div class="evidence-timeline-title">Timeline</div>';
+    records.slice(0, 20).forEach(function(rec) {
+      var meta = rec.metadata || {};
+      var acquired = meta.acquired_at ? meta.acquired_at.slice(0, 10) : (rec.date || '');
+      var dataType = meta.data_type || rec.data_type || rec.type || '';
+      var method = meta.acquisition_method || meta.method || 'none';
+      var statusClass = method === 'cdp' ? 'cdp' : method === 'mock' ? 'mock' : 'none';
+      html += '<div class="evidence-timeline-item">' +
+        '<span><span class="evidence-timeline-date">' + escHtml(acquired) + '</span> ' +
+        '<span class="evidence-timeline-meta">' + escHtml(dataType) + '</span></span>' +
+        '<span class="evidence-timeline-status ' + statusClass + '">' + escHtml(method) + '</span>' +
+      '</div>';
+    });
+    html += '</div>';
+
+    html += '<div class="provenance-node-meta" style="margin-top:8px">' +
+      'Total: ' + summary.total_evidence + ' records &middot; ' +
+      'From: ' + escHtml(summary.date_range || '') +
+      '</div>';
+
+    html += '</div></div>';
+  }
+
+  html += '</div>'; // end provenance-chain
+
+  container.innerHTML = html;
+}
+
 // ═══ Agent Trace Panel ════════════════════════════════════
 function selectFinding(finding) {
   state.selectedEntityId = finding.entityId || finding.entity_id;
@@ -1073,7 +1465,7 @@ document.querySelectorAll('.chip-question').forEach(chip => {
   if (replayTo) { replayTo.max = today; replayTo.value = today; }
 
   applyI18n();
-  switchView('inbox', 'all');
+  switchView('agentSession');
   await loadData();
 
   // If no rankings exist yet, auto-compute them (first-time setup)

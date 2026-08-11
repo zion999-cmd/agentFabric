@@ -17,7 +17,9 @@ import { getDataPages } from '#app/connectors/jd/blueprint.js';
 import { saveEvidence } from '#app/connectors/evidence/store.js';
 import { parseJdPayload } from '#app/connectors/jd/parsers/index.js';
 import { SignalFacade } from '#app/analysis/metrics/facade.js';
-import { loadEvidence } from '#app/connectors/evidence/store.js';
+import { loadEvidence, listEvidence } from '#app/connectors/evidence/store.js';
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 // ---- Request Schemas ----
 
@@ -332,6 +334,144 @@ export const runtimeRouter = (db: Db): Router => {
       });
     } catch (err) {
       fail(res, 500, err instanceof Error ? err.message : 'Discovery failed');
+    }
+  });
+
+  // ── Capability Contract API ──────────────────────────────────
+
+  // GET /api/capabilities — list all capability contracts.
+  // Query params: ?domain=traffic, ?intent=流量
+  router.get('/capabilities', (_req, res) => {
+    try {
+      const contractPath = resolve(process.cwd(), 'generated', 'capability-contract.json');
+      if (!existsSync(contractPath)) {
+        ok(res, { capabilities: [], summary: { total_capabilities: 0 } }, { total: 0 });
+        return;
+      }
+      const raw = readFileSync(contractPath, 'utf-8');
+      const contract = JSON.parse(raw);
+      let capabilities = contract.capabilities || [];
+
+      // Filter by domain
+      const domain = _req.query['domain'] as string | undefined;
+      if (domain && domain !== 'all') {
+        capabilities = capabilities.filter(
+          (c: { domain: string }) => c.domain === domain,
+        );
+      }
+
+      // Search by intent
+      const intent = _req.query['intent'] as string | undefined;
+      if (intent) {
+        const q = intent.toLowerCase();
+        capabilities = capabilities.filter((c: { intent: string[]; name: string; description: string }) =>
+          (c.intent || []).some((i: string) => i.includes(q)) ||
+          c.name.includes(q) ||
+          c.description.includes(q),
+        );
+      }
+
+      ok(res, {
+        capabilities,
+        summary: contract.summary,
+        domains: contract.summary?.domains || [],
+      }, { total: capabilities.length });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to load capabilities');
+    }
+  });
+
+  // GET /api/evidence/:capabilityId — evidence chain for a capability.
+  // Returns provenance data: capability info + discovery artifacts + evidence records.
+  router.get('/evidence/:capabilityId', (req, res) => {
+    try {
+      const capabilityId = req.params['capabilityId'];
+      if (!capabilityId) {
+        fail(res, 400, 'Missing capability ID');
+        return;
+      }
+
+      // Load capability contract
+      const contractPath = resolve(process.cwd(), 'generated', 'capability-contract.json');
+      let capability: Record<string, unknown> | undefined;
+      if (existsSync(contractPath)) {
+        const contract = JSON.parse(readFileSync(contractPath, 'utf-8'));
+        capability = (contract.capabilities || []).find(
+          (c: { capability: string }) => c.capability === capabilityId,
+        );
+      }
+
+      if (!capability) {
+        fail(res, 404, `Capability not found: ${capabilityId}`);
+        return;
+      }
+
+      // Build provenance chain
+      const provider = capability.provider as Record<string, string> || {};
+      const validation = capability.validation as Record<string, unknown> || {};
+      const platform = (provider.platform || 'jd') as string;
+
+      // List evidence records for this platform
+      let evidenceRecords: unknown[] = [];
+      try {
+        evidenceRecords = listEvidence({ source: platform });
+      } catch {
+        // Evidence may not exist yet — that's fine
+      }
+
+      // Read discovery artifacts if available
+      const discoveryBase = resolve(process.cwd(), 'discovery', 'jd-capability');
+      const artifacts: Record<string, unknown> = {};
+      const artifactFiles = [
+        'capability_matrix.json',
+        'api_inventory.json',
+        'indicator_dictionary.json',
+      ];
+      for (const f of artifactFiles) {
+        const p = resolve(discoveryBase, f);
+        if (existsSync(p)) {
+          try {
+            artifacts[f] = JSON.parse(readFileSync(p, 'utf-8'));
+          } catch { artifacts[f] = null; }
+        }
+      }
+
+      // Build the provenance chain response
+      const provenance = {
+        capability: {
+          id: capability.capability,
+          name: capability.name,
+          domain: capability.domain,
+          description: capability.description,
+        },
+        provider: {
+          platform: provider.platform,
+          platformName: platform === 'jd' ? '京东商智' : provider.platform,
+          acquisition: provider.acquisition || 'cdp',
+          acquisitionLabel: provider.acquisition === 'cdp' ? 'Live CDP Capture' : provider.acquisition || 'Unknown',
+          status: validation.status || 'unknown',
+          lastVerified: validation.last_verified || null,
+        },
+        evidence: {
+          totalRecords: evidenceRecords.length,
+          recentRecords: evidenceRecords.slice(0, 10),
+        },
+        discovery: {
+          artifacts: Object.keys(artifacts).length > 0 ? artifacts : null,
+          artifactCount: Object.keys(artifacts).length,
+        },
+        validation: {
+          status: validation.status,
+          verifiedMetrics: validation.verified_metrics || [],
+          lastVerified: validation.last_verified || null,
+        },
+        metrics: capability.metrics || [],
+        constraints: capability.constraints || {},
+      };
+
+      ok(res, provenance);
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to load evidence');
     }
   });
 
