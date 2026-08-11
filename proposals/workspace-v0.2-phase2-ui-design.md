@@ -1,692 +1,688 @@
-# Workspace v0.2 Phase 2 — Agent Cognitive Workspace UI Design
+# Workspace v0.2 — Agent Cognitive Workspace
+
+**Human ↔ Agent ↔ Capability ↔ Evidence**
 
 **Status**: Proposal  
 **Date**: 2026-08-11  
-**Depends on**: P0006.5.3 Capability Contract, P0002 Workspace IA, P0006 HermesAgent Integration  
+**Depends on**: P0006.5.3 Capability Contract, P0002 Workspace IA  
 **Type**: Pure Design — no implementation
 
 ---
 
-## 1. Context
+## 1. Objective
 
-### 1.1 What Exists Today (v0.9.1)
+Workspace v0.2 将现有 agentFabric Workspace MVP 升级为 **Agent Cognitive Workspace**，使用户能够：
 
-```
-Workspace v0.9.1
-├── Sidebar (8 nav items + agent status footer)
-├── Center Panel (6 views)
-│   ├── Inbox — AI findings + stat cards + chat
-│   ├── Product Analysis — SKU search placeholder
-│   ├── Trend View — signal timeline (placeholder)
-│   ├── Archive — historical ranking profiles
-│   ├── Memory — operator memory growth (placeholder)
-│   └── Runtime — manual collect button + replay panel + execution history
-├── Decision Panel (right sidebar)
-│   ├── Business Mode — AI summary + reasoning + tool calls
-│   └── Developer Mode — expanded trace (skills, MCP, memory, validation)
-└── Header — branding + notification + lang + user
-```
+- 与 HermesAgent（agentFabric 当前选用的 Agent Runtime）进行工作对话
+- 查看 Agent 当前任务状态与可观测的执行过程
+- 发现 agentFabric 已具备的 Capability（数据获取能力）
+- 追溯每个 Capability 使用的数据来源与 Evidence 链路
 
-### 1.2 What Changed Since v0.9.1
-
-P0006.5.3 completed the **Capability Contract** — a machine-readable interface that tells agent runtimes what data capabilities exist. Before this, the Workspace only displayed signals and findings that were already computed. Now, the Workspace can show *what capabilities are available* and *where data comes from*, not just *what conclusions were drawn*.
-
-### 1.3 Phase 2 Goal
-
-> Transform the Workspace from "AI output display" into "Agent Cognitive Workspace" — where operators can see what the agent knows, how it knows it, and interact with it to make decisions.
+Workspace 的对象是 **agentFabric 系统本身**。HermesAgent 是它当前的 Agent Runtime。
 
 ---
 
-## 2. Core Architecture: Capability Contract → Workspace → HermesAgent
+## 2. Architecture
 
-### 2.1 The Consumption Chain
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                   Capability Contract                    │
-│                  (generated/capability-contract.json)    │
-│                                                         │
-│  11 capabilities · 48 metrics · 8 domains               │
-│  intent-based search · validation status · provider     │
-└──────────────┬──────────────────────┬───────────────────┘
-               │                      │
-               ▼                      ▼
-┌──────────────────────┐  ┌──────────────────────┐
-│   Contract Explorer   │  │    HermesAgent        │
-│   (Workspace View)    │  │    (Runtime)          │
-│                       │  │                       │
-│  Operator browses:    │  │  Agent queries:       │
-│  "What data can we    │  │  registry.searchBy    │
-│   get from JD 商智?"  │  │  Intent("分析流量")   │
-│                       │  │                       │
-│  → See capabilities   │  │  → Gets capability    │
-│  → See metrics        │  │  → Plans acquisition  │
-│  → See validation     │  │  → Executes via CDP   │
-└──────────────────────┘  └──────────┬───────────┘
-                                     │
-                                     ▼
-                          ┌──────────────────────┐
-                          │   Agent Session View  │
-                          │   (Workspace View)    │
-                          │                       │
-                          │  Operator interacts:  │
-                          │  "分析流量下降原因"    │
-                          │                       │
-                          │  → See agent thinking │
-                          │  → See capability used│
-                          │  → See results        │
-                          │  → Click into evidence│
-                          └──────────┬───────────┘
-                                     │
-                                     ▼
-                          ┌──────────────────────┐
-                          │   Evidence Viewer     │
-                          │   (Workspace View)    │
-                          │                       │
-                          │  Operator inspects:   │
-                          │  "Where did this      │
-                          │   GMV=¥4,634 come     │
-                          │   from?"              │
-                          │                       │
-                          │  → Source platform    │
-                          │  → Acquisition method │
-                          │  → Timestamp + hash   │
-                          │  → Raw → canonical    │
-                          └──────────────────────┘
-```
-
-### 2.2 Design Principle: Capability-First Navigation
-
-Before Phase 2, navigation was by *data type* (商品分析, 趋势观察) — the operator needed to know what data exists and where to find it.
-
-After Phase 2, navigation is by *business capability* — the operator asks "what can the agent do?" and the Workspace shows the answer.
+### 2.1 System Boundary
 
 ```
-BEFORE (data-first):          AFTER (capability-first):
-  商品分析                        Contract Explorer
-  趋势观察                        ├── trade.overview ✅
-  历史归档                        ├── traffic.overview ⚠️
-  Memory 成长                     ├── product.overview ⚠️
-  Runtime 执行                    └── ...
-                                    │
-                                    ├── Agent Session
-                                    └── Evidence Viewer
+                    agentFabric
+┌──────────────────────────────────────────────────┐
+│                                                  │
+│   Workspace (人机交互层)                          │
+│      │                                           │
+│      ├──── Agent Session ───────────┐            │
+│      │     (主工作视图)              │            │
+│      │                              │            │
+│      ├──── Capability Explorer      │            │
+│      │     (能力发现)               │            │
+│      │                              ▼            │
+│      └──── Evidence Viewer     HermesAgent       │
+│           (证据追溯)            (Agent Runtime)   │
+│                │                    │            │
+│                ▼                    │            │
+│         Capability Registry         │            │
+│                │                    │            │
+│                ▼                    │            │
+│         Catalog / Evidence          │            │
+│                │                    │            │
+│                └──────────┬─────────┘            │
+│                           ▼                      │
+│                   Runtime / Acquisition          │
+│                           │                      │
+│                        JD 商智                    │
+└──────────────────────────────────────────────────┘
 ```
+
+**关键关系**：
+
+- HermesAgent 和 Workspace 都处于 agentFabric 内部架构中
+- 不存在 Workspace → CBP → HermesAgent → agentFabric 的外部链
+- Capability Registry / Catalog / Evidence 是 agentFabric 自己的能力资产
+- CBP 不属于这条架构链
+
+### 2.2 Ownership Boundary
+
+```
+agentFabric owns:                    HermesAgent owns:
+├── Workspace                        ├── task planning
+├── Capability Registry              ├── reasoning
+├── Catalog                          ├── capability selection
+├── Evidence                         ├── tool invocation
+├── Acquisition capabilities         └── runtime loop
+└── Domain knowledge / Skills
+```
+
+agentFabric 不重新实现 Agent loop。HermesAgent 不做数据采集。
 
 ---
 
-## 3. Information Architecture — Phase 2 Update
+## 3. Workspace Definition
 
-### 3.1 Updated Sidebar Structure
+Workspace 不是 Dashboard。
+
+| Dashboard 思路 | Workspace 思路 |
+|---------------|----------------|
+| 系统发生了什么 → 展示状态 | 我要完成什么 → 与 Agent 工作 |
+| 被动监控 | 主动协作 |
+| 数据展示为中心 | Agent 交互为中心 |
+
+Workspace 的工作流：
+
+```
+我要完成什么
+      ↓
+与 Agent 工作
+      ↓
+Agent 使用什么 Capability
+      ↓
+Capability 获取了什么 Evidence
+      ↓
+Agent 得出了什么认知/结果
+```
+
+这是一个**工作界面**，不是监控界面。
+
+---
+
+## 4. Information Architecture
+
+### 4.1 Primary View: Agent Session
+
+Agent Session 是 Workspace 的核心工作区，不是三个平级 Panel 之一。
+
+```
+┌─ Workspace ─────────────────────────────────────────────┐
+│                                                          │
+│  ┌─ Header ───────────────────────────────────────────┐ │
+│  │  agentFabric · v0.2.0                               │ │
+│  └─────────────────────────────────────────────────────┘ │
+│                                                          │
+│  ┌──────────┬──────────────────────────────┬──────────┐ │
+│  │ Sidebar  │     Center: Agent Session    │ Decision │ │
+│  │          │                              │ Panel    │ │
+│  │ 🤖 Agent │  用户 ↔ HermesAgent          │          │ │
+│  │   Session│                              │ Detail   │ │
+│  │          │  当前任务                     │ view for │ │
+│  │ 🔍 Inbox │  当前认知                     │ agent    │ │
+│  │   Growth │  Capability usage             │ claims   │ │
+│  │   Risk   │  Evidence references          │          │ │
+│  │   Review │  Result                       │          │ │
+│  │          │                              │          │ │
+│  │ 📋 Capab.│                              │          │ │
+│  │   Evid.  │                              │          │ │
+│  │          │                              │          │ │
+│  │ 📊 Prod. │                              │          │ │
+│  │   Trend  │                              │          │ │
+│  │   Archive│                              │          │ │
+│  │   Memory │                              │          │ │
+│  │          │                              │          │ │
+│  │ ⚡ Runtime│                              │          │ │
+│  │          │                              │          │ │
+│  │ ⚙️ Config│                              │          │ │
+│  └──────────┴──────────────────────────────┴──────────┘ │
+└──────────────────────────────────────────────────────────┘
+```
+
+### 4.2 Sidebar Structure
 
 ```
 Workspace v0.2 Sidebar
 │
-├── 🔍 DISCOVERY (existing, enhanced)
-│   ├── Inbox — AI findings with capability provenance
-│   ├── Growth — opportunities
-│   ├── Risk — warnings
-│   └── Review — human review queue
+├── 🤖 AGENT (NEW — primary)
+│   └── Agent Session     ★ 首页/默认视图
+│
+├── 🔍 DISCOVERY (existing)
+│   ├── Inbox
+│   ├── Growth
+│   ├── Risk
+│   └── Review
 │
 ├── 📋 CAPABILITY (NEW)
-│   ├── Contract Explorer — browse data capabilities
-│   └── Evidence Viewer — inspect data provenance
+│   ├── Capability Explorer   — 浏览数据能力
+│   └── Evidence Viewer       — 追溯证据链
 │
-├── 🤖 AGENT (NEW)
-│   └── Agent Session — interact with HermesAgent
-│
-├── 📊 ANALYSIS (existing, preserved)
+├── 📊 ANALYSIS (existing)
 │   ├── Product Analysis
 │   ├── Trend View
 │   ├── Archive
 │   └── Memory Growth
 │
-├── ⚡ RUNTIME (existing, preserved)
+├── ⚡ RUNTIME (existing)
 │   └── Execution History
 │
 └── ⚙️ SYSTEM (existing)
     └── Agent Config
 ```
 
-### 3.2 What's New vs What's Preserved
+### 4.3 Existing Views — Modification Plan
 
-| View | Status | Notes |
-|------|--------|-------|
-| Inbox / Growth / Risk / Review | **Preserved** | Existing findings + chat |
-| Product / Trend / Archive / Memory | **Preserved** | Existing analysis views |
-| Runtime Execution | **Preserved** | Existing collect + replay |
-| Agent Config | **Preserved** | Existing settings |
-| **Contract Explorer** | **NEW** | Capability browsing |
-| **Evidence Viewer** | **NEW** | Provenance inspection |
-| **Agent Session** | **NEW** | HermesAgent interaction |
+| 文件 | 变更类型 | 说明 |
+|------|---------|------|
+| `workspace/index.html` | **Modify** | 新增 Agent Session / Capability Explorer / Evidence Viewer 的 DOM 容器；现有 view container 保留 |
+| `workspace/styles.css` | **Modify** | 新增 capability cards、evidence provenance chain、session messages 的样式 |
+| `workspace/app.js` | **Modify** | 新增 AgentSession、CapabilityExplorer、EvidenceViewer 模块；sidebar 新增 AGENT + CAPABILITY section；现有模块保留 |
+| `platform/server/routes/runtime.ts` | **Modify** | 新增 `POST /api/runtime/chat`、`GET /api/evidence/:id`、`GET /api/capabilities` 端点 |
+| 其他所有文件 | **Keep** | 不做任何修改 |
 
 ---
 
-## 4. View Design: Contract Explorer
-
-### 4.1 Purpose
-
-The Contract Explorer answers: *"What data capabilities does agentFabric have?"*
-
-It is the human-readable rendering of `capability-contract.json`. Operators use it to understand what data the agent can access before asking questions.
-
-### 4.2 Layout
-
-```
-┌─ Contract Explorer ──────────────────────────────────────┐
-│                                                           │
-│  ┌─ Domain Filter ────────────────────────────────────┐  │
-│  │ [All] [Trade] [Traffic] [Product] [Service] [...]   │  │
-│  └─────────────────────────────────────────────────────┘  │
-│                                                           │
-│  ┌─ Search ───────────────────────────────────────────┐  │
-│  │ 🔍 "分析流量"                          [11 results]  │  │
-│  └─────────────────────────────────────────────────────┘  │
-│                                                           │
-│  ┌─ Capability Cards (grid, 2-col) ───────────────────┐  │
-│  │                                                     │  │
-│  │  ┌─ trade.overview ✅ verified ──────────────────┐  │  │
-│  │  │  交易概览                                      │  │  │
-│  │  │  核心经营指标：GMV、订单、访客、转化率         │  │  │
-│  │  │                                               │  │  │
-│  │  │  Outputs: gmv, orders, visitors, customers,   │  │  │
-│  │  │           conversion_rate, gmv_hourly         │  │  │
-│  │  │                                               │  │  │
-│  │  │  Provider: jd · CDP · Last verified 2026-08-09│  │  │
-│  │  │                                               │  │  │
-│  │  │  Intents: 今天卖了多少 | GMV涨跌分析 | ...    │  │  │
-│  │  │                                               │  │  │
-│  │  │  [View Evidence]  [Ask Agent about this]      │  │  │
-│  │  └───────────────────────────────────────────────┘  │  │
-│  │                                                     │  │
-│  │  ┌─ traffic.overview ⚠️ captured ───────────────┐  │  │
-│  │  │  ...                                          │  │  │
-│  │  └───────────────────────────────────────────────┘  │  │
-│  │                                                     │  │
-│  │  ┌─ trade.competition 💰 premium ────────────────┐  │  │
-│  │  │  ...                                          │  │  │
-│  │  └───────────────────────────────────────────────┘  │  │
-│  └─────────────────────────────────────────────────────┘  │
-│                                                           │
-│  ┌─ Summary Footer ──────────────────────────────────┐   │
-│  │  11 capabilities · 48 metrics · 1 verified · ...   │   │
-│  └─────────────────────────────────────────────────────┘   │
-└───────────────────────────────────────────────────────────┘
-```
-
-### 4.3 Card Component Specification
-
-Each capability card renders the CapabilityContractEntry:
-
-| Field | Rendering |
-|-------|-----------|
-| `capability` | Title + domain badge |
-| `validation.status` | Status icon: ✅ verified / ⚠️ captured / 💰 premium / 🚧 blocked |
-| `description` | Subtitle text |
-| `outputs` | Metric chips (small pills showing canonical names) |
-| `provider` | "jd · CDP" compact label |
-| `intent` | Example questions (max 3), as clickable chips → jump to Agent Session |
-| `validation.last_verified` | "Last verified: 2026-08-09" (only if verified) |
-| `constraints` | Warning banner if premium/popup blocked |
-
-### 4.4 Interactions
-
-1. **Domain filter** — click domain pill, cards filter in-place
-2. **Search** — calls `registry.searchByIntent(query)`, shows ranked results
-3. **"Ask Agent about this"** — clicks a capability card → opens Agent Session view with capability pre-selected as context
-4. **"View Evidence"** — clicks → opens Evidence Viewer filtered to this capability's verified metrics
-5. **Intent chip click** — "GMV涨跌分析" → opens Agent Session with that intent as the initial prompt
-
----
-
-## 5. View Design: Evidence Viewer
+## 5. View Design: Agent Session（主视图）
 
 ### 5.1 Purpose
 
-The Evidence Viewer answers: *"Where did this data come from, and can I trust it?"*
+Agent Session 是用户与 HermesAgent 工作的主界面。用户输入自然语言，Agent 使用 agentFabric 的 Capability 获取数据，返回分析结果。每一条结论都可以追溯到 Capability 和 Evidence。
 
-It renders the provenance chain from `EvidenceMetadata`: acquisition_method → processing_method → content_hash → file_path. Every data point the agent uses must be traceable to its source.
+### 5.2 Strict Constraint: No Fabricated Cognition
 
-### 5.2 Layout
+**Agent Session 只能展示 Runtime 明确暴露的 observable state**：
+
+| 允许展示 | 不允许展示（除非 Runtime 真实提供） |
+|---------|-----------------------------------|
+| 用户消息 | 伪造的 "Thinking..." 步骤 |
+| Agent 返回的最终响应文本 | 伪造的 "Analyzing..." / "Reasoning..." |
+| Runtime 明确发出的 task event（如 capability selected, acquisition started） | 推断的 chain-of-thought |
+| Capability 使用记录（哪个 capability 被调用） | UI 自行推演的 "Agent thinks..." |
+| Evidence reference（结果关联了哪个 evidence） | 编造的中间分析步骤 |
+| 系统消息（session 开始/结束、capability 不可用、错误） | — |
+
+**如果当前 HermesAgent integration 尚未提供 task/acquisition events**：UI 只展示 user message + agent response，不填充中间状态。
+
+### 5.3 Layout
+
+```
+┌─ Agent Session ──────────────────────────────────────────┐
+│                                                           │
+│  ┌─ Session Header ──────────────────────────────────┐   │
+│  │  🤖 HermesAgent · 2026-08-11 14:32                │   │
+│  │  [New Session]  [History ▾]                        │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                           │
+│  ┌─ Conversation ────────────────────────────────────┐   │
+│  │                                                    │   │
+│  │  🧑 "分析一下最近7天的流量下降原因"                 │   │
+│  │      14:32                                         │   │
+│  │                                                    │   │
+│  │  ── System: capability selected ──                 │   │
+│  │  traffic.overview (jd, CDP, verified ✅)           │   │
+│  │  [View capability details]                         │   │
+│  │                                                    │   │
+│  │  ── System: acquisition started ──                 │   │
+│  │  Capturing traffic data for 2026-08-04 ~ 08-11     │   │
+│  │  (only if Runtime emits this event)                │   │
+│  │                                                    │   │
+│  │  🤖 "过去7天流量下降 23%，主要来自：               │   │
+│  │                                                    │   │
+│  │   1. 搜索渠道: -35% (关键词排名下降)               │   │
+│  │      [View Evidence]                               │   │
+│  │                                                    │   │
+│  │   2. 推荐渠道: -12%                                │   │
+│  │      [View Evidence]                               │   │
+│  │                                                    │   │
+│  │   Based on: traffic.overview (jd, CDP, ✅)         │   │
+│  │   Evidence: 7 artifacts (2026-08-04 ~ 08-11)      │   │
+│  │   "                                              │   │
+│  │                                                    │   │
+│  │  [Ask follow-up]                                   │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                           │
+│  ┌─ Input ───────────────────────────────────────────┐   │
+│  │  [traffic.overview ×] Type a question...    [Send] │   │
+│  └────────────────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────────────┘
+```
+
+### 5.4 Observable Event Types (from Runtime)
+
+| Event | Source | When |
+|-------|--------|------|
+| `session.created` | System | Session 开始 |
+| `capability.selected` | HermesAgent | Agent 确定使用某个 Capability |
+| `acquisition.started` | Runtime Kernel | 数据采集开始 |
+| `acquisition.completed` | Runtime Kernel | 数据采集完成（含 evidence count） |
+| `response.ready` | HermesAgent | Agent 返回分析结果 |
+| `error` | System | Capability 不可用、采集失败等 |
+
+> 以上 event types 定义了 UI 的 state interface。如果当前 HermesAgent / Runtime 尚未发出这些事件，UI 保留对应的渲染逻辑，但不填充伪造数据。
+
+---
+
+## 6. View Design: Capability Explorer
+
+### 6.1 Purpose
+
+Capability Explorer 回答：**"agentFabric 现在能获取什么数据？"**
+
+它消费 Capability Contract，但展示的是**人类可读的业务语义**，不是 JSON dump。
+
+### 6.2 Principle: Business Semantics, Not JSON Viewer
+
+我们做 P0006.5.3 Capability Contract，不是为了在 UI 里漂亮地显示 JSON。
+
+用户看到的不应该是：
+
+```
+❌ capability: "traffic.overview"
+❌ outputs: ["uv", "pv", "conversion_rate"]
+❌ provider: { platform: "jd", acquisition: "cdp" }
+```
+
+用户应该看到：
+
+```
+✅ 流量分析
+   平台：京东商智
+   可以回答：
+   · 店铺流量怎么样？
+   · 最近流量是否下降？
+   · 哪个渠道贡献最大？
+   · 商品流量表现如何？
+   提供指标：访客数、浏览量、转化率、曝光、点击
+   状态：Verified ✅
+   Evidence：12 artifacts
+   [查看详情]  [在 Agent Session 中使用]
+```
+
+### 6.3 Layout
+
+```
+┌─ Capability Explorer ────────────────────────────────────┐
+│                                                           │
+│  ┌─ Filters ──────────────────────────────────────────┐  │
+│  │  [All] [Trade] [Traffic] [Product] [Service] [...]  │  │
+│  │  🔍 Search intents...                               │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                           │
+│  ┌─ Capabilities ─────────────────────────────────────┐  │
+│  │                                                     │  │
+│  │  ┌──────────────────────────┐  ┌──────────────────┐ │  │
+│  │  │ ✅ 交易概览               │  │ ⚠️ 流量分析       │ │  │
+│  │  │ trade.overview            │  │ traffic.overview  │ │  │
+│  │  │                          │  │                   │ │  │
+│  │  │ 核心经营指标：GMV、订单、 │  │ 流量来源分析：    │ │  │
+│  │  │ 访客、转化率。每日汇总 +  │  │ 各渠道访客数、UV、│ │  │
+│  │  │ 24h趋势 + Top5商品排行。 │  │ PV、跳失率。      │ │  │
+│  │  │                          │  │                   │ │  │
+│  │  │ 可以回答：               │  │ 可以回答：        │ │  │
+│  │  │ · 今天卖了多少？         │  │ · 店铺流量怎么样？│ │  │
+│  │  │ · GMV涨跌分析            │  │ · 流量从哪里来？  │ │  │
+│  │  │ · 哪个商品卖得最好？     │  │ · 搜索什么关键词？│ │  │
+│  │  │                          │  │                   │ │  │
+│  │  │ 提供指标：               │  │ 提供指标：        │ │  │
+│  │  │ gmv orders visitors      │  │ visitors uv pv    │ │  │
+│  │  │ customers conversion_rate│  │ bounce_rate ...   │ │  │
+│  │  │                          │  │                   │ │  │
+│  │  │ 平台：京东商智 · CDP     │  │ 平台：京东商智·CDP│ │  │
+│  │  │ 已验证：2026-08-09       │  │ 已采集（待验证）  │ │  │
+│  │  │                          │  │                   │ │  │
+│  │  │ [在 Session 中使用]      │  │ [在 Session 中使用]│ │  │
+│  │  └──────────────────────────┘  └──────────────────┘ │  │
+│  │                                                     │  │
+│  │  ┌──────────────────────────┐                       │  │
+│  │  │ 💰 竞争分析               │                       │  │
+│  │  │ trade.competition         │                       │  │
+│  │  │ 需要 ¥8,856/年 数据尊享包 │                       │  │
+│  │  └──────────────────────────┘                       │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                           │
+│  11 capabilities · 48 metrics · 1 verified · 4 blocked    │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 6.4 Capability Detail (expanded view)
+
+点击 "查看详情" 进入单个 Capability 的完整视图：
+
+```
+┌─ Capability Detail: traffic.overview ────────────────────┐
+│                                                           │
+│  流量分析                                     ⚠️ captured │
+│  traffic.overview                                         │
+│                                                           │
+│  流量来源分析：各渠道访客数、UV、PV、跳失率。             │
+│  来源渠道归因 + 搜索关键词分析。                          │
+│                                                           │
+│  ── 可以回答 ──────────────────────────────────────────  │
+│  · 店铺流量怎么样？                                       │
+│  · 最近流量是否下降？                                     │
+│  · 哪个渠道贡献最大？                                     │
+│  · 搜索什么关键词进来的？                                 │
+│  · 商品流量表现如何？                                     │
+│                                                           │
+│  ── 提供指标 ──────────────────────────────────────────  │
+│  访客数 (visitors)    浏览量 (pv)         UV             │
+│  跳失率 (bounce_rate)  停留时长           渠道访客        │
+│  渠道成交              搜索词访客                         │
+│                                                           │
+│  ── Provider ──────────────────────────────────────────  │
+│  平台：京东商智                                          │
+│  获取方式：Live CDP                                       │
+│  状态：Available                                          │
+│  Last verified: — (captured, not yet verified)            │
+│                                                           │
+│  ── Evidence ──────────────────────────────────────────  │
+│  12 artifacts (2026-08-04 ~ 2026-08-11)                   │
+│  [Open Evidence Viewer →]                                 │
+│                                                           │
+│  ── 约束 ──────────────────────────────────────────────  │
+│  需要子菜单点击交互                                       │
+│                                                           │
+│  [在 Agent Session 中使用此 Capability]                   │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 6.5 Key Constraint
+
+**Contract 是机器接口；Workspace 展示的是 Capability 的人类语义。**
+UI 从 CapabilityContractEntry 中读取字段，但渲染层必须转化为业务语言。
+
+---
+
+## 7. View Design: Evidence Viewer
+
+### 7.1 Purpose
+
+Evidence Viewer 回答：**"这个结论的数据从哪里来，能信吗？"**
+
+它不是文件浏览器。它展示的是 **Capability → Discovery → Acquisition → Evidence 的 provenance 链**。
+
+### 7.2 Principle: Provenance Chain, Not File Browser
+
+不要做成：
+
+```
+❌ capture.json
+❌ endpoints.json
+❌ api-001.json
+❌ api-002.json
+```
+
+要表达：
+
+```
+traffic.overview
+     ↓
+京东商智 / 流量 / 流量概况
+     ↓
+Live CDP Capture · 2026-08-10
+     ↓
+7 endpoints captured
+     ↓
+Raw Response → Semantic Mapping → 17 Metrics
+     ↓
+Capability Contract ← this evidence validates
+```
+
+用户需要时才能逐层展开 raw artifact。
+
+### 7.3 Layout
 
 ```
 ┌─ Evidence Viewer ────────────────────────────────────────┐
 │                                                           │
-│  ┌─ Context Breadcrumb ───────────────────────────────┐  │
-│  │  Agent Session > "分析流量下降" > traffic.overview   │  │
-│  │  > Evidence: 2026-08-09_summary                     │  │
+│  ┌─ Breadcrumb ───────────────────────────────────────┐  │
+│  │  Agent Session > traffic.overview > 2026-08-10       │  │
 │  └─────────────────────────────────────────────────────┘  │
 │                                                           │
-│  ┌─ Evidence Record ──────────────────────────────────┐  │
+│  ┌─ Provenance Chain ─────────────────────────────────┐  │
 │  │                                                     │  │
-│  │  ┌─ Provenance Card ───────────────────────────┐   │  │
-│  │  │  ┌──────────┐   ┌──────────┐   ┌──────────┐ │   │  │
-│  │  │  │ JD 商智   │ → │ CDP      │ → │ Runtime  │ │   │  │
-│  │  │  │ (source)  │   │ (acquire)│   │ (process) │ │   │  │
-│  │  │  └──────────┘   └──────────┘   └──────────┘ │   │  │
-│  │  │                                             │   │  │
-│  │  │  Platform:    jd                            │   │  │
-│  │  │  Shop:        祁门红茶旗舰店 (11855009)      │   │  │
-│  │  │  Data Type:   summary                       │   │  │
-│  │  │  Acquired:    2026-08-09T02:30:00Z (CDP)    │   │  │
-│  │  │  Processed:   2026-08-09T02:31:00Z (runtime) │   │  │
-│  │  │  Hash:        sha256:a3f2b8c1...            │   │  │
-│  │  │  File:        data/evidence/jd/2026/08/     │   │  │
-│  │  │               09_summary.json               │   │  │
-│  │  └─────────────────────────────────────────────┘   │  │
-│  │                                                     │  │
-│  │  ┌─ Data Preview ──────────────────────────────┐   │  │
-│  │  │  {                                          │   │  │
-│  │  │    "gmv": 4634.40,                          │   │  │
-│  │  │    "orders": 25,                            │   │  │
-│  │  │    "visitors": 448,                         │   │  │
-│  │  │    "customers": 21,                         │   │  │
-│  │  │    "conversion_rate": 5.58                  │   │  │
-│  │  │  }                                          │   │  │
-│  │  │  [View Raw]  [Copy]                         │   │  │
-│  │  └─────────────────────────────────────────────┘   │  │
-│  │                                                     │  │
-│  │  ┌─ Canonical Mapping ─────────────────────────┐   │  │
-│  │  │  jdr_sch_trade_deal_ord_ord_amt_sz_... → gmv │   │  │
-│  │  │  jdr_sch_trade_deal_ord_ord_qtty_sz_... → ord │   │  │
-│  │  │  Confidence: 1.0 (hand-verified)             │   │  │
-│  │  └─────────────────────────────────────────────┘   │  │
+│  │  traffic.overview                                   │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  京东商智 / 流量 / 流量概况                          │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  Live CDP Capture                                   │  │
+│  │  2026-08-10 02:30 UTC                               │  │
+│  │  Shop: 祁门红茶旗舰店 (11855009)                    │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  7 endpoints captured                               │  │
+│  │  [▸ expand: getFlowDetail, getFlowSrcTop, ...]     │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  Raw Response                                       │  │
+│  │  [▸ View raw JSON]                                  │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  Semantic Mapping                                   │  │
+│  │  jdr_sch_traffic_... → traffic_by_channel (0.92)    │  │
+│  │  jdr_sch_traffic_... → order_amount_by_channel (0.87)│  │
+│  │  [▸ View all 17 mappings]                           │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  17 Metrics                                         │  │
+│  │  visitors=1,234 | uv=892 | pv=3,456 | ...           │  │
+│  │      │                                              │  │
+│  │      ▼                                              │  │
+│  │  Capability Contract                                │  │
+│  │  This evidence supports: traffic.overview            │  │
+│  │  Validation status: captured ⚠️                      │  │
 │  └─────────────────────────────────────────────────────┘  │
 │                                                           │
-│  ┌─ Evidence List (sidebar, scrollable) ──────────────┐   │
-│  │  2026-08-09  summary    ✅ verified                 │   │
-│  │  2026-08-09  trend      24h breakdown               │   │
-│  │  2026-08-09  productTop Top 5 SKU                   │   │
-│  │  2026-08-08  summary    ...                         │   │
-│  │  ...                                                │   │
-│  └─────────────────────────────────────────────────────┘   │
-└───────────────────────────────────────────────────────────┘
-```
-
-### 5.3 Key Interactions
-
-1. **Provenance flow** — visual 3-step pipeline: Source → Acquisition → Processing, with timestamps
-2. **Content hash** — displayed but truncated; click to copy full SHA-256
-3. **Raw data toggle** — expand/collapse the raw JSON payload
-4. **Canonical mapping** — expandable section showing JDR key → canonical metric + confidence
-5. **Evidence list** — chronological list of all evidence records for this data type, with verification badges
-6. **Cross-reference** — "This evidence was used in: Agent Session #42, Signal #128"
-
----
-
-## 6. View Design: Agent Session View
-
-### 6.1 Purpose
-
-The Agent Session View is the primary interaction surface between the operator and HermesAgent. It replaces the current inline chat (which is buried in the Inbox view) with a first-class conversational interface that shows:
-
-- What the operator asked
-- What the agent understood (intent)
-- Which capability the agent used
-- What data the agent acquired
-- What conclusion the agent reached
-- The evidence trail for every claim
-
-### 6.2 Layout
-
-```
-┌─ Agent Session ───────────────────────────────────────────┐
-│                                                            │
-│  ┌─ Session Header ───────────────────────────────────┐   │
-│  │  🤖 HermesAgent · Session #42 · 2026-08-11 14:32   │   │
-│  │  Status: ● Active  |  [New Session]  [History ▾]    │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                            │
-│  ┌─ Conversation (scrollable) ────────────────────────┐   │
-│  │                                                     │   │
-│  │  ┌─ Operator Message ──────────────────────────┐   │   │
-│  │  │  🧑 "分析一下最近7天的流量下降原因"          │   │   │
-│  │  │              2026-08-11 14:32                │   │   │
-│  │  └──────────────────────────────────────────────┘   │   │
-│  │                                                     │   │
-│  │  ┌─ Agent Thinking (collapsible) ───────────────┐  │   │
-│  │  │  🤔 Understanding...                         │  │   │
-│  │  │  ├─ Intent: 分析流量变化, 解释访客下降        │  │   │
-│  │  │  ├─ Capability: traffic.overview (jd, CDP)   │  │   │
-│  │  │  └─ Need: 7 days of traffic data             │  │   │
-│  │  └──────────────────────────────────────────────┘  │   │
-│  │                                                     │   │
-│  │  ┌─ Agent Action (collapsible) ────────────────┐   │   │
-│  │  │  ⚡ Acquiring data...                        │  │   │
-│  │  │  ├─ CDP connect → jdsz.jd.com ✓              │  │   │
-│  │  │  ├─ Navigate → flow-summary ✓                │  │   │
-│  │  │  ├─ Capture → getFlowDetail (3 APIs) ✓       │  │   │
-│  │  │  └─ Normalize → 12 metrics mapped ✓          │  │   │
-│  │  └──────────────────────────────────────────────┘  │   │
-│  │                                                     │   │
-│  │  ┌─ Agent Response ────────────────────────────┐   │   │
-│  │  │  🤖 "过去7天流量下降 23%，主要来自："       │  │   │
-│  │  │                                             │  │   │
-│  │  │  1. 搜索渠道: -35% (关键词排名下降)         │  │   │
-│  │  │     [View Evidence] [View Trend]            │  │   │
-│  │  │                                             │  │   │
-│  │  │  2. 推荐渠道: -12%                          │  │   │
-│  │  │     [View Evidence]                         │  │   │
-│  │  │                                             │  │   │
-│  │  │  Confidence: 0.87                           │  │   │
-│  │  │  Based on: traffic.overview (jd, CDP, ✅)   │  │   │
-│  │  │                                             │  │   │
-│  │  │  [Approve Analysis] [Ask Follow-up]         │  │   │
-│  │  └─────────────────────────────────────────────┘   │  │
-│  └─────────────────────────────────────────────────────┘  │
-│                                                            │
-│  ┌─ Input Area ───────────────────────────────────────┐   │
-│  │  ┌─ Context Chips ─────────────────────────────┐   │  │
-│  │  │  [traffic.overview ×]  [last 7 days]         │   │  │
-│  │  └──────────────────────────────────────────────┘   │  │
-│  │  ┌──────────────────────────────────────────────┐   │  │
-│  │  │  Type a question...                          │   │  │
-│  │  │                                    [Send →]  │   │  │
-│  │  └──────────────────────────────────────────────┘   │  │
-│  │  Suggested: [查看最新GMV] [流量渠道分析] [商品排行] │   │
+│  ┌─ Evidence Timeline ────────────────────────────────┐  │
+│  │  2026-08-11  traffic  · 7 APIs · 17 metrics         │  │
+│  │  2026-08-10  traffic  · 7 APIs · 17 metrics         │  │
+│  │  2026-08-09  traffic  · 7 APIs · 17 metrics         │  │
+│  │  ...                                                 │  │
 │  └─────────────────────────────────────────────────────┘  │
 └───────────────────────────────────────────────────────────┘
 ```
 
-### 6.3 Message Types
+---
 
-| Message Type | Icon | Content | Source |
-|-------------|------|---------|--------|
-| Operator Message | 🧑 | Natural language question | User input |
-| Agent Thinking | 🤔 | Intent detection + capability resolution | HermesAgent planning phase |
-| Agent Action | ⚡ | CDP connect, navigate, capture, normalize | Runtime execution log |
-| Agent Response | 🤖 | Analysis conclusion + evidence links | HermesAgent response |
-| System Note | ℹ️ | Session start, capability unavailable, error | System events |
+## 8. Data Flow
 
-### 6.4 Key Interactions
-
-1. **Intent chips** — after agent responds, show detected intents as chips → operator can click to refine
-2. **Evidence links** — every data claim in agent response has `[View Evidence]` link → opens Evidence Viewer
-3. **Capability badge** — shows which capability was used (e.g., `traffic.overview ✅`) → click to open Contract Explorer for that capability
-4. **Confidence display** — numeric + visual bar for agent confidence
-5. **Approve/Follow-up** — operator actions on agent conclusions
-6. **Session history** — dropdown to view/switch past sessions
-7. **Context chips** — pre-selected capability/domain chips at input area, showing what context the agent is working with
-
-### 6.5 Integration with Decision Panel
-
-The existing Decision Panel (right sidebar) is the detail view for agent responses. When the operator clicks a data claim in the Agent Session:
+### 8.1 Agent Session Flow
 
 ```
-Agent Session View (center)        Decision Panel (right)
-┌─────────────────────────┐       ┌──────────────────────┐
-│ "搜索渠道下降 35%"       │       │ Decision Basis       │
-│  [View Evidence]  ←click │       │                      │
-└────────────┬────────────┘       │ Evidence source:     │
-             │                     │  jd · CDP · verified │
-             └────────────────────→│                      │
-                                   │ Raw metric:          │
-                                   │  visitors_by_channel │
-                                   │  = 289 (prev: 445)   │
-                                   │                      │
-                                   │ Confidence: 0.92     │
-                                   │ [Developer Trace ▾]  │
-                                   └──────────────────────┘
+User types "分析流量下降原因"
+    │
+    ▼
+┌─────────────────────────────┐
+│ Agent Session View           │
+│ POST /api/runtime/chat       │
+│ { prompt, session_id }       │
+└──────────┬──────────────────┘
+           │
+           ▼
+┌─────────────────────────────┐
+│ HermesAgent (agentFabric 的  │
+│ Agent Runtime)               │
+│                              │
+│ Owns:                        │
+│  - task planning             │
+│  - reasoning                 │
+│  - capability selection      │
+│  - tool invocation           │
+│                              │
+│ 1. Queries CapabilityRegistry│
+│    registry.searchByIntent() │
+│    → traffic.overview        │
+│                              │
+│ 2. Plans acquisition         │
+│                              │
+│ 3. Invokes Runtime Kernel    │
+└──────────┬──────────────────┘
+           │
+           ▼
+┌─────────────────────────────┐
+│ Runtime Kernel               │
+│ (agentFabric acquisition)    │
+│                              │
+│ Owns:                        │
+│  - CDP / API acquisition     │
+│  - parsing / normalizing     │
+│  - evidence storage          │
+│                              │
+│ → Returns: signals + evidence│
+│   references                 │
+└──────────┬──────────────────┘
+           │
+           ▼
+┌─────────────────────────────┐
+│ HermesAgent                  │
+│ → Formats response           │
+│ → Includes evidence links    │
+│ → Includes capability ref    │
+└──────────┬──────────────────┘
+           │
+           ▼
+┌─────────────────────────────┐
+│ Agent Session View           │
+│ Renders:                     │
+│  - Agent response            │
+│  - Capability badge          │
+│  - Evidence links            │
+│  - Observable events (if any)│
+└─────────────────────────────┘
 ```
+
+### 8.2 Workspace Does NOT Know About Acquisition Implementation
+
+```
+Workspace sees:                  Workspace does NOT see:
+┌──────────────────────┐        ┌──────────────────────┐
+│ Provider: JD 商智     │        │ CDP port 9222        │
+│ Method: Live CDP      │        │ szgateway.jd.com     │
+│ Status: Available     │        │ POST body params     │
+│ Last verified: ...    │        │ cookie               │
+└──────────────────────┘        │ Playwright           │
+                                │ page.goto()          │
+                                └──────────────────────┘
+```
+
+实现细节属于 capability provider / acquisition implementation，不泄漏到 Workspace interaction model。
 
 ---
 
-## 7. Data Flow
+## 9. Component Boundaries
 
-### 7.1 Complete Session Flow
-
-```
-Operator types "分析流量下降原因"
-    │
-    ▼
-┌─────────────────────────────────────────────────────┐
-│ Agent Session View                                  │
-│ → POST /api/runtime/chat  { prompt, session_id }    │
-└──────────────────────┬──────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│ HermesAgent (planning phase)                        │
-│                                                     │
-│  1. Understand intent: "分析流量下降原因"            │
-│  2. Query CapabilityRegistry:                       │
-│     registry.searchByIntent("分析流量下降原因")      │
-│     → traffic.overview (score: 38.0)                │
-│  3. Verify capability is available:                 │
-│     validation: captured ⚠️ (not verified)          │
-│  4. Decide: proceed with caveat OR ask user         │
-└──────────────────────┬──────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│ Runtime Kernel (execution phase)                    │
-│                                                     │
-│  5. Execute acquisition plan:                       │
-│     → CDP connect to jdsz.jd.com                    │
-│     → Navigate to flow-summary                      │
-│     → Click sub-menu: 来源渠道                       │
-│     → Intercept getFlowDetail API                   │
-│  6. Parse + normalize:                              │
-│     JDR keys → canonical metrics                    │
-│  7. Store evidence:                                 │
-│     data/evidence/jd/2026/08/11_traffic.json        │
-│  8. Compute signals:                                │
-│     visitors_by_channel, traffic_trend               │
-└──────────────────────┬──────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│ HermesAgent (response phase)                        │
-│                                                     │
-│  9. Analyze signals:                                │
-│     "搜索渠道 visitors -35%, 推荐渠道 -12%"          │
-│  10. Format response with evidence links            │
-└──────────────────────┬──────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│ Agent Session View (rendering)                      │
-│                                                     │
-│  Display:                                           │
-│  - Agent Thinking (collapsed by default)            │
-│  - Agent Action (collapsed by default)              │
-│  - Agent Response (expanded)                        │
-│  - Evidence links → click opens Evidence Viewer     │
-│  - Capability badge → click opens Contract Explorer │
-└─────────────────────────────────────────────────────┘
-```
-
-### 7.2 Capability Contract Data Flow
+### 9.1 Ownership
 
 ```
-generated/capability-contract.json
-    │
-    │  loadContract()
-    ▼
-CapabilityRegistry (in-memory, indexed)
-    │
-    ├──→ Contract Explorer: renders cards from registry.listAll()
-    │
-    ├──→ HermesAgent: queries registry.searchByIntent(prompt)
-    │
-    └──→ Agent Session: shows capability badge via registry.getById(capability)
-```
+Agent Session View
+├── Owns: conversation state, message rendering, input handling
+├── Reads: POST /api/runtime/chat → agent response + events
+├── Does NOT: execute CDP, parse JDR keys, plan tasks
+└── Links to: Capability Explorer, Evidence Viewer, Decision Panel
 
-### 7.3 Evidence Viewer Data Flow
-
-```
-Agent Session: operator clicks [View Evidence]
-    │
-    ▼
-Evidence Viewer loads:
-    │
-    ├── EvidenceMetadata from .meta.json (provenance card)
-    ├── Raw payload from .json (data preview)
-    └── Indicator mapping from indicator-map.ts (canonical mapping)
-```
-
----
-
-## 8. Component Boundaries
-
-### 8.1 What Each Component Owns
-
-```
-Contract Explorer
-├── Owns: capability card rendering, domain filter, search
-├── Reads: CapabilityRegistry (in-memory)
+Capability Explorer
+├── Owns: capability card rendering, domain filter, semantic search
+├── Reads: CapabilityRegistry (in-memory, from capability-contract.json)
 ├── Does NOT: trigger acquisition, execute anything
-└── Exposes: "Ask Agent about this" → opens Agent Session
+└── Links to: Agent Session ("使用此 Capability")
 
 Evidence Viewer
-├── Owns: provenance display, data preview, mapping display
+├── Owns: provenance chain rendering, data preview, mapping display
 ├── Reads: Evidence Store (file system), indicator-map (in-memory)
 ├── Does NOT: modify evidence, re-acquire data
-└── Exposes: "Used in Session #N" → links back to Agent Session
+└── Links to: Agent Session, Capability Explorer
 
-Agent Session View
-├── Owns: conversation rendering, message types, input handling
-├── Reads: HermesAgent API, CapabilityRegistry
-├── Does NOT: execute CDP directly, parse JDR keys
-└── Exposes: evidence links → opens Evidence Viewer
-
-Decision Panel (existing, reused)
+Decision Panel (existing, preserved)
 ├── Owns: detailed reasoning display, trace expansion
 ├── Reads: agent response metadata
 ├── Does NOT: own conversation state
-└── Exposes: Developer Mode trace for debugging
+└── Mode: Business (AI summary) / Developer (full trace)
 ```
 
-### 8.2 Cross-Component Links
+### 9.2 Cross-Component Navigation
 
 ```
-Agent Session ←──────────→ Contract Explorer
-     │  "Ask about this"        "Use this capability"
-     │
-     ├──────────→ Evidence Viewer
-     │  "View Evidence"
-     │
-     └──────────→ Decision Panel
-        "View Details" (existing)
-```
+Agent Session ──→ Capability Explorer
+   "View capability details" on capability badge
 
----
+Agent Session ──→ Evidence Viewer
+   "View Evidence" on data claim
 
-## 9. Layout Design
+Agent Session ──→ Decision Panel
+   Click claim → show detail in right sidebar
 
-### 9.1 Default Layout (Agent Session active)
+Capability Explorer ──→ Agent Session
+   "在 Session 中使用" → opens Session with capability pre-selected
 
-```
-┌─ Header ───────────────────────────────────────────────────┐
-│  agentFabric · Agent Workspace · v0.2.0                     │
-├────────┬────────────────────────────────────┬───────────────┤
-│ Sidebar│        Center Panel                │ Decision Panel│
-│ 240px  │                                    │ 340px         │
-│        │  ┌─ Agent Session ──────────────┐  │               │
-│  🔍    │  │                               │  │  Decision     │
-│  Inbox │  │  🧑 "分析流量下降"            │  │  Basis        │
-│  Growth│  │                               │  │               │
-│  Risk  │  │  🤖 "过去7天流量下降23%..."   │  │  Source       │
-│  Review│  │                               │  │  Evidence     │
-│        │  │  [View Evidence] [Approve]    │  │  Reasoning    │
-│  📋    │  │                               │  │  Trace        │
-│  Contr.│  └───────────────────────────────┘  │               │
-│  Evid. │                                     │               │
-│        │  ┌─ Input ───────────────────────┐  │               │
-│  🤖    │  │ [traffic.overview] Type...  → │  │               │
-│  Sess. │  └───────────────────────────────┘  │               │
-│        │                                     │               │
-│  📊    │                                     │               │
-│  ...   │                                     │               │
-└────────┴────────────────────────────────────┴───────────────┘
-```
-
-### 9.2 Layout with Evidence Viewer (split center panel)
-
-When operator clicks [View Evidence], the center panel splits:
-
-```
-┌─ Center Panel (split) ─────────────────────────────────────┐
-│                                                            │
-│  ┌─ Agent Session (60%) ────┐  ┌─ Evidence Viewer (40%) ┐ │
-│  │                           │  │                        │ │
-│  │  🤖 "搜索渠道下降 35%"    │  │  Provenance            │ │
-│  │       [View Evidence] ←──┼──│  ┌──────────────────┐  │ │
-│  │                           │  │  │ JD → CDP → RT    │  │ │
-│  │                           │  │  └──────────────────┘  │ │
-│  │                           │  │                        │ │
-│  │                           │  │  Data Preview          │ │
-│  │                           │  │  { visitors: 289 }     │ │
-│  │                           │  │                        │ │
-│  │                           │  │  [Close]               │ │
-│  └───────────────────────────┘  └────────────────────────┘ │
-└────────────────────────────────────────────────────────────┘
-```
-
-### 9.3 Layout with Contract Explorer (replaces center)
-
-When operator navigates to Contract Explorer:
-
-```
-┌─ Center Panel (full width) ────────────────────────────────┐
-│                                                            │
-│  ┌─ Contract Explorer ─────────────────────────────────┐   │
-│  │                                                      │   │
-│  │  [Domain Filter]  [Search]                           │   │
-│  │                                                      │   │
-│  │  ┌─ Capability Cards (grid) ─────────────────────┐   │   │
-│  │  │  trade.overview  ·  traffic.overview  ·  ...  │   │   │
-│  │  └───────────────────────────────────────────────┘   │   │
-│  └──────────────────────────────────────────────────────┘   │
-└────────────────────────────────────────────────────────────┘
+Evidence Viewer ──→ Capability Explorer
+   "This evidence supports: traffic.overview"
 ```
 
 ---
 
-## 10. NOT Included in This Design
+## 10. Included (Phase 2 Scope)
 
-Per the constraints stated:
-
-| Category | Excluded | Reason |
-|----------|----------|--------|
-| CBP changes | ❌ | CBP is a separate system |
-| Hermes Runtime extension | ❌ | Hermes provides execution; agentFabric provides business context |
-| Execution implementation | ❌ | P0006.5.3 describes capability, doesn't execute |
-| BI analytics platform | ❌ | Workspace is a decision OS, not a dashboard |
-| New connector types | ❌ | P0006.5.3 works with existing connectors |
-| Skill lifecycle management | ❌ | P0007 concern |
-| Memory / Experience integration | ❌ | P0007 concern |
-| Multi-platform contracts (Tmall, Amazon) | ❌ | Future — single platform first |
-| Real-time streaming | ❌ | Current CDP is synchronous |
-| Automated scheduling | ❌ | Manual Chrome + CLI for now |
-| Code implementation | ❌ | Design only |
+- 扩展现有 agentFabric Workspace（`workspace/index.html` + `app.js` + `styles.css`），而非建立独立 Dashboard
+- Agent Session 成为 Workspace 的核心工作视图（默认首页）
+- Capability Explorer 消费现有 Capability Contract（`generated/capability-contract.json`），展示业务语义
+- Capability Detail 展示单个 capability 的 intent、inputs、outputs、provider、validation
+- Evidence Viewer 建立 Capability → Platform Page → CDP Capture → Raw Response → Semantic Mapping → Metrics 的 provenance 视图
+- Agent Session 支持展示 Runtime 明确发出的 observable event（session start、capability selected、acquisition completed、response ready、error）
+- 如果当前 HermesAgent integration 尚未提供 task/acquisition events：UI 只定义 state interface，不填充伪造数据
+- 保留现有 Workspace 的全部已有功能（Inbox / Growth / Risk / Review / Product / Trend / Archive / Memory / Runtime / Config）
+- 重新组织导航关系：AGENT section 置顶，CAPABILITY section 新增，其他 section 保留
+- 为未来 Skill / Memory evolution 保留入口，但 Phase 2 不实现
 
 ---
 
-## 11. Acceptance Criteria (for when implementation begins)
+## 11. NOT Included
 
-- [ ] Contract Explorer renders all 11 capabilities from `capability-contract.json`
-- [ ] Domain filter and search work via CapabilityRegistry
-- [ ] "Ask Agent about this" navigates to Agent Session with capability pre-selected
-- [ ] Evidence Viewer shows provenance chain: source → acquisition → processing
-- [ ] Evidence Viewer displays raw data preview with canonical mapping
-- [ ] Agent Session View accepts natural language prompts
-- [ ] Agent responses include capability badges and evidence links
-- [ ] Clicking [View Evidence] opens Evidence Viewer with correct context
-- [ ] Decision Panel shows detailed trace for agent responses
-- [ ] All three new views are navigable from the sidebar
-- [ ] Existing views (Inbox, Product, Trend, Archive, Memory, Runtime) are preserved unchanged
+| 类别 | 排除 | 原因 |
+|------|------|------|
+| CBP 项目 | ❌ | 不修改 CBP、CBP Protocol、CBP Dashboard、或 `/Users/bx/Workspace/bridge` 下的任何文件 |
+| HermesAgent 重新实现 | ❌ | 不开发新的 Agent loop / planner / reasoning engine |
+| Capability Contract 改为 UI schema | ❌ | Contract 是 Agent API contract，UI 只是 consumer |
+| Workspace 内实现 CDP/Playwright/JD API | ❌ | 采集实现属于 acquisition layer |
+| 伪造 Agent 认知链 | ❌ | 不展示或伪造模型内部 Chain-of-Thought |
+| 重写现有 Workspace | ❌ | 必须增量扩展现有 Workspace |
+| BI Dashboard | ❌ | 商品趋势、流量图表只在 Agent 工作结果需要时作为 artifact 展示 |
+| P0007 Skill/Memory learning | ❌ | 属于下一阶段 |
+| 多平台 Contract（Tmall, Amazon）| ❌ | 单平台先行 |
+| 自动化采集调度 | ❌ | 当前依赖手动 Chrome + CLI |
+| 代码实现 | ❌ | Design only — 本 Proposal 不包含任何代码 |
 
 ---
 
-## 12. File Inventory (for when implementation begins)
+## 12. Acceptance Criteria
 
-| File | Change | Purpose |
-|------|--------|---------|
-| `workspace/index.html` | ADD sections | Contract Explorer, Evidence Viewer, Agent Session views |
-| `workspace/styles.css` | ADD styles | Capability cards, evidence provenance, session messages |
-| `workspace/app.js` | ADD modules | ContractExplorer, EvidenceViewer, AgentSession controllers |
-| `workspace/app.js` | MODIFY sidebar | Add CAPABILITY and AGENT sections |
-| `platform/server/routes/runtime.ts` | ADD endpoint | `POST /api/runtime/chat` (Agent Session) |
-| `platform/server/routes/runtime.ts` | ADD endpoint | `GET /api/evidence/:id` (Evidence detail) |
-| `platform/server/routes/runtime.ts` | ADD endpoint | `GET /api/capabilities` (Contract read) |
+- [ ] Agent Session 是 Workspace 默认首页
+- [ ] Agent Session 可接受自然语言输入，展示 Agent 返回的响应
+- [ ] Agent 响应中包含 Capability badge（点击进入 Capability Detail）
+- [ ] Agent 响应中的数据声明包含 Evidence link（点击进入 Evidence Viewer）
+- [ ] Capability Explorer 展示全部 11 个 capabilities，以业务语义呈现
+- [ ] Capability Detail 展示单个 capability 的 intent/metrics/provider/validation
+- [ ] Evidence Viewer 展示完整的 provenance 链（capability → page → capture → raw → mapping → metrics）
+- [ ] Provenance 链的每一层可按需展开
+- [ ] Sidebar 新增 AGENT（顶部）和 CAPABILITY（第二）两个 section
+- [ ] 现有一切视图完整保留，功能不受影响
+- [ ] 如果 Runtime 不发出 task event，Agent Session 不展示伪造的中间状态
+
+---
+
+## 13. File Inventory
+
+| 文件 | 变更 | 说明 |
+|------|------|------|
+| `apps/ecommerce/workspace/index.html` | **Modify** | Add: Agent Session container, Capability Explorer container, Evidence Viewer container. Keep: all existing view containers |
+| `apps/ecommerce/workspace/styles.css` | **Modify** | Add: `.session-message`, `.capability-card`, `.provenance-chain`, `.evidence-timeline` styles. Keep: all existing styles |
+| `apps/ecommerce/workspace/app.js` | **Modify** | Add: `AgentSession`, `CapabilityExplorer`, `EvidenceViewer` modules. Modify: sidebar nav (add AGENT + CAPABILITY sections). Keep: all existing modules |
+| `platform/server/routes/runtime.ts` | **Modify** | Add: `POST /api/runtime/chat`, `GET /api/evidence/:id`, `GET /api/capabilities` |
+| All other files | **Keep** | No changes |
