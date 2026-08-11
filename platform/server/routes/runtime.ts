@@ -475,5 +475,74 @@ export const runtimeRouter = (db: Db): Router => {
     }
   });
 
+  // GET /api/runtime/events/:taskId — SSE event stream for Agent Session UI.
+  // Phase 3.3: Workspace Event Binding. The Agent Session UI subscribes to this
+  // endpoint to receive ExecutionEvents as they happen.
+  // Events follow the ExecutionEvent schema (shared/schemas/execution.ts).
+  router.get('/events/:taskId', (req, res) => {
+    const taskId = req.params['taskId'];
+    if (!taskId) { res.status(400).json({ error: 'Missing taskId' }); return; }
+
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      Connection: 'keep-alive',
+      'X-Accel-Buffering': 'no',
+    });
+
+    const send = (event: string, data: Record<string, unknown>) => {
+      res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+    };
+
+    // Phase 3.3: Emit a demo sequence using the ExecutionEvent contract.
+    // When Phase 3.4 connects real HermesAgent + Runtime Kernel, this endpoint
+    // will stream actual events from the running task.
+    const now = new Date().toISOString();
+    let seq = 0;
+    const emit = () => {
+      seq++;
+      switch (seq) {
+        case 1:
+          send('execution.started', {
+            type: 'execution.started', taskId,
+            timestamp: now,
+            data: { capability: 'traffic.overview', provider: { platform: 'jd', acquisition: 'cdp' } },
+          });
+          break;
+        case 2:
+          send('acquisition.started', {
+            type: 'acquisition.started', taskId,
+            timestamp: now,
+            data: { method: 'cdp', platform: 'jd', page: '流量概况' },
+          });
+          break;
+        case 3:
+          send('evidence.created', {
+            type: 'evidence.created', taskId,
+            timestamp: now,
+            data: { evidenceId: 'ev_001', dataType: 'traffic', metricsCount: 17 },
+          });
+          break;
+        case 4:
+          send('acquisition.completed', {
+            type: 'acquisition.completed', taskId,
+            timestamp: now,
+            data: { endpointsCaptured: 7, durationMs: 14200 },
+          });
+          break;
+        case 5:
+          send('execution.completed', {
+            type: 'execution.completed', taskId,
+            timestamp: now,
+            data: { totalEvidence: 1, totalMetrics: 17, durationMs: 15200 },
+          });
+          res.end();
+          return;
+      }
+      setTimeout(emit, 800);
+    };
+    setTimeout(emit, 300);
+  });
+
   return router;
 };

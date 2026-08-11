@@ -795,18 +795,133 @@ function loadConfig() {
   applyI18n();
 }
 
-// ═══ Agent Session (Phase 2) ══════════════════════════════
-// Static shell only. The HTML contains the full UI (notice + event slots + disabled input).
-// Phase 2: no runtime data loading — the placeholder state is the correct state.
-// Phase 3: will connect to HermesAgent and populate event slots dynamically.
+// ═══ Agent Session (Phase 3.3) ═══════════════════════════
+// Event-driven: subscribes to SSE event stream and renders Agent Activity.
+// Phase 2 shell (notice + slots + disabled input) → Phase 3.3 live event display.
+
+var agentSessionState = { taskId: null, status: 'idle', events: [], connected: false };
+var agentSessionEventSource = null;
+
 function loadAgentSession() {
-  // No dynamic data to load in Phase 2.
-  // The static HTML already shows: "Runtime integration unavailable" + event contract slots + disabled input.
-  // This function satisfies the viewLoader contract; future Phase 3 will add event stream subscription.
+  // Hide the Phase 2 "unavailable" notice. Phase 3.3 shows live events.
   var notice = document.getElementById('sessionNotice');
-  if (notice) notice.style.display = 'flex';
+  if (notice) notice.style.display = 'none';
+
+  // Show event slots area
   var slots = document.getElementById('sessionActivitySlots');
   if (slots) slots.style.display = 'block';
+
+  // Connect to event stream
+  connectEventStream();
+}
+
+function connectEventStream() {
+  if (agentSessionEventSource) {
+    agentSessionEventSource.close();
+  }
+
+  // Use a demo task ID. Phase 3.4 replaces this with real task IDs from HermesAgent.
+  var taskId = 'task_demo_' + Date.now();
+  agentSessionState = { taskId: taskId, status: 'connecting', events: [], connected: false };
+
+  // Update status badge
+  var badge = document.getElementById('sessionStatusBadge');
+  if (badge) { badge.textContent = 'Connecting...'; badge.className = 'session-status-badge unavailable'; }
+
+  // Reset all activity slots to pending
+  document.querySelectorAll('.activity-slot-status').forEach(function(el) {
+    el.textContent = '— pending';
+    el.className = 'activity-slot-status pending';
+  });
+
+  agentSessionEventSource = new EventSource('/api/runtime/events/' + taskId);
+
+  agentSessionEventSource.addEventListener('execution.started', function(e) {
+    var data = JSON.parse(e.data);
+    agentSessionState.status = 'executing';
+    agentSessionState.events.push(data);
+    updateSlot('execution.started', 'Execution started: ' + (data.data && data.data.capability || ''));
+    updateStatusBadge('running');
+  });
+
+  agentSessionEventSource.addEventListener('acquisition.started', function(e) {
+    var data = JSON.parse(e.data);
+    agentSessionState.events.push(data);
+    var label = 'Acquisition started';
+    if (data.data && data.data.method) label += ': ' + data.data.method.toUpperCase();
+    if (data.data && data.data.platform) label += ' (' + data.data.platform + ')';
+    updateSlot('acquisition.started', label);
+  });
+
+  agentSessionEventSource.addEventListener('evidence.created', function(e) {
+    var data = JSON.parse(e.data);
+    agentSessionState.events.push(data);
+    var n = data.data && data.data.metricsCount || 0;
+    updateSlot('evidence.created', 'Evidence available: ' + n + ' metrics');
+    updateSlot('acquisition.completed', 'Acquisition done');
+  });
+
+  agentSessionEventSource.addEventListener('acquisition.completed', function(e) {
+    var data = JSON.parse(e.data);
+    agentSessionState.events.push(data);
+    var n = data.data && data.data.endpointsCaptured || 0;
+    updateSlot('acquisition.completed', 'Acquisition completed: ' + n + ' endpoints');
+  });
+
+  agentSessionEventSource.addEventListener('execution.completed', function(e) {
+    var data = JSON.parse(e.data);
+    agentSessionState.events.push(data);
+    agentSessionState.status = 'completed';
+    agentSessionState.connected = false;
+    var ev = data.data && data.data.totalEvidence || 0;
+    var mt = data.data && data.data.totalMetrics || 0;
+    updateSlot('execution.completed', 'Completed: ' + ev + ' evidence, ' + mt + ' metrics');
+    updateStatusBadge('connected');
+    agentSessionEventSource.close();
+  });
+
+  agentSessionEventSource.addEventListener('execution.failed', function(e) {
+    var data = JSON.parse(e.data);
+    agentSessionState.status = 'failed';
+    updateSlot('execution.failed', 'Failed: ' + (data.data && data.data.message || ''));
+    updateStatusBadge('unavailable');
+    agentSessionEventSource.close();
+  });
+
+  agentSessionEventSource.onerror = function() {
+    agentSessionState.connected = false;
+    // Only show error if we haven't completed successfully
+    if (agentSessionState.status !== 'completed') {
+      updateStatusBadge('unavailable');
+    }
+    // Don't close — EventSource auto-reconnects
+  };
+
+  agentSessionEventSource.onopen = function() {
+    agentSessionState.connected = true;
+  };
+}
+
+function updateSlot(eventType, text) {
+  var slot = document.querySelector('.activity-slot[data-slot="' + eventType + '"]');
+  if (!slot) return;
+  var status = slot.querySelector('.activity-slot-status');
+  if (status) {
+    status.textContent = text;
+    status.className = 'activity-slot-status active';
+  }
+}
+
+function updateStatusBadge(state) {
+  var badge = document.getElementById('sessionStatusBadge');
+  if (!badge) return;
+  if (state === 'running' || state === 'connected') {
+    badge.textContent = '● Connected';
+    badge.className = 'session-status-badge connected';
+  } else if (state === 'unavailable') {
+    badge.textContent = 'Runtime integration unavailable';
+    badge.className = 'session-status-badge unavailable';
+  }
 }
 
 // ═══ Capability Explorer (Phase 2) ═══════════════════════
