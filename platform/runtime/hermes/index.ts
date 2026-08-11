@@ -7,6 +7,8 @@ import type { HermesClient } from './types.js';
 
 export * from './types.js';
 export { HermesRuntimeAdapter } from './adapter.js';
+export { createCapabilityBridge, resetCapabilityBridge } from './capability-bridge.js';
+export type { CapabilityBridge, CapabilityDiscoveryResult } from './capability-bridge.js';
 
 const isTest = process.env.NODE_ENV === 'test' || process.env.VITEST === 'true';
 

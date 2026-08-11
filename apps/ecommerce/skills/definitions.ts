@@ -26,7 +26,8 @@ export type SkillHandler =
   | 'facade.signals'          // SignalFacade.list/listAll() — read signals
   | 'facade.evidence'         // Evidence store — read evidence records
   | 'facade.memory'           // MemoryFacade.queryActive() — read memories
-  | 'facade.products';        // ProductRepository — list products
+  | 'facade.products'          // ProductRepository — list products
+  | 'bridge.discover';           // CapabilityBridge — discover capabilities
 
 // ---- Skill Definition ----
 
@@ -195,6 +196,30 @@ export const SKILL_CATALOG: readonly SkillDefinition[] = [
       '用户问题: {{userMessage}}',
       '',
       '请根据用户的具体问题，用友好的语气回答，并引导用户使用合适的命令。如果需要执行数据采集或排名分析，请告知用户。',
+    ].join('\n'),
+  },
+  {
+    name: 'discover_capability',
+    displayName: '能力发现',
+    description: '查询 agentFabric 已具备的数据获取能力。根据用户意图，返回可用的 Capability（如交易概览、流量分析、商品排行等）及其可提供的指标。',
+    intentPatterns: [
+      '能获取什么数据', '有什么数据', '数据能力', '能查什么',
+      '能拿到哪些指标', '平台有什么', '可以获取什么',
+      '能分析流量吗', '能看交易数据吗', '能查商品吗',
+      'what data', 'what capabilities', 'available data',
+      'capability', '能力', '数据来源',
+    ],
+    handlerType: 'facade',
+    handler: 'bridge.discover',
+    requiredParams: [],
+    responseTemplate: [
+      '你是 agentFabric 的能力发现助手。以下是当前可用的数据获取能力：',
+      '',
+      '{{capabilitySummary}}',
+      '',
+      '用户想要: {{userMessage}}',
+      '',
+      '请根据用户的意图，推荐最匹配的能力，并说明该能力可以提供哪些指标。如果用户的问题暂时没有匹配的能力，请如实告知。',
     ].join('\n'),
   },
 ];

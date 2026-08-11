@@ -6,7 +6,7 @@ import { SKILL_CATALOG, getSkillByName, skillListForPrompt } from '#app/skills/d
 
 describe('Skill Catalog', () => {
   test('every skill has required fields with valid values', () => {
-    expect(SKILL_CATALOG.length).toBeGreaterThanOrEqual(4);
+    expect(SKILL_CATALOG.length).toBeGreaterThanOrEqual(5);
 
     for (const skill of SKILL_CATALOG) {
       expect(skill.name).toBeTruthy();
@@ -35,6 +35,7 @@ describe('Skill Catalog', () => {
       'facade.evidence',
       'facade.memory',
       'facade.products',
+      'bridge.discover',
     ];
 
     for (const skill of SKILL_CATALOG) {
