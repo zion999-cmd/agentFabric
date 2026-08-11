@@ -74,19 +74,34 @@ P{NNNN}[-{N}]-{kebab-case-description}.md
 | Future expansion | `P000x.N` | Reserved — assign P number on implementation |
 | Module phase | `{module}-v{ver}-phase{N}` | Feature-level phased development |
 
-### Next Available P Numbers
+### P-Number Inventory & Roadmap
 
-| Prefix | Next | Current |
-|--------|------|---------|
-| `P0001` | 1 | P0001 ✅ |
-| `P0002` | 1 | P0002 ✅ |
-| `P0003` | 2 | P0003 ✅, P0003.1 ✅ |
-| `P0004` | 1 | P0004 ✅ |
-| `P0005` | 7 | P0005 ✅, P0005.1-6 ✅, P0005.6.1 ✅ |
-| `P0006` | 3 | P0006 ✅, P0006.1 ✅, P0006.2 ✅ |
-| `P0007` | 1 | P0007.3 ✅ (P0007, P0007.1, P0007.2 not yet written) |
-| `P0008` | — | Available |
-| `P000x` | 5 | P000x ✅, P000x.1-4 ✅ |
+| Prefix | Domain | Written | Not Yet Written |
+|--------|--------|---------|-----------------|
+| `P0001` | AgentFabric repositioning | P0001 | — |
+| `P0002` | Workspace IA | P0002 | — |
+| `P0003` | Trust UI System | P0003, P0003.1 | — |
+| `P0004` | Runtime control plane | P0004 | — |
+| `P0005` | Data foundation | P0005, P0005.1–P0005.6, P0005.6.1 | — |
+| `P0006` | HermesAgent + Workspace | P0006, P0006.1, P0006.2, P0006.5.3 | P0006.3, P0006.4, P0006.5 (root), P0006.5.1, P0006.5.2 |
+| `P0007` | Operator intelligence | P0007.3 | P0007, P0007.1, P0007.2, P0007.4+ |
+| `P0008` | (next domain) | — | Available |
+| `P000x` | Future expansion | P000x, P000x.1–P000x.4 | — |
+
+**P0006 sub-numbering note**: P0006.3 and P0006.4 are currently unassigned. Do NOT auto-fill gaps — only create sub-numbers when the corresponding architecture decision exists. Feature-level work (e.g., Workspace Phase 3 Hermes integration) should use the `{module}-v{version}-phase{N}` format first; promote to P-number only when the capability rises to architecture-level.
+
+### When to Use P-Number vs Feature Proposal
+
+| Scenario | Use |
+|----------|-----|
+| Cross-module architecture decision | P-number |
+| Protocol / contract definition | P-number |
+| Runtime boundary change | P-number |
+| Single-module feature phase | Feature proposal (`{module}-v{ver}-phase{N}`) |
+| UI / UX design for a view | Feature proposal |
+| Module-specific bug fix or patch | Feature proposal |
+
+Feature proposals can be promoted to P-numbers later if they prove to be architecture-level.
 
 ---
 
