@@ -359,3 +359,33 @@ Layer 2: Observation (Instance) — 每次采集产生
 5. 描述必须完整，不截断
 
 本次规范化：17 个文件重命名（修复 PascalCase、typo、下划线、特殊字符、截断描述）。
+
+## ADR-020: Phase 3 HermesAgent Integration — 四个核心设计决策
+
+- **日期**: 2026-08-11
+- **状态**: Accepted (Design)
+- **来源**: [workspace-v0.2-phase3-hermes-integration.md](proposals/workspace-v0.2-phase3-hermes-integration.md)
+
+### 决策 1: Capability Discovery 由 HermesAgent 驱动
+
+HermesAgent 调用 `CapabilityRegistry.searchByIntent()` 获取候选能力，自行选择最优匹配。Registry 只返回 capability candidates，不返回数据，不执行采集。
+
+**意义**: HermesAgent 只理解需求，不接触采集细节。Capability Registry 是纯查询接口。
+
+### 决策 2: Runtime Kernel 是共享 Capability Execution Layer
+
+Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行层——任何 Agent Runtime (Hermes, Claude Agent, future agents) 都可以共享。
+
+**意义**: agentFabric 不会退化成"会调用工具的 ChatBot"。它是多 Agent 共享的能力执行基础设施。
+
+### 决策 3: Observable Event Model 定义 UI 契约
+
+8 种标准化事件类型（intent.resolved → response.ready）。Agent Session UI 消费事件流渲染 Agent Activity panel。事件是 Agent 外部可观察行为，不是内部思维过程。
+
+**意义**: UI 观察行为，不读取内部思维。不暴露模型 Chain-of-Thought。
+
+### 决策 4: Runtime Chat 是异步 Task 模型
+
+`POST /api/runtime/chat` 不是同步 Chat API——是异步 task 模型 + SSE 事件流。因为 CDP 采集需要 10-30 秒，Agent 执行是过程不是同步问答。
+
+**意义**: Task 模型支持多消费者观察同一任务（Workspace + CLI + future tools），支持 replay/audit/debug。

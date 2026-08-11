@@ -111,6 +111,7 @@ Feature proposals can be promoted to P-numbers later if they prove to be archite
 ✅ P0005.1-jd-connector.md
 ✅ P0006.2-historical-replay-runtime.md
 ✅ workspace-v0.2-phase2-ui-design.md
+✅ workspace-v0.2-phase3-hermes-integration.md
 ✅ P0003.1-ui-fix-right-panel-redesign.md
 ✅ P000x.1-multi-connector-expansion.md
 
@@ -162,5 +163,6 @@ proposals/
 ├── P000x.4-cross-platform-semantic-normalization-layer.md
 ├── signal-persistence-design-review.md
 ├── workspace-v0.2-phase2-ui-design.md
+├── workspace-v0.2-phase3-hermes-integration.md
 └── README.md                                 ← this file
 ```
