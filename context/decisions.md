@@ -404,3 +404,27 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 `POST /api/runtime/chat` 不是同步 Chat API——是异步 task 模型 + SSE 事件流。因为 CDP 采集需要 10-30 秒，Agent 执行是过程不是同步问答。
 
 **意义**: Task 模型支持多消费者观察同一任务（Workspace + CLI + future tools），支持 replay/audit/debug。
+
+## ADR-022: Phase 3 Complete — HermesAgent Integration
+
+- **日期**: 2026-08-12
+- **状态**: Accepted (Complete)
+- **来源**: Phase 3.1–3.4 commits (047079c → 7a79902)
+
+**Artifacts delivered**:
+
+| Phase | Commit | Artifact |
+|-------|--------|----------|
+| 3.1 | 047079c | ExecutionRequest/Event schemas, 20 tests, docs |
+| 3.2 | 000a6a3 | CapabilityBridge, discover_capability skill, 13 tests |
+| 3.3 | 92afb7c | SSE endpoint, AgentSessionState, execution event slots |
+| 3.4 | 5c98ec1 | bridge.discover handler, auto-execute E2E chain |
+| Fix | 7a79902 | chat.ts mock:false — real evidence data |
+
+**Verified**: Live CDP 2026-08-12: 14 API responses, GMV=¥337.90, 3 evidence files, 3 signals.
+
+**Known tech debt**:
+1. SSE endpoint uses demo event sequence — needs real HermesAgent task event source (Phase 4)
+2. resetCapabilityBridge() exported from production module — should move to test utils
+
+**Next**: Phase 4 (P0007 Experience → Memory → Skill) or decide on new mainline.

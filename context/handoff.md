@@ -1,5 +1,33 @@
 # 交接文档
 
+## 本次会话 (2026-08-12) — Phase 3 Complete + Live CDP Verification + mock→real switch
+
+### Phase 3 Closeout
+
+Phase 3.1–3.4 全部完成。E2E 链路已验证：
+
+```
+CapabilityBridge.searchByIntent("分析最近30天流量")
+  → traffic.overview (score: 22.0)
+  → discover_capability skill → bridge.discover handler
+  → kernel.execute({ mock: false }) → real evidence data
+  → SSE event stream → Agent Activity panel
+  → POST /api/chat → capability + execution → response
+```
+
+Live CDP 验证: CLI `collect jd --mode live --date 2026-08-12` → 14 API responses, GMV=¥337.90, orders=2, visitors=23.
+
+chat.ts 已切换 mock:false — 全部使用真实 evidence 数据。
+
+### Known Debt
+- SSE demo sequence (Phase 4: connect to real HermesAgent task events)
+- resetCapabilityBridge() test export in production module (low priority)
+
+### Tag
+v0.2-phase3-complete
+
+---
+
 ## 本次会话 (2026-08-11) — Phase 2 Workspace + Proposal Taxonomy + Phase 3 Design + Phase 3.1
 
 ### Phase 3.1 Runtime Kernel Contract

@@ -1,9 +1,13 @@
 # 当前状态
 
-|**版本**: v0.2-phase3.1-contract | **Hermes**: v0.18.0 | **测试**: 432/433 passed | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-phase3-complete | **Hermes**: v0.18.0 | **测试**: 445/446 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
 
 ## 已完成
 
+- [x] **Phase 3 Complete** — HermesAgent Integration (3.1–3.4). CapabilityBridge → discover_capability skill → kernel.execute(real evidence) → SSE events → Agent Activity. Live CDP verified (2026-08-12: 14 APIs, GMV=¥337.90). chat.ts switched to mock:false. Tag: v0.2-phase3-complete. ADR-022.
+- [x] **Phase 3.4 E2E Capability** — chat.ts: bridge.discover handler + auto-execute flow. CapabilityBridge → kernel.execute → real evidence → response. Live CDP: CL​I collect --mode live verified.
+- [x] **Phase 3.3 Workspace Event Binding** — SSE endpoint (5 events, demo sequence), AgentSessionState model, loadAgentSession() rewrite, execution-level event slots.
+- [x] **Phase 3.2 Hermes Capability Discovery** — CapabilityBridge (searchByIntent/getById/findByDomain), discover_capability skill registration, 13 contract tests.
 - [x] **Phase 3.1 Runtime Kernel Contract** — ExecutionRequest + ExecutionEvent Zod schemas, 7 event types, Agent-agnostic contract. 20 contract tests. ADR-021. 无 Hermes/CDP/UI 修改.
 - [x] **Phase 3 HermesAgent Integration Proposal** — workspace-v0.2-phase3-hermes-integration.md. 四个核心设计: (1) HermesAgent → CapabilityRegistry.searchByIntent() 能力选择, (2) Runtime Kernel 作为共享 Capability Execution Layer, (3) Observable Event Model 8 种事件类型, (4) POST /api/runtime/chat 异步 task 模型 + SSE 事件流. NOT Included: HermesAgent 内部实现, Skill/Memory 系统, MCP, 多轮对话.
 - [x] **Phase 2 Agent Cognitive Workspace** — Human ↔ Agent ↔ Capability ↔ Evidence. Agent Session (主视图, UI state contract, Phase 3 接 HermesAgent), Capability Explorer (11 capabilities, domain filter, intent search), Evidence Viewer (provenance chain + evidence timeline). GET /api/capabilities, GET /api/evidence/:id. JS loaders 实现. 测试 412/413 pass. Tag: v0.2-phase2-workspace. 无 CBP 污染. ADR-030
