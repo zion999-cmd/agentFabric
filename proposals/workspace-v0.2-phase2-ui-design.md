@@ -194,20 +194,26 @@ Workspace v0.2 Sidebar
 
 Agent Session 是用户与 HermesAgent 工作的主界面。用户输入自然语言，Agent 使用 agentFabric 的 Capability 获取数据，返回分析结果。每一条结论都可以追溯到 Capability 和 Evidence。
 
-### 5.2 Strict Constraint: No Fabricated Cognition
+### 5.2 Strict Constraint: Observable Events Only — No "Thinking"
 
-**Agent Session 只能展示 Runtime 明确暴露的 observable state**：
+**Agent Session 不展示 "Agent Thinking"。不假装 UI 能看到模型内部思维过程。**
 
-| 允许展示 | 不允许展示（除非 Runtime 真实提供） |
-|---------|-----------------------------------|
-| 用户消息 | 伪造的 "Thinking..." 步骤 |
-| Agent 返回的最终响应文本 | 伪造的 "Analyzing..." / "Reasoning..." |
-| Runtime 明确发出的 task event（如 capability selected, acquisition started） | 推断的 chain-of-thought |
-| Capability 使用记录（哪个 capability 被调用） | UI 自行推演的 "Agent thinks..." |
-| Evidence reference（结果关联了哪个 evidence） | 编造的中间分析步骤 |
+UI 只展示 HermesAgent 显式输出的 observable events — 这些是 Agent 的外部行为，不是内部思维：
+
+| 允许展示（observable output） | 禁止展示 |
+|------------------------------|---------|
+| 用户消息 | ❌ "Thinking..." |
+| Intent resolved（Agent 声明：我理解了 X） | ❌ "Understanding..." |
+| Capability selected（Agent 声明：使用 traffic.overview） | ❌ "Analyzing..." |
+| Data requested（Agent 声明：需要最近 7 天数据） | ❌ "Reasoning..." |
+| Acquisition started / completed | ❌ Chain-of-Thought 推演 |
+| Evidence produced（N artifacts） | ❌ "Agent thinks..." |
+| Agent 返回的最终响应文本 | ❌ 编造的中间分析步骤 |
 | 系统消息（session 开始/结束、capability 不可用、错误） | — |
 
-**如果当前 HermesAgent integration 尚未提供 task/acquisition events**：UI 只展示 user message + agent response，不填充中间状态。
+这组 observable events 称为 **Agent Activity**（或 Agent Plan），不是 "Agent Thinking"。
+
+**如果当前 HermesAgent integration 尚未提供 task/acquisition events**：UI 只展示 user message + agent response，Agent Activity 区域为空或显示 "Runtime integration unavailable"。绝不填充伪造数据。
 
 ### 5.3 Layout
 
@@ -224,13 +230,13 @@ Agent Session 是用户与 HermesAgent 工作的主界面。用户输入自然�
 │  │  🧑 "分析一下最近7天的流量下降原因"                 │   │
 │  │      14:32                                         │   │
 │  │                                                    │   │
-│  │  ── System: capability selected ──                 │   │
-│  │  traffic.overview (jd, CDP, verified ✅)           │   │
-│  │  [View capability details]                         │   │
-│  │                                                    │   │
-│  │  ── System: acquisition started ──                 │   │
-│  │  Capturing traffic data for 2026-08-04 ~ 08-11     │   │
-│  │  (only if Runtime emits this event)                │   │
+│  │  ── Agent Activity ── (collapsible)                  │   │
+│  │  Intent resolved: 分析流量变化, 解释访客下降          │   │
+│  │  Capability selected: traffic.overview               │   │
+│  │    (jd, CDP, verified ✅)                            │   │
+│  │  Data requested: 2026-08-04 ~ 2026-08-11             │   │
+│  │  [View capability details]                           │   │
+│  │  (only if HermesAgent emits these events)            │   │
 │  │                                                    │   │
 │  │  🤖 "过去7天流量下降 23%，主要来自：               │   │
 │  │                                                    │   │
@@ -253,18 +259,20 @@ Agent Session 是用户与 HermesAgent 工作的主界面。用户输入自然�
 └──────────────────────────────────────────────────────────┘
 ```
 
-### 5.4 Observable Event Types (from Runtime)
+### 5.4 Observable Event Types (Agent Activity)
 
-| Event | Source | When |
-|-------|--------|------|
-| `session.created` | System | Session 开始 |
-| `capability.selected` | HermesAgent | Agent 确定使用某个 Capability |
-| `acquisition.started` | Runtime Kernel | 数据采集开始 |
-| `acquisition.completed` | Runtime Kernel | 数据采集完成（含 evidence count） |
-| `response.ready` | HermesAgent | Agent 返回分析结果 |
-| `error` | System | Capability 不可用、采集失败等 |
+Events HermesAgent may emit as explicit output. UI renders these; does not infer them.
 
-> 以上 event types 定义了 UI 的 state interface。如果当前 HermesAgent / Runtime 尚未发出这些事件，UI 保留对应的渲染逻辑，但不填充伪造数据。
+| Event | Content | Meaning |
+|-------|---------|---------|
+| `intent.resolved` | Intent phrases | Agent 声明理解了用户的意图 |
+| `capability.selected` | Capability ID + provider | Agent 声明将使用哪个 Capability |
+| `data.requested` | Date range + parameters | Agent 声明需要什么数据 |
+| `acquisition.completed` | Evidence count + references | 数据采集完成 |
+| `response.ready` | Agent response text + evidence links | Agent 返回分析结果 |
+| `error` | Error code + message | Capability 不可用、采集失败等 |
+
+> 以上 event types 定义了 Agent Session UI 的 state contract。如果当前 HermesAgent 尚未发出这些事件，Agent Activity 区域显示 "Runtime integration unavailable — HermesAgent events not connected." 不填充伪造数据。
 
 ---
 
@@ -494,72 +502,62 @@ Capability Contract ← this evidence validates
 
 ## 8. Data Flow
 
-### 8.1 Agent Session Flow
+### 8.1 Phase 2 — Implemented Data Flow (THIS PHASE)
+
+Phase 2 实现 Workspace UI 与 agentFabric 现有能力之间的数据流。不涉及 HermesAgent 内部执行。
 
 ```
-User types "分析流量下降原因"
+Workspace (UI)
+│
+├── Capability Explorer
+│   │
+│   │  GET /api/capabilities
+│   ▼
+│   CapabilityRegistry → capability-contract.json
+│   │
+│   └── Renders: capability cards with business semantics
+│
+├── Evidence Viewer
+│   │
+│   │  GET /api/evidence/:id
+│   ▼
+│   Evidence Store → data/evidence/jd/**/*.json + .meta.json
+│   │
+│   └── Renders: provenance chain (capability → page → capture → raw → mapping → metrics)
+│
+└── Agent Session (UI boundary)
+    │
+    │  Defines: message types, Agent Activity event contract, input handling
+    │  State contract: see Section 5.4 Observable Event Types
     │
     ▼
-┌─────────────────────────────┐
-│ Agent Session View           │
-│ POST /api/runtime/chat       │
-│ { prompt, session_id }       │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│ HermesAgent (agentFabric 的  │
-│ Agent Runtime)               │
-│                              │
-│ Owns:                        │
-│  - task planning             │
-│  - reasoning                 │
-│  - capability selection      │
-│  - tool invocation           │
-│                              │
-│ 1. Queries CapabilityRegistry│
-│    registry.searchByIntent() │
-│    → traffic.overview        │
-│                              │
-│ 2. Plans acquisition         │
-│                              │
-│ 3. Invokes Runtime Kernel    │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│ Runtime Kernel               │
-│ (agentFabric acquisition)    │
-│                              │
-│ Owns:                        │
-│  - CDP / API acquisition     │
-│  - parsing / normalizing     │
-│  - evidence storage          │
-│                              │
-│ → Returns: signals + evidence│
-│   references                 │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│ HermesAgent                  │
-│ → Formats response           │
-│ → Includes evidence links    │
-│ → Includes capability ref    │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│ Agent Session View           │
-│ Renders:                     │
-│  - Agent response            │
-│  - Capability badge          │
-│  - Evidence links            │
-│  - Observable events (if any)│
-└─────────────────────────────┘
+    HermesAgent integration boundary
+    (connection point — NOT implemented in Phase 2)
 ```
 
-### 8.2 Workspace Does NOT Know About Acquisition Implementation
+### 8.2 Future — Hermes → Capability → Acquisition Flow (NOT Phase 2)
+
+以下流程定义了 Agent Session 最终的数据通路，但 Phase 2 不实现。以虚线表示。
+
+```
+··User prompt··············································
+    │
+    ▼
+··HermesAgent (future integration)·························
+    │
+    ├── intent.resolved
+    ├── capability.selected → CapabilityRegistry
+    ├── data.requested
+    │       │
+    │       ▼
+    ├── Runtime Kernel → CDP acquisition → Evidence Store
+    │
+    └── response.ready → Agent Session renders
+```
+
+Phase 2 仅定义此 flow 的 UI state contract（Section 5.4），不规定 HermesAgent 内部如何完成这条链路。
+
+### 8.3 Workspace Does NOT Know About Acquisition Implementation
 
 ```
 Workspace sees:                  Workspace does NOT see:
@@ -632,14 +630,16 @@ Evidence Viewer ──→ Capability Explorer
 
 - 扩展现有 agentFabric Workspace（`workspace/index.html` + `app.js` + `styles.css`），而非建立独立 Dashboard
 - Agent Session 成为 Workspace 的核心工作视图（默认首页）
+- Agent Session 定义完整的 UI state contract：message types、Agent Activity event slots、input area、integration boundary
+- Agent Session 明确标记 HermesAgent integration 尚未接通的状态，不伪造 Agent 活动
 - Capability Explorer 消费现有 Capability Contract（`generated/capability-contract.json`），展示业务语义
 - Capability Detail 展示单个 capability 的 intent、inputs、outputs、provider、validation
 - Evidence Viewer 建立 Capability → Platform Page → CDP Capture → Raw Response → Semantic Mapping → Metrics 的 provenance 视图
-- Agent Session 支持展示 Runtime 明确发出的 observable event（session start、capability selected、acquisition completed、response ready、error）
-- 如果当前 HermesAgent integration 尚未提供 task/acquisition events：UI 只定义 state interface，不填充伪造数据
+- 新增 API 端点：`GET /api/capabilities`（Capability Contract 读取）、`GET /api/evidence/:id`（Evidence 详情）
 - 保留现有 Workspace 的全部已有功能（Inbox / Growth / Risk / Review / Product / Trend / Archive / Memory / Runtime / Config）
 - 重新组织导航关系：AGENT section 置顶，CAPABILITY section 新增，其他 section 保留
 - 为未来 Skill / Memory evolution 保留入口，但 Phase 2 不实现
+- **Phase 2 = Workspace UI only。HermesAgent 接通属于 Phase 3。**
 
 ---
 
@@ -663,17 +663,25 @@ Evidence Viewer ──→ Capability Explorer
 
 ## 12. Acceptance Criteria
 
+### Phase 2 — Workspace UI (THIS PHASE)
+
 - [ ] Agent Session 是 Workspace 默认首页
-- [ ] Agent Session 可接受自然语言输入，展示 Agent 返回的响应
-- [ ] Agent 响应中包含 Capability badge（点击进入 Capability Detail）
-- [ ] Agent 响应中的数据声明包含 Evidence link（点击进入 Evidence Viewer）
-- [ ] Capability Explorer 展示全部 11 个 capabilities，以业务语义呈现
-- [ ] Capability Detail 展示单个 capability 的 intent/metrics/provider/validation
+- [ ] Agent Session 定义完整的 UI state contract：message types、Agent Activity event slots、input area
+- [ ] Agent Session 展示 "Runtime integration unavailable — HermesAgent events not connected"（不伪造 Agent 活动）
+- [ ] Sidebar 新增 AGENT section（顶部，含 Agent Session 入口）
+- [ ] Capability Explorer 展示全部 11 个 capabilities，以业务语义呈现（intent / metrics / provider / validation）
+- [ ] Capability Detail 展示单个 capability 的完整业务语义
+- [ ] Sidebar 新增 CAPABILITY section（含 Capability Explorer + Evidence Viewer 入口）
 - [ ] Evidence Viewer 展示完整的 provenance 链（capability → page → capture → raw → mapping → metrics）
 - [ ] Provenance 链的每一层可按需展开
-- [ ] Sidebar 新增 AGENT（顶部）和 CAPABILITY（第二）两个 section
-- [ ] 现有一切视图完整保留，功能不受影响
-- [ ] 如果 Runtime 不发出 task event，Agent Session 不展示伪造的中间状态
+- [ ] 现有一切视图（Inbox / Growth / Risk / Review / Product / Trend / Archive / Memory / Runtime / Config）完整保留，功能不受影响
+
+### NOT in Phase 2 — Requires HermesAgent Integration (deferred)
+
+- ⬜ Agent Session 接受自然语言输入并返回 Agent 响应
+- ⬜ Agent 响应中包含真实的 Capability badge
+- ⬜ Agent 响应中的数据声明包含 Evidence link
+- ⬜ Agent Activity 区域展示真实的 intent.resolved / capability.selected / data.requested 事件
 
 ---
 
@@ -684,5 +692,6 @@ Evidence Viewer ──→ Capability Explorer
 | `apps/ecommerce/workspace/index.html` | **Modify** | Add: Agent Session container, Capability Explorer container, Evidence Viewer container. Keep: all existing view containers |
 | `apps/ecommerce/workspace/styles.css` | **Modify** | Add: `.session-message`, `.capability-card`, `.provenance-chain`, `.evidence-timeline` styles. Keep: all existing styles |
 | `apps/ecommerce/workspace/app.js` | **Modify** | Add: `AgentSession`, `CapabilityExplorer`, `EvidenceViewer` modules. Modify: sidebar nav (add AGENT + CAPABILITY sections). Keep: all existing modules |
-| `platform/server/routes/runtime.ts` | **Modify** | Add: `POST /api/runtime/chat`, `GET /api/evidence/:id`, `GET /api/capabilities` |
+| `platform/server/routes/runtime.ts` | **Modify** | Add: `GET /api/evidence/:id`, `GET /api/capabilities` |
+| `platform/server/routes/runtime.ts` | **NOT in Phase 2** | `POST /api/runtime/chat` — requires HermesAgent integration (Phase 3) |
 | All other files | **Keep** | No changes |
