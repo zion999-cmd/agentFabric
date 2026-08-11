@@ -1,5 +1,44 @@
 # 交接文档
 
+## 本次会话 (2026-08-11) — Phase 2 Workspace + Proposal Taxonomy
+
+### 做了什么
+
+完成 P0006.5.3 Capability Contract 后，实现 Phase 2 Agent Cognitive Workspace（Human ↔ Agent ↔ Capability ↔ Evidence），并规范化 proposals/ 目录命名体系。
+
+### Phase 2 Workspace UI 实施
+
+- **Agent Session**（主视图）: UI state contract 定义，5 个 observable event slots，"Runtime integration unavailable" 状态（Phase 3 接 HermesAgent）
+- **Capability Explorer**: GET /api/capabilities → domain filter + intent search + capability cards（11 capabilities, 48 metrics, 8 domains）+ detail view
+- **Evidence Viewer**: GET /api/evidence/:capabilityId → provenance chain（capability → discovery artifacts → evidence records → timeline）
+- **Sidebar**: AGENT section（顶部）+ CAPABILITY section（新增），现有视图完整保留
+- **Boot**: Agent Session 为默认首页
+- **JS**: loadAgentSession / loadCapabilityExplorer / loadEvidenceViewer 三个 loader 实现
+- **审计**: Phase-2-Implementation-Audit.md — 初始发现 3 个 undefined loader + 2 个 bug，全部修复
+- **Tag**: v0.2-phase2-workspace
+- **测试**: 412/413 pass（1 pre-existing coverage threshold）
+- **事故防控**: 零 CBP/bridge 污染，零 Hermes 认知伪造，零 Phase 3 越界
+
+### Proposal 命名规范化
+
+- 17 个文件重命名：PascalCase→kebab-case，修复 typo（"Capalibity"→"capability"），修复截断（"Integrat"→"integration"），下划线→连字符，移除特殊字符（&）
+- 1 个死链修复：`P0002-workspace-information-architecture.md` → `P0002-workspace-information-architecture.md`
+- 创建 `proposals/README.md` — taxonomy, naming convention, examples, next available P numbers
+- 更新 `context/decisions.md`（ADR-019: Proposal 命名规范）+ cross-reference 更新
+- 更新 `context/current_state.md`（版本 v0.2-phase2-workspace, 新增完成项）
+
+### 命名规则
+
+- Architecture Proposal: `P{NNNN}[-{N}]-{kebab-case-description}.md`
+- Feature/Phase Proposal: `{module}-v{version}-phase{N}-{description}.md`
+- 全小写 kebab-case，只用连字符，不用下划线/特殊字符/PascalCase
+
+### 下一步
+
+Phase 3: HermesAgent Integration — 接通 POST /api/runtime/chat + 将 Agent Session 从 static shell 升级为实时 Agent 交互。
+
+---
+
 ## 本次会话 (2026-08-09) — P0006.2 Real Data Replay Verification
 
 ### 做了什么（一句话）

@@ -143,7 +143,7 @@ Layer 2: Observation (Instance) — 每次采集产生
   - 生成物输出到 `generated/`（5 个 JSON 文件），Connector 可选择消费
   - Coverage Report：Discovery 70 APIs vs Connector 3 APIs → 4% API 覆盖率，诚实暴露差距
   - 关键原则：Generator 不负责发现（discovery 做），不负责采集（connector 做）。只负责把 Discovery Assets 转换成 Connector Blueprint。
-- **原因**: 见 [P0005.3](proposals/P0005.3-Discovery-Capability-Generator.md)。hand-written 的 manifest.ts 和 indicator-map.ts 需要被 auto-generated 的 blueprint 替代。新增平台只需 re-run Discovery → Generator → Connector。
+- **原因**: 见 [P0005.3](proposals/P0005.3-discovery-capability-generator.md)。hand-written 的 manifest.ts 和 indicator-map.ts 需要被 auto-generated 的 blueprint 替代。新增平台只需 re-run Discovery → Generator → Connector。
 
 ## ADR-000: 项目初始化
 - **日期**: 2026-06-26
@@ -222,7 +222,7 @@ Layer 2: Observation (Instance) — 每次采集产生
 - **日期**: 2026-06-27
 - **状态**: Accepted
 - **决策**: 三个目录重命名，反映业务语言而非工程语言
-- **原因**: 见 [P0002](proposals/P0002-workspace-redesign.md)。dashboard 只是 workspace 中的 widget；connectors 不只是 collectors（还有 ERP、Webhook、MCP）；orchestrator 编排整个业务循环而非"组合"几个 domain。
+- **原因**: 见 [P0002](proposals/P0002-workspace-information-architecture.md)。dashboard 只是 workspace 中的 widget；connectors 不只是 collectors（还有 ERP、Webhook、MCP）；orchestrator 编排整个业务循环而非"组合"几个 domain。
 
 ## ADR-012: 项目记忆系统（Four-layer Context）
 - **日期**: 2026-06-27
@@ -234,13 +234,13 @@ Layer 2: Observation (Instance) — 每次采集产生
 - **日期**: 2026-06-27
 - **状态**: Accepted
 - **决策**: Workspace 从 V1 (agentCMS 复刻) 升级为 V2 Trust Decision Stack。右侧面板从 Explain/Reason/Trace 升级为 7 层信任决策栈 (Confidence→Evidence→Reasoning→Skills→Execution→Validation)。Inbox Card 增加 Impact Score、Confidence、Approve/Reject/Modify 行动按钮。侧边栏 IA 对齐 P0002 (Inbox/Discover → Reviews → Skills/Experience → Validation/Reports → Settings)。
-- **原因**: 见 [P0002](proposals/P0002-workspace-information-architecture.md) + [P0003](proposals/P0003-Trust-UI-System.md)。Workspace 不是 Dashboard — 是 Human↔AI Business Decision Operating System。核心原则: Trust is product, not feature。
+- **原因**: 见 [P0002](proposals/P0002-workspace-information-architecture.md) + [P0003](proposals/P0003-trust-ui-system.md)。Workspace 不是 Dashboard — 是 Human↔AI Business Decision Operating System。核心原则: Trust is product, not feature。
 
 ## ADR-014: UI Fix & Trace Panel (P0003.1)
 - **日期**: 2026-06-27
 - **状态**: Accepted
 - **决策**: (1) 侧边栏恢复至 V1 agentCMS 稳定结构，全 i18n，移除 P0003 实验性分类。(2) 右侧面板从 Trust Decision Stack 重构为 Agent Transparency / Trace Panel——Operator 模式显示 Decision Summary + Data Sources + Execution Status，Builder 模式展开完整 trace（Skills Triggered、MCP/Tool Calls、Memory Influence、Execution Steps、Result Validation），默认折叠。(3) 中间 Workspace 保持不变。
-- **原因**: 见 [P0003.1](proposals/P0003.1-UI-Fix-&-Right-Panel-Redesign.md)。三栏职责分离清晰：Sidebar = Navigation, Workspace = Execution, Right Panel = Agent Trace。不允许 Sidebar 承担 AI 逻辑、Right Panel 做统计 Dashboard。
+- **原因**: 见 [P0003.1](proposals/P0003.1-ui-fix-right-panel-redesign.md)。三栏职责分离清晰：Sidebar = Navigation, Workspace = Execution, Right Panel = Agent Trace。不允许 Sidebar 承担 AI 逻辑、Right Panel 做统计 Dashboard。
 
 ## ADR-017: JD Business Data Connector (P0005.1)
 - **日期**: 2026-06-30
@@ -251,7 +251,7 @@ Layer 2: Observation (Instance) — 每次采集产生
   - JD Acquisition: 双模式 — Mock (开发/测试/CI) + CDP/Playwright (生产, 复用 Chrome session)
   - CLI: `cli collect jd <shopId> [--mock true|false] [--days N]` 完整可运行
   - 目录结构遵循 P0005: acquisition/ parsers/ evidence/ normalizers/ manifest.ts
-- **原因**: 见 [P0005](proposals/P0005-Business-Data-Foundation.md) + [P0005.1](proposals/P0005.1-jd-connector.md)。京东商智是第一个完整验证 P0005 管线的 connector。Mock 模式默认开启，零外部依赖即可开发。
+- **原因**: 见 [P0005](proposals/P0005-business-data-foundation.md) + [P0005.1](proposals/P0005.1-jd-connector.md)。京东商智是第一个完整验证 P0005 管线的 connector。Mock 模式默认开启，零外部依赖即可开发。
 
 ## ADR-016: Runtime Control Plane (P0004)
 - **日期**: 2026-06-29
@@ -301,7 +301,7 @@ Layer 2: Observation (Instance) — 每次采集产生
   - 所有 Business Context 候选必须有对应的真实 API 字段作为证据（context→based_on_fields）
   - Context Detection Rules (`CONTEXT_DETECTION_RULES`) 是 field-pattern→context 映射的单一可信源
   - 新增平台时，Skill/Decision/Experience/Review 全部无需修改 — Context 由 Discovery 自动生成
-- **原因**: 见 [P0005.2](proposals/P0005.2-Discovery-Driven-Connector-Architecture.md)。基于页面名称的推测不可靠。只有真实 API 响应字段才能验证"这个平台能提供什么数据"。这是平台无关性的基础 — 每个新平台只需运行 Discovery，Context 自动生成。
+- **原因**: 见 [P0005.2](proposals/P0005.2-discovery-driven-connector-architecture.md)。基于页面名称的推测不可靠。只有真实 API 响应字段才能验证"这个平台能提供什么数据"。这是平台无关性的基础 — 每个新平台只需运行 Discovery，Context 自动生成。
 
 ## ADR-026: JD Persistence Layer — Data → SQLite Bridge (2026-07-12)
 
@@ -344,3 +344,18 @@ Layer 2: Observation (Instance) — 每次采集产生
 - **符合规范**: CLAUDE.md 规定 "No `any` — use `unknown` and narrow"
 
 - **原因**: 采集的数据需要持久化到 SQLite 供后续分析使用。这是 P0005.1 (Connector) 和 P0005.5 (Kernel) 之后的数据持久化层补充。
+
+## ADR-019: Proposal 命名规范
+
+- **日期**: 2026-08-11
+- **状态**: Accepted
+- **决策**: 统一 proposal 文件命名规范。详见 `proposals/README.md`。
+
+规则：
+1. Architecture Proposal: `P{NNNN}[-{N}]-{kebab-case-description}.md`
+2. Feature/Phase Proposal: `{module}-v{version}-phase{N}-{description}.md`
+3. Expansion Layer: `P000x.N` 保留前缀
+4. 全小写 kebab-case，只用连字符，不用下划线/特殊字符/PascalCase
+5. 描述必须完整，不截断
+
+本次规范化：17 个文件重命名（修复 PascalCase、typo、下划线、特殊字符、截断描述）。
