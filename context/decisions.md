@@ -384,6 +384,21 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 
 **意义**: UI 观察行为，不读取内部思维。不暴露模型 Chain-of-Thought。
 
+## ADR-021: Phase 3.1 Runtime Kernel Contract
+
+- **日期**: 2026-08-11
+- **状态**: Accepted
+- **来源**: [docs/runtime-kernel-contract.md](../docs/runtime-kernel-contract.md)
+
+**决策**: 建立 Agent Runtime 与 Runtime Kernel 之间的标准化 ExecutionRequest/ExecutionEvent 协议。
+
+- `ExecutionRequest`: Agent 发送 { taskId, capability, inputs, context } — Kernel 决定 HOW 执行
+- `ExecutionEvent`: Kernel 发出 7 种可观察事件（execution.started → execution.completed/failed）
+- Contract 是 Agent-agnostic 的 — 任何 Agent Runtime 都可用
+- 事件描述执行状态，不描述模型思维（无 thinking/reasoning/chain-of-thought）
+- 与 Capability Contract 的关系: Contract 定义 WHAT; Execution Contract 定义 HOW TO REQUEST
+- 文件: `shared/schemas/execution.ts` + `tests/contract/execution.contract.ts` (20 tests)
+
 ### 决策 4: Runtime Chat 是异步 Task 模型
 
 `POST /api/runtime/chat` 不是同步 Chat API——是异步 task 模型 + SSE 事件流。因为 CDP 采集需要 10-30 秒，Agent 执行是过程不是同步问答。

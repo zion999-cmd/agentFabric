@@ -1,9 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-phase2-workspace | **Hermes**: v0.18.0 | **测试**: 412/413 passed | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-phase3.1-contract | **Hermes**: v0.18.0 | **测试**: 432/433 passed | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
 
 ## 已完成
 
+- [x] **Phase 3.1 Runtime Kernel Contract** — ExecutionRequest + ExecutionEvent Zod schemas, 7 event types, Agent-agnostic contract. 20 contract tests. ADR-021. 无 Hermes/CDP/UI 修改.
 - [x] **Phase 3 HermesAgent Integration Proposal** — workspace-v0.2-phase3-hermes-integration.md. 四个核心设计: (1) HermesAgent → CapabilityRegistry.searchByIntent() 能力选择, (2) Runtime Kernel 作为共享 Capability Execution Layer, (3) Observable Event Model 8 种事件类型, (4) POST /api/runtime/chat 异步 task 模型 + SSE 事件流. NOT Included: HermesAgent 内部实现, Skill/Memory 系统, MCP, 多轮对话.
 - [x] **Phase 2 Agent Cognitive Workspace** — Human ↔ Agent ↔ Capability ↔ Evidence. Agent Session (主视图, UI state contract, Phase 3 接 HermesAgent), Capability Explorer (11 capabilities, domain filter, intent search), Evidence Viewer (provenance chain + evidence timeline). GET /api/capabilities, GET /api/evidence/:id. JS loaders 实现. 测试 412/413 pass. Tag: v0.2-phase2-workspace. 无 CBP 污染. ADR-030
 - [x] **P0006.5.3 Capability Contract** — Schema (intent/inputs/outputs/provider), Generator (11 capabilities, 48 metrics, 8 domains), Registry (searchByIntent, findByMetric, findByDomain), CLI (generate-contract, describe-capability). Contract Artifact: generated/capability-contract.json. ADR-029

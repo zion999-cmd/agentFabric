@@ -1,5 +1,22 @@
 # 交接文档
 
+## 本次会话 (2026-08-11) — Phase 2 Workspace + Proposal Taxonomy + Phase 3 Design + Phase 3.1
+
+### Phase 3.1 Runtime Kernel Contract
+
+- **文件**: `shared/schemas/execution.ts` + `tests/contract/execution.contract.ts` + `docs/runtime-kernel-contract.md`
+- **范围**: 纯 Contract — 无 Hermes/CDP/UI 修改
+- **内容**:
+  - `ExecutionRequest`: { taskId, capability, inputs, context } — Agent 请求 Kernel 执行
+  - `ExecutionEvent`: 7 种事件类型 (execution.started → execution.failed)
+  - 20 contract validation tests — 全部通过
+  - 事件描述执行状态，不描述模型思维 (无 thinking/reasoning)
+  - Contract 是 Agent-agnostic — 任何 Agent Runtime 都可用
+- **与 Capability Contract 关系**: Contract 定义 WHAT; Execution Contract 定义 HOW TO REQUEST
+- **下一步**: Phase 3.2 Hermes Capability Discovery (searchByIntent bridge)
+
+---
+
 ## 本次会话 (2026-08-11) — Phase 2 Workspace + Proposal Taxonomy + Phase 3 Design
 
 ### 做了什么
