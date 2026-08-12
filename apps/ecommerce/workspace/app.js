@@ -856,11 +856,10 @@ async function loadSituationFeed(filter) {
     });
     list.innerHTML = html || '<p class="muted placeholder">当前过滤器下无 Situation。</p>';
 
-    // Click → detail (load data first, then switch view)
+    // Click → detail (switch immediately → show "加载中", then load data)
     list.querySelectorAll('.situation-card').forEach(function(card) {
-      card.addEventListener('click', async function() {
-        var sid = card.dataset.situationId;
-        await loadSituationDetail(sid);
+      card.addEventListener('click', function() {
+        currentSituationId = card.dataset.situationId;
         switchView('situationDetail');
       });
     });
