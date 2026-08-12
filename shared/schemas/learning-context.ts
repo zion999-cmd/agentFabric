@@ -161,6 +161,8 @@ export const HumanInterventionSchema = z.object({
   reviewId: z.string().optional(),
   /** If this intervention led to an action */
   actionId: z.string().optional(),
+  /** Which agent activities this intervention responds to (if any) */
+  respondsToActivityIds: z.array(z.string()).default([]),
 });
 export type HumanIntervention = z.infer<typeof HumanInterventionSchema>;
 
@@ -208,8 +210,14 @@ export type ActionRef = z.infer<typeof ActionRefSchema>;
 export const OutcomeRefSchema = z.object({
   /** Unique outcome ID */
   outcomeId: z.string().min(1),
-  /** The action this outcome follows */
-  actionId: z.string(),
+  /**
+   * Actions that preceded this outcome observation.
+   * Plural + "related" — NOT singular + "causedBy".
+   * agentFabric records temporal association, not causation.
+   * Example: three actions (换主图, 降价, 增加投放) all precede CTR+8%.
+   * The Contract records that all three are related; Runtime infers causality.
+   */
+  relatedActionIds: z.array(z.string()).default([]),
   /** When the outcome was observed */
   observedAt: IsoDateString,
   /** Evidence produced by outcome observation (source of truth) */

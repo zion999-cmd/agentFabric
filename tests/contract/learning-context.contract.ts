@@ -136,7 +136,7 @@ describe('LearningContext — mature lifecycle', () => {
     }];
     ctx.outcomes = [{
       outcomeId: 'out_001',
-      actionId: 'act_001',
+      relatedActionIds: ['act_001'],
       observedAt: '2026-08-19T00:00:00Z',
       summary: 'GMV +54%, orders +150% after price adjustment',
     }];
@@ -232,6 +232,65 @@ describe('HumanIntervention — minimal reference (P0007.1)', () => {
   });
 });
 
+describe('HumanIntervention — respondsToActivityIds (Case C)', () => {
+  it('can reference which agent activity the human is responding to', () => {
+    const intervention = {
+      interventionId: 'int_c_rejection',
+      actor: { id: 'u1', role: 'operator' },
+      type: 'reject',
+      timestamp: '2026-08-12T00:00:00Z',
+      summary: 'Rejected agent recommendation — traffic drop is seasonal, not channel issue',
+      respondsToActivityIds: ['act_agent_recommendation_001'],
+    };
+    const result = HumanInterventionSchema.safeParse(intervention);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.respondsToActivityIds).toEqual(['act_agent_recommendation_001']);
+    }
+  });
+
+  it('respondsToActivityIds defaults to empty when not specified', () => {
+    const intervention = {
+      interventionId: 'int_no_ref',
+      actor: { id: 'u1', role: 'operator' },
+      type: 'annotation',
+      timestamp: '2026-08-12T00:00:00Z',
+      summary: 'General note',
+    };
+    const result = HumanInterventionSchema.parse(intervention);
+    expect(result.respondsToActivityIds).toEqual([]);
+  });
+});
+
+describe('Outcome — relatedActionIds (Case D)', () => {
+  it('records multiple actions without implying causality', () => {
+    // Reality: 换主图 + 降价 + 增加投放 all happened, then CTR+8%.
+    // Contract records all three as related — does NOT pick a single cause.
+    const outcome = {
+      outcomeId: 'out_multi_action',
+      relatedActionIds: ['act_banner_change', 'act_price_drop', 'act_ad_increase'],
+      observedAt: '2026-08-19T00:00:00Z',
+      summary: 'CTR +8% after combined changes',
+    };
+    const result = OutcomeRefSchema.safeParse(outcome);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.relatedActionIds).toHaveLength(3);
+    }
+  });
+
+  it('can have zero related actions (outcome from external factors)', () => {
+    const outcome = {
+      outcomeId: 'out_external',
+      relatedActionIds: [],
+      observedAt: '2026-08-19T00:00:00Z',
+      summary: 'Market-wide traffic increase — no actions taken by shop',
+    };
+    const result = OutcomeRefSchema.safeParse(outcome);
+    expect(result.success).toBe(true);
+  });
+});
+
 describe('LearningContext — incremental enrichment', () => {
   it('can start open then add intervention (partial) then outcome (mature)', () => {
     const ctx = buildMinimalContext();
@@ -247,7 +306,7 @@ describe('LearningContext — incremental enrichment', () => {
       actionId: 'a1', type: 'price_change', actor: { type: 'human' as const },
       timestamp: '2026-08-12T00:00:00Z', description: 'test',
     }], outcomes: [{
-      outcomeId: 'o1', actionId: 'a1',
+      outcomeId: 'o1', relatedActionIds: ['a1'],
       observedAt: '2026-08-19T00:00:00Z',
     }]};
     expect(determineLifecycle(withOutcome)).toBe('mature');
