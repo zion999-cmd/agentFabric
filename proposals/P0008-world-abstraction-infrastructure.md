@@ -712,9 +712,9 @@ P0008 不修改 P0007 Learning Context ownership。
 
 # 12. Proposed Phases
 
-## P0008.1 — World Model Contract + JD Validation
+## P0008.1 — Contract Archaeology & Gap Map  ✅ Complete
 
-从三组已有资产反推 Contract：
+检查三组已有资产，反推 World primitive 需求：
 
 ```text
 discovery/
@@ -722,13 +722,23 @@ data/jd_shangzhi_features/
 WorldExplorationTask/
 ```
 
-建立最小 World Model。
-
-不新增探索。
+输出 Gap Map（见 `P0008.1-world-model-gap-map.md`）。已确定收敛模型：6 个 World Objects + Assertion Graph。
 
 ---
 
-## P0008.2 — World Query + Capability Binding
+## P0008.2 — World Model Contract  ← NEXT
+
+基于 P0008.1 Gap Map，定义：
+
+- World Primitive（System / Surface / Feature-Affordance / Metric / Dimension / Constraint）
+- World Assertion（subject → predicate → object + epistemicStatus + evidenceRefs）
+- External Binding（World → CapabilityRegistry）
+
+建立最小 JD World Model。不新增探索。
+
+---
+
+## P0008.3 — World Query & Capability Binding
 
 实现：
 
@@ -746,7 +756,7 @@ Evidence
 
 ---
 
-## P0008.3 — Bootstrap Context
+## P0008.4 — Agent Bootstrap Context
 
 定义 Runtime-neutral Bootstrap Context。
 
@@ -756,7 +766,7 @@ Evidence
 
 ---
 
-## P0008.4 — Blank Runtime E2E
+## P0008.5 — Blank Runtime E2E
 
 启动没有：
 
@@ -780,7 +790,7 @@ Capability Registry
 
 ---
 
-## P0008.5 — Explorer Artifact Protocol
+## P0008.6 — Explorer Artifact Protocol
 
 基于 Claude 历史探索 + Hermes 实验，正式定义：
 
@@ -790,7 +800,7 @@ Capability Registry
 
 ---
 
-## P0008.6 — Second-System Validation
+## P0008.7 — Second-System Validation
 
 选择一个真实第二系统：
 
