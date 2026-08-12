@@ -8,3 +8,4 @@ export * from './collector.js';
 export * from './ecommerce.js';
 export * from './execution.js';
 export * from './learning-context.js';
+export * from './world-model.js';
