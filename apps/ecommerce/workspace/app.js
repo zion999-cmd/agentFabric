@@ -856,10 +856,11 @@ async function loadSituationFeed(filter) {
     });
     list.innerHTML = html || '<p class="muted placeholder">当前过滤器下无 Situation。</p>';
 
-    // Click → detail
+    // Click → detail (load data first, then switch view)
     list.querySelectorAll('.situation-card').forEach(function(card) {
-      card.addEventListener('click', function() {
-        loadSituationDetail(card.dataset.situationId);
+      card.addEventListener('click', async function() {
+        var sid = card.dataset.situationId;
+        await loadSituationDetail(sid);
         switchView('situationDetail');
       });
     });
@@ -882,8 +883,13 @@ function updateSituationBadges(counts) {
 }
 
 // ═══ P0007.3 Situation Detail + Interaction ══════════════
+var currentSituationId = null; // track which situation is in the detail view
+
 async function loadSituationDetail(situationId) {
+  // If called without ID (e.g. from switchView), use the last loaded situation
+  if (!situationId) situationId = currentSituationId;
   if (!situationId) return;
+  currentSituationId = situationId;
   var content = document.getElementById('situationDetailContent');
   var badge = document.getElementById('situationLifecycleBadge');
   content.innerHTML = '<p class="muted placeholder">加载中...</p>';
@@ -918,7 +924,7 @@ async function loadSituationDetail(situationId) {
     html += '<h3 class="situation-layer-title">🤖 Agent 怎么理解</h3>';
     html += '<div class="situation-layer-body">';
     html += '<p class="muted">Agent 分析: ' + escHtml(desc) + '</p>';
-    html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');loadEvidenceViewer()">[查看 Evidence →]</p>';
+    html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\')">[查看 Evidence →]</p>';
     html += '</div></div>';
 
     // Layer 3: Agent 建议什么
@@ -1654,6 +1660,10 @@ function toggleTraceExpand() {
 }
 
 // ═══ Event Bindings ══════════════════════════════════════
+// P0007.3: Situation detail back button
+document.getElementById('situationBackBtn')?.addEventListener('click', () => {
+  switchView('situations', state.activeFilter || 'all');
+});
 document.getElementById('langToggle')?.addEventListener('change', (e) => {
   currentLang = e.target.value;
   localStorage.setItem('agentfabric-lang', currentLang);
