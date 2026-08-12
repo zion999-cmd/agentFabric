@@ -961,7 +961,7 @@ async function loadSituationDetail(situationId) {
     // Layer 5: Situation Chat (collapsed)
     html += '<div class="situation-chat" style="margin-top:20px">';
     html += '<details><summary style="cursor:pointer;font-size:0.85rem;font-weight:600">💬 追问 Agent (关于这个 Situation)</summary>';
-    html += '<div style="margin-top:12px"><p class="muted" style="font-size:0.78rem">Chat 功能将在 HermesAgent 接通后启用。</p></div>';
+    html += '<div style="margin-top:12px"><p class="muted" style="font-size:0.78rem"><span class="unimplemented-badge" style="margin-left:0">未实现</span> Chat 功能将在 HermesAgent 接通后启用。</p></div>';
     html += '</details></div>';
 
     html += '</div>'; // end detail body

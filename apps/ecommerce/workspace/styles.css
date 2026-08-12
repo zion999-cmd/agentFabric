@@ -565,6 +565,9 @@ ul, ol { list-style: none; }
 .intervention-record-summary { flex: 1; min-width: 0; }
 .intervention-record-time { color: var(--muted); font-size: 0.68rem; flex-shrink: 0; }
 
+/* ── Unimplemented badge ────────────────────────────────── */
+.unimplemented-badge { font-size: 0.66rem; padding: 2px 10px; border-radius: 10px; font-weight: 600; background: #fef2f2; color: #dc2626; margin-left: 10px; vertical-align: middle; }
+
 /* ── Situation Chat ─────────────────────────────────────── */
 .situation-chat { padding: 12px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); }
 .situation-chat details summary { color: var(--text); }
