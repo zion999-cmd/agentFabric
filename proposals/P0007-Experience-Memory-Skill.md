@@ -249,52 +249,38 @@ Review ≠ Intervention ≠ Action ≠ Execution ≠ Outcome
 Architecture
                          REAL WORLD
                              │
-                    World Interfaces
-                             │
+                      World Interface
+                             ↓
                         Observation
+                             ↓
+                   Evidence / Signal
+                             ↓
+                     Situation / Case
                              │
-                          Evidence
+                  Agent Interpretation
                              │
-                    Agent Interpretation
+                      Recommendation
                              │
-                       Agent Proposal
-                             │
-                 ┌───────────┴───────────┐
-                 │                       │
-              Agent                  Professional
-            Execution               Intervention
-                 │                       │
-                 │                  Decision
-                 │                  Correction
-                 │                  Annotation
-                 │                  Action Intent
-                 │                       │
-                 └───────────┬───────────┘
-                             │
-                           Action
-                             │
-                     Action Execution
-                             │
-                       World Change
-                             │
-                    Outcome Observation
-                             │
-                        Evaluation
-                             │
-                    Learning Context
+                  ┌──────────┴──────────┐
+                  │   DOMAIN WORKSPACE  │
+                  │                     │
+                  │ Human Intervention  │
+                  │ Action Intent       │
+                  └──────────┬──────────┘
+                             ↓
+                   Professional Action
+                             ↓
+                      World Change
+                             ↓
+                   Outcome Observation
+                             ↓
+                      Learning Context
                              │
 ════════════════════ Runtime Boundary ════════════════════
                              │
-                      HermesAgent /
-                      Other Runtime
+                           Hermes
                              │
-                  periodic reflection
-                             │
-                  Experience extraction
-                             │
-                           Memory
-                             │
-                           Skill
+                     Memory → Skill
                              │
                      Behavior Change
                              │
@@ -631,13 +617,27 @@ agentFabric 不规定 Runtime：
 什么值得成为 Skill
 Skill 的文件格式
 Skill 如何 inject
+Design Principles
+
+Domain Workspace is the primary human interface of Learning Context Formation.
+
+The primary Workspace object is a Situation/Case, not a chat message or an Agent output.
+
 Sub-Proposals
 
 P0007 采用逐层验证，而不是一次实现全部架构。
 
 P0007.1 — Learning Context Contract
 
-定义 runtime-neutral Learning Context。
+定义整个 P0007 的核心数据契约。
+
+核心概念：
+
+Situation / Case
+      ↓
+Learning Context
+
+Situation/Case 是一次真实业务情境的锚点。Observation、Evidence、Signal、Agent Proposal、Human Intervention、Action、Outcome 都围绕它关联。
 
 验证：
 
@@ -647,87 +647,100 @@ P0007.1 — Learning Context Contract
 
 P0007.2 — Human Intervention & Action Grammar
 
-建立：
+建立语义模型，明确区分：
 
-Decision
-Correction
-Annotation
-Context Supplement
-Action Intent
+Human Intervention
+├── Decision
+├── Correction
+├── Annotation
+├── Context Supplement
+└── Action Intent
+
 Professional Action
+      ↓
 Action Execution
+      ↓
+World Change
 
-并使用多个垂直领域案例验证 Grammar。
+不使用 approve/reject/modify 作为完整专业行为模型。
 
-重点解决“系统不知道全部 Action Vocabulary”问题。
+并使用多个垂直领域案例验证 Grammar。重点解决”系统不知道全部 Action Vocabulary”问题。
 
-P0007.3 — Outcome Observation
+P0007.3 — Domain Workspace & Interaction Surface
 
-建立：
+定义专业人员在哪里与 agentFabric 工作。
 
-Action
- ↓
-Observation Window
- ↓
-World Re-acquisition
- ↓
-Outcome
+核心对象不是 Chat，也不是 Agent Output，而是 Situation：
 
-优先验证电商真实数据闭环。
+              Situation
+
+Observation / Evidence / Signal
+              ↓
+      Agent Interpretation
+              ↓
+        Recommendation
+              ↓
+════════ Domain Workspace ════════
+              ↕
+      Human Intervention
+              ↓
+      Professional Action
+              ↓
+        Learning Context
+
+Dynamic Interaction Surface（原来的 7.5）是 Domain Workspace 内部的能力：Context Gap → Interaction Definition → Generic Renderer → Professional Input → Learning Context enriched。
+
+第一阶段可以有固定 Workspace shell + schema-driven interaction。Dynamic Surface 是 Workspace 的能力，不是 Workspace 本身。
+
+P0007.4 — Outcome Observation
+
+Situation → Professional Action → World Change → T+n Re-observation → Outcome → Learning Context enrichment。
+
+优先验证 JD Capability 自动重新观察闭环（traffic/CTR/CVR/GMV/margin），不要求运营人员手填”效果怎么样”。
 
 不做因果推断引擎。
 
-P0007.4 — Provenance & Trust
+P0007.5 — Provenance & Trust
 
-把现有 Execution Events 延伸到：
+把现有 Execution Events 延伸到 Observation / Evidence / Agent Activity / Human Intervention / Action / Outcome / Evaluation 全链路。
 
-Observation
-Evidence
-Agent Activity
-Human Intervention
-Action
-Outcome
-Evaluation
+Trust 两个维度明确区分：
 
-同时建立 Execution Reliability 所需的事实模型。
+Trust
+├── Verifiability Trust
+│   └── 它到底看到了什么、做了什么、结果如何
+│       (Evidence, Provenance, Action records, Outcome records,
+│        immutable observable events)
+│
+└── Execution Reliability Trust
+    └── 它是否能稳定完成 Stage / Task / Goal
+        (task completion, stage completion, failure/recovery,
+         human takeover, repeated retry, long-horizon drift,
+         outcome success)
 
-P0007.5 — Dynamic Interaction Surface
+Domain Workspace 消费这些事实来展示 Trust，但 Workspace 不生产 Provenance。
 
-验证：
-
-Context Gap
- ↓
-Interaction Definition
- ↓
-Generic Renderer
- ↓
-Professional Input
- ↓
-Learning Context
-
-重点验证 UI 能否随领域 Vocabulary 增长，而不要求程序员为每个 Action 重写页面。
+Trust 可以是 capability / task / domain scoped，不压缩成单一全局分数。
 
 P0007.6 — Hermes Learning Loop Validation
 
 第一次完整验证：
 
-Real World
- ↓
-agentFabric
- ↓
-Learning Context
- ↓
+Situation
+    ↓
+完整 Learning Context
+    ↓
 Hermes
- ↓
-Reflection / Learn
- ↓
+    ↓
+Reflection
+    ↓
 Memory
- ↓
+    ↓
 Skill
 
 只观察 Hermes 是否能够从 Learning Context 中形成有价值的 Memory / Skill。
 
-不修改 Hermes 内部学习算法。
+不修改 Hermes Memory / Reflection / Skill 机制。不复制 Hermes /learn、Memory、Curator 等能力。
 
 Boundaries
 Included
@@ -806,12 +819,12 @@ tests/
     └── experience/
 
 proposals/
-├── P0007-experience-memory-skill.md
+├── P0007-Experience-Memory-Skill.md
 ├── P0007.1-learning-context-contract.md
 ├── P0007.2-human-intervention-action-grammar.md
-├── P0007.3-outcome-observation.md
-├── P0007.4-provenance-trust.md
-├── P0007.5-dynamic-interaction-surface.md
+├── P0007.3-domain-workspace-interaction-surface.md
+├── P0007.4-outcome-observation.md
+├── P0007.5-provenance-trust.md
 └── P0007.6-hermes-learning-loop-validation.md
 
 注意： 此处仅定义目标架构位置，不授权 P0007 主阶段一次性创建以上所有模块。
