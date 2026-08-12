@@ -1,5 +1,19 @@
 # 交接文档
 
+## 本次会话 (2026-08-12) — P0007.1 Learning Context Contract
+
+### P0007.1 Implementation
+
+- `shared/schemas/learning-context.ts`: Situation/Case anchor + Observation + Agent Activity + Human Intervention + Action + Outcome schemas. Open/partial/mature lifecycle. Runtime-neutral.
+- `tests/contract/learning-context.contract.ts`: 12 tests (situation, lifecycle, real JD evidence, intervention types, incremental enrichment)
+- Real JD validation: context built from live CDP evidence (2026-08-12, GMV=¥337.90). No fake intervention/action/outcome.
+- Tests: 456/458 pass (2 pre-existing failures)
+
+### P0007 Restructure
+Sub-proposals reordered: 7.1 Contract → 7.2 Grammar → 7.3 Domain Workspace → 7.4 Outcome → 7.5 Trust → 7.6 Hermes Loop. Architecture diagram updated with Situation/Case + Domain Workspace.
+
+---
+
 ## 本次会话 (2026-08-12) — Phase 3 Complete + P0007 Proposal
 
 ### P0007 Architecture

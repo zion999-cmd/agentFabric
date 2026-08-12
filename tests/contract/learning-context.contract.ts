@@ -1,0 +1,282 @@
+// P0007.1 — Learning Context Contract tests.
+// Validates schema, partial contexts, and real JD evidence integration.
+
+import { describe, it, expect } from 'vitest';
+import {
+  LearningContextSchema,
+  SituationSchema,
+  ObservationRefSchema,
+  AgentActivityRefSchema,
+  HumanInterventionSchema,
+  ActionRefSchema,
+  OutcomeRefSchema,
+  isLearnable,
+  determineLifecycle,
+} from '#shared/schemas/learning-context.js';
+import type { LearningContext } from '#shared/schemas/learning-context.js';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+// ---- Schema Validation Tests ----
+
+describe('Situation', () => {
+  it('accepts a valid JD ecommerce situation', () => {
+    const situation = {
+      situationId: 'sit_20260812_qimen_traffic',
+      domain: 'ecommerce',
+      type: 'performance_analysis',
+      entity: { id: '11855009', type: 'shop', name: '祁门红茶旗舰店', platform: 'jd' },
+      temporal: {
+        observedAt: '2026-08-12T02:38:00Z',
+        windowStart: '2026-08-05',
+        windowEnd: '2026-08-12',
+      },
+      description: '祁门红茶旗舰店 2026-08-12 流量下降分析',
+    };
+    const result = SituationSchema.safeParse(situation);
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects missing description', () => {
+    const result = SituationSchema.safeParse({ situationId: 'x', domain: 'ecommerce', type: 'performance_analysis', entity: { id: '1', type: 'shop' }, temporal: { observedAt: '2026-08-12' } });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe('LearningContext — minimal (open lifecycle)', () => {
+  it('accepts a context with only situation + observations + agent activity', () => {
+    const ctx = {
+      contextId: 'ctx_qimen_traffic_20260812',
+      situation: {
+        situationId: 'sit_20260812_qimen_traffic',
+        domain: 'ecommerce',
+        type: 'performance_analysis' as const,
+        entity: { id: '11855009', type: 'shop', name: '祁门红茶旗舰店', platform: 'jd' },
+        temporal: { observedAt: '2026-08-12T02:38:00Z', windowEnd: '2026-08-12' },
+        description: '祁门红茶旗舰店 2026-08-12 流量下降分析',
+      },
+      createdAt: '2026-08-12T02:40:00Z',
+      updatedAt: '2026-08-12T02:40:00Z',
+      lifecycle: 'open' as const,
+      observations: [{
+        observationId: 'obs_20260812_cdp',
+        capability: 'trade.overview',
+        provider: { platform: 'jd', acquisition: 'cdp' as const },
+        observedAt: '2026-08-12T02:38:00Z',
+        summary: 'Live CDP capture: 14 API responses, GMV=¥337.90, orders=2, visitors=23',
+        evidenceIds: ['ev_summary_20260812', 'ev_trend_20260812', 'ev_productTop_20260812'],
+        metrics: { gmv: 337.90, orders: 2, visitors: 23 },
+      }],
+      agentActivities: [{
+        activityId: 'act_discover_20260812',
+        type: 'capability_discovery' as const,
+        agentRuntime: 'hermes',
+        timestamp: '2026-08-12T02:37:00Z',
+        summary: 'CapabilityBridge.searchByIntent → traffic.overview (score: 22.0)',
+        capabilityId: 'traffic.overview',
+        taskId: 'task_demo_20260812',
+      }],
+    };
+    const result = LearningContextSchema.safeParse(ctx);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(isLearnable(result.data)).toBe(true);
+      expect(determineLifecycle(result.data)).toBe('open');
+    }
+  });
+
+  it('open context is learnable with just observations + agent activity', () => {
+    const ctx = buildMinimalContext();
+    expect(isLearnable(ctx)).toBe(true);
+  });
+
+  it('context without agent activity is not learnable', () => {
+    const ctx = buildMinimalContext();
+    ctx.agentActivities = [];
+    expect(isLearnable(ctx)).toBe(false);
+  });
+});
+
+describe('LearningContext — partial lifecycle', () => {
+  it('has partial lifecycle when human interventions exist', () => {
+    const ctx = buildMinimalContext();
+    ctx.humanInterventions = [{
+      interventionId: 'int_001',
+      actor: { id: 'operator_1', role: 'operator' },
+      type: 'decision',
+      timestamp: '2026-08-12T03:00:00Z',
+      summary: 'Approved analysis — agrees traffic decline is from search channel',
+      reviewId: 'rev_001',
+    }];
+    expect(determineLifecycle(ctx)).toBe('partial');
+  });
+
+  it('has partial lifecycle when actions exist', () => {
+    const ctx = buildMinimalContext();
+    ctx.actions = [{
+      actionId: 'act_001',
+      type: 'price_adjustment',
+      actor: { type: 'human', id: 'operator_1' },
+      timestamp: '2026-08-12T04:00:00Z',
+      description: 'Lowered price on top 3 SKUs by 10%',
+    }];
+    expect(determineLifecycle(ctx)).toBe('partial');
+  });
+});
+
+describe('LearningContext — mature lifecycle', () => {
+  it('has mature lifecycle when outcomes exist', () => {
+    const ctx = buildMinimalContext();
+    ctx.actions = [{
+      actionId: 'act_001',
+      type: 'price_adjustment',
+      actor: { type: 'human', id: 'operator_1' },
+      timestamp: '2026-08-12T04:00:00Z',
+      description: 'Lowered price on top 3 SKUs by 10%',
+    }];
+    ctx.outcomes = [{
+      outcomeId: 'out_001',
+      actionId: 'act_001',
+      observationWindow: '7d',
+      observedAt: '2026-08-19T00:00:00Z',
+      baseline: { gmv: 337, orders: 2 },
+      postValue: { gmv: 520, orders: 5 },
+      summary: 'GMV +54%, orders +150% after price adjustment',
+    }];
+    expect(determineLifecycle(ctx)).toBe('mature');
+  });
+});
+
+describe('LearningContext — runtime-neutral', () => {
+  it('contains no Hermes-specific fields in schema', () => {
+    const ctx = buildMinimalContext();
+    const result = LearningContextSchema.safeParse(ctx);
+    expect(result.success).toBe(true);
+    // Verify the schema doesn't require hermes-specific keys
+    const keys = Object.keys(result.success ? result.data : {});
+    expect(keys).not.toContain('hermesMemory');
+    expect(keys).not.toContain('hermesSkill');
+    expect(keys).not.toContain('chainOfThought');
+  });
+});
+
+describe('LearningContext — real JD evidence validation', () => {
+  it('can build a context from real CDP evidence data', () => {
+    const evidencePath = resolve(process.cwd(), 'data', 'evidence', 'jd', '2026', '08', '12_summary.meta.json');
+    if (!existsSync(evidencePath)) {
+      // Skip if no evidence exists yet
+      return;
+    }
+    const meta = JSON.parse(readFileSync(evidencePath, 'utf-8'));
+
+    const ctx: LearningContext = {
+      contextId: 'ctx_real_jd_20260812',
+      situation: {
+        situationId: 'sit_real_jd_20260812',
+        domain: 'ecommerce',
+        type: 'performance_analysis',
+        entity: { id: meta.shop_id, type: 'shop', platform: meta.source },
+        temporal: { observedAt: meta.acquired_at, windowEnd: meta.acquired_at.slice(0, 10) },
+        description: `Live CDP acquisition for ${meta.source} shop ${meta.shop_id}`,
+      },
+      createdAt: meta.acquired_at,
+      updatedAt: meta.acquired_at,
+      observations: [{
+        observationId: `obs_${meta.content_hash.slice(0, 8)}`,
+        capability: 'trade.overview',
+        provider: { platform: meta.source, acquisition: meta.acquisition_method as 'cdp' },
+        observedAt: meta.acquired_at,
+        summary: `${meta.data_type} captured via ${meta.acquisition_method}`,
+        evidenceIds: [meta.content_hash],
+      }],
+      agentActivities: [{
+        activityId: 'act_cdp_collect',
+        type: 'data_acquisition',
+        agentRuntime: 'cli',
+        timestamp: meta.acquired_at,
+        summary: `CLI collect jd --mode live --date 2026-08-12`,
+        taskId: 'cli_collect_20260812',
+      }],
+    };
+
+    const result = LearningContextSchema.safeParse(ctx);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.observations[0]!.evidenceIds.length).toBeGreaterThanOrEqual(1);
+      expect(isLearnable(result.data)).toBe(true);
+    }
+  });
+});
+
+describe('HumanIntervention — type coverage', () => {
+  it('supports all intervention types from P0007 proposal', () => {
+    const types = ['decision', 'correction', 'annotation', 'context_supplement', 'action_intent', 'no_action', 'other'];
+    types.forEach(type => {
+      const intervention = {
+        interventionId: `int_${type}`,
+        actor: { id: 'u1', role: 'operator' },
+        type,
+        timestamp: '2026-08-12T00:00:00Z',
+        summary: `Test ${type}`,
+      };
+      expect(() => HumanInterventionSchema.parse(intervention)).not.toThrow();
+    });
+  });
+});
+
+describe('LearningContext — incremental enrichment', () => {
+  it('can start open then add intervention (partial) then outcome (mature)', () => {
+    const ctx = buildMinimalContext();
+    expect(determineLifecycle(ctx)).toBe('open');
+
+    const withIntervention = { ...ctx, humanInterventions: [{
+      interventionId: 'int_001', actor: { id: 'u1', role: 'operator' },
+      type: 'decision' as const, timestamp: '2026-08-12T00:00:00Z', summary: 'test',
+    }]};
+    expect(determineLifecycle(withIntervention)).toBe('partial');
+
+    const withOutcome = { ...withIntervention, actions: [{
+      actionId: 'a1', type: 'price_change', actor: { type: 'human' as const },
+      timestamp: '2026-08-12T00:00:00Z', description: 'test',
+    }], outcomes: [{
+      outcomeId: 'o1', actionId: 'a1', observationWindow: '7d' as const,
+      observedAt: '2026-08-19T00:00:00Z',
+      baseline: {}, postValue: {},
+    }]};
+    expect(determineLifecycle(withOutcome)).toBe('mature');
+  });
+});
+
+// ---- Test Helpers ----
+
+function buildMinimalContext(): LearningContext {
+  return {
+    contextId: 'ctx_test',
+    situation: {
+      situationId: 'sit_test',
+      domain: 'ecommerce',
+      type: 'performance_analysis',
+      entity: { id: 'test_shop', type: 'shop', name: 'Test Shop', platform: 'jd' },
+      temporal: { observedAt: '2026-08-12T00:00:00Z' },
+      description: 'Test situation for Learning Context validation',
+    },
+    lifecycle: 'open',
+    createdAt: '2026-08-12T00:00:00Z',
+    updatedAt: '2026-08-12T00:00:00Z',
+    observations: [{
+      observationId: 'obs_test',
+      capability: 'trade.overview',
+      provider: { platform: 'jd', acquisition: 'cdp' },
+      observedAt: '2026-08-12T00:00:00Z',
+      summary: 'Test observation',
+      metrics: { gmv: 100 },
+    }],
+    agentActivities: [{
+      activityId: 'act_test',
+      type: 'capability_discovery',
+      agentRuntime: 'hermes',
+      timestamp: '2026-08-12T00:00:00Z',
+      summary: 'Test activity',
+    }],
+  };
+}

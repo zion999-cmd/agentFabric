@@ -7,3 +7,4 @@ export * from './trace.js';
 export * from './collector.js';
 export * from './ecommerce.js';
 export * from './execution.js';
+export * from './learning-context.js';
