@@ -10,8 +10,10 @@ import {
   WorldModelSchema,
   EPISTEMIC_ORDER,
   upgradeAssertion,
+  supersedeAssertion,
   isVerified,
   isLearnableKnowledge,
+  isActiveKnowledge,
 } from '#shared/schemas/world-model.js';
 import type { WorldModel, WorldObject, WorldAssertion } from '#shared/schemas/world-model.js';
 
@@ -40,12 +42,12 @@ const jdAssertions: WorldAssertion[] = [
   { id: 'a4', subjectId: 'jd_metric_gmv', predicate: 'observable_by', objectRef: '/szweb/api/trade/summary', objectIsRef: false, epistemicStatus: 'suspected', evidenceRefs: [], discoveredAt: '2026-08-13T00:00:00Z', source: 'hermes-zero-shot' },
   // Metric → Dimension (verified)
   { id: 'a5', subjectId: 'jd_metric_gmv', predicate: 'supports_dimension', objectRef: 'jd_dimension_time', objectIsRef: true, epistemicStatus: 'verified', evidenceRefs: ['ev_page_trade_summary'], discoveredAt: '2026-08-13T00:00:00Z', source: 'claude-guided-discovery' },
-  // Surface → Feature (verified)
+  // Surface → Feature (observed)
   { id: 'a6', subjectId: 'jd_surface_trade_summary', predicate: 'accessible_via', objectRef: 'jd_feature_realtime_ranking', objectIsRef: true, epistemicStatus: 'observed', evidenceRefs: ['ev_feature_catalog'], discoveredAt: '2026-08-13T00:00:00Z', source: 'claude-features' },
-];
+].map((a) => WorldAssertionSchema.parse(a));
 
 const jdBindings = [
-  { id: 'b1', worldObjectId: 'jd_metric_gmv', capabilityId: 'trade.overview', bindingType: 'observes' as const, epistemicStatus: 'observed' as const },
+  { id: 'b1', worldObjectId: 'jd_metric_gmv', capabilityId: 'trade.overview', relationship: 'observable_by' as const, epistemicStatus: 'observed' as const },
 ];
 
 const buildJdModel = (): WorldModel => ({
@@ -175,7 +177,7 @@ describe('Scenario F — Metric object does not store real-time values', () => {
 describe('Scenario G — Surface → CapabilityBinding → CapabilityRegistry', () => {
   it('binding is a REFERENCE, not a copy of Capability Contract', () => {
     const binding = jdBindings[0]!;
-    // Binding has only: worldObjectId + capabilityId + bindingType + epistemicStatus.
+    // Binding has only: worldObjectId + capabilityId + relationship + epistemicStatus.
     // It does NOT copy capability's metrics/dimensions/provider.
     expect(binding).not.toHaveProperty('metrics');
     expect(binding).not.toHaveProperty('provider');
@@ -183,8 +185,71 @@ describe('Scenario G — Surface → CapabilityBinding → CapabilityRegistry', 
     expect(binding.capabilityId).toBe('trade.overview'); // reference only
   });
 
+  it('binding has explicit relationship semantics (not a bare ID association)', () => {
+    const binding = jdBindings[0]!;
+    expect(binding.relationship).toBe('observable_by');
+    // A Metric could be observable_by one capability, exportable_by another, comparable_by a third.
+    // The relationship field expresses WHY the two IDs are bound.
+    const otherBinding = { id: 'b2', worldObjectId: 'jd_metric_gmv', capabilityId: 'trade.reports', relationship: 'exportable_by' as const, epistemicStatus: 'observed' as const };
+    expect(() => CapabilityBindingSchema.parse(otherBinding)).not.toThrow();
+  });
+
+  it('rejects binding without a relationship (no bare association)', () => {
+    const bare = { id: 'b3', worldObjectId: 'jd_metric_gmv', capabilityId: 'trade.overview' };
+    const result = CapabilityBindingSchema.safeParse(bare);
+    expect(result.success).toBe(false);
+  });
+
   it('binding schema validates', () => {
     expect(() => CapabilityBindingSchema.parse(jdBindings[0])).not.toThrow();
+  });
+});
+
+describe('Scenario I — temporal lifecycle ≠ epistemic lifecycle', () => {
+  it('superseding keeps epistemic status, changes temporal status', () => {
+    const verified = jdAssertions.find((a) => a.id === 'a2')!; // Surface exposes_metric GMV, verified
+    const superseded = supersedeAssertion(verified, 'a2_v2');
+    // Epistemic confidence did NOT decrease — it WAS verified at the time.
+    expect(superseded.epistemicStatus).toBe('verified');
+    // Temporal validity changed — no longer the current truth.
+    expect(superseded.temporalStatus).toBe('superseded');
+    expect(superseded.supersededBy).toBe('a2_v2');
+  });
+
+  it('superseded assertion is NOT active knowledge even though verified', () => {
+    const verified = jdAssertions.find((a) => a.id === 'a2')!;
+    const superseded = supersedeAssertion(verified, 'a2_v2');
+    expect(isVerified(superseded)).toBe(true);       // still verified (confidence)
+    expect(isActiveKnowledge(superseded)).toBe(false); // but not active (world changed)
+  });
+
+  it('rejects superseding an already superseded/retired assertion', () => {
+    const verified = jdAssertions.find((a) => a.id === 'a2')!;
+    const once = supersedeAssertion(verified, 'v1');
+    expect(() => supersedeAssertion(once, 'v2')).toThrow(/already/);
+  });
+
+  it('default temporalStatus is active', () => {
+    const a1 = jdAssertions.find((a) => a.id === 'a1')!;
+    expect(a1.temporalStatus ?? 'active').toBe('active');
+  });
+});
+
+describe('Scenario J — evidenceRefs is a reference interface (not full provenance)', () => {
+  it('assertion carries evidenceRefs (reference IDs)', () => {
+    const a2 = jdAssertions.find((a) => a.id === 'a2')!;
+    expect(a2.evidenceRefs.length).toBeGreaterThan(0);
+  });
+
+  it('evidenceRefs are plain IDs — World Evidence semantics NOT yet implemented', () => {
+    // evidenceRefs point to Evidence IDs, but the Evidence contract (evidence/types.ts)
+    // is designed for business-data acquisition (shop_id/summary/trend), NOT World
+    // Discovery evidence (screenshot/DOM/network/documentation). This is a known gap.
+    // The contract supports the REFERENCE, but full World Evidence semantics are pending.
+    const a2 = jdAssertions.find((a) => a.id === 'a2')!;
+    expect(typeof a2.evidenceRefs[0]).toBe('string'); // just an ID reference
+    // No evidence-type field here — the assertion does NOT model what kind of evidence.
+    expect('evidenceType' in a2).toBe(false);
   });
 });
 

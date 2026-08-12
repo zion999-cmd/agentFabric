@@ -103,6 +103,21 @@ export type AssertionPredicate = z.infer<typeof AssertionPredicateSchema>;
  * The SAME object can appear in many assertions of DIFFERENT epistemic statuses:
  *   Metric "成交金额" — exists [verified]
  *   Metric "成交金额" — observable_by /szgateway/xxx [suspected]   (Hermes guessed wrong)
+ *
+ * TWO orthogonal lifecycles (must not be conflated):
+ *
+ *   Epistemic lifecycle (confidence) — monotonic, never backward:
+ *     suspected → observed → verified
+ *     ("how certain am I?")
+ *
+ *   Temporal lifecycle (world validity) — changes with the real world:
+ *     active → superseded / retired
+ *     ("is this still true?")
+ *
+ * Example: "Surface A exposes Metric X" can be `verified` in confidence,
+ * but later `superseded` when JD 改版 removes Metric X from Surface A.
+ * Confidence did NOT decrease — the WORLD changed. A superseded assertion
+ * stays `verified` in epistemic terms, but is no longer `active` temporally.
  */
 export const WorldAssertionSchema = z.object({
   /** Stable assertion identity */
@@ -119,9 +134,23 @@ export const WorldAssertionSchema = z.object({
   objectRef: z.string().min(1),
   /** Whether objectRef points to a WorldObject.id (true) or is a literal (false) */
   objectIsRef: z.boolean(),
-  /** How certain we are about this assertion */
+  /** How certain we are about this assertion (confidence — monotonic) */
   epistemicStatus: EpistemicStatusSchema,
-  /** Evidence IDs backing this assertion (screenshot/DOM/network/documentation) */
+  /** Whether this assertion is currently valid (world-validity — changes with reality) */
+  temporalStatus: z.enum(['active', 'superseded', 'retired']).default('active'),
+  /** If superseded, which assertion replaced this one (reference, not a value) */
+  supersededBy: z.string().optional(),
+  /** If retired, why (e.g. "JD removed Metric X from Surface A in 2026-10") */
+  retiredReason: z.string().optional(),
+  /**
+   * Evidence IDs backing this assertion.
+   *
+   * NOTE (known gap, P0008.1 Gap Map §6): this is currently a REFERENCE interface.
+   * The existing Evidence contract (evidence/types.ts) is designed for BUSINESS DATA
+   * acquisition (shop_id, summary/trend/productTop), NOT World Discovery evidence
+   * (screenshot / DOM / network response / documentation). World Evidence semantics
+   * are NOT yet implemented. Do not claim "provenance infrastructure complete".
+   */
   evidenceRefs: z.array(z.string()).default([]),
   /** When this assertion was first made */
   discoveredAt: z.string().min(1),
@@ -146,8 +175,16 @@ export const CapabilityBindingSchema = z.object({
   worldObjectId: z.string().min(1),
   /** The CapabilityContractEntry.capability identifier (e.g. "trade.overview") */
   capabilityId: z.string().min(1),
-  /** What this binding means */
-  bindingType: z.enum(['observes', 'exposes']),
+  /**
+   * The SEMANTICS of this binding — WHY the two IDs are related.
+   * Not a bare association. A Metric may be observable by one capability,
+   * exportable by another, comparable by a third.
+   *
+   * Currently only `observable_by` is exercised by the JD fixture.
+   * `exportable_by` / `comparable_by` are reserved for future capabilities
+   * (CSV export, cross-platform comparison), not yet validated.
+   */
+  relationship: z.enum(['observable_by', 'exportable_by', 'comparable_by']),
   /** Epistemic status of the binding itself */
   epistemicStatus: EpistemicStatusSchema.default('observed'),
 });
@@ -199,9 +236,43 @@ export const upgradeAssertion = (
   };
 };
 
+/**
+ * Supersede an assertion (temporal lifecycle — world changed).
+ * Marks the OLD assertion as `superseded` and points it at the NEW assertion.
+ *
+ * This is DIFFERENT from a confidence downgrade: the old assertion keeps its
+ * epistemicStatus (e.g. stays `verified` — it WAS verified at the time), but
+ * its temporalStatus becomes `superseded` (no longer the current truth).
+ *
+ * Returns a NEW assertion (immutable). Throws if already superseded/retired.
+ */
+export const supersedeAssertion = (
+  oldAssertion: WorldAssertion,
+  newAssertionId: string,
+): WorldAssertion => {
+  if (oldAssertion.temporalStatus !== 'active') {
+    throw new Error(
+      `Cannot supersede assertion ${oldAssertion.id}: already ${oldAssertion.temporalStatus}`,
+    );
+  }
+  return {
+    ...oldAssertion,
+    temporalStatus: 'superseded',
+    supersededBy: newAssertionId,
+  };
+};
+
 /** Whether an assertion is verified (can be treated as a stable World Fact). */
 export const isVerified = (assertion: WorldAssertion): boolean =>
   assertion.epistemicStatus === 'verified';
+
+/**
+ * Whether an assertion is currently ACTIVE world knowledge — temporally valid
+ * (not superseded/retired) AND epistemically learnable (observed/verified).
+ * A superseded assertion must NOT be returned as current knowledge, even if verified.
+ */
+export const isActiveKnowledge = (assertion: WorldAssertion): boolean =>
+  assertion.temporalStatus === 'active' && isLearnableKnowledge(assertion);
 
 /**
  * Whether an assertion is "learnable" knowledge — observed or verified.
