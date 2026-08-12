@@ -470,3 +470,37 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 | `summary` | Aggregated metadata, NOT provenance (P0007.5) |
 
 **边界**: Runtime-neutral, 无 Hermes/JD/ecommerce 私有字段, partial contexts valid, incremental enrichment.
+
+## ADR-028: P0008.1 World Model Gap Map
+
+- **日期**: 2026-08-13
+- **状态**: Accepted
+- **来源**: [P0008.1-world-model-gap-map.md](proposals/P0008.1-world-model-gap-map.md)
+
+**决策**: World Model 收敛为 6 个 World Objects + Assertion Graph，不是 9 节点大 Ontology。
+
+- 6 Objects: System / Surface / Feature-Affordance / Metric / Dimension / Constraint
+- 去掉 Entity（三方都只隐式，无一等证据）和 Concept（太松散）独立节点
+- Relationship 由 World Assertion 承担，不独立
+- 从 Hermes zero-shot 自然产出反推，而非 Claude guided 扁平结构反推
+
+## ADR-029: P0008.2 World Model Contract
+
+- **日期**: 2026-08-13
+- **状态**: Accepted (Complete)
+- **来源**: [P0008.2-world-model-contract.md](proposals/P0008.2-world-model-contract.md) + `shared/schemas/world-model.ts`
+
+**三个关键语义决策**:
+
+1. **epistemic ≠ temporal 两个正交生命周期**
+   - epistemic: suspected→observed→verified（confidence，单调）
+   - temporal: active→superseded/retired（world validity，随世界变化）
+   - supersede 不降级 epistemic（京东改版后旧断言仍 verified，只是不再 active）
+
+2. **evidenceRefs 是 reference interface，不是完整 provenance**
+   - 现有 Evidence contract 为业务数据 acquisition 设计，非 World Discovery evidence
+   - World Evidence semantics（screenshot/DOM/network/documentation）未实现
+
+3. **CapabilityBinding 有 relationship 语义**
+   - observable_by / exportable_by / comparable_by（当前只验证 observable_by）
+   - 非 bare ID association

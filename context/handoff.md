@@ -1,5 +1,29 @@
 # 交接文档
 
+## 本次会话 (2026-08-13) — P0008 World Abstraction Infrastructure
+
+### P0008.1 Contract Archaeology & Gap Map
+
+- 三组资产考古: `discovery/`(Claude guided) / `data/jd_shangzhi_features/`(Claude 早期) / `WorldExplorationTask/`(Hermes zero-shot)
+- 最大发现: Hermes 在零 schema 下独立产出全套 World primitive + `_suspected` epistemic 标记（猜错 API 路径但知道自己只是猜）
+- 收敛模型: 6 个 World Objects + Assertion Graph（去掉 Entity/Concept 独立节点）
+- 4 个 Contract Review 语义修正: Capability→Feature/Affordance 命名、epistemic 属 Assertion 不属对象、Entity binding 延后、真实值非 World Fact
+
+### P0008.2 World Model Contract
+
+- `shared/schemas/world-model.ts` + 28 stress tests
+- 三层分离: World Object(6 types) / World Assertion / Capability Binding
+- 两个正交生命周期: epistemic(suspected→observed→verified 单调) vs temporal(active→superseded/retired)
+- evidenceRefs 是 reference interface（World Evidence semantics 未实现）
+- binding 有 relationship 语义（observable_by/exportable_by/comparable_by）
+- 无 Builder/Query/Registry（P0008.3 的事）
+
+### 下一步
+
+P0008.3 World Query & Capability Binding（待指示，不自动开始）
+
+---
+
 ## 本次会话 (2026-08-12) — P0007.1 Learning Context Contract
 
 ### P0007.1 Implementation

@@ -1,8 +1,12 @@
 # 当前状态
 
-|**版本**: v0.2-p0007.1-complete | **Hermes**: v0.18.0 | **测试**: 445/446 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-p0008.2-complete | **Hermes**: v0.18.0 | **测试**: 489/491 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **P0008.2 Complete** — World Model Contract. 三层分离: World Object(6 types) / World Assertion(subject→predicate→object + epistemicStatus + temporalStatus) / Capability Binding(relationship 语义). epistemic(suspected/observed/verified) ≠ temporal(active/superseded/retired) 两个正交生命周期. evidenceRefs 是 reference interface(World Evidence semantics 未实现). 28 stress tests. 无 Builder/Query/Registry. ADR-029.
+
+- [x] **P0008.1 Complete** — Contract Archaeology & Gap Map. 三组资产(discovery/jd_shangzhi_features/WorldExplorationTask)考古. 最大发现: Hermes 零 schema 独立产出全套 World primitive + epistemic 标记. 收敛 7→6 primitives(去掉 Entity/Concept). ADR-028.
 
 - [x] **P0007.1 Complete** — Learning Context Contract. Situation/Case anchor, Observation/AgentActivity/Intervention/Action/Outcome reference placeholders. summary (not provenance). metricsSnapshot (derived, not authoritative). relatedActionIds (association, not causation). respondsToActivityIds (Case C). 17 contract tests. Runtime-neutral. No Hermes/JD private fields. Tag: v0.2-p0007.1-complete.
 
