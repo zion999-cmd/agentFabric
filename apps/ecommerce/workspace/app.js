@@ -185,7 +185,8 @@ function switchView(name, filter = 'all') {
 }
 
 const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, agentConfig: loadConfig,
-  agentSession: loadAgentSession, capabilityExplorer: loadCapabilityExplorer, evidenceViewer: loadEvidenceViewer };
+  agentSession: loadAgentSession, capabilityExplorer: loadCapabilityExplorer, evidenceViewer: loadEvidenceViewer,
+  situations: loadSituationFeed, situationDetail: loadSituationDetail };
 
 // ═══ Data Loading ══════════════════════════════════════════
 async function loadData() {
@@ -793,6 +794,231 @@ function loadConfig() {
   if (saved.competitionWeight != null) document.getElementById('cfgCompetitionWeight').value = saved.competitionWeight;
   if (saved.qualityWeight != null) document.getElementById('cfgQualityWeight').value = saved.qualityWeight;
   applyI18n();
+}
+
+// ═══ P0007.3 Situation Feed ═══════════════════════════════
+async function loadSituationFeed(filter) {
+  filter = filter || 'all';
+  var list = document.getElementById('situationFeedList');
+  var subtitle = document.getElementById('situationFeedSubtitle');
+  list.innerHTML = '<p class="muted placeholder">加载 Situation 中...</p>';
+
+  // Update tab active state
+  document.querySelectorAll('#situationFeedTabs .feed-tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.filter === filter);
+  });
+
+  try {
+    var data = await apiGet('/api/situations');
+    var situations = Array.isArray(data) ? data : (data.situations || []);
+    if (!situations.length) {
+      list.innerHTML = '<p class="muted placeholder">暂无 Situation。运行 CDP 采集后，系统会自动创建 Situation。</p>';
+      if (subtitle) subtitle.textContent = '0 个 Situation';
+      updateSituationBadges({ all: 0, open: 0, partial: 0 });
+      return;
+    }
+
+    // Filter
+    var filtered = situations;
+    if (filter === 'open') filtered = situations.filter(function(s) { return s.lifecycle === 'open'; });
+    else if (filter === 'partial') filtered = situations.filter(function(s) { return s.lifecycle === 'partial'; });
+    else if (filter === 'agent') filtered = situations.filter(function(s) { return s.interventionCount === 0; });
+
+    var counts = { all: situations.length, open: 0, partial: 0, agent: 0 };
+    situations.forEach(function(s) {
+      if (s.lifecycle === 'open') counts.open++;
+      if (s.lifecycle === 'partial') counts.partial++;
+      if (s.interventionCount === 0) counts.agent++;
+    });
+    updateSituationBadges(counts);
+
+    if (subtitle) subtitle.textContent = filtered.length + ' 个 Situation';
+
+    var html = '';
+    filtered.forEach(function(s) {
+      var entity = s.entity || {};
+      var temporal = s.temporal || {};
+      var badge = s.lifecycle === 'open' ? '<span class="situation-card-badge open">待处理</span>' :
+                  s.lifecycle === 'partial' ? '<span class="situation-card-badge partial">已处理</span>' :
+                  '<span class="situation-card-badge mature">待观察</span>';
+      var dateLabel = (temporal.observedAt || s.createdAt || '').slice(0, 10);
+      html += '<div class="situation-card" data-situation-id="' + escHtml(s.situationId) + '">' +
+        '<div class="situation-card-top">' +
+          '<span class="situation-card-title">' + escHtml(entity.name || s.situationId) + ' · ' + escHtml((s.description || '').slice(0, 30)) + '</span>' +
+          badge +
+        '</div>' +
+        '<div class="situation-card-summary">' + escHtml((s.description || '').slice(0, 80)) + '</div>' +
+        '<div class="situation-card-footer">' +
+          '<span>' + dateLabel + ' · ' + (s.interventionCount || 0) + ' 条处理</span>' +
+          '<span class="situation-card-action">查看详情 →</span>' +
+        '</div>' +
+      '</div>';
+    });
+    list.innerHTML = html || '<p class="muted placeholder">当前过滤器下无 Situation。</p>';
+
+    // Click → detail
+    list.querySelectorAll('.situation-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        loadSituationDetail(card.dataset.situationId);
+        switchView('situationDetail');
+      });
+    });
+  } catch (e) {
+    list.innerHTML = '<p class="muted placeholder">加载失败 (' + e.message + ')</p>';
+  }
+}
+
+function updateSituationBadges(counts) {
+  var badges = {
+    badgeAllSituations: counts.all,
+    badgeOpenSituations: counts.open,
+    badgeAgentSituations: counts.agent,
+    badgePartialSituations: counts.partial,
+  };
+  Object.keys(badges).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) { el.textContent = badges[id] > 0 ? badges[id] : '--'; }
+  });
+}
+
+// ═══ P0007.3 Situation Detail + Interaction ══════════════
+async function loadSituationDetail(situationId) {
+  if (!situationId) return;
+  var content = document.getElementById('situationDetailContent');
+  var badge = document.getElementById('situationLifecycleBadge');
+  content.innerHTML = '<p class="muted placeholder">加载中...</p>';
+
+  try {
+    var raw = await apiGet('/api/situations/' + situationId);
+    var entity = raw.entity || {};
+    var temporal = raw.temporal || {};
+    var interventions = raw.interventions || [];
+    var desc = raw.description || '';
+
+    if (badge) {
+      badge.textContent = raw.lifecycle === 'open' ? '待处理' : raw.lifecycle === 'partial' ? '已处理' : '待观察';
+      badge.className = 'situation-lifecycle-badge ' + (raw.lifecycle || 'open');
+    }
+
+    var html = '<div class="situation-detail-body">';
+
+    // Title
+    html += '<h2 class="situation-detail-title">' + escHtml(entity.name || '') + ' · ' + escHtml((desc || '').slice(0, 40)) + '</h2>';
+    html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
+
+    // Layer 1: 发生了什么
+    html += '<div class="situation-layer">';
+    html += '<h3 class="situation-layer-title">📊 发生了什么</h3>';
+    html += '<div class="situation-layer-body">';
+    html += '<p>' + escHtml(desc) + '</p>';
+    html += '</div></div>';
+
+    // Layer 2: Agent 怎么理解
+    html += '<div class="situation-layer">';
+    html += '<h3 class="situation-layer-title">🤖 Agent 怎么理解</h3>';
+    html += '<div class="situation-layer-body">';
+    html += '<p class="muted">Agent 分析: ' + escHtml(desc) + '</p>';
+    html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');loadEvidenceViewer()">[查看 Evidence →]</p>';
+    html += '</div></div>';
+
+    // Layer 3: Agent 建议什么
+    html += '<div class="situation-layer">';
+    html += '<h3 class="situation-layer-title">💡 Agent 建议</h3>';
+    html += '<div class="situation-layer-body">';
+    html += '<p>Agent 建议: 查看详细数据判断原因</p>';
+    html += '</div></div>';
+
+    // Layer 4: 你怎么处理？
+    html += '<div class="situation-layer situation-interaction">';
+    html += '<h3 class="situation-layer-title">👤 你怎么处理？</h3>';
+    html += renderInteractionSurface(situationId);
+
+    // Show existing interventions
+    if (interventions.length > 0) {
+      html += '<div class="situation-interventions-existing">';
+      html += '<h4 style="font-size:0.8rem;margin-bottom:8px">处理记录</h4>';
+      interventions.forEach(function(i) {
+        var typeLabel = i.type === 'correction' ? '判断有误' : i.type === 'context_supplement' ? '补充情况' :
+                        i.type === 'decision' ? '决策' : i.type === 'action_intent' ? '准备处理' : '认同判断';
+        html += '<div class="intervention-record">' +
+          '<span class="intervention-record-type">' + typeLabel + '</span>' +
+          '<span class="intervention-record-summary">' + escHtml(i.summary || '') + '</span>' +
+          '<span class="intervention-record-time">' + (i.timestamp || i.createdAt || '').slice(0, 16) + '</span>' +
+        '</div>';
+      });
+      html += '</div>';
+    }
+
+    html += '</div>'; // end interaction layer
+
+    // Layer 5: Situation Chat (collapsed)
+    html += '<div class="situation-chat" style="margin-top:20px">';
+    html += '<details><summary style="cursor:pointer;font-size:0.85rem;font-weight:600">💬 追问 Agent (关于这个 Situation)</summary>';
+    html += '<div style="margin-top:12px"><p class="muted" style="font-size:0.78rem">Chat 功能将在 HermesAgent 接通后启用。</p></div>';
+    html += '</details></div>';
+
+    html += '</div>'; // end detail body
+    content.innerHTML = html;
+  } catch (e) {
+    content.innerHTML = '<p class="muted placeholder">加载失败 (' + e.message + ')</p>';
+  }
+}
+
+function renderInteractionSurface(situationId) {
+  return '<div class="interaction-surface">' +
+    '<div class="interaction-group">' +
+      '<span class="interaction-label">Agent 判断</span>' +
+      '<div class="interaction-buttons">' +
+        '<button class="interaction-btn response-btn" onclick="submitIntervention(\'' + situationId + '\', \'response\', \'认同 Agent 判断\')">认同</button>' +
+        '<button class="interaction-btn correction-btn" onclick="promptIntervention(\'' + situationId + '\', \'correction\')">这里判断错了</button>' +
+        '<button class="interaction-btn context-btn" onclick="promptIntervention(\'' + situationId + '\', \'context_supplement\')">还有一个你不知道的情况</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="interaction-group">' +
+      '<span class="interaction-label">Agent 建议</span>' +
+      '<div class="interaction-buttons">' +
+        '<button class="interaction-btn decision-btn" onclick="submitIntervention(\'' + situationId + '\', \'decision\', \'采用 Agent 建议\')">采用建议</button>' +
+        '<button class="interaction-btn decision-btn secondary" onclick="promptIntervention(\'' + situationId + '\', \'decision\')">不采用</button>' +
+        '<button class="interaction-btn decision-btn secondary" onclick="submitIntervention(\'' + situationId + '\', \'decision\', \'稍后处理\')">稍后处理</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="interaction-group">' +
+      '<span class="interaction-label">你准备怎么处理？</span>' +
+      '<div class="interaction-buttons">' +
+        '<button class="interaction-btn action-btn" onclick="promptIntervention(\'' + situationId + '\', \'action_intent\')">我准备这样处理…</button>' +
+        '<button class="interaction-btn action-btn secondary" onclick="submitIntervention(\'' + situationId + '\', \'decision\', \'暂不处理\')">暂不处理</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// Simple prompt for interventions that need text input
+function promptIntervention(situationId, type) {
+  var placeholders = { correction: '正确的判断是什么？', context_supplement: '什么情况？', decision: '为什么不采用？', action_intent: '描述你准备做什么…' };
+  var text = prompt(placeholders[type] || '请描述:', '');
+  if (text && text.trim()) {
+    submitIntervention(situationId, type, text.trim());
+  }
+}
+
+// Submit intervention → POST → re-read → re-render
+async function submitIntervention(situationId, type, summary) {
+  try {
+    var payload = {
+      interventionId: 'int_' + Date.now(),
+      situationId: situationId,
+      actor: { id: 'operator_1', role: 'operator' },
+      type: type,
+      summary: summary,
+      timestamp: new Date().toISOString(),
+    };
+    await apiPost('/api/situations/' + situationId + '/interventions', payload);
+    // Re-read — don't fake state
+    loadSituationDetail(situationId);
+    showToast('已记录: ' + summary.slice(0, 30));
+  } catch (e) {
+    showToast('提交失败: ' + e.message);
+  }
 }
 
 // ═══ Agent Session (Phase 3.3) ═══════════════════════════
@@ -1580,7 +1806,7 @@ document.querySelectorAll('.chip-question').forEach(chip => {
   if (replayTo) { replayTo.max = today; replayTo.value = today; }
 
   applyI18n();
-  switchView('agentSession');
+  switchView('situations', 'all');
   await loadData();
 
   // If no rankings exist yet, auto-compute them (first-time setup)

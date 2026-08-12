@@ -3,7 +3,6 @@
 
 import { Router } from 'express';
 import type { Database as Db } from 'better-sqlite3';
-import { uuid } from '#shared/utils/crypto.js';
 import { nowIso } from '#shared/utils/time.js';
 import { HumanInterventionSchema, SituationSchema } from '#shared/schemas/learning-context.js';
 

@@ -31,36 +31,38 @@
     <main class="workspace-layout">
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand"><span class="brand-icon">&#9729;</span><span class="brand-text">agentFabric</span></div>
+        <!-- P0007.3: 今日工作 — top section, Situation-centered -->
         <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="nav.section.agent">AGENT</div>
-          <a href="#" class="sidebar-item active" data-view="agentSession"><span class="sidebar-icon">🤖</span><span data-i18n="nav.agentSession">Agent Session</span></a>
+          <div class="sidebar-section-label">今日工作</div>
+          <a href="#" class="sidebar-item active" data-view="situations" data-filter="all"><span class="sidebar-icon">📋</span><span>全部 Situation</span><span class="sidebar-badge" id="badgeAllSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="open"><span class="sidebar-icon">●</span><span>待我处理</span><span class="sidebar-badge" id="badgeOpenSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="agent"><span class="sidebar-icon">⏳</span><span>Agent 处理中</span><span class="sidebar-badge" id="badgeAgentSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="partial"><span class="sidebar-icon">✓</span><span>已处理</span><span class="sidebar-badge" id="badgePartialSituations">--</span></a>
         </div>
         <div class="sidebar-divider"></div>
+        <!-- 经营观察 — renamed, preserved business views -->
         <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="nav.section.discovery">发现视图</div>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="all"><span class="sidebar-icon">&#128269;</span><span data-i18n="nav.inbox">今日发现</span><span class="sidebar-badge" id="badgeAll">--</span></a>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="growth"><span class="sidebar-icon growth-icon">&#128293;</span><span data-i18n="nav.growth">增长机会</span><span class="sidebar-badge" id="badgeGrowth">--</span></a>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="risk"><span class="sidebar-icon risk-icon">&#9888;</span><span data-i18n="nav.risk">风险预警</span><span class="sidebar-badge" id="badgeRisk">--</span></a>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="review"><span class="sidebar-icon review-icon">&#9745;</span><span data-i18n="nav.review">审核中心</span><span class="sidebar-badge" id="badgeReview">--</span></a>
+          <div class="sidebar-section-label">经营观察</div>
+          <a href="#" class="sidebar-item" data-view="product"><span class="sidebar-icon product-icon">&#127991;</span><span>商品</span></a>
+          <a href="#" class="sidebar-item" data-view="trend"><span class="sidebar-icon trend-icon">&#128200;</span><span>趋势</span></a>
+          <a href="#" class="sidebar-item" data-view="archive"><span class="sidebar-icon archive-icon">&#128451;</span><span>历史归档</span></a>
         </div>
         <div class="sidebar-divider"></div>
+        <!-- 系统/高级 — downgraded -->
         <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="nav.section.capability">CAPABILITY</div>
-          <a href="#" class="sidebar-item" data-view="capabilityExplorer"><span class="sidebar-icon">📋</span><span data-i18n="nav.capabilityExplorer">Capability Explorer</span></a>
-          <a href="#" class="sidebar-item" data-view="evidenceViewer"><span class="sidebar-icon">🔗</span><span data-i18n="nav.evidenceViewer">Evidence Viewer</span></a>
+          <div class="sidebar-section-label">系统</div>
+          <a href="#" class="sidebar-item" data-view="runtime"><span class="sidebar-icon runtime-icon">&#9889;</span><span>Agent Runtime</span></a>
+          <a href="#" class="sidebar-item" data-view="evidenceViewer"><span class="sidebar-icon">🔗</span><span>Evidence</span></a>
+          <a href="#" class="sidebar-item" data-view="capabilityExplorer"><span class="sidebar-icon">📋</span><span>Capability</span></a>
         </div>
         <div class="sidebar-divider"></div>
-        <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="nav.section.analysis">分析视图</div>
-          <a href="#" class="sidebar-item" data-view="product"><span class="sidebar-icon product-icon">&#127991;</span><span data-i18n="nav.product">商品分析</span></a>
-          <a href="#" class="sidebar-item" data-view="trend"><span class="sidebar-icon trend-icon">&#128200;</span><span data-i18n="nav.trend">趋势观察</span></a>
-          <a href="#" class="sidebar-item" data-view="archive"><span class="sidebar-icon archive-icon">&#128451;</span><span data-i18n="nav.archive">历史归档</span></a>
-          <a href="#" class="sidebar-item" data-view="memory"><span class="sidebar-icon memory-icon">&#129504;</span><span data-i18n="nav.memory">Memory 成长</span></a>
-          <a href="#" class="sidebar-item" data-view="runtime"><span class="sidebar-icon runtime-icon">&#9889;</span><span data-i18n="nav.runtime">Runtime 执行</span></a>
-        </div>
-        <div class="sidebar-divider"></div>
-        <div class="sidebar-section">
-          <a href="#" class="sidebar-item" data-view="agentConfig"><span class="sidebar-icon config-icon">&#9881;</span><span data-i18n="nav.agentConfig">Agent 配置</span></a>
+        <!-- Legacy — hidden by default, collapsed -->
+        <div class="sidebar-section legacy-section" style="display:none">
+          <div class="sidebar-section-label">Legacy</div>
+          <a href="#" class="sidebar-item" data-view="inbox" data-filter="all"><span class="sidebar-icon">📥</span><span>Inbox (旧)</span></a>
+          <a href="#" class="sidebar-item" data-view="memory"><span class="sidebar-icon memory-icon">&#129504;</span><span>Memory (旧)</span></a>
+          <a href="#" class="sidebar-item" data-view="agentConfig"><span class="sidebar-icon config-icon">&#9881;</span><span>Agent 配置 (旧)</span></a>
+          <a href="#" class="sidebar-item" data-view="agentSession"><span class="sidebar-icon">🤖</span><span>Agent Session (旧)</span></a>
         </div>
         <div class="sidebar-footer">
           <div class="sidebar-footer-header"><span data-i18n="sidebar.agent">运营Agent</span><span class="status-badge running" data-i18n="sidebar.running">运行中</span></div>
@@ -74,7 +76,34 @@
       </nav>
 
       <section class="center-panel" id="centerPanel">
-        <div id="view-inbox" class="view-container active">
+        <!-- P0007.3: Situation Feed — primary view, replaces old inbox as default -->
+        <div id="view-situations" class="view-container active">
+          <div class="view-scroll">
+            <div class="situation-feed-header">
+              <div><h2 class="view-title">今日经营</h2><p class="view-subtitle" id="situationFeedSubtitle">加载中...</p></div>
+              <div class="situation-feed-tabs" id="situationFeedTabs">
+                <button class="feed-tab active" data-filter="all">全部</button>
+                <button class="feed-tab" data-filter="open">待我处理</button>
+                <button class="feed-tab" data-filter="agent">Agent 处理中</button>
+                <button class="feed-tab" data-filter="partial">已处理</button>
+              </div>
+            </div>
+            <div id="situationFeedList" class="situation-feed-list"><p class="muted placeholder">加载 Situation 中...</p></div>
+          </div>
+        </div>
+
+        <!-- P0007.3: Situation Detail -->
+        <div id="view-situationDetail" class="view-container">
+          <div class="view-scroll">
+            <div class="situation-detail-header">
+              <button class="btn-icon" id="situationBackBtn">← 返回列表</button>
+              <span class="situation-lifecycle-badge" id="situationLifecycleBadge">待处理</span>
+            </div>
+            <div id="situationDetailContent"></div>
+          </div>
+        </div>
+
+        <div id="view-inbox" class="view-container">
           <div class="view-scroll">
             <div class="inbox-header"><div><h2 class="inbox-title" data-i18n="inbox.title">今日洞察</h2><p class="inbox-subtitle" id="inboxSubtitle" data-i18n="inbox.subtitle">运营Agent 正在分析数据...</p></div><div class="inbox-header-right"><span class="inbox-updated" id="inboxUpdated">--</span><button id="refreshInboxBtn" class="btn-icon" title="Refresh">&#8635;</button></div></div>
             <div class="stat-row" id="statRow">
