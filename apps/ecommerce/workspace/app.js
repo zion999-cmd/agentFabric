@@ -925,7 +925,7 @@ async function loadSituationDetail(situationId) {
     html += '<h3 class="situation-layer-title">🤖 Agent 怎么理解</h3>';
     html += '<div class="situation-layer-body">';
     html += '<p class="muted">Agent 分析: ' + escHtml(desc) + '</p>';
-    html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\')">[查看 Evidence →]</p>';
+    html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');setTimeout(function(){loadEvidenceViewer()},100)">[查看 Evidence →]</p>';
     html += '</div></div>';
 
     // Layer 3: Agent 建议什么
