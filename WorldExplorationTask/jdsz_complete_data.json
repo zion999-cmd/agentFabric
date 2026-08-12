@@ -1,0 +1,3509 @@
+{
+  "用户分析": {
+    "title": "用户概况",
+    "url": "https://jdsz.jd.com/szweb/view/customer/cust-summarys-temp.html?sz=%2Fszweb%2Fsz%2Fview%2Fgrowth%2Fsummary.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n用户概览\n\n用户概况\n用户洞察\n人群列表\n触达记录\n\n用户分析\n\n访客分析\n未购访客分析\n新老客分析\n\n关注店铺用户分析\n\n关注店铺用户概况\n关注店铺用户特征\n关注店铺用户质量\n\nPlus会员分析\n\nPlus会员概况\n会员权益效果\n\n品牌会员分析\n\n会员概况\n会员特征\n\n用户增长运营\n\n购物车营销\n定向人群营销效果\n定向人群营销管理\n客户概览\n客户运营诊断及部分核心数据，限时免费开放体验中。数据预计14点前更新，若有延迟请耐心等待。\n按天查询(2026-08-11至2026-08-11)\n店铺消费者资产\n可运营消费者资产\n267,501\n较前一天\n+0.23%\n较去年同期\n-10.50%\n较相似店铺\n-42.04%\n潜在客户\n生成人群\n253,051占总资产: 94.60%\n较前一天\n+0.24%\n较去年同期\n-11.08%\n较相似店铺\n-44.12%\n近30天新客\n生成人群\n558占总资产: 0.21%\n较前一天\n+0.36%\n较去年同期\n-33.41%\n较相似店铺\n+7.93%\n365天存量客户\n生成人群\n13,892占总资产: 5.19%\n较前一天-0.03%较去年同期+3.15%较相似店铺+60.92%\n重点运营场景\n分析日期范围：2026-07-13 ~ 2026-08-11\n拉新运营\n生成人群\n潜在客户及近 30 天新客户\n253,609\n成交客户数贡献\n78.70%\n成交金额贡献\n77.39%\n存量客户运营\n生成人群\n近 365 天存量客户\n13,892\n成交客户数贡献\n21.30%\n成交金额贡献\n22.61%\n关注店铺用户运营\n生成人群\n有效用户总数\n68,661\n成交客户数贡献\n14.25%\n成交金额贡献\n18.39%\n会员运营\n生成人群\n开卡会员总数\n11,491\n成交客户数贡献\n10.86%\n成交金额贡献\n20.61%\n转化分析\n商品偏好\n拉新用户运营趋势\n拉新用户转化分析\n对比目标：\n上一周期\n去年同期\n相似店铺\n潜在客户及近 30 天新客户\n253,609\n对比相似店铺：-44.05%\n进店\n9,339\n对比相似店铺：+29.58%\n浏览商详\n8,653\n对比相似店铺：+24.16%\n加购\n1,115\n对比相似店铺：+28.16%\n成交\n558\n对比相似店铺：+21.30%\n进店率：3.68%\n对比相似店铺：+22.77%\n进店 - 浏览率：92.65%\n对比相似店铺：-1.90%\n浏览 - 加购率：12.89%\n对比相似店铺：+38.44%\n加购 - 成交率：50.04%\n对比相似店铺：+30.82%\n拉新用户运营诊断\n拉新运营2个指标异常\n进店-浏览率92.65%低于90.48%的相似店铺，较上一周期排名升高了 1.06%\n加购-成交率50.04%低于24.87%的相似店铺，较上一周期排名降低了 10.05%\n由京东数坊提供支持，更丰富的用户洞察与运营策略，立即体验\n01运营配置\n对接系统\n请选择\n数据类型\n京东PIN\n投放账户ID\n请输入投放账户ID\n0 / 40\n02选择人群\n京准通DMP系统配额为3000个/日，店铺配额为10个/日。注意：超出京准通DMP系统或店铺配额将会推送失败，今日店铺配额剩余：0个。人群包推送预计耗时0.5-4小时，若有延迟请耐心等待。\n潜在客户\n253,051\n近30天新客\n558\n潜在客户及近30天新客\n253,609\n03推广商品\n \n暂无数据\n点击将会扣除人群包推送配额，未推送成功则返还人群包配额开始推送取消\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "用户洞察",
+        "href": "/szweb/view/customer/cus-insight-temp.html"
+      },
+      {
+        "text": "人群列表",
+        "href": "/szweb/view/customer/audience-list-temp.html"
+      },
+      {
+        "text": "触达记录",
+        "href": "/szweb/view/customer/audience-reach-temp.html"
+      },
+      {
+        "text": "访客分析",
+        "href": "/szweb/view/user/visitor-analysis-temp.html"
+      },
+      {
+        "text": "未购访客分析",
+        "href": "/szweb/view/customer/customerpots-temp.html"
+      },
+      {
+        "text": "新老客分析",
+        "href": "/szweb/view/customer/customer-ords-temp.html"
+      },
+      {
+        "text": "关注店铺用户概况",
+        "href": "/szweb/view/customer/fans-summary-temp.html"
+      },
+      {
+        "text": "关注店铺用户特征",
+        "href": "/szweb/view/customer/fans-feature-temp.html"
+      },
+      {
+        "text": "关注店铺用户质量",
+        "href": "/szweb/view/customer/fans-quality-temp.html"
+      },
+      {
+        "text": "Plus会员概况",
+        "href": "/szweb/view/user/plus-member-summary-temp.html"
+      },
+      {
+        "text": "会员权益效果",
+        "href": "/szweb/view/user/member-benefits-temp.html"
+      },
+      {
+        "text": "会员概况",
+        "href": "/szweb/view/customer/member-overview-temp.html"
+      },
+      {
+        "text": "会员特征",
+        "href": "/szweb/view/customer/member-feature-temp.html"
+      },
+      {
+        "text": "购物车营销",
+        "href": "/szweb/view/venders/activity-lists-temp.html"
+      },
+      {
+        "text": "定向人群营销效果",
+        "href": "/szweb/view/venders/activity-indexs-temp.html"
+      },
+      {
+        "text": "定向人群营销管理",
+        "href": "/szweb/view/venders/analysis-lists-temp.html"
+      },
+      {
+        "text": "帮助",
+        "href": "https://jdsz.jd.com/sz/view/help/indexs.html"
+      },
+      {
+        "text": "个人中心",
+        "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html"
+      },
+      {
+        "text": "首页",
+        "href": "https://jdsz.jd.com/szweb/sz/view/index/home.html"
+      },
+      {
+        "text": "实时",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSummarysNew.html"
+      },
+      {
+        "text": "流量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/viewflow/viewStats.html"
+      },
+      {
+        "text": "商品",
+        "href": "https://jdsz.jd.com/sz/view/productAnalysis/productSummarys.html"
+      },
+      {
+        "text": "交易",
+        "href": "https://jdsz.jd.com/sz/view/dealAnalysis/dealSummarys.html"
+      },
+      {
+        "text": "服务",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html"
+      },
+      {
+        "text": "营销",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/marketing/marketingOverview.html"
+      },
+      {
+        "text": "供应链",
+        "href": "https://jdsz.jd.com/stockweb/sz/view/ihs/InventoryHealth.html"
+      },
+      {
+        "text": "客户",
+        "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html"
+      },
+      {
+        "text": "行业",
+        "href": "https://jdsz.jd.com/szweb/sz/view/industryMarket/industryRealTimeNew.html"
+      },
+      {
+        "text": "竞争",
+        "href": "https://jdsz.jd.com/sz/view/competitionAnalysis/shopOverviews.html"
+      },
+      {
+        "text": "揽客",
+        "href": "https://jdsz.jd.com/sz/view/vender/shopping/activityLists.html"
+      },
+      {
+        "text": "报表",
+        "href": "https://jdsz.jd.com/sz/view/selfHelp/reportLists.html"
+      },
+      {
+        "text": "业务专区",
+        "href": "https://jdsz.jd.com/sz/view/businessZone/wanjia.html"
+      },
+      {
+        "text": "智能工具",
+        "href": "https://jdsz.jd.com/szweb/sz/view/facilitator/smartSelection.html"
+      },
+      {
+        "text": "培训",
+        "href": "https://jdsz.jd.com/sz/view/knowledgeCenter/school.html"
+      },
+      {
+        "text": "客户洞察",
+        "href": "https://jdsz.jd.com/szweb/sz/view/custom/customerInsight.html"
+      },
+      {
+        "text": "新老客户分析",
+        "href": "https://jdsz.jd.com/sz/view/cust/custs.html"
+      },
+      {
+        "text": "未购访客分析",
+        "href": "https://jdsz.jd.com/sz/view/cust/potcusts.html"
+      },
+      {
+        "text": "学生用户概况",
+        "href": "https://jdsz.jd.com/szweb/sz/view/custom/studentOverview.html"
+      },
+      {
+        "text": "PLUS会员概况",
+        "href": "https://jdsz.jd.com/sz/view/plusMember/memberSummary.html"
+      },
+      {
+        "text": "PLUS会员权益",
+        "href": "https://jdsz.jd.com/szweb/sz/view/plusMember/memberBenefits.html"
+      },
+      {
+        "text": "关注店铺用户概况",
+        "href": "https://jdsz.jd.com/sz/view/shopFans/fansSummary.html"
+      },
+      {
+        "text": "关注店铺用户特征",
+        "href": "https://jdsz.jd.com/sz/view/shopFans/fansFeature.html"
+      },
+      {
+        "text": "关注店铺用户质量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/quality/dataBoard.html"
+      },
+      {
+        "text": "会员概况",
+        "href": "https://jdsz.jd.com/szweb/sz/view/brandMember/memberOverview.html"
+      },
+      {
+        "text": "会员特征",
+        "href": "https://jdsz.jd.com/sz/view/brandMember/memberFeature.html"
+      },
+      {
+        "text": "人群列表",
+        "href": "https://jdsz.jd.com/szweb/sz/view/custom/audienceList.html"
+      },
+      {
+        "text": "触达记录",
+        "href": "https://jdsz.jd.com/szweb/sz/view/custom/audienceReach.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "//jdsz.jd.com/sz/common/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "//jdsz.jd.com/sz/common/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "//jdsz.jd.com/sz/common/商智店铺版用户注销.pdf"
+      },
+      {
+        "text": "资费说明",
+        "href": "https://jdsz.jd.com/szweb/sz/view/help/tariffDess.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "用户概况",
+          "用户概况",
+          "用户洞察",
+          "用户洞察",
+          "人群列表",
+          "人群列表",
+          "触达记录",
+          "触达记录"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "用户概况",
+          "用户概况",
+          "用户洞察",
+          "用户洞察",
+          "人群列表",
+          "人群列表",
+          "触达记录",
+          "触达记录"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "访客分析",
+          "访客分析",
+          "未购访客分析",
+          "未购访客分析",
+          "新老客分析",
+          "新老客分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "访客分析",
+          "访客分析",
+          "未购访客分析",
+          "未购访客分析",
+          "新老客分析",
+          "新老客分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "关注店铺用户概况",
+          "关注店铺用户概况",
+          "关注店铺用户特征",
+          "关注店铺用户特征",
+          "关注店铺用户质量",
+          "关注店铺用户质量"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "关注店铺用户概况",
+          "关注店铺用户概况",
+          "关注店铺用户特征",
+          "关注店铺用户特征",
+          "关注店铺用户质量",
+          "关注店铺用户质量"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "Plus会员概况",
+          "Plus会员概况",
+          "会员权益效果",
+          "会员权益效果"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "Plus会员概况",
+          "Plus会员概况",
+          "会员权益效果",
+          "会员权益效果"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "会员概况",
+          "会员概况",
+          "会员特征",
+          "会员特征"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "会员概况",
+          "会员概况",
+          "会员特征",
+          "会员特征"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "购物车营销",
+          "购物车营销",
+          "定向人群营销效果",
+          "定向人群营销效果",
+          "定向人群营销管理",
+          "定向人群营销管理"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "购物车营销",
+          "购物车营销",
+          "定向人群营销效果",
+          "定向人群营销效果",
+          "定向人群营销管理",
+          "定向人群营销管理"
+        ]
+      },
+      {
+        "class": "top-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      },
+      {
+        "class": "menu-list clearfix",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 12,
+        "header": "商品信息商品分区拉新用户操作访客数加购人数成交转化率成交金额"
+      }
+    ],
+    "charts": [],
+    "chartCount": 21
+  },
+  "供应链": {
+    "title": "库存预警",
+    "url": "https://jdsz.jd.com/szweb/view/inventory/Inventory-health-temp.html?sz=%2Fstockweb%2Fsz%2Fview%2Fihs%2FInventoryHealth.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n供应链分析\n\n库存预警\n布局诊断\n入仓模拟\n库存分析\n库存诊断\n配送分析\n库存预警\n特别说明：本页面数据仅作为运营分析使用，不作为财务结算依据。\n2026-08-11\n40\n健康度说明\n所在行业：茗茶\n当前库存健康度一般，请再接再厉！\n结合京东大数据行业分析和店铺的供应链运营数据，优化建议如下：\n1、需及时关注滞销商品，并控制库存水位\n2、需及时关注缺货情况，提高现货率，避免销售损失\n规则说明\n当前店铺得分\n行业均值得分\n周转\n滞销率\n现货率\nundefined\n周转\n 历史趋势\n下载\n件数周转 5304.39 天\nPV现货率\n 历史趋势\n98.70%\n打败16%的同行\n差\n畅销品现货率\n98.70%\n滞销库存占比\n 历史趋势\n0.00%\n打败100%的同行\n优秀\n不动销库存占比\n4.19%\n滞销库存商品数占比\n0.00%\n预警明细\n全国\n分区\n缺货\n0\n畅销品 0\n预估7日销售损失\n￥0\n即将缺货\n0\n畅销品 0\n7日成交金额\n￥0\n即将滞销\n--\n非畅销 --\n滞销\n--\n非畅销 --\n滞销库存价值\n￥--\n不动销\n10\n不动销库存价值\n￥311.2万\n全部类目\n所有类型\n全部仓库\n支持批量查询多个SKU...\n查询\n下载数据\n商品信息（为畅销品 ）\t类目\t库房信息\t缺货时长\t采购在途\t操作\n缺货定义：可用库存=0，即件数周转=0\n总共0条\n1\n10条/页\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "布局诊断",
+        "href": "/szweb/view/inventory/stock-diagnosis-temp.html"
+      },
+      {
+        "text": "入仓模拟",
+        "href": "/szweb/view/inventory/in-store-temp.html"
+      },
+      {
+        "text": "库存分析",
+        "href": "/szweb/view/inventory/supplys-temp.html"
+      },
+      {
+        "text": "库存诊断",
+        "href": "/szweb/view/inventory/supplys-diagnosis-temp.html"
+      },
+      {
+        "text": "配送分析",
+        "href": "/szweb/view/inventory/deliverys-temp.html"
+      },
+      {
+        "text": "帮助",
+        "href": "https://jdsz.jd.com/sz/view/help/indexs.html"
+      },
+      {
+        "text": "个人中心",
+        "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html"
+      },
+      {
+        "text": "首页",
+        "href": "https://jdsz.jd.com/szweb/sz/view/index/home.html"
+      },
+      {
+        "text": "实时",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSummarysNew.html"
+      },
+      {
+        "text": "流量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/viewflow/viewStats.html"
+      },
+      {
+        "text": "商品",
+        "href": "https://jdsz.jd.com/sz/view/productAnalysis/productSummarys.html"
+      },
+      {
+        "text": "交易",
+        "href": "https://jdsz.jd.com/sz/view/dealAnalysis/dealSummarys.html"
+      },
+      {
+        "text": "服务",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html"
+      },
+      {
+        "text": "营销",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/marketing/marketingOverview.html"
+      },
+      {
+        "text": "供应链",
+        "href": "https://jdsz.jd.com/stockweb/sz/view/ihs/InventoryHealth.html"
+      },
+      {
+        "text": "客户",
+        "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html"
+      },
+      {
+        "text": "行业",
+        "href": "https://jdsz.jd.com/szweb/sz/view/industryMarket/industryRealTimeNew.html"
+      },
+      {
+        "text": "竞争",
+        "href": "https://jdsz.jd.com/sz/view/competitionAnalysis/shopOverviews.html"
+      },
+      {
+        "text": "揽客",
+        "href": "https://jdsz.jd.com/sz/view/vender/shopping/activityLists.html"
+      },
+      {
+        "text": "报表",
+        "href": "https://jdsz.jd.com/sz/view/selfHelp/reportLists.html"
+      },
+      {
+        "text": "业务专区",
+        "href": "https://jdsz.jd.com/sz/view/businessZone/wanjia.html"
+      },
+      {
+        "text": "智能工具",
+        "href": "https://jdsz.jd.com/szweb/sz/view/facilitator/smartSelection.html"
+      },
+      {
+        "text": "培训",
+        "href": "https://jdsz.jd.com/sz/view/knowledgeCenter/school.html"
+      },
+      {
+        "text": "布局诊断",
+        "href": "https://jdsz.jd.com/stockdiagnosisweb/sz/view/il/LayoutDiagnosis.html"
+      },
+      {
+        "text": "入仓模拟",
+        "href": "https://jdsz.jd.com/stocksimulweb/sz/view/supplyChain/warehousingCalculator.html"
+      },
+      {
+        "text": "库存分析",
+        "href": "https://jdsz.jd.com/supplyweb/sz/view/scm/storeAnalysis.html"
+      },
+      {
+        "text": "库存诊断",
+        "href": "https://jdsz.jd.com/stockdiagnosisweb-diagnosis/sz/view/diagnosis/InventoryAnalysis.html"
+      },
+      {
+        "text": "配送分析",
+        "href": "https://jdsz.jd.com/supplyweb/sz/view/scm/deliveryAnalysis.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "//jdsz.jd.com/common/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "//jdsz.jd.com/common/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "//jdsz.jd.com/common/商智店铺版用户注销.pdf"
+      },
+      {
+        "text": "资费说明",
+        "href": "https://jdsz.jd.com/szweb/sz/view/help/tariffDess.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "库存预警",
+          "库存预警",
+          "布局诊断",
+          "布局诊断",
+          "入仓模拟",
+          "入仓模拟",
+          "库存分析",
+          "库存分析",
+          "库存诊断",
+          "库存诊断",
+          "配送分析",
+          "配送分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "库存预警",
+          "库存预警",
+          "布局诊断",
+          "布局诊断",
+          "入仓模拟",
+          "入仓模拟",
+          "库存分析",
+          "库存分析",
+          "库存诊断",
+          "库存诊断",
+          "配送分析",
+          "配送分析"
+        ]
+      },
+      {
+        "class": "top-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      },
+      {
+        "class": "menu-list clearfix",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "header": "商品信息（为畅销品 ）\t类目\t库房信息\t缺货时长\t采购在途\t操作"
+      }
+    ],
+    "charts": [],
+    "chartCount": 13
+  },
+  "订单明细": {
+    "title": "订单明细",
+    "url": "https://jdsz.jd.com/szweb/view/tradeAnalysis/orderDetails.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n交易概览\n\n交易概况\n订单明细\n订单明细\n当前：2026-08-11\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n成交订单\n取消订单\n售后退款订单\n渠道\n全部\nSPU\n最多输入100个SPU\n0\n/100\n订单ID\n最多输入100个，英文逗号分隔\n0\n/100\n查询\n重置\n数据明细\n订单明细页面数据量较大，请您耐心等待\n下载数据\n订单号\n\t\n商品名称\n\t\nSKU\n\t\nSPU\n\t\n优惠前金额\n\t\n成交订单商品件数\n\t\n优惠金额\n\t\n订单金额\n\t\n运费\n\t\n服务费\n\t\n下单时间\n\t\n付款时间\n\t\n付款方式\n\n\n3587239004746714\n\t\n祁门红茶官方旗舰店特级正宗茶叶中秋礼盒送人礼品送礼长辈父母 祁红-福合360g\n\t\n10072457189341\n\t\n10023968939218\n\t\n¥1,650.00\n\t\n2\n\t\n¥0.00\n\t\n¥1,390.00\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 15:08:17\n\t\n2026-08-11 15:08:32\n\t\n在线支付\n\n\n3587490000351115\n\t\n祁门红茶官方旗舰店茶叶中秋礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗\n\t\n10072472854693\n\t\n10023968977041\n\t\n¥700.00\n\t\n3\n\t\n¥0.00\n\t\n¥590.00\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 19:55:42\n\t\n2026-08-11 19:56:08\n\t\n在线支付\n\n\n3587432004888452\n\t\n祁门红茶官方旗舰店茶叶中秋礼盒装高档茶叶独立小包装送礼长辈父母 红润东方160g特茗\n\t\n10072472854693\n\t\n10023968977041\n\t\n¥700.00\n\t\n3\n\t\n¥0.00\n\t\n¥590.00\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 19:50:20\n\t\n2026-08-11 19:54:42\n\t\n在线支付\n\n\n3587416011896287\n\t\n祁门红茶官方旗舰店茶叶中秋礼盒装高档茶叶独立小包装送礼长辈父母 名师工坊-汉植130g\n\t\n10183926558880\n\t\n10023968977041\n\t\n¥600.00\n\t\n1\n\t\n¥0.00\n\t\n¥490.00\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 20:49:56\n\t\n2026-08-11 20:50:21\n\t\n在线支付\n\n\n3587419011866444\n\t\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 特级祁红香螺300g\n\t\n10072459153406\n\t\n10023923194464\n\t\n¥556.00\n\t\n6\n\t\n¥160.40\n\t\n¥385.80\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 11:47:33\n\t\n2026-08-11 11:47:42\n\t\n在线支付\n\n\n3587496017442241\n\t\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺200g（特级/一等）\n\t\n10072459317818\n\t\n10023922033080\n\t\n¥300.00\n\t\n1\n\t\n¥62.00\n\t\n¥228.20\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 21:27:32\n\t\n2026-08-11 21:27:37\n\t\n在线支付\n\n\n3587486000518489\n\t\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺200g（特级/一等）\n\t\n10072459317818\n\t\n10023922033080\n\t\n¥300.00\n\t\n1\n\t\n¥62.00\n\t\n¥228.20\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 12:08:45\n\t\n2026-08-11 12:08:50\n\t\n在线支付\n\n\n3587453013514417\n\t\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺200g（特级/一等）\n\t\n10072459317818\n\t\n10023922033080\n\t\n¥300.00\n\t\n1\n\t\n¥62.00\n\t\n¥228.20\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 16:23:35\n\t\n2026-08-11 16:23:40\n\t\n在线支付\n\n\n3587485000379633\n\t\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 特级祁红毛峰300g\n\t\n10106674469758\n\t\n10023923194464\n\t\n¥278.00\n\t\n3\n\t\n¥0.00\n\t\n¥218.00\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 11:43:47\n\t\n2026-08-11 11:44:01\n\t\n在线支付\n\n\n3587487016992645\n\t\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺200g（特级/一等）\n\t\n10072459317818\n\t\n10023922033080\n\t\n¥300.00\n\t\n1\n\t\n¥62.00\n\t\n¥216.30\n\t\n¥0.00\n\t\n¥0.00\n\t\n2026-08-11 13:48:22\n\t\n2026-08-11 13:48:31\n\t\n在线支付\n总共36条\n1\n2\n3\n4\n10条/页\n跳至\n页\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "订单明细",
+        "href": "/szweb/view/tradeAnalysis/orderDetails.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "交易概况",
+          "交易概况",
+          "订单明细",
+          "订单明细"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "交易概况",
+          "交易概况",
+          "订单明细",
+          "订单明细"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 11,
+        "header": ""
+      }
+    ],
+    "charts": [],
+    "chartCount": 48
+  },
+  "商品明细": {
+    "title": "商品明细",
+    "url": "https://jdsz.jd.com/szweb/view/product/productDetail.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n商品概览\n\n商品概况\n商品明细\n异常商品\n类目分析\n属性分析\n\n经营视角\n\n单品监控\n新品分析\n\n活动商品分析\n\n打标新品分析\n预约商品分析\n预售商品分析\n商品明细\n当前：2026-08-13 04:11:28\n实时\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n有曝光但无访问或成交的商品仅在近2个月时间内展示，暂只支持昨天、天的时间维度，全部和APP渠道。\nSPU\nSKU\n品类\n全部\n渠道\n全部\n查询\n重置\n数据明细\n指标配置\n下载数据\n商品ID\n\t\n用英文逗号或空格分隔\n0\n/\n100\n关键词\n昨日真实值\n仅看关注商品\n序号\n\t\n商品信息\n\t\n成交金额\n\t\n成交商品件数\n\t\n成交转化率\n\t\n商品浏览量\n\t\n商品访客数\n\t\n操作\n\n\n1\n\t\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300g*2【两罐装送礼袋】\nSPU: 10023923194464\n有机会0出资享消费补贴券 立即投广\n\t\n¥286.90\n¥1,897.81\n\t\n3\n15\n\t\n11.11%\n6.25%\n\t\n20\n630\n\t\n9\n224\n\t\n取消\n单品分析\n广告推广\n\n\n2\n\t\n祁门红茶 精美手提礼袋\nSPU: 10024709069442\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥0.00\n\t\n1\n8\n\t\n--\n-\n\t\n0\n0\n\t\n0\n0\n\t\n关注\n单品分析\n广告推广\n\n\n3\n\t\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺【2罐装】【赠礼品袋】\nSPU: 10023922033080\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥1,992.50\n\t\n0\n8\n\t\n0.00%\n5.33%\n\t\n18\n412\n\t\n8\n150\n\t\n关注\n单品分析\n广告推广\n\n\n4\n\t\n祁门红茶官方旗舰店2026新茶叶特级正宗香螺口粮自己喝送长辈父母家长 特级祁红香螺200g【特惠-2盒装】\nSPU: 10024736027634\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥1,123.70\n\t\n0\n12\n\t\n0.00%\n6.98%\n\t\n7\n105\n\t\n5\n43\n\t\n关注\n单品分析\n广告推广\n\n\n5\n\t\n祁门红茶官方旗舰店正宗新茶叶自己喝口粮茶祁红工夫 祁红工夫250g\nSPU: 10023969721350\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥0.00\n\t\n0\n0\n\t\n0.00%\n0.00%\n\t\n3\n45\n\t\n3\n22\n\t\n关注\n单品分析\n广告推广\n\n\n6\n\t\n祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100g\nSPU: 10024700347561\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥1,856.35\n\t\n0\n9\n\t\n0.00%\n5.13%\n\t\n2\n67\n\t\n2\n39\n\t\n关注\n单品分析\n广告推广\n\n\n7\n\t\n祁门Keemun祁门红茶特级茶叶自己喝口粮茶祁红毛峰送礼送长辈 茉莉王妃特级礼盒168g\nSPU: 10023970416377\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥0.00\n\t\n0\n0\n\t\n0.00%\n0.00%\n\t\n2\n14\n\t\n1\n8\n\t\n关注\n单品分析\n广告推广\n\n\n8\n\t\n祁门红茶官方旗舰店特级正宗茶叶中秋礼盒送人礼品送长辈父母 礼盒装144g1盒玫瑰皇后特级\nSPU: 10023970377367\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n-\n\t\n0\n-\n\t\n0.00%\n-\n\t\n1\n-\n\t\n1\n-\n\t\n关注\n单品分析\n广告推广\n\n\n9\n\t\n祁门红茶官方旗舰店正宗高档红茶礼盒自己喝口粮茶叶毛峰送礼送长辈 1915祁红香螺200g（同款正装）\nSPU: 10024931064504\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥445.00\n\t\n0\n3\n\t\n0.00%\n18.75%\n\t\n1\n31\n\t\n1\n16\n\t\n关注\n单品分析\n广告推广\n\n\n10\n\t\n祁门红茶官方旗舰店茉莉花茶特级正宗精品茶叶自己喝高档礼盒送礼领导 茉莉王妃特级80g/听\nSPU: 10028584324083\n有机会0出资享消费补贴券 立即投广\n\t\n¥0.00\n¥0.00\n\t\n0\n0\n\t\n0.00%\n0.00%\n\t\n3\n8\n\t\n1\n4\n\t\n关注\n单品分析\n广告推广\n总共13条\n1\n2\n10 条/页\n跳至页\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "商品明细",
+        "href": "/szweb/view/product/productDetail.html"
+      },
+      {
+        "text": "异常商品",
+        "href": "/szweb/view/product/abnormal-product-temp.html"
+      },
+      {
+        "text": "类目分析",
+        "href": "/szweb/view/product/category-analyze-temp.html"
+      },
+      {
+        "text": "属性分析",
+        "href": "/szweb/view/product/attr-analyze-temp.html"
+      },
+      {
+        "text": "单品监控",
+        "href": "/szweb/view/product/single-product-monitor-temp.html"
+      },
+      {
+        "text": "新品分析",
+        "href": "/szweb/view/product/new-product-analysis-temp.html"
+      },
+      {
+        "text": "打标新品分析",
+        "href": "/szweb/view/product/mark-new-product-temp.html"
+      },
+      {
+        "text": "预约商品分析",
+        "href": "/szweb/view/product/order-product-temp.html"
+      },
+      {
+        "text": "预售商品分析",
+        "href": "/szweb/view/product/presell-product-temp.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item active",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "商品概况",
+          "商品概况",
+          "商品明细",
+          "商品明细",
+          "异常商品",
+          "异常商品",
+          "类目分析",
+          "类目分析",
+          "属性分析",
+          "属性分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "商品概况",
+          "商品概况",
+          "商品明细",
+          "商品明细",
+          "异常商品",
+          "异常商品",
+          "类目分析",
+          "类目分析",
+          "属性分析",
+          "属性分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "单品监控",
+          "单品监控",
+          "新品分析",
+          "新品分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "单品监控",
+          "单品监控",
+          "新品分析",
+          "新品分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "打标新品分析",
+          "打标新品分析",
+          "预约商品分析",
+          "预约商品分析",
+          "预售商品分析",
+          "预售商品分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "打标新品分析",
+          "打标新品分析",
+          "预约商品分析",
+          "预约商品分析",
+          "预售商品分析",
+          "预售商品分析"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 11,
+        "header": ""
+      }
+    ],
+    "charts": [],
+    "chartCount": 74
+  },
+  "异常商品": {
+    "title": "异常商品",
+    "url": "https://jdsz.jd.com/szweb/view/product/abnormal-product-temp.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n商品概览\n\n商品概况\n商品明细\n异常商品\n类目分析\n属性分析\n\n经营视角\n\n单品监控\n新品分析\n\n活动商品分析\n\n打标新品分析\n预约商品分析\n预售商品分析\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "商品明细",
+        "href": "/szweb/view/product/productDetail.html"
+      },
+      {
+        "text": "异常商品",
+        "href": "/szweb/view/product/abnormal-product-temp.html"
+      },
+      {
+        "text": "类目分析",
+        "href": "/szweb/view/product/category-analyze-temp.html"
+      },
+      {
+        "text": "属性分析",
+        "href": "/szweb/view/product/attr-analyze-temp.html"
+      },
+      {
+        "text": "单品监控",
+        "href": "/szweb/view/product/single-product-monitor-temp.html"
+      },
+      {
+        "text": "新品分析",
+        "href": "/szweb/view/product/new-product-analysis-temp.html"
+      },
+      {
+        "text": "打标新品分析",
+        "href": "/szweb/view/product/mark-new-product-temp.html"
+      },
+      {
+        "text": "预约商品分析",
+        "href": "/szweb/view/product/order-product-temp.html"
+      },
+      {
+        "text": "预售商品分析",
+        "href": "/szweb/view/product/presell-product-temp.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "商品概况",
+          "商品概况",
+          "商品明细",
+          "商品明细",
+          "异常商品",
+          "异常商品",
+          "类目分析",
+          "类目分析",
+          "属性分析",
+          "属性分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "商品概况",
+          "商品概况",
+          "商品明细",
+          "商品明细",
+          "异常商品",
+          "异常商品",
+          "类目分析",
+          "类目分析",
+          "属性分析",
+          "属性分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "单品监控",
+          "单品监控",
+          "新品分析",
+          "新品分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "单品监控",
+          "单品监控",
+          "新品分析",
+          "新品分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "打标新品分析",
+          "打标新品分析",
+          "预约商品分析",
+          "预约商品分析",
+          "预售商品分析",
+          "预售商品分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "打标新品分析",
+          "打标新品分析",
+          "预约商品分析",
+          "预约商品分析",
+          "预售商品分析",
+          "预售商品分析"
+        ]
+      }
+    ],
+    "tables": [],
+    "charts": [],
+    "chartCount": 11
+  },
+  "流量来源": {
+    "title": "流量来源",
+    "url": "https://jdsz.jd.com/szweb/view/view-source/view-flow.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n流量概览\n\n流量概况\n流量来源\n实时访客\n\n搜索流量分析\n\n搜索流量运营\n搜索数据概览\n商品排名定位\n实时搜索词\n搜索词分析\n\n推荐流量分析\n\n推荐数据概况\n推荐诊断\n视频效果\n\n付费流量分析\n\n广告概况\nCPS联盟\n共增营销\n流量来源\n当前：2026-08-13 04:11:46\n对比：2026-08-12 04:11:46\n实时\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n环比\n同比\n更多\n商品曝光相关指标暂不支持实时、近7天、近30天、按周、按月、自定义维度。目前仅包含搜索和推荐场域。\n商品曝光相关指标暂不支持实时、近7天、近30天、按周、按月、自定义维度。目前仅包含搜索和推荐场域。\n渠道\nAPP\n查询\n重置\n流量结构分析\n转化效果归属于：末次场域来源\n按场域来源\n按素材流转\n指标配置\n下载数据\n末次场域来源与末次来源的口径差异 详细说明 场域是具备用户心智的重要流量分发入口。本页面展示不同场域的流量获取情况，助您定位核心运营的重点场域！\n末次场域来源与末次来源的口径差异 详细说明 场域是具备用户心智的重要流量分发入口。本页面展示不同场域的流量获取情况，助您定位核心运营的重点场域！\n流量来源\n\t\n引入商详浏览量\n\t\n引入商详访客数\n\t\n引入成交客户数\n\t\n引入成交金额\n\t\n访客-成交转化率\n\t\nUV价值\n\t\n操作\n\n\n站内场域\n\t\n55\n-40.86%\n\t\n25\n-3.85%\n\t\n0\n-100.00%\n\t\n￥0.00\n-100.00%\n\t\n0.00%\n-100.00%\n\t\n0.00\n-100.00%\n\t\n趋势\n商品效果\n\n\n搜索\n\t\n37\n-32.73%\n\t\n13\n+62.50%\n\t\n0\n-\n\t\n￥0.00\n-\n\t\n0.00%\n-\n\t\n0.00\n-\n\t\n关注\n趋势\n来源明细\n商品效果\n\n\n频道\n\t\n8\n-42.86%\n\t\n7\n-36.36%\n\t\n0\n-100.00%\n\t\n￥0.00\n-100.00%\n\t\n0.00%\n-100.00%\n\t\n0.00\n-100.00%\n\t\n关注\n趋势\n来源明细\n商品效果\n\n\n游戏\n\t\n3\n-\n\t\n3\n-\n\t\n0\n-\n\t\n￥0.00\n-\n\t\n0.00%\n-\n\t\n0.00\n-\n\t\n关注\n趋势\n来源明细\n商品效果\n\n\n我的京东\n\t\n1\n-\n\t\n1\n-\n\t\n0\n-\n\t\n￥0.00\n-\n\t\n0.00%\n-\n\t\n0.00\n-\n\t\n关注\n趋势\n来源明细\n商品效果\n\n\n推荐\n\t\n6\n-\n\t\n1\n-\n\t\n0\n-\n\t\n￥0.00\n-\n\t\n0.00%\n-\n\t\n0.00\n-\n\t\n关注\n趋势\n来源明细\n商品效果\n\n\n站外渠道\n\t\n5\n-\n\t\n1\n-\n\t\n1\n0.00%\n\t\n￥286.90\n+20.04%\n\t\n100.00%\n-\n\t\n286.90\n-\n\t\n趋势\n商品效果\n流量对比分析\n流量来源\n推荐\n购物车\n频道\n搜索\n推荐\n购物车\n...\n4/4\n对比指标\n引入商详访客数\n引入商详浏览量\n引入成交客户数\n引入成交金额\n引入商详访客数\n...\n4/4\n引入商详浏览量\n引入商详访客数\n引入成交客户数\n引入成交金额\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "流量来源",
+        "href": "/szweb/view/view-source/view-flow.html"
+      },
+      {
+        "text": "实时访客",
+        "href": "/szweb/view/flow/real-uv-temp.html"
+      },
+      {
+        "text": "搜索流量运营",
+        "href": "/squidweb/view/flow/searchOperationsCenter.html"
+      },
+      {
+        "text": "搜索数据概览",
+        "href": "/squidweb/view/flow/searchOverview.html"
+      },
+      {
+        "text": "商品排名定位",
+        "href": "/squidweb/view/flow/rankLocation.html"
+      },
+      {
+        "text": "实时搜索词",
+        "href": "/szweb/view/flow/real-keyword-temp.html"
+      },
+      {
+        "text": "搜索词分析",
+        "href": "/squidweb/view/flow/searchKeywordAnalysis.html"
+      },
+      {
+        "text": "推荐数据概况",
+        "href": "/szweb/view/flow/recommend-summary-temp.html"
+      },
+      {
+        "text": "推荐诊断",
+        "href": "/szweb/view/flow/recommend-diagnosis-temp.html"
+      },
+      {
+        "text": "视频效果",
+        "href": "/szweb/view/flow/video-effect-temp.html"
+      },
+      {
+        "text": "广告概况",
+        "href": "/szweb/view/market/advert-summary.html"
+      },
+      {
+        "text": "CPS联盟",
+        "href": "/szweb/view/market/alliance-summary-temp.html"
+      },
+      {
+        "text": "共增营销",
+        "href": "/szweb/view/market/gzyx-temp.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item active",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link top-menu-item",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "流量概况",
+          "流量概况",
+          "流量来源",
+          "流量来源",
+          "实时访客",
+          "实时访客"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "流量概况",
+          "流量概况",
+          "流量来源",
+          "流量来源",
+          "实时访客",
+          "实时访客"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "搜索流量运营",
+          "搜索流量运营",
+          "搜索数据概览",
+          "搜索数据概览",
+          "商品排名定位",
+          "商品排名定位",
+          "实时搜索词",
+          "实时搜索词",
+          "搜索词分析",
+          "搜索词分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "搜索流量运营",
+          "搜索流量运营",
+          "搜索数据概览",
+          "搜索数据概览",
+          "商品排名定位",
+          "商品排名定位",
+          "实时搜索词",
+          "实时搜索词",
+          "搜索词分析",
+          "搜索词分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "推荐数据概况",
+          "推荐数据概况",
+          "推荐诊断",
+          "推荐诊断",
+          "视频效果",
+          "视频效果"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "推荐数据概况",
+          "推荐数据概况",
+          "推荐诊断",
+          "推荐诊断",
+          "视频效果",
+          "视频效果"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "广告概况",
+          "广告概况",
+          "CPS联盟",
+          "CPS联盟",
+          "共增营销",
+          "共增营销"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "广告概况",
+          "广告概况",
+          "CPS联盟",
+          "CPS联盟",
+          "共增营销",
+          "共增营销"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 8,
+        "header": ""
+      }
+    ],
+    "charts": [],
+    "chartCount": 80
+  },
+  "实时访客": {
+    "title": "实时访客",
+    "url": "https://jdsz.jd.com/szweb/view/flow/real-uv-temp.html?sz=%2Fszweb%2Fsz%2Fview%2FrealTime%2FrealUVsNew.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n流量概览\n\n流量概况\n流量来源\n实时访客\n\n搜索流量分析\n\n搜索流量运营\n搜索数据概览\n商品排名定位\n实时搜索词\n搜索词分析\n\n推荐流量分析\n\n推荐数据概况\n推荐诊断\n视频效果\n\n付费流量分析\n\n广告概况\nCPS联盟\n共增营销\n实时访客\n更新时间：2026-08-13 04:11:43\nAPP\n访客明细\n实时访客页面的流量来源为进入您的店铺页/商详页的【上一级】页面分类。\n全部流量来源\n全部被访问页面\n下载数据\n访问时间\n\t流量来源\t被访问页面\t访客位置\n\t访客名称\n\t当日累计浏览量\n\n03:44:29\t\n\n详情\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 一级蜜香祁红香螺250g*2\n\n\t广西钦州\tg****9\t6\n03:44:25\t\n\n详情\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁红毛峰300g*2【两罐装送礼袋】\n\n\t广西钦州\tg****9\t6\n03:43:47\t\n\n详情\n\n\t\n\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红香螺200g（特级/一等）\n\n\t广西钦州\tg****9\t6\n03:43:04\t\n\n优惠券\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 一级蜜香祁红香螺250g\n\n\t广西钦州\tg****9\t6\n03:42:35\t\n\n提交订单页\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 一级蜜香祁红香螺250g*2\n\n\t广西钦州\tg****9\t6\n03:40:02\t\n\n首页\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 一级蜜香祁红香螺250g\n\n\t广西钦州\tg****9\t6\n03:37:12\t\n\n店铺首页\n\n\t店铺商品\t江西吉安\tj****k\t2\n03:37:11\t\n\n搜索结果页 祁门功夫红茶\n\n\t店铺首页\t江西吉安\tj****k\t2\n02:37:31\t\n\n营销活动\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 一级蜜香祁红香螺250g\n\n\t山西太原\ty****l\t1\n02:05:05\t\n\n详情\n\n\t\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 特级祁红香螺300g\n\n\t贵州贵阳\t上****尖\t5\n总共 80 条记录\n1\n2\n3\n4\n5\n6\n8\n10条/页\n访客分析\n入店关键词TOP10\n了解更多\n关键词\t点击人数\t点击次数\n\n祁门红茶\n\t\n5\n\t5\n\n安徽祁门红茶官方旗舰店\n\t\n2\n\t2\n\n祁门红茶官方旗舰店\n\t\n1\n\t2\n\n4红茶\n\t\n1\n\t1\n浏览量分布TOP10\n浏览频次\t访客数\t访客数占比\n\n1次\n\t\n12\n\t44.44%\n\n2次\n\t\n4\n\t14.81%\n\n3次\n\t\n4\n\t14.81%\n\n45次\n\t\n3\n\t11.11%\n\n56-7次\n\t\n3\n\t11.11%\n\n611-15次\n\t\n1\n\t3.70%\n\n74次\n\t\n0\n\t0.00%\n\n88-10次\n\t\n0\n\t0.00%\n\n916-20次\n\t\n0\n\t0.00%\n\n1020次以上\n\t\n0\n\t0.00%\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "流量来源",
+        "href": "/szweb/view/view-source/view-flow.html"
+      },
+      {
+        "text": "实时访客",
+        "href": "/szweb/view/flow/real-uv-temp.html"
+      },
+      {
+        "text": "搜索流量运营",
+        "href": "/squidweb/view/flow/searchOperationsCenter.html"
+      },
+      {
+        "text": "搜索数据概览",
+        "href": "/squidweb/view/flow/searchOverview.html"
+      },
+      {
+        "text": "商品排名定位",
+        "href": "/squidweb/view/flow/rankLocation.html"
+      },
+      {
+        "text": "实时搜索词",
+        "href": "/szweb/view/flow/real-keyword-temp.html"
+      },
+      {
+        "text": "搜索词分析",
+        "href": "/squidweb/view/flow/searchKeywordAnalysis.html"
+      },
+      {
+        "text": "推荐数据概况",
+        "href": "/szweb/view/flow/recommend-summary-temp.html"
+      },
+      {
+        "text": "推荐诊断",
+        "href": "/szweb/view/flow/recommend-diagnosis-temp.html"
+      },
+      {
+        "text": "视频效果",
+        "href": "/szweb/view/flow/video-effect-temp.html"
+      },
+      {
+        "text": "广告概况",
+        "href": "/szweb/view/market/advert-summary.html"
+      },
+      {
+        "text": "CPS联盟",
+        "href": "/szweb/view/market/alliance-summary-temp.html"
+      },
+      {
+        "text": "共增营销",
+        "href": "/szweb/view/market/gzyx-temp.html"
+      },
+      {
+        "text": "帮助",
+        "href": "https://jdsz.jd.com/sz/view/help/indexs.html"
+      },
+      {
+        "text": "个人中心",
+        "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html"
+      },
+      {
+        "text": "首页",
+        "href": "https://jdsz.jd.com/szweb/sz/view/index/home.html"
+      },
+      {
+        "text": "实时",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSummarysNew.html"
+      },
+      {
+        "text": "流量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/viewflow/viewStats.html"
+      },
+      {
+        "text": "商品",
+        "href": "https://jdsz.jd.com/sz/view/productAnalysis/productSummarys.html"
+      },
+      {
+        "text": "交易",
+        "href": "https://jdsz.jd.com/sz/view/dealAnalysis/dealSummarys.html"
+      },
+      {
+        "text": "服务",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html"
+      },
+      {
+        "text": "营销",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/marketing/marketingOverview.html"
+      },
+      {
+        "text": "供应链",
+        "href": "https://jdsz.jd.com/stockweb/sz/view/ihs/InventoryHealth.html"
+      },
+      {
+        "text": "客户",
+        "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html"
+      },
+      {
+        "text": "行业",
+        "href": "https://jdsz.jd.com/szweb/sz/view/industryMarket/industryRealTimeNew.html"
+      },
+      {
+        "text": "竞争",
+        "href": "https://jdsz.jd.com/sz/view/competitionAnalysis/shopOverviews.html"
+      },
+      {
+        "text": "揽客",
+        "href": "https://jdsz.jd.com/sz/view/vender/shopping/activityLists.html"
+      },
+      {
+        "text": "报表",
+        "href": "https://jdsz.jd.com/sz/view/selfHelp/reportLists.html"
+      },
+      {
+        "text": "业务专区",
+        "href": "https://jdsz.jd.com/sz/view/businessZone/wanjia.html"
+      },
+      {
+        "text": "智能工具",
+        "href": "https://jdsz.jd.com/szweb/sz/view/facilitator/smartSelection.html"
+      },
+      {
+        "text": "培训",
+        "href": "https://jdsz.jd.com/sz/view/knowledgeCenter/school.html"
+      },
+      {
+        "text": "实时榜单",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realTopsNew.html"
+      },
+      {
+        "text": "实时访客",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realUVsNew.html"
+      },
+      {
+        "text": "实时来源",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSourcesNew.html"
+      },
+      {
+        "text": "实时关键词",
+        "href": "https://jdsz.jd.com/sz/view/realTime/realKeyWord.html"
+      },
+      {
+        "text": "实时看板",
+        "href": "https://jdsz.jd.com/sz/view/realTime/realKanBans.html"
+      },
+      {
+        "text": "大屏选择",
+        "href": "https://jdsz.jd.com/sz/view/realtimeScreen/screenList.html"
+      },
+      {
+        "text": "大屏装修",
+        "href": "https://jdsz.jd.com/sz/view/realtimeScreen/editScreen.html"
+      },
+      {
+        "text": "实时单品监控",
+        "href": "https://jdsz.jd.com/sz/view/realTime/realProWatchs.html"
+      },
+      {
+        "text": "实时竞店监控",
+        "href": "https://jdsz.jd.com/sz/view/realTime/competition.html"
+      },
+      {
+        "text": "实时竞店配置",
+        "href": "https://jdsz.jd.com/sz/view/realTime/competitionConfig.html"
+      },
+      {
+        "text": "活动分析",
+        "href": "https://jdsz.jd.com/sz/view/promotionAnalysis/promotionList.html"
+      },
+      {
+        "text": "活动对比",
+        "href": "https://jdsz.jd.com/sz/view/promotionAnalysis/promotionContrast.html"
+      },
+      {
+        "text": "活动沉淀",
+        "href": "https://jdsz.jd.com/sz/view/promotionAnalysis/promotionDeposit.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "//jdsz.jd.com/sz/common/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "//jdsz.jd.com/sz/common/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "//jdsz.jd.com/sz/common/商智店铺版用户注销.pdf"
+      },
+      {
+        "text": "资费说明",
+        "href": "https://jdsz.jd.com/szweb/sz/view/help/tariffDess.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "流量概况",
+          "流量概况",
+          "流量来源",
+          "流量来源",
+          "实时访客",
+          "实时访客"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "流量概况",
+          "流量概况",
+          "流量来源",
+          "流量来源",
+          "实时访客",
+          "实时访客"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "搜索流量运营",
+          "搜索流量运营",
+          "搜索数据概览",
+          "搜索数据概览",
+          "商品排名定位",
+          "商品排名定位",
+          "实时搜索词",
+          "实时搜索词",
+          "搜索词分析",
+          "搜索词分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "搜索流量运营",
+          "搜索流量运营",
+          "搜索数据概览",
+          "搜索数据概览",
+          "商品排名定位",
+          "商品排名定位",
+          "实时搜索词",
+          "实时搜索词",
+          "搜索词分析",
+          "搜索词分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "推荐数据概况",
+          "推荐数据概况",
+          "推荐诊断",
+          "推荐诊断",
+          "视频效果",
+          "视频效果"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "推荐数据概况",
+          "推荐数据概况",
+          "推荐诊断",
+          "推荐诊断",
+          "视频效果",
+          "视频效果"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "广告概况",
+          "广告概况",
+          "CPS联盟",
+          "CPS联盟",
+          "共增营销",
+          "共增营销"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "广告概况",
+          "广告概况",
+          "CPS联盟",
+          "CPS联盟",
+          "共增营销",
+          "共增营销"
+        ]
+      },
+      {
+        "class": "top-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      },
+      {
+        "class": "menu-list clearfix",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 11,
+        "header": "访问时间\n\t流量来源\t被访问页面\t访客位置\n\t访客名称\n\t当日累计浏览量\n\n"
+      },
+      {
+        "index": 1,
+        "rows": 5,
+        "header": "关键词\t点击人数\t点击次数\n"
+      },
+      {
+        "index": 2,
+        "rows": 11,
+        "header": "浏览频次\t访客数\t访客数占比\n"
+      },
+      {
+        "index": 3,
+        "rows": 1,
+        "header": ""
+      }
+    ],
+    "charts": [],
+    "chartCount": 26
+  },
+  "店铺星级": {
+    "title": "店铺星级",
+    "url": "https://jdsz.jd.com/szweb/view/service/shop-experience-score.html?shopstar=%2F",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n服务分析\n\n服务概览\n店铺星级\n售后分析\n评价分析\n\n服务考核\n\n违规服务分析\n售后考核\n商品质量\n物流履约\n政企发票考核\n查看规则解读\n店铺星级\n近30天有效订单\n734\n单，≥15单展示真实星级\n数据更新时间\n2026-08-12\n数据日期\n星级动态\n解读\n默认赋星规则解读 查看更多\n1/3\n当前星级\n4.6\n较昨日\n-0.1星\n体验得分&星级计算公式\n五星店铺\n暂未达标\n今日星级较昨日小幅下降， 完成定制任务星级速提升，享 5.0星 专属权益。\n3.0\n4.0\n4.2\n4.5\n目标5.0\n达到目标星级 5.0星 后可享：\n权益详情\n五星专属透标\n五星店铺专属标签，搜索结果页、商品详情页、店铺首页、咚咚聊天页、店铺详情页全方位透出，大幅提升转化效果\n频道优先露出\n商品在各频道中具有优先露出的机会\n搜索流量加权\n五星店铺专属流量加权，显著提升搜索曝光\n京小贷免息优惠\n查看\n京小贷POP商家专属利率优惠，五星店铺月月享福利\n完成任务提升星级：\n优先\n复购率提升至8.04%，体验得分加0.2分\n运营店铺会员，使用首购礼金、会员券等促销玩法，提升店铺复购\n店铺复购率\n5.24%\n立即前往\n运单配送时效达成率提升至99.11%，可提升至10.0分\n顺丰快递达成率差，建议使用优质承运商，可大幅改善物流体验\n教程\n本店运单配送时效达成率\n97.68%\n立即处理\n售后服务时长缩短至0.1小时，可提升至10.0分\n创建自动审核模板，可大幅改善售后服务时长\n教程\n本店售后服务时长\n1.421小时\n立即提升\n客服咨询10.0分\n物流履约9.5分\n售后服务9.1分\n商品体验9.7分\n附加项0.4分\n恶意行为风险上报\n高\n客服咨询\n10.0分\n较昨日\n持平\n占店铺星级权重15%\n公式\n近30天\n咚咚平均响应时长\n10.0分\n较昨日\n持平\n指标表现\n15.25s\n|\n指标详情\n高\n物流履约\n9.5分\n较昨日\n持平\n占店铺星级权重50%\n公式\n指标总得分大于奖励分，展示两者更高分\n指标总得分\n9.5\n分\n公式\n近30天\n当日揽收率\n10.0分\n较昨日\n持平\n指标表现\n99.4%\n|\n指标详情\n近30天\n运单配送时效达成率\n8.5分\n较昨日\n持平\n指标表现\n97.68%\n|\n指标详情\n提升京东配送或入仓货品比例\n获得前台打标，大幅提升流量转化率\n立即提升\n近30天\n发货物流品退率\n10.0分\n较昨日\n持平\n指标表现\n0.0%\n|\n指标详情\n奖励分\n--\n分\n提升京仓/京配订单占比，可享更高分\n近30天\n京仓订单占比\n店铺未入仓\n得分规则\n入京东仓并使用京东配送，京仓占比达60%，即可直达10.0分\n去使用\n指标表现\n0.00%\n|\n指标详情\n近30天\n京配订单占比\n指标表现\n0.00%\n|\n指标详情\n减分项\n0.0\n分\n近30天\n延迟发货单量（48小时以上）\n0.0分\n延迟发货单量（48小时以上）≥ 7 单，将 -1 分\n减分规则\n指标表现\n0单\n|\n指标详情\n高\n售后服务\n9.1分\n较昨日\n持平\n占店铺星级权重20%\n公式\n近30天\n售后服务时长\n8.0分\n较昨日\n持平\n指标表现\n1.421h\n|\n指标详情\n售后服务单待审核1笔，待收货2笔，待处理0笔\n及时跟进避免影响售后服务时长\n立即查看\n创建自动审核模板\n提升售后效率，大幅缩短售后时长\n立即使用\n近90天\n售后评价得分\n9.0分\n较昨日\n持平\n考核数据量不足5个，得分已受到保护\n指标表现\n10.0分\n|\n指标详情\n近30天\n平台介入率\n10.0分\n较昨日\n持平\n指标暂无数据，系统默认得分\n指标表现\n0.0%\n|\n指标详情\n高\n商品体验\n9.7分\n较昨日\n持平\n占店铺星级权重15%\n公式\n近30天\n店铺评价得分\n9.5分\n较昨日\n持平\n指标表现\n9.91分\n|\n指标详情\n近30天\n商品品质退货率\n10.0分\n较昨日\n持平\n指标表现\n0.13368%\n|\n指标详情\n附加项\n0.4分\n未加分\n上1月\n金牌客服认证比例\n0.0分\n金牌客服≥2个，且（金牌客服数/100及以上月接待量的客服数）≥50%，+0.2分\n指标表现\n100.00%\n认证金牌客服\n金牌客服≥2个，且（金牌客服数/月接待量100以上客服数）≥50%，+0.2分\n去认证\n已加分\n运费险\n0.2分\n开通后+0.2分\n指标表现\n已开通\n未加分\n近90天\n店铺复购率\n0.0分\n若统计期内下单用户数＜15人，此项不加分\n指标表现\n5.24%\n|\n指标详情\n运营店铺会员\n使用首购礼金、会员券等促销玩法，长期提升店铺复购\n立即创建\n优化店铺装修\n打造个性化店铺页，大幅提高店铺可逛性\n立即优化\n未加满\n前1天\n店铺价格力\n0.2分\n指标表现\n3.40\n|\n指标详情\n调整商品价格\n提升价格竞争力，最高可获得0.4分\n一键升星\n未加分\n近7天\n退款不退货执行率\n0.0分\n暂完结>10单且超过2%将+0.2分\n指标表现\n0.00%\n|\n指标详情\n未减分\n前1天\n价格1星商品占比\n0.0分\n指标表现\n0.00%\n|\n指标详情\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "店铺星级",
+        "href": "/szweb/view/service/shop-experience-score.html"
+      },
+      {
+        "text": "售后分析",
+        "href": "/szweb/view/service/after-sales-service-analysis-temp.html"
+      },
+      {
+        "text": "评价分析",
+        "href": "/szweb/view/service/comment-analysis.html"
+      },
+      {
+        "text": "违规服务分析",
+        "href": "/szweb/view/service/negative-service-temp.html"
+      },
+      {
+        "text": "售后考核",
+        "href": "/szweb/view/service/after-sales-through-train-temp.html"
+      },
+      {
+        "text": "商品质量",
+        "href": "/szweb/view/service/product-quality-temp.html"
+      },
+      {
+        "text": "物流履约",
+        "href": "/szweb/view/service/logistics-quality-temp.html"
+      },
+      {
+        "text": "政企发票考核",
+        "href": "/szweb/view/service/create-invoice-governance-temp.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "服务概览",
+          "服务概览",
+          "店铺星级",
+          "店铺星级",
+          "售后分析",
+          "售后分析",
+          "评价分析",
+          "评价分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "服务概览",
+          "服务概览",
+          "店铺星级",
+          "店铺星级",
+          "售后分析",
+          "售后分析",
+          "评价分析",
+          "评价分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "违规服务分析",
+          "违规服务分析",
+          "售后考核",
+          "售后考核",
+          "商品质量",
+          "商品质量",
+          "物流履约",
+          "物流履约",
+          "政企发票考核",
+          "政企发票考核"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "违规服务分析",
+          "违规服务分析",
+          "售后考核",
+          "售后考核",
+          "商品质量",
+          "商品质量",
+          "物流履约",
+          "物流履约",
+          "政企发票考核",
+          "政企发票考核"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 7,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 1,
+        "header": "店铺星级体验得分排名率体验得分因子得分(客服、物流、售后、商品)延迟发货单量（48小时以上）价格1星商品占比"
+      },
+      {
+        "index": 2,
+        "rows": 18,
+        "header": ""
+      },
+      {
+        "index": 3,
+        "rows": 1,
+        "header": "奖励分京仓订单占比京配订单占比备注"
+      },
+      {
+        "index": 4,
+        "rows": 5,
+        "header": ""
+      },
+      {
+        "index": 5,
+        "rows": 1,
+        "header": "限制分京仓订单占比京配订单占比备注"
+      },
+      {
+        "index": 6,
+        "rows": 1,
+        "header": ""
+      },
+      {
+        "index": 7,
+        "rows": 1,
+        "header": "减分值延迟发货单量（48小时以上）延迟发货考核订单总量"
+      },
+      {
+        "index": 8,
+        "rows": 3,
+        "header": ""
+      }
+    ],
+    "charts": [],
+    "chartCount": 47
+  },
+  "售后分析": {
+    "title": "售后分析",
+    "url": "https://jdsz.jd.com/szweb/view/service/after-sales-service-analysis-temp.html?sz=%2Fszweb%2Fsz%2Fview%2FserviceAnalysis%2FafterSalesServiceAnalysis.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n服务分析\n\n服务概览\n店铺星级\n售后分析\n评价分析\n\n服务考核\n\n违规服务分析\n售后考核\n商品质量\n物流履约\n政企发票考核\n售后分析\n时间\n按天查询（2026-08-11 至 2026-08-11）\n对比时间\n2026-08-10\n重置\n确定\n指标概览\n规模\n售后服务单申请量\n0\n环比\n--\n已完结服务单量\n0\n环比\n--\n取消订单申请量\n19\n环比\n11.76%\n退款单量\n19\n环比\n5.56%\n效率\n售后服务时长\n--\n环比\n--\n取消订单平均退款时长\n0.00\n环比\n99.83%\n纠纷全链路时长\n--\n环比\n--\n体验\n售后满意度\n--\n环比\n--\n平台介入率\n0.00%\n环比\n--\n纠纷商责率\n0.00%\n环比\n--\n规模分析\n效率分析\n体验分析\n服务单分析\n取消单分析\n退款分析\n售后申请原因分类\n\t售后申请原因\t服务单申请量\n\t占比\n暂无数据\n售后类型分析\n环图\n表格\n暂无数据\n服务单申请件数分析\n下载数据\n商品明细查看全部服务单明细\n指标配置\n下载数据\n商品品类\n全部\n售后原因\n全部\n客户期望\n全部\n商品编码\n最多可输入100个SKU，英文逗号隔开\n商品\t一级品类\t二级品类\t三级品类\t服务单申请量\n\t已完结服务单量\n\t申请退货件数\n\t申请换货件数\n\t申请返修件数\n\t操作\n暂无数据\n1\n10条/页\n前往\n页\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "店铺星级",
+        "href": "/szweb/view/service/shop-experience-score.html"
+      },
+      {
+        "text": "售后分析",
+        "href": "/szweb/view/service/after-sales-service-analysis-temp.html"
+      },
+      {
+        "text": "评价分析",
+        "href": "/szweb/view/service/comment-analysis.html"
+      },
+      {
+        "text": "违规服务分析",
+        "href": "/szweb/view/service/negative-service-temp.html"
+      },
+      {
+        "text": "售后考核",
+        "href": "/szweb/view/service/after-sales-through-train-temp.html"
+      },
+      {
+        "text": "商品质量",
+        "href": "/szweb/view/service/product-quality-temp.html"
+      },
+      {
+        "text": "物流履约",
+        "href": "/szweb/view/service/logistics-quality-temp.html"
+      },
+      {
+        "text": "政企发票考核",
+        "href": "/szweb/view/service/create-invoice-governance-temp.html"
+      },
+      {
+        "text": "帮助",
+        "href": "https://jdsz.jd.com/sz/view/help/indexs.html"
+      },
+      {
+        "text": "个人中心",
+        "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html"
+      },
+      {
+        "text": "首页",
+        "href": "https://jdsz.jd.com/szweb/sz/view/index/home.html"
+      },
+      {
+        "text": "实时",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSummarysNew.html"
+      },
+      {
+        "text": "流量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/viewflow/viewStats.html"
+      },
+      {
+        "text": "商品",
+        "href": "https://jdsz.jd.com/sz/view/productAnalysis/productSummarys.html"
+      },
+      {
+        "text": "交易",
+        "href": "https://jdsz.jd.com/sz/view/dealAnalysis/dealSummarys.html"
+      },
+      {
+        "text": "服务",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html"
+      },
+      {
+        "text": "营销",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/marketing/marketingOverview.html"
+      },
+      {
+        "text": "供应链",
+        "href": "https://jdsz.jd.com/stockweb/sz/view/ihs/InventoryHealth.html"
+      },
+      {
+        "text": "客户",
+        "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html"
+      },
+      {
+        "text": "行业",
+        "href": "https://jdsz.jd.com/szweb/sz/view/industryMarket/industryRealTimeNew.html"
+      },
+      {
+        "text": "竞争",
+        "href": "https://jdsz.jd.com/sz/view/competitionAnalysis/shopOverviews.html"
+      },
+      {
+        "text": "揽客",
+        "href": "https://jdsz.jd.com/sz/view/vender/shopping/activityLists.html"
+      },
+      {
+        "text": "报表",
+        "href": "https://jdsz.jd.com/sz/view/selfHelp/reportLists.html"
+      },
+      {
+        "text": "业务专区",
+        "href": "https://jdsz.jd.com/sz/view/businessZone/wanjia.html"
+      },
+      {
+        "text": "智能工具",
+        "href": "https://jdsz.jd.com/szweb/sz/view/facilitator/smartSelection.html"
+      },
+      {
+        "text": "培训",
+        "href": "https://jdsz.jd.com/sz/view/knowledgeCenter/school.html"
+      },
+      {
+        "text": "服务分析",
+        "href": "https://jdsz.jd.com/sz/view/serviceAnalysis/serviceMonitors.html"
+      },
+      {
+        "text": "评价分析",
+        "href": "https://jdsz.jd.com/sz/view/commentAnalyze/commentAnalyzes.html"
+      },
+      {
+        "text": "店铺星级",
+        "href": "https://jdsz.jd.com/szweb/sz/view/shopstar/shopstar.html/vane/VaneContainer"
+      },
+      {
+        "text": "违规服务分析",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/negativeService.html"
+      },
+      {
+        "text": "商品质量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/productQuality.html"
+      },
+      {
+        "text": "物流履约",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/logisticsQuality.html"
+      },
+      {
+        "text": "直通车售后考核",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesThroughTrain.html"
+      },
+      {
+        "text": "政企开票考核",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/createInvoiceGovernance.html"
+      },
+      {
+        "text": "咚咚概览",
+        "href": "https://jdsz.jd.com/sz/view/serviceAnalysis/timlineService.html"
+      },
+      {
+        "text": "接待响应",
+        "href": "https://jdsz.jd.com/sz/view/serviceAnalysis/receptionResponse.html"
+      },
+      {
+        "text": "客服销售",
+        "href": "https://jdsz.jd.com/sz/view/serviceAnalysis/customServiceSales.html"
+      },
+      {
+        "text": "客服排行",
+        "href": "https://jdsz.jd.com/sz/view/serviceAnalysis/customServiceRank.html"
+      },
+      {
+        "text": "服务竞争",
+        "href": "https://jdsz.jd.com/sz/view/serviceAnalysis/serviceCompetition.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "//jdsz.jd.com/sz/common/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "//jdsz.jd.com/sz/common/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "//jdsz.jd.com/sz/common/商智店铺版用户注销.pdf"
+      },
+      {
+        "text": "资费说明",
+        "href": "https://jdsz.jd.com/szweb/sz/view/help/tariffDess.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "服务概览",
+          "服务概览",
+          "店铺星级",
+          "店铺星级",
+          "售后分析",
+          "售后分析",
+          "评价分析",
+          "评价分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "服务概览",
+          "服务概览",
+          "店铺星级",
+          "店铺星级",
+          "售后分析",
+          "售后分析",
+          "评价分析",
+          "评价分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "违规服务分析",
+          "违规服务分析",
+          "售后考核",
+          "售后考核",
+          "商品质量",
+          "商品质量",
+          "物流履约",
+          "物流履约",
+          "政企发票考核",
+          "政企发票考核"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "违规服务分析",
+          "违规服务分析",
+          "售后考核",
+          "售后考核",
+          "商品质量",
+          "商品质量",
+          "物流履约",
+          "物流履约",
+          "政企发票考核",
+          "政企发票考核"
+        ]
+      },
+      {
+        "class": "top-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      },
+      {
+        "class": "menu-list clearfix",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "实时",
+          "实时",
+          "实时",
+          "流量",
+          "流量",
+          "流量",
+          "商品",
+          "商品",
+          "商品",
+          "交易",
+          "交易",
+          "交易"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "header": "\t售后申请原因\t服务单申请量\n\t占比"
+      },
+      {
+        "index": 1,
+        "rows": 1,
+        "header": "商品\t一级品类\t二级品类\t三级品类\t服务单申请量\n\t已完结服务单量\n\t申请退货件数\n\t申请换货件数\n\t申请返修件数\n\t操作"
+      }
+    ],
+    "charts": [],
+    "chartCount": 11
+  },
+  "行业卖家": {
+    "title": "行业卖家",
+    "url": "https://jdsz.jd.com/szweb/view/industry/industry-shop-analysis-temp.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n行业动态\n\n行业大盘\n行业卖家\n店铺榜单\n商品榜单\n品牌榜单\n品牌动态详情\n\n行业关键词\n\n热门关键词\n关键词查询\n商机推荐\n\n行业机会挖掘\n\n类目属性概况\n类目属性详情\n产品榜单\n产品详情\n\n行业用户动态\n\n买家分析\n\n竞争分析\n\n实时竞店监控\n实时竞店配置\n竞店概况\n竞店对比\n竞品对比\n竞品流失\n竞品监控\n竞争流失\n竞争配置\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "行业卖家",
+        "href": "/szweb/view/industry/industry-shop-analysis-temp.html"
+      },
+      {
+        "text": "店铺榜单",
+        "href": "/szweb/view/industry/industry-shop-rank-temp.html"
+      },
+      {
+        "text": "商品榜单",
+        "href": "/szweb/view/industry/industry-product-rank-temp.html"
+      },
+      {
+        "text": "品牌榜单",
+        "href": "/szweb/view/industry/industry-brand-rank-temp.html"
+      },
+      {
+        "text": "品牌动态详情",
+        "href": "/szweb/view/industry/brand-rank-detail-temp.html"
+      },
+      {
+        "text": "热门关键词",
+        "href": "/squidweb/view/industry/hotKeywords.html"
+      },
+      {
+        "text": "关键词查询",
+        "href": "/squidweb/view/industry/keywordQuery.html"
+      },
+      {
+        "text": "商机推荐",
+        "href": "/szweb/view/industry/business-recommend.html/chance"
+      },
+      {
+        "text": "类目属性概况",
+        "href": "/szweb/view/industry/attr-summary-temp.html"
+      },
+      {
+        "text": "类目属性详情",
+        "href": "/szweb/view/industry/attr-detail-temp.html"
+      },
+      {
+        "text": "产品榜单",
+        "href": "/szweb/view/industry/industry-product-temp.html"
+      },
+      {
+        "text": "产品详情",
+        "href": "/szweb/view/industry/industry-product-detail-temp.html"
+      },
+      {
+        "text": "买家分析",
+        "href": "/szweb/view/industry/deal-cust-analysis-temp.html"
+      },
+      {
+        "text": "实时竞店监控",
+        "href": "/szweb/view/compete/compete-shop-monitor-temp.html"
+      },
+      {
+        "text": "实时竞店配置",
+        "href": "/szweb/view/compete/compete-shop-config-temp.html"
+      },
+      {
+        "text": "竞店概况",
+        "href": "/szweb/view/compete/compete-shop-overview-temp.html"
+      },
+      {
+        "text": "竞店对比",
+        "href": "/szweb/view/industry/competeShop.html"
+      },
+      {
+        "text": "竞品对比",
+        "href": "/szweb/view/industry/compete-product.html"
+      },
+      {
+        "text": "竞品流失",
+        "href": "/szweb/view/compete/compete-product-loss.html"
+      },
+      {
+        "text": "竞品监控",
+        "href": "/szweb/view/industry/compete-monitor.html"
+      },
+      {
+        "text": "竞争流失",
+        "href": "/szweb/view/compete/compete-loss-temp.html"
+      },
+      {
+        "text": "竞争配置",
+        "href": "/szweb/view/compete/compete-config-temp.html"
+      }
+    ],
+    "submenus": [
+      {
+        "class": "page-top-header-menu",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "menu-list",
+        "items": [
+          "首页",
+          "首页",
+          "首页",
+          "交易",
+          "交易",
+          "交易",
+          "商品",
+          "商品",
+          "商品",
+          "流量",
+          "流量",
+          "流量",
+          "用户",
+          "用户",
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "首页"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "交易"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "商品"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "流量"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "用户"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "营销"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "体验"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "供应链"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "市场"
+        ]
+      },
+      {
+        "class": "jmt-link jmt-link-css-iskjpj jmtv2 jmt-link-main jmt-link-main-css-iskjpj jmtv2 ",
+        "items": [
+          "报表"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "行业大盘",
+          "行业大盘",
+          "行业卖家",
+          "行业卖家",
+          "店铺榜单",
+          "店铺榜单",
+          "商品榜单",
+          "商品榜单",
+          "品牌榜单",
+          "品牌榜单",
+          "品牌动态详情",
+          "品牌动态详情"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "行业大盘",
+          "行业大盘",
+          "行业卖家",
+          "行业卖家",
+          "店铺榜单",
+          "店铺榜单",
+          "商品榜单",
+          "商品榜单",
+          "品牌榜单",
+          "品牌榜单",
+          "品牌动态详情",
+          "品牌动态详情"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "热门关键词",
+          "热门关键词",
+          "关键词查询",
+          "关键词查询",
+          "商机推荐",
+          "商机推荐"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "热门关键词",
+          "热门关键词",
+          "关键词查询",
+          "关键词查询",
+          "商机推荐",
+          "商机推荐"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "类目属性概况",
+          "类目属性概况",
+          "类目属性详情",
+          "类目属性详情",
+          "产品榜单",
+          "产品榜单",
+          "产品详情",
+          "产品详情"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "类目属性概况",
+          "类目属性概况",
+          "类目属性详情",
+          "类目属性详情",
+          "产品榜单",
+          "产品榜单",
+          "产品详情",
+          "产品详情"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "买家分析",
+          "买家分析"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "买家分析",
+          "买家分析"
+        ]
+      },
+      {
+        "class": "second-menu-containter",
+        "items": [
+          "实时竞店监控",
+          "实时竞店监控",
+          "实时竞店配置",
+          "实时竞店配置",
+          "竞店概况",
+          "竞店概况",
+          "竞店对比",
+          "竞店对比",
+          "竞品对比",
+          "竞品对比",
+          "竞品流失",
+          "竞品流失",
+          "竞品监控",
+          "竞品监控",
+          "竞争流失"
+        ]
+      },
+      {
+        "class": "third-menu-container",
+        "items": [
+          "实时竞店监控",
+          "实时竞店监控",
+          "实时竞店配置",
+          "实时竞店配置",
+          "竞店概况",
+          "竞店概况",
+          "竞店对比",
+          "竞店对比",
+          "竞品对比",
+          "竞品对比",
+          "竞品流失",
+          "竞品流失",
+          "竞品监控",
+          "竞品监控",
+          "竞争流失"
+        ]
+      }
+    ],
+    "tables": [],
+    "charts": [],
+    "chartCount": 11
+  }
+}

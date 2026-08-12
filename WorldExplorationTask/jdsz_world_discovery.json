@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "system_name": "京东商智 (JD Shangzhi)",
+    "exploration_date": "2026-08-13",
+    "target_shop": "祁门红茶官方旗舰店",
+    "shop_type": "POP",
+    "shop_id": "11855009",
+    "industry": "茗茶",
+    "current_star_rating": 4.6,
+    "data_freshness": "实时数据延迟约1分钟，日报数据预计14:00前更新"
+  },
+  "navigation_structure": {
+    "top_level_modules": [
+      {"name": "首页", "url": "/szweb/view/index/home.html"},
+      {"name": "交易", "url": "/szweb/view/tradeAnalysis/tradeSummary.html"},
+      {"name": "商品", "url": "/szweb/view/product/product360.html"},
+      {"name": "流量", "url": "/szweb/view/flow/flow-summary.html"},
+      {"name": "用户", "url": "/szweb/view/customer/cust-summarys-temp.html"},
+      {"name": "营销", "url": "/szweb/view/market/marketingtool-summary-temp.html"},
+      {"name": "体验", "url": "/szweb/view/service/service-summary.html"},
+      {"name": "供应链", "url": "/szweb/view/inventory/Inventory-health-temp.html"},
+      {"name": "市场", "url": "/szweb/view/industry/industrySummary.html"},
+      {"name": "报表", "url": "/szweb/view/reports-center/download-center.html"}
+    ]
+  },
+  "core_metrics": {
+    "交易核心": ["成交金额", "成交商品件数", "成交客户数", "成交单量", "店铺成交转化率", "客单价", "店铺浏览量", "店铺访客数", "平均停留时长"],
+    "商品核心": ["动销SPU数", "动销率", "成交金额", "成交转化率", "客单价", "件单价"],
+    "流量核心": ["进店访客数", "进商详访客数", "成交客户数", "商品浏览量", "UV价值", "商品曝光次数", "商品曝光人数"],
+    "用户核心": ["可运营消费者资产", "潜在客户", "近30天新客", "365天存量客户", "成交客户数贡献", "成交金额贡献"],
+    "体验核心": ["店铺星级", "体验得分", "客服咨询得分", "物流履约得分", "售后服务得分", "商品体验得分"]
+  },
+  "time_dimensions": ["实时", "昨天", "近7天", "近30天", "天", "周", "月", "自定义"],
+  "comparison_types": ["环比", "同比", "同行同级均值", "同行上级均值", "相似店铺"],
+  "data_export_formats": ["Excel", "CSV"],
+  "api_endpoints_suspected": [
+    "/szweb/api/trade/summary",
+    "/szweb/api/product/list",
+    "/szweb/api/flow/source",
+    "/szweb/api/customer/asset",
+    "/szweb/api/market/promotion",
+    "/szweb/api/service/score",
+    "/szweb/api/inventory/health",
+    "/szweb/api/industry/market"
+  ],
+  "technical_notes": {
+    "cdp_endpoint": "ws://localhost:9222/devtools/browser/16999e9d-b6d0-4488-8ae7-719e3b87af6d",
+    "framework": "Vue/React SPA",
+    "chart_library": "ECharts",
+    "data_rendering": "JavaScript动态渲染，需等待networkidle"
+  }
+}

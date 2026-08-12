@@ -1,0 +1,3881 @@
+{
+  "交易分析": {
+    "title": "交易概况",
+    "url": "https://jdsz.jd.com/szweb/view/tradeAnalysis/tradeSummary.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n交易概览\n\n交易概况\n订单明细\n交易概况\n当前：2026-08-11\n对比：2026-08-10\n实时\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n环比\n同比\n更多\n渠道\n全部\n查询\n重置\n核心指标\n对比时间真实值\n同行同级对比\n指标配置\n下载数据\n成交金额\n¥7,983.16\n对比时间\n¥5,175.16\n环比\n+54.26%\n同行同级均值\n¥17,354.82\n同行上级均值\n--\n成交商品件数\n67\n对比时间\n45\n环比\n+48.89%\n同行同级均值\n207\n同行上级均值\n--\n成交客户数\n36\n对比时间\n23\n环比\n+56.52%\n同行同级均值\n77\n同行上级均值\n--\n成交单量\n36\n对比时间\n23\n环比\n+56.52%\n同行同级均值\n82\n同行上级均值\n--\n店铺成交转化率\n6.94%\n对比时间\n4.75%\n环比\n+45.97%\n加购商品件数\n59\n对比时间\n43\n环比\n+37.21%\n客单价\n¥221.75\n对比时间\n¥225.01\n环比\n-1.45%\n同行同级均值\n¥224.22\n同行上级均值\n--\n店铺浏览量\n2,441\n对比时间\n2,811\n环比\n-13.16%\n店铺访客数\n519\n对比时间\n484\n环比\n+7.23%\n店铺平均停留时长\n85.20\n对比时间\n83.69\n环比\n+1.81%\n加购客户数\n82\n对比时间\n64\n环比\n+28.13%\n加购转化率\n16.80%\n对比时间\n14.25%\n环比\n+17.89%\n品牌构成\n下载数据\n品牌\n\t\n成交金额\n\t\n成交金额占比\n\t\n成交商品件数\n\t\n成交单量\n\t\n成交客户数\n\t\n操作\n\n\n祁门\n\t\n¥7,983.16\n\t\n100%\n\t\n67\n\t\n36\n\t\n36\n\t\n趋势\n类目构成\n店铺类目\n二级类目\n下载数据\n渠道构成\n下载数据\n地域构成\n省份\n城市\n城市级别\n成交金额\n成交商品件数\n下载数据\n--\n--\n--\n排名\n暂无数据\n新老客构成\n新老客（整体）\n下载数据\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "订单明细",
+        "href": "/szweb/view/tradeAnalysis/orderDetails.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 12,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 13,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 14,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 15,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 16,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 17,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 18,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 19,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 20,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 21,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 22,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 23,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 24,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 25,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 26,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 27,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 28,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 29,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 30,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 988,
+        "height": 290
+      },
+      {
+        "index": 31,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 32,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 33,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 34,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 35,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 36,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 37,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 38,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 39,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 40,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 41,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 42,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 43,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 44,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 45,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 46,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 47,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 48,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 49,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 50,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 51,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 52,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 53,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 54,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 55,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 56,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 57,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 58,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 59,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 60,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 61,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 62,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 63,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 64,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 65,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 66,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 67,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 68,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 69,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 70,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 71,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 72,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 73,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 74,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 75,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 76,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 77,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 78,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 79,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 80,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 81,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 82,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 83,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 84,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 85,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 86,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 87,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 88,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 89,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 90,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 91,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 92,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 93,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 94,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 95,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 96,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 97,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 98,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 99,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 100,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 101,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 102,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 103,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 104,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 105,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 106,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 107,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 108,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 109,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 110,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 111,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 112,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 113,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 114,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "cols": 7,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 2,
+        "cols": 7,
+        "header": "品牌\n\t\n成交金额\n\t\n成交金额占比\n\t\n成交商品件数\n\t\n成交单量\n\t\n成交客户数\n\t\n操作"
+      },
+      {
+        "index": 2,
+        "rows": 1,
+        "cols": 1,
+        "header": "排名"
+      }
+    ],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  },
+  "商品分析": {
+    "title": "商品概况",
+    "url": "https://jdsz.jd.com/szweb/view/product/product360.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n商品概览\n\n商品概况\n商品明细\n异常商品\n类目分析\n属性分析\n\n经营视角\n\n单品监控\n新品分析\n\n活动商品分析\n\n打标新品分析\n预约商品分析\n预售商品分析\n商品概况\n当前：2026-08-11\n对比：2026-08-10\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n环比\n同比\n更多\nSPU\nSKU\n渠道\n全部\n查询\n重置\n核心指标\n同行同级对比\n趋势分析\n下载数据\n动销\n动销SPU数\n15\n环比\n+87.50%\n加购\n加购SPU数\n12\n环比\n+9.09%\n访问\n访问SPU数\n31\n环比\n-24.39%\n上架\n上架SPU数\n45\n环比\n0.00%\n动销SPU数\n15\n环比\n+87.50%\nSPU动销率\n33.33%\n环比\n+87.50%\n成交金额\n￥7,983.16\n环比\n+54.26%\n同行同级均值\n￥17,354.82\n同行上级均值\n--\n成交商品件数\n67\n环比\n+48.89%\n同行同级均值\n207\n同行上级均值\n--\n成交单量\n36\n环比\n+56.52%\n同行同级均值\n82\n同行上级均值\n--\n成交客户数\n36\n环比\n+56.52%\n同行同级均值\n77\n同行上级均值\n--\n成交转化率\n7.38%\n环比\n+44.01%\n同行同级均值\n6.76%\n同行上级均值\n--\n客单价\n￥221.75\n环比\n-1.45%\n同行同级均值\n￥224.22\n同行上级均值\n--\n件单价\n￥119.15\n环比\n+3.61%\n同行同级均值\n￥83.90\n同行上级均值\n--\n动销SPU数趋势\n热销商品榜\n全部商品\n排名\n\t\n操作\n暂无数据\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "商品明细",
+        "href": "/szweb/view/product/productDetail.html"
+      },
+      {
+        "text": "异常商品",
+        "href": "/szweb/view/product/abnormal-product-temp.html"
+      },
+      {
+        "text": "类目分析",
+        "href": "/szweb/view/product/category-analyze-temp.html"
+      },
+      {
+        "text": "属性分析",
+        "href": "/szweb/view/product/attr-analyze-temp.html"
+      },
+      {
+        "text": "单品监控",
+        "href": "/szweb/view/product/single-product-monitor-temp.html"
+      },
+      {
+        "text": "新品分析",
+        "href": "/szweb/view/product/new-product-analysis-temp.html"
+      },
+      {
+        "text": "打标新品分析",
+        "href": "/szweb/view/product/mark-new-product-temp.html"
+      },
+      {
+        "text": "预约商品分析",
+        "href": "/szweb/view/product/order-product-temp.html"
+      },
+      {
+        "text": "预售商品分析",
+        "href": "/szweb/view/product/presell-product-temp.html"
+      },
+      {
+        "text": "全部商品",
+        "href": "#"
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 12,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 13,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 14,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 15,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 16,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 17,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 18,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 19,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 20,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 21,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 22,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 23,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 24,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 25,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 988,
+        "height": 320
+      },
+      {
+        "index": 26,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 27,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 28,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 29,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 30,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 31,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 32,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 33,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 34,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 35,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "cols": 2,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 1,
+        "cols": 2,
+        "header": "排名\n\t\n操作"
+      }
+    ],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  },
+  "流量分析": {
+    "title": "流量概况",
+    "url": "https://jdsz.jd.com/szweb/view/flow/flow-summary.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n流量概览\n\n流量概况\n流量来源\n实时访客\n\n搜索流量分析\n\n搜索流量运营\n搜索数据概览\n商品排名定位\n实时搜索词\n搜索词分析\n\n推荐流量分析\n\n推荐数据概况\n推荐诊断\n视频效果\n\n付费流量分析\n\n广告概况\nCPS联盟\n共增营销\n流量概况\n当前：2026-08-11\n对比：2026-08-10\n实时\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n环比\n同比\n更多\n渠道\n全部\n查询\n重置\n核心指标\n同行同级\n看整体\n看付费\n下载数据\n进店\n店铺访客数\n519\n环比\n+7.23%\n进商详\n商品访客数\n488\n环比\n+8.69%\n同行同级均值\n1,145\n同行上级均值\n--\n转化\n成交客户数\n36\n环比\n+56.52%\n同行同级均值\n77\n同行上级均值\n--\n成交\n成交金额\n￥7,983.16\n环比\n+54.26%\n同行同级均值\n￥17,354.82\n同行上级均值\n--\n商品浏览量\n1,635\n环比\n-3.02%\n同行同级均值\n3,719\n同行上级均值\n--\n商品人均浏览量\n3.35\n环比\n-10.77%\n商品平均停留时长\n70.46\n环比\n+12.90%\nUV价值\n16.36\n环比\n+41.93%\n同行同级均值\n15.16\n同行上级均值\n--\n客单价\n￥221.75\n环比\n-1.45%\n同行同级均值\n￥224.22\n同行上级均值\n--\n商品曝光次数\n5,360\n环比\n-1.80%\n商品曝光人数\n1,894\n环比\n-7.07%\n来源渠道\n定位重点来源渠道流量及成交贡献\n查看全部渠道\n参照指标\n按引入商详访客数\n排序方式\nTOP降序\n仅查看关注渠道\n下载数据\n搜索\n引入商详访客数\n203\n环比\n-4.25%\n占比\n46.77%\n引入成交金额\n￥3,639.40\n环比\n-0.90%\n占比\n61.53%\n频道\n引入商详访客数\n109\n环比\n-9.92%\n占比\n25.12%\n引入成交金额\n￥176.13\n环比\n--\n占比\n2.98%\n购物车\n引入商详访客数\n35\n环比\n+94.44%\n占比\n8.06%\n引入成交金额\n￥67.94\n环比\n-39.95%\n占比\n1.15%\n我的京东\n引入商详访客数\n33\n环比\n+26.92%\n占比\n7.60%\n引入成交金额\n￥583.07\n环比\n+0.95%\n占比\n9.86%\n商品\n引入商详访客数\n13\n环比\n+18.18%\n占比\n3.00%\n引入成交金额\n￥806.30\n环比\n+31.28%\n占比\n13.63%\n搜索-渠道分析\n查看渠道详情\n趋势\nTOP5来源明细\n关键词\n\t\n引入访客数\n\t\n引入成交金额\n\n\n祁门红茶\n\t\n97\n+3.19%\n\t\n￥888.06\n-64.60%\n\n\n祁门红茶官方旗舰店\n\t\n23\n-4.17%\n\t\n￥315.32\n-44.30%\n\n\n红茶\n\t\n20\n+42.86%\n\t\n￥89.62\n-49.65%\n\n\n安徽祁门红茶官方旗舰店\n\t\n14\n-22.22%\n\t\n￥179.05\n-\n\n\n红茶祁红\n\t\n6\n+20.00%\n\t\n￥177.00\n-\nTOP5商品\nSPU\nSKU\n商品信息\n\t\n引入访客数\n\t\n引入成交金额\n\n\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300g\nSPU:10023923194464\n\t\n110\n+7.84%\n\t\n￥851.28\n+43.40%\n\n\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300g\nSPU:10023922033080\n\t\n66\n-4.35%\n\t\n￥889.00\n-68.10%\n\n\n祁门红茶官方旗舰店茶叶中秋礼盒装高档茶叶独立小包装送礼长辈父母 50g*2听\nSPU:10023968977041\n\t\n36\n-5.26%\n\t\n￥590.00\n-\n\n\n祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100g\nSPU:10024700347561\n\t\n14\n-33.33%\n\t\n￥179.05\n-13.73%\n\n\n祁门红茶官方旗舰店正宗新茶叶自己喝口粮茶祁红工夫 祁红工夫250g\nSPU:10023969721350\n\t\n10\n-16.67%\n\t\n￥69.00\n-\n商品表现\n定位核心商品流量及成交贡献\n查看更多商品\n参照指标\n按商品访客数\n排序方式\nTOP降序\nSPU\nSKU\n仅查看关注商品\n下载数据\n排名\n\t\n商品信息\n\t\n商品访客数\n\t\n商品访客数占比\n\t\n成交金额\n\t\n成交转化率\n\t\nUV价值\n\t\n商品曝光人数\n\t\n商品曝光次数\n\t\n操作\n\n\n\t\n祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300g\nSPU:10023923194464\n\t\n264\n+35.38%\n\t\n54.1%\n\t\n￥2,014.37\n+32.24%\n\t\n5.68%\n-26.14%\n\t\n7.63\n-2.33%\n\t\n871\n-9.46%\n\t\n1,627\n-2.46%\n\t\n单品分析\n一键推广\n\n\n\t\n祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300g\nSPU:10023922033080\n\t\n112\n-13.18%\n\t\n22.95%\n\t\n￥1,333.50\n-58.37%\n\t\n5.36%\n+38.21%\n\t\n11.91\n-52.06%\n\t\n579\n+6.83%\n\t\n949\n+18.92%\n\t\n单品分析\n一键推广\n\n\n\t\n祁门红茶官方旗舰店茶叶中秋礼盒装高档茶叶独立小包装送礼长辈父母 50g*2听\nSPU:10023968977041\n\t\n72\n+9.09%\n\t\n14.75%\n\t\n￥1,670.00\n-\n\t\n4.17%\n-\n\t\n23.19\n-\n\t\n509\n+103.60%\n\t\n732\n+69.05%\n\t\n单品分析\n一键推广\n\n\n4\n\t\n祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100g\nSPU:10024700347561\n\t\n32\n-25.58%\n\t\n6.56%\n\t\n￥358.10\n+72.54%\n\t\n6.25%\n+168.75%\n\t\n11.19\n+131.85%\n\t\n239\n-56.23%\n\t\n289\n-55.81%\n\t\n单品分析\n一键推广\n\n\n5\n\t\n祁门红茶官方旗舰店2026新茶叶特级正宗香螺口粮自己喝送长辈父母家长 特级祁红香螺200g【特惠-2盒装】\nSPU:10024736027634\n\t\n30\n+20.00%\n\t\n6.15%\n\t\n￥366.24\n-\n\t\n10.00%\n-\n\t\n12.21\n-\n\t\n162\n-1.22%\n\t\n240\n+6.19%\n\t\n单品分析\n一键推广\n\n\n6\n\t\n祁门红茶官方旗舰店正宗新茶叶自己喝口粮茶祁红工夫 祁红工夫250g\nSPU:10023969721350\n\t\n28\n+3.70%\n\t\n5.74%\n\t\n￥69.00\n-55.95%\n\t\n3.57%\n-51.79%\n\t\n2.46\n-57.52%\n\t\n195\n+31.76%\n\t\n255\n+30.77%\n\t\n单品分析\n一键推广\n\n\n7\n\t\n祁门红茶官方旗舰店特级正宗1915系列茶叶独立小包装自己喝送礼送长辈 1915香螺100g\nSPU:10024566211674\n\t\n20\n+5.26%\n\t\n4.1%\n\t\n￥177.00\n-\n\t\n5.00%\n-\n\t\n8.85\n-\n\t\n150\n-17.13%\n\t\n213\n-9.36%\n\t\n单品分析\n一键推广\n\n\n8\n\t\n祁门红茶官方旗舰店正宗高档茶叶中秋礼盒送人送长辈新茶 老厂房祁红毛峰160g\nSPU:10025724415510\n\t\n17\n+325.00%\n\t\n3.48%\n\t\n￥187.05\n-\n\t\n5.88%\n-\n\t\n11.00\n-\n\t\n28\n+33.33%\n\t\n43\n+43.33%\n\t\n单品分析\n一键推广\n\n\n9\n\t\n祁门红茶官方旗舰店特级正宗茶叶中秋礼盒送人礼品送礼长辈父母 祁红-禄合\nSPU:10023968939218\n\t\n5\n0.00%\n\t\n1.02%\n\t\n￥1,390.00\n-\n\t\n20.00%\n-\n\t\n278.00\n-\n\t\n14\n-26.32%\n\t\n19\n-20.83%\n\t\n单品分析\n一键推广\n\n\n10\n\t\n祁门红茶官方旗舰店正宗高档茶叶中秋礼盒送人送长辈新茶 老厂房祁红毛峰160g\nSPU:10026562748098\n\t\n5\n+150.00%\n\t\n1.02%\n\t\n￥398.00\n-\n\t\n40.00%\n-\n\t\n79.60\n-\n\t\n19\n0.00%\n\t\n29\n-3.33%\n\t\n单品分析\n一键推广\n总共11条\n1\n2\n10条/页\n跳至\n页\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "流量来源",
+        "href": "/szweb/view/view-source/view-flow.html"
+      },
+      {
+        "text": "实时访客",
+        "href": "/szweb/view/flow/real-uv-temp.html"
+      },
+      {
+        "text": "搜索流量运营",
+        "href": "/squidweb/view/flow/searchOperationsCenter.html"
+      },
+      {
+        "text": "搜索数据概览",
+        "href": "/squidweb/view/flow/searchOverview.html"
+      },
+      {
+        "text": "商品排名定位",
+        "href": "/squidweb/view/flow/rankLocation.html"
+      },
+      {
+        "text": "实时搜索词",
+        "href": "/szweb/view/flow/real-keyword-temp.html"
+      },
+      {
+        "text": "搜索词分析",
+        "href": "/squidweb/view/flow/searchKeywordAnalysis.html"
+      },
+      {
+        "text": "推荐数据概况",
+        "href": "/szweb/view/flow/recommend-summary-temp.html"
+      },
+      {
+        "text": "推荐诊断",
+        "href": "/szweb/view/flow/recommend-diagnosis-temp.html"
+      },
+      {
+        "text": "视频效果",
+        "href": "/szweb/view/flow/video-effect-temp.html"
+      },
+      {
+        "text": "广告概况",
+        "href": "/szweb/view/market/advert-summary.html"
+      },
+      {
+        "text": "CPS联盟",
+        "href": "/szweb/view/market/alliance-summary-temp.html"
+      },
+      {
+        "text": "共增营销",
+        "href": "/szweb/view/market/gzyx-temp.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长 祁门香螺500g 300g",
+        "href": "//item.jd.com/10072455910801.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长 祁红毛峰（特级一等） 300g",
+        "href": "//item.jd.com/10072456208436.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店茶叶中秋礼盒装高档茶叶独立小包装送礼长辈父母 50g*2听",
+        "href": "//item.jd.com/10072422123631.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店正宗祁红功夫自己喝口粮茶叶金奖浓香型送礼送长辈 100g",
+        "href": "//item.jd.com/10084045299330.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店正宗新茶叶自己喝口粮茶祁红工夫 祁红工夫250g",
+        "href": "//item.jd.com/10072472245322.html"
+      },
+      {
+        "text": "查看更多商品",
+        "href": "/szweb/view/product/productDetail.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店2026新茶叶特级正宗香螺口粮自己喝送长辈父母家长 特级祁红香螺200g【特惠-2",
+        "href": "//item.jd.com/10103278318319.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店特级正宗1915系列茶叶独立小包装自己喝送礼送长辈 1915香螺100g",
+        "href": "//item.jd.com/10081762472122.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店正宗高档茶叶中秋礼盒送人送长辈新茶 老厂房祁红毛峰160g",
+        "href": "//item.jd.com/10129253118749.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店特级正宗茶叶中秋礼盒送人礼品送礼长辈父母 祁红-禄合",
+        "href": "//item.jd.com/10072420986342.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店正宗高档茶叶中秋礼盒送人送长辈新茶 老厂房祁红毛峰160g",
+        "href": "//item.jd.com/10115044795169.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 12,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 13,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 14,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 15,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 16,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 17,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 18,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 19,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 20,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 21,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 22,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 23,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 24,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 25,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 26,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 27,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 28,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 29,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 30,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 31,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 32,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 33,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 34,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 35,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 36,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 37,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 38,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 39,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 40,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 41,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 42,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 43,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 44,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 45,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 46,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 47,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 48,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 49,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 50,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 302,
+        "height": 290
+      },
+      {
+        "index": 51,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 52,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 53,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 54,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 55,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 56,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 57,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 58,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 59,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 60,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 61,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 62,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 63,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 64,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 65,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 66,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 67,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 68,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 69,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 70,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 71,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 72,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 73,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 74,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 75,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 76,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 77,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 78,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 79,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 80,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 81,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 82,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 83,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 84,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 85,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 86,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 87,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 88,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 936,
+        "height": 290
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 6,
+        "cols": 3,
+        "header": "关键词\n\t\n引入访客数\n\t\n引入成交金额"
+      },
+      {
+        "index": 1,
+        "rows": 6,
+        "cols": 3,
+        "header": "商品信息\n\t\n引入访客数\n\t\n引入成交金额"
+      },
+      {
+        "index": 2,
+        "rows": 1,
+        "cols": 10,
+        "header": ""
+      },
+      {
+        "index": 3,
+        "rows": 11,
+        "cols": 10,
+        "header": "排名\n\t\n商品信息\n\t\n商品访客数\n\t\n商品访客数占比\n\t\n成交金额\n\t\n成交转化率\n\t\nUV价值\n\t\n商品曝光人数\n\t\n商品曝光次数\n\t\n操作"
+      }
+    ],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "DIV",
+        "placeholder": "",
+        "label": "按商品访客数",
+        "type": ""
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  },
+  "用户分析": {
+    "error": "Timeout 30000ms exceeded."
+  },
+  "营销分析": {
+    "title": "营销概览",
+    "url": "https://jdsz.jd.com/szweb/view/market/marketingtool-summary-temp.html?sz=%2Fmarketweb%2Fsz%2Fview%2Fmarketing%2FmarketingOverview.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n促销工具分析\n\n营销概览\n工具效果\n裂变优惠券\n店铺礼包\n搭配购\n品牌购物卡\n评价有礼\n礼金促销\n膨胀金\n搭售活动分析\n\n营销活动分析\n\n活动分析\n活动对比\n活动沉淀\n大屏选择\n实时大屏\n\n频道活动分析\n\n百亿补贴\n京东拍卖概况\n京东拍卖明细\n便宜包邮分析\n秒杀活动分析\n国补核销数据\n国补资金消耗\n微信域\n排行榜分析\n试用分析\n\n内容营销分析\n\n内容概览\n内容明细\n实时直播分析\n营销概览\n按天查询（2026-08-11 至 2026-08-11）\nSKUSPU\n数据概览\n环比（天）\n同比（年）\n\n转化效果\n\n成交客户数\n34\n较前一天\n61.90%\n同行店铺均值\n17\n全店成交客户数\n36\n成交商品数\n10\n较前一天\n100.00%\n同行店铺均值\n5\n全店成交商品数\n12\n成交商品件数\n40\n较前一天\n48.15%\n同行店铺均值\n24\n全店成交商品件数\n67\n成交金额\n￥7,424.16\n较前一天\n57.35%\n同行店铺均值\n￥2,923.86\n全店成交金额\n￥7,983.16\n成交单量\n34\n较前一天\n61.90%\n同行店铺均值\n17\n全店成交单量\n36\n客单价（ARPU）\n￥218.36\n较前一天\n2.81%\n同行店铺均值\n￥216.10\n全店客单价（ARPU）\n￥221.75\n\n客户价值\n\n新成交客户数\n28\n较前一天\n86.67%\n同行店铺均值\n11\n全店新成交客户数\n29\n老成交客户数\n6\n较前一天\n0.00%\n同行店铺均值\n5\n全店老成交客户数\n7\n新成交会员数\n1\n较前一天\n66.67%\n同行店铺均值\n0\n全店成交会员数\n3\n老成交会员数\n0\n较前一天\n-\n同行店铺均值\n0\n全店成交会员数\n3\n成交老客占比\n17.65%\n较前一天\n38.24%\n同行店铺均值\n25.82%\n全店成交老客占比\n19.44%\n新成交关注店铺用户数\n2\n较前一天\n0.00%\n同行店铺均值\n0\n全店成交关注店铺用户数\n5\n老成交关注店铺用户数\n3\n较前一天\n200.00%\n同行店铺均值\n1\n全店成交关注店铺用户数\n5\n数据趋势\n转化效果\n成交客户数\n成交商品数\n成交商品件数\n成交金额\n成交单量\n客单价（ARPU）\n客户价值\n新成交客户数\n老成交客户数\n新成交会员数\n老成交会员数\n新成交关注店铺用户数\n老成交关注店铺用户数\n成交老客占比\n已选择：2/4\n7-13\n7-14\n7-15\n7-16\n7-17\n7-18\n7-19\n7-20\n7-21\n7-22\n7-23\n7-24\n7-25\n7-26\n7-27\n7-28\n7-29\n7-30\n7-31\n8-01\n8-02\n8-03\n8-04\n8-05\n8-06\n8-07\n8-08\n8-09\n8-10\n8-11\n成交商品件数\n成交金额\n数据加载中...\n8-11 促销活动榜单\n成交商品件数\n40\n成交金额\n￥7,424.16\n排名\n活动类型\n活动名称\n成交商品件数\n操作\n单品促销\n超级补贴(含包邮)--祁门红茶官方旗舰店特级正宗2026新茶叶自己喝口粮茶送长辈父母家长特级祁红香螺300g\n11\n详情\n赠品促销\n红白品鉴包赠品促销\n10\n详情\n单品促销\n超级补贴(含包邮)--祁门红茶官方旗舰店新茶特级正宗高端茶叶自己喝送长辈父母家长祁红香螺200g（特级/一\n6\n详情\n4\n赠品促销\n满2件赠礼袋\n6\n详情\n5\n单品促销\n便宜包邮10219134350195\n5\n详情\n6\n商品券\n立减售卖金冠*2\n4\n详情\n7\n总价促销\n店铺促销老厂房\n3\n详情\n8\n赠品促销\n下单送赠品2024-08-2616:07\n2\n详情\n9\n赠品促销\n中国红*2\n2\n详情\n10\n单品促销\n（会员专享）会员价\n2\n详情\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "工具效果",
+        "href": "/szweb/view/market/marketingtool-effect-temp.html"
+      },
+      {
+        "text": "裂变优惠券",
+        "href": "/szweb/view/market/coupon-share-overview-temp.html"
+      },
+      {
+        "text": "店铺礼包",
+        "href": "/szweb/view/market/shop-gift-overview-temp.html"
+      },
+      {
+        "text": "搭配购",
+        "href": "/szweb/view/market/match-buy-temp.html"
+      },
+      {
+        "text": "品牌购物卡",
+        "href": "/szweb/view/market/brand-card-temp.html"
+      },
+      {
+        "text": "评价有礼",
+        "href": "/szweb/view/market/rating-gift-reward-temp.html"
+      },
+      {
+        "text": "礼金促销",
+        "href": "/szweb/view/market/gift-money-promotion-temp.html"
+      },
+      {
+        "text": "膨胀金",
+        "href": "/szweb/view/market/expansion-money-overview-temp.html"
+      },
+      {
+        "text": "搭售活动分析",
+        "href": "/szweb/view/market/bunding-sale-analysis-temp.html"
+      },
+      {
+        "text": "活动分析",
+        "href": "/szweb/view/realtime/promotion-list-temp.html"
+      },
+      {
+        "text": "活动对比",
+        "href": "/szweb/view/realtime/promotion-contrast-temp.html"
+      },
+      {
+        "text": "活动沉淀",
+        "href": "/szweb/view/realtime/promotion-harvest-temp.html"
+      },
+      {
+        "text": "大屏选择",
+        "href": "/szweb/view/realtime/screen-list-temp.html"
+      },
+      {
+        "text": "实时大屏",
+        "href": "/szweb/view/realtime/edit-screen-temp.html"
+      },
+      {
+        "text": "百亿补贴",
+        "href": "/szweb/view/market/subsidy-analysis-temp.html"
+      },
+      {
+        "text": "京东拍卖概况",
+        "href": "/szweb/view/market/action-activity-temp.html"
+      },
+      {
+        "text": "京东拍卖明细",
+        "href": "/szweb/view/market/action-detail-temp.html"
+      },
+      {
+        "text": "便宜包邮分析",
+        "href": "/szweb/view/market/cheap-product-analysis-temp.html"
+      },
+      {
+        "text": "秒杀活动分析",
+        "href": "/szweb/view/market/seckill-analysis-temp.html"
+      },
+      {
+        "text": "国补核销数据",
+        "href": "/szweb/view/market/bg-charge-off-temp.html"
+      },
+      {
+        "text": "国补资金消耗",
+        "href": "/szweb/view/market/gbCharge-finance-temp.html"
+      },
+      {
+        "text": "微信域",
+        "href": "/szweb/view/market/we-chat-domain-temp.html"
+      },
+      {
+        "text": "排行榜分析",
+        "href": "/szweb/view/market/rank-analysis-temp.html"
+      },
+      {
+        "text": "试用分析",
+        "href": "/szweb/view/market/try-activity-temp.html"
+      },
+      {
+        "text": "内容概览",
+        "href": "/szweb/view/market/content-summary-temp.html"
+      },
+      {
+        "text": "内容明细",
+        "href": "/szweb/view/market/type-analyse-temp.html"
+      },
+      {
+        "text": "实时直播分析",
+        "href": "/szweb/view/market/live-streaming-temp.html"
+      },
+      {
+        "text": "帮助",
+        "href": "https://jdsz.jd.com/sz/view/help/indexs.html"
+      },
+      {
+        "text": "个人中心",
+        "href": "https://jdsz.jd.com/sz/view/personalCenter/basicInfor.html"
+      },
+      {
+        "text": "订购中心",
+        "href": "//fw.jd.com/main/detail/FW_GOODS-549810?skuId=797631&p=sz&t=sz"
+      },
+      {
+        "text": "首页",
+        "href": "https://jdsz.jd.com/szweb/sz/view/index/home.html"
+      },
+      {
+        "text": "实时",
+        "href": "https://jdsz.jd.com/szweb/sz/view/realTime/realSummarysNew.html"
+      },
+      {
+        "text": "流量",
+        "href": "https://jdsz.jd.com/szweb/sz/view/viewflow/viewStats.html"
+      },
+      {
+        "text": "商品",
+        "href": "https://jdsz.jd.com/sz/view/productAnalysis/productSummarys.html"
+      },
+      {
+        "text": "交易",
+        "href": "https://jdsz.jd.com/sz/view/dealAnalysis/dealSummarys.html"
+      },
+      {
+        "text": "服务",
+        "href": "https://jdsz.jd.com/szweb/sz/view/serviceAnalysis/afterSalesServiceAnalysis.html"
+      },
+      {
+        "text": "营销",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/marketing/marketingOverview.html"
+      },
+      {
+        "text": "供应链",
+        "href": "https://jdsz.jd.com/stockweb/sz/view/ihs/InventoryHealth.html"
+      },
+      {
+        "text": "客户",
+        "href": "https://jdsz.jd.com/szweb/sz/view/growth/summary.html"
+      },
+      {
+        "text": "行业",
+        "href": "https://jdsz.jd.com/szweb/sz/view/industryMarket/industryRealTimeNew.html"
+      },
+      {
+        "text": "竞争",
+        "href": "https://jdsz.jd.com/sz/view/competitionAnalysis/shopOverviews.html"
+      },
+      {
+        "text": "揽客",
+        "href": "https://jdsz.jd.com/sz/view/vender/shopping/activityLists.html"
+      },
+      {
+        "text": "报表",
+        "href": "https://jdsz.jd.com/sz/view/selfHelp/reportLists.html"
+      },
+      {
+        "text": "业务专区",
+        "href": "https://jdsz.jd.com/sz/view/businessZone/wanjia.html"
+      },
+      {
+        "text": "智能工具",
+        "href": "https://jdsz.jd.com/szweb/sz/view/facilitator/smartSelection.html"
+      },
+      {
+        "text": "培训",
+        "href": "https://jdsz.jd.com/sz/view/knowledgeCenter/school.html"
+      },
+      {
+        "text": "工具效果",
+        "href": "https://jdsz.jd.com/sz/view/marketingTool/toolEffects.html"
+      },
+      {
+        "text": "裂变优惠券",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/couponShare/couponShareOverview.html"
+      },
+      {
+        "text": "店铺礼包",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/shopGift/shopGiftOverview.html"
+      },
+      {
+        "text": "礼金促销",
+        "href": "https://jdsz.jd.com/marketweb/sz/view/giftMoney/giftMoneyOverview.html"
+      },
+      {
+        "text": "排行榜分析",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/rankAnalysis.html"
+      },
+      {
+        "text": "膨胀金",
+        "href": "https://jdsz.jd.com/szallowance/web/views/expansionMoney/expansionMoneyOverview.html"
+      },
+      {
+        "text": "品牌购物卡",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/brandCard.html"
+      },
+      {
+        "text": "搭配购",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/crossSell.html"
+      },
+      {
+        "text": "评价有礼",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/ratingGiftReward.html"
+      },
+      {
+        "text": "百亿补贴",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/subsidiesAnalysis.html"
+      },
+      {
+        "text": "国补资金消耗",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/gbChargeFinance.html"
+      },
+      {
+        "text": "国补核销数据",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/gbChargeOff.html"
+      },
+      {
+        "text": "京东拍卖概况",
+        "href": "https://jdsz.jd.com/szweb/sz/view/marketing/actionActivity.html"
+      },
+      {
+        "text": "京东拍卖明细",
+        "href": "https://jdsz.jd.com/szweb/sz/view/marketing/actionDetail.html"
+      },
+      {
+        "text": "便宜包邮分析",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/cheapProductAnalysis.html"
+      },
+      {
+        "text": "秒杀活动",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/seckillActivityPop.html"
+      },
+      {
+        "text": "搭售活动分析",
+        "href": "https://jdsz.jd.com/szweb/sz/view/marketing/bundingSaleAnalysis.html"
+      },
+      {
+        "text": "微信域",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/weChatDomain.html"
+      },
+      {
+        "text": "试用概况",
+        "href": "https://jdsz.jd.com/szweb/sz/view/marketing/tryActivity.html"
+      },
+      {
+        "text": "白条免息",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/creditConsump.html"
+      },
+      {
+        "text": "新品礼金券",
+        "href": "https://jdsz.jd.com/sz/view/market/giftVoucher.html"
+      },
+      {
+        "text": "内容概览",
+        "href": "https://jdsz.jd.com/sz/view/contentMarket/contentSummary.html"
+      },
+      {
+        "text": "内容明细",
+        "href": "https://jdsz.jd.com/sz/view/contentMarket/typeAnalyse.html"
+      },
+      {
+        "text": "实时直播",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/realTime.html"
+      },
+      {
+        "text": "官方数字人直播",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/yxAiLive.html"
+      },
+      {
+        "text": "广告概况",
+        "href": "https://jdsz.jd.com/sz/view/marketingTool/advertSummary.html"
+      },
+      {
+        "text": "CPS联盟",
+        "href": "https://jdsz.jd.com/szweb/sz/view/market/allianceSummary.html"
+      },
+      {
+        "text": "共增营销分析",
+        "href": "https://jdsz.jd.com/szweb/sz/view/marketing/gzyx.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "//jdsz.jd.com/common/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "//jdsz.jd.com/common/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "//jdsz.jd.com/common/商智店铺版用户注销.pdf"
+      },
+      {
+        "text": "资费说明",
+        "href": "https://jdsz.jd.com/szweb/sz/view/help/tariffDess.html"
+      },
+      {
+        "text": "在线咨询",
+        "href": "https://chat.jd.com/jd/chat?entry=jd_web_jingmai "
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      }
+    ],
+    "tables": [],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  },
+  "体验分析": {
+    "title": "服务概览",
+    "url": "https://jdsz.jd.com/szweb/view/service/service-summary.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n服务分析\n\n服务概览\n店铺星级\n售后分析\n评价分析\n\n服务考核\n\n违规服务分析\n售后考核\n商品质量\n物流履约\n政企发票考核\n服务概览\n店铺星级\n查看详情\n系统提示：新版店铺星级即将于 2025年9月17日正式生效，敬请关注！新版迭代内容 详见公告\n店铺表现\n近30天有效订单\n734\n单，15单以上展示真实星级\n数据更新时间\n：2026-08-11\n数据日期：\n店铺星级\n星级&体验得分换算标准\n4.6\n较昨日\n-0.1星\n体验得分\n9.92\n分\n较昨日\n持平\n超过\n69.64%\n同行\n客服咨询\n10.0\n分\n高\n较昨日\n持平\nx15%权重=1.5分\n物流履约\n9.5\n分\n高\n较昨日\n持平\nx50%权重=4.75分\n售后服务\n9.1\n分\n高\n较昨日\n持平\nx20%权重=1.82分\n商品体验\n9.7\n分\n高\n较昨日\n持平\nx15%权重=1.45分\n附加项\n0.4\n分\n较昨日\n持平\nx100%权重=0分\n体验诊断 星级小幅下滑， 请重点关注数据变化\n影响下降\n售后服务时长\n详情\n\n积极响应消费者售后问题，提升处理速度\n\n影响下降\n售后评价得分\n详情\n\n积极处理消费者售后问题,争取消费者好评\n\n影响下降\n运单配送时效达成率\n详情\n\n使用京仓京配，提升消费者物流体验\n\n店铺权益提升至5.0\n查看权益详情\n\n五星专属透标\n\n五星店铺专属标签，搜索结果页、商品详情页、店铺首页、咚咚聊天页、店铺详情页全方位透出，大幅提升转化效果\n\n频道优先露出\n\n商品在各频道中具有优先露出的机会\n\n搜索流量加权\n\n五星店铺专属流量加权，显著提升搜索曝光\n\n京小贷免息优惠 查看\n\n京小贷POP商家专属利率优惠，五星店铺月月享福利\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗\n服务运营\n对比时间\n当前：2026-08-11\n对比：2026-08-10\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n环比\n售前\n客户咨询-引导成交\n促成下单金额\n￥575.00\n对比时间\n￥440.90\n环比\n+30.42%\n促成下单转化率\n60.00%\n对比时间\n50.00%\n环比\n+20.00%\n客服\n客户咨询-客服解答\n咨询量\n7\n对比时间\n8\n环比\n-12.50%\n接待量\n7\n对比时间\n8\n环比\n-12.50%\n平均响应时长\n15.93\n对比时间\n16.22\n环比\n-1.77%\n售中\n发货揽收-确认收货\n京配订单占比\n0.00%\n对比时间\n0.00%\n环比\n-\n物流停滞率\n0.00%\n对比时间\n0.00%\n环比\n-\n售后\n申请售后-完成售后\n申请退货件数\n0\n对比时间\n0\n环比\n-\n售后满意度\n-\n对比时间\n-\n环比\n-\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "店铺星级",
+        "href": "/szweb/view/service/shop-experience-score.html"
+      },
+      {
+        "text": "售后分析",
+        "href": "/szweb/view/service/after-sales-service-analysis-temp.html"
+      },
+      {
+        "text": "评价分析",
+        "href": "/szweb/view/service/comment-analysis.html"
+      },
+      {
+        "text": "违规服务分析",
+        "href": "/szweb/view/service/negative-service-temp.html"
+      },
+      {
+        "text": "售后考核",
+        "href": "/szweb/view/service/after-sales-through-train-temp.html"
+      },
+      {
+        "text": "商品质量",
+        "href": "/szweb/view/service/product-quality-temp.html"
+      },
+      {
+        "text": "物流履约",
+        "href": "/szweb/view/service/logistics-quality-temp.html"
+      },
+      {
+        "text": "政企发票考核",
+        "href": "/szweb/view/service/create-invoice-governance-temp.html"
+      },
+      {
+        "text": "详见公告",
+        "href": "https://mtt.jd.com/article/articleView/1c515f49-fd36-49cd-98fe-07e4a7810d1d.action"
+      },
+      {
+        "text": "查看",
+        "href": "https://loan.jd.com/loanPage/main/activity/jxd-pc-20230914154961-good-store-template?code=BbIo5xia7Ln5XJ40YGbAAA%3D%3D&siteID="
+      },
+      {
+        "text": "品牌类别",
+        "href": "https://learn-jdm.jd.com/knowledge/hot-topic/detail?issueId=47861.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 12,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 13,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 14,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 15,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 16,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 17,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 18,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 19,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 20,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 21,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 22,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 23,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 24,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 25,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 26,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 27,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 28,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 29,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 30,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 31,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 32,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 33,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 34,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 35,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 36,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 37,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 38,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 39,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 40,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 41,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 42,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 43,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 44,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 45,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 46,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 47,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 48,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 49,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 50,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 51,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 52,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 53,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 54,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 55,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 100,
+        "height": 34
+      },
+      {
+        "index": 56,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 57,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 58,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 59,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 60,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 61,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 936,
+        "height": 290
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 7,
+        "cols": 7,
+        "header": "日一二三四五六"
+      },
+      {
+        "index": 1,
+        "rows": 1,
+        "cols": 0,
+        "header": ""
+      },
+      {
+        "index": 2,
+        "rows": 0,
+        "cols": 0,
+        "header": ""
+      }
+    ],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "选择日期",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  },
+  "供应链": {
+    "error": "Timeout 30000ms exceeded."
+  },
+  "市场分析": {
+    "title": "行业大盘",
+    "url": "https://jdsz.jd.com/szweb/view/industry/industrySummary.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n行业动态\n\n行业大盘\n行业卖家\n店铺榜单\n商品榜单\n品牌榜单\n品牌动态详情\n\n行业关键词\n\n热门关键词\n关键词查询\n商机推荐\n\n行业机会挖掘\n\n类目属性概况\n类目属性详情\n产品榜单\n产品详情\n\n行业用户动态\n\n买家分析\n\n竞争分析\n\n实时竞店监控\n实时竞店配置\n竞店概况\n竞店对比\n竞品对比\n竞品流失\n竞品监控\n竞争流失\n竞争配置\n行业大盘\n当前：2026-08-13 04:10:25\n对比：2026-08-12 04:10:25\n实时\n昨天\n近7天\n近30天\n天\n周\n月\n自定义\n环比\n同比\n更多\n类目\n茗茶\n渠道\n全部\n查询\n重置\n核心指标\n指标配置\n下载数据\n成交金额增幅\n-6%~-4%\n成交单量增幅\n-8%~-6%\n浏览量\n6万~8万\n环比\n-10.14%\n访客数\n1万~2万\n环比\n-7.09%\n搜索点击次数\n1万~2万\n环比\n-4.95%\n成交客单价增幅\n4%~6%\n成交转化率增幅\n-4%~-2%\n成交商品件数增幅\n20%~22%\n分时\n累计\n行业品牌榜\n行业大盘为概览页，品牌榜仅展示TOP10，品牌明细榜菜单建设中，敬请期待。\n下载数据\n行业热销品牌TOP10\n行业流量品牌TOP10\n更新时间：2026-08-13 04:10:25\n排名\n\t\n品牌名称\n\t\n成交金额\n\t\n成交单量\n\t\n成交商品件数\n\t\n浏览量\n\t\n访客数\n\t\n搜索点击次数\n\n\n1\n\t\n张一元\n\t\n￥1万~￥2万\n\t\n10~50\n\t\n50~100\n\t\n2,000~4,000\n\t\n600~800\n\t\n400~600\n\n\n1\n\t\n八马茶业\n\t\n￥8,000~￥1万\n\t\n50~100\n\t\n100~200\n\t\n2,000~4,000\n\t\n800~1,000\n\t\n400~600\n\n\n3\n\t\n无品牌\n\t\n￥4,000~￥6,000\n\t\n1,000~2,000\n\t\n1,000~2,000\n\t\n8,000~1万\n\t\n2,000~4,000\n\t\n800~1,000\n\n\n4\n新入榜\n\t\nFORTNUM & MASON\n\t\n￥4,000~￥6,000\n\t\n0~5\n\t\n5~10\n\t\n10~50\n\t\n10~50\n\t\n10~50\n\n\n5\n新入榜\n\t\n茉莉飘雪\n\t\n￥4,000~￥6,000\n\t\n10~50\n\t\n10~50\n\t\n400~600\n\t\n200~400\n\t\n10~50\n\n\n6\n新入榜\n\t\n中茶\n\t\n￥4,000~￥6,000\n\t\n10~50\n\t\n10~50\n\t\n1,000~2,000\n\t\n400~600\n\t\n200~400\n\n\n7\n1\n\t\n大益\n\t\n￥2,000~￥4,000\n\t\n10~50\n\t\n10~50\n\t\n1,000~2,000\n\t\n200~400\n\t\n200~400\n\n\n8\n1\n\t\n正山堂\n\t\n￥2,000~￥4,000\n\t\n5~10\n\t\n10~50\n\t\n1,000~2,000\n\t\n200~400\n\t\n200~400\n\n\n9\n新入榜\n\t\n鑫凤凰\n\t\n￥2,000~￥4,000\n\t\n10~50\n\t\n10~50\n\t\n100~200\n\t\n100~200\n\t\n10~50\n\n\n10\n新入榜\n\t\n品品香\n\t\n￥2,000~￥4,000\n\t\n10~50\n\t\n10~50\n\t\n1,000~2,000\n\t\n400~600\n\t\n100~200\n行业店铺榜\n下载数据\n行业热销店铺TOP100\n行业流量店铺TOP100\n更新时间：2026-08-13 04:10:25\n排名\n暂无数据\n行业商品榜\n下载数据\n行业热销商品TOP200\n行业流量商品TOP200\nSPU\nSKU\n更新时间：2026-08-13 04:10:25\n排名\n暂无数据\n子行业排名\n子行业排名暂不支持实时维度，请切换至离线查看。\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "行业卖家",
+        "href": "/szweb/view/industry/industry-shop-analysis-temp.html"
+      },
+      {
+        "text": "店铺榜单",
+        "href": "/szweb/view/industry/industry-shop-rank-temp.html"
+      },
+      {
+        "text": "商品榜单",
+        "href": "/szweb/view/industry/industry-product-rank-temp.html"
+      },
+      {
+        "text": "品牌榜单",
+        "href": "/szweb/view/industry/industry-brand-rank-temp.html"
+      },
+      {
+        "text": "品牌动态详情",
+        "href": "/szweb/view/industry/brand-rank-detail-temp.html"
+      },
+      {
+        "text": "热门关键词",
+        "href": "/squidweb/view/industry/hotKeywords.html"
+      },
+      {
+        "text": "关键词查询",
+        "href": "/squidweb/view/industry/keywordQuery.html"
+      },
+      {
+        "text": "商机推荐",
+        "href": "/szweb/view/industry/business-recommend.html/chance"
+      },
+      {
+        "text": "类目属性概况",
+        "href": "/szweb/view/industry/attr-summary-temp.html"
+      },
+      {
+        "text": "类目属性详情",
+        "href": "/szweb/view/industry/attr-detail-temp.html"
+      },
+      {
+        "text": "产品榜单",
+        "href": "/szweb/view/industry/industry-product-temp.html"
+      },
+      {
+        "text": "产品详情",
+        "href": "/szweb/view/industry/industry-product-detail-temp.html"
+      },
+      {
+        "text": "买家分析",
+        "href": "/szweb/view/industry/deal-cust-analysis-temp.html"
+      },
+      {
+        "text": "实时竞店监控",
+        "href": "/szweb/view/compete/compete-shop-monitor-temp.html"
+      },
+      {
+        "text": "实时竞店配置",
+        "href": "/szweb/view/compete/compete-shop-config-temp.html"
+      },
+      {
+        "text": "竞店概况",
+        "href": "/szweb/view/compete/compete-shop-overview-temp.html"
+      },
+      {
+        "text": "竞店对比",
+        "href": "/szweb/view/industry/competeShop.html"
+      },
+      {
+        "text": "竞品对比",
+        "href": "/szweb/view/industry/compete-product.html"
+      },
+      {
+        "text": "竞品流失",
+        "href": "/szweb/view/compete/compete-product-loss.html"
+      },
+      {
+        "text": "竞品监控",
+        "href": "/szweb/view/industry/compete-monitor.html"
+      },
+      {
+        "text": "竞争流失",
+        "href": "/szweb/view/compete/compete-loss-temp.html"
+      },
+      {
+        "text": "竞争配置",
+        "href": "/szweb/view/compete/compete-config-temp.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 12,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 13,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 14,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 15,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 16,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 17,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 18,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 19,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 20,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 21,
+        "tag": "CANVAS",
+        "class": "",
+        "width": 988,
+        "height": 300
+      },
+      {
+        "index": 22,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 23,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 24,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 25,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 26,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 27,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 28,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 29,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 30,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 31,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 32,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 33,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 34,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 35,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 36,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 37,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 38,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 39,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 11,
+        "cols": 8,
+        "header": "排名\n\t\n品牌名称\n\t\n成交金额\n\t\n成交单量\n\t\n成交商品件数\n\t\n浏览量\n\t\n访客数\n\t\n搜索点击次数"
+      },
+      {
+        "index": 1,
+        "rows": 1,
+        "cols": 1,
+        "header": "排名"
+      },
+      {
+        "index": 2,
+        "rows": 1,
+        "cols": 1,
+        "header": "排名"
+      }
+    ],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  },
+  "报表中心": {
+    "title": "下载中心",
+    "url": "https://jdsz.jd.com/szweb/view/reports-center/download-center.html",
+    "bodyText": "首页\n交易\n商品\n流量\n用户\n营销\n体验\n供应链\n市场\n报表\n祁门红茶官方旗舰店\nPOP\n\n报表中心\n\n下载中心\n推荐报表\n我的报表\n下载中心\n根据创建时间由近到远进行排列，只保留30天内最新的100份文件\n下载列表\n刷新\n请输入下载文件名称查询\n文件名称\n\t\n来源类型\n\t\n创建时间\n\t\n下载状态\n\t\n操作\n暂无数据\n咨询\n反馈\n调研\n\nCopyright©2004-2026 JD.com 京东版权所有\n\n京ICP证070359号 北京市公安局朝阳分局备案编号110105014669\n\n用户协议|营业执照|注销流程\n\n猜你想问\n店铺没订单？试试这几招\nPOP商家有什么政策吗\n平台针对商家有什么扶持举措吗",
+    "navItems": [
+      {
+        "text": "首页",
+        "href": "/szweb/view/index/home.html"
+      },
+      {
+        "text": "交易",
+        "href": "/szweb/view/tradeAnalysis/tradeSummary.html"
+      },
+      {
+        "text": "商品",
+        "href": "/szweb/view/product/product360.html"
+      },
+      {
+        "text": "流量",
+        "href": "/szweb/view/flow/flow-summary.html"
+      },
+      {
+        "text": "用户",
+        "href": "/szweb/view/customer/cust-summarys-temp.html"
+      },
+      {
+        "text": "营销",
+        "href": "/szweb/view/market/marketingtool-summary-temp.html"
+      },
+      {
+        "text": "体验",
+        "href": "/szweb/view/service/service-summary.html"
+      },
+      {
+        "text": "供应链",
+        "href": "/szweb/view/inventory/Inventory-health-temp.html"
+      },
+      {
+        "text": "市场",
+        "href": "/szweb/view/industry/industrySummary.html"
+      },
+      {
+        "text": "报表",
+        "href": "/szweb/view/reports-center/download-center.html"
+      },
+      {
+        "text": "祁门红茶官方旗舰店POP",
+        "href": "//mall.jd.com/index-11855009.html"
+      },
+      {
+        "text": "推荐报表",
+        "href": "/szweb/view/reports-center/recommend-report-temp.html"
+      },
+      {
+        "text": "我的报表",
+        "href": "/szweb/view/reports-center/my-report-temp.html"
+      },
+      {
+        "text": "用户协议",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版-在线使用协议V1.pdf"
+      },
+      {
+        "text": "营业执照",
+        "href": "https://storage.360buyimg.com/sz-agreement/营业执照.jpg"
+      },
+      {
+        "text": "注销流程",
+        "href": "https://storage.360buyimg.com/sz-agreement/商智店铺版用户注销.pdf"
+      }
+    ],
+    "metrics": [],
+    "charts": [
+      {
+        "index": 0,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 1,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 2,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 3,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 4,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 5,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 6,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 7,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 8,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 9,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 10,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 11,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 12,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 13,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      },
+      {
+        "index": 14,
+        "tag": "svg",
+        "class": "[object SVGAnimatedString]",
+        "width": null,
+        "height": null
+      }
+    ],
+    "tables": [
+      {
+        "index": 0,
+        "rows": 1,
+        "cols": 5,
+        "header": ""
+      },
+      {
+        "index": 1,
+        "rows": 1,
+        "cols": 5,
+        "header": "文件名称\n\t\n来源类型\n\t\n创建时间\n\t\n下载状态\n\t\n操作"
+      }
+    ],
+    "filters": [
+      {
+        "tag": "INPUT",
+        "placeholder": "找功能/找指标/找商品",
+        "label": "",
+        "type": "text"
+      },
+      {
+        "tag": "INPUT",
+        "placeholder": "有问题点我直接问",
+        "label": "",
+        "type": "text"
+      }
+    ],
+    "sections": []
+  }
+}
