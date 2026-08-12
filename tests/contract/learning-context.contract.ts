@@ -65,7 +65,7 @@ describe('LearningContext — minimal (open lifecycle)', () => {
         observedAt: '2026-08-12T02:38:00Z',
         summary: 'Live CDP capture: 14 API responses, GMV=¥337.90, orders=2, visitors=23',
         evidenceIds: ['ev_summary_20260812', 'ev_trend_20260812', 'ev_productTop_20260812'],
-        metrics: { gmv: 337.90, orders: 2, visitors: 23 },
+        metricsSnapshot: { gmv: 337.90, orders: 2, visitors: 23 },
       }],
       agentActivities: [{
         activityId: 'act_discover_20260812',
@@ -137,10 +137,7 @@ describe('LearningContext — mature lifecycle', () => {
     ctx.outcomes = [{
       outcomeId: 'out_001',
       actionId: 'act_001',
-      observationWindow: '7d',
       observedAt: '2026-08-19T00:00:00Z',
-      baseline: { gmv: 337, orders: 2 },
-      postValue: { gmv: 520, orders: 5 },
       summary: 'GMV +54%, orders +150% after price adjustment',
     }];
     expect(determineLifecycle(ctx)).toBe('mature');
@@ -208,10 +205,10 @@ describe('LearningContext — real JD evidence validation', () => {
   });
 });
 
-describe('HumanIntervention — type coverage', () => {
-  it('supports all intervention types from P0007 proposal', () => {
-    const types = ['decision', 'correction', 'annotation', 'context_supplement', 'action_intent', 'no_action', 'other'];
-    types.forEach(type => {
+describe('HumanIntervention — minimal reference (P0007.1)', () => {
+  it('accepts free-form intervention type (grammar defined in P0007.2)', () => {
+    const sampleTypes = ['decision', 'correction', 'annotation', 'context_supplement', 'action_intent', 'no_action'];
+    sampleTypes.forEach(type => {
       const intervention = {
         interventionId: `int_${type}`,
         actor: { id: 'u1', role: 'operator' },
@@ -221,6 +218,17 @@ describe('HumanIntervention — type coverage', () => {
       };
       expect(() => HumanInterventionSchema.parse(intervention)).not.toThrow();
     });
+  });
+
+  it('does NOT define grammar — type is free-form string', () => {
+    const intervention = {
+      interventionId: 'int_custom',
+      actor: { id: 'u1', role: 'domain_expert' },
+      type: 'custom_escalation_protocol',  // unknown type is valid
+      timestamp: '2026-08-12T00:00:00Z',
+      summary: 'Escalated to legal team for review',
+    };
+    expect(() => HumanInterventionSchema.parse(intervention)).not.toThrow();
   });
 });
 
@@ -239,9 +247,8 @@ describe('LearningContext — incremental enrichment', () => {
       actionId: 'a1', type: 'price_change', actor: { type: 'human' as const },
       timestamp: '2026-08-12T00:00:00Z', description: 'test',
     }], outcomes: [{
-      outcomeId: 'o1', actionId: 'a1', observationWindow: '7d' as const,
+      outcomeId: 'o1', actionId: 'a1',
       observedAt: '2026-08-19T00:00:00Z',
-      baseline: {}, postValue: {},
     }]};
     expect(determineLifecycle(withOutcome)).toBe('mature');
   });
@@ -269,7 +276,7 @@ function buildMinimalContext(): LearningContext {
       provider: { platform: 'jd', acquisition: 'cdp' },
       observedAt: '2026-08-12T00:00:00Z',
       summary: 'Test observation',
-      metrics: { gmv: 100 },
+      metricsSnapshot: { gmv: 100 },
     }],
     agentActivities: [{
       activityId: 'act_test',

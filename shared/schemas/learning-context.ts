@@ -13,7 +13,7 @@
 //   2. Everything is referenced by ID — no data duplication
 //   3. Partial contexts are valid — Action/Outcome/Intervention are optional
 //   4. Runtime-neutral — no Hermes-specific fields
-//   5. Provenance is woven through reference chains, not a separate trace
+//   5. Metric snapshots are derived, not authoritative — evidence is the source of truth
 
 import { z } from 'zod';
 import { IsoDateString } from './common.js';
@@ -92,8 +92,15 @@ export const ObservationRefSchema = z.object({
   evidenceIds: z.array(z.string()).default([]),
   /** Reference to signals derived from this observation */
   signalIds: z.array(z.string()).default([]),
-  /** Metrics snapshot (canonical name → value) */
-  metrics: z.record(z.string(), z.number()).default({}),
+  /**
+   * Metrics snapshot — derived convenience, NOT authoritative.
+   * Source of truth: evidence identified by evidenceIds.
+   * Included only to avoid Runtime re-fetching all evidence files.
+   * Every key maps to a canonical metric name from CapabilityContract.
+   */
+  metricsSnapshot: z.record(z.string(), z.number()).default({}).describe(
+    'Derived metric snapshot. Source of truth: evidenceIds. Not authoritative.',
+  ),
 });
 export type ObservationRef = z.infer<typeof ObservationRefSchema>;
 
@@ -132,9 +139,9 @@ export type AgentActivityRef = z.infer<typeof AgentActivityRefSchema>;
  * A Human Intervention is any professional input into the situation.
  * It may or may not lead to an Action.
  *
- * P0007.2 will extend this with the full grammar (Decision, Correction,
- * Annotation, Context Supplement, Action Intent, Professional Action).
- * P0007.1 only defines the minimal contract.
+ * P0007.1 defines the minimal reference placeholder.
+ * P0007.2 defines the full grammar: Decision semantics, Correction structure,
+ * Annotation model, Context Supplement, Action Intent, Professional Action.
  */
 export const HumanInterventionSchema = z.object({
   /** Unique intervention ID */
@@ -142,24 +149,14 @@ export const HumanInterventionSchema = z.object({
   /** Who intervened */
   actor: z.object({
     id: z.string(),
-    role: z.string(),    // "operator", "domain_expert", "reviewer"
+    role: z.string(),    // free-form: "operator", "domain_expert", "reviewer"
   }),
-  /** What kind of intervention */
-  type: z.enum([
-    'decision',           // approved / rejected / modified
-    'correction',         // corrected agent output
-    'annotation',         // added context or explanation
-    'context_supplement', // provided missing information
-    'action_intent',      // initiated a professional action
-    'no_action',          // deliberately chose not to act
-    'other',
-  ]),
+  /** What kind of intervention (free-form label; P0007.2 defines the grammar) */
+  type: z.string().min(1),
   /** When the intervention occurred */
   timestamp: IsoDateString,
   /** What the human did or said */
   summary: z.string().min(1),
-  /** Structured detail — type-specific payload */
-  detail: z.record(z.string(), z.unknown()).default({}),
   /** Reference to the review/feedback that captured this intervention */
   reviewId: z.string().optional(),
   /** If this intervention led to an action */
@@ -204,23 +201,19 @@ export type ActionRef = z.infer<typeof ActionRefSchema>;
  * An Outcome is what happened after an Action — observed via re-acquisition
  * of the real world through existing Capabilities.
  *
- * P0007.4 will extend this with the full Outcome Observation model.
- * P0007.1 only defines the minimal reference.
+ * P0007.1 defines only the reference placeholder (actionId, evidenceIds).
+ * P0007.4 will add: observationWindow, baseline snapshot, postValue snapshot,
+ * and the full Outcome Observation model.
  */
 export const OutcomeRefSchema = z.object({
   /** Unique outcome ID */
   outcomeId: z.string().min(1),
   /** The action this outcome follows */
   actionId: z.string(),
-  /** Observation window after the action */
-  observationWindow: z.enum(['3d', '7d', '14d', '30d', 'custom']).default('7d'),
   /** When the outcome was observed */
   observedAt: IsoDateString,
-  /** Evidence produced by outcome observation */
+  /** Evidence produced by outcome observation (source of truth) */
   evidenceIds: z.array(z.string()).default([]),
-  /** Metrics before vs after */
-  baseline: z.record(z.string(), z.number()).default({}),
-  postValue: z.record(z.string(), z.number()).default({}),
   /** Human-readable summary */
   summary: z.string().optional(),
   /** The capability used to re-observe */
@@ -274,8 +267,13 @@ export const LearningContextSchema = z.object({
   /** What outcomes were observed */
   outcomes: z.array(OutcomeRefSchema).default([]),
 
-  /** Cross-reference graph for provenance */
-  provenance: z.object({
+  /**
+   * Context summary — aggregated metadata for quick inspection.
+   * NOT provenance. Provenance is the ID reference chains woven through
+   * observations, evidence, interventions, actions, and outcomes.
+   * P0007.5 will define the full Provenance model.
+   */
+  summary: z.object({
     /** Capabilities used across all observations */
     capabilitiesUsed: z.array(z.string()).default([]),
     /** Agent runtimes involved */
