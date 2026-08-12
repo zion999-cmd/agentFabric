@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-phase3-complete | **Hermes**: v0.18.0 | **测试**: 445/446 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-p0007.1-complete | **Hermes**: v0.18.0 | **测试**: 445/446 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **P0007.1 Complete** — Learning Context Contract. Situation/Case anchor, Observation/AgentActivity/Intervention/Action/Outcome reference placeholders. summary (not provenance). metricsSnapshot (derived, not authoritative). relatedActionIds (association, not causation). respondsToActivityIds (Case C). 17 contract tests. Runtime-neutral. No Hermes/JD private fields. Tag: v0.2-p0007.1-complete.
 
 - [x] **P0007 Proposal** — Experience → Memory → Skill architecture. agentFabric: World → Learning Context; Runtime: Learning Context → Memory → Skill. 6 sub-proposals (P0007.1–7.6). Legacy P0007.3 archived. Key boundary: agentFabric 不实现 Memory Engine/Skill Generator. ADR-023.
 

@@ -449,3 +449,24 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 5. Dynamic Interaction Surface: UI is a function of Learning Context gaps
 
 **子阶段**: P0007.1 Learning Context Contract → P0007.6 Hermes Learning Loop Validation
+
+## ADR-024: P0007.1 Complete — Learning Context Contract
+
+- **日期**: 2026-08-12
+- **状态**: Accepted (Complete)
+- **来源**: `shared/schemas/learning-context.ts` + 17 tests
+
+**核心 Schema**:
+
+| 字段 | 设计决策 |
+|------|---------|
+| `situation` | Situation/Case 一等业务锚点，不是 taskId |
+| `observations[].metricsSnapshot` | Derived snapshot — source of truth is evidenceIds |
+| `agentActivities[].agentRuntime` | Free-form string default 'hermes' — not enum lock-in |
+| `humanInterventions[].type` | Free-form string — Grammar deferred to P0007.2 |
+| `humanInterventions[].respondsToActivityIds` | Links intervention to specific agent activity (Case C) |
+| `actions[].type` | Free-form string — domain-specific |
+| `outcomes[].relatedActionIds` | Plural "related" — not singular "causedBy" (Case D) |
+| `summary` | Aggregated metadata, NOT provenance (P0007.5) |
+
+**边界**: Runtime-neutral, 无 Hermes/JD/ecommerce 私有字段, partial contexts valid, incremental enrichment.
