@@ -279,56 +279,63 @@ Published World Model
 
 P0008.1 不追求完整 Ontology。
 
-第一版从历史 JD + Hermes Artifact 反推最小 primitive：
+考古结论（`P0008.1-world-model-gap-map.md`）：真正发现的不是"7 个节点类型"，而是：
+
+> **少量 World Objects + 一个有证据、有认知状态的 Assertion Graph。**
+
+### World Primitive（Object 类型，6 个）
 
 ```text
 System
 Surface
-Entity
-Concept
+Feature / Affordance
 Metric
 Dimension
 Constraint
-Capability
-Relationship
 ```
 
-例如：
+**关键命名修正**：`Feature / Affordance`（系统自己提供什么，如"实时榜单"）必须与 agentFabric 的 `Capability`（traffic.overview，怎样实际观察）严格区分。二者不是同一个东西，否则 World Registry 与 Capability Registry 会被揉在一起。
+
+### World Assertion（Graph edge，带 epistemic status）
+
+真正的认知状态挂在 Assertion 上，不是对象 metadata 上：
 
 ```text
-System
-  jd_shangzhi
-
-Surface
-  realtime_ranking
-
-Entity
-  Product
-    levels:
-      SPU
-      SKU
-
-Concept
-  Transaction
-
-Metric
-  transaction_amount
-
-Dimension
-  time
-  channel
-  category
-
-Relationship
-  realtime_ranking
-      exposes → transaction_amount
-
-  transaction_amount
-      measures → Product
-
-Capability
-      observes → transaction_amount
+subject → predicate → object/reference
+  + epistemicStatus (suspected / observed / verified)
+  + evidenceRefs
+  + discoveredAt
+  + source
 ```
+
+示例：
+
+```text
+JD Shangzhi          has_surface      Realtime Overview       [verified]
+Realtime Overview    exposes_metric   Transaction Amount      [verified]
+Transaction Amount   observable_by    /szgateway/xxx          [suspected]
+```
+
+`Relationship` 由 `World Assertion` 承担，不单独做对象类型。
+
+### External Binding（World → Capability）
+
+```text
+World Assertion / Surface / Metric
+        ↓
+CapabilityBinding
+        ↓
+CapabilityRegistry
+```
+
+### 延后（无真实证据）
+
+```text
+Entity registry（三方都只隐式出现，从未一等建模）
+Concept 独立节点（discovery 的 Business Context 太松散）
+```
+
+P0008.1 只做 `Capability ↔ Surface binding`；`Capability ↔ Entity binding` 延后。
 
 这些 Primitive 必须通过真实 JD Artifact 验证，而不是为了 Schema 完整性继续扩张。
 
