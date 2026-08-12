@@ -109,6 +109,7 @@ describe('LearningContext — partial lifecycle', () => {
     const ctx = buildMinimalContext();
     ctx.humanInterventions = [{
       interventionId: 'int_001',
+      situationId: 'sit_test',
       actor: { id: 'operator_1', role: 'operator' },
       type: 'decision',
       timestamp: '2026-08-12T03:00:00Z',
@@ -216,12 +217,13 @@ describe('LearningContext — real JD evidence validation', () => {
   });
 });
 
-describe('HumanIntervention — minimal reference (P0007.1)', () => {
-  it('accepts free-form intervention type (grammar defined in P0007.2)', () => {
-    const sampleTypes = ['decision', 'correction', 'annotation', 'context_supplement', 'action_intent', 'no_action'];
-    sampleTypes.forEach(type => {
+describe('HumanIntervention — 5-type Grammar (P0007.2)', () => {
+  it('accepts all 5 intervention types', () => {
+    const grammarTypes = ['response', 'correction', 'context_supplement', 'decision', 'action_intent'] as const;
+    grammarTypes.forEach(type => {
       const intervention = {
         interventionId: `int_${type}`,
+        situationId: 'sit_test',
         actor: { id: 'u1', role: 'operator' },
         type,
         timestamp: '2026-08-12T00:00:00Z',
@@ -231,15 +233,17 @@ describe('HumanIntervention — minimal reference (P0007.1)', () => {
     });
   });
 
-  it('does NOT define grammar — type is free-form string', () => {
+  it('rejects invalid type — Grammar is enforced, unknown values fail validation', () => {
     const intervention = {
-      interventionId: 'int_custom',
-      actor: { id: 'u1', role: 'domain_expert' },
-      type: 'custom_escalation_protocol',  // unknown type is valid
+      interventionId: 'int_bad',
+      situationId: 'sit_test',
+      actor: { id: 'u1', role: 'operator' },
+      type: 'custom_escalation_protocol',  // NOT in the 5-type Grammar
       timestamp: '2026-08-12T00:00:00Z',
       summary: 'Escalated to legal team for review',
     };
-    expect(() => HumanInterventionSchema.parse(intervention)).not.toThrow();
+    const result = HumanInterventionSchema.safeParse(intervention);
+    expect(result.success).toBe(false);
   });
 });
 
@@ -247,8 +251,9 @@ describe('HumanIntervention — respondsToActivityIds (Case C)', () => {
   it('can reference which agent activity the human is responding to', () => {
     const intervention = {
       interventionId: 'int_c_rejection',
+      situationId: 'sit_test',
       actor: { id: 'u1', role: 'operator' },
-      type: 'reject',
+      type: 'decision' as const,
       timestamp: '2026-08-12T00:00:00Z',
       summary: 'Rejected agent recommendation — traffic drop is seasonal, not channel issue',
       respondsToActivityIds: ['act_agent_recommendation_001'],
@@ -263,8 +268,9 @@ describe('HumanIntervention — respondsToActivityIds (Case C)', () => {
   it('respondsToActivityIds defaults to empty when not specified', () => {
     const intervention = {
       interventionId: 'int_no_ref',
+      situationId: 'sit_test',
       actor: { id: 'u1', role: 'operator' },
-      type: 'annotation',
+      type: 'correction' as const,
       timestamp: '2026-08-12T00:00:00Z',
       summary: 'General note',
     };
@@ -308,7 +314,7 @@ describe('LearningContext — incremental enrichment', () => {
     expect(determineLifecycle(ctx)).toBe('open');
 
     const withIntervention = { ...ctx, humanInterventions: [{
-      interventionId: 'int_001', actor: { id: 'u1', role: 'operator' },
+      interventionId: 'int_001', situationId: 'sit_test', actor: { id: 'u1', role: 'operator' },
       type: 'decision' as const, timestamp: '2026-08-12T00:00:00Z', summary: 'test',
     }]};
     expect(determineLifecycle(withIntervention)).toBe('partial');

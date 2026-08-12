@@ -133,29 +133,125 @@ export const AgentActivityRefSchema = z.object({
 });
 export type AgentActivityRef = z.infer<typeof AgentActivityRefSchema>;
 
-// ---- Human Intervention ----
+// ---- Human Intervention Grammar (P0007.2) ----
+
+/**
+ * The 5-type Human Intervention Grammar.
+ *
+ * Each type captures a distinct professional behavior:
+ *   response          — reacting to Agent output or Signal
+ *   correction        — fixing the system's understanding of reality
+ *   context_supplement — adding information the system cannot observe
+ *   decision          — choosing to act / not act / defer
+ *   action_intent     — intending to change the real world
+ *
+ * Grammar is separate from domain content. The `content` field carries
+ * type-specific payload; domain vocabulary evolves independently.
+ */
+
+/** Content payload for 'response' — what the human is responding to and what they said. */
+export const ResponseContentSchema = z.object({
+  /** What triggered this response */
+  respondsTo: z.object({
+    agentActivityIds: z.array(z.string()).default([]),
+    signalIds: z.array(z.string()).default([]),
+    observationIds: z.array(z.string()).default([]),
+  }),
+  /** The human's evaluation */
+  evaluation: z.enum(['agree', 'disagree', 'partial', 'uncertain']),
+  /** Free-text explanation */
+  rationale: z.string().optional(),
+});
+
+/** Content payload for 'correction' — what understanding is wrong and what's correct. */
+export const CorrectionContentSchema = z.object({
+  /** What is being corrected */
+  corrects: z.object({
+    observationId: z.string().optional(),
+    signalId: z.string().optional(),
+    metricName: z.string().optional(),
+    agentActivityId: z.string().optional(),
+  }),
+  /** What the correct understanding is */
+  correction: z.string().min(1),
+  /** Optional corrected value */
+  correctedValue: z.unknown().optional(),
+});
+
+/** Content payload for 'context_supplement' — unobservable information. */
+export const ContextSupplementContentSchema = z.object({
+  /** What situation aspect this supplements */
+  supplements: z.object({
+    observationId: z.string().optional(),
+    situationAspect: z.string().optional(),
+  }),
+  /** The information the system cannot observe */
+  information: z.string().min(1),
+  /** Structured detail (e.g. supplier status, upcoming event) */
+  detail: z.record(z.string(), z.unknown()).default({}),
+});
+
+/** Content payload for 'decision' — a choice the human is making. */
+export const DecisionContentSchema = z.object({
+  /** The decision type */
+  decision: z.enum(['accept', 'reject', 'defer', 'override', 'no_action']),
+  /** What the decision applies to */
+  appliesTo: z.object({
+    agentActivityId: z.string().optional(),
+    recommendationId: z.string().optional(),
+    signalId: z.string().optional(),
+  }),
+  /** Rationale for the decision */
+  rationale: z.string().optional(),
+  /** Deferral target (if decision = 'defer') */
+  deferUntil: IsoDateString.optional(),
+});
+
+/** Content payload for 'action_intent' — human intends to change the real world. */
+export const ActionIntentContentSchema = z.object({
+  /** What the human intends to do */
+  description: z.string().min(1),
+  /** What this action targets */
+  target: z.string().optional(),
+  /** Expected effect */
+  expectedEffect: z.string().optional(),
+  /** This is a hypothesis — validated by P0007.3+ observation */
+  _hypothesis: z.literal(true).default(true),
+});
+
+/** Discriminated content union — type determines payload shape. */
+export const InterventionContentSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('response'), ...ResponseContentSchema.shape }),
+  z.object({ type: z.literal('correction'), ...CorrectionContentSchema.shape }),
+  z.object({ type: z.literal('context_supplement'), ...ContextSupplementContentSchema.shape }),
+  z.object({ type: z.literal('decision'), ...DecisionContentSchema.shape }),
+  z.object({ type: z.literal('action_intent'), ...ActionIntentContentSchema.shape }),
+]);
+export type InterventionContent = z.infer<typeof InterventionContentSchema>;
 
 /**
  * A Human Intervention is any professional input into the situation.
  * It may or may not lead to an Action.
  *
- * P0007.1 defines the minimal reference placeholder.
- * P0007.2 defines the full grammar: Decision semantics, Correction structure,
- * Annotation model, Context Supplement, Action Intent, Professional Action.
+ * P0007.2: Defines the 5-type Grammar. Type determines content payload.
+ * Grammar is stable; domain content (values inside `content`) can evolve.
  */
 export const HumanInterventionSchema = z.object({
   /** Unique intervention ID */
   interventionId: z.string().min(1),
+  /** The situation this intervention belongs to */
+  situationId: z.string().min(1),
   /** Who intervened */
   actor: z.object({
     id: z.string(),
-    role: z.string(),    // free-form: "operator", "domain_expert", "reviewer"
+    role: z.string(),
   }),
-  /** What kind of intervention (free-form label; P0007.2 defines the grammar) */
-  type: z.string().min(1),
+  /** Grammar type + type-specific content */
+  type: z.enum(['response', 'correction', 'context_supplement', 'decision', 'action_intent']),
+  content: z.record(z.string(), z.unknown()).default({}),
   /** When the intervention occurred */
   timestamp: IsoDateString,
-  /** What the human did or said */
+  /** Human-readable summary */
   summary: z.string().min(1),
   /** Reference to the review/feedback that captured this intervention */
   reviewId: z.string().optional(),
@@ -163,6 +259,8 @@ export const HumanInterventionSchema = z.object({
   actionId: z.string().optional(),
   /** Which agent activities this intervention responds to (if any) */
   respondsToActivityIds: z.array(z.string()).default([]),
+  /** Provenance: was this created by a legacy adapter? */
+  _legacySource: z.enum(['legacy_review', 'legacy_feedback', 'none']).default('none'),
 });
 export type HumanIntervention = z.infer<typeof HumanInterventionSchema>;
 

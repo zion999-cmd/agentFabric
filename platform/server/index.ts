@@ -10,6 +10,7 @@ import { memoryRouter, reviewsRouter, traceRouter } from './routes/reviews.js';
 import { workspaceRouter } from './routes/workspace.js';
 import { chatRouter } from './routes/chat.js';
 import { runtimeRouter } from './routes/runtime.js';
+import { p0007Router } from './routes/p0007.js';
 import { openDb } from '#platform/storage/connection.js';
 
 export interface ServerOptions {
@@ -32,6 +33,7 @@ export const createServer = (options: ServerOptions): Express => {
   app.use('/api', workspaceRouter(db));
   app.use('/api', chatRouter(db));
   app.use('/api', runtimeRouter(db));
+  app.use('/api', p0007Router(db));
 
   // Dashboard SPA (vanilla JS). Served as static files.
   const dashDir = workspaceDir ?? resolve(process.cwd(), 'apps/ecommerce/workspace');

@@ -1,0 +1,240 @@
+// P0007.2 Routes — Situation API + Intervention API.
+// Thin HTTP adapters over SQLite. No business logic — all semantics in schemas.
+
+import { Router } from 'express';
+import type { Database as Db } from 'better-sqlite3';
+import { uuid } from '#shared/utils/crypto.js';
+import { nowIso } from '#shared/utils/time.js';
+import { HumanInterventionSchema, SituationSchema } from '#shared/schemas/learning-context.js';
+
+// ---- Helpers ----
+
+const ok = (res: any, data: unknown, meta?: Record<string, unknown>) => {
+  res.json({ success: true, data, ...(meta ? { meta } : {}) });
+};
+const fail = (res: any, status: number, error: string) => {
+  res.status(status).json({ success: false, error });
+};
+
+// ---- Routes ----
+
+export const p0007Router = (db: Db): Router => {
+  const router = Router();
+
+  // ── Situation API ────────────────────────────────────────
+
+  // GET /api/situations — list recent situations.
+  router.get('/situations', (_req, res) => {
+    try {
+      const rows = db.prepare(
+        `SELECT s.*, COUNT(i.intervention_id) as intervention_count
+         FROM situations s
+         LEFT JOIN human_interventions i ON s.situation_id = i.situation_id
+         GROUP BY s.situation_id
+         ORDER BY s.observed_at DESC
+         LIMIT 50`,
+      ).all() as Record<string, unknown>[];
+
+      const situations = rows.map((r) => ({
+        situationId: r.situation_id,
+        domain: r.domain,
+        type: r.type,
+        entity: { id: r.entity_id, type: r.entity_type, name: r.entity_name, platform: r.entity_platform },
+        temporal: { observedAt: r.observed_at, windowStart: r.window_start, windowEnd: r.window_end },
+        description: r.description,
+        tags: JSON.parse(String(r.tags ?? '[]')),
+        lifecycle: r.lifecycle,
+        interventionCount: r.intervention_count,
+        createdAt: r.created_at,
+        updatedAt: r.updated_at,
+      }));
+
+      ok(res, situations);
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to list situations');
+    }
+  });
+
+  // GET /api/situations/:id — full situation detail.
+  router.get('/situations/:id', (req, res) => {
+    try {
+      const situationId = req.params['id'];
+      if (!situationId) { fail(res, 400, 'Missing situation ID'); return; }
+
+      const row = db.prepare('SELECT * FROM situations WHERE situation_id = ?').get(situationId) as Record<string, unknown> | undefined;
+      if (!row) { fail(res, 404, 'Situation not found'); return; }
+
+      // Also fetch interventions
+      const interventions = db.prepare(
+        'SELECT * FROM human_interventions WHERE situation_id = ? ORDER BY created_at ASC',
+      ).all(situationId) as Record<string, unknown>[];
+
+      const situation = {
+        situationId: row.situation_id,
+        domain: row.domain,
+        type: row.type,
+        entity: { id: row.entity_id, type: row.entity_type, name: row.entity_name, platform: row.entity_platform },
+        temporal: { observedAt: row.observed_at, windowStart: row.window_start, windowEnd: row.window_end },
+        description: row.description,
+        tags: JSON.parse(String(row.tags ?? '[]')),
+        lifecycle: row.lifecycle,
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+        interventions: interventions.map((i: Record<string, unknown>) => ({
+          interventionId: i.intervention_id,
+          situationId: i.situation_id,
+          actor: { id: i.actor_id, role: i.actor_role },
+          type: i.type,
+          content: JSON.parse(String(i.content ?? '{}')),
+          summary: i.summary,
+          respondsToActivityIds: JSON.parse(String(i.responds_to_activity_ids ?? '[]')),
+          reviewId: i.review_id,
+          actionId: i.action_id,
+          legacySource: i.legacy_source,
+          timestamp: i.created_at,
+        })),
+      };
+
+      ok(res, situation);
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to load situation');
+    }
+  });
+
+  // POST /api/situations — create a new situation from observation data.
+  router.post('/situations', (req, res) => {
+    try {
+      const parsed = SituationSchema.safeParse(req.body);
+      if (!parsed.success) {
+        fail(res, 400, `Invalid situation: ${parsed.error.message}`);
+        return;
+      }
+      const s = parsed.data;
+      const now = nowIso();
+
+      db.prepare(
+        `INSERT INTO situations (situation_id, domain, type, entity_id, entity_type, entity_name, entity_platform,
+           observed_at, window_start, window_end, description, tags, lifecycle, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ).run(
+        s.situationId, s.domain, s.type,
+        s.entity.id, s.entity.type, s.entity.name ?? null, s.entity.platform ?? null,
+        s.temporal.observedAt, s.temporal.windowStart ?? null, s.temporal.windowEnd ?? null,
+        s.description, JSON.stringify(s.tags ?? []), 'open', now, now,
+      );
+
+      ok(res, { situationId: s.situationId, createdAt: now }, { status: 'created' });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to create situation');
+    }
+  });
+
+  // ── Intervention API ─────────────────────────────────────
+
+  // GET /api/situations/:id/interventions — list interventions for a situation.
+  router.get('/situations/:id/interventions', (req, res) => {
+    try {
+      const situationId = req.params['id'];
+      if (!situationId) { fail(res, 400, 'Missing situation ID'); return; }
+
+      const rows = db.prepare(
+        'SELECT * FROM human_interventions WHERE situation_id = ? ORDER BY created_at ASC',
+      ).all(situationId) as Record<string, unknown>[];
+
+      const interventions = rows.map((i) => ({
+        interventionId: i.intervention_id,
+        situationId: i.situation_id,
+        actor: { id: i.actor_id, role: i.actor_role },
+        type: i.type,
+        content: JSON.parse(String(i.content ?? '{}')),
+        summary: i.summary,
+        respondsToActivityIds: JSON.parse(String(i.responds_to_activity_ids ?? '[]')),
+        reviewId: i.review_id,
+        actionId: i.action_id,
+        legacySource: i.legacy_source,
+        timestamp: i.created_at,
+      }));
+
+      ok(res, interventions);
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to list interventions');
+    }
+  });
+
+  // POST /api/situations/:id/interventions — record a new intervention.
+  router.post('/situations/:id/interventions', (req, res) => {
+    try {
+      const situationId = req.params['id'];
+      if (!situationId) { fail(res, 400, 'Missing situation ID'); return; }
+
+      // Verify situation exists
+      const situation = db.prepare('SELECT situation_id FROM situations WHERE situation_id = ?').get(situationId);
+      if (!situation) { fail(res, 404, 'Situation not found'); return; }
+
+      const body = { ...req.body, situationId };
+      const parsed = HumanInterventionSchema.safeParse(body);
+      if (!parsed.success) {
+        fail(res, 400, `Invalid intervention: ${parsed.error.message}`);
+        return;
+      }
+
+      const i = parsed.data;
+      const now = nowIso();
+
+      db.prepare(
+        `INSERT INTO human_interventions (intervention_id, situation_id, actor_id, actor_role,
+           type, content, summary, responds_to_activity_ids, review_id, action_id, legacy_source, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ).run(
+        i.interventionId, i.situationId, i.actor.id, i.actor.role,
+        i.type, JSON.stringify(i.content), i.summary,
+        JSON.stringify(i.respondsToActivityIds), i.reviewId ?? null, i.actionId ?? null,
+        i._legacySource, now,
+      );
+
+      // Update situation lifecycle if this is the first intervention
+      const interventionCount = (db.prepare(
+        'SELECT COUNT(*) as cnt FROM human_interventions WHERE situation_id = ?',
+      ).get(situationId) as { cnt: number }).cnt;
+
+      if (interventionCount === 1) {
+        db.prepare(
+          'UPDATE situations SET lifecycle = ?, updated_at = ? WHERE situation_id = ?',
+        ).run('partial', now, situationId);
+      }
+
+      // Update the learning context if one exists
+      const lc = db.prepare(
+        'SELECT * FROM learning_contexts WHERE situation_id = ?',
+      ).get(situationId) as Record<string, unknown> | undefined;
+
+      if (lc) {
+        const body = JSON.parse(String(lc.body ?? '{}'));
+        if (!body.humanInterventions) body.humanInterventions = [];
+        body.humanInterventions.push({
+          interventionId: i.interventionId,
+          situationId: i.situationId,
+          actor: i.actor,
+          type: i.type,
+          content: i.content,
+          summary: i.summary,
+          respondsToActivityIds: i.respondsToActivityIds,
+          reviewId: i.reviewId,
+          actionId: i.actionId,
+          timestamp: now,
+        });
+        body.lifecycle = 'partial';
+        body.updatedAt = now;
+        db.prepare(
+          'UPDATE learning_contexts SET body = ?, lifecycle = ?, updated_at = ? WHERE situation_id = ?',
+        ).run(JSON.stringify(body), 'partial', now, situationId);
+      }
+
+      ok(res, { interventionId: i.interventionId, createdAt: now }, { status: 'created' });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to record intervention');
+    }
+  });
+
+  return router;
+};
