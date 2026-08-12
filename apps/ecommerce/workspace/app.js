@@ -885,8 +885,10 @@ function updateSituationBadges(counts) {
 var currentSituationId = null; // track which situation is in the detail view
 
 async function loadSituationDetail(situationId) {
-  // If called without ID (e.g. from switchView), use the last loaded situation
-  if (!situationId) situationId = currentSituationId;
+  // switchView passes filter value; ignore non-ID values like 'all', 'open' etc.
+  if (!situationId || situationId === 'all' || situationId === 'open' || situationId === 'partial' || situationId === 'agent') {
+    situationId = currentSituationId;
+  }
   if (!situationId) return;
   currentSituationId = situationId;
   var content = document.getElementById('situationDetailContent');
