@@ -428,3 +428,24 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 2. resetCapabilityBridge() exported from production module — should move to test utils
 
 **Next**: Phase 4 (P0007 Experience → Memory → Skill) or decide on new mainline.
+
+## ADR-023: P0007 Architecture — agentFabric as Learning Context Provider
+
+- **日期**: 2026-08-12
+- **状态**: Proposed
+- **来源**: [P0007-Experience-Memory-Skill.md](proposals/P0007-Experience-Memory-Skill.md)
+
+**核心决策**: agentFabric 不实现 Memory Engine 或 Skill Generator。
+
+**职责边界**:
+- agentFabric: World → Learning Context（观察、记录、提供上下文）
+- Runtime (HermesAgent): Learning Context → Memory → Skill（学习、抽象、成长）
+
+**关键架构**:
+1. Learning Context 是 Runtime-neutral 的成长接口，包含 observation/evidence/signals/agent activities/human interventions/actions/outcomes
+2. Runtime Boundary: agentFabric 不规定 Runtime 如何学习、多久 reflection、何时遗忘
+3. Human Intervention Grammar: Decision/Correction/Annotation/Action Intent/Professional Action——不再是 approve/reject/modify
+4. Trust 是横向能力（Verifiability Trust + Execution Reliability Trust），不是单一分数
+5. Dynamic Interaction Surface: UI is a function of Learning Context gaps
+
+**子阶段**: P0007.1 Learning Context Contract → P0007.6 Hermes Learning Loop Validation

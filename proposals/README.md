@@ -84,7 +84,7 @@ P{NNNN}[-{N}]-{kebab-case-description}.md
 | `P0004` | Runtime control plane | P0004 | — |
 | `P0005` | Data foundation | P0005, P0005.1–P0005.6, P0005.6.1 | — |
 | `P0006` | HermesAgent + Workspace | P0006, P0006.1, P0006.2, P0006.5.3 | P0006.3, P0006.4, P0006.5 (root), P0006.5.1, P0006.5.2 |
-| `P0007` | Operator intelligence | P0007.3 | P0007, P0007.1, P0007.2, P0007.4+ |
+| `P0007` | Operator intelligence | P0007 | P0007.1–P0007.6 planned (P0007.3 archived) |
 | `P0008` | (next domain) | — | Available |
 | `P000x` | Future expansion | P000x, P000x.1–P000x.4 | — |
 
@@ -155,7 +155,9 @@ proposals/
 ├── P0006-hermes-agent-workspace-integration.md
 ├── P0006.1-product-readiness-checklist.md
 ├── P0006.2-historical-replay-runtime.md
-├── P0007.3-memory-retrieval.md
+├── P0007-Experience-Memory-Skill.md
+├── archive/
+│   └── P0007.3-memory-retrieval.md
 ├── P000x-system-expansion-layer.md
 ├── P000x.1-multi-connector-expansion.md
 ├── P000x.2-observability-runtime-trace-layer.md

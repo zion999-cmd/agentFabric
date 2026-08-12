@@ -4,6 +4,8 @@
 
 ## 已完成
 
+- [x] **P0007 Proposal** — Experience → Memory → Skill architecture. agentFabric: World → Learning Context; Runtime: Learning Context → Memory → Skill. 6 sub-proposals (P0007.1–7.6). Legacy P0007.3 archived. Key boundary: agentFabric 不实现 Memory Engine/Skill Generator. ADR-023.
+
 - [x] **Phase 3 Complete** — HermesAgent Integration (3.1–3.4). CapabilityBridge → discover_capability skill → kernel.execute(real evidence) → SSE events → Agent Activity. Live CDP verified (2026-08-12: 14 APIs, GMV=¥337.90). chat.ts switched to mock:false. Tag: v0.2-phase3-complete. ADR-022.
 - [x] **Phase 3.4 E2E Capability** — chat.ts: bridge.discover handler + auto-execute flow. CapabilityBridge → kernel.execute → real evidence → response. Live CDP: CL​I collect --mode live verified.
 - [x] **Phase 3.3 Workspace Event Binding** — SSE endpoint (5 events, demo sequence), AgentSessionState model, loadAgentSession() rewrite, execution-level event slots.

@@ -1,5 +1,20 @@
 # 交接文档
 
+## 本次会话 (2026-08-12) — Phase 3 Complete + P0007 Proposal
+
+### P0007 Architecture
+
+新 P0007-Experience-Memory-Skill.md 创建。旧 P0007.3-memory-retrieval.md → proposals/archive/。
+
+核心架构决策：
+- agentFabric: World → Learning Context（不实现 Memory/Skill Engine）
+- Runtime: Learning Context → Memory → Skill（HermesAgent 自有学习机制）
+- Learning Context 是 Runtime-neutral 的成长接口
+- 6 个子 Proposal (P0007.1–7.6)，逐层验证
+- Trust 是横向能力，不是单一分数
+
+---
+
 ## 本次会话 (2026-08-12) — Phase 3 Complete + Live CDP Verification + mock→real switch
 
 ### Phase 3 Closeout
