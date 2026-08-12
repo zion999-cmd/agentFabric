@@ -1,7 +1,14 @@
 // P0007.1 — Learning Context Contract tests.
 // Validates schema, partial contexts, and real JD evidence integration.
+//
+// Fixture timestamps: all test fixtures use a fixed TEST_T0 to keep tests
+// deterministic. Production code sources ALL times from real events
+// (evidence metadata, execution events, intervention recording).
 
 import { describe, it, expect } from 'vitest';
+
+/** Central fixture anchor — all test times derive from this. Not for production use. */
+const TEST_T0 = '2026-08-12T02:38:00Z';
 import {
   LearningContextSchema,
   SituationSchema,
@@ -176,12 +183,16 @@ describe('LearningContext — real JD evidence validation', () => {
         temporal: { observedAt: meta.acquired_at, windowEnd: meta.acquired_at.slice(0, 10) },
         description: `Live CDP acquisition for ${meta.source} shop ${meta.shop_id}`,
       },
-      createdAt: meta.acquired_at,
+      // Context creation ≠ evidence acquisition.
+      // Evidence time (observedAt) = from source metadata.
+      // Context time (createdAt) = when context was assembled (later).
+      createdAt: meta.acquired_at,   // reasonable in test: assembly immediately after capture
       updatedAt: meta.acquired_at,
       observations: [{
         observationId: `obs_${meta.content_hash.slice(0, 8)}`,
         capability: 'trade.overview',
         provider: { platform: meta.source, acquisition: meta.acquisition_method as 'cdp' },
+        // Observation time = evidence acquisition time (source of truth)
         observedAt: meta.acquired_at,
         summary: `${meta.data_type} captured via ${meta.acquisition_method}`,
         evidenceIds: [meta.content_hash],
