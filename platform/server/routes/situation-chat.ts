@@ -17,6 +17,7 @@ import { HermesSessionClient } from '#platform/runtime/hermes/index.js';
 import type { HermesEvent, CreateSessionParams, CreateSessionResult } from '#platform/runtime/hermes/index.js';
 import { writeProjection } from '#app/runtime/fabric-workspace/index.js';
 import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
+import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
 
 // ---- Session registry (server-side) ----
 
@@ -45,7 +46,7 @@ interface SituationChatOptions {
   clientFactory?: (url?: string) => SituationChatClient;
 }
 
-/** Lazily project the Fabric Agent Workspace (deterministic, rebuildable). */
+/** Lazily build the Fabric Agent Workspace: world/ (projected) + knowledge/ (seeded). */
 const ensureWorkspace = (dir: string): string => {
   writeProjection(
     {
@@ -54,6 +55,8 @@ const ensureWorkspace = (dir: string): string => {
     },
     dir,
   );
+  // P0008.4: seed the Shared Knowledge layer (raw immutable + knowledge Read Model).
+  initSharedKnowledgeLayer(dir);
   return resolve(dir);
 };
 
