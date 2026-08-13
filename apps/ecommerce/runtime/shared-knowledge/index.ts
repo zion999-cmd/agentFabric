@@ -8,6 +8,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { KNOWLEDGE_GOVERNANCE, KNOWLEDGE_INDEX } from './governance.js';
+import { AGENTS_CONTRACT } from './contract.js';
 import {
   RAW_PLATFORM_PROMOTION,
   RAW_MARKETING_CASE,
@@ -17,6 +18,7 @@ import {
 } from './fixtures.js';
 
 export * from './governance.js';
+export * from './contract.js';
 export * from './fixtures.js';
 
 export interface SharedKnowledgeInitResult {
@@ -43,6 +45,9 @@ export const initSharedKnowledgeLayer = (workspaceRoot: string): SharedKnowledge
     writeFileSync(abs, content, 'utf-8');
     files.push(relPath);
   };
+
+  // Workspace-root AGENTS.md contract (Hermes natively loads from cwd).
+  write('AGENTS.md', AGENTS_CONTRACT);
 
   // Immutable raw sources (provenance).
   write('knowledge-sources/raw/platform-promotion.md', RAW_PLATFORM_PROMOTION);

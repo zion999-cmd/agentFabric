@@ -6,7 +6,7 @@ import { existsSync, readFileSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
-import { KNOWLEDGE_GOVERNANCE, KNOWLEDGE_INDEX } from '#app/runtime/shared-knowledge/index.js';
+import { KNOWLEDGE_GOVERNANCE, KNOWLEDGE_INDEX, AGENTS_CONTRACT } from '#app/runtime/shared-knowledge/index.js';
 
 const TEST_ROOT = resolve(tmpdir(), 'shared-knowledge-test');
 
@@ -39,6 +39,38 @@ describe('KNOWLEDGE.md governance contract', () => {
     expect(KNOWLEDGE_INDEX).toContain('Knowledge Index');
     expect(KNOWLEDGE_INDEX).toContain('Platform');
     expect(KNOWLEDGE_INDEX).toContain('Cases');
+  });
+});
+
+describe('AGENTS.md — Fabric Agent Workspace Contract', () => {
+  it('describes workspace topology (world/knowledge/raw)', () => {
+    expect(AGENTS_CONTRACT).toContain('world/');
+    expect(AGENTS_CONTRACT).toContain('knowledge/');
+    expect(AGENTS_CONTRACT).toContain('knowledge-sources/raw/');
+  });
+
+  it('specifies read/write boundaries (world + raw read-only, knowledge writable)', () => {
+    expect(AGENTS_CONTRACT).toContain('READ-ONLY');
+    expect(AGENTS_CONTRACT).toContain('never modify');
+    expect(AGENTS_CONTRACT).toContain('maintain Shared Knowledge here');
+  });
+
+  it('points to KNOWLEDGE.md, does NOT copy its content', () => {
+    expect(AGENTS_CONTRACT).toContain('knowledge/KNOWLEDGE.md');
+    // AGENTS.md is a contract/pointer, not a duplicate of KNOWLEDGE.md governance rules.
+    expect(AGENTS_CONTRACT).not.toContain('One source may update multiple pages');
+  });
+
+  it('declares Runtime Self ownership (Memory/Skill/Soul NOT in workspace)', () => {
+    expect(AGENTS_CONTRACT).toContain('Memory');
+    expect(AGENTS_CONTRACT).toContain('Runtime profile');
+    expect(AGENTS_CONTRACT).toContain('NOT this workspace');
+  });
+
+  it('is written to workspace ROOT (cwd), where Hermes natively loads', () => {
+    const result = initSharedKnowledgeLayer(TEST_ROOT);
+    expect(result.files).toContain('AGENTS.md');
+    expect(existsSync(resolve(TEST_ROOT, 'AGENTS.md'))).toBe(true);
   });
 });
 
