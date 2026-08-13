@@ -113,6 +113,15 @@ export class HermesSessionClient {
     await this.request('prompt.submit', { session_id: sessionId, text });
   }
 
+  /** Respond to a pending approval request (choice: 'approve' | 'deny'). */
+  async respondApproval(sessionId: string, choice: 'approve' | 'deny', all = false): Promise<void> {
+    await this.request('approval.respond', {
+      session_id: sessionId,
+      choice,
+      all,
+    });
+  }
+
   /** Resume an existing session (by id/prefix). */
   async resumeSession(sessionId: string): Promise<void> {
     await this.request('session.resume', { session_id: sessionId });
