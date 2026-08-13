@@ -104,10 +104,10 @@ describe('HermesSessionClient', () => {
     const events: HermesEvent[] = [];
     client.onEvent((e) => events.push(e));
 
-    ws.emitMessage({ jsonrpc: '2.0', method: 'event', params: { type: 'message.delta', text: '流量', session_id: 'abc12345' } });
-    ws.emitMessage({ jsonrpc: '2.0', method: 'event', params: { type: 'turn.end', session_id: 'abc12345' } });
+    ws.emitMessage({ jsonrpc: '2.0', method: 'event', params: { type: 'message.delta', payload: { text: '流量' }, session_id: 'abc12345' } });
+    ws.emitMessage({ jsonrpc: '2.0', method: 'event', params: { type: 'message.complete', payload: { text: '流量下降' }, session_id: 'abc12345' } });
 
-    expect(events.map((e) => e.type)).toEqual(['message.delta', 'turn.end']);
+    expect(events.map((e) => e.type)).toEqual(['message.delta', 'message.complete']);
   });
 
   it('rejects createSession when server returns an error', async () => {

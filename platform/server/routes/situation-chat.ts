@@ -14,14 +14,23 @@
 import { Router } from 'express';
 import { resolve } from 'node:path';
 import { HermesSessionClient } from '#platform/runtime/hermes/index.js';
-import type { HermesEvent } from '#platform/runtime/hermes/index.js';
+import type { HermesEvent, CreateSessionParams, CreateSessionResult } from '#platform/runtime/hermes/index.js';
 import { writeProjection } from '#app/runtime/fabric-workspace/index.js';
 import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
 
 // ---- Session registry (server-side) ----
 
+/** Minimal interface the bridge needs from a Hermes session client (testable). */
+export interface SituationChatClient {
+  connect(): Promise<void>;
+  createSession(params: CreateSessionParams): Promise<CreateSessionResult>;
+  submitPrompt(sessionId: string, text: string): Promise<void>;
+  onEvent(handler: (event: HermesEvent) => void): () => void;
+  close(): void;
+}
+
 interface ActiveSituationSession {
-  client: HermesSessionClient;
+  client: SituationChatClient;
   hermesSessionId: string;
 }
 
@@ -32,6 +41,8 @@ interface SituationChatOptions {
   hermesUrl?: string;
   /** Hermes profile name */
   profile?: string;
+  /** Client factory (injectable for tests; defaults to HermesSessionClient) */
+  clientFactory?: (url?: string) => SituationChatClient;
 }
 
 /** Lazily project the Fabric Agent Workspace (deterministic, rebuildable). */
@@ -46,8 +57,8 @@ const ensureWorkspace = (dir: string): string => {
   return resolve(dir);
 };
 
-/** Accumulate message.delta text until turn.end, resolve with full reply. */
-const collectTurn = (client: HermesSessionClient, sessionId: string): Promise<string> => {
+/** Accumulate message.delta text until message.complete, resolve with full reply. */
+const collectTurn = (client: SituationChatClient, sessionId: string): Promise<string> => {
   return new Promise((resolveTurn, rejectTurn) => {
     let text = '';
     let timedOut = false;
@@ -55,7 +66,7 @@ const collectTurn = (client: HermesSessionClient, sessionId: string): Promise<st
     const timeout = setTimeout(() => {
       timedOut = true;
       unsubscribe();
-      rejectTurn(new Error('Turn timed out waiting for turn.end'));
+      rejectTurn(new Error('Turn timed out waiting for message.complete'));
     }, 120_000);
 
     const unsubscribe = client.onEvent((event: HermesEvent) => {
@@ -105,9 +116,9 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
       // Ensure session (create on first message, reuse after).
       let active = sessions.get(situationId);
       if (!active) {
-        const client = new HermesSessionClient(
-          options.hermesUrl ? { url: options.hermesUrl } : {},
-        );
+        const client = options.clientFactory
+          ? options.clientFactory(options.hermesUrl)
+          : new HermesSessionClient(options.hermesUrl ? { url: options.hermesUrl } : {});
         await client.connect();
         const created = await client.createSession({
           cwd: workspaceDir,
@@ -117,9 +128,10 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
         sessions.set(situationId, active);
       }
 
-      // Submit + collect response.
+      // Register event collection BEFORE submit — no events are missed.
+      const replyPromise = collectTurn(active.client, active.hermesSessionId);
       await active.client.submitPrompt(active.hermesSessionId, message);
-      const reply = await collectTurn(active.client, active.hermesSessionId);
+      const reply = await replyPromise;
 
       res.json({
         success: true,

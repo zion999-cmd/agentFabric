@@ -8,7 +8,7 @@
 //   prompt.submit   {"jsonrpc":"2.0","method":"prompt.submit","params":{session_id,text},"id":N}
 //   events          {"jsonrpc":"2.0","method":"event","params":{"type":"message.delta",...}}
 //
-// Turn lifecycle events: turn.start → message.start → message.delta* → message.complete → turn.end
+// Turn lifecycle events: turn.start → message.start → message.delta* → message.complete
 //
 // Uses Node's built-in WHATWG WebSocket (no external dependency).
 
@@ -90,7 +90,7 @@ export class HermesSessionClient {
     });
   }
 
-  /** Subscribe to streamed events (message.delta, turn.end, tool.*, etc.). */
+  /** Subscribe to streamed events (message.delta, message.complete, tool.*, etc.). */
   onEvent(handler: EventHandler): () => void {
     this.eventHandlers.add(handler);
     return () => this.eventHandlers.delete(handler);
