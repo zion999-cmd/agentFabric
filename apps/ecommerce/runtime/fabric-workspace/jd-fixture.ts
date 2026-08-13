@@ -1,7 +1,14 @@
 // Minimal JD fixture — real facts from discovery/ + WorldExplorationTask/.
-// P0008.3. This is the authoritative World Model + bindings used to project
-// the Fabric Agent Workspace. It is a minimal subset (9 objects / 6 assertions /
-// 1 binding), NOT a full JD World import.
+// P0008.3 / P0008.6. This is the authoritative World Model + bindings used to
+// project the Fabric Agent Workspace. It is a minimal subset, NOT a full JD
+// World import.
+//
+// P0008.6 acceptance: enriched with the P0008.5-verified known facts so the
+// three known-fact probes are answerable from systems/ WITHOUT re-exploring JD
+// and WITHOUT extending the P0008.2 ontology (same primitive types):
+//   - shop identity + star rating 4.6  → system attributes
+//   - comparison benchmarks           → dimension (对比基准)
+//   - top-level navigation modules 10 → system attribute
 
 import type { WorldModel, CapabilityBinding } from '#shared/schemas/world-model.js';
 
@@ -9,13 +16,23 @@ export const JD_FIXTURE: { worldModel: WorldModel; bindings: CapabilityBinding[]
   worldModel: {
     systemId: 'jd_shangzhi',
     objects: [
-      { id: 'jd_shangzhi', type: 'system', name: '京东商智', attributes: {} },
+      {
+        id: 'jd_shangzhi',
+        type: 'system',
+        name: '京东商智',
+        attributes: {
+          shop: '祁门红茶官方旗舰店 (11855009)',
+          shop_rating: '4.6',
+          top_navigation_modules: '10',
+        },
+      },
       { id: 'jd_surface_trade_summary', type: 'surface', name: '交易概况', attributes: { url: '/szweb/view/tradeAnalysis/tradeSummary.html' } },
       { id: 'jd_surface_flow_summary', type: 'surface', name: '流量', attributes: { url: '/szweb/view/flow/flow-summary.html' } },
       { id: 'jd_metric_gmv', type: 'metric', name: '成交金额', attributes: { unit: '元' } },
       { id: 'jd_metric_orders', type: 'metric', name: '成交单量', attributes: { unit: '笔' } },
       { id: 'jd_metric_aov', type: 'metric', name: '客单价', attributes: { formula: '成交金额/成交客户数' } },
       { id: 'jd_dimension_time', type: 'dimension', name: '时间', attributes: { values: ['实时', '昨天', '近7天', '近30天', '天', '周', '月'] } },
+      { id: 'jd_dimension_benchmark', type: 'dimension', name: '对比基准', attributes: { values: ['同行同级均值', '同行上级均值', '相似店铺'] } },
       { id: 'jd_feature_realtime_ranking', type: 'feature', name: '实时榜单', attributes: {} },
       { id: 'jd_constraint_data_freshness', type: 'constraint', name: '数据新鲜度', attributes: { description: '实时数据延迟约1分钟，日报14:00前更新' } },
     ],

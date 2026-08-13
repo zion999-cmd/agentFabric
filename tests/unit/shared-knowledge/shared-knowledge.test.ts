@@ -43,16 +43,37 @@ describe('KNOWLEDGE.md governance contract', () => {
 });
 
 describe('AGENTS.md — Fabric Agent Workspace Contract', () => {
-  it('describes workspace topology (world/knowledge/raw)', () => {
-    expect(AGENTS_CONTRACT).toContain('world/');
+  it('describes workspace topology (systems/knowledge/raw/capabilities)', () => {
+    expect(AGENTS_CONTRACT).toContain('systems/');
     expect(AGENTS_CONTRACT).toContain('knowledge/');
     expect(AGENTS_CONTRACT).toContain('knowledge-sources/raw/');
+    expect(AGENTS_CONTRACT).toContain('capabilities/');
+    // P0008.6 rename: world/ is gone from the runtime-facing vocabulary.
+    expect(AGENTS_CONTRACT).not.toContain('world/');
   });
 
-  it('specifies read/write boundaries (world + raw read-only, knowledge writable)', () => {
+  it('specifies read/write boundaries (systems + raw read-only, knowledge writable)', () => {
     expect(AGENTS_CONTRACT).toContain('READ-ONLY');
     expect(AGENTS_CONTRACT).toContain('never modify');
     expect(AGENTS_CONTRACT).toContain('maintain Shared Knowledge here');
+  });
+
+  it('expresses READ-side routing by context-source semantics, not filesystem-first', () => {
+    expect(AGENTS_CONTRACT).toContain('Routing');
+    expect(AGENTS_CONTRACT).toContain('systems/INDEX.md');
+    expect(AGENTS_CONTRACT).toContain('knowledge/INDEX.md');
+    expect(AGENTS_CONTRACT).toContain('capabilities/INDEX.md');
+    // External tools are gated on insufficiency / freshness / exploration.
+    expect(AGENTS_CONTRACT).toContain('insufficient');
+    expect(AGENTS_CONTRACT).toContain('freshness');
+  });
+
+  it('separates epistemic status from freshness', () => {
+    expect(AGENTS_CONTRACT).toContain('verified');
+    expect(AGENTS_CONTRACT).toContain('suspected');
+    expect(AGENTS_CONTRACT).toContain('AT DISCOVERY TIME');
+    // verified must NOT be framed as "fresher than live data".
+    expect(AGENTS_CONTRACT).toContain('NOT a freshness guarantee');
   });
 
   it('points to KNOWLEDGE.md, does NOT copy its content', () => {
