@@ -1,5 +1,117 @@
 # 交接文档
 
+## 本次会话 (2026-08-14) — P0008.6 Claudian Instruction Architecture Audit
+
+### 任务与定位
+
+P0008.5 已收敛到"缺 Workspace-level Instruction Architecture"（不再用局部 prompt / AGENTS.md patch 调试）。本次 P0008.6 是**架构考古 + Audit**，不是 implementation。目标：研究 Claudian 已验证的 Workspace Instruction Pattern，抽象出 Fabric Workspace Instruction Architecture，回答"Blank Runtime 进入 workspace 后如何理解我在哪/有哪些 context/何时用哪种/怎么导航/什么能改/边界在哪"。
+
+### 做了什么
+
+1. **Claudian archaeology**（`git clone --depth 1`，只读 instruction/context 相关文件，忽略 UI/plugin）：
+   - 发现 Claudian 有 **3 条独立指令轨道**：① repo developer instruction（root AGENTS.md + 9 个 scoped AGENTS.md，`src/app|core|features/chat|providers/{claude,codex,grok,opencode,pi}|style`）；② runtime system prompt（`src/core/prompt/mainAgent.ts:buildSystemPrompt()` → `Options.systemPrompt`）；③ user vault instruction（用户自己的 AGENTS.md，provider 原生发现，Claudian 绝不碰）。
+   - `CLAUDE.md = @AGENTS.md`（指针，不复制内容）。
+   - **orientation 在 system prompt 里，不在 AGENTS.md 里**——这是对 agentFabric 最反直觉的一点：Claudian 的 AGENTS.md 是给开发者（如何编辑代码），给终端用户 agent 的 orientation（我在哪/内容模型/怎么导航/什么能改）全在 buildSystemPrompt。
+   - Claudian **没有 router、没有 INDEX**——导航是涌现式（cwd=vault + 原生 file tools + 内容模型）。INDEX 是 agentFabric 自己发明的，不是从 Claudian 学的。
+   - 边界声明最强先例：grok AGENTS.md "Repository Instructions vs Runtime Instructions"——Claudian 绝不 create/import/append/suppress/rewrite/inject vault/runtime 指令。
+   - 明确不重实现的清单：instruction loading、file tools、approval、session、MCP、skills（AgentSkillRepository 只是 codec 包装）。
+
+2. **Claudian → Fabric mapping**（REUSE/ADAPT/REJECT，逐项）：orientation 反转落 workspace-root AGENTS.md（ADAPT）；scoped instruction（ADAPT）；CLAUDE.md 指针（ADAPT）；INDEX 是补强（ADAPT-扩展）；ownership 边界（REUSE 原则）；provider-native 能力（REUSE 不复制）；skill/permission（REJECT）。
+
+3. **P0008.5 failure 五维解读**：`knowledge/` 成功因碰巧有完整消费链（task routing → KNOWLEDGE.md query 操作 → INDEX → content → provenance）；`world/` 只有生产链（construct routing → WORLD_MODEL.md → content），消费链缺 orientation(subject anchoring)/routing(READ-side)/scope(operational)/navigation(pointer)/semantics(epistemic authority) 四环半。**不是"少一行"**。
+
+4. **提议 5-layer Instruction Layers**：Instruction / Navigation / Content / Capability / Runtime Self。评价了 Part C 结构：`knowledge/AGENTS.md` + `KNOWLEDGE.md` 双指令冗余；`systems/` vs `world/` 是 Case C 非决定性；致命缺失是 Routing 规则 + Epistemic Semantics（而非再加 INDEX 文件）。
+
+5. **Ownership boundary**：Fabric-owned（topology/instructions/systems/knowledge/capability/navigation/governance）vs Runtime-owned（SOUL/Memory/Skill/Session/tools/approval/instruction loading）。
+
+6. **Operational capability classification**：4 个已验证行为——System Context Construction + Shared Knowledge Ingestion = **Fabric Procedure**；Context Navigation + Grounded Consumption = **Workspace Instruction + Navigation**。**无一不是 Runtime Skill 或 Fabric Capability**。防退化 = 落成 workspace 内纯 Markdown 文件（instruction/procedure/map），而非停留在测试报告。
+
+### 交付物
+
+- `proposals/audits/p0008.6-claudian-instruction-architecture.md`（约 200 行，7 节：archaeology / mapping / failure 解读 / proposed layers / ownership / classification / open questions）
+
+### 未做（NOT Included 遵守）
+
+- 未改 P0008.5 测试结果、未改 AGENTS.md / systems/ / knowledge/ / capability/、未重跑 Blank Agent、未实现 RAG/VectorDB/Search/router/loader/Capability Engine/权限系统、未改 Hermes/Claude Code、未建 Hermes Skill、未复制 Claudian UI。
+
+### 发现的具体 drift（供 Review）
+
+- `data/fabric-workspace/AGENTS.md:73` 引用 `contracts/WORLD_MODEL.md`，但 repo 内**不存在** `contracts/` 或 `WORLD_MODEL.md`（dangling reference）。
+- AGENTS.md 写 `capabilities/`（复数），实际目录是 `capability/`（单数）。
+- AGENTS.md 写 `world/`，P0008.5 实验结论是 `systems/` 更好（1/3）。
+- 生产 `data/fabric-workspace` 与 P0008.5 测试 workspace 结构已分叉。
+
+### 风险
+
+- Routing "systems 优先、web 兜底" 可能反伤真实业务（world 内容不全时硬答）——需"systems 无答案 → 明确 fallback"退出条件。
+- Epistemic Authority 信任边界：`verified` 标注本身可能错，无条件信任会把 preparation 错误放大——需 provenance 链而非单档 `verified`。
+- 未回答：P0008.6 是否要走"先修 root AGENTS.md routing/epistemic + WORLD_MODEL 落盘 + topology 对齐，再重跑 3 known-fact probes"作为验收——待 Review 拍板。
+
+### 建议下一步
+
+1. Architecture Review P0008.6 Audit。
+2. 若通过，创建正式 P0008.6 Proposal：定案 Instruction Layers canonical 定义 + routing/epistemic 规则形态 + 验收方案（重跑 P0008.5 3 known-fact probes）。
+
+---
+
+## 本次会话 (2026-08-13/14) — P0008.5 Minimal World + Knowledge Bootstrap E2E
+
+### 目标
+
+验证 P0008 核心命题：一个 Blank Runtime（未参与构建的 Hermes Profile）能否继承另一个 Agent 整理出来的 Context。
+
+### 三条链结果
+
+1. **Phase B — System Context Construction ✅**：WorldExplorationTask（Hermes 真实探索产物）→ Fabric Contract → world/。首次旧 Contract 出 topology 歧义 + world 空 + source 被 move。修正 3 处 Contract（topology 唯一 / source taxonomy / source immutability）后，**同模型 agnes-2.5-flash** 正确生成 6-primitive structured World + epistemic status + evidence + provenance。结论：清晰 Contract 足以指导普通 Agent 抽象 structured context，非模型聪明。
+
+2. **Phase C/D — Shared Knowledge Ingestion ✅**：非 Markdown .txt 文档，prompt 只"请处理"，Agent 自主 search_files → 读 KNOWLEDGE.md → semantic compilation（7 模块框架）→ page + provenance + INDEX + log。raw 不变、world 隔离、不进 Memory/Skill。
+
+3. **Phase F — Blank Runtime Consumption ⚠️ 不对称**：Knowledge 继承成立（Probe B/C PASS）；World 消费失败（Probe A 走 web_search）。Known-Fact Diagnostic 用 3 个确定存在的事实 → 0/3 读 world/。
+
+### 后续控制变量实验（逐层排除，都是负面/部分结果）
+
+- **World Map A/B**：加 world/INDEX.md（无答案泄露）→ 0/3，`indexRead:false`（Agent 根本不读 INDEX）。结论：Navigation Map 必要不充分。
+- **`world/` → `systems/`**：1/3（system-identity 类"店铺星级 4.6"0→1 提升，search_files→read_file→grounded；enumeration 类仍 web_search）。结论：`systems/` 是强候选 vocabulary，但 naming 非完整解。
+
+### 收敛
+
+Gap 从"缺 World Model"→"缺 INDEX"→"仅改 vocabulary 不够"，最终收敛为 **缺 Workspace-level Instruction Architecture**。停止，进入 P0008.6。
+
+---
+
+## 本次会话 (2026-08-13) — P0008.4 Agent Shared Knowledge Layer
+
+### 核心决策
+
+- Shared Knowledge 非 Wiki，是 "Raw Source → Agent semantic compilation → persistent Shared Knowledge"（借鉴 Karpathy LLM Wiki 维护 pattern，非产品边界）。
+- 四层 Context Environment 绝不合并：world/ + knowledge/ + Situation/Learning Context + Hermes Profile（Runtime Self）。
+- ownership：`knowledge-sources/raw/` immutable provenance；`knowledge/` = Agent-consumable Read Model（非 canonical truth）。
+- AGENTS.md = Fabric Agent Workspace Contract，Hermes 原生加载，指向 KNOWLEDGE.md 不复制内容。
+
+### 实现 + 验证
+
+- workspace root AGENTS.md + knowledge/KNOWLEDGE.md + INDEX.md + log.md。15 tests 全过（5 个 AGENTS.md 测试）。
+- Blank Hermes acceptance（诚实）：AGENTS.md 被加载（discovery 生效），但对 research 任务默认 web_search（9 次）而非先读 raw sources，write_file 未发生。缺口 = "workspace 内知识优先于 web_search"规则缺失 → 成为 P0008.5/P0008.6 主线。
+
+---
+
+## 本次会话 (2026-08-13) — P0008.3 Agent Workspace & Runtime Integration
+
+### 三个工程对象
+
+1. **FabricAgentWorkspace**（projector.ts）：authoritative state → runtime-facing 投影，deterministic/rebuildable（SHA-256 contentHash + 清空重建），只写不读回。
+2. **HermesSessionClient**（session-client.ts）：speak Hermes /api/ws JSON-RPC，只接线不复现 session。
+3. **Situation Chat Bridge**（situation-chat.ts）：只接"人↔Hermes Session"，不产生 Memory/Skill。
+
+### 结果
+
+- 11 tests 全过（projector 6 + session client 5）。
+- 真实 Hermes E2E PASS：session.create cwd=FabricWorkspace，模型自主触发 filesystem 读取（2 次 tool call）。
+- 协议修正：文本在 `event.payload.text`、完成信号 `message.complete`、需 `?token=` WS 认证。
+- 边界：Memory/Skill/SOUL 归 Hermes Profile（`~/.hermes/profiles/jd/`），不进 agentFabric。
+
+---
+
 ## 本次会话 (2026-08-13) — P0008 World Abstraction Infrastructure
 
 ### P0008.1 Contract Archaeology & Gap Map

@@ -1,9 +1,15 @@
 {
   "project": "agentFabric",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Business Workspace on Hermes Agent Runtime",
-  "hermes": "0.17.0",
+  "hermes": "0.18.0",
   "completed": [
+    "P0008.6 Instruction Architecture Audit — Claudian archaeology, Fabric mapping, P0008.5 failure 五维解读, 5-layer Instruction Layers, ownership boundary, operational capability classification (proposals/audits/p0008.6-claudian-instruction-architecture.md)",
+    "P0008.5 Minimal World + Knowledge Bootstrap E2E — World construction ✅, Knowledge ingestion ✅, Blank consumption asymmetric (Knowledge PASS / World FAIL, known-fact 0/3); INDEX insufficient, systems/ rename 1/3; converged to missing Instruction Architecture",
+    "P0008.4 Agent Shared Knowledge Layer — Karpathy maintenance pattern, four-layer context env, AGENTS.md workspace contract, raw immutable + knowledge Read Model (honest finding: web_search default over workspace)",
+    "P0008.3 Agent Workspace & Runtime Integration — FabricAgentWorkspace projection (deterministic), HermesSessionClient (/api/ws), Situation Chat Bridge; E2E PASS, Memory/Skill/SOUL stay in Hermes Profile",
+    "P0008.2 World Model Contract — 6 World Objects + Assertion Graph, epistemic≠temporal, CapabilityBinding relationship",
+    "P0008.1 World Model Gap Map — 6 Objects + Assertion Graph (dropped Entity/Concept)",
     "P0006.1.1 Signal Observation Model Refactor — observed_at column, two-layer Signal model, three-timeline architecture",
     "P0006 HermesAgent & Workspace Integration — Skills, Chat endpoint, Runtime HTTP API, Workspace Runtime View",
     "P0005.6.1 CLI Final Patch — CLI pure shell, zero business logic, kernel.executeLiveCDP + kernel.executeImport",
@@ -33,8 +39,13 @@
     "Proposals (P0001-P0006: product reposition, workspace redesign, context architecture, review pipeline, skill lifecycle, experience model)",
     "Renames (dashboard→workspace, collectors→connectors, composition.ts→orchestrator.ts)"
   ],
-  "developing": [],
-  "next": [],
+  "developing": [
+    "P0008.6 Architecture Review — awaiting review of p0008.6-claudian-instruction-architecture.md (audit, not implementation)"
+  ],
+  "next": [
+    "P0008.6 Proposal (if review passes): Instruction Layers canonical definition + routing/epistemic rules + acceptance via P0008.5 known-fact probes re-run",
+    "Resolve drift: dangling contracts/WORLD_MODEL.md, capabilities/ vs capability/, world/ vs systems/"
+  ],
   "blocked": [],
   "tests": 413,
   "coverage": "domains: 80%+ target"

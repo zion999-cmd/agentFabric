@@ -33,6 +33,15 @@
 - [ ] **Business Context** — 一等公民 (campaign, business objectives, seasonality, constraints, competitor snapshot)
 - [ ] 每次 Decision 前自动 Load Business Context
 
+## P0008 系列: World Model + Instruction Architecture 🔜
+- [x] P0008.1 World Model Gap Map (6 Objects + Assertion Graph)
+- [x] P0008.2 World Model Contract (epistemic ≠ temporal, CapabilityBinding relationship)
+- [x] P0008.3 Agent Workspace & Hermes Session Integration
+- [x] P0008.4 Shared Knowledge Layer + AGENTS.md (Fabric Agent Workspace Contract)
+- [x] P0008.5 Minimal World + Knowledge Bootstrap E2E (Knowledge PASS, World consumption FAIL → gap 收敛为 "缺 Instruction Architecture")
+- [x] **P0008.6 Instruction Architecture Audit** (Claudian archaeology + 5-layer Instruction Layers + ownership + classification)
+- [ ] P0008.6 Proposal (若 Review 通过): routing/epistemic 规则落盘 + topology 对齐 + known-fact probe 复验
+
 ## Phase 7: Skills + Workflows 🔮
 - [ ] **Business Workflows** — 618, 双11, 新品上市, 日报/周报/月报 (不是 Runtime Workflow)
 

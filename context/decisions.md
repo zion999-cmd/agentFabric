@@ -504,3 +504,73 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 3. **CapabilityBinding 有 relationship 语义**
    - observable_by / exportable_by / comparable_by（当前只验证 observable_by）
    - 非 bare ID association
+
+## ADR-030: P0008.3 Agent Workspace & Runtime Integration
+
+- **日期**: 2026-08-13
+- **状态**: Accepted (Complete)
+- **来源**: [P0008.3-agent-workspace-runtime-integration.md](proposals/P0008.3-agent-workspace-runtime-integration.md) + `audits/p0008.3-integration-gap-map.md` + [P0008.3-e2e-evidence.md](proposals/P0008.3-e2e-evidence.md)
+
+**决策**:
+
+1. **FabricAgentWorkspace 是投影，不是 authoritative state**。authoritative state（World Model/Situation/Evidence/Capability）不能直接作 Hermes cwd（repo 有源码/tests/proposals 噪声）。Workspace 是干净目录，只含 runtime 需要"看见"的业务知识。投影 deterministic/rebuildable（SHA-256 contentHash + 清空重建），只写不读回，任何 workspace 修改不反向写入 authoritative state。
+
+2. **HermesSessionClient 只接线不复现 session**。薄客户端 speak Hermes `/api/ws` JSON-RPC（session.create / prompt.submit / event stream）。Session create/resume/compression/持久化全由 Hermes 完成。E2E 实测修正协议：文本在 `event.payload.text`、完成信号 `message.complete`、需 `?token=` WS 认证。
+
+3. **Situation Chat Bridge 只接"人↔Hermes Session"**，不产生 Memory/Skill、不做 Action execution。Situation→Hermes session mapping 由 Fabric 服务端持有（`Map<situationId, {client, hermesSessionId}>`）。
+
+4. **Memory/Skill/SOUL 归 Hermes Profile**（`~/.hermes/profiles/jd/`），不进 agentFabric。
+
+## ADR-031: P0008.4 Agent Shared Knowledge Layer
+
+- **日期**: 2026-08-13
+- **状态**: Accepted (Complete)
+- **来源**: [P0008.4-shared-knowledge-layer.md](proposals/P0008.4-shared-knowledge-layer.md) + [P0008.4-acceptance-evidence.md](proposals/P0008.4-acceptance-evidence.md)
+
+**决策**:
+
+1. **Shared Knowledge 不是 Wiki**，是 "Raw Source → Agent semantic compilation → persistent Shared Knowledge" 机制（借鉴 Karpathy LLM Wiki **维护 pattern**，非产品边界）。核心区别 vs RAG：persistent knowledge 随资料持续变丰富；RAG 每次临时拼 chunks。
+
+2. **四层 Context Environment 绝不合并**：world/（外部世界是什么，P0008.2）+ knowledge/（人类共享了什么，P0008.4）+ Situation/Learning Context（P0007）+ Hermes Profile（Runtime Self：Memory/Skill/Soul）。前三层 Fabric 提供，第四层 Runtime-owned。
+
+3. **ownership**：`knowledge-sources/raw/` = immutable provenance source（只读）；`knowledge/` = Agent-consumable Read Model（Agent 维护，**非 canonical truth**，可能含 inference/uncertainty/disagreement）。
+
+4. **AGENTS.md = Fabric Agent Workspace Contract**。Hermes 原生从 cwd 加载的顶层指令，只描述 topology/semantics/boundaries/指引，**指向 KNOWLEDGE.md 不复制其内容**，不实现 instruction loader / file tools / approval / session / memory-skill（全委托 Hermes）。
+
+5. **诚实发现**：Blank Hermes 能加载 AGENTS.md（discovery 生效），但对 research 类任务默认 web_search（9 次）而非先读 raw sources，导致 knowledge compile（write_file）未发生。缺口 = AGENTS.md 缺"workspace 内知识优先于 web_search"的优先级规则——这是后来 P0008.5/P0008.6 的主线。
+
+## ADR-032: P0008.5 Minimal World + Knowledge Bootstrap E2E
+
+- **日期**: 2026-08-14
+- **状态**: Accepted (Complete — 负面/部分结果)
+- **来源**: [P0008.5-minimal-world-knowledge-bootstrap-e2e.md](proposals/P0008.5-minimal-world-knowledge-bootstrap-e2e.md) + 8 个 phase/experiment evidence 文件
+
+**决策**（三条链验证 + 一个不对称收敛）:
+
+1. **Exploration Artifact + World Contract → structured world/ ✅**。修正 3 处 Contract（topology 唯一 / source taxonomy / source immutability）后，同一模型 agnes-2.5-flash 从"分类歧义"变"正确生成 6-primitive structured World + epistemic status + evidence + provenance"。**清晰 Contract 足以指导普通 Agent 抽象 structured context，不是依赖模型聪明**。
+
+2. **Human Document + Knowledge Governance → Shared Knowledge ✅**。非 Markdown 文档，prompt 只"请处理"，Agent 自主 search_files 找到 source → 读 KNOWLEDGE.md → semantic compilation（7 模块框架，非格式转换）→ knowledge page + provenance + INDEX + log，raw 不变、world 隔离、不进 Memory/Skill。
+
+3. **Blank Runtime consumption 不对称（关键负面结果）**：Knowledge 继承成立（Probe B/C PASS），World 消费失败。Known-Fact Diagnostic（3 个确定存在的事实）→ 0/3 读 world/。逐层排除：非 Content Gap（事实确定存在）、非 INDEX 缺失（加 world/INDEX.md 后 indexRead:false × 3）、非命名（world/→systems/ 仅 1/3，system-identity 类 0→1，enumeration 类仍 web_search）。
+
+4. **收敛**：Gap = **缺 Workspace-level Instruction Architecture**（World 只有 WRITE-side 指令、无 READ-side 指令），不是缺 World Model / INDEX / 单条规则。
+
+## ADR-033: P0008.6 Fabric Workspace Instruction Architecture（Audit 结论）
+
+- **日期**: 2026-08-14
+- **状态**: Accepted (Audit — 待 Review 决定是否落为 Proposal)
+- **来源**: [p0008.6-claudian-instruction-architecture.md](proposals/audits/p0008.6-claudian-instruction-architecture.md)
+
+**决策**（Claudian archaeology + P0008.5 证据收敛出的架构结论，非实现）:
+
+1. **Instruction 分层，五层语义不混**。Workspace 上下文拆为 Instruction / Navigation / Content / Capability / Runtime Self 五层。Instruction = 如何工作；Navigation = 东西在哪（INDEX）；Content = 知道什么；Capability = connected system 能做什么（bindings）；Runtime Self = SOUL/Memory/Skill/Session（**不在 workspace**）。
+
+2. **orientation 落 workspace-root AGENTS.md，不是 system prompt**。Claudian 把 orientation 放 system prompt（它有 runtime）；agentFabric 无 runtime，唯一能被 Hermes 原生加载的是 cwd-root 的 AGENTS.md，所以 orientation + routing + scope 索引必须全部落在这个文件里，且显式分层。
+
+3. **P0008.5 World 消费失败的根因 = 缺 READ-side 指令**。`world/`(systems/) 只有 WRITE-side（"如何构建"）指令，从无 READ-side（"何时/为何/如何消费"）指令。`knowledge/` 成功是因为 KNOWLEDGE.md 同时含 maintenance + query 两侧。修复方向 = 补 routing（何时用哪种 context）+ epistemic authority（systems/verified 优先于 web）+ navigation 指针（"读 INDEX"），**不是再加一个 INDEX 文件**。
+
+4. **4 个已验证行为无一是 Runtime Skill 或 Fabric Capability**。System Context Construction / Shared Knowledge Ingestion = Fabric Procedure（持久化为 governance 文档）；Context Navigation / Grounded Consumption = Workspace Instruction（routing + epistemic 规则）+ Navigation（INDEX）。全部 Fabric-owned，纯 Markdown 文件持久化即可防退化。
+
+5. **scoped instruction 必须被 root 指向，不能自动加载**。Hermes 只加载 cwd-root AGENTS.md；nested 指令（KNOWLEDGE.md / GOVERNANCE.md）是死文件除非 root 有 routing 规则指向它们——这正是 P0008.5 world/INDEX.md 失败的复刻。
+
+**边界**: 仅 audit，未修改 AGENTS.md/systems/knowledge/capability，未重跑 Blank Agent，未实现 loader/router/capability engine。

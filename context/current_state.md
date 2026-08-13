@@ -1,8 +1,16 @@
 # 当前状态
 
-|**版本**: v0.2-p0008.2-complete | **Hermes**: v0.18.0 | **测试**: 489/491 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-p0008.6-audit | **Hermes**: v0.18.0 | **测试**: 489/491 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **P0008.6 Instruction Architecture Audit** — Claudian archaeology → Fabric mapping → P0008.5 failure 五维解读 → 5-layer Instruction Layers → ownership boundary → operational capability classification. 核心结论: (1) Claudian 有 3 条指令轨道(repo AGENTS.md / runtime system prompt / user vault instruction)，orientation 在 system prompt 而非 AGENTS.md，agentFabric 必须反转到 workspace-root AGENTS.md；(2) Claudian 无 router/INDEX，INDEX 是 agentFabric 自己发明的；(3) P0008.5 World 消费失败根因 = world/ 只有 WRITE-side 指令、无 READ-side 指令，缺 orientation(subject)/routing/scope(operational)/navigation(pointer)/semantics(epistemic authority) 五环；(4) 4 个已验证行为全部是 Instruction+Navigation+Procedure，无一是 Runtime Skill 或 Fabric Capability。交付 `proposals/audits/p0008.6-claudian-instruction-architecture.md`。仅 audit，未改 workspace/未重跑 Blank Agent。ADR-033。
+
+- [x] **P0008.5 Minimal World + Knowledge Bootstrap E2E** — 三条链验证 + 一个不对称收敛。✅ Exploration Artifact + World Contract → structured world/（Contract 清晰即可，非模型聪明）；✅ Human Document + Knowledge Governance → Shared Knowledge（semantic compilation 非格式转换）。⚠️ Blank Runtime consumption 不对称：Knowledge 继承成立，World 消费失败（known-fact 0/3）。逐层排除 Content Gap → INDEX 缺失（加了也 indexRead:false）→ world/→systems/ 命名（1/3 部分提升），收敛为**缺 Workspace-level Instruction Architecture**。ADR-032。
+
+- [x] **P0008.4 Agent Shared Knowledge Layer** — Shared Knowledge 非 Wiki，是 "Raw Source → Agent semantic compilation → persistent Shared Knowledge"（借鉴 Karpathy LLM Wiki 维护 pattern）。四层 Context Environment（world/knowledge/situation/Hermes profile）绝不合并。AGENTS.md = Fabric Agent Workspace Contract（Hermes 原生加载，指向 KNOWLEDGE.md 不复制）。ownership: raw/ immutable provenance；knowledge/ = Agent 维护 Read Model（非 canonical truth）。诚实发现：Blank Hermes 加载 AGENTS.md 但 research 任务默认 web_search，缺"workspace 优先"规则。ADR-031。
+
+- [x] **P0008.3 Agent Workspace & Runtime Integration** — FabricAgentWorkspace（authoritative state → runtime-facing 投影，deterministic/rebuildable，只写不读回）+ HermesSessionClient（speak /api/ws JSON-RPC，只接线不复现 session）+ Situation Chat Bridge（只接人↔Session）。Memory/Skill/SOUL 归 Hermes Profile。E2E PASS（session.create cwd=FabricWorkspace，模型自主 filesystem 读取）。ADR-030。
 
 - [x] **P0008.2 Complete** — World Model Contract. 三层分离: World Object(6 types) / World Assertion(subject→predicate→object + epistemicStatus + temporalStatus) / Capability Binding(relationship 语义). epistemic(suspected/observed/verified) ≠ temporal(active/superseded/retired) 两个正交生命周期. evidenceRefs 是 reference interface(World Evidence semantics 未实现). 28 stress tests. 无 Builder/Query/Registry. ADR-029.
 
@@ -51,13 +59,15 @@
 
 ## 进行中
 
-_无_
+- [ ] **P0008.6 Architecture Review** — 等待对 `proposals/audits/p0008.6-claudian-instruction-architecture.md` 的 Review。Audit 已按任务要求停在"只定义 ownership/representation，不实现"，下一步方向（是否补 routing/epistemic 到 AGENTS.md + WORLD_MODEL 落盘 + topology 对齐 + 重跑 3 known-fact probes）待 Review 拍板。
 
 ## 下一步
 
-待根据实际运行情况决定
+- 基于 P0008.6 Audit 决定是否创建正式 P0008.6 Proposal（含 Instruction Layers 的 canonical 定义 + routing/epistemic 规则形态 + 验收方案）
+- 待决: scoped instruction 命名（统一 AGENTS.md vs 描述性名）、`systems/` vs `world/` 定案、dangling `contracts/WORLD_MODEL.md` 落盘、`capability/` vs `capabilities/` 对齐
 
 ## 阻塞
 
 - [ ] **竞争分析模块** — 需 ¥8,856/年 数据尊享包订阅才能获取 API 数据
 - [ ] **实时/流量/服务页面 API** — 跨子域 SPA 路由需特殊导航逻辑
+- [ ] **P0008.6 依赖 Review 决策** — 未获 Review 前，不得修改 AGENTS.md / systems/ / knowledge/ / capability/，不得重跑 Blank Agent（P0008.6 NOT Included 边界）
