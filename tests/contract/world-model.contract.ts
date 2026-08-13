@@ -8,7 +8,6 @@ import {
   WorldAssertionSchema,
   CapabilityBindingSchema,
   WorldModelSchema,
-  EPISTEMIC_ORDER,
   upgradeAssertion,
   supersedeAssertion,
   isVerified,
@@ -20,14 +19,14 @@ import type { WorldModel, WorldObject, WorldAssertion } from '#shared/schemas/wo
 // ---- Minimal JD fixture (real facts from discovery/ + WorldExplorationTask/) ----
 
 const jdObjects: WorldObject[] = [
-  { id: 'jd_shangzhi', type: 'system', name: '京东商智' },
+  { id: 'jd_shangzhi', type: 'system', name: '京东商智', attributes: {} },
   { id: 'jd_surface_trade_summary', type: 'surface', name: '交易概况', attributes: { url: '/szweb/view/tradeAnalysis/tradeSummary.html' } },
   { id: 'jd_surface_flow_summary', type: 'surface', name: '流量', attributes: { url: '/szweb/view/flow/flow-summary.html' } },
   { id: 'jd_metric_gmv', type: 'metric', name: '成交金额', attributes: { unit: '元' } },
   { id: 'jd_metric_orders', type: 'metric', name: '成交单量', attributes: { unit: '笔' } },
   { id: 'jd_metric_aov', type: 'metric', name: '客单价', attributes: { formula: '成交金额/成交客户数' } },
   { id: 'jd_dimension_time', type: 'dimension', name: '时间', attributes: { values: ['实时', '昨天', '近7天', '近30天', '天', '周', '月'] } },
-  { id: 'jd_feature_realtime_ranking', type: 'feature', name: '实时榜单' },
+  { id: 'jd_feature_realtime_ranking', type: 'feature', name: '实时榜单', attributes: {} },
   { id: 'jd_constraint_data_freshness', type: 'constraint', name: '数据新鲜度', attributes: { description: '实时数据延迟约1分钟，日报14:00前更新' } },
 ];
 

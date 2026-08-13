@@ -11,6 +11,7 @@ import { workspaceRouter } from './routes/workspace.js';
 import { chatRouter } from './routes/chat.js';
 import { runtimeRouter } from './routes/runtime.js';
 import { p0007Router } from './routes/p0007.js';
+import { situationChatRouter } from './routes/situation-chat.js';
 import { openDb } from '#platform/storage/connection.js';
 
 export interface ServerOptions {
@@ -34,6 +35,15 @@ export const createServer = (options: ServerOptions): Express => {
   app.use('/api', chatRouter(db));
   app.use('/api', runtimeRouter(db));
   app.use('/api', p0007Router(db));
+  // P0008.3 — Situation Chat Bridge (Hermes session integration).
+  // Lazy: only connects to Hermes serve on first chat. Session mapping held server-side.
+  app.use(
+    '/api',
+    situationChatRouter({
+      workspaceDir: resolve(process.cwd(), 'data', 'fabric-workspace'),
+      profile: 'default',
+    }),
+  );
 
   // Dashboard SPA (vanilla JS). Served as static files.
   const dashDir = workspaceDir ?? resolve(process.cwd(), 'apps/ecommerce/workspace');
