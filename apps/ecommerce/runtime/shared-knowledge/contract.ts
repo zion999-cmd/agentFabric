@@ -40,6 +40,12 @@ Do not confuse these two:
 A "raw artifact" is NOT automatically a "knowledge raw source". Raw describes the
 knowledge-ingestion lifecycle, not a dump for all unprocessed files.
 
+**Invariant**: \`knowledge-sources/raw/\` contains ONLY sources explicitly submitted
+for Shared Knowledge ingestion. World Exploration Artifacts MUST NOT be copied,
+moved, mirrored, or stored under \`knowledge-sources/raw/\` — they are provenance
+inputs for \`world/\` only. Do not auto-classify an unprocessed file as a knowledge
+raw source just because it is "raw".
+
 ## Context Semantics
 
 - \`world/\` = what the external world IS (structured, verified World Model)
