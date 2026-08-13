@@ -85,7 +85,7 @@ P{NNNN}[-{N}]-{kebab-case-description}.md
 | `P0005` | Data foundation | P0005, P0005.1–P0005.6, P0005.6.1 | — |
 | `P0006` | HermesAgent + Workspace | P0006, P0006.1, P0006.2, P0006.5.3 | P0006.3, P0006.4, P0006.5 (root), P0006.5.1, P0006.5.2 |
 | `P0007` | Operator intelligence | P0007 | P0007.1–P0007.6 planned (P0007.3 archived) |
-| `P0008` | (next domain) | — | Available |
+| `P0008` | World Abstraction Infrastructure | P0008, P0008.1, P0008.2, P0008.3 | P0008.4–P0008.7 planned |
 | `P000x` | Future expansion | P000x, P000x.1–P000x.4 | — |
 
 **P0006 sub-numbering note**: P0006.3 and P0006.4 are currently unassigned. Do NOT auto-fill gaps — only create sub-numbers when the corresponding architecture decision exists. Feature-level work (e.g., Workspace Phase 3 Hermes integration) should use the `{module}-v{version}-phase{N}` format first; promote to P-number only when the capability rises to architecture-level.
@@ -156,8 +156,14 @@ proposals/
 ├── P0006.1-product-readiness-checklist.md
 ├── P0006.2-historical-replay-runtime.md
 ├── P0007-Experience-Memory-Skill.md
+├── P0008-world-abstraction-infrastructure.md
+├── P0008.1-world-model-gap-map.md
+├── P0008.2-world-model-contract.md
+├── P0008.3-agent-workspace-runtime-integration.md
 ├── archive/
 │   └── P0007.3-memory-retrieval.md
+├── audits/
+│   └── p0008.3-integration-gap-map.md
 ├── P000x-system-expansion-layer.md
 ├── P000x.1-multi-connector-expansion.md
 ├── P000x.2-observability-runtime-trace-layer.md
