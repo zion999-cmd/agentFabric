@@ -5,9 +5,14 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import express from 'express';
 import type { Server } from 'node:http';
+import { rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
 import { situationChatRouter } from '#platform/server/routes/situation-chat.js';
 import type { SituationChatClient } from '#platform/server/routes/situation-chat.js';
 import type { HermesEvent, CreateSessionParams, CreateSessionResult } from '#platform/runtime/hermes/index.js';
+
+const TEST_WORKSPACE = resolve(tmpdir(), 'fabric-workspace-test-chat');
 
 // ---- Mock Hermes session client ----
 
@@ -60,7 +65,7 @@ describe('Situation Chat Runtime Bridge', () => {
     app.use(
       '/api',
       situationChatRouter({
-        workspaceDir: './data/test-fabric-workspace',
+        workspaceDir: TEST_WORKSPACE,
         clientFactory: (url) => new MockClient(url),
       }),
     );
@@ -72,6 +77,7 @@ describe('Situation Chat Runtime Bridge', () => {
 
   afterAll(() => {
     server.close();
+    rmSync(TEST_WORKSPACE, { recursive: true, force: true });
   });
 
   const chat = async (situationId: string, message: string) => {
