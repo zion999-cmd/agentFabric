@@ -2,11 +2,11 @@
 // Verifies: governance contract, directory structure, immutable raw, provenance.
 
 import { describe, it, expect, afterAll } from 'vitest';
-import { existsSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
-import { KNOWLEDGE_GOVERNANCE, KNOWLEDGE_INDEX, AGENTS_CONTRACT } from '#app/runtime/shared-knowledge/index.js';
+import { KNOWLEDGE_GOVERNANCE, KNOWLEDGE_INDEX, SEED_INDEX, AGENTS_CONTRACT } from '#app/runtime/shared-knowledge/index.js';
 
 const TEST_ROOT = resolve(tmpdir(), 'shared-knowledge-test');
 
@@ -101,13 +101,16 @@ describe('initSharedKnowledgeLayer', () => {
   });
 
   it('creates the correct directory structure', () => {
-    const result = initSharedKnowledgeLayer(TEST_ROOT);
+    const root = resolve(tmpdir(), 'sk-structure');
+    rmSync(root, { recursive: true, force: true });
+    const result = initSharedKnowledgeLayer(root);
     expect(result.files).toContain('knowledge-sources/raw/platform-promotion.md');
     expect(result.files).toContain('knowledge-sources/raw/marketing-case.md');
     expect(result.files).toContain('knowledge/KNOWLEDGE.md');
     expect(result.files).toContain('knowledge/INDEX.md');
     expect(result.files).toContain('knowledge/log.md');
     expect(result.files).toContain('knowledge/platform/京东内容化推广.md');
+    rmSync(root, { recursive: true, force: true });
   });
 
   it('writes immutable raw sources to disk', () => {
@@ -122,10 +125,55 @@ describe('initSharedKnowledgeLayer', () => {
     expect(page).toContain('knowledge-sources/raw/platform-promotion.md');
   });
 
-  it('is idempotent — re-init does not delete or error', () => {
-    const r1 = initSharedKnowledgeLayer(TEST_ROOT);
-    const r2 = initSharedKnowledgeLayer(TEST_ROOT);
-    expect(r1.files.length).toBe(r2.files.length);
-    expect(existsSync(resolve(TEST_ROOT, 'knowledge/KNOWLEDGE.md'))).toBe(true);
+  it('is idempotent — re-init overwrites only contract, preserves seeded content', () => {
+    const root = resolve(tmpdir(), 'sk-idempotent');
+    rmSync(root, { recursive: true, force: true });
+    const r1 = initSharedKnowledgeLayer(root);
+    expect(r1.files).toContain('knowledge/platform/京东内容化推广.md');
+    const r2 = initSharedKnowledgeLayer(root);
+    // Second init writes only the Fabric contract files (seed content already present).
+    expect(r2.files).toEqual(['AGENTS.md', 'knowledge/KNOWLEDGE.md']);
+    expect(existsSync(resolve(root, 'knowledge/KNOWLEDGE.md'))).toBe(true);
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it('is seed-if-absent — Agent modifications survive re-init (restart)', () => {
+    const root = resolve(tmpdir(), 'sk-seed-preserve');
+    rmSync(root, { recursive: true, force: true });
+    initSharedKnowledgeLayer(root);
+    const idx = resolve(root, 'knowledge/INDEX.md');
+    const log = resolve(root, 'knowledge/log.md');
+    const page = resolve(root, 'knowledge/platform/京东内容化推广.md');
+    writeFileSync(idx, 'AGENT-MODIFIED-INDEX', 'utf-8');
+    writeFileSync(log, 'AGENT-APPENDED-LOG', 'utf-8');
+    writeFileSync(page, 'AGENT-MODIFIED-PAGE', 'utf-8');
+    // Re-init (service restart).
+    initSharedKnowledgeLayer(root);
+    expect(readFileSync(idx, 'utf-8')).toBe('AGENT-MODIFIED-INDEX');
+    expect(readFileSync(log, 'utf-8')).toBe('AGENT-APPENDED-LOG');
+    expect(readFileSync(page, 'utf-8')).toBe('AGENT-MODIFIED-PAGE');
+    // Contract files still overwritten deterministically.
+    expect(readFileSync(resolve(root, 'AGENTS.md'), 'utf-8')).toContain('AGENTS.md');
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it('new workspace seeds correctly', () => {
+    const root = resolve(tmpdir(), 'sk-fresh');
+    rmSync(root, { recursive: true, force: true });
+    const result = initSharedKnowledgeLayer(root);
+    expect(result.files).toContain('knowledge/platform/京东内容化推广.md');
+    expect(result.files).toContain('knowledge/INDEX.md');
+    expect(result.files).toContain('knowledge-sources/raw/platform-promotion.md');
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it('INDEX uses runtime-readable paths that resolve on disk (no [[wikilink]])', () => {
+    expect(SEED_INDEX).not.toContain('[[');
+    expect(SEED_INDEX).toContain('knowledge/platform/京东内容化推广.md');
+    const root = resolve(tmpdir(), 'sk-index-resolve');
+    rmSync(root, { recursive: true, force: true });
+    initSharedKnowledgeLayer(root);
+    expect(existsSync(resolve(root, 'knowledge/platform/京东内容化推广.md'))).toBe(true);
+    rmSync(root, { recursive: true, force: true });
   });
 });

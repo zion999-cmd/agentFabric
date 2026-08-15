@@ -54,7 +54,7 @@ tags: [jd, promotion, content]
 export const SEED_INDEX = `# Knowledge Index
 
 ## Platform
-- [[京东内容化推广]] — 京东 2026 内容化推广产品与适用场景
+- 京东内容化推广 → \`knowledge/platform/京东内容化推广.md\` — 京东 2026 内容化推广产品与适用场景
 
 ## Cases
 （待编译）

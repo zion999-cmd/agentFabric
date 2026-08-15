@@ -42,9 +42,16 @@ This file tells you HOW to maintain knowledge. It is NOT business knowledge.
    the disagreement. Record both positions under a "未决矛盾 / contradictions"
    section. Never silently overwrite the older conclusion.
 
-7. **Cross-references.** Link related pages using [[Page Name]] where useful.
+7. **Cross-references.** In page BODIES, link related pages using [[Page Name]]
+   where useful (human-readable). Runtimes do NOT auto-resolve [[wikilinks]] —
+   body cross-references are for humans and Agent-to-page navigation, not for
+   filesystem discovery.
 
 8. **INDEX.** Keep knowledge/INDEX.md up to date so navigation stays accurate.
+   Every INDEX entry MUST use an explicit runtime-readable relative path from
+   the workspace root (e.g. \`knowledge/platform/京东内容化推广.md\`), NEVER a
+   bare [[wikilink]] — Runtimes resolve files via the filesystem, not an
+   Obsidian wikilink resolver.
 
 9. **Log.** Append every ingest/update/lint action to knowledge/log.md in
    chronological order.
