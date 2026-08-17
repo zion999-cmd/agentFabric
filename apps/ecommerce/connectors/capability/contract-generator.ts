@@ -320,6 +320,26 @@ const DOMAIN_CONFIGS: readonly DomainConfig[] = [
   },
 ];
 
+/**
+ * Canonical capability ID → connector api_module.
+ * THE single source of truth for capability → module resolution. The planner
+ * uses this (not the stale discovery vocabulary) to bind a canonical
+ * capability to its endpoint subset. Unknown capabilities fail closed.
+ */
+export const CAPABILITY_TO_MODULE: Readonly<Record<string, string>> = {
+  'trade.overview': 'indexSummary',
+  'trade.detail': 'indexSummary',
+  'trade.competition': 'industryMarket',
+  'trade.reports': 'common',
+  'traffic.overview': 'indexSummary',
+  'product.overview': 'indexSummary',
+  'service.overview': 'common',
+  'industry.benchmark': 'industryMarket',
+  'customer.overview': 'custGrowth',
+  'marketing.overview': 'marketing',
+  'supply_chain.inventory': 'stock',
+};
+
 // ---- Metric Metadata ----
 // Detailed metadata for each canonical metric that appears in outputs.
 

@@ -35,7 +35,23 @@ describe('buildExecutionPlan', () => {
     const plan = buildExecutionPlan(model, { capabilities: ['campaign_performance'] });
 
     expect(plan.apis_to_call.length).toBeGreaterThanOrEqual(0);
-    expect(plan.target_capabilities).toContain('Marketing');
+    expect(plan.target_capabilities).toContain('marketing.overview');
+  });
+
+  test('canonical capability "traffic.overview" resolves to a scoped endpoint subset (not all 70)', () => {
+    const model = loadBlueprint('jd');
+    const plan = buildExecutionPlan(model, { capabilities: ['traffic.overview'] });
+
+    // Resolves through CAPABILITY_TO_MODULE → indexSummary, NOT the 70-endpoint fallback.
+    expect(plan.target_capabilities).toContain('traffic.overview');
+    expect(plan.apis_to_call.length).toBeGreaterThan(0);
+    expect(plan.apis_to_call.length).toBeLessThan(70);
+  });
+
+  test('unknown capability fails closed (no all-endpoints fallback)', () => {
+    const model = loadBlueprint('jd');
+    expect(() => buildExecutionPlan(model, { capabilities: ['nonexistent.capability'] }))
+      .toThrow(/Unresolved capability/);
   });
 
   test('empty capabilities array selects all APIs', () => {

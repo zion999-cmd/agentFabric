@@ -11,12 +11,13 @@ import type {
   PlanOptions,
 } from './types.js';
 import { CapabilityExecutionPlanSchema } from './types.js';
+import { CAPABILITY_TO_MODULE } from '#app/connectors/capability/contract-generator.js';
 
-/** Map signal types back to the capabilities they encompass. */
+/** Map signal types back to the canonical capabilities they encompass. */
 const SIGNAL_TO_CAPABILITIES: Readonly<Record<string, string[]>> = {
-  daily_summary: ['Transaction', 'Customer', 'Product', 'Industry', 'SupplyChain'],
-  hourly_traffic: ['Transaction'],
-  campaign_performance: ['Marketing'],
+  daily_summary: ['trade.overview', 'customer.overview', 'product.overview', 'industry.benchmark', 'supply_chain.inventory'],
+  hourly_traffic: ['traffic.overview'],
+  campaign_performance: ['marketing.overview'],
 };
 
 /** Default JD gateway — can be overridden per platform. */
@@ -88,21 +89,30 @@ const resolveApisForCapability = (
   capabilities: string[],
   gatewayBase: string,
 ): ApiCall[] => {
-  // Build capability → api_module mapping from the blueprint
-  const capToModule = new Map<string, string>();
+  // Legacy module map (blueprint's stale discovery vocabulary) — kept only so
+  // the no-capability "collect all" path keeps working.
+  const legacyCapToModule = new Map<string, string>();
   for (const cap of model.capabilities) {
-    capToModule.set(cap.capability, cap.api_module);
+    legacyCapToModule.set(cap.capability, cap.api_module);
   }
 
-  // Collect all endpoints that belong to the requested capabilities' modules
+  // Resolve requested capabilities → modules. The canonical mapping is the
+  // single source of truth; legacy discovery names are a backward-compat fallback.
   const selectedModules = new Set<string>();
+  const unresolved: string[] = [];
   for (const cap of capabilities) {
-    const mod = capToModule.get(cap);
+    const mod = CAPABILITY_TO_MODULE[cap] ?? legacyCapToModule.get(cap);
     if (mod) selectedModules.add(mod);
+    else unresolved.push(cap);
   }
 
-  // Filter parser rules: include rules whose endpoint's module matches
-  // We identify the module by endpoint prefix matching against known module prefixes
+  // Fail closed: an unknown capability must never silently fall back to
+  // "all endpoints" (that masks a binding gap and re-triggers live CDP).
+  if (unresolved.length > 0) {
+    throw new Error(`Unresolved capability: ${unresolved.join(', ')}`);
+  }
+
+  // Filter parser rules: include rules whose endpoint's module matches.
   const moduleEndpoints = getModuleEndpoints(model, selectedModules);
 
   const apis: ApiCall[] = [];
@@ -115,21 +125,6 @@ const resolveApisForCapability = (
         fields_to_parse: rule.fields_to_parse,
         field_mapping: rule.field_mapping,
       });
-    }
-  }
-
-  // If no APIs matched, return all rules with fields (unfiltered fallback)
-  if (apis.length === 0) {
-    for (const rule of model.parser_plan.rules) {
-      if (rule.fields_to_parse.length > 0) {
-        apis.push({
-          endpoint: rule.endpoint,
-          gateway_url: gatewayBase,
-          strategy: rule.strategy,
-          fields_to_parse: rule.fields_to_parse,
-          field_mapping: rule.field_mapping,
-        });
-      }
     }
   }
 

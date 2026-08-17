@@ -76,6 +76,35 @@ describe('AGENTS.md — Fabric Agent Workspace Contract', () => {
     expect(AGENTS_CONTRACT).toContain('NOT a freshness guarantee');
   });
 
+  it('specifies Capability Execution Semantics (Runtime-native discovery, not a hard-coded tool name)', () => {
+    // Native discovery flow is described (Runtime-independent + Hermes concrete).
+    expect(AGENTS_CONTRACT).toContain('tool_search');
+    expect(AGENTS_CONTRACT).toContain('tool_describe');
+    expect(AGENTS_CONTRACT).toContain('tool_call');
+    expect(AGENTS_CONTRACT).toContain('tool-discovery mechanism');
+    // Must NOT hard-code a specific tool name or MCP namespace (Runtime internal detail).
+    expect(AGENTS_CONTRACT).not.toContain('fabric_execute_capability');
+    expect(AGENTS_CONTRACT).not.toContain('mcp__');
+    // systems/ + knowledge/ are CONTEXT, explicitly NOT a substitute for live data.
+    expect(AGENTS_CONTRACT).toContain('not a substitute for live operational data');
+    // Internal implementation storage (SQLite/db) is explicitly banned as a data source.
+    expect(AGENTS_CONTRACT).toContain('SQLite');
+    expect(AGENTS_CONTRACT).toContain('NOT a data source');
+    // External web cannot replace an existing Fabric capability.
+    expect(AGENTS_CONTRACT).toContain('not replaced by external web search');
+  });
+
+  it('generated workspace AGENTS.md carries the discovery semantics verbatim', () => {
+    const root = resolve(tmpdir(), 'sk-execution-semantics');
+    rmSync(root, { recursive: true, force: true });
+    initSharedKnowledgeLayer(root);
+    const onDisk = readFileSync(resolve(root, 'AGENTS.md'), 'utf-8');
+    expect(onDisk).toContain('Capability Execution');
+    expect(onDisk).toContain('tool_search');
+    expect(onDisk).not.toContain('mcp__fabric__');
+    rmSync(root, { recursive: true, force: true });
+  });
+
   it('points to KNOWLEDGE.md, does NOT copy its content', () => {
     expect(AGENTS_CONTRACT).toContain('knowledge/KNOWLEDGE.md');
     // AGENTS.md is a contract/pointer, not a duplicate of KNOWLEDGE.md governance rules.

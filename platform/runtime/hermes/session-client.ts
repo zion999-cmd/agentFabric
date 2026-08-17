@@ -28,7 +28,8 @@ export interface HermesEvent {
 export interface HermesSessionClientOptions {
   /** Hermes serve host/port (default localhost:9119) */
   url?: string;
-  /** Auth token if required (loopback usually needs none) */
+  /** Hermes dashboard session token. Authenticates the /api/ws upgrade via
+   *  `?token=`. Falls back to the HERMES_DASHBOARD_SESSION_TOKEN env var. */
   token?: string;
   /** Connection timeout ms */
   connectTimeoutMs?: number;
@@ -67,13 +68,26 @@ export class HermesSessionClient {
   constructor(options: HermesSessionClientOptions = {}) {
     const port = 9119;
     this.url = options.url ?? `ws://localhost:${port}/api/ws`;
-    this.token = options.token;
+    // Hermes serve authenticates the /api/ws upgrade via `?token=<_SESSION_TOKEN>`,
+    // where _SESSION_TOKEN is the HERMES_DASHBOARD_SESSION_TOKEN env (or a random
+    // value when unset). agentFabric reads the SAME env var, so one operator-provided
+    // secret authenticates both sides. An explicit `token` option wins over the env.
+    this.token = options.token ?? process.env.HERMES_DASHBOARD_SESSION_TOKEN;
   }
 
   /** Connect to Hermes serve /api/ws. Resolves when the socket opens. */
   connect(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const wsUrl = this.token ? `${this.url}?token=${encodeURIComponent(this.token)}` : this.url;
+      if (!this.token) {
+        reject(
+          new Error(
+            'Missing Hermes dashboard session token: set HERMES_DASHBOARD_SESSION_TOKEN ' +
+              '(the same value passed to `hermes serve`) so the /api/ws client can authenticate.',
+          ),
+        );
+        return;
+      }
+      const wsUrl = `${this.url}?token=${encodeURIComponent(this.token)}`;
       const ws = new WebSocket(wsUrl);
       this.ws = ws;
 

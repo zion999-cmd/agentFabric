@@ -42,6 +42,11 @@
 - [x] **P0008.6 Instruction Architecture Audit** (Claudian archaeology + 5-layer Instruction Layers + ownership + classification)
 - [ ] P0008.6 Proposal (若 Review 通过): routing/epistemic 规则落盘 + topology 对齐 + known-fact probe 复验
 
+## P0009 系列: Real Product Vertical Slice ✅
+- [x] P0009 Real Product Vertical Slice — Product Surface / Hermes Session / Fabric Workspace / Capability Runtime / JD Acquisition / Evidence 六面接线 + startup backfill
+- [x] **P0009.1 Situation Producer / 今日工作** — deterministic detection (meaningful_change/ranking_attention/cross_signal) + idempotent dedup + 复用 P0007 persistence；真实 grounded Situation 落「今日工作」
+- [ ] P0009 Final Browser Acceptance — Workspace 浏览器端到端验收（待模型稳定性）
+
 ## Phase 7: Skills + Workflows 🔮
 - [ ] **Business Workflows** — 618, 双11, 新品上市, 日报/周报/月报 (不是 Runtime Workflow)
 

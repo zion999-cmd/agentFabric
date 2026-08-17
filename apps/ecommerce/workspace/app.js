@@ -1036,16 +1036,85 @@ var agentSessionState = { taskId: null, status: 'idle', events: [], connected: f
 var agentSessionEventSource = null;
 
 function loadAgentSession() {
-  // Hide the Phase 2 "unavailable" notice. Phase 3.3 shows live events.
-  var notice = document.getElementById('sessionNotice');
-  if (notice) notice.style.display = 'none';
+  loadReadiness();
+  ensureAgentSessionChatWired();
+}
 
-  // Show event slots area
-  var slots = document.getElementById('sessionActivitySlots');
-  if (slots) slots.style.display = 'block';
+// ── P0009: Runtime Readiness — surface real runtime status ──
+function loadReadiness() {
+  apiGet('/api/readiness').then(function (data) {
+    renderReadiness(data);
+    updateStatusBadge(data.workspace === 'ready' ? 'connected' : 'unavailable');
+  }).catch(function () {
+    updateStatusBadge('unavailable');
+  });
+}
 
-  // Connect to event stream
-  connectEventStream();
+function renderReadiness(data) {
+  var d = data || {};
+  var chips = {
+    readinessHermes: 'Hermes · ' + (d.workspace === 'ready' ? 'ready' : 'unavailable'),
+    readinessCdp: 'JD/CDP · ' + (d.jd_cdp === 'ready' ? 'ready' : 'unavailable'),
+    readinessCapabilities: 'Capabilities · ' + (d.capabilities != null ? d.capabilities : '…'),
+    readinessEvidence: 'Evidence · ' + (d.evidence != null ? d.evidence : '…'),
+  };
+  Object.keys(chips).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = chips[id];
+  });
+}
+
+// ── P0009: canonical Situation Chat wired into the primary Agent Session view ──
+function ensureAgentSessionChatWired() {
+  if (ensureAgentSessionChatWired._done) return;
+  ensureAgentSessionChatWired._done = true;
+
+  var input = document.getElementById('agentSessionInput');
+  var sendBtn = document.getElementById('agentSessionSendBtn');
+  if (!input || !sendBtn) return;
+
+  var submit = async function () {
+    var message = input.value.trim();
+    if (!message) return;
+    input.value = '';
+    appendSessionMessage('user', message);
+    var loading = appendSessionMessage('bot', 'Agent 思考中…', true);
+    updateSlot('capability.selected', '…');
+    updateSlot('evidence.created', '…');
+    updateSlot('response.ready', '…');
+    try {
+      var data = await apiPost('/api/situation/jd_shop_001/chat', { message: message });
+      var reply = (data && data.reply) || '无法处理该请求';
+      loading.textContent = reply;
+      updateSlot('response.ready', '回答已返回');
+      updateStatusBadge('connected');
+    } catch (e) {
+      loading.textContent = 'Agent 响应失败: ' + e.message;
+      updateSlot('response.ready', '失败: ' + e.message);
+      updateStatusBadge('unavailable');
+    }
+  };
+
+  sendBtn.addEventListener('click', submit);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') submit();
+  });
+}
+
+function appendSessionMessage(role, text, isPending) {
+  var container = document.getElementById('sessionConversation');
+  if (!container) return null;
+  var ph = document.getElementById('sessionPlaceholder');
+  if (ph) ph.style.display = 'none';
+  var el = document.createElement('div');
+  el.className = role === 'user' ? 'chat-message-user' : 'chat-message-bot';
+  el.style.cssText = role === 'user'
+    ? 'text-align:right;margin-bottom:8px;padding:6px 12px;background:var(--card-bg);border-radius:8px;font-size:0.82rem'
+    : 'margin-bottom:8px;padding:8px 12px;background:var(--card-bg);border-left:3px solid var(--primary);border-radius:6px;font-size:0.82rem;white-space:pre-wrap';
+  el.textContent = text;
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+  return el;
 }
 
 function connectEventStream() {
@@ -1721,16 +1790,14 @@ document.getElementById('chatSendButton')?.addEventListener('click', async () =>
     container.scrollTop = container.scrollHeight;
     inp.value = '';
     try {
-      const data = await apiPost('/api/chat', { message: message });
+      // P0009: canonical Situation Chat → persistent Hermes Session (P0008.3).
+      // The session is keyed by the current business context (shop).
+      const data = await apiPost('/api/situation/jd_shop_001/chat', { message: message });
       loadingMsg.remove();
       const botMsg = document.createElement('div');
       botMsg.className = 'chat-message-bot';
       botMsg.style.cssText = 'margin-bottom:8px;padding:8px 12px;background:var(--card-bg);border-left:3px solid var(--primary);border-radius:6px;font-size:0.82rem';
-      var replyText = (data.reply || '无法处理该请求');
-      if (data.execution && data.execution.success) {
-        replyText += '\n\n[查看执行详情 →](/runtime/' + data.intent + ')';
-      }
-      botMsg.textContent = replyText;
+      botMsg.textContent = (data.reply || '无法处理该请求');
       container.appendChild(botMsg);
       container.scrollTop = container.scrollHeight;
     } catch (e) {

@@ -36,7 +36,20 @@ Route by QUESTION TYPE to the matching context source. Do NOT default to web sea
 - External-system facts (what the system/shop IS, its metrics, dimensions, constraints, surfaces) → read \`systems/INDEX.md\`, then the relevant primitive.
 - Shared organizational/domain knowledge (methods, rules, cases, SOPs) → read \`knowledge/INDEX.md\`, then the relevant page.
 - Available observation/action ("what data/actions can Fabric provide") → read \`capabilities/INDEX.md\`.
-- Use Runtime-native external tools (web_search etc.) ONLY when: (a) local context is insufficient, or (b) the task explicitly needs freshness / current / real-time data, or (c) you need to continue exploring the external world.
+- Operational / live business data (the shop's actual current metrics — traffic, sales, orders, stock) → read \`capabilities/INDEX.md\`, then execute the matching capability via the Runtime's native tool discovery (see "Capability Execution").
+- Use Runtime-native external tools (web_search etc.) ONLY when: (a) local context is insufficient, or (b) the task needs freshness / current / real-time data about the external world (general facts, news, market), or (c) you need to continue exploring the external world.
+
+## Capability Execution
+
+\`capabilities/\` describes the operational capabilities Fabric currently provides. When the task needs live / current operational data or to perform a business operation, do NOT reconstruct it from internal storage.
+
+- \`systems/\` and \`knowledge/\` provide CONTEXT (what the system is, its dimensions, methods, rules) — they are not a substitute for live operational data.
+- Internal implementation storage (e.g. agentFabric's SQLite database under \`data/\`) is NOT a data source for answering business questions. Do not read it directly to reconstruct business data.
+- Read \`capabilities/INDEX.md\` to understand which operational capabilities are available.
+- To actually EXECUTE a capability, use the Runtime's native tool-discovery mechanism to locate the executable tool that corresponds to that capability. Do not assume a hard-coded tool name, and do not fall back to reading internal storage.
+- In this Hermes Runtime, that native discovery flow is: \`tool_search\` (find the tool) → \`tool_describe\` (load its argument schema) → \`tool_call\` (execute). Use it to discover and invoke the Fabric execution tool for the capability you need.
+- The Evidence returned by capability execution is the authoritative basis for this operational observation.
+- An existing Fabric capability is not replaced by external web search. Use web / external tools only for information the workspace/capabilities cannot provide, or when the task explicitly needs external-world freshness.
 
 ## Epistemic Semantics
 

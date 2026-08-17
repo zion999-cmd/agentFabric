@@ -1,8 +1,12 @@
 # 当前状态
 
-|**版本**: v0.2-p0008.6-audit | **Hermes**: v0.18.0 | **测试**: 489/491 passed | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-p0009.1 | **Hermes**: v0.20.0 | **测试**: 561/563 passed (2 pre-existing failures) | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **P0009.1 Situation Producer / 今日工作** — 补齐 P0007 缺失的 canonical Situation Producer。`runtime/situation/{rules,producer,index}.ts`：确定性检测（meaningful_change 20% 阈值 / ranking_attention top-K+gap / cross_signal uv·cvr 反向），模板描述（无 LLM），确定性 situationId（sha256 fingerprint）+ `INSERT OR IGNORE` 幂等去重。消费 `SignalFacade.list`（store daily_summary）+ `RankingFacade.load`，复用 P0007 `situations` 表 + SituationSchema + lifecycle='open'，不重构 p0007 route。startup 接线 `index.ts` backfill 之后，闭环 `backfill → signals → rankings → situations`。真实 DB 生成 4 条 grounded Situation（祁门红茶旗舰店 08-16：访客 -47.5%、成交 -67.9%、订单 -66.7%、转化 -33.4%），幂等重跑 `0 created / 4 deduped`。12 新测试全绿。ADR-034。**未 commit**。
+
+- [x] **P0009 Real Product Vertical Slice** — 打通 Product Surface / Hermes Session / Fabric Workspace / Capability Runtime / JD Acquisition / Evidence 六面，acceptance 问题"分析一下最近的店铺流量情况"。含 token 修复、Capability Execution Semantics、Capability Identity/Endpoint Binding（traffic.overview → canonical）、Evidence Reuse（local-first）、Return Contract（metrics）、startup backfill（7 天 + rankings 带时间戳）。runtime 产物（Readiness/Capability Explorer/Evidence Viewer/Agent Session 路由）已接线。runtime limitation：模型稳定性（nemotron-3-ultra 71-77s vs >180s）记录为已知，未改模型/超时/transport。
 
 - [x] **P0008.6 Instruction Architecture Audit** — Claudian archaeology → Fabric mapping → P0008.5 failure 五维解读 → 5-layer Instruction Layers → ownership boundary → operational capability classification. 核心结论: (1) Claudian 有 3 条指令轨道(repo AGENTS.md / runtime system prompt / user vault instruction)，orientation 在 system prompt 而非 AGENTS.md，agentFabric 必须反转到 workspace-root AGENTS.md；(2) Claudian 无 router/INDEX，INDEX 是 agentFabric 自己发明的；(3) P0008.5 World 消费失败根因 = world/ 只有 WRITE-side 指令、无 READ-side 指令，缺 orientation(subject)/routing/scope(operational)/navigation(pointer)/semantics(epistemic authority) 五环；(4) 4 个已验证行为全部是 Instruction+Navigation+Procedure，无一是 Runtime Skill 或 Fabric Capability。交付 `proposals/audits/p0008.6-claudian-instruction-architecture.md`。仅 audit，未改 workspace/未重跑 Blank Agent。ADR-033。
 
@@ -59,15 +63,17 @@
 
 ## 进行中
 
-- [ ] **P0008.6 Architecture Review** — 等待对 `proposals/audits/p0008.6-claudian-instruction-architecture.md` 的 Review。Audit 已按任务要求停在"只定义 ownership/representation，不实现"，下一步方向（是否补 routing/epistemic 到 AGENTS.md + WORLD_MODEL 落盘 + topology 对齐 + 重跑 3 known-fact probes）待 Review 拍板。
+- [ ] **P0009 Final Browser Acceptance** — Product Surface 六面已接线，尚待从 Workspace 浏览器端做最终端到端验收（模型稳定性 nemotron-3-ultra 71-77s vs >180s 为已记录 runtime limitation，未改模型/超时/transport）。
 
 ## 下一步
 
-- 基于 P0008.6 Audit 决定是否创建正式 P0008.6 Proposal（含 Instruction Layers 的 canonical 定义 + routing/epistemic 规则形态 + 验收方案）
-- 待决: scoped instruction 命名（统一 AGENTS.md vs 描述性名）、`systems/` vs `world/` 定案、dangling `contracts/WORLD_MODEL.md` 落盘、`capability/` vs `capabilities/` 对齐
+- P0009.1 从 Workspace 浏览器确认「今日工作」渲染真实 Situation（API 已验证返回 5 条）。
+- commit P0009 + P0009.1（**待用户指示**，当前未 commit）。
+- 若需 ranking_attention 触发真实内容，先解决商品数据非差异化问题（67 商品 ranking 全同分 0.4648，属数据/采集层面，非 Producer）。
+- 遗留（低优先）: P0008.6 Proposal、`systems/` vs `world/` 定案、dangling `contracts/WORLD_MODEL.md`。
 
 ## 阻塞
 
 - [ ] **竞争分析模块** — 需 ¥8,856/年 数据尊享包订阅才能获取 API 数据
 - [ ] **实时/流量/服务页面 API** — 跨子域 SPA 路由需特殊导航逻辑
-- [ ] **P0008.6 依赖 Review 决策** — 未获 Review 前，不得修改 AGENTS.md / systems/ / knowledge/ / capability/，不得重跑 Blank Agent（P0008.6 NOT Included 边界）
+- [ ] **P0009 模型稳定性** — nemotron-3-ultra 运行间抖动（71-77s 或 >180s），已确认 transport 正确，属模型/配额层，非 agentFabric 可修

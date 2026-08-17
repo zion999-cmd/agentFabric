@@ -42,18 +42,55 @@ describe('HermesSessionClient', () => {
   beforeEach(() => {
     MockWebSocket.instances = [];
     vi.stubGlobal('WebSocket', MockWebSocket);
+    // Default: a token is available via env (matches a correctly-configured deploy).
+    process.env.HERMES_DASHBOARD_SESSION_TOKEN = 'test-secret';
   });
   afterEach(() => {
     vi.unstubAllGlobals();
+    delete process.env.HERMES_DASHBOARD_SESSION_TOKEN;
   });
 
-  it('connect opens a WebSocket to /api/ws', async () => {
-    const client = new HermesSessionClient({ url: 'ws://localhost:9119/api/ws' });
+  it('connect opens a WebSocket to /api/ws and appends ?token=', async () => {
+    const client = new HermesSessionClient({ url: 'ws://localhost:9119/api/ws', token: 'explicit-secret' });
     const connectPromise = client.connect();
     const ws = MockWebSocket.instances[0]!;
     ws.emitOpen();
     await connectPromise;
-    expect(ws.url).toBe('ws://localhost:9119/api/ws');
+    expect(ws.url).toBe('ws://localhost:9119/api/ws?token=explicit-secret');
+  });
+
+  it('reads the token from HERMES_DASHBOARD_SESSION_TOKEN env when none passed', async () => {
+    process.env.HERMES_DASHBOARD_SESSION_TOKEN = 'env-secret';
+    const client = new HermesSessionClient();
+    const connectPromise = client.connect();
+    const ws = MockWebSocket.instances[0]!;
+    ws.emitOpen();
+    await connectPromise;
+    expect(ws.url).toBe('ws://localhost:9119/api/ws?token=env-secret');
+  });
+
+  it('explicit token option wins over the env var', async () => {
+    process.env.HERMES_DASHBOARD_SESSION_TOKEN = 'env-secret';
+    const client = new HermesSessionClient({ token: 'option-secret' });
+    const connectPromise = client.connect();
+    const ws = MockWebSocket.instances[0]!;
+    ws.emitOpen();
+    await connectPromise;
+    expect(ws.url).toBe('ws://localhost:9119/api/ws?token=option-secret');
+  });
+
+  it('fails explicitly when no token is available', async () => {
+    delete process.env.HERMES_DASHBOARD_SESSION_TOKEN;
+    const client = new HermesSessionClient();
+    await expect(client.connect()).rejects.toThrow(/Missing Hermes dashboard session token/);
+  });
+
+  it('rejects connect() when the server rejects the credential (onerror)', async () => {
+    const client = new HermesSessionClient({ token: 'wrong-secret' });
+    const connectPromise = client.connect();
+    const ws = MockWebSocket.instances[0]!;
+    ws.onerror?.(new Error('WebSocket handshake rejected'));
+    await expect(connectPromise).rejects.toThrow(/WebSocket error/);
   });
 
   it('createSession sends a valid session.create JSON-RPC frame', async () => {

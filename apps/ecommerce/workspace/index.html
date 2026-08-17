@@ -160,56 +160,46 @@
                 <span class="session-subtitle" id="sessionSubtitle">2026-08-11</span>
               </div>
               <div class="session-header-right">
-                <span class="session-status-badge unavailable" id="sessionStatusBadge">Runtime integration unavailable</span>
+                <span class="session-status-badge unavailable" id="sessionStatusBadge">连接中...</span>
               </div>
             </div>
 
-            <div class="session-notice" id="sessionNotice">
-              <div class="session-notice-icon">⚠️</div>
-              <div class="session-notice-body">
-                <strong>Runtime integration unavailable</strong>
-                <p>HermesAgent events not connected. Agent Activity display requires HermesAgent integration (Phase 3).</p>
-                <p class="session-notice-hint">Agent Session defines the UI contract for observable events (intent.resolved, capability.selected, data.requested, acquisition.completed, response.ready). These event slots will be populated when HermesAgent integration is complete.</p>
-              </div>
+            <!-- P0009: Runtime Readiness — real status, not static config -->
+            <div class="readiness-panel" id="readinessPanel" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+              <span class="readiness-chip" id="readinessHermes" style="padding:4px 10px;border-radius:12px;font-size:0.72rem;background:var(--card-bg);border:1px solid var(--border-color)">Hermes · …</span>
+              <span class="readiness-chip" id="readinessCdp" style="padding:4px 10px;border-radius:12px;font-size:0.72rem;background:var(--card-bg);border:1px solid var(--border-color)">JD/CDP · …</span>
+              <span class="readiness-chip" id="readinessCapabilities" style="padding:4px 10px;border-radius:12px;font-size:0.72rem;background:var(--card-bg);border:1px solid var(--border-color)">Capabilities · …</span>
+              <span class="readiness-chip" id="readinessEvidence" style="padding:4px 10px;border-radius:12px;font-size:0.72rem;background:var(--card-bg);border:1px solid var(--border-color)">Evidence · …</span>
             </div>
 
             <div class="session-conversation" id="sessionConversation">
-              <!-- Messages rendered here by AgentSession module -->
-              <div class="session-placeholder">
+              <!-- Messages rendered here by the canonical Situation Chat -->
+              <div class="session-placeholder" id="sessionPlaceholder">
                 <div class="session-placeholder-icon">🤖</div>
-                <p>Agent Session 是您与 HermesAgent 协作的工作视图。</p>
-                <p class="muted" style="margin-top:8px">完整功能需要 HermesAgent Runtime 集成 (Phase 3)。当前展示 UI boundary 和 event contract。</p>
+                <p>向 Agent 提问，获取基于真实京东数据的经营分析。</p>
               </div>
             </div>
 
-            <!-- Observable Event Slots (defined but not populated in Phase 2) -->
+            <!-- Observable Event Slots (populated from real execution) -->
             <div class="session-activity-slots" id="sessionActivitySlots">
-              <h3 class="session-activity-title">Agent Activity (execution events)</h3>
-              <div class="activity-slot" data-slot="execution.started">
-                <span class="activity-slot-label">execution.started</span>
-                <span class="activity-slot-status pending">— pending</span>
-              </div>
-              <div class="activity-slot" data-slot="acquisition.started">
-                <span class="activity-slot-label">acquisition.started</span>
-                <span class="activity-slot-status pending">— pending</span>
+              <h3 class="session-activity-title">Agent Activity</h3>
+              <div class="activity-slot" data-slot="capability.selected">
+                <span class="activity-slot-label">capability.selected</span>
+                <span class="activity-slot-status pending">—</span>
               </div>
               <div class="activity-slot" data-slot="evidence.created">
                 <span class="activity-slot-label">evidence.created</span>
-                <span class="activity-slot-status pending">— pending</span>
+                <span class="activity-slot-status pending">—</span>
               </div>
-              <div class="activity-slot" data-slot="acquisition.completed">
-                <span class="activity-slot-label">acquisition.completed</span>
-                <span class="activity-slot-status pending">— pending</span>
-              </div>
-              <div class="activity-slot" data-slot="execution.completed">
-                <span class="activity-slot-label">execution.completed</span>
-                <span class="activity-slot-status pending">— pending</span>
+              <div class="activity-slot" data-slot="response.ready">
+                <span class="activity-slot-label">response.ready</span>
+                <span class="activity-slot-status pending">—</span>
               </div>
             </div>
 
             <div class="session-input-row">
-              <input id="agentSessionInput" class="input session-input-main" placeholder="Type a question for HermesAgent... (Phase 3)" disabled />
-              <button id="agentSessionSendBtn" class="btn btn-primary session-send-btn" disabled>➤</button>
+              <input id="agentSessionInput" class="input session-input-main" placeholder="分析一下最近的店铺流量情况，有什么值得关注的变化？" />
+              <button id="agentSessionSendBtn" class="btn btn-primary session-send-btn">➤</button>
             </div>
           </div>
         </div>

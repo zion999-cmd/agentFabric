@@ -8,6 +8,7 @@
 
 import { loadEvidence } from '#app/connectors/evidence/store.js';
 import { mockJdPayload, type MockJdPayload } from '#app/connectors/jd/acquisition/mock.js';
+import { acquireJdData, type AcquireResult } from '#app/connectors/jd/acquisition/index.js';
 import type { AcquireFunction } from '#app/connectors/binding/executor.js';
 
 /** Map endpoint names to evidence data types. */
@@ -51,6 +52,62 @@ export const createHistoricalAcquire = (): AcquireFunction => {
         const key = dataType as keyof MockJdPayload;
         if (key in mock && mock[key] !== undefined) {
           data[endpoint] = mock[key] as unknown;
+        }
+      }
+    }
+
+    return data;
+  };
+};
+
+/**
+ * Create a local-first → live-on-miss acquire function.
+ * P0009 correction: operational capability execution consumes already-collected
+ * local Evidence first; it only triggers real JD CDP acquisition for endpoints
+ * whose local evidence is missing for the target date.
+ *
+ * Priority per endpoint:
+ *   1. Evidence store (real collected data)
+ *   2. Live CDP acquisition (single-date, only for the missing endpoints)
+ *
+ * Same return shape as the live JD acquire → Record<endpoint, payload>.
+ * `liveAcquire` is injectable for tests (defaults to the real acquireJdData).
+ */
+export const createLocalFirstLiveAcquire = (
+  liveAcquire: (opts: Parameters<typeof acquireJdData>[0]) => Promise<AcquireResult> = acquireJdData,
+): AcquireFunction => {
+  return async (shopId, endpoints, options) => {
+    const date = options?.date ?? new Date().toISOString().slice(0, 10);
+    const data: Record<string, unknown> = {};
+    const missing: string[] = [];
+
+    // Pass 1 — local evidence store (real collected data).
+    for (const endpoint of endpoints) {
+      const dataType = endpointToDataType(endpoint);
+      // The JD connector persists only its core data types (summary/trend/productTop).
+      // Endpoints that map to any other data type are never resolvable from the
+      // store — skip them so they don't re-trigger live CDP on every call.
+      if (dataType !== 'summary' && dataType !== 'trend' && dataType !== 'productTop') {
+        continue;
+      }
+      const loaded = loadEvidence('jd', date, dataType);
+      if (loaded) {
+        data[endpoint] = loaded.data;
+      } else {
+        missing.push(endpoint);
+      }
+    }
+
+    // Pass 2 — live CDP only for missing endpoints (single-date acquisition).
+    if (missing.length > 0) {
+      const live = await liveAcquire({ shopId, mock: false, fromDate: date, toDate: date });
+      if (live.success && live.rawPayload) {
+        const raw = live.rawPayload as Record<string, unknown>;
+        for (const endpoint of missing) {
+          const dataType = endpointToDataType(endpoint);
+          if (dataType in raw) {
+            data[endpoint] = raw[dataType];
+          }
         }
       }
     }

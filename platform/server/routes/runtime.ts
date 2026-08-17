@@ -12,7 +12,9 @@ import { fail, ok } from '../envelope.js';
 import { createRuntimeKernel, createEmptyBlueprint } from '#app/runtime/kernel/index.js';
 import type { RuntimeKernel } from '#app/runtime/kernel/index.js';
 import { loadBlueprint } from '#app/connectors/binding/loader.js';
-import { acquireJdMultiPage } from '#app/connectors/jd/acquisition/cdp-client.js';
+import type { EnterpriseSignal } from '#shared/schemas/signal.js';
+import { acquireJdMultiPage, isCdpAvailable } from '#app/connectors/jd/acquisition/cdp-client.js';
+import { createLocalFirstLiveAcquire } from '#app/connectors/jd/historical-acquire.js';
 import { getDataPages } from '#app/connectors/jd/blueprint.js';
 import { saveEvidence } from '#app/connectors/evidence/store.js';
 import { parseJdPayload } from '#app/connectors/jd/parsers/index.js';
@@ -38,6 +40,12 @@ const ReplayRequestSchema = z.object({
   to: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'to must be YYYY-MM-DD'),
 });
 
+const FabricExecuteRequestSchema = z.object({
+  capability: z.string().min(1),
+  shopId: z.string().min(1).default('jd_shop_001'),
+  date: z.string().optional(),
+});
+
 // ---- Kernel Lazy Initialization ----
 
 let _kernel: RuntimeKernel | null = null;
@@ -55,9 +63,56 @@ const getKernel = (db: Db): RuntimeKernel => {
   return _kernel;
 };
 
-/** Reset the kernel singleton (for testing). */
+// Fabric execution boundary uses a local-first kernel: consume collected
+// Evidence first, live CDP only for missing dates/endpoints (P0009 correction).
+// The default `getKernel` (CDP acquire) stays for collect/discover/chat.
+let _fabricKernel: RuntimeKernel | null = null;
+
+const getFabricKernel = (db: Db): RuntimeKernel => {
+  if (_fabricKernel) return _fabricKernel;
+  let blueprint;
+  try {
+    blueprint = loadBlueprint('jd');
+  } catch {
+    blueprint = createEmptyBlueprint('jd');
+  }
+  _fabricKernel = createRuntimeKernel(db, blueprint, createLocalFirstLiveAcquire());
+  return _fabricKernel;
+};
+
+/** Reset the kernel singletons (for testing). */
 export const resetKernel = (): void => {
   _kernel = null;
+  _fabricKernel = null;
+};
+
+// ---- Agent-facing Fabric Execution Return Contract ----
+
+/** One projected signal for the Hermes-facing return contract. */
+export interface AgentSignalProjection {
+  name: string;
+  value: number;
+  unit: string;
+  direction: string;
+  metrics: EnterpriseSignal['metrics'];
+  observedAt: string;
+}
+
+/**
+ * Project Runtime EnterpriseSignals into the Agent-facing contract.
+ * Keeps the business values (name/value/unit/direction + metric bundle) Hermes
+ * needs to reason; drops internal fields (raw_payload, trace, lifecycle,
+ * collector_trace_id, entity internals).
+ */
+export const projectAgentSignals = (signals: EnterpriseSignal[]): AgentSignalProjection[] => {
+  return signals.map((s) => ({
+    name: s.signal_name,
+    value: s.signal_value,
+    unit: s.signal_unit,
+    direction: s.signal_direction,
+    metrics: s.metrics,
+    observedAt: s.observed_at,
+  }));
 };
 
 // ---- Router ----
@@ -109,6 +164,55 @@ export const runtimeRouter = (db: Db): Router => {
       });
     } catch (err) {
       fail(res, 500, err instanceof Error ? err.message : 'Runtime execution failed');
+    }
+  });
+
+  // POST /api/fabric/execute — Fabric execution boundary for Hermes (P0009).
+  // Hermes (via an MCP tool) calls this to execute a capability → live JD CDP
+  // → Evidence. Returns the Execution Return Contract. Live only — no mock
+  // fallback (P0009: no fake success).
+  router.post('/fabric/execute', async (req, res) => {
+    const parsed = FabricExecuteRequestSchema.safeParse(req.body ?? {});
+    if (!parsed.success) {
+      fail(res, 400, `Invalid request: ${parsed.error.message}`);
+      return;
+    }
+
+    try {
+      const { capability, shopId, date } = parsed.data;
+      const kernel = getFabricKernel(db);
+      const result = await kernel.execute({
+        shopId,
+        mock: false,
+        capabilities: [capability],
+        ...(date ? { date } : {}),
+      });
+
+      ok(res, {
+        success: result.success,
+        capability,
+        status: result.success ? 'completed' : 'failed',
+        date: result.date,
+        acquisitionMethod: 'cdp',
+        // Agent-facing business result: the actual signals + metrics (not just count).
+        signals: projectAgentSignals(result.signals),
+        evidence: result.evidence,
+        errors: result.errors,
+      });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Execution failed';
+      // Distinguish CDP-unavailable from generic failure (honest readiness).
+      if (msg.includes('CDP') || msg.includes('Chrome')) {
+        ok(res, {
+          success: false,
+          capability: parsed.data.capability,
+          status: 'cdp_unavailable',
+          error: msg,
+          evidence: [],
+        });
+        return;
+      }
+      fail(res, 500, msg);
     }
   });
 
@@ -208,6 +312,36 @@ export const runtimeRouter = (db: Db): Router => {
       });
     } catch (err) {
       fail(res, 500, err instanceof Error ? err.message : 'Failed to load execution detail');
+    }
+  });
+
+  // GET /api/readiness — product runtime readiness (P0009). Honest: reflects
+  // real acquisition prerequisites (JD/CDP), not static config presence.
+  router.get('/readiness', async (_req, res) => {
+    try {
+      const [cdpAvailable, capabilityCount, evidenceCount] = await Promise.all([
+        isCdpAvailable(9222).catch(() => false),
+        (async () => {
+          try {
+            const p = resolve(process.cwd(), 'generated', 'capability-contract.json');
+            if (!existsSync(p)) return 0;
+            const c = JSON.parse(readFileSync(p, 'utf-8'));
+            return (c.capabilities ?? []).length;
+          } catch { return 0; }
+        })(),
+        (async () => {
+          try { return listEvidence({}).length; } catch { return 0; }
+        })(),
+      ]);
+
+      ok(res, {
+        workspace: 'ready',
+        capabilities: capabilityCount,
+        jd_cdp: cdpAvailable ? 'ready' : 'unavailable',
+        evidence: evidenceCount,
+      });
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Readiness check failed');
     }
   });
 

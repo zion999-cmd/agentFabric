@@ -1,5 +1,31 @@
 # 技术决策记录 (ADR)
 
+## ADR-034: P0009.1 Situation Producer — 确定性检测 + 无 LLM + 幂等去重
+
+- **日期**: 2026-08-16
+- **状态**: Accepted
+- **来源**: [P0009.1-situation-producer-odays-work.md](../proposals/P0009.1-situation-producer-odays-work.md)
+
+**决策**（补齐 P0007 缺失的 canonical Situation Producer，代码审计确认此前"从 Signals/Rankings 生成 Situation"的逻辑不存在）:
+
+1. **Producer 是确定性运行时能力，不是 AI 分析器**。描述用模板生成（`{店铺} {指标} 较昨日下降 47.5%，从 434 变为 228`），阈值判断（20% 相对变化），全程 NO LLM / NO Hermes / NO CDP / NO acquisition。职责严格单向 `detect → construct → persist`。
+
+2. **输入只消费已完成的 runtime output**。store-level `daily_summary` signals（`SignalFacade.list(db, 'product', shopId)`，注意 enterprise signal 的 `entity_type` 恒为 'product'，`entity_id` 才是 shop）+ `RankingFacade.load(db, 'operator_mode')`。不重新采集、不重新计算业务指标（uv/gmv/cvr 来自已存 metrics，Producer 只做跨天比较得出 direction）。
+
+3. **三类确定性检测**。A meaningful_change（逐指标 20% 阈值）；B ranking_attention（top-K + 领先 gap ≥0.1）；C cross_signal（uv/cvr 反向移动）。detection kind 存入 `tags`，`SituationSchema.type` 只承载粗粒度业务类别（decline/cross→anomaly_investigation，rise/ranking→performance_analysis）。
+
+4. **幂等去重 = 确定性 situationId + INSERT OR IGNORE**。`sit_<sha256(kind+entityType+entityId+subject+window).slice(20)>`，situationId 不包含 metric 值或店名，因此重启重跑 `created=0 / skipped=N`，绝不重复（满足"重启 10 次不出现 10 条"）。
+
+5. **复用 P0007 持久化/lifecycle，不重构**。写 `situations` 表 + `SituationSchema` 校验 + `lifecycle='open'`（后续 human intervention→partial、outcome→mature 走既有 P0007 route）。不改 `p0007.ts` route，不新增第二套 lifecycle。
+
+6. **诚实处理非差异化数据**。当前 67 商品 ranking 全部同分 0.4648（mock/import 数据未区分商品），ranking_attention 规则已实现但不触发——不制造 demo 数据填页面。store-level 的 gmv/orders/uv/cvr 下滑是真实 grounded 内容（2026-08-16 vs 08-15: uv 434→228 = -47.5% 等 4 条）。
+
+7. **latest-window only**（今日 vs 昨日）= "今日工作"语义；随日期推进自然累积历史 Situation。
+
+**文件**: `apps/ecommerce/runtime/situation/{rules,producer,index}.ts`（纯 rules 与 DB producer 分离便于测试），`tests/unit/situation/situation-producer.test.ts`（12 测试），startup wiring 在 `platform/server/index.ts` backfill 之后。
+
+---
+
 ## ADR-027: P0006.2 Real Data Runtime Replay — Evidence Store Parsing Fix
 
 - **日期**: 2026-08-09

@@ -1,5 +1,44 @@
 # 交接文档
 
+## 本次会话 (2026-08-16) — P0009.1 Situation Producer / 今日工作
+
+### 任务与定位
+
+补齐 P0007 缺失的 **canonical Situation Producer**。前序审计已确认：P0007 只有契约（SituationSchema）+ thin INSERT route + legacy-adapter（review→intervention）+ viewmodel（presentation），**不存在**"观察 Signals/Rankings → 生成 Situation"的 producer。P0009.1 把已跑通的 `Evidence → Signals → Rankings` 提升为真实可持久化的 Situation，使 Workspace「今日工作」第一次有真实业务内容。严格边界：deterministic、无 LLM、无 acquisition、复用 P0007、不重构。
+
+### 新增
+
+- `apps/ecommerce/runtime/situation/rules.ts` — 纯检测规则（无 DB/IO）：三类检测（meaningful_change / ranking_attention / cross_signal）、中文业务指标词表（gmv→成交金额 等）、模板描述、确定性 situationId（sha256 fingerprint）。export `detectSituations`（纯函数，输入 signals+rankings → `Situation[]`）。
+- `apps/ecommerce/runtime/situation/producer.ts` — `runSituationProducer(db, {shopId, shopName})`：`SignalFacade.list` 读 daily_summary → `RankingFacade.load` 读 rankings → `detectSituations` → `SituationSchema.safeParse` 校验 → `INSERT OR IGNORE`（幂等）。
+- `apps/ecommerce/runtime/situation/index.ts` — barrel。
+- `tests/unit/situation/situation-producer.test.ts` — 12 测试（decline/rise/阈值/少于2观测/cross_signal/ranking/确定性/持久化/幂等/无数据）。
+
+### 重构 / 接线
+
+- `platform/server/index.ts` — backfill 之后新增 `runSituationProducer`（`created`/`skipped` 日志）。startup 闭环确认：`backfill → signals → rankings → situations`。
+
+### 测试
+
+- 新增 12 测试全绿。全量 `npm test`: 561 passed / 2 failed（**均为 pre-existing**：`chat.contract.ts` CDP 5s 超时、`capability/coverage.test.ts` "58 ≤ 50" 断言漂移——与 P0009.1 无关）。
+- `npm run typecheck`: 我的新文件零错误；剩余错误均为 pre-existing（`cdp-client.ts` apiName 未用、`routes/runtime.ts` meta 形状、`tests/contract/learning-context.contract.ts` schema 形状）。
+
+### 验收（真实数据）
+
+- 真实 DB 生成 4 条 grounded Situation（entity=祁门红茶旗舰店，observed_at=2026-08-16）：成交金额 -67.9%（¥3384→¥1087）、订单量 -66.7%（21→7）、访客数 -47.5%（434→228）、转化率 -33.4%（4.6%→3.1%），type=anomaly_investigation，lifecycle=open。
+- 幂等：重跑 `created=0 / skipped=4`；服务重启 backfill `situations: 0 created / 4 deduped`。
+- `GET /api/situations` 返回 5 条（4 producer + 1 既有 manual `sit_e2e_jd_20260812`），Workspace「今日工作」经既有 `loadSituationFeed` 渲染。
+- 诚实发现：ranking_attention 规则已实现但不触发（67 商品 ranking 全同分 0.4648，数据未差异化），不制造 demo。
+
+### 数据污染与恢复（重要）
+
+单测初版误用 `openDb()`（真实 file DB）而非 `:memory:`，导致 `generateSignals` upsert 覆盖了真实 `jd_shop_001` 的 08-14/08-15 daily_summary，并写入 3 条 "测试店铺" Situation。已恢复：删除污染 Situation + 从 intact 的 `11855009` 行/evidence store 还原正确 metrics。测试已改为 `openDb(':memory:')` 隔离。**教训：所有 DB 单测必须 `:memory:`，勿碰真实 file DB。**
+
+### 建议下一步
+
+- P0009.1 已按边界完成，未 commit。下一步由用户定：a) 从 Workspace 浏览器做最终 Browser Acceptance；b) commit（需用户指示）；c) 若需 ranking_attention 触发真实内容，需先解决商品数据非差异化问题（属数据/采集，非 Producer）。
+
+---
+
 ## 本次会话 (2026-08-14) — P0008.6 Claudian Instruction Architecture Audit
 
 ### 任务与定位
