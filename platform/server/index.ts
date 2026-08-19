@@ -93,11 +93,18 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
     }
 
     let completed = 0;
+    let latestTopProducts: import('#app/connectors/jd/parsers/index.js').JdProductTopEntry[] = [];
     const missed: string[] = [];
     for (const date of dates) {
       const result = await kernel.execute({ shopId: 'jd_shop_001', mock: false, date });
-      if (result.success) completed++;
-      else missed.push(`${date}${result.errors.length > 0 ? ` (${result.errors[0]})` : ''}`);
+      if (result.success) {
+        completed++;
+        if (result.parsed?.top_products && result.parsed.top_products.length > 0) {
+          latestTopProducts = result.parsed.top_products;
+        }
+      } else {
+        missed.push(`${date}${result.errors.length > 0 ? ` (${result.errors[0]})` : ''}`);
+      }
     }
     // eslint-disable-next-line no-console
     console.log(
@@ -105,19 +112,18 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
         (missed.length > 0 ? ` · ${missed.length} missed: ${missed.join('; ')}` : ''),
     );
 
-    // Regenerate rankings from the backfilled signals (商品/经营观察 view).
-    // Fast path only — no AI summary (avoids the slow Hermes one-shot).
-    const { listProducts, listOrders } = await import('#platform/storage/product-repository.js');
-    const { SignalFacade } = await import('#app/analysis/metrics/facade.js');
+    // Regenerate rankings from the JD productTop (real per-SKU GMV).
+    // Ranking Data Consolidation: the stale agentCMS migration data is REMOVED from
+    // the canonical ranking input — productTop is now the only source. No JD data
+    // means no ranking (honest empty, no fabricated differences).
     const { RankingFacade } = await import('#app/analysis/decision/facade.js');
-    const products = listProducts(db);
-    const orders = listOrders(db);
-    if (products.length > 0) {
-      const { signals } = SignalFacade.compute({ products, orders }, { windowDays: [3, 7, 14] });
-      const rankings = RankingFacade.rankByProfile(signals, 'operator_mode', []);
+    const { generateProductTopSignals } = await import('#app/analysis/metrics/product-top-signals.js');
+    const productTopSignals = generateProductTopSignals(latestTopProducts);
+    if (productTopSignals.length > 0) {
+      const rankings = RankingFacade.rankByProfile(productTopSignals, 'operator_mode', []);
       RankingFacade.store(db, 'operator_mode', rankings);
       // eslint-disable-next-line no-console
-      console.log(`[backfill] rankings regenerated (${rankings.length} ranked / ${products.length} products)`);
+      console.log(`[backfill] rankings regenerated from JD productTop (${rankings.length} ranked / ${productTopSignals.length} signals)`);
     }
 
     // P0009.1: generate Situations from the completed Signals/Rankings.
