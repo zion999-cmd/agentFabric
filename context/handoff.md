@@ -1,5 +1,33 @@
 # 交接文档
 
+## 本次会话 (2026-08-20) — Consolidation Pass 2.1: Learning Context observations WIRE
+
+### 目标
+
+补全 ADR-035 canonical path 的「观察」层，让 Learning Context 从「一段描述」变成 grounded context（situation + observations + interventions + provenance）。
+
+### 做了什么
+
+- `learning-context-producer.ts` 新增 `buildObservations`：从 `SignalFacade.list`（当日 signals）+ `listEvidence`（当日 evidence）构建 `ObservationRef`（capability/provider/observedAt/signalIds/evidenceIds/metricsSnapshot）。不重新计算分析，不新增 schema。
+- `buildLearningContext` 接收 observations，汇总顶层 `evidenceIds/signalIds/summary`。
+- reclassification 追加进 `professional-capability-surface-audit.md` 附 2（4 项判定：Explainability/Trust=WIRE、operator_memories=REMOVE CANDIDATE、observations=WIRE、agentActivities=REMOVE CANDIDATE、Evaluation=MISSING）。
+
+### 验收
+
+真实 Situation（访客数下降 47.5% @ 08-16）→ intervention → learning_contexts：
+
+```
+observations: 1
+  capability=daily_summary  provider={jd,cdp}  observedAt=2026-08-16
+  signalIds=6  evidenceIds=3  metricsSnapshot={gmv,orders,uv,cvr}
+```
+
+### 下一步（待审计，不修）
+
+**Ranking Data Lineage Audit**：67 商品全 0.4648，怀疑是旧 mock/import 遗留，非最新 CDP 真实商品数据。纵向追 product evidence → signals → SignalFacade → ranking 输入 → normalization/weights → score/confidence。
+
+---
+
 ## 本次会话 (2026-08-20) — Consolidation Pass 2: Situation → Professional Action
 
 ### 目标与定位

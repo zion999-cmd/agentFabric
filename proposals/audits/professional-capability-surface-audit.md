@@ -147,3 +147,18 @@
 | Review/Feedback/context_memories 空表 + extractMemories 从不被调 | ⚠️ **REMOVE CANDIDATE**（暂不删除，禁止新功能依赖）——Memory/Growth 归 Hermes，Fabric 不再做「自己学习」 |
 
 **尚未收口**（下一步重新审视本审计的剩余断腿）：Explainability/Trust 仍 orphan（business_traces 无 UI consumer）、operator_memories(12) 仍无 UI、Evaluation 仍缺失、Learning Context 的 observations/agentActivities 仍 schema-only（未填充）。
+
+---
+
+## 附 2：post-Pass-2 Reclassification（2026-08-20）
+
+对剩余断腿重新定 ownership（不是让 audit 变绿，是决定 REUSE / WIRE / REPAIR / REMOVE）：
+
+| 项 | 判定 | 依据 |
+|---|---|---|
+| Explainability / Trust（business_traces） | **WIRE**（orphan consumer） | producer+persistence+API 全真；keyed 到 ranking 非 situation；但 trust_score=0 因 ranking confidence=0（数据非差异化）→ 接 consumer 前须先修 ranking 数据 |
+| Pattern Engine `explainPatterns` | **REUSE**（已接 /api/explain） | 确定性归因引擎 |
+| `operator_memories` | **REMOVE CANDIDATE** | 12 条=2 类确定性统计模式（traffic_driven_drop 56% 恢复 / volume_driven_spike 90%），非「人类反馈 memory」；冗余于 /api/explain 的 recovery 字段；两 consumer 皆 orphan；命名与 ADR-035 冲突 |
+| Learning Context `observations` | **WIRE**（低优先） | Fabric-owned 的证据链，从 signals/evidence 填 |
+| Learning Context `agentActivities` | **REMOVE CANDIDATE** | Hermes-owned，Fabric 不该生产；确定性「Agent 怎么理解」不映射 |
+| Evaluation | **MISSING**（不建）+ 休眠列 **REMOVE CANDIDATE** | 无模块，仅死字段 |

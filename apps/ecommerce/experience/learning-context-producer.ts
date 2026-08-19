@@ -10,10 +10,12 @@
 //   Fabric does NOT produce its own Memory.
 
 import type { Database as Db } from 'better-sqlite3';
-import type { HumanIntervention, LearningContext, Situation } from '#shared/schemas/learning-context.js';
+import type { HumanIntervention, LearningContext, ObservationRef, Situation } from '#shared/schemas/learning-context.js';
 import { LearningContextSchema } from '#shared/schemas/learning-context.js';
 import { uuid } from '#shared/utils/crypto.js';
 import { nowIso } from '#shared/utils/time.js';
+import { SignalFacade } from '#app/analysis/metrics/facade.js';
+import { listEvidence } from '#app/connectors/evidence/store.js';
 
 /** Map a `situations` table row to the canonical Situation shape. */
 const rowToSituation = (row: Record<string, unknown>): Situation => ({
@@ -42,8 +44,51 @@ export const loadSituation = (db: Db, situationId: string): Situation | null => 
   return rowToSituation(row);
 };
 
-/** Build a fresh LearningContext body from a situation + its interventions. */
-const buildLearningContext = (situation: Situation, interventions: HumanIntervention[]): LearningContext => {
+/** Map the evidence store's acquisition method to the ObservationRef acquisition enum. */
+const deriveAcquisition = (methods: string[]): ObservationRef['provider']['acquisition'] => {
+  if (methods.includes('cdp')) return 'cdp';
+  if (methods.includes('import-agentcms')) return 'csv_export';
+  return 'manual'; // mock / unknown → manual (synthetic or unknown provenance)
+};
+
+/**
+ * Build the situation's observations — the verifiable evidence/signals it is based on.
+ * Does NOT recompute analysis: it only references existing signals + evidence.
+ */
+const buildObservations = (db: Db, situation: Situation): ObservationRef[] => {
+  const date = situation.temporal.observedAt.slice(0, 10);
+
+  // Enterprise signals are stored with entity_type 'product' (entity_id = the shop id).
+  const signals = SignalFacade.list(db, 'product', situation.entity.id)
+    .filter((s) => s.observed_at.slice(0, 10) === date);
+  const evidence = listEvidence({ source: situation.entity.platform ?? 'jd', fromDate: date, toDate: date, limit: 100 });
+
+  if (signals.length === 0 && evidence.length === 0) return [];
+
+  const dailySummary = signals.find((s) => s.signal_name === 'daily_summary');
+  const metricsSnapshot = (dailySummary as unknown as { metrics?: Record<string, number> })?.metrics ?? {};
+
+  return [{
+    observationId: uuid(),
+    capability: 'daily_summary',
+    provider: {
+      platform: situation.entity.platform ?? 'jd',
+      acquisition: deriveAcquisition(evidence.map((e) => e.metadata.acquisition_method)),
+    },
+    observedAt: situation.temporal.observedAt,
+    summary: situation.description,
+    evidenceIds: evidence.map((e) => e.metadata.content_hash),
+    signalIds: signals.map((s) => s.signal_id),
+    metricsSnapshot,
+  }];
+};
+
+/** Build a fresh LearningContext body from a situation + its observations + interventions. */
+const buildLearningContext = (
+  situation: Situation,
+  observations: ObservationRef[],
+  interventions: HumanIntervention[],
+): LearningContext => {
   const now = nowIso();
   return {
     contextId: uuid(),
@@ -51,14 +96,20 @@ const buildLearningContext = (situation: Situation, interventions: HumanInterven
     lifecycle: 'partial',
     createdAt: now,
     updatedAt: now,
-    observations: [],
-    evidenceIds: [],
-    signalIds: [],
+    observations,
+    evidenceIds: [...new Set(observations.flatMap((o) => o.evidenceIds))],
+    signalIds: [...new Set(observations.flatMap((o) => o.signalIds))],
     agentActivities: [],
     humanInterventions: interventions,
     actions: [],
     outcomes: [],
-    summary: { capabilitiesUsed: [], agentRuntimes: [], humanActors: [], totalEvidence: 0, totalSignals: 0 },
+    summary: {
+      capabilitiesUsed: [...new Set(observations.map((o) => o.capability))],
+      agentRuntimes: [],
+      humanActors: [...new Set(interventions.map((i) => i.actor.id))],
+      totalEvidence: new Set(observations.flatMap((o) => o.evidenceIds)).size,
+      totalSignals: new Set(observations.flatMap((o) => o.signalIds)).size,
+    },
   };
 };
 
@@ -83,8 +134,10 @@ export const recordInterventionInLearningContext = (
     db.prepare('UPDATE learning_contexts SET body = ?, lifecycle = ?, updated_at = ? WHERE situation_id = ?')
       .run(JSON.stringify(next), 'partial', now, situation.situationId);
   } else {
-    // First intervention — create the Learning Context for this situation.
-    const ctx = buildLearningContext(situation, [intervention]);
+    // First intervention — create the Learning Context for this situation,
+    // including its observations (the verifiable evidence/signals it is based on).
+    const observations = buildObservations(db, situation);
+    const ctx = buildLearningContext(situation, observations, [intervention]);
     const validated = LearningContextSchema.parse(ctx);
     db.prepare(
       `INSERT INTO learning_contexts (context_id, situation_id, lifecycle, created_at, updated_at, body)
