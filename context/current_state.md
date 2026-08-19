@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-p0009.1 | **Hermes**: v0.20.0 | **测试**: 561/563 passed (2 pre-existing failures) | **真实 CDP**: ✅ 已验证 (2026-08-12: GMV=¥337.90) | **发现**: 70 APIs, 10 Business Contexts | **JD Evidence**: 594 files (Jan-Aug 2026)
+|**版本**: v0.2-consolidation-pass1 | **Hermes**: v0.20.0 | **测试**: 566/568 passed (2 pre-existing failures) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **Consolidation Pass 1 — Self-Sustaining Data Runtime** — 三层收债：① Pass 1 诚实完成（backfill 不再把「循环跑完」当「采到数据」，CDP miss 诚实报 N/M + 原因）；② Pass 1.1 诚实 readiness（`jd_cdp` 三态 ready/auth_required/unavailable，`isJdPageAvailable` 区分 Chrome reachable vs JD page）+ **session lifecycle ownership**（`session-lifecycle.ts` 的 `ensureChromeReady`/`ensureJdPageOpen`/`ensureJdSession`，startup backfill 前自动 ensure，不自动登录）；③ Pass 1.2 收口 **direct HTTP hypothesis REJECTED**（JCap 反爬：user-mnp/user-mup/uuid 每请求动态 token，secret 在 JD 压缩 JS，D0002 探索永远不可能沉淀 direct executable knowledge）→ **JD canonical execution = browser-mediated CDP**，**human boundary = 正常 JD 登录**。Cold-start acceptance：`ensureJdSession` → CDP 采集 08-17/08-18 → 6 个新 Evidence → +31 signals（daily_summary 08-18 gmv ¥4978.54）→ rankings → **2 条新 Situation**（订单 +25%、成交 +30.2%）。审计存档 `proposals/audits/jd-acquisition-path-recovery-audit.md`（含 JCap 证据）。
 
 - [x] **P0009.1 Situation Producer / 今日工作** — 补齐 P0007 缺失的 canonical Situation Producer。`runtime/situation/{rules,producer,index}.ts`：确定性检测（meaningful_change 20% 阈值 / ranking_attention top-K+gap / cross_signal uv·cvr 反向），模板描述（无 LLM），确定性 situationId（sha256 fingerprint）+ `INSERT OR IGNORE` 幂等去重。消费 `SignalFacade.list`（store daily_summary）+ `RankingFacade.load`，复用 P0007 `situations` 表 + SituationSchema + lifecycle='open'，不重构 p0007 route。startup 接线 `index.ts` backfill 之后，闭环 `backfill → signals → rankings → situations`。真实 DB 生成 4 条 grounded Situation（祁门红茶旗舰店 08-16：访客 -47.5%、成交 -67.9%、订单 -66.7%、转化 -33.4%），幂等重跑 `0 created / 4 deduped`。12 新测试全绿。ADR-034。**未 commit**。
 

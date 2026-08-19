@@ -1,5 +1,58 @@
 # 交接文档
 
+## 本次会话 (2026-08-19) — Consolidation Pass 1: Self-Sustaining Data Runtime
+
+### 目标与定位
+
+两份 Audit 钉死事实后，停止 fork feature，开始「还债」。Pass 1 只修数据生命线：让 Fabric 离开开发者后自己能持续获得世界状态；身份认证留给人。三小刀：
+
+### Pass 1 — 诚实完成（no fake success）
+
+根因：CDP miss 被 5 级静默吞掉，`executePlan` 把空采集报 success → backfill 报「7/7 completed」但实际零产出。修复：
+- `historical-acquire.ts` `createLocalFirstLiveAcquire`：CDP 失败 throw（带原因），不再静默空返回。
+- `binding/executor.ts` `executePlan`：`success = errors空 && acquired非空`；「No APIs」= false。
+- `index.ts` `backfillRecentData`：收集失败日 + 原因，如实输出 `N/M · missed(...)`。
+
+### Pass 1.1 — 诚实 readiness + session lifecycle ownership
+
+- `cdp-client.ts` 新增 `isJdPageAvailable`（区分 Chrome reachable vs sz.jd.com page open）。
+- `routes/runtime.ts` `/api/readiness`：`jd_cdp` 三态 ready/auth_required/unavailable + `jd_page`。
+- `workspace/app.js` readiness chip：`auth_required` → 「需要登录」。
+- `session-lifecycle.ts`（新）：`ensureChromeReady`（Chrome 不在就 launch + 持久 profile `~/.agentfabric/chrome-jd-profile`）、`ensureJdPageOpen`（无 sz.jd.com tab 就开 商智 首页 via CDP `/json/new`）、`ensureJdSession`。startup backfill 前自动 ensure。
+
+### Pass 1.2 — direct HTTP hypothesis REJECTED（JCap）
+
+实验：真实登录 session 直接 `fetch summary.ajax` → `-402 不安全的请求`（无 CSRF 头）→ `-407`（伪造头）。拦截 SPA 真实请求：`user-mnp`(32hex)/`user-mup`(ts)/`uuid` **每请求动态生成**，secret 在 JD 压缩 JS，从不在网络流量。结论：**direct WebAPI 对 JD 不可行，JD canonical execution = browser-mediated CDP**，不复现/不研究 JCap。曾尝试的 `direct-executor.ts` 已删除。
+
+### Cold-start acceptance（真实验收）
+
+```
+[backfill] jd session: chrome=ready page=available
+[CDP] ... Will fetch 1 dates (08-17~08-17) → Captured 8 API responses
+[CDP] ... (08-18) → Captured 8 API responses
+[backfill] 7/7 days completed (08-12~08-18)          ← 真 7/7
+[backfill] rankings regenerated (67)
+[backfill] situations: 2 created / 0 deduped          ← 真新 Situation
+```
+
+DB 实证：6 个新 Evidence（17/18_*）、signals 5537→5568（daily_summary 08-18 gmv ¥4978.54/orders 30/uv 480）、2 条新 Situation（订单 +25%、成交 +30.2%）。
+
+### 关键边界（本次确立）
+
+- **JD canonical execution = browser-mediated CDP**（非 direct HTTP，JCap 封死）。
+- **human boundary = 正常 JD 登录**（session lifecycle 只 ensure Chrome/page，不登录、不绕过）。
+- 不做 Browser Manager / 新 acquisition service / scheduler / 自动登录。
+
+### 测试
+
+566 passed / 2 pre-existing failures（`chat.contract` 真 CDP 需商智页、`coverage` 断言漂移），typecheck 干净。新增 `session-lifecycle.test.ts`(4)。
+
+### 建议下一步
+
+Pass 2: Situation → Professional Action（收编 Explainability/Hermes/Intervention/Pattern 等已有资产）。当前未 commit（待指示）。
+
+---
+
 ## 本次会话 (2026-08-16) — P0009.1 Situation Producer / 今日工作
 
 ### 任务与定位

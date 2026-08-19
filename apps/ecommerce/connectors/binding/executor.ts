@@ -88,7 +88,7 @@ export const executePlan = async (
 
     if (endpointNames.length === 0) {
       return {
-        success: true,
+        success: false,
         platform: plan.platform,
         shopId,
         date: executionDate,
@@ -120,7 +120,9 @@ export const executePlan = async (
     }
 
     return {
-      success: errors.length === 0,
+      // Honest completion: an execution with no acquired data is not a success
+      // (Consolidation Pass 1 — "loop ran" ≠ "data acquired").
+      success: errors.length === 0 && Object.keys(acquired).length > 0,
       platform: plan.platform,
       shopId,
       date: executionDate,

@@ -23,9 +23,10 @@ describe('Binding Layer Contract', () => {
     const validated = CapabilityExecutionPlanSchema.parse(plan);
     expect(validated.platform).toBe('jd');
 
-    // Execute with mock acquire
+    // Execute with mock acquire — keyed by the plan's endpoint name ('summary'),
+    // not the legacy 'summary.ajax' suffix.
     const mockAcquire: AcquireFunction = vi.fn().mockResolvedValue({
-      'summary.ajax': { gmv: 5000 },
+      summary: { gmv: 5000 },
     });
     const result = await executePlan(plan, mockAcquire, {
       shopId: 'jd_shop_001',

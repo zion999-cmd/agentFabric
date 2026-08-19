@@ -23,7 +23,9 @@ const makeLive = (payload: Record<string, unknown>) =>
 
 describe('createLocalFirstLiveAcquire', () => {
   afterAll(() => {
-    rmSync(resolve(EVIDENCE_JD_DIR, '2099'), { recursive: true, force: true });
+    // Remove only this suite's own month (2099-01-*), not the whole 2099 year —
+    // the local-first-reuse suite shares the same year (2099-03-*) on disk.
+    rmSync(resolve(EVIDENCE_JD_DIR, '2099', '01'), { recursive: true, force: true });
   });
 
   it('uses local evidence and does NOT trigger live CDP when evidence exists', async () => {
@@ -63,5 +65,18 @@ describe('createLocalFirstLiveAcquire', () => {
     expect(live).toHaveBeenCalledTimes(1);
     expect(data['trend.ajax']).toEqual({ hourly: [1, 2] }); // local
     expect(data['summary.ajax']).toEqual({ gmv: 999 }); // live
+  });
+
+  it('throws when live CDP fails for missing evidence (honest completion)', async () => {
+    const live = vi.fn(async (): Promise<AcquireResult> => ({
+      success: false,
+      method: 'cdp',
+      error: 'No 京东商智 page found in Chrome',
+    }));
+    const acquire = createLocalFirstLiveAcquire(live);
+
+    await expect(
+      acquire('jd_shop_001', ['summary.ajax'], { date: DATE_MISS }),
+    ).rejects.toThrow('No 京东商智 page found in Chrome');
   });
 });

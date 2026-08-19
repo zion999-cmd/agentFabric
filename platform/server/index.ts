@@ -74,6 +74,16 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
     const blueprint = loadBlueprint('jd');
     const kernel = createRuntimeKernel(db, blueprint, createLocalFirstLiveAcquire());
 
+    // Prepare the JD browser session (Chrome + 商智 page) — the acquisition
+    // dependency. Idempotent; login itself stays a human boundary (Pass 1.1).
+    const { ensureJdSession } = await import('#app/connectors/jd/acquisition/session-lifecycle.js');
+    const session = await ensureJdSession();
+    // eslint-disable-next-line no-console
+    console.log(
+      `[backfill] jd session: chrome=${session.chrome} page=${session.jdPage}` +
+        (session.ready ? '' : ' (acquisition will fail honestly if not logged in)'),
+    );
+
     const to = new Date(Date.now() - 86400_000); // yesterday (today is not final yet)
     const from = new Date(to.getTime() - (days - 1) * 86400_000);
     const dates: string[] = [];
@@ -82,12 +92,17 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
     }
 
     let completed = 0;
+    const missed: string[] = [];
     for (const date of dates) {
       const result = await kernel.execute({ shopId: 'jd_shop_001', mock: false, date });
       if (result.success) completed++;
+      else missed.push(`${date}${result.errors.length > 0 ? ` (${result.errors[0]})` : ''}`);
     }
     // eslint-disable-next-line no-console
-    console.log(`[backfill] ${completed}/${dates.length} days completed (${dates[0]} ~ ${dates[dates.length - 1]})`);
+    console.log(
+      `[backfill] ${completed}/${dates.length} days completed (${dates[0]} ~ ${dates[dates.length - 1]})` +
+        (missed.length > 0 ? ` · ${missed.length} missed: ${missed.join('; ')}` : ''),
+    );
 
     // Regenerate rankings from the backfilled signals (商品/经营观察 view).
     // Fast path only — no AI summary (avoids the slow Hermes one-shot).

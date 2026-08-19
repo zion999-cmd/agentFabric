@@ -122,6 +122,47 @@ const getWsUrl = async (port: number): Promise<string | null> => {
   }
 };
 
+/**
+ * Check whether a 京东商智 (sz.jd.com) page is open in Chrome — the real
+ * data-source readiness signal. `isCdpAvailable` only confirms the Chrome
+ * remote-debugging port is reachable; it does NOT mean a JD page is open (and
+ * therefore that the operator is logged in).
+ *
+ * Read-only probe: connects to Chrome, lists pages, then closes. It never
+ * launches Chrome, opens a tab, or acquires data.
+ */
+export const isJdPageAvailable = async (port = 9222): Promise<boolean> => {
+  if (!(await isCdpAvailable(port))) return false;
+
+  let playwright: PlaywrightCore;
+  try {
+    playwright = (await import(String('playwright-core'))) as unknown as PlaywrightCore;
+  } catch {
+    return false;
+  }
+
+  const wsUrl = await getWsUrl(port);
+  if (!wsUrl) return false;
+
+  let browser: CdpBrowser;
+  try {
+    browser = await playwright.chromium.connectOverCDP(wsUrl);
+  } catch {
+    return false;
+  }
+
+  try {
+    for (const ctx of browser.contexts()) {
+      for (const p of ctx.pages()) {
+        if (p.url().includes('sz.jd.com')) return true;
+      }
+    }
+    return false;
+  } finally {
+    await browser.close().catch(() => {});
+  }
+};
+
 /** Build date list between fromDate and toDate (inclusive). */
 const buildDateRange = (fromDate: string, toDate: string): string[] => {
   const dates: string[] = [];

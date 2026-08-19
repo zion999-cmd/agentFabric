@@ -153,7 +153,7 @@ describe('executeRuntimePipeline', () => {
     }
   });
 
-  test('handles empty acquired data gracefully', async () => {
+  test('returns success: false when acquired data is empty (honest completion)', async () => {
     const emptyAcquire: AcquireFunction = async () => ({});
 
     const result = await executeRuntimePipeline(
@@ -163,7 +163,7 @@ describe('executeRuntimePipeline', () => {
       { shopId: 'jd_shop_001', date: '2026-07-04', mock: true },
     );
 
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
     // No data to parse → parsed is null
     expect(result.parsed).toBeNull();
     // No signals generated (no data)

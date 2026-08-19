@@ -64,7 +64,7 @@ describe('executePlan', () => {
     expect(result.acquired['trend.ajax']).toBeDefined();
   });
 
-  test('returns success: true with warning when no APIs to call', async () => {
+  test('returns success: false when no APIs to call', async () => {
     const plan: CapabilityExecutionPlan = {
       ...makePlan(),
       apis_to_call: [],
@@ -74,7 +74,7 @@ describe('executePlan', () => {
       shopId: 'jd_shop_001',
     });
 
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
     expect(result.errors.length).toBeGreaterThan(0);
     expect(result.errors[0]).toContain('No APIs');
   });

@@ -1054,7 +1054,7 @@ function renderReadiness(data) {
   var d = data || {};
   var chips = {
     readinessHermes: 'Hermes · ' + (d.workspace === 'ready' ? 'ready' : 'unavailable'),
-    readinessCdp: 'JD/CDP · ' + (d.jd_cdp === 'ready' ? 'ready' : 'unavailable'),
+    readinessCdp: 'JD/CDP · ' + (d.jd_cdp === 'ready' ? 'ready' : d.jd_cdp === 'auth_required' ? '需要登录' : 'unavailable'),
     readinessCapabilities: 'Capabilities · ' + (d.capabilities != null ? d.capabilities : '…'),
     readinessEvidence: 'Evidence · ' + (d.evidence != null ? d.evidence : '…'),
   };

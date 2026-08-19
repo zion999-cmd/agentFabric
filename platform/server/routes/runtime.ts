@@ -13,7 +13,7 @@ import { createRuntimeKernel, createEmptyBlueprint } from '#app/runtime/kernel/i
 import type { RuntimeKernel } from '#app/runtime/kernel/index.js';
 import { loadBlueprint } from '#app/connectors/binding/loader.js';
 import type { EnterpriseSignal } from '#shared/schemas/signal.js';
-import { acquireJdMultiPage, isCdpAvailable } from '#app/connectors/jd/acquisition/cdp-client.js';
+import { acquireJdMultiPage, isCdpAvailable, isJdPageAvailable } from '#app/connectors/jd/acquisition/cdp-client.js';
 import { createLocalFirstLiveAcquire } from '#app/connectors/jd/historical-acquire.js';
 import { getDataPages } from '#app/connectors/jd/blueprint.js';
 import { saveEvidence } from '#app/connectors/evidence/store.js';
@@ -319,8 +319,9 @@ export const runtimeRouter = (db: Db): Router => {
   // real acquisition prerequisites (JD/CDP), not static config presence.
   router.get('/readiness', async (_req, res) => {
     try {
-      const [cdpAvailable, capabilityCount, evidenceCount] = await Promise.all([
+      const [cdpAvailable, jdPageAvailable, capabilityCount, evidenceCount] = await Promise.all([
         isCdpAvailable(9222).catch(() => false),
+        isJdPageAvailable(9222).catch(() => false),
         (async () => {
           try {
             const p = resolve(process.cwd(), 'generated', 'capability-contract.json');
@@ -334,10 +335,14 @@ export const runtimeRouter = (db: Db): Router => {
         })(),
       ]);
 
+      // Honest JD data-source state: Chrome reachable ≠ JD page open ≠ logged in.
+      const jdCdp = !cdpAvailable ? 'unavailable' : jdPageAvailable ? 'ready' : 'auth_required';
+
       ok(res, {
         workspace: 'ready',
         capabilities: capabilityCount,
-        jd_cdp: cdpAvailable ? 'ready' : 'unavailable',
+        jd_cdp: jdCdp,
+        jd_page: jdPageAvailable ? 'available' : 'missing',
         evidence: evidenceCount,
       });
     } catch (err) {

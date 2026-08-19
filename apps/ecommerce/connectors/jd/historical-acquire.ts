@@ -99,6 +99,8 @@ export const createLocalFirstLiveAcquire = (
     }
 
     // Pass 2 — live CDP only for missing endpoints (single-date acquisition).
+    // Fail loudly on CDP failure: an evidence miss must not be silently counted
+    // as a completed acquisition (Consolidation Pass 1 — honest completion).
     if (missing.length > 0) {
       const live = await liveAcquire({ shopId, mock: false, fromDate: date, toDate: date });
       if (live.success && live.rawPayload) {
@@ -109,6 +111,8 @@ export const createLocalFirstLiveAcquire = (
             data[endpoint] = raw[dataType];
           }
         }
+      } else {
+        throw new Error(live.error ?? `JD CDP acquisition failed for ${date}`);
       }
     }
 
