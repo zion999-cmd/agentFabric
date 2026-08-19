@@ -38,10 +38,10 @@ export const aggregateProductMetrics = (
       orderCountPrevious: 0,
       cancelledOrders: 0,
       totalProductOrders: 0,
-      stock: product.stock,
-      price: product.price,
-      category: product.category,
-      categoryMedianPrice: product.price,
+      stock: product.stock ?? 0,
+      price: product.price ?? 0,
+      category: product.category ?? 'unknown',
+      categoryMedianPrice: product.price ?? 0,
     });
   }
 
@@ -82,6 +82,7 @@ const computeCategoryMedians = (
 ): Map<string, number> => {
   const byCategory = new Map<string, number[]>();
   for (const p of products) {
+    if (p.category === null || p.price === null) continue;
     const list = byCategory.get(p.category) ?? [];
     list.push(p.price);
     byCategory.set(p.category, list);

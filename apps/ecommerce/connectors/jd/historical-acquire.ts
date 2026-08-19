@@ -87,7 +87,8 @@ export const createLocalFirstLiveAcquire = (
       // The JD connector persists only its core data types (summary/trend/productTop).
       // Endpoints that map to any other data type are never resolvable from the
       // store — skip them so they don't re-trigger live CDP on every call.
-      if (dataType !== 'summary' && dataType !== 'trend' && dataType !== 'productTop') {
+      if (dataType !== 'summary' && dataType !== 'trend' && dataType !== 'productTop' &&
+          dataType !== 'getProductAnalysisData') {
         continue;
       }
       const loaded = loadEvidence('jd', date, dataType);

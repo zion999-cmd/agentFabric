@@ -13,9 +13,11 @@ export type OrderItem = z.infer<typeof OrderItemSchema>;
 export const ProductSchema = z.object({
   product_id: z.string().min(1),
   name: z.string().min(1),
-  category: z.string().min(1),
-  price: z.number().nonnegative(),
-  stock: z.number().int().nonnegative().default(0),
+  // Catalog = identity, not operating attributes. JD does NOT guarantee these
+  // exist — they are nullable, not fabricated placeholders.
+  category: z.string().nullable(),
+  price: z.number().nonnegative().nullable(),
+  stock: z.number().int().nonnegative().nullable(),
   status: z.string().default('active'),
   attributes: z.record(z.string(), z.unknown()).default({}),
   created_at: IsoDateString,

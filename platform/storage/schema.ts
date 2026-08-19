@@ -4,7 +4,7 @@
 import type { Database as Db } from 'better-sqlite3';
 import { nowIso } from '#shared/utils/time.js';
 
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 
 const STATEMENTS: readonly string[] = [
   `CREATE TABLE IF NOT EXISTS schema_version (
@@ -15,9 +15,9 @@ const STATEMENTS: readonly string[] = [
   `CREATE TABLE IF NOT EXISTS products (
     product_id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
-    category TEXT NOT NULL,
-    price REAL NOT NULL,
-    stock INTEGER NOT NULL DEFAULT 0,
+    category TEXT,
+    price REAL,
+    stock INTEGER,
     status TEXT NOT NULL DEFAULT 'active',
     attributes TEXT NOT NULL DEFAULT '{}',
     created_at TEXT NOT NULL,
@@ -274,10 +274,43 @@ const migrateV3 = (db: Db): void => {
   `);
 };
 
+/** Product Catalog Consolidation: migrate products v3 → v4 (nullable category/price/stock). */
+const migrateV4 = (db: Db): void => {
+  const tableCheck = db
+    .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='products'")
+    .get() as { name: string } | undefined;
+  if (!tableCheck) return; // fresh DB — CREATE TABLE already has nullable columns
+
+  const cols = db.prepare("PRAGMA table_info('products')").all() as Array<{ name: string; notnull: number }>;
+  const needsMigration = ['category', 'price', 'stock'].some(
+    (c) => cols.find((x) => x.name === c)?.notnull === 1,
+  );
+  if (!needsMigration) return; // already nullable
+
+  db.exec(`
+    CREATE TABLE products_v4 (
+      product_id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      category TEXT,
+      price REAL,
+      stock INTEGER,
+      status TEXT NOT NULL DEFAULT 'active',
+      attributes TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+    INSERT INTO products_v4 (product_id, name, category, price, stock, status, attributes, created_at, updated_at)
+      SELECT product_id, name, category, price, stock, status, attributes, created_at, updated_at FROM products;
+    DROP TABLE products;
+    ALTER TABLE products_v4 RENAME TO products;
+  `);
+};
+
 /** Apply the full schema idempotently and record the schema version. */
 export const applySchema = (db: Db): void => {
   // Run migration before CREATE TABLE (which is IF NOT EXISTS)
   migrateV3(db);
+  migrateV4(db);
   db.exec(STATEMENTS.join(';\n'));
   const recorded = db
     .prepare('SELECT 1 FROM schema_version WHERE version = ?')

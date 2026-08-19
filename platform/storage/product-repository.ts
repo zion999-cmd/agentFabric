@@ -69,9 +69,9 @@ export const listProducts = (db: Db): Product[] => {
   const rows = db.prepare('SELECT * FROM products').all() as Array<{
     product_id: string;
     name: string;
-    category: string;
-    price: number;
-    stock: number;
+    category: string | null;
+    price: number | null;
+    stock: number | null;
     status: string;
     attributes: string;
     created_at: string;

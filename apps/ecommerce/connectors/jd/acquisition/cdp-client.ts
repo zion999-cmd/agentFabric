@@ -395,6 +395,7 @@ export const acquireJdViaCDP = async (
 
   const payloads: MockJdPayload[] = [];
   for (const [date, apiMap] of byDate.entries()) {
+    const productAnalysis = apiMap.get('getProductAnalysisData');
     payloads.push({
       shopName: '京东店铺',
       shopId: 'jd_shop_001',
@@ -403,6 +404,7 @@ export const acquireJdViaCDP = async (
       summary: apiMap.get('summary') ?? [],
       trend: apiMap.get('trend') ?? [],
       productTop: apiMap.get('productTop') ?? [],
+      ...(productAnalysis ? { getProductAnalysisData: productAnalysis } : {}),
     });
   }
 

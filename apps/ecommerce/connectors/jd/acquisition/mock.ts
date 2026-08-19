@@ -14,6 +14,8 @@ export interface MockJdPayload {
   summary: unknown[];
   trend: unknown[];
   productTop: unknown[];
+  /** Product analysis endpoint (captured by CDP steady-state). */
+  getProductAnalysisData?: unknown[];
 }
 
 /**
