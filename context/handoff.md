@@ -1,5 +1,40 @@
 # 交接文档
 
+## 本次会话 (2026-08-20) — Consolidation Pass 2: Situation → Professional Action
+
+### 目标与定位
+
+两份 Audit 已钉死「专业人员打开 Situation 只看到占位符按钮」。Pass 2 收债「专业人员参与 Agent 认知」的闭环，架构决策定死：**canonical = `Situation → Intervention → Learning Context → Hermes`；Memory/Growth 归 Hermes**（ADR-035）。
+
+### 三刀
+
+1. **Slice 1 — 真实分析/建议/追问**（`workspace/app.js`）：Situation Detail 三个占位符换真实内容——「Agent 怎么理解」= Pattern Engine 归因（`/api/explain`，primary_driver + evidence + 历史恢复率）；「Agent 建议」= 从 tags(metric,direction) 确定性推导；「追问 Agent」= situation-chat 桥（去掉「未实现」）。
+
+2. **Slice 2 — Intervention → Learning Context producer**（`apps/ecommerce/experience/learning-context-producer.ts` 新 + `p0007.ts` + `situation-chat.ts` + `index.ts`）：补上缺失的 INSERT（`recordInterventionInLearningContext`），新增 `GET /api/situations/:id/learning-context`，situation-chat 建 session 前把 Learning Context 写入 `fabric-workspace/situations/<id>.json`。**没做 `Intervention → context_memories`，没恢复 legacy Review 链。**
+
+3. **Slice 3 — UI 结构化 grammar**（`workspace/interaction-grammar.js` 新 + `index.html` + `app.js` + `situation-viewmodel.ts`）：`INTERACTION_OPTIONS` 从 orphaned `.ts` 移成浏览器单一事实源；`submitIntervention` 发结构化 content（response/correction/decision 已表达）；**修复 module-scoped inline onclick**（暴露到 window）。验收从 Workspace 点按钮/填内容完成，非手工 POST。
+
+### 关键决策（ADR-035）
+
+- canonical professional-learning path = `Situation → Intervention → Learning Context → Hermes`。
+- Memory/Growth 归 Hermes，Fabric 不生产自身 Memory。
+- legacy `Review → Feedback → context_memories → memory-adjustment` 标记 **REMOVE CANDIDATE**，暂不删除，禁止新功能依赖。
+- **Action/Result（业务执行）≠ 认知反馈**，不在 Pass 2 处理。
+
+### 验收链（全通）
+
+Workspace 点「认同/这里判断错了/不采用」→ structured Intervention（content 按 grammar）→ human_interventions → Learning Context（3 条结构化）→ Hermes workspace（`situations/<id>.json` 3 条人工判断）。
+
+### 测试
+
+566 passed / 2 pre-existing failures（chat.contract 真 CDP、coverage 断言漂移），typecheck 干净。
+
+### 建议下一步
+
+重新打开 `professional-capability-surface-audit.md`，看剩下「断腿」里哪些继续 Consolidation（Explainer/Trust、operator_memories UI、Evaluation 等），不马上开 Pass 3。
+
+---
+
 ## 本次会话 (2026-08-19) — Consolidation Pass 1: Self-Sustaining Data Runtime
 
 ### 目标与定位

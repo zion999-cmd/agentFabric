@@ -86,35 +86,9 @@ export interface InterventionVM {
 }
 
 // ---- Interaction Definition ----
-
-/** Defines what interaction buttons to show and what Grammar type they map to. */
-export interface InteractionOption {
-  /** Button label in business language */
-  label: string;
-  /** Grammar type this maps to */
-  grammarType: 'response' | 'correction' | 'context_supplement' | 'decision' | 'action_intent';
-  /** Which section this belongs to */
-  section: 'judgment' | 'suggestion' | 'action';
-  /** If this option requires additional input */
-  requiresInput: boolean;
-  /** Placeholder for input if required */
-  inputPlaceholder?: string;
-}
-
-/** The full set of interaction options for a Situation. */
-export const INTERACTION_OPTIONS: InteractionOption[] = [
-  // Agent 判断
-  { label: '认同', grammarType: 'response', section: 'judgment', requiresInput: false },
-  { label: '这里判断错了', grammarType: 'correction', section: 'judgment', requiresInput: true, inputPlaceholder: '正确的判断是什么？' },
-  { label: '还有一个你不知道的情况', grammarType: 'context_supplement', section: 'judgment', requiresInput: true, inputPlaceholder: '什么情况？' },
-  // Agent 建议
-  { label: '采用建议', grammarType: 'decision', section: 'suggestion', requiresInput: false },
-  { label: '不采用', grammarType: 'decision', section: 'suggestion', requiresInput: true, inputPlaceholder: '为什么不采用？' },
-  { label: '稍后处理', grammarType: 'decision', section: 'suggestion', requiresInput: false },
-  // 你准备怎么处理
-  { label: '我准备这样处理…', grammarType: 'action_intent', section: 'action', requiresInput: true, inputPlaceholder: '描述你准备做什么…' },
-  { label: '暂不处理', grammarType: 'decision', section: 'action', requiresInput: false },
-];
+// NOTE: INTERACTION_OPTIONS now lives in interaction-grammar.js (a browser-loadable
+// script) — it is the single source of truth for the interaction surface. This .ts
+// file is server-side-only and cannot be loaded by the vanilla-JS workspace.
 
 // ---- Transformers ----
 

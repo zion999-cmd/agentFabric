@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-consolidation-pass1 | **Hermes**: v0.20.0 | **测试**: 566/568 passed (2 pre-existing failures) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
+|**版本**: v0.2-consolidation-pass2 | **Hermes**: v0.20.0 | **测试**: 566/568 passed (2 pre-existing failures) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **Consolidation Pass 2 — Situation → Professional Action** — 三刀收口「专业人员参与 Agent 认知」闭环：① Situation Detail 三个占位符换成真实内容（Agent 怎么理解 = Pattern Engine 归因 `/api/explain`；Agent 建议 = 确定性推荐；追问 Agent = situation-chat 桥）；② `Intervention → Learning Context` canonical producer（`learning-context-producer.ts` 补 INSERT + GET `/api/situations/:id/learning-context` + situation-chat 交付 workspace）；③ 恢复 UI 结构化 grammar（`interaction-grammar.js` 单一事实源，`submitIntervention` 发结构化 content，response/correction/decision 已表达，修复 module-scoped inline onclick）。验收链：Workspace 点按钮/填内容 → structured Intervention → human_interventions → Learning Context → Hermes workspace。ADR-035：canonical = `Situation → Intervention → Learning Context → Hermes`；Memory/Growth 归 Hermes；legacy `Review → Feedback → context_memories → memory-adjustment` 标记 REMOVE CANDIDATE。**Action/Result 留待下一阶段**（认知反馈 ≠ 业务执行）。
 
 - [x] **Consolidation Pass 1 — Self-Sustaining Data Runtime** — 三层收债：① Pass 1 诚实完成（backfill 不再把「循环跑完」当「采到数据」，CDP miss 诚实报 N/M + 原因）；② Pass 1.1 诚实 readiness（`jd_cdp` 三态 ready/auth_required/unavailable，`isJdPageAvailable` 区分 Chrome reachable vs JD page）+ **session lifecycle ownership**（`session-lifecycle.ts` 的 `ensureChromeReady`/`ensureJdPageOpen`/`ensureJdSession`，startup backfill 前自动 ensure，不自动登录）；③ Pass 1.2 收口 **direct HTTP hypothesis REJECTED**（JCap 反爬：user-mnp/user-mup/uuid 每请求动态 token，secret 在 JD 压缩 JS，D0002 探索永远不可能沉淀 direct executable knowledge）→ **JD canonical execution = browser-mediated CDP**，**human boundary = 正常 JD 登录**。Cold-start acceptance：`ensureJdSession` → CDP 采集 08-17/08-18 → 6 个新 Evidence → +31 signals（daily_summary 08-18 gmv ¥4978.54）→ rankings → **2 条新 Situation**（订单 +25%、成交 +30.2%）。审计存档 `proposals/audits/jd-acquisition-path-recovery-audit.md`（含 JCap 证据）。
 

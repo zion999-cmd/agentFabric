@@ -42,6 +42,7 @@ export const createServer = (options: ServerOptions): Express => {
     situationChatRouter({
       workspaceDir: resolve(process.cwd(), 'data', 'fabric-workspace'),
       profile: 'default',
+      db,
     }),
   );
 

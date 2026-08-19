@@ -13,12 +13,15 @@
 
 import { Router } from 'express';
 import { resolve } from 'node:path';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import type { Database as Db } from 'better-sqlite3';
 import { HermesSessionClient } from '#platform/runtime/hermes/index.js';
 import type { HermesEvent, CreateSessionParams, CreateSessionResult } from '#platform/runtime/hermes/index.js';
 import { writeProjection } from '#app/runtime/fabric-workspace/index.js';
 import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
 import { loadCapabilityEntries } from '#app/runtime/fabric-workspace/capability-loader.js';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
+import { loadLearningContext } from '#app/experience/learning-context-producer.js';
 
 // ---- Session registry (server-side) ----
 
@@ -45,6 +48,8 @@ interface SituationChatOptions {
   profile?: string;
   /** Client factory (injectable for tests; defaults to HermesSessionClient) */
   clientFactory?: (url?: string) => SituationChatClient;
+  /** Database handle — enables delivering the situation's Learning Context to Hermes. */
+  db?: Db;
 }
 
 /** Lazily build the Fabric Agent Workspace: systems/ + capabilities/ (projected) + knowledge/ (seeded, persistent). */
@@ -61,6 +66,13 @@ const ensureWorkspace = (dir: string): string => {
   // Idempotent — never deletes Agent-maintained knowledge pages.
   initSharedKnowledgeLayer(dir);
   return resolve(dir);
+};
+
+/** Deliver a situation's Learning Context into the Hermes session workspace. */
+const writeLearningContextToWorkspace = (dir: string, situationId: string, ctx: unknown): void => {
+  const situationsDir = resolve(dir, 'situations');
+  mkdirSync(situationsDir, { recursive: true });
+  writeFileSync(resolve(situationsDir, `${situationId}.json`), JSON.stringify(ctx, null, 2), 'utf-8');
 };
 
 /** Accumulate message.delta text until message.complete, resolve with full reply. */
@@ -122,6 +134,14 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
       // Ensure session (create on first message, reuse after).
       let active = sessions.get(situationId);
       if (!active) {
+        // Deliver the situation's Learning Context into the session workspace so
+        // Hermes can read it (Fabric's experience delivery layer — Memory stays
+        // with Hermes). Best-effort: absence of a context is not fatal.
+        if (options.db) {
+          const ctx = loadLearningContext(options.db, situationId);
+          if (ctx) writeLearningContextToWorkspace(workspaceDir, situationId, ctx);
+        }
+
         const client = options.clientFactory
           ? options.clientFactory(options.hermesUrl)
           : new HermesSessionClient(options.hermesUrl ? { url: options.hermesUrl } : {});

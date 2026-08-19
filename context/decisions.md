@@ -1,5 +1,23 @@
 # 技术决策记录 (ADR)
 
+## ADR-035: Consolidation Pass 2 — Canonical Professional-Learning Path
+
+- **日期**: 2026-08-20
+- **状态**: Accepted
+- **来源**: Consolidation Pass 2（Situation → Professional Action 收债）
+
+**决策**（确定「专业人员参与 Agent 认知」的唯一主线，并划清 Memory 归属）：
+
+1. **Canonical professional-learning path = `Situation → Human Intervention → Learning Context → Hermes`。** Fabric 的职责到 Learning Context 为止：`human_interventions` 保留为专业人员的原始判断记录，`learning_contexts` 恢复为 Fabric 的「经验交付层」（`Intervention → Learning Context` producer 已在 `apps/ecommerce/experience/learning-context-producer.ts`）。结构化 grammar（response/correction/context_supplement/decision/action_intent）经 UI 原样进入 Learning Context，再交付给 Hermes workspace。
+
+2. **Memory / Growth 归 Hermes。** Fabric 不生产自身 Memory，不做 `Intervention → context_memories` producer，不实现 Hermes Memory。Fabric 的终点是「把 Learning Context 交付给 Hermes」（situation-chat 建 session 前写入 `fabric-workspace/situations/<id>.json`）。
+
+3. **Legacy `Review → Feedback → context_memories → memory-adjustment` 链标记 REMOVE CANDIDATE，暂不删除。** 这是 agentCMS 时代的「Fabric 自己学习、自己记忆」思路，与当前 canonical path 冲突。禁止后续新功能继续依赖该链（`ReviewFacade.submit/promote`、`MemoryFacade.extract/store`、`memory-adjustment` 的 adjustmentsFor 均不再作为新功能入口）。真正删除留待后续统一清理。
+
+**边界**：Action / Result（业务执行：调预算、改价、报名活动）与认知反馈（我不采用/这是价格调整导致）是两回事，不在 Pass 2 范围内处理。
+
+---
+
 ## ADR-034: P0009.1 Situation Producer — 确定性检测 + 无 LLM + 幂等去重
 
 - **日期**: 2026-08-16

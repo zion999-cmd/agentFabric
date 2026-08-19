@@ -5,6 +5,7 @@ import { Router } from 'express';
 import type { Database as Db } from 'better-sqlite3';
 import { nowIso } from '#shared/utils/time.js';
 import { HumanInterventionSchema, SituationSchema } from '#shared/schemas/learning-context.js';
+import { loadSituation, recordInterventionInLearningContext, loadLearningContext } from '#app/experience/learning-context-producer.js';
 
 // ---- Helpers ----
 
@@ -202,36 +203,30 @@ export const p0007Router = (db: Db): Router => {
         ).run('partial', now, situationId);
       }
 
-      // Update the learning context if one exists
-      const lc = db.prepare(
-        'SELECT * FROM learning_contexts WHERE situation_id = ?',
-      ).get(situationId) as Record<string, unknown> | undefined;
-
-      if (lc) {
-        const body = JSON.parse(String(lc.body ?? '{}'));
-        if (!body.humanInterventions) body.humanInterventions = [];
-        body.humanInterventions.push({
-          interventionId: i.interventionId,
-          situationId: i.situationId,
-          actor: i.actor,
-          type: i.type,
-          content: i.content,
-          summary: i.summary,
-          respondsToActivityIds: i.respondsToActivityIds,
-          reviewId: i.reviewId,
-          actionId: i.actionId,
-          timestamp: now,
-        });
-        body.lifecycle = 'partial';
-        body.updatedAt = now;
-        db.prepare(
-          'UPDATE learning_contexts SET body = ?, lifecycle = ?, updated_at = ? WHERE situation_id = ?',
-        ).run(JSON.stringify(body), 'partial', now, situationId);
+      // Record the intervention into the situation's Learning Context (INSERT or
+      // UPDATE). This is Fabric's experience delivery layer — Memory stays with Hermes.
+      const situationFull = loadSituation(db, situationId);
+      if (situationFull) {
+        recordInterventionInLearningContext(db, situationFull, i);
       }
 
       ok(res, { interventionId: i.interventionId, createdAt: now }, { status: 'created' });
     } catch (err) {
       fail(res, 500, err instanceof Error ? err.message : 'Failed to record intervention');
+    }
+  });
+
+  // GET /api/situations/:id/learning-context — the situation's Learning Context
+  // (Fabric's experience delivery layer, consumed by Hermes). 404 when not yet created.
+  router.get('/situations/:id/learning-context', (req, res) => {
+    try {
+      const situationId = req.params['id'];
+      if (!situationId) { fail(res, 400, 'Missing situation ID'); return; }
+      const ctx = loadLearningContext(db, situationId);
+      if (!ctx) { fail(res, 404, 'Learning context not found'); return; }
+      ok(res, ctx);
+    } catch (err) {
+      fail(res, 500, err instanceof Error ? err.message : 'Failed to load learning context');
     }
   });
 

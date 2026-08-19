@@ -884,6 +884,68 @@ function updateSituationBadges(counts) {
 // ═══ P0007.3 Situation Detail + Interaction ══════════════
 var currentSituationId = null; // track which situation is in the detail view
 
+// ═══ P0007.3 Situation Detail — real analysis/recommendation (Consolidation Pass 2) ═══
+
+// Deterministic recommendation from the situation's metric + direction tags.
+var SITUATION_RECOMMENDATIONS = {
+  uv: { down: '访客数下降：优先检查流量来源渠道的变化，确认搜索/推荐/投放是否被削弱或分流。', up: '访客数上升：确认流量来源与质量，判断是否为可持续增长而非一次性波动。' },
+  cvr: { down: '转化率下降：检查商品详情页、价格、评价与库存状态，定位转化路径的阻断点。', up: '转化率改善：确认改善来源（页面/价格/活动），判断是否为可复制的做法。' },
+  gmv: { down: '成交金额下降：结合访客数与转化率，先定位是流量问题还是转化问题。', up: '成交金额上升：确认驱动因素（流量/转化/客单价），判断增长是否健康。' },
+  orders: { down: '订单量下降：检查客单价与转化率，确认订单结构是否发生变化。', up: '订单量上升：确认增长来源，判断是否可持续。' },
+};
+
+function renderAgentRecommendation(tags) {
+  var metric = tags[1] || '';
+  var direction = tags[2] || '';
+  var rec = SITUATION_RECOMMENDATIONS[metric];
+  if (rec && rec[direction]) return rec[direction];
+  return '结合访客数、转化率与成交金额的变化，定位当前波动的驱动因素后决定下一步。';
+}
+
+// Render the Pattern Engine attribution ("why did this change") as the agent's
+// understanding. Falls back to the description when no explanation is available.
+function renderAgentUnderstanding(explanation, desc) {
+  if (!explanation) return '<p class="muted">暂无归因数据。Agent 分析基于可用信号：' + escHtml(desc) + '</p>';
+  var driver = explanation.primary_driver || '未知';
+  var conf = explanation.driver_confidence != null ? Math.round(explanation.driver_confidence * 100) + '%' : '—';
+  var html = '<p>主要驱动因素: <strong>' + escHtml(driver) + '</strong>（置信度 ' + conf + '）</p>';
+  var evidence = explanation.evidence || [];
+  if (evidence.length > 0) {
+    html += '<ul style="margin:6px 0;padding-left:18px">';
+    evidence.slice(0, 3).forEach(function(e) {
+      var dir = e.change_pct >= 0 ? '↑' : '↓';
+      var cur = typeof e.current_value === 'number' ? e.current_value.toFixed(1) : e.current_value;
+      var exp = typeof e.expected_value === 'number' ? e.expected_value.toFixed(1) : e.expected_value;
+      html += '<li>' + escHtml(e.metric) + ' ' + dir + ' ' + Math.abs(e.change_pct) + '%（当前 ' + cur + ' vs 基准 ' + exp + '）</li>';
+    });
+    html += '</ul>';
+  }
+  if (explanation.historical_recovery_rate != null) {
+    html += '<p class="muted">历史同类事件恢复率: ' + Math.round(explanation.historical_recovery_rate * 100) + '%（' + (explanation.similar_events || []).length + ' 个相似事件）</p>';
+  }
+  return html;
+}
+
+// 追问 Agent — send a follow-up question to the Hermes situation-chat bridge.
+async function askSituationAgent(situationId) {
+  var input = document.getElementById('situationChatInput_' + situationId);
+  var log = document.getElementById('situationChatLog_' + situationId);
+  if (!input || !log) return;
+  var msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  log.innerHTML += '<p><strong>你:</strong> ' + escHtml(msg) + '</p>';
+  log.innerHTML += '<p class="muted">Agent 思考中…</p>';
+  try {
+    var data = await apiPost('/api/situation/' + situationId + '/chat', { message: msg });
+    log.innerHTML = log.innerHTML.replace('Agent 思考中…', '');
+    log.innerHTML += '<p><strong>Agent:</strong> ' + escHtml((data && data.reply) || '无法处理该请求') + '</p>';
+  } catch (e) {
+    log.innerHTML = log.innerHTML.replace('Agent 思考中…', '');
+    log.innerHTML += '<p class="muted">追问失败: ' + escHtml(e.message) + '</p>';
+  }
+}
+
 async function loadSituationDetail(situationId) {
   // switchView passes filter value; ignore non-ID values like 'all', 'open' etc.
   if (!situationId || situationId === 'all' || situationId === 'open' || situationId === 'partial' || situationId === 'agent') {
@@ -901,6 +963,18 @@ async function loadSituationDetail(situationId) {
     var temporal = raw.temporal || {};
     var interventions = raw.interventions || [];
     var desc = raw.description || '';
+    var tags = Array.isArray(raw.tags) ? raw.tags : [];
+
+    // Fetch the pattern-engine attribution for the situation's date (deterministic
+    // "why did this change"). Falls back to the description when unavailable.
+    var observedDate = (temporal.observedAt || '').slice(0, 10);
+    var explanation = null;
+    if (observedDate) {
+      try {
+        var expl = await apiGet('/api/explain?date=' + encodeURIComponent(observedDate));
+        explanation = (Array.isArray(expl) && expl.length > 0) ? expl[0] : null;
+      } catch { /* explanation unavailable — keep null */ }
+    }
 
     if (badge) {
       badge.textContent = raw.lifecycle === 'open' ? '待处理' : raw.lifecycle === 'partial' ? '已处理' : '待观察';
@@ -920,19 +994,19 @@ async function loadSituationDetail(situationId) {
     html += '<p>' + escHtml(desc) + '</p>';
     html += '</div></div>';
 
-    // Layer 2: Agent 怎么理解
+    // Layer 2: Agent 怎么理解 — real attribution from the Pattern Engine.
     html += '<div class="situation-layer">';
     html += '<h3 class="situation-layer-title">🤖 Agent 怎么理解</h3>';
     html += '<div class="situation-layer-body">';
-    html += '<p class="muted">Agent 分析: ' + escHtml(desc) + '</p>';
+    html += renderAgentUnderstanding(explanation, desc);
     html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');setTimeout(function(){loadEvidenceViewer()},100)">[查看 Evidence →]</p>';
     html += '</div></div>';
 
-    // Layer 3: Agent 建议什么
+    // Layer 3: Agent 建议 — deterministic recommendation from metric + direction.
     html += '<div class="situation-layer">';
     html += '<h3 class="situation-layer-title">💡 Agent 建议</h3>';
     html += '<div class="situation-layer-body">';
-    html += '<p>Agent 建议: 查看详细数据判断原因</p>';
+    html += '<p>' + escHtml(renderAgentRecommendation(tags)) + '</p>';
     html += '</div></div>';
 
     // Layer 4: 你怎么处理？
@@ -958,10 +1032,15 @@ async function loadSituationDetail(situationId) {
 
     html += '</div>'; // end interaction layer
 
-    // Layer 5: Situation Chat (collapsed)
+    // Layer 5: 追问 Agent — wired to the Hermes situation-chat bridge.
     html += '<div class="situation-chat" style="margin-top:20px">';
     html += '<details><summary style="cursor:pointer;font-size:0.85rem;font-weight:600">💬 追问 Agent (关于这个 Situation)</summary>';
-    html += '<div style="margin-top:12px"><p class="muted" style="font-size:0.78rem"><span class="unimplemented-badge" style="margin-left:0">未实现</span> Chat 功能将在 HermesAgent 接通后启用。</p></div>';
+    html += '<div style="margin-top:12px">';
+    html += '<div id="situationChatLog_' + escHtml(situationId) + '" style="margin-bottom:8px;max-height:240px;overflow-y:auto"></div>';
+    html += '<div style="display:flex;gap:6px">';
+    html += '<input id="situationChatInput_' + escHtml(situationId) + '" class="input" style="flex:1;font-size:0.8rem" placeholder="追问 Agent，例如：为什么转化率下降？" />';
+    html += '<button class="btn primary" onclick="askSituationAgent(\'' + escHtml(situationId) + '\')">发送</button>';
+    html += '</div></div>';
     html += '</details></div>';
 
     html += '</div>'; // end detail body
@@ -972,50 +1051,50 @@ async function loadSituationDetail(situationId) {
 }
 
 function renderInteractionSurface(situationId) {
-  return '<div class="interaction-surface">' +
-    '<div class="interaction-group">' +
-      '<span class="interaction-label">Agent 判断</span>' +
-      '<div class="interaction-buttons">' +
-        '<button class="interaction-btn response-btn" onclick="submitIntervention(\'' + situationId + '\', \'response\', \'认同 Agent 判断\')">认同</button>' +
-        '<button class="interaction-btn correction-btn" onclick="promptIntervention(\'' + situationId + '\', \'correction\')">这里判断错了</button>' +
-        '<button class="interaction-btn context-btn" onclick="promptIntervention(\'' + situationId + '\', \'context_supplement\')">还有一个你不知道的情况</button>' +
-      '</div>' +
-    '</div>' +
-    '<div class="interaction-group">' +
-      '<span class="interaction-label">Agent 建议</span>' +
-      '<div class="interaction-buttons">' +
-        '<button class="interaction-btn decision-btn" onclick="submitIntervention(\'' + situationId + '\', \'decision\', \'采用 Agent 建议\')">采用建议</button>' +
-        '<button class="interaction-btn decision-btn secondary" onclick="promptIntervention(\'' + situationId + '\', \'decision\')">不采用</button>' +
-        '<button class="interaction-btn decision-btn secondary" onclick="submitIntervention(\'' + situationId + '\', \'decision\', \'稍后处理\')">稍后处理</button>' +
-      '</div>' +
-    '</div>' +
-    '<div class="interaction-group">' +
-      '<span class="interaction-label">你准备怎么处理？</span>' +
-      '<div class="interaction-buttons">' +
-        '<button class="interaction-btn action-btn" onclick="promptIntervention(\'' + situationId + '\', \'action_intent\')">我准备这样处理…</button>' +
-        '<button class="interaction-btn action-btn secondary" onclick="submitIntervention(\'' + situationId + '\', \'decision\', \'暂不处理\')">暂不处理</button>' +
-      '</div>' +
-    '</div>' +
-  '</div>';
+  var sectionLabels = { judgment: 'Agent 判断', suggestion: 'Agent 建议', action: '你准备怎么处理？' };
+  var options = window.INTERACTION_OPTIONS || [];
+  var html = '<div class="interaction-surface">';
+  Object.keys(sectionLabels).forEach(function(section) {
+    var sectionOptions = options.filter(function(o) { return o.section === section; });
+    if (sectionOptions.length === 0) return;
+    html += '<div class="interaction-group">' +
+      '<span class="interaction-label">' + sectionLabels[section] + '</span>' +
+      '<div class="interaction-buttons">';
+    sectionOptions.forEach(function(o) {
+      var idx = options.indexOf(o);
+      html += '<button class="interaction-btn" onclick="handleIntervention(\'' + situationId + '\', ' + idx + ')">' + escHtml(o.label) + '</button>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
 }
 
-// Simple prompt for interventions that need text input
-function promptIntervention(situationId, type) {
-  var placeholders = { correction: '正确的判断是什么？', context_supplement: '什么情况？', decision: '为什么不采用？', action_intent: '描述你准备做什么…' };
-  var text = prompt(placeholders[type] || '请描述:', '');
-  if (text && text.trim()) {
-    submitIntervention(situationId, type, text.trim());
+// Handle an interaction button click: prompt for text if required, then submit
+// the structured intervention (grammar content + summary).
+function handleIntervention(situationId, optionIndex) {
+  var option = (window.INTERACTION_OPTIONS || [])[optionIndex];
+  if (!option) return;
+  var text = '';
+  if (option.requiresInput) {
+    text = prompt(option.inputPlaceholder || '请描述:', '');
+    if (!text || !text.trim()) return; // cancelled
+    text = text.trim();
   }
+  var content = window.buildInterventionContent(option, text);
+  var summary = window.buildInterventionSummary(option, text);
+  submitStructuredIntervention(situationId, option.grammarType, summary, content);
 }
 
-// Submit intervention → POST → re-read → re-render
-async function submitIntervention(situationId, type, summary) {
+// Submit a structured intervention → POST → re-read → re-render.
+async function submitStructuredIntervention(situationId, type, summary, content) {
   try {
     var payload = {
       interventionId: 'int_' + Date.now(),
       situationId: situationId,
       actor: { id: 'operator_1', role: 'operator' },
       type: type,
+      content: content,
       summary: summary,
       timestamp: new Date().toISOString(),
     };
@@ -1903,3 +1982,10 @@ document.querySelectorAll('.chip-question').forEach(chip => {
   }
   setInterval(loadData, 300000);
 })();
+
+// Expose inline-onclick handlers to window — app.js is an ES module, so its
+// top-level functions are module-scoped and unreachable from HTML onclick attrs.
+window.switchView = switchView;
+window.loadEvidenceViewer = loadEvidenceViewer;
+window.askSituationAgent = askSituationAgent;
+window.handleIntervention = handleIntervention;

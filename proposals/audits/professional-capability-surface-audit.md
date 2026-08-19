@@ -133,3 +133,17 @@
 - `apps/ecommerce/orchestrator.ts` — 65(adjustmentsFor) / 122,152(trust 只喂 LLM) / 130(policyIds 硬编码) / 175(TraceFacade.store)
 - `platform/server/routes/` — p0007.ts(situations/interventions) / ranking.ts(baseline/patterns/explain/memories/sync/context) / reviews.ts(reviews/memory/trace) / runtime.ts(executions/replay/evidence/capabilities/events) / workspace.ts(findings，被 loadInbox 覆盖) / chat.ts(skills) / situation-chat.ts(shared-knowledge wiring)
 - `shared/schemas/learning-context.ts` — Situation / LearningContext / AgentActivityRef / HumanIntervention schemas
+
+---
+
+## 附：Consolidation Pass 2 收口更新（2026-08-20）
+
+本审计标记的三处「断腿」已在 Pass 2 收口（ADR-035）：
+
+| 原状态 | 收口后 |
+|---|---|
+| Intervention 写后死路（不喂 reviews/feedback/memory） | ✅ **canonical**：`Intervention → Learning Context → Hermes`（`learning-context-producer.ts` 补 INSERT + situation-chat 交付 workspace） |
+| Intervention grammar 压平（只发 flat summary，content 空） | ✅ UI 恢复结构化 grammar（`interaction-grammar.js` 单一事实源，response/correction/decision 已表达） |
+| Review/Feedback/context_memories 空表 + extractMemories 从不被调 | ⚠️ **REMOVE CANDIDATE**（暂不删除，禁止新功能依赖）——Memory/Growth 归 Hermes，Fabric 不再做「自己学习」 |
+
+**尚未收口**（下一步重新审视本审计的剩余断腿）：Explainability/Trust 仍 orphan（business_traces 无 UI consumer）、operator_memories(12) 仍无 UI、Evaluation 仍缺失、Learning Context 的 observations/agentActivities 仍 schema-only（未填充）。
