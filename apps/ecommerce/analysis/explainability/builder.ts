@@ -12,7 +12,7 @@ import type {
   RankingTraceEntry,
 } from '#shared/schemas/trace.js';
 import type { ContextMemory } from '#shared/schemas/memory.js';
-import type { RankingResult, RankingMemoryAdjustment } from '#shared/schemas/ranking.js';
+import type { RankingResult, RankingMemoryAdjustment, RankingProfileName } from '#shared/schemas/ranking.js';
 import { nowIso } from '#shared/utils/time.js';
 import { uuid } from '#shared/utils/crypto.js';
 import { clamp } from '#shared/utils/math.js';
@@ -75,6 +75,40 @@ export const buildTrace = (input: BuildTraceInput): BusinessConclusionTrace => {
     alignment,
     created_at: nowIso(),
   };
+};
+
+export interface RankingTraceInput {
+  ranking: RankingResult;
+  /** The signals that fed this ranking (all signals for this entity). */
+  entitySignals: readonly Signal[];
+  profile: RankingProfileName;
+  /** 1-based position in the ranking list. */
+  rank: number;
+  /** Human-readable entity name; falls back to entity_id. */
+  entityName?: string | undefined;
+}
+
+/**
+ * Assemble a trace for a single ranking result (productTop path). Trust is computed
+ * by buildTrace from the ranking's real confidence/coverage. No DB access.
+ */
+export const buildRankingTrace = (input: RankingTraceInput): BusinessConclusionTrace => {
+  const { ranking, entitySignals, profile, rank, entityName } = input;
+  return buildTrace({
+    conclusion: {
+      entity_id: ranking.entity_id,
+      entity_name: entityName ?? ranking.entity_id,
+      statement: `该商品在 ${profile} 榜单中排名第 ${rank}`,
+      profile,
+      date: ranking.ranked_at,
+    },
+    ranking,
+    signals: entitySignals,
+    memories: [],
+    memoryAdjustments: [],
+    replayConsistency: { days_present: 0, avg_rank: 0, rank_volatility: 0, top1_count: 0 },
+    rank,
+  });
 };
 
 const toRankingTraceEntry = (r: RankingResult, rank?: number): RankingTraceEntry => ({

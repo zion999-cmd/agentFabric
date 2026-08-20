@@ -1,5 +1,43 @@
 # 交接文档
 
+## 本次会话 (2026-08-20) — Consolidation: Explainability/Trust Producer Wiring
+
+### 目标
+
+纵向收口 `productTop → product signals → Ranking → buildTrace → business_traces → /api/trace/:traceId`，只把真实 productTop ranking 接进已有 Explainability/Trust producer（上一步 audit 判定 `business_traces` 只有 1 行 stale agentCMS trace、5 个真实 SKU ranking 零 trace）。
+
+### 做了什么
+
+- `apps/ecommerce/analysis/explainability/builder.ts` 新增 `buildRankingTrace`（纯函数：单个 ranking → trace，复用 `buildTrace`）。
+- `apps/ecommerce/analysis/explainability/facade.ts` 新增 `explainRanking`（facade 薄委托，保唯一跨域入口）。
+- `platform/server/index.ts` backfill：`rankByProfile` + `RankingFacade.store` 后，为每个 ranking `TraceFacade.explainRanking` + `store`。
+- 新增 `tests/integration/product-top-trace.test.ts`（2 tests：差异化→trace→trust>0→一一对应；store/load round-trip）。
+
+### 验收（真实 DB 实证）
+
+- 5 差异化 ranking（0.3667 / 0.1326 / 0.1004 / 0.0916 / 0.0815，conf=0.9 cov=0.2）→ 每次 run 5 条 current trace。
+- `ranking_id ↔ trace_id ↔ SKU` 最新 run 一一对应；`/api/trace/:traceId` round-trip 可读。
+- `trust_score=0.12`（>0），`contradictions=["low_coverage"]`（单信号 `gmv_growth_1d` → coverage 0.2 → Rule 5）。
+- stale 旧 trace `2448038d`（agentCMS，trust=0）保留，ranking_id 悬空，无 latest/list 视图误用。
+
+### 状态
+
+- **Explainability/Trust producer wiring: COMPLETE**
+- **Workspace consumer: 仍未 WIRE**
+- **Trace history: append-only**（本轮接受）
+- **Known issue**: 旧 trace 的 `ranking_id` 在 ranking current-state 被覆盖后成为 dangling reference；未来 Replay/Audit 需 ranking snapshot / retention policy（本轮不改 store / ranking_id / unique constraint）。
+
+### 测试
+
+570 total / 568 passed / 2 pre-existing failures（coverage.test 阈值过期、chat.contract Hermes 超时），改动文件 typecheck 干净。
+
+### 建议下一步
+
+- Workspace consumer（trace 面板，只消费 `/api/trace/:traceId`）——下一刀。
+- （可选）trace 幂等：`business_traces` 加 `(profile, entity_id)` 唯一键 + `storeTrace` upsert，或 `ranking_id` 确定性化——需放宽「REUSE store / 不改 ranking 算法」红线。
+
+---
+
 ## 本次会话 (2026-08-20) — Consolidation Pass 2.1: Learning Context observations WIRE
 
 ### 目标

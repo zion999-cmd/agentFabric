@@ -1,9 +1,10 @@
 {
   "project": "agentFabric",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Business Workspace on Hermes Agent Runtime",
   "hermes": "0.20.0",
   "completed": [
+    "Explainability/Trust Producer Wiring — productTop → buildTrace → business_traces: builder.ts#buildRankingTrace (pure) + facade.ts#explainRanking + backfill per-ranking explainRanking+store; 5 current traces (trust=0.12, low_coverage), ranking_id↔trace_id↔SKU one-to-one, /api/trace/:traceId readable; append-only history (known dangling ranking_id issue); ADR-036",
     "P0009.1 Situation Producer / 今日工作 — runtime/situation/{rules,producer,index}.ts: deterministic detection (meaningful_change/ranking_attention/cross_signal), template descriptions (no LLM), sha256 situationId + INSERT OR IGNORE idempotent dedup, reuses P0007 situations table + SituationSchema + lifecycle=open; startup wiring after backfill; 4 grounded situations generated; 12 tests",
     "P0009 Real Product Vertical Slice — Product Surface/Hermes Session/Fabric Workspace/Capability Runtime/JD Acquisition/Evidence six-surface wiring; token fix, capability identity/endpoint binding, evidence reuse, return contract metrics, startup backfill (7-day + rankings)",
     "P0008.6 Instruction Architecture Audit — Claudian archaeology, Fabric mapping, P0008.5 failure 五维解读, 5-layer Instruction Layers, ownership boundary, operational capability classification (proposals/audits/p0008.6-claudian-instruction-architecture.md)",
@@ -45,13 +46,13 @@
     "P0009 Final Browser Acceptance — six-surface wiring done, awaiting Workspace browser end-to-end verification (model stability recorded as runtime limitation)"
   ],
   "next": [
-    "Commit P0009 + P0009.1 (pending user instruction)",
+    "Workspace consumer (trace panel) — consume /api/trace/:traceId",
     "Workspace browser confirmation of 今日工作 rendering real situations",
-    "ranking_attention real content: resolve product data non-differentiation (67 rankings all 0.4648)"
+    "Optional: trace idempotency (business_traces unique key + storeTrace upsert, or deterministic ranking_id)"
   ],
   "blocked": [
     "P0009 model stability — nemotron-3-ultra run-to-run jitter (71-77s vs >180s), transport confirmed correct, model/quota layer"
   ],
-  "tests": 563,
+  "tests": 570,
   "coverage": "domains: 80%+ target"
 }

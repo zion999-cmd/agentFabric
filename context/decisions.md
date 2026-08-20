@@ -1,5 +1,25 @@
 # 技术决策记录 (ADR)
 
+## ADR-036: Explainability/Trust Producer Wiring — Append-Only Trace History
+
+- **日期**: 2026-08-20
+- **状态**: Accepted
+- **来源**: Consolidation（Ranking → Explainability/Trust 纵向收口，见 ranking-data-lineage-audit.md §5）
+
+**决策**（把真实 productTop ranking 接进已有 `buildTrace → business_traces` producer）：
+
+1. **REUSE 现有 producer，不新建、不改算法。** 复用 `buildTrace` / `TraceFacade.store` / `computeTrustScore`；新增 `buildRankingTrace`（`builder.ts` 纯函数）+ `TraceFacade.explainRanking`（facade 薄委托，保「facade = 唯一跨域入口」）。backfill 在 `rankByProfile` + `RankingFacade.store` 后为**每个** ranking 生成并持久化一条 trace。不改 trust 公式、不改 ranking 算法、不接 Workspace consumer、不重构 AI ranking path（`rankProductsComposition`/`persistComposition` 原样保留）。
+
+2. **trust 用真实 productTop input。** 5 个 SKU 各 1 个 `gmv_growth_1d` 信号，confidence=0.9，coverage=0.2（5 组件只覆盖 growth）。`detectContradictions` Rule 5 `low_coverage`（coverage<0.4）→ `is_supported=false` → `trust_score=max(0, 0.9*0.3 - 1*0.15)=0.12`。诚实反映「单信号证据稀薄」，非 bug。
+
+3. **Trace history = append-only（本轮接受）。** `storeTrace` 纯 INSERT、`ranking_id` 每次 `rankProducts` 重生成（`uuid()`）、backfill 每启动跑一次——三者叠加导致每次启动 +5 行 trace。记录为已知 **Retention / Historical Referential Integrity** issue，非当前 bug。**本轮不修**（修需动 `storeTrace` 语义 / `ranking_id` 生成 / DB unique constraint，均超出 producer wiring 红线）。
+
+4. **未来 Replay/Audit 再设计 ranking snapshot / retention policy。** 若历史 trace 需要可回放/审计，届时引入 ranking snapshot（固定 ranking_id）或 retention 策略。
+
+**文件**: `apps/ecommerce/analysis/explainability/{builder,facade}.ts`（`buildRankingTrace`/`explainRanking`），`platform/server/index.ts`（backfill 接线），`tests/integration/product-top-trace.test.ts`。
+
+---
+
 ## ADR-035: Consolidation Pass 2 — Canonical Professional-Learning Path
 
 - **日期**: 2026-08-20

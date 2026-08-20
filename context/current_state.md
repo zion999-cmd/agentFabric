@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-consolidation-pass2 | **Hermes**: v0.20.0 | **测试**: 566/568 passed (2 pre-existing failures) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
+|**版本**: v0.2-consolidation-pass3 | **Hermes**: v0.20.0 | **测试**: 568 passed / 2 pre-existing failures (570 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **Consolidation — Explainability/Trust Producer Wiring** — 纵向收口 `productTop → product signals → Ranking → buildTrace → business_traces → /api/trace/:traceId`。`builder.ts` 新增 `buildRankingTrace`（纯函数）+ `facade.ts` 新增 `explainRanking`；backfill 在 `rankByProfile`+`RankingFacade.store` 后为每个 ranking `explainRanking`+`store`。真实 DB 实证：5 差异化 ranking（0.3667/0.1326/0.1004/0.0916/0.0815，conf=0.9 cov=0.2）→ 每次 run 5 条 current trace，`ranking_id↔trace_id↔SKU` 一一对应，`trust_score=0.12`（单信号 `gmv_growth_1d` → coverage 0.2 → `low_coverage` → unsupported），`/api/trace/:traceId` round-trip 可读。**Workspace consumer 未 WIRE**；**trace history append-only**（本轮接受）；known issue = 旧 trace `ranking_id` 悬空（未来 Replay/Audit 需 ranking snapshot / retention）。ADR-036。新测试 2。
 
 - [x] **Consolidation Pass 2.1 — Learning Context observations WIRE + reclassification** — `learning-context-producer.ts` 新增 `buildObservations`：从 `SignalFacade.list`（当日 signals）+ `listEvidence`（当日 evidence）构建 `ObservationRef`，只引用已有 signalIds/evidenceIds/capability/observedAt/metricsSnapshot，不重新计算分析；`deriveAcquisition` 把 evidence acquisition_method 映射到 ObservationRef enum。Learning Context 现在 = situation + observations(真实 refs) + humanInterventions(结构化) + 顶层 evidenceIds/signalIds/summary 汇总。provenance 完整：grounded context 而非「一段描述」。reclassification 追加进 professional-capability-surface-audit 附 2（Explainability/Trust=WIRE 但被 ranking 数据挡住、operator_memories=REMOVE CANDIDATE、agentActivities=REMOVE CANDIDATE、Evaluation=MISSING）。
 
@@ -73,9 +75,9 @@
 
 ## 下一步
 
+- Workspace consumer（trace 面板，只消费 `/api/trace/:traceId`）——下一刀。
 - P0009.1 从 Workspace 浏览器确认「今日工作」渲染真实 Situation（API 已验证返回 5 条）。
-- commit P0009 + P0009.1（**待用户指示**，当前未 commit）。
-- 若需 ranking_attention 触发真实内容，先解决商品数据非差异化问题（67 商品 ranking 全同分 0.4648，属数据/采集层面，非 Producer）。
+- （可选）trace 幂等：`business_traces` 加 `(profile, entity_id)` 唯一键 + `storeTrace` upsert，或 `ranking_id` 确定性化（需放宽「REUSE store / 不改 ranking 算法」红线）。
 - 遗留（低优先）: P0008.6 Proposal、`systems/` vs `world/` 定案、dangling `contracts/WORLD_MODEL.md`。
 
 ## 阻塞

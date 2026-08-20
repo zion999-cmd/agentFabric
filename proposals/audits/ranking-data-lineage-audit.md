@@ -68,3 +68,16 @@ Product-level Ranking（STALE）
 - `apps/ecommerce/analysis/decision/profiles.ts` — ranking profile signal_mapping
 - `apps/ecommerce/connectors/jd/parsers/index.ts` — `parseJdPayload` → `ParsedJdData.top_products`（已解析但未转 signals）
 - `data/evidence/jd/2026/08/18_productTop.json` — 真实 per-product GMV（5 SKU 差异化）
+
+---
+
+## 5. Consolidation 收口 (2026-08-20) — Explainability/Trust Producer Wiring
+
+第 3 节分类里「Explainability / Trust = WIRE blocker」已收口（`trust_score=0` 的根因——confidence=0 / 吃 stale agentCMS——已随 productTop → signals wiring 一起解决）。
+
+- **Explainability/Trust producer wiring: COMPLETE** — 真实 productTop ranking 已接进 `buildTrace → business_traces`。`builder.ts#buildRankingTrace`（纯函数）+ `facade.ts#explainRanking`；backfill 在 `rankByProfile`+`RankingFacade.store` 后为**每个** ranking 生成并持久化 trace。
+- **5 个 ranking 均有对应 current trace** — 每次 run 5 条，`ranking_id ↔ trace_id ↔ SKU` 一一对应，`/api/trace/:traceId` 可读（`TraceFacade.load` round-trip）。
+- **trust 用真实 productTop input** — confidence=0.9 / coverage=0.2（单信号 `gmv_growth_1d` 只覆盖 growth 组件）→ `detectContradictions` Rule 5 `low_coverage` → `is_supported=false` → `trust_score=0.12`（>0，非 stale 的 0）。
+- **Workspace consumer：仍未 WIRE** — 本轮只接 producer，下一刀才接消费端。
+- **Trace history：append-only（本轮接受）** — `storeTrace` 纯 INSERT + `ranking_id` 每次 `rankProducts` 重生成 + backfill 每启动跑一次 → 每启动 +5 行 trace。
+- **Known issue（非 bug，本轮不修）** — 旧 trace 的 `ranking_id` 在 `ranking_results` upsert 覆盖后成为 dangling reference；未来 Replay/Audit 需设计 ranking snapshot / retention policy。本轮不改 `TraceFacade.store` / `ranking_id` 生成 / DB unique constraint。

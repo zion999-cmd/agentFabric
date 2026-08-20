@@ -118,12 +118,32 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
     // means no ranking (honest empty, no fabricated differences).
     const { RankingFacade } = await import('#app/analysis/decision/facade.js');
     const { generateProductTopSignals } = await import('#app/analysis/metrics/product-top-signals.js');
+    const { TraceFacade } = await import('#app/analysis/explainability/facade.js');
     const productTopSignals = generateProductTopSignals(latestTopProducts);
     if (productTopSignals.length > 0) {
       const rankings = RankingFacade.rankByProfile(productTopSignals, 'operator_mode', []);
       RankingFacade.store(db, 'operator_mode', rankings);
+
+      // Explainability/Trust Consolidation: wire the real productTop ranking into
+      // the existing buildTrace → business_traces producer. One trace per ranking;
+      // trust is computed from the ranking's real confidence (0.9) / coverage (0.2).
+      const namesByEntity = new Map(latestTopProducts.map((p) => [p.sku_id, p.name]));
+      rankings.forEach((ranking, index) => {
+        const entitySignals = productTopSignals.filter((s) => s.entity_id === ranking.entity_id);
+        TraceFacade.store(
+          db,
+          TraceFacade.explainRanking({
+            ranking,
+            entitySignals,
+            profile: 'operator_mode',
+            rank: index + 1,
+            entityName: namesByEntity.get(ranking.entity_id),
+          }),
+        );
+      });
+
       // eslint-disable-next-line no-console
-      console.log(`[backfill] rankings regenerated from JD productTop (${rankings.length} ranked / ${productTopSignals.length} signals)`);
+      console.log(`[backfill] rankings regenerated from JD productTop (${rankings.length} ranked / ${productTopSignals.length} signals) · ${rankings.length} traces persisted`);
     }
 
     // P0009.1: generate Situations from the completed Signals/Rankings.
