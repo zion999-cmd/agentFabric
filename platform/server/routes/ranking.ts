@@ -69,6 +69,11 @@ export const rankingRouter = (db: Db): Router => {
   });
 
   // GET /api/ranking/:profile — load persisted rankings.
+  // Explainability/Trust WIRE: each ranking carries the trace_id of the CURRENT
+  // trace for that ranking (business_traces.ranking_id = live ranking_results
+  // ranking_id), so the Workspace can consume /api/trace/:traceId. Traces whose
+  // ranking_id was overwritten (dangling historical traces) never match and are
+  // therefore never surfaced as current.
   router.get('/ranking/:profile', (req, res) => {
     const profile = req.params['profile'];
     if (profile !== 'sales_leaderboard' && profile !== 'growth_discovery' && profile !== 'operator_mode') {
@@ -76,7 +81,14 @@ export const rankingRouter = (db: Db): Router => {
       return;
     }
     const rankings = RankingFacade.load(db, profile);
-    ok(res, rankings, { total: rankings.length, page: 1, limit: rankings.length });
+    const traceStmt = db.prepare(
+      'SELECT trace_id FROM business_traces WHERE ranking_id = ? ORDER BY created_at DESC LIMIT 1',
+    );
+    const enriched = rankings.map((r) => ({
+      ...r,
+      trace_id: (traceStmt.get(r.ranking_id) as { trace_id: string } | undefined)?.trace_id ?? null,
+    }));
+    ok(res, enriched, { total: enriched.length, page: 1, limit: enriched.length });
   });
 
   // GET /api/signals — list all signals (optionally filtered by entity).

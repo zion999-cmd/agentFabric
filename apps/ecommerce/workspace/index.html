@@ -277,20 +277,13 @@
             <div id="decisionToolCalls" class="tool-calls-list"></div>
           </div>
 
-          <!-- Developer Mode: Trace Layer -->
+          <!-- Developer Mode: Ranking Explainability — real /api/trace consumer -->
           <div id="panelDeveloper" style="display:none;">
-            <div id="traceCollapsed">
-              <div class="trace-section" id="traceDecisionSummary"></div>
-              <div class="trace-section" id="traceDataSources"></div>
-              <div class="trace-section" id="traceExecutionStatus"></div>
-              <button class="trace-expand-btn" id="traceExpandBtn">&#9660; Expand Details</button>
-            </div>
-            <div id="traceExpanded" style="display:none">
-              <div class="trace-section" id="traceSkillsTriggered"></div>
-              <div class="trace-section" id="traceMcpCalls"></div>
-              <div class="trace-section" id="traceMemoryInfluence"></div>
-              <div class="trace-section" id="traceExecutionSteps"></div>
-              <div class="trace-section" id="traceResultValidation"></div>
+            <div class="trace-section">
+              <div class="trace-section-title">Ranking Explainability · 排名解释</div>
+              <div id="traceContent">
+                <p class="muted placeholder">选择左侧商品卡片，展示当前排名对应的 business trace（来源: /api/trace/:traceId）。</p>
+              </div>
             </div>
           </div>
 

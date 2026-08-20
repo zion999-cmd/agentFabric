@@ -22,19 +22,15 @@ const i18n = {
     'stat.totalSku': 'SKU 总数', 'stat.activeSku': '活跃 SKU', 'stat.newSignals': '新增信号', 'stat.pendingReview': '待审核建议',
     'findings.title': 'AI 发现',
     'filter.allPriority': '全部优先级', 'filter.allType': '全部类型',
-    'decision.title': 'Agent Trace',
-    'decision.placeholder': '点击左侧 AI 发现卡片查看 Agent Trace。',
-    'trace.decisionSummary': 'Decision Summary',
-    'trace.dataSources': 'Data Sources',
-    'trace.executionStatus': 'Execution Status',
-    'trace.expandDetails': 'Expand Details',
-    'trace.collapseDetails': 'Collapse Details',
-    'trace.skillsTriggered': 'Skills Triggered',
-    'trace.mcpCalls': 'MCP / Tool Calls',
-    'trace.memoryInfluence': 'Memory Influence',
-    'trace.executionSteps': 'Execution Steps',
-    'trace.resultValidation': 'Result Validation',
-    'trace.noSignals': 'No signal data', 'trace.noMemories': 'No active memories',
+    'decision.title': 'Ranking Explainability · 排名解释',
+    'decision.placeholder': '点击左侧商品卡片查看当前排名对应的业务追踪（/api/trace/:traceId）。',
+    'trace.rankExplain': '排名解释（Ranking Explainability）· 非 Situation 解释',
+    'trace.trust': '信任分 Trust Score',
+    'trace.contradictions': '矛盾点 Contradictions',
+    'trace.evidence': '证据 / Reasoning',
+    'trace.ranking': '排名 Ranking',
+    'trace.isSupported': '支持度',
+    'trace.noTrace': '当前排名没有对应的 business trace',
     'product.title': '商品分析', 'product.search': '搜索', 'product.placeholder': '输入商品 ID 查看完整画像',
     'product.notFound': '未找到该商品', 'product.score': '综合得分', 'product.rank': '排名',
     'trend.title': '趋势观察', 'trend.subtitle': '信号变化与排名漂移时间轴',
@@ -94,15 +90,15 @@ const i18n = {
     'stat.totalSku': 'Total SKUs', 'stat.activeSku': 'Active SKUs', 'stat.newSignals': 'New Signals', 'stat.pendingReview': 'Pending Reviews',
     'findings.title': 'AI Discoveries',
     'filter.allPriority': 'All Priorities', 'filter.allType': 'All Types',
-    'decision.title': 'Agent Trace',
-    'decision.placeholder': 'Click a finding to view Agent Trace.',
-    'trace.decisionSummary': 'Decision Summary', 'trace.dataSources': 'Data Sources',
-    'trace.executionStatus': 'Execution Status', 'trace.expandDetails': 'Expand Details',
-    'trace.collapseDetails': 'Collapse Details',
-    'trace.skillsTriggered': 'Skills Triggered', 'trace.mcpCalls': 'MCP / Tool Calls',
-    'trace.memoryInfluence': 'Memory Influence', 'trace.executionSteps': 'Execution Steps',
-    'trace.resultValidation': 'Result Validation',
-    'trace.noSignals': 'No signal data', 'trace.noMemories': 'No active memories',
+    'decision.title': 'Ranking Explainability',
+    'decision.placeholder': 'Click a product card to view its business trace for the current ranking.',
+    'trace.rankExplain': 'Ranking Explainability — not Situation explanation',
+    'trace.trust': 'Trust Score',
+    'trace.contradictions': 'Contradictions',
+    'trace.evidence': 'Evidence / Reasoning',
+    'trace.ranking': 'Ranking',
+    'trace.isSupported': 'Supported',
+    'trace.noTrace': 'No business trace for the current ranking',
     'product.title': 'Product Analysis', 'product.search': 'Search', 'product.placeholder': 'Enter product ID',
     'product.notFound': 'Product not found', 'product.score': 'Score', 'product.rank': 'Rank',
     'trend.title': 'Trend Watch', 'trend.subtitle': 'Signal & ranking drift time series',
@@ -161,10 +157,10 @@ function applyI18n() {
 const state = {
   activeView: 'inbox', activeFilter: 'all',
   panelMode: 'business',      // 'business' | 'developer'
-  traceExpanded: false,
   selectedEntityId: null, findingsData: [],
   rankingsCache: [], memoriesCache: [],
   productNames: {},  // product_id → name
+  currentTrace: null, // BusinessConclusionTrace loaded for the selected entity
 };
 
 function showToast(msg) { toastNode.textContent = msg; toastNode.classList.add('show'); setTimeout(() => toastNode.classList.remove('show'), 1500); }
@@ -245,7 +241,7 @@ async function loadInbox(filterType = 'all') {
         ...(r.explainability?.strengths || []).slice(0, 2),
         ...(r.explainability?.risks || []).slice(0, 2),
       ],
-      traceData: null,
+      trace_id: r.trace_id || null,
       timestamp: r.ranked_at || new Date().toISOString(),
     };
   });
@@ -268,7 +264,7 @@ async function loadInbox(filterType = 'all') {
         type: 'review', priority: 'high', title: r.reason || 'Pending Review',
         metrics: [], tags: [r.status === 'pending' ? '待审核' : r.status],
         aiSuggestion: r.reason_category || '', reasoningSummary: [`Review: ${r.reason}`],
-        traceData: null, timestamp: r.created_at || new Date().toISOString(),
+        trace_id: null, timestamp: r.created_at || new Date().toISOString(),
       }));
     } catch { filtered = []; }
     document.getElementById('findingsTitle').textContent = t('nav.review');
@@ -451,7 +447,7 @@ async function loadProduct() {
       } catch(e2) { /* optional */ }
 
       var comp = match.component_scores || {};
-      ct.innerHTML = '<div class="finding-card" style="cursor:default;border-left:4px solid var(--primary)"><div class="finding-body">' +
+      ct.innerHTML = '<div class="finding-card" style="cursor:pointer;border-left:4px solid var(--primary)" title="点击查看排名解释 (Ranking Explainability)"><div class="finding-body">' +
         '<div class="finding-header"><span class="finding-entity-name" style="font-size:0.9rem">' + (pname || pid) + '</span></div>' +
         '<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px">ID: ' + pid + '</div>' +
         '<div class="finding-metrics" style="grid-template-columns:repeat(5,1fr)">' +
@@ -461,6 +457,11 @@ async function loadProduct() {
           '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.supply_stability||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Supply</div></div>' +
           '<div class="finding-metric"><div class="finding-metric-value">' + ((match.confidence||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Confidence</div></div>' +
         '</div>' + signalsHtml + '</div></div>';
+      // Explainability/Trust WIRE: clicking the product card opens the decision panel,
+      // which consumes /api/trace/:traceId for the CURRENT ranking (real trust/evidence).
+      ct.querySelector('.finding-card')?.addEventListener('click', () => {
+        selectFinding({ entityId: pid, entityName: pname });
+      });
 
     } catch (e) { ct.innerHTML = '<p class="muted">加载失败 (' + e.message + ')</p>'; }
   }
@@ -1624,7 +1625,7 @@ function renderProvenanceChain(container, evidence, capId) {
   container.innerHTML = html;
 }
 
-// ═══ Agent Trace Panel ════════════════════════════════════
+// ═══ Ranking Explainability Panel (real /api/trace/:traceId consumer) ═══
 function selectFinding(finding) {
   state.selectedEntityId = finding.entityId || finding.entity_id;
   const eid = state.selectedEntityId;
@@ -1638,16 +1639,31 @@ function selectFinding(finding) {
   updatePanel(finding, ranking);
 }
 
-function updatePanel(finding, ranking) {
-  if (state.panelMode === 'business') {
-    renderBusinessPanel(finding, ranking);
-  } else {
-    renderTracePanel(finding, ranking);
+async function updatePanel(finding, ranking) {
+  const eid = state.selectedEntityId;
+  const entityName = finding?.entityName || ranking?.entity_id;
+  // Fetch the trace for the CURRENT ranking only. The server attaches trace_id to
+  // a ranking only when its ranking_id is still live in ranking_results — dangling
+  // historical traces are never requested/displayed. Trace content is consumed
+  // exclusively from /api/trace/:traceId (no recompute, no Hermes/LLM).
+  let trace = null;
+  if (ranking?.trace_id) {
+    try {
+      trace = await apiGet('/api/trace/' + encodeURIComponent(ranking.trace_id));
+    } catch { trace = null; }
   }
+  if (state.selectedEntityId !== eid) return; // stale selection — ignore late response
+  state.currentTrace = trace;
+
+  if (state.panelMode === 'business') {
+    renderBusinessPanel(finding, ranking, trace);
+    return;
+  }
+  renderTracePanel(trace, entityName, ranking?.trace_id && !trace ? '加载失败: 无法读取 /api/trace/' + ranking.trace_id.slice(0, 8) + '…' : null);
 }
 
 // ═══ V1 Business Mode: AI Summary + Reasoning + Tool Calls ═══
-function renderBusinessPanel(finding, ranking) {
+function renderBusinessPanel(finding, ranking, trace) {
   document.getElementById('panelBusiness').style.display = 'block';
   document.getElementById('panelDeveloper').style.display = 'none';
 
@@ -1655,8 +1671,12 @@ function renderBusinessPanel(finding, ranking) {
   const dt = ranking?.decision_trace ?? {};
   const signalsUsed = ranking?.signals_used || [];
 
-  // Reasoning from real ranking data
+  // Reasoning from real ranking data + the trace's real trust (consumed, not recomputed).
   const reasons = [];
+  if (trace?.alignment) {
+    const tScore = Math.round((trace.alignment.trust_score || 0) * 100);
+    reasons.push(`信任分: ${tScore}% — ${tScore >= 70 ? '证据充分' : tScore >= 40 ? '中等可信' : '证据稀薄，需人工复核'}${(trace.alignment.contradictions || []).length ? '（' + (trace.alignment.contradictions || []).join('、') + '）' : ''}`);
+  }
   if (comp.growth) reasons.push(`增长得分: ${(comp.growth*100).toFixed(0)}% — ${comp.growth >= 0.5 ? '增长势头强劲' : comp.growth >= 0.3 ? '增长稳定' : '增长空间大'}`);
   if (comp.competition) reasons.push(`竞争得分: ${(comp.competition*100).toFixed(0)}% — ${comp.competition >= 0.5 ? '竞争优势明显' : '竞争压力较大'}`);
   if (comp.supply_stability) reasons.push(`供应稳定性: ${(comp.supply_stability*100).toFixed(0)}%`);
@@ -1699,83 +1719,81 @@ function renderBusinessPanel(finding, ranking) {
     <div class="tool-call-item"><span class="tool-call-name">${t.name}</span><span class="tool-call-status">${t.status}</span></div>`).join('');
 }
 
-// ═══ Developer Mode: P0003.1 Trace Panel ══════════════════
-function renderTracePanel(finding, ranking) {
-  document.getElementById('panelBusiness').style.display = 'none';
-  document.getElementById('panelDeveloper').style.display = 'block';
+// ═══ Developer Mode: Ranking Explainability — real /api/trace/:traceId consumer ═══
+const CONTRADICTION_LABELS = {
+  entity_not_in_ranking: '结论实体不在当前榜单',
+  no_signals: '该实体没有任何信号输入',
+  ranking_decision_missing_signal_support: '排名决策缺少信号支撑',
+  memory_decreased_confidence: '记忆调整降低了置信度',
+  low_confidence: '置信度低于 0.3',
+  low_coverage: '信号覆盖度低于 0.4（当前仅覆盖少数组件）',
+  majority_stale_signals: '超过 50% 的信号已过期',
+  entity_mismatch: '结论实体与排名实体不一致',
+};
 
-  const comp = ranking?.component_scores ?? {};
-  const dt = ranking?.decision_trace ?? {};
+function renderTracePanel(trace, entityName, message) {
+  const content = document.getElementById('traceContent');
+  if (!content) return;
 
-  // Decision Summary
-  document.getElementById('traceDecisionSummary').innerHTML = `
-    <div class="trace-section-title">Decision Summary</div>
-    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text">${finding.entityName || finding.entityId || '?'} ranked at score ${ranking?.overall_score?.toFixed(3) || '?'}</span></div>
-    <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Growth: ${(comp.growth||0).toFixed(2)} | Competition: ${(comp.competition||0).toFixed(2)} | Supply: ${(comp.supply_stability||0).toFixed(2)} | Quality: ${(comp.quality||0).toFixed(2)}</span></div>
-    <div class="trace-step-conf"><span class="conf-mini ${(ranking?.confidence||0)>=0.7?'high':(ranking?.confidence||0)>=0.4?'medium':'low'}">Confidence: ${Math.round((ranking?.confidence||0)*100)}%</span><span class="conf-mini ${(ranking?.coverage||0)>=0.7?'high':(ranking?.coverage||0)>=0.4?'medium':'low'}">Coverage: ${Math.round((ranking?.coverage||0)*100)}%</span></div>`;
+  // Honest empty / error state — never fabricated fallback data.
+  if (!trace) {
+    content.innerHTML = `
+      <div class="trace-step"><span class="trace-step-num">!</span><span class="trace-step-text">${message || t('trace.noTrace')}${entityName ? '（' + entityName + '）' : ''}</span></div>`;
+    return;
+  }
 
-  // Data Sources
-  document.getElementById('traceDataSources').innerHTML = `
-    <div class="trace-section-title">Data Sources</div>
-    ${(dt.top_signals||[]).slice(0,3).map(s => `<div class="data-source-item"><span class="data-source-dot"></span>${s.signal_name}</div>`).join('') || '<div class="muted">No signal data</div>'}`;
+  const a = trace.alignment || {};
+  const st = trace.system_truth || {};
+  const ranking = st.ranking || null;
+  const conclusion = trace.conclusion || {};
+  const comp = ranking?.component_scores || {};
+  const trustPct = Math.round((a.trust_score || 0) * 100);
+  const trustClass = a.trust_score >= 0.7 ? 'high' : a.trust_score >= 0.4 ? 'medium' : 'low';
 
-  // Execution Status
-  const hasRisks = (dt.risk_signals||[]).length > 0;
-  document.getElementById('traceExecutionStatus').innerHTML = `
-    <div class="trace-section-title">Execution Status</div>
-    <span class="execution-status ${hasRisks?'warn':'ok'}">${hasRisks?'Needs Review':'OK'}</span>`;
+  // The trace's ranking entry carries confidence but not coverage (schema). Only
+  // render coverage when it is actually present — never a fabricated 0%.
+  const coverageChip = typeof ranking?.coverage === 'number'
+    ? `<span class="conf-mini ${ranking.coverage>=0.4?'medium':'low'}">Coverage: ${Math.round(ranking.coverage*100)}%</span>`
+    : '';
 
-  // Builder-expanded sections
-  const mems = state.memoriesCache.slice(0, 3);
+  const contradictions = (a.contradictions || []).map(c =>
+    `<div class="trace-step"><span class="trace-step-num">!</span><span class="trace-step-text">${CONTRADICTION_LABELS[c] || c}</span></div>`,
+  ).join('') || '<div class="muted">无矛盾</div>';
 
-  // Skills — real skills from the system
-  const skillsUsed = [
-    { name: 'signal_pipeline', desc: `Compute ${ranking?.signals_used?.length || 9} signal types × [3,7,14]d` },
-    { name: 'ranking_engine', desc: 'Weighted multi-component scoring + dampening' },
-    { name: 'memory_adjustment', desc: `${ranking?.memory_adjustments?.length || 0} active memories applied` },
-  ];
-  document.getElementById('traceSkillsTriggered').innerHTML = `
-    <div class="trace-section-title">Skills Triggered</div>
-    ${skillsUsed.map(s => `<div class="trace-step"><span class="trace-step-num">-</span><span class="trace-step-text">${s.name} — ${s.desc}</span></div>`).join('')}`;
+  const signals = (st.signals || []).map(s =>
+    `<div class="data-source-item"><span class="data-source-dot"></span>` +
+    `<span style="font-family:var(--font-mono);font-size:0.7rem">${s.signal_name}</span>` +
+    `<span class="muted" style="font-size:0.7rem">value=${s.signal_value.toFixed(3)} · ${s.signal_direction} · impact=${s.impact.toFixed(3)} · conf=${Math.round((s.confidence||0)*100)}%</span>` +
+    `</div>`,
+  ).join('') || '<div class="muted">无信号证据</div>';
 
-  // MCP / Tool Calls — real API calls made
-  const mcpCalls = [
-    { name: 'GET /api/ranking/operator_mode', result: `${state.rankingsCache.length} ranked products` },
-    { name: 'GET /api/memory', result: `${mems.length} active memories` },
-    { name: 'GET /api/signals', result: `${ranking?.signals_used?.length || '?'} signal types` },
-  ];
-  document.getElementById('traceMcpCalls').innerHTML = `
-    <div class="trace-section-title">MCP / Tool Calls</div>
-    ${mcpCalls.map((c, i) => `<div class="trace-step"><span class="trace-step-num">${i+1}</span><span class="trace-step-text">${c.name} → ${c.result}</span></div>`).join('')}`;
+  content.innerHTML = `
+    <div class="trace-section-title">${t('trace.rankExplain')}</div>
+    <div class="trace-step"><span class="trace-step-num">1</span><span class="trace-step-text"><strong>${entityName || conclusion.entity_name || conclusion.entity_id}</strong> · ${conclusion.statement || ''}</span></div>
+    <div class="trace-step"><span class="trace-step-num">2</span><span class="trace-step-text">Profile: ${conclusion.profile || '?'} · trace_id: ${(trace.trace_id || '').slice(0, 8)}…</span></div>
 
-  document.getElementById('traceMemoryInfluence').innerHTML = `
-    <div class="trace-section-title">Memory Influence</div>
-    ${mems.length ? mems.map(m => `<div class="memory-influence-item"><div class="mi-statement">${m.statement||m.memory_id}</div><div class="mi-meta">${m.memory_type} | score: ${m.weight?.final_score?.toFixed(3)||'?'}</div></div>`).join('') : '<div class="muted">No active memories</div>'}`;
+    <div class="trace-section-title">${t('trace.trust')}</div>
+    <div class="trace-step-conf">
+      <span class="conf-mini ${trustClass}">${t('trace.trust')}: ${trustPct}%</span>
+      <span class="conf-mini ${a.is_supported ? 'high' : 'low'}">${t('trace.isSupported')}: ${a.is_supported ? 'yes' : 'no'}</span>
+      <span class="conf-mini ${(ranking?.confidence||0)>=0.7?'high':'low'}">Conf: ${Math.round((ranking?.confidence||0)*100)}%</span>
+      ${coverageChip}
+    </div>
+    <div class="trace-step"><span class="trace-step-text muted">证据数: ${a.evidence_count ?? 0} · 生成于 ${(trace.created_at || '').slice(0, 19).replace('T', ' ')}</span></div>
 
-  // Execution steps — real pipeline stages
-  const execSteps = [
-    { step: 1, title: 'Signal Computation', desc: `${ranking?.signals_used?.length || 9} types × [3,7,14]d windows → ${ranking?.signals_used?.length || '?'} signals per product` },
-    { step: 2, title: 'Component Scoring', desc: `Growth(${((comp.growth||0)*100).toFixed(0)}%) · Competition(${((comp.competition||0)*100).toFixed(0)}%) · Supply(${((comp.supply_stability||0)*100).toFixed(0)}%) · Quality(${((comp.quality||0)*100).toFixed(0)}%)` },
-    { step: 3, title: 'Memory Adjustment', desc: `${ranking?.memory_adjustments?.length || 0} memories matched → score adjustment applied` },
-    { step: 4, title: 'Final Ranking', desc: `Overall: ${ranking?.overall_score?.toFixed(3) || '?'} · Coverage: ${((ranking?.coverage||0)*100).toFixed(0)}% · Confidence: ${Math.round((ranking?.confidence||0)*100)}%` },
-  ];
-  document.getElementById('traceExecutionSteps').innerHTML = `
-    <div class="trace-section-title">Execution Steps</div>
-    ${execSteps.map(s => `<div class="trace-step"><span class="trace-step-num">${s.step}</span><span class="trace-step-text">${s.title}: ${s.desc}</span></div>`).join('')}`;
+    <div class="trace-section-title">${t('trace.contradictions')}</div>
+    ${contradictions}
 
-  document.getElementById('traceResultValidation').innerHTML = `
-    <div class="trace-section-title">Result Validation</div>
-    <div class="validation-item"><span>Coverage</span><span class="validation-value ${(ranking?.coverage||0)>=0.6?'ok':'warn'}">${(ranking?.coverage||0).toFixed(2)}</span></div>
-    <div class="validation-item"><span>Confidence</span><span class="validation-value ${(ranking?.confidence||0)>=0.7?'ok':'warn'}">${Math.round((ranking?.confidence||0)*100)}%</span></div>
-    <div class="validation-item"><span>Signals Used</span><span class="validation-value">${ranking?.signals_used?.length||0}</span></div>`;
+    <div class="trace-section-title">${t('trace.evidence')}</div>
+    ${signals}
 
-  // Collapsible trace: start collapsed, user can expand
-  var expandEl = document.getElementById('traceExpanded');
-  var btnEl = document.getElementById('traceExpandBtn');
-  expandEl.style.display = state.traceExpanded ? 'block' : 'none';
-  btnEl.style.display = 'block';
-  btnEl.textContent = state.traceExpanded ? '▲ Collapse Details' : '▼ Expand Details';
-  document.getElementById('traceCollapsed').style.display = 'block';
+    <div class="trace-section-title">${t('trace.ranking')}</div>
+    ${ranking ? `
+      <div class="trace-step"><span class="trace-step-num">R</span><span class="trace-step-text">排名第 ${ranking.rank} · 综合得分 ${ranking.overall_score.toFixed(4)}</span></div>
+      <div class="trace-step"><span class="trace-step-num">C</span><span class="trace-step-text">Growth ${(comp.growth||0).toFixed(2)} · Competition ${(comp.competition||0).toFixed(2)} · Supply ${(comp.supply_stability||0).toFixed(2)} · Lifecycle ${(comp.lifecycle||0).toFixed(2)} · Quality ${(comp.quality||0).toFixed(2)}</span></div>
+      ${(ranking.top_signals||[]).length ? `<div class="trace-step"><span class="trace-step-text muted">Top signals: ${ranking.top_signals.map(s => s.signal_name + '(' + s.impact.toFixed(3) + ')').join(', ')}</span></div>` : ''}
+    ` : '<div class="muted">无排名信息</div>'}
+  `;
 }
 
 // ═══ Mode Toggles ═════════════════════════════════════════
@@ -1802,12 +1820,6 @@ function togglePanelMode() {
   }
 }
 
-function toggleTraceExpand() {
-  state.traceExpanded = !state.traceExpanded;
-  document.getElementById('traceExpanded').style.display = state.traceExpanded ? 'block' : 'none';
-  document.getElementById('traceExpandBtn').textContent = state.traceExpanded ? '▲ Collapse Details' : '▼ Expand Details';
-}
-
 // ═══ Event Bindings ══════════════════════════════════════
 // P0007.3: Situation detail back button
 document.getElementById('situationBackBtn')?.addEventListener('click', () => {
@@ -1825,12 +1837,12 @@ document.querySelectorAll('.sidebar-item').forEach(item => {
 document.getElementById('panelModeToggle')?.addEventListener('change', togglePanelMode);
 document.getElementById('decisionCloseBtn')?.addEventListener('click', () => {
   state.selectedEntityId = null;
+  state.currentTrace = null;
   document.getElementById('decisionEntityLabel').textContent = '';
   document.getElementById('decisionPlaceholder').style.display = 'flex';
   document.getElementById('decisionContent').style.display = 'none';
   document.querySelectorAll('.finding-card').forEach(c => c.classList.remove('selected'));
 });
-document.getElementById('traceExpandBtn')?.addEventListener('click', toggleTraceExpand);
 document.getElementById('refreshInboxBtn')?.addEventListener('click', () => { loadInbox(state.activeFilter); showToast(t('toast.refreshed')); });
 document.getElementById('filterPriority')?.addEventListener('change', () => { loadInbox(state.activeFilter); });
 document.getElementById('filterType')?.addEventListener('change', (e) => { switchView('inbox', e.target.value); });

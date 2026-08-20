@@ -64,6 +64,28 @@ describe('HTTP server (integration)', () => {
     expect(data.length).toBe(canonicalProducts.length);
   });
 
+  test('ranking carries current trace_id; /api/trace/:traceId returns the real trace', async () => {
+    const res = await fetch(`${base}/api/ranking/operator_mode`);
+    const body = (await res.json()) as Record<string, unknown>;
+    const data = body['data'] as Array<Record<string, unknown>>;
+    const withTrace = data.filter(
+      (r) => typeof r['trace_id'] === 'string' && (r['trace_id'] as string).length > 0,
+    );
+    // persistComposition stores a trace for the top ranking → at least one live link.
+    expect(withTrace.length).toBeGreaterThanOrEqual(1);
+
+    const traceId = withTrace[0]!['trace_id'] as string;
+    const tRes = await fetch(`${base}/api/trace/${traceId}`);
+    const tBody = (await tRes.json()) as Record<string, unknown>;
+    const trace = tBody['data'] as Record<string, unknown>;
+    expect(tRes.status).toBe(200);
+    const alignment = trace['alignment'] as Record<string, unknown>;
+    expect(typeof alignment['trust_score']).toBe('number');
+    expect(alignment['trust_score']).toBeGreaterThanOrEqual(0);
+    expect(trace['system_truth']).toBeDefined();
+    expect((trace['system_truth'] as Record<string, unknown>)['ranking']).toBeDefined();
+  });
+
   test('GET /api/workspace/findings returns a discoveries feed', async () => {
     const res = await fetch(`${base}/api/workspace/findings?profile=operator_mode`);
     const body = (await res.json()) as Record<string, unknown>;

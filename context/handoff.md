@@ -1,5 +1,36 @@
 # 交接文档
 
+## 本次会话 (2026-08-20) — Explainability/Trust Workspace WIRE（END-TO-END COMPLETE）
+
+### 做了什么
+
+把真实 Ranking 对应的 trace 接进 Workspace 商品/Ranking 视图，闭环 `JD productTop → signals → Ranking → buildTrace → business_traces → /api/trace → Workspace → 专业人员看到真实 Trust/Evidence/Contradictions`。
+
+- `platform/server/routes/ranking.ts`：`GET /api/ranking/:profile` 为每个 ranking 附带**当前** trace_id（JOIN business_traces.ranking_id = live ranking_results，悬空历史 trace 永不命中）。
+- `apps/ecommerce/workspace/app.js`：`updatePanel` 异步拉 `/api/trace/:traceId`（stale-guard 防竞态）；`renderTracePanel` 整体重写为真实 trace consumer（trust/contradictions/evidence/ranking，明确「Ranking Explainability 非 Situation 解释」）；旧合成 section（Skills/MCP/Memory/ExecutionSteps）与 expand 逻辑删除；`renderBusinessPanel` 显示 trace 真实信任分；商品视图详情卡可点开决策面板。
+- `apps/ecommerce/workspace/index.html`：8 个合成 trace section → 单一真实 consumer 容器。
+- `tests/integration/http.test.ts`：新增 ranking 携带 current trace_id + /api/trace 返回真实 alignment 测试。
+
+### 浏览器实证
+
+商品视图点开一个商品 → 决策面板：运营模式 `信任分: 12% — 证据稀薄，需人工复核（low_coverage）`；开发模式完整 `信任分 12% / 支持度 no / Conf 90% / 矛盾点 low_coverage / 证据 gmv_growth_1d impact=0.880 / 排名第 1 · 0.3667`。真实，非硬编码。
+
+### 决策（ADR-037）
+
+- Workspace 只消费 `/api/trace/:traceId`，不重算 trust、不调 Hermes/LLM。
+- 旧 fabricated trace panel 替换，不维护两套。
+- **Legacy Inbox（`loadInbox`）pre-existing broken `badgeAll` 引用 → REMOVE CANDIDATE，不修复**（已标记「(旧)」，canonical Workspace 不依赖）。
+
+### 测试
+
+569 passed / 2 pre-existing failures，改动文件 typecheck 干净。
+
+### 下一步（用户指示：不继续顺着 UI 找小 bug）
+
+回到 capability audit，做 **post-consolidation inventory**：逐项分类「真正值得恢复的断腿」vs「REMOVE CANDIDATE」，判断这轮补旧账何时结束。
+
+---
+
 ## 本次会话 (2026-08-20) — Consolidation: Explainability/Trust Producer Wiring
 
 ### 目标

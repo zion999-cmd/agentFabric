@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-consolidation-pass3 | **Hermes**: v0.20.0 | **测试**: 568 passed / 2 pre-existing failures (570 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
+|**版本**: v0.2-consolidation-pass4 | **Hermes**: v0.20.0 | **测试**: 569 passed / 2 pre-existing failures (571 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **Consolidation — Explainability/Trust Workspace WIRE (END-TO-END COMPLETE)** — `JD productTop → signals → Ranking → buildTrace → business_traces → /api/trace → Workspace` 闭环。`GET /api/ranking/:profile` 附带 current trace_id（JOIN live ranking_results，悬空历史 trace 永不命中）；Workspace 决策面板只消费 `/api/trace/:traceId`（`renderTracePanel` 重写为真实 consumer：trust/contradictions/evidence/ranking，明确 Ranking Explainability 非 Situation 解释）；旧 fabricated trace panel（Skills/MCP/Memory/ExecutionSteps 合成 section）整体替换；商品视图详情卡可点开面板；运营模式显示真实信任分。浏览器实证 trust=0.12、low_coverage、gmv_growth_1d。**Legacy Inbox `loadInbox` pre-existing broken `badgeAll` → REMOVE CANDIDATE，不修复**。ADR-037。新测试 1。
 
 - [x] **Consolidation — Explainability/Trust Producer Wiring** — 纵向收口 `productTop → product signals → Ranking → buildTrace → business_traces → /api/trace/:traceId`。`builder.ts` 新增 `buildRankingTrace`（纯函数）+ `facade.ts` 新增 `explainRanking`；backfill 在 `rankByProfile`+`RankingFacade.store` 后为每个 ranking `explainRanking`+`store`。真实 DB 实证：5 差异化 ranking（0.3667/0.1326/0.1004/0.0916/0.0815，conf=0.9 cov=0.2）→ 每次 run 5 条 current trace，`ranking_id↔trace_id↔SKU` 一一对应，`trust_score=0.12`（单信号 `gmv_growth_1d` → coverage 0.2 → `low_coverage` → unsupported），`/api/trace/:traceId` round-trip 可读。**Workspace consumer 未 WIRE**；**trace history append-only**（本轮接受）；known issue = 旧 trace `ranking_id` 悬空（未来 Replay/Audit 需 ranking snapshot / retention）。ADR-036。新测试 2。
 

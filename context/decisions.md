@@ -1,5 +1,27 @@
 # 技术决策记录 (ADR)
 
+## ADR-037: Explainability/Trust Workspace WIRE — Real /api/trace Consumer
+
+- **日期**: 2026-08-20
+- **状态**: Accepted
+- **来源**: Consolidation（Explainability/Trust 纵向收口，producer wiring 之后接 Workspace consumer）
+
+**决策**（把真实 Ranking 对应的 trace 接进 Workspace 商品/Ranking 视图）：
+
+1. **Workspace 只消费现有 trace API。** 决策面板（运营/开发两种模式）的 trace 内容唯一来源是 `/api/trace/:traceId`；`GET /api/ranking/:profile` 只为每个 ranking 附加**当前** trace_id（`business_traces.ranking_id` = live `ranking_results` ranking_id 的 JOIN）作为链接，悬空历史 trace 永不命中、永不显示。不重新计算 trust、不调用 Hermes/LLM。
+
+2. **旧 fabricated trace panel = 替换，不维护两套。** P0003.1 的 `renderTracePanel`（Decision Summary / Skills Triggered / MCP Calls / Memory Influence / Execution Steps / Result Validation）是合成内容——skills/MCP/memory 是硬编码的展示结构，非真实运行轨迹。已整体替换为真实 trace consumer（trust_score / contradictions / evidence signals / ranking trace entry），expand 折叠逻辑删除。
+
+3. **明确 Ranking Explainability 语义。** 面板标题标注「排名解释（Ranking Explainability）· 非 Situation 解释」——这是 ranking 的 business_trace，不是 Situation 解释。
+
+4. **Legacy Inbox = REMOVE CANDIDATE。** `loadInbox` 引用已删除的 `badgeAll`（P0009 重构去掉了 inbox 徽章 DOM），pre-existing broken。**不修复**——它已标记「(旧)」，canonical Product/Ranking Workspace 不再依赖它；加 guard 本质是继续维护 REMOVE CANDIDATE。
+
+**验收**：浏览器实证 `商品 → 点商品 → 决策面板` → 运营模式 `信任分 12% — 证据稀薄（low_coverage）`；开发模式完整 trace（trust=0.12、low_coverage、gmv_growth_1d 证据、排名第 1 / 0.3667）。
+
+**文件**: `apps/ecommerce/workspace/{app.js,index.html}`，`platform/server/routes/ranking.ts`（trace_id 附带），`tests/integration/http.test.ts`。
+
+---
+
 ## ADR-036: Explainability/Trust Producer Wiring — Append-Only Trace History
 
 - **日期**: 2026-08-20

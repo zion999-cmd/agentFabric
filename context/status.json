@@ -1,9 +1,10 @@
 {
   "project": "agentFabric",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Business Workspace on Hermes Agent Runtime",
   "hermes": "0.20.0",
   "completed": [
+    "Explainability/Trust Workspace WIRE — ranking.ts GET /api/ranking/:profile attaches current trace_id (JOIN live ranking_results, dangling never surfaces); Workspace decision panel consumes only /api/trace/:traceId (renderTracePanel rewritten real consumer: trust/contradictions/evidence/ranking, labeled Ranking Explainability not Situation); fabricated P0003.1 trace sections removed; product view card opens panel; business panel shows real trust line; browser-verified trust=0.12/low_coverage; legacy Inbox badgeAll break = REMOVE CANDIDATE (unrepaired); ADR-037",
     "Explainability/Trust Producer Wiring — productTop → buildTrace → business_traces: builder.ts#buildRankingTrace (pure) + facade.ts#explainRanking + backfill per-ranking explainRanking+store; 5 current traces (trust=0.12, low_coverage), ranking_id↔trace_id↔SKU one-to-one, /api/trace/:traceId readable; append-only history (known dangling ranking_id issue); ADR-036",
     "P0009.1 Situation Producer / 今日工作 — runtime/situation/{rules,producer,index}.ts: deterministic detection (meaningful_change/ranking_attention/cross_signal), template descriptions (no LLM), sha256 situationId + INSERT OR IGNORE idempotent dedup, reuses P0007 situations table + SituationSchema + lifecycle=open; startup wiring after backfill; 4 grounded situations generated; 12 tests",
     "P0009 Real Product Vertical Slice — Product Surface/Hermes Session/Fabric Workspace/Capability Runtime/JD Acquisition/Evidence six-surface wiring; token fix, capability identity/endpoint binding, evidence reuse, return contract metrics, startup backfill (7-day + rankings)",
@@ -46,13 +47,13 @@
     "P0009 Final Browser Acceptance — six-surface wiring done, awaiting Workspace browser end-to-end verification (model stability recorded as runtime limitation)"
   ],
   "next": [
-    "Workspace consumer (trace panel) — consume /api/trace/:traceId",
+    "Post-consolidation inventory — re-audit capability surface: which half-built legs are worth REUSE/WIRE/REPAIR vs REMOVE CANDIDATE; decide when to end the debt-repayment round",
     "Workspace browser confirmation of 今日工作 rendering real situations",
     "Optional: trace idempotency (business_traces unique key + storeTrace upsert, or deterministic ranking_id)"
   ],
   "blocked": [
     "P0009 model stability — nemotron-3-ultra run-to-run jitter (71-77s vs >180s), transport confirmed correct, model/quota layer"
   ],
-  "tests": 570,
+  "tests": 571,
   "coverage": "domains: 80%+ target"
 }
