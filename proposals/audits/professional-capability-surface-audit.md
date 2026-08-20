@@ -162,3 +162,47 @@
 | Learning Context `observations` | **WIRE**（低优先） | Fabric-owned 的证据链，从 signals/evidence 填 |
 | Learning Context `agentActivities` | **REMOVE CANDIDATE** | Hermes-owned，Fabric 不该生产；确定性「Agent 怎么理解」不映射 |
 | Evaluation | **MISSING**（不建）+ 休眠列 **REMOVE CANDIDATE** | 无模块，仅死字段 |
+
+---
+
+## 附 3：Post-Consolidation Inventory（2026-08-21）
+
+Consolidation 功能恢复阶段收口盘点（基于当前代码逐项验证，非 2026-08-17 审计时的假设）。
+
+### 本轮 Consolidation 已闭合（全部 commit）
+
+| 原状态 | 现状 |
+|---|---|
+| Acquisition「接了不触发」+ 静默 7/7 | ✅ Pass 1：live-on-miss 真实触发，失败诚实报 N/M |
+| Ranking 吃 stale agentCMS 数据（67 全 0.4648） | ✅ productTop -> 真实差异化 5-8 SKU |
+| Situation Detail 三层占位符 | ✅ Pass 2：真实分析/建议/追问 |
+| Intervention 压平 + 写后死路 | ✅ Pass 2：结构化 grammar -> Learning Context -> Hermes |
+| Learning Context observations schema-only | ✅ Pass 2.1：真实 signals/evidence refs |
+| Explainability/Trust（trace 无人看） | ✅ producer（ADR-036）+ Workspace consumer（ADR-037）END-TO-END |
+| Evidence Viewer 契约不匹配（渲染空） | ✅ ADR-038：contract 对齐，END-TO-END 可用 |
+
+### 剩余项判定
+
+**值得恢复（REPAIR）--已做完**：Evidence Viewer 契约修复（ADR-038）。这是最后一条有真实数据撑着的断腿。
+
+**REMOVE CANDIDATE（不值得恢复，待 REMOVE sweep）**：
+
+| 项 | 依据 |
+|---|---|
+| agentSession SSE demo 事件流（`task_demo_*`） | demo；Hermes Session 已走 `/api/situation/:id/chat` 真实路径 |
+| agentConfig（只写 localStorage） | 配置不落服务器，伪持久化 |
+| `situation-viewmodel.ts` | orphaned 死文件（Pass 2 已被 `interaction-grammar.js` 取代） |
+| `operator_memories`(12) + Pattern Engine 冗余端点 | 附 2 已判 REMOVE CANDIDATE |
+| `signal_weights` 表 | seeded 但运行时零读写（权重活在 `DEFAULT_SIGNAL_WEIGHTS` + `ranking_profiles`） |
+| Evaluation 休眠列（`ground_truth_rank`/`usefulness_score`/`signal_usefulness`） | 无模块，仅死字段 |
+| Legacy Inbox `loadInbox`（badgeAll） | ADR-037 已记录 |
+| `context_memories`/`extractMemories` | ADR-035 已标记 |
+| 废弃 i18n keys（`evidence.viewRawJson`/`viewMappings`/`provenanceRaw` 等） | 指向不存在的功能，死键 |
+
+**不是断腿（有意延后/新工作，本轮不碰）**：Action/Result 业务闭环（ADR-035 下一阶段）、knowledge/policy/context/reports 空目录（有意的未来模块）、Memory/Learning（Hermes-owned，ADR-035）、Evaluation（决定不建）。
+
+**后续 provenance consolidation（ADR-038 记录，非本轮）**：persistent evidence identity（`evidence_id` 每次 list 重生成 UUID）、capability↔evidence 关联（EvidenceMetadata 无 capability 字段）、`lastVerified` 数据缺失。
+
+### 结论
+
+**Consolidation 的「功能恢复」到此结束。** 剩余只有两类：(a) REMOVE sweep 清 demo/死代码/误导入口；(b) 全新产品工作（knowledge/policy/reports、Action/Result、provenance consolidation）。继续修 UI 小 bug = 开始造新功能，不再是还债。

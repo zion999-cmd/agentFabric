@@ -102,4 +102,27 @@ describe('HTTP server (integration)', () => {
     expect(res.status).toBe(200);
     expect(data.length).toBeGreaterThan(0);
   });
+
+  test('GET /api/evidence/:capabilityId returns recent records sorted newest-first', async () => {
+    const res = await fetch(`${base}/api/evidence/product.overview`);
+    const body = (await res.json()) as Record<string, unknown>;
+    expect(res.status).toBe(200);
+    const data = body['data'] as Record<string, unknown>;
+
+    const evidence = data['evidence'] as { totalRecords: number; recentRecords: Array<{ metadata: { acquired_at: string } }> };
+    expect(Array.isArray(evidence.recentRecords)).toBe(true);
+    expect(evidence.recentRecords.length).toBeLessThanOrEqual(10);
+    expect(evidence.totalRecords).toBeGreaterThanOrEqual(evidence.recentRecords.length);
+
+    // recentRecords must be the NEWEST records (sorted by acquired_at descending),
+    // not the first N of an ascending directory walk.
+    const acquired = evidence.recentRecords.map((r) => r.metadata.acquired_at);
+    const sorted = [...acquired].sort((a, b) => b.localeCompare(a));
+    expect(acquired).toEqual(sorted);
+
+    // provenance fields the Evidence Viewer renders
+    const provider = data['provider'] as Record<string, unknown>;
+    expect(typeof provider['platform']).toBe('string');
+    expect(typeof provider['acquisition']).toBe('string');
+  });
 });

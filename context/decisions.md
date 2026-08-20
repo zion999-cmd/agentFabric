@@ -1,5 +1,33 @@
 # 技术决策记录 (ADR)
 
+## ADR-038: Evidence Viewer Contract Repair - 消费真实 Provenance
+
+- **日期**: 2026-08-21
+- **状态**: Accepted
+- **来源**: Consolidation（post-consolidation inventory 判定 Evidence Viewer 是最后一条「有真实数据撑着的断腿」）
+
+**决策**（修复 Evidence Viewer 的 API/UI contract mismatch，只对齐契约不扩功能）：
+
+1. **只做 contract 对齐。** `renderProvenanceChain` 原读 `evidence.artifacts` / `evidence.evidence_records` / `evidence.summary`（三个路径全错 -> 永远渲染空）。修正为消费路由真实返回：`discovery.artifacts` / `evidence.recentRecords` / `evidence.totalRecords` / `provider.{platformName,acquisitionLabel}` / `validation.lastVerified`。不新增 schema、不新增 producer、不重新设计 provenance。
+
+2. **producer 侧两处语义修复**（`GET /api/evidence/:capabilityId`）：
+   - `recentRecords` 按 `acquired_at` 降序排序--原实现取 `listEvidence` 目录序前 10 条，实为**最旧** 10 条；
+   - `listEvidence` 显式 `limit`（`EVIDENCE_LIST_LIMIT=10_000`）--默认 limit=100 会把 `totalRecords` 静默截断（真实 641 条报 100），且截断后最新 evidence（如 2026-08-20 CDP 采集）永远进不了 recentRecords。
+
+3. **`loadBtn` 用 `onclick` 赋值替代 `addEventListener`。** 该 view loader 每次导航都执行，addEventListener 会叠加重复 listener -> 重复 fetch。
+
+4. **记录为后续 gaps，本轮不修**：
+   - **capability 与 evidence 无稳定关联**（MISSING，schema gap）：route 按 `source=platform` 列全部 evidence，product.overview 也会显示 summary/trend 记录；EvidenceMetadata 无 capability 字段。
+   - **persistent evidence identity**（provenance identity gap，重要非 blocker）：`evidence_id` 每次 list 重新生成 UUID（store.ts 自述「for runtime tracking, not persistence」）--未来要做「点一条 Evidence -> 稳定回链原始证据」必须先解决，归后续 provenance consolidation。
+   - **`validation.lastVerified=null`**（metadata gap，低优先）：capability-contract.json 无 last_verified 数据。
+
+**验收**：浏览器（CDP 实测）product.overview -> 三个 provenance 节点（商品表现 / Discovery Artifacts / Evidence Records）+ `京东商智 · Live CDP Capture` + timeline 10 条真实 CDP evidence（2026-08-20 productTop · jd_shop_001 · cdp，与 API recentRecords 逐项一致）+ `Total: 641 records`。新增 http.test 回归（recentRecords 降序 + totalRecords 不截断）。
+
+**文件**: `apps/ecommerce/workspace/app.js`，`platform/server/routes/runtime.ts`，`tests/integration/http.test.ts`。
+
+---
+
+
 ## ADR-037: Explainability/Trust Workspace WIRE — Real /api/trace Consumer
 
 - **日期**: 2026-08-20
@@ -660,3 +688,4 @@ Runtime Kernel 不属于 HermesAgent 内部。它是 agentFabric 的公共执行
 5. **scoped instruction 必须被 root 指向，不能自动加载**。Hermes 只加载 cwd-root AGENTS.md；nested 指令（KNOWLEDGE.md / GOVERNANCE.md）是死文件除非 root 有 routing 规则指向它们——这正是 P0008.5 world/INDEX.md 失败的复刻。
 
 **边界**: 仅 audit，未修改 AGENTS.md/systems/knowledge/capability，未重跑 Blank Agent，未实现 loader/router/capability engine。
+

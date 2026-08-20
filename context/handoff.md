@@ -1,5 +1,43 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - Consolidation: Evidence Viewer Contract Repair
+
+### 目标
+
+修复 Evidence Viewer 的 API/UI contract mismatch（post-consolidation inventory 判定为最后一条「有真实数据撑着的断腿」）：`Evidence Store -> /api/evidence/:capabilityId -> Evidence Viewer -> 专业人员可查看真实 provenance`。只允许契约对齐 + REUSE 现有 recentRecords/discovery.artifacts，不新增 schema/producer、不重设计 provenance。
+
+### 做了什么
+
+- `apps/ecommerce/workspace/app.js`：`renderProvenanceChain` 字段路径修正（`evidence.artifacts`->`discovery.artifacts`、`evidence.evidence_records`->`evidence.recentRecords`、`evidence.summary`->`evidence.totalRecords`）；Provider 节点显示真实 `platformName`/`acquisitionLabel`/`lastVerified`；Timeline 增加 `shop_id`；`loadBtn` 改 `onclick`（view loader 每次导航重跑，addEventListener 叠加重复 listener -> 重复 fetch）。
+- `platform/server/routes/runtime.ts`：`recentRecords` 按 `acquired_at` 降序（原目录序前 10 = **最旧** 10 条，字段名叫 recent 实则 oldest）；`listEvidence` 显式 `EVIDENCE_LIST_LIMIT=10_000`（默认 limit=100 会截断 `totalRecords` 且 2026-08-20 最新 CDP evidence 永远进不了列表--修复前 recentRecords 首位是 2026-08-16，修复后是 2026-08-20）。
+- `tests/integration/http.test.ts`：新增回归测试（recentRecords 降序 + <=10 条 + totalRecords 不截断 + provider 字段）。
+
+### 浏览器实证（CDP 实测 Chrome，product.overview）
+
+三个 provenance 节点（商品表现 -> Discovery Artifacts -> Evidence Records）不再空白；Provider `京东商智 · Live CDP Capture`；Timeline 10 条真实 CDP evidence（`2026-08-20 productTop · jd_shop_001 · cdp` 等，与 API recentRecords 逐项一致）；`Total: 641 records` 与磁盘 641 个 .meta.json 一致。
+
+### 新发现（记录，不修 -- ADR-038）
+
+1. **capability ↔ evidence 无稳定关联**（schema gap，MISSING）：route 按 `source=platform` 列全部 evidence，product.overview 也显示 summary/trend 记录。
+2. **persistent evidence identity**（重要非 blocker）：`evidence_id` 每次 list 重新生成 UUID，未来「点一条 Evidence -> 稳定回链原始证据」必须先解决，归后续 provenance consolidation。
+3. **`lastVerified=null`**：capability-contract.json 无 last_verified 数据（低优先）。
+4. **废弃 i18n keys**（`evidence.viewRawJson`/`viewMappings`/`provenanceRaw` 等指向不存在的功能）：留给 REMOVE sweep。
+
+### 事故
+
+onclick 改动漏改闭合括号（`});`->`};`）造成 app.js `SyntaxError` 整个 SPA 不加载，CDP console 捕获后修复，`node --check` 加入验收流程。
+
+### 测试
+
+572 total / 570 passed / 2 pre-existing failures（coverage indicator_pct 漂移、chat.contract Hermes 超时），http.test 7/7。typecheck 17 错误前后一致（全部 pre-existing）。
+
+### 状态
+
+- **Evidence Viewer: END-TO-END 可用**（Evidence Store -> API -> Viewer 全链真实数据）。
+- Consolidation 功能恢复阶段结束；剩余工作 = REMOVE sweep + inventory 收口（见 current_state.md 下一步）。
+
+---
+
 ## 本次会话 (2026-08-20) — Explainability/Trust Workspace WIRE（END-TO-END COMPLETE）
 
 ### 做了什么

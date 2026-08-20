@@ -25,6 +25,9 @@ import { resolve } from 'node:path';
 
 // ---- Request Schemas ----
 
+/** Upper bound for evidence listing in the provenance route (listEvidence caps at 100 by default). */
+const EVIDENCE_LIST_LIMIT = 10_000;
+
 const CollectRequestSchema = z.object({
   platform: z.string().default('jd'),
   shopId: z.string().min(1),
@@ -550,10 +553,11 @@ export const runtimeRouter = (db: Db): Router => {
       const validation = capability.validation as Record<string, unknown> || {};
       const platform = (provider.platform || 'jd') as string;
 
-      // List evidence records for this platform
+      // List evidence records for this platform. Explicit limit: listEvidence
+      // defaults to 100, which would silently cap totalRecords below reality.
       let evidenceRecords: unknown[] = [];
       try {
-        evidenceRecords = listEvidence({ source: platform });
+        evidenceRecords = listEvidence({ source: platform, limit: EVIDENCE_LIST_LIMIT });
       } catch {
         // Evidence may not exist yet — that's fine
       }
@@ -593,7 +597,15 @@ export const runtimeRouter = (db: Db): Router => {
         },
         evidence: {
           totalRecords: evidenceRecords.length,
-          recentRecords: evidenceRecords.slice(0, 10),
+          // listEvidence walks the tree in ascending date order - sort by
+          // acquired_at descending so "recentRecords" really is the most recent.
+          recentRecords: [...evidenceRecords]
+            .sort((a, b) => {
+              const at = (a as { metadata?: { acquired_at?: string } }).metadata?.acquired_at ?? '';
+              const bt = (b as { metadata?: { acquired_at?: string } }).metadata?.acquired_at ?? '';
+              return bt.localeCompare(at);
+            })
+            .slice(0, 10),
         },
         discovery: {
           artifacts: Object.keys(artifacts).length > 0 ? artifacts : null,

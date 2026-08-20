@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-consolidation-pass4 | **Hermes**: v0.20.0 | **测试**: 569 passed / 2 pre-existing failures (571 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 600+ files (Jan-Aug 2026)
+|**版本**: v0.2-consolidation-pass5 | **Hermes**: v0.20.0 | **测试**: 570 passed / 2 pre-existing failures (572 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 641 files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **Consolidation - Evidence Viewer Contract Repair (END-TO-END 可用)** - 修复 `/api/evidence/:capabilityId` 与 Workspace Evidence Viewer 的 contract mismatch：`renderProvenanceChain` 三个错误字段路径（`evidence.artifacts`/`evidence_records`/`summary`）改为真实返回（`discovery.artifacts`/`evidence.recentRecords`/`totalRecords`）；producer 侧 `recentRecords` 改 `acquired_at` 降序（原取目录序前 10 = 最旧 10 条）+ `listEvidence` 显式 limit（默认 100 会截断 totalRecords 且最新 CDP evidence 永远进不了列表）；`loadBtn` onclick 防 listener 叠加。浏览器实证：product.overview → 京东商智 · Live CDP Capture + 10 条真实 CDP timeline（2026-08-20 productTop · jd_shop_001）+ Total: 641 records，与 API 逐项一致。**后续 gaps 记录不修**：capability↔evidence 无关联（MISSING）、evidence_id 非持久（provenance identity gap，归后续 provenance consolidation）、lastVerified=null（低优先）。ADR-038。新测试 1。
 
 - [x] **Consolidation — Explainability/Trust Workspace WIRE (END-TO-END COMPLETE)** — `JD productTop → signals → Ranking → buildTrace → business_traces → /api/trace → Workspace` 闭环。`GET /api/ranking/:profile` 附带 current trace_id（JOIN live ranking_results，悬空历史 trace 永不命中）；Workspace 决策面板只消费 `/api/trace/:traceId`（`renderTracePanel` 重写为真实 consumer：trust/contradictions/evidence/ranking，明确 Ranking Explainability 非 Situation 解释）；旧 fabricated trace panel（Skills/MCP/Memory/ExecutionSteps 合成 section）整体替换；商品视图详情卡可点开面板；运营模式显示真实信任分。浏览器实证 trust=0.12、low_coverage、gmv_growth_1d。**Legacy Inbox `loadInbox` pre-existing broken `badgeAll` → REMOVE CANDIDATE，不修复**。ADR-037。新测试 1。
 
@@ -77,10 +79,10 @@
 
 ## 下一步
 
-- Workspace consumer（trace 面板，只消费 `/api/trace/:traceId`）——下一刀。
+- **REMOVE sweep + inventory 收口**（建议的最后一刀）：删除 demo/死代码/误导入口（`situation-viewmodel.ts` 孤儿文件、agentSession `task_demo_*` SSE demo、agentConfig localStorage 伪持久化、`signal_weights` 孤儿表、废弃 i18n keys、operator_memories/Pattern Engine 冗余端点、legacy Inbox、休眠 Evaluation 列），然后归档 post-consolidation inventory，正式结束这轮还债。
 - P0009.1 从 Workspace 浏览器确认「今日工作」渲染真实 Situation（API 已验证返回 5 条）。
 - （可选）trace 幂等：`business_traces` 加 `(profile, entity_id)` 唯一键 + `storeTrace` upsert，或 `ranking_id` 确定性化（需放宽「REUSE store / 不改 ranking 算法」红线）。
-- 遗留（低优先）: P0008.6 Proposal、`systems/` vs `world/` 定案、dangling `contracts/WORLD_MODEL.md`。
+- （后续 provenance consolidation，非本轮）persistent evidence identity + capability↔evidence 关联（ADR-038 记录的 gaps）。
 
 ## 阻塞
 

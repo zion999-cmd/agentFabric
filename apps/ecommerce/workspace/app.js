@@ -1527,8 +1527,9 @@ async function loadEvidenceViewer() {
 
   content.innerHTML = '<p class="muted placeholder">Select a capability to view its evidence provenance chain.</p>';
 
-  // Load evidence on button click
-  loadBtn.addEventListener('click', async function() {
+  // Load evidence on button click (onclick assignment - this view loader runs on
+  // every navigation, addEventListener would stack duplicate listeners/fetches)
+  loadBtn.onclick = async function() {
     var capId = select.value;
     if (!capId) { content.innerHTML = '<p class="muted placeholder">Please select a capability first.</p>'; return; }
     content.innerHTML = '<p class="muted">Loading evidence for ' + escHtml(capId) + '...</p>';
@@ -1538,15 +1539,18 @@ async function loadEvidenceViewer() {
     } catch (e) {
       content.innerHTML = '<p class="muted placeholder">Failed to load evidence (' + e.message + ')</p>';
     }
-  });
+  };
 }
 
 function renderProvenanceChain(container, evidence, capId) {
+  // Field paths match /api/evidence/:capabilityId exactly (runtime.ts):
+  // { capability, provider, evidence: { totalRecords, recentRecords }, discovery: { artifacts }, validation }
   var cap = evidence.capability || {};
   var provider = evidence.provider || {};
-  var artifacts = evidence.artifacts || {};
-  var records = evidence.evidence_records || [];
-  var summary = evidence.summary || {};
+  var artifacts = (evidence.discovery && evidence.discovery.artifacts) || {};
+  var records = (evidence.evidence && evidence.evidence.recentRecords) || [];
+  var totalRecords = (evidence.evidence && evidence.evidence.totalRecords) || records.length;
+  var validation = evidence.validation || {};
 
   var html = '<div class="evidence-breadcrumb">' +
     '<span>Agent Session</span> <span class="sep">&gt;</span> ' +
@@ -1565,7 +1569,9 @@ function renderProvenanceChain(container, evidence, capId) {
       '<div class="provenance-node-subtitle">Capability: ' + escHtml(cap.domain || '') + '</div>' +
       '<div class="provenance-node-detail">' + escHtml(cap.description || '') + '</div>' +
     '</div>' +
-    '<span class="provenance-status verified">' + escHtml(provider.platform || '') + ' &middot; ' + escHtml(provider.acquisition || '') + '</span>' +
+    '<span class="provenance-status verified">' + escHtml(provider.platformName || provider.platform || '') + ' &middot; ' +
+      escHtml(provider.acquisitionLabel || provider.acquisition || '') +
+      (validation.lastVerified ? ' &middot; ' + escHtml(validation.lastVerified.slice(0, 10)) : '') + '</span>' +
   '</div>';
 
   // Node 2: Discovery artifacts
@@ -1596,25 +1602,25 @@ function renderProvenanceChain(container, evidence, capId) {
         '<div class="provenance-node-title">Evidence Records</div>' +
         '<div class="provenance-node-subtitle">' + records.length + ' evidence files</div>';
 
-    // Evidence timeline
+    // Evidence timeline - each item maps 1:1 to an EvidenceRecord from
+    // /api/evidence (metadata.acquired_at / data_type / acquisition_method / shop_id).
     html += '<div class="evidence-timeline"><div class="evidence-timeline-title">Timeline</div>';
     records.slice(0, 20).forEach(function(rec) {
       var meta = rec.metadata || {};
-      var acquired = meta.acquired_at ? meta.acquired_at.slice(0, 10) : (rec.date || '');
-      var dataType = meta.data_type || rec.data_type || rec.type || '';
+      var acquired = meta.acquired_at ? meta.acquired_at.slice(0, 10) : '';
+      var dataType = meta.data_type || '';
       var method = meta.acquisition_method || meta.method || 'none';
       var statusClass = method === 'cdp' ? 'cdp' : method === 'mock' ? 'mock' : 'none';
       html += '<div class="evidence-timeline-item">' +
         '<span><span class="evidence-timeline-date">' + escHtml(acquired) + '</span> ' +
-        '<span class="evidence-timeline-meta">' + escHtml(dataType) + '</span></span>' +
+        '<span class="evidence-timeline-meta">' + escHtml(dataType) + (meta.shop_id ? ' · ' + escHtml(meta.shop_id) : '') + '</span></span>' +
         '<span class="evidence-timeline-status ' + statusClass + '">' + escHtml(method) + '</span>' +
       '</div>';
     });
     html += '</div>';
 
     html += '<div class="provenance-node-meta" style="margin-top:8px">' +
-      'Total: ' + summary.total_evidence + ' records &middot; ' +
-      'From: ' + escHtml(summary.date_range || '') +
+      'Total: ' + totalRecords + ' records' +
       '</div>';
 
     html += '</div></div>';
