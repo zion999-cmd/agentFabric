@@ -60,13 +60,11 @@
         <!-- 业务配置 — only agentFabric-owned config -->
         <div class="sidebar-section">
           <div class="sidebar-section-label">业务配置</div>
-          <a href="#" class="sidebar-item" data-view="agentConfig"><span class="sidebar-icon config-icon">&#9881;</span><span>排名权重</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <!-- Legacy — hidden (Memory is Runtime-owned, removed from nav) -->
         <div class="sidebar-section legacy-section" style="display:none">
           <div class="sidebar-section-label">Legacy (迁移中)</div>
-          <a href="#" class="sidebar-item" data-view="inbox" data-filter="all"><span class="sidebar-icon">📥</span><span>Inbox (旧)</span></a>
           <a href="#" class="sidebar-item" data-view="memory"><span class="sidebar-icon memory-icon">&#129504;</span><span>Memory (旧 — Runtime-owned)</span></a>
         </div>
         <div class="sidebar-footer">
@@ -107,23 +105,6 @@
             <div id="situationDetailContent"></div>
           </div>
         </div>
-
-        <div id="view-inbox" class="view-container">
-          <div class="view-scroll">
-            <div class="inbox-header"><div><h2 class="inbox-title" data-i18n="inbox.title">今日洞察</h2><p class="inbox-subtitle" id="inboxSubtitle" data-i18n="inbox.subtitle">运营Agent 正在分析数据...</p></div><div class="inbox-header-right"><span class="inbox-updated" id="inboxUpdated">--</span><button id="refreshInboxBtn" class="btn-icon" title="Refresh">&#8635;</button></div></div>
-            <div class="stat-row" id="statRow">
-              <div class="stat-card"><div class="stat-icon-wrap stat-icon-blue"><span>&#127991;</span></div><div class="stat-body"><div class="stat-label" data-i18n="stat.totalSku">SKU 总数</div><div class="stat-value" id="statTotalSku">--</div><div class="stat-trend" id="statTotalSkuTrend"></div></div></div>
-              <div class="stat-card"><div class="stat-icon-wrap stat-icon-green"><span>&#128260;</span></div><div class="stat-body"><div class="stat-label" data-i18n="stat.activeSku">活跃 SKU</div><div class="stat-value" id="statActiveSku">--</div><div class="stat-trend" id="statActiveSkuTrend"></div></div></div>
-              <div class="stat-card"><div class="stat-icon-wrap stat-icon-indigo"><span>&#9729;</span></div><div class="stat-body"><div class="stat-label" data-i18n="stat.newSignals">新增信号</div><div class="stat-value" id="statNewSignals">--</div><div class="stat-trend" id="statNewSignalsTrend"></div></div></div>
-              <div class="stat-card"><div class="stat-icon-wrap stat-icon-pink"><span>&#128221;</span></div><div class="stat-body"><div class="stat-label" data-i18n="stat.pendingReview">待审核建议</div><div class="stat-value" id="statPendingReview">--</div><div class="stat-trend" id="statPendingReviewTrend"></div></div></div>
-            </div>
-            <div class="findings-section">
-              <div class="findings-toolbar"><h3 class="findings-title" id="findingsTitle" data-i18n="findings.title">AI 发现</h3><div class="findings-filters"><select id="filterPriority" class="input select filter-select"><option value="all" data-i18n="filter.allPriority">全部优先级</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select><select id="filterType" class="input select filter-select"><option value="all" data-i18n="filter.allType">全部类型</option><option value="opportunity" data-i18n="filter.opportunity">潜力商品</option><option value="risk" data-i18n="filter.risk">风险预警</option><option value="review">审核</option></select></div></div>
-              <div id="findingsList" class="findings-list"><p class="muted placeholder">加载 AI 发现中...</p></div>
-            </div>
-          </div>
-          <div class="inbox-chat-section"><h3 class="chat-section-title" data-i18n="chat.recommended">推荐问题</h3><div class="chat-recommended-chips" id="recommendedChips"><button class="chip chip-question" data-question="为什么销量最高的商品排第一？">为什么销量最高的商品排第一？</button><button class="chip chip-question" data-question="最近7天最大的变化是什么？">最近7天最大的变化是什么？</button><button class="chip chip-question" data-question="有哪些高风险商品？">有哪些高风险商品？</button></div><div class="chat-input-row"><input id="chatInput" class="input chat-input-main" placeholder="追问 Agent..." /><button id="chatSendButton" class="btn btn-primary chat-send-btn">&#10148;</button></div><div id="inboxChatMessages" class="chat-messages-inline"></div></div>
-        </div>
         <div id="view-product" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="product.title">商品分析</h2></div><div class="product-search-row"><input id="productSearchInput" class="input" style="flex:1" placeholder="搜索商品 ID..." /><button id="productSearchBtn" class="btn btn-primary" data-i18n="product.search">搜索</button></div><div id="productContent" class="muted placeholder">输入商品 ID 查看完整画像</div></div>
         <div id="view-trend" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="trend.title">趋势观察</h2><span class="muted" data-i18n="trend.subtitle">信号变化与排名漂移时间轴</span></div><div id="trendContent" class="muted placeholder">加载中...</div></div>
         <div id="view-archive" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="archive.title">历史归档</h2><select id="archiveProfileSelect" class="input select" style="font-size:0.8rem;"><option value="operator_mode" data-i18n="profile.operator">运营推荐</option><option value="growth_discovery" data-i18n="profile.growth">增长发现</option><option value="sales_leaderboard" data-i18n="profile.sales">销售排行</option></select></div><div id="archiveTimeline"></div></div>
@@ -149,7 +130,6 @@
           </div>
 
           <div class="runtime-executions" style="max-height:50vh;overflow-y:auto"><h3 style="font-size:0.85rem;margin-bottom:8px;position:sticky;top:0;background:var(--bg);z-index:1;padding:4px 0">执行历史 <span id="runtimeExecCount" class="muted" style="font-size:0.72rem"></span></h3><div id="runtimeExecutionsList" class="muted placeholder">加载中...</div></div><div id="runtimeDetail" style="display:none;margin-top:16px"><h3 style="font-size:0.85rem;margin-bottom:8px">执行详情</h3><div id="runtimeDetailContent"></div></div></div>
-        <div id="view-agentConfig" class="view-container"><div class="view-title-row"><h2 class="view-title">业务配置</h2><span class="muted" style="font-size:0.72rem">仅 agentFabric-owned 配置</span></div><div class="config-section"><h3 class="config-section-title">排名权重</h3><div class="threshold-row"><div class="threshold-item"><label>增长权重</label><input type="number" class="input" id="cfgGrowthWeight" value="0.35" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label>竞争权重</label><input type="number" class="input" id="cfgCompetitionWeight" value="0.25" min="0" max="1" step="0.05" /></div><div class="threshold-item"><label>质量权重</label><input type="number" class="input" id="cfgQualityWeight" value="0.15" min="0" max="1" step="0.05" /></div></div></div><p class="muted" style="font-size:0.72rem;margin-top:16px">Memory TTL / 衰减 / LLM Provider / Model / Temperature 属于 Hermes Runtime 管理，已从 agentFabric Workspace 移除。</p><button class="btn btn-primary" id="saveAgentConfig" style="margin-top:16px">保存配置</button></div>
 
         <!-- v0.2 Phase 2: Agent Session — primary workspace view -->
         <div id="view-agentSession" class="view-container active">

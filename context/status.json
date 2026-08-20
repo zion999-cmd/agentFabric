@@ -1,9 +1,10 @@
 {
   "project": "agentFabric",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Business Workspace on Hermes Agent Runtime",
   "hermes": "0.20.0",
   "completed": [
+    "Post-Consolidation REMOVE Sweep - deleted only assets marked REMOVE CANDIDATE with proven zero canonical consumers: situation-viewmodel.ts orphan, agentSession SSE demo route+connectEventStream, agentConfig localStorage pseudo-persistence, Legacy Inbox (loadInbox/badgeAll/view-inbox/inbox chat), 17 dead Evidence Viewer i18n keys, operator_memories producer+3 zero-consumer endpoints (kept DB table+store as inert); kept legacy Review->Feedback->context_memories read side (LIVE consumers: /api/memory, chat, findings, orchestrator adjustments) and signal_weights (schema cleanup forbidden); -1036 lines; browser-verified 7 canonical chains no regression; ADR-039",
     "Evidence Viewer Contract Repair - renderProvenanceChain field paths aligned to real /api/evidence response (discovery.artifacts/evidence.recentRecords/totalRecords); recentRecords sorted acquired_at desc (was oldest 10) + explicit listEvidence limit (default 100 truncated totalRecords and hid newest CDP evidence); loadBtn onclick; browser-verified real CDP provenance (2026-08-20 productTop, Total: 641 records); gaps recorded not fixed: capability-evidence association MISSING, non-persistent evidence_id, lastVerified=null; ADR-038",
     "Explainability/Trust Workspace WIRE — ranking.ts GET /api/ranking/:profile attaches current trace_id (JOIN live ranking_results, dangling never surfaces); Workspace decision panel consumes only /api/trace/:traceId (renderTracePanel rewritten real consumer: trust/contradictions/evidence/ranking, labeled Ranking Explainability not Situation); fabricated P0003.1 trace sections removed; product view card opens panel; business panel shows real trust line; browser-verified trust=0.12/low_coverage; legacy Inbox badgeAll break = REMOVE CANDIDATE (unrepaired); ADR-037",
     "Explainability/Trust Producer Wiring — productTop → buildTrace → business_traces: builder.ts#buildRankingTrace (pure) + facade.ts#explainRanking + backfill per-ranking explainRanking+store; 5 current traces (trust=0.12, low_coverage), ranking_id↔trace_id↔SKU one-to-one, /api/trace/:traceId readable; append-only history (known dangling ranking_id issue); ADR-036",
@@ -48,10 +49,7 @@
     "P0009 Final Browser Acceptance — six-surface wiring done, awaiting Workspace browser end-to-end verification (model stability recorded as runtime limitation)"
   ],
   "next": [
-    "REMOVE sweep + inventory close-out - delete demo/dead code/misleading entries (situation-viewmodel.ts orphan, task_demo_ SSE, agentConfig localStorage, signal_weights orphan table, dead i18n keys, operator_memories/Pattern Engine redundant endpoints, legacy Inbox, dormant Evaluation columns), archive post-consolidation inventory, formally end the debt-repayment round",
-    "Workspace browser confirmation of 今日工作 rendering real situations",
-    "Optional: trace idempotency (business_traces unique key + storeTrace upsert, or deterministic ranking_id)",
-    "Later (provenance consolidation, not this round): persistent evidence identity + capability-evidence association (ADR-038 gaps)"
+    "None - debt-repayment round formally closed (Consolidation feature-recovery + REMOVE sweep complete). Next work = new product surface (knowledge/policy/reports, Action/Result loop, provenance consolidation per ADR-038) when business requirement drives it"
   ],
   "blocked": [
     "P0009 model stability — nemotron-3-ultra run-to-run jitter (71-77s vs >180s), transport confirmed correct, model/quota layer"

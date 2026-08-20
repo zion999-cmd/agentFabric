@@ -12,16 +12,10 @@ const i18n = {
     'mode.operator': 'Operator', 'mode.builder': 'Builder',
     'header.role': '运营总监', 'header.team': '电商运营团队',
     'nav.section.discovery': '发现视图', 'nav.section.analysis': '分析视图',
-    'nav.inbox': '今日发现', 'nav.growth': '增长机会', 'nav.risk': '风险预警', 'nav.review': '审核中心',
-    'nav.product': '商品分析', 'nav.trend': '趋势观察', 'nav.archive': '历史归档', 'nav.memory': 'Memory 成长', 'nav.runtime': 'Runtime 执行', 'nav.agentConfig': 'Agent 配置',
+    'nav.product': '商品分析', 'nav.trend': '趋势观察', 'nav.archive': '历史归档', 'nav.runtime': 'Runtime 执行',
     'sidebar.agent': '运营Agent', 'sidebar.running': '运行中',
     'sidebar.version': '版本', 'sidebar.dataTime': '数据时间',
     'sidebar.decisions': '今日决策', 'sidebar.accuracy': '准确率 (近7天)',
-    'inbox.title': '今日洞察', 'inbox.subtitle': '运营Agent 正在分析数据...',
-    'inbox.insightCount': '运营Agent 为您发现 {count} 条重要洞察',
-    'stat.totalSku': 'SKU 总数', 'stat.activeSku': '活跃 SKU', 'stat.newSignals': '新增信号', 'stat.pendingReview': '待审核建议',
-    'findings.title': 'AI 发现',
-    'filter.allPriority': '全部优先级', 'filter.allType': '全部类型',
     'decision.title': 'Ranking Explainability · 排名解释',
     'decision.placeholder': '点击左侧商品卡片查看当前排名对应的业务追踪（/api/trace/:traceId）。',
     'trace.rankExplain': '排名解释（Ranking Explainability）· 非 Situation 解释',
@@ -37,15 +31,10 @@ const i18n = {
     'archive.title': '历史归档',
     'memory.title': 'Memory 成长', 'memory.subtitle': 'Agent 从运营反馈中学习的知识积累',
     'profile.operator': '运营推荐', 'profile.growth': '增长发现', 'profile.sales': '销售排行',
-    'config.title': 'Agent 配置', 'config.ranking': '排名权重',
-    'config.growthWeight': '增长权重', 'config.competitionWeight': '竞争权重', 'config.qualityWeight': '质量权重',
-    'config.memory': 'Memory 设置', 'config.memoryTtl': 'TTL (天)', 'config.memoryDecay': '衰减率', 'config.memoryThreshold': '验证阈值',
-    'config.llm': 'LLM 配置', 'config.llmProvider': 'Provider', 'config.llmModel': 'Model', 'config.llmTemp': 'Temperature',
-    'config.save': '保存配置', 'config.saved': '配置已保存',
     'label.score': 'Score', 'label.growth': 'Growth', 'label.competition': 'Competition',
     'label.supply': 'Supply', 'label.quality': 'Quality', 'label.conf': 'Conf', 'label.none': '--',
     'label.updated': 'Updated {time}', 'label.loading': 'Loading...', 'label.unavailable': 'Unavailable',
-    'toast.ready': 'Agent Workspace 就绪', 'toast.refreshed': '已刷新', 'toast.configSaved': '配置已保存',
+    'toast.ready': 'Agent Workspace 就绪', 'toast.refreshed': '已刷新',
     // Phase 2
     'nav.section.agent': 'AGENT', 'nav.agentSession': 'Agent Session',
     'nav.section.capability': 'CAPABILITY', 'nav.capabilityExplorer': 'Capability Explorer', 'nav.evidenceViewer': 'Evidence Viewer',
@@ -64,32 +53,16 @@ const i18n = {
     'capability.provider': '数据来源', 'capability.constraints': '约束',
     'capability.evidence': 'Evidence', 'capability.openEvidence': '查看 Evidence 链 →',
     'capability.footer': '{total} capabilities · {verified} verified · {blocked} blocked',
-    'evidence.title': '数据从哪里来，能信吗？',
-    'evidence.selectCapability': 'Select Capability:', 'evidence.load': 'Load Evidence',
-    'evidence.placeholder': '选择一个 Capability 查看其证据溯源链。',
-    'evidence.notFound': '未找到该 Capability',
-    'evidence.provenanceCapability': 'Capability', 'evidence.provenancePlatform': '平台页面',
-    'evidence.provenanceCapture': '数据采集', 'evidence.provenanceRaw': '原始响应',
-    'evidence.provenanceMapping': '语义映射', 'evidence.provenanceMetrics': '指标',
-    'evidence.provenanceContract': 'Capability Contract',
-    'evidence.expand': '▸ 展开', 'evidence.collapse': '▾ 收起',
-    'evidence.viewRawJson': '查看原始 JSON', 'evidence.viewMappings': '查看全部 {count} 条映射',
-    'evidence.supports': '此 Evidence 验证: {id}',
+    
   },
   en: {
     'mode.business': 'Business', 'mode.developer': 'Developer', 'mode.operator': 'Operator', 'mode.builder': 'Builder',
     'header.role': 'Ops Director', 'header.team': 'E-commerce Team',
     'nav.section.discovery': 'Discovery', 'nav.section.analysis': 'Analysis',
-    'nav.inbox': 'Today', 'nav.growth': 'Growth', 'nav.risk': 'Risk Alerts', 'nav.review': 'Reviews',
-    'nav.product': 'Products', 'nav.trend': 'Trends', 'nav.archive': 'Archive', 'nav.memory': 'Memory', 'nav.runtime': 'Runtime', 'nav.agentConfig': 'Config',
+    'nav.product': 'Products', 'nav.trend': 'Trends', 'nav.archive': 'Archive', 'nav.runtime': 'Runtime',
     'sidebar.agent': 'Ops Agent', 'sidebar.running': 'Running',
     'sidebar.version': 'Version', 'sidebar.dataTime': 'Data Time',
     'sidebar.decisions': 'Decisions', 'sidebar.accuracy': 'Accuracy (7d)',
-    'inbox.title': "Today's Insights", 'inbox.subtitle': 'Agent is analyzing data...',
-    'inbox.insightCount': 'Agent discovered {count} insights',
-    'stat.totalSku': 'Total SKUs', 'stat.activeSku': 'Active SKUs', 'stat.newSignals': 'New Signals', 'stat.pendingReview': 'Pending Reviews',
-    'findings.title': 'AI Discoveries',
-    'filter.allPriority': 'All Priorities', 'filter.allType': 'All Types',
     'decision.title': 'Ranking Explainability',
     'decision.placeholder': 'Click a product card to view its business trace for the current ranking.',
     'trace.rankExplain': 'Ranking Explainability — not Situation explanation',
@@ -105,15 +78,10 @@ const i18n = {
     'archive.title': 'Archive',
     'memory.title': 'Memory Growth', 'memory.subtitle': 'Knowledge from operations feedback',
     'profile.operator': 'Operator', 'profile.growth': 'Growth', 'profile.sales': 'Sales',
-    'config.title': 'Agent Config', 'config.ranking': 'Ranking Weights',
-    'config.growthWeight': 'Growth', 'config.competitionWeight': 'Competition', 'config.qualityWeight': 'Quality',
-    'config.memory': 'Memory Settings', 'config.memoryTtl': 'TTL (days)', 'config.memoryDecay': 'Decay', 'config.memoryThreshold': 'Threshold',
-    'config.llm': 'LLM Config', 'config.llmProvider': 'Provider', 'config.llmModel': 'Model', 'config.llmTemp': 'Temperature',
-    'config.save': 'Save', 'config.saved': 'Saved',
     'label.score': 'Score', 'label.growth': 'Growth', 'label.competition': 'Competition',
     'label.supply': 'Supply', 'label.quality': 'Quality', 'label.conf': 'Conf', 'label.none': '--',
     'label.updated': 'Updated {time}', 'label.loading': 'Loading...', 'label.unavailable': 'Unavailable',
-    'toast.ready': 'Agent Workspace ready', 'toast.refreshed': 'Refreshed', 'toast.configSaved': 'Config saved',
+    'toast.ready': 'Agent Workspace ready', 'toast.refreshed': 'Refreshed',
     // Phase 2
     'nav.section.agent': 'AGENT', 'nav.agentSession': 'Agent Session',
     'nav.section.capability': 'CAPABILITY', 'nav.capabilityExplorer': 'Capability Explorer', 'nav.evidenceViewer': 'Evidence Viewer',
@@ -132,17 +100,6 @@ const i18n = {
     'capability.provider': 'Provider', 'capability.constraints': 'Constraints',
     'capability.evidence': 'Evidence', 'capability.openEvidence': 'Open Evidence Chain →',
     'capability.footer': '{total} capabilities · {verified} verified · {blocked} blocked',
-    'evidence.title': 'Where does the data come from? Can it be trusted?',
-    'evidence.selectCapability': 'Select Capability:', 'evidence.load': 'Load Evidence',
-    'evidence.placeholder': 'Select a capability to view its evidence provenance chain.',
-    'evidence.notFound': 'Capability not found',
-    'evidence.provenanceCapability': 'Capability', 'evidence.provenancePlatform': 'Platform Page',
-    'evidence.provenanceCapture': 'Capture', 'evidence.provenanceRaw': 'Raw Response',
-    'evidence.provenanceMapping': 'Semantic Mapping', 'evidence.provenanceMetrics': 'Metrics',
-    'evidence.provenanceContract': 'Capability Contract',
-    'evidence.expand': '▸ Expand', 'evidence.collapse': '▾ Collapse',
-    'evidence.viewRawJson': 'View Raw JSON', 'evidence.viewMappings': 'View all {count} mappings',
-    'evidence.supports': 'This evidence supports: {id}',
   },
 };
 
@@ -173,14 +130,13 @@ function switchView(name, filter = 'all') {
   state.activeView = name; state.activeFilter = filter;
   document.querySelectorAll('.sidebar-item').forEach(item => {
     const itemView = item.dataset.view, itemFilter = item.dataset.filter;
-    if (name === 'inbox') item.classList.toggle('active', itemView === 'inbox' && itemFilter === filter);
-    else item.classList.toggle('active', itemView === name && !itemFilter);
+    item.classList.toggle('active', itemView === name && !itemFilter);
   });
   document.querySelectorAll('.view-container').forEach(c => { c.classList.toggle('active', c.id === `view-${name}`); });
   viewLoaders[name]?.(filter);
 }
 
-const viewLoaders = { inbox: loadInbox, product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, agentConfig: loadConfig,
+const viewLoaders = { product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, 
   agentSession: loadAgentSession, capabilityExplorer: loadCapabilityExplorer, evidenceViewer: loadEvidenceViewer,
   situations: loadSituationFeed, situationDetail: loadSituationDetail };
 
@@ -203,147 +159,6 @@ async function loadData() {
     }
   } catch { /* keep caches */ }
 }
-
-// ═══ Inbox ═════════════════════════════════════════════════
-async function loadInbox(filterType = 'all') {
-  document.getElementById('findingsTitle').textContent = `${t('findings.title')}`;
-  await loadData();
-
-  // Build enriched cards from rankings
-  const enriched = state.rankingsCache.map(r => {
-    const isRisk = r.explainability?.risks?.length > r.explainability?.strengths?.length;
-    const dir = (v) => v >= 0.65 ? 'up' : v <= 0.45 ? 'down' : 'neutral';
-    const comp = r.component_scores || {};
-    const tags = [];
-    if (isRisk) tags.push('需关注');
-    if (r.explainability?.strengths?.length) tags.push('增长信号强');
-    if (r.explainability?.risks?.length) tags.push('存在风险');
-    return {
-      id: r.entity_id,
-      entityId: r.entity_id,
-      entityName: state.productNames[r.entity_id] || r.entity_id,
-      type: isRisk ? 'risk' : 'growth',
-      priority: r.overall_score >= 0.5 ? 'high' : r.overall_score >= 0.3 ? 'medium' : 'low',
-      title: r.explainability?.summary || '排名结果',
-      metrics: [
-        { label: '增长得分', value: comp.growth ? (comp.growth * 100).toFixed(1) + '%' : '--', direction: dir(comp.growth) },
-        { label: '增长趋势', value: comp.competition ? (comp.competition * 100).toFixed(1) + '%' : '--', direction: dir(comp.competition) },
-        { label: '库存健康', value: comp.supply_stability ? (comp.supply_stability * 100).toFixed(1) + '%' : '--', direction: dir(comp.supply_stability) },
-        { label: '置信度', value: Math.round(r.confidence * 100) + '%', direction: r.confidence >= 0.7 ? 'up' : 'neutral' },
-      ],
-      tags,
-      aiSuggestion: r.explainability?.strengths?.length
-        ? r.explainability.strengths[0] + '。关注关键指标变化趋势。'
-        : '关注关键指标变化趋势。',
-      reasoningSummary: [
-        `综合得分: ${r.overall_score.toFixed(3)}`,
-        `覆盖度: ${(r.coverage * 100).toFixed(0)}%`,
-        ...(r.explainability?.strengths || []).slice(0, 2),
-        ...(r.explainability?.risks || []).slice(0, 2),
-      ],
-      trace_id: r.trace_id || null,
-      timestamp: r.ranked_at || new Date().toISOString(),
-    };
-  });
-
-  state.findingsData = enriched;
-
-  // Sidebar badges
-  document.getElementById('badgeAll').textContent = enriched.length;
-  document.getElementById('badgeGrowth').textContent = enriched.filter(f => f.type === 'growth').length;
-  document.getElementById('badgeRisk').textContent = enriched.filter(f => f.type === 'risk').length;
-  document.getElementById('badgeReview').textContent = 0;
-
-  // Filter
-  let filtered = enriched;
-  if (filterType === 'review') {
-    try {
-      const reviews = await apiGet('/api/reviews/ranking');
-      filtered = (Array.isArray(reviews) ? reviews : []).map(r => ({
-        id: r.review_id, entityId: r.entity_id, entityName: r.entity_id,
-        type: 'review', priority: 'high', title: r.reason || 'Pending Review',
-        metrics: [], tags: [r.status === 'pending' ? '待审核' : r.status],
-        aiSuggestion: r.reason_category || '', reasoningSummary: [`Review: ${r.reason}`],
-        trace_id: null, timestamp: r.created_at || new Date().toISOString(),
-      }));
-    } catch { filtered = []; }
-    document.getElementById('findingsTitle').textContent = t('nav.review');
-  } else {
-    if (filterType !== 'all') filtered = enriched.filter(f => f.type === filterType);
-  }
-  const priorityFilter = document.getElementById('filterPriority')?.value || 'all';
-  if (priorityFilter !== 'all') filtered = filtered.filter(f => f.priority === priorityFilter);
-
-  document.getElementById('inboxSubtitle').textContent = tf('inbox.insightCount', { count: enriched.length });
-
-  // Stat cards
-  document.getElementById('statTotalSku').textContent = state.rankingsCache.length.toLocaleString();
-  document.getElementById('statActiveSku').textContent = state.rankingsCache.filter(r => r.overall_score > 0.3).length.toLocaleString();
-  document.getElementById('statNewSignals').textContent = enriched.length.toLocaleString();
-  document.getElementById('statPendingReview').textContent = '0';
-  const up = '<span class="stat-trend up">&#9650;</span>';
-  ['statTotalSkuTrend', 'statActiveSkuTrend', 'statNewSignalsTrend'].forEach(id => { document.getElementById(id).innerHTML = up; });
-
-  // Sidebar footer stats — real data from rankings
-  if (state.rankingsCache.length > 0) {
-    const latestRanked = state.rankingsCache.reduce((a, b) => (a.ranked_at || '') > (b.ranked_at || '') ? a : b);
-    document.getElementById('sidebarDataTime').textContent = (latestRanked.ranked_at || '').slice(0, 10) || '--';
-    document.getElementById('sidebarDecisions').textContent = state.rankingsCache.length.toLocaleString();
-    const avgConf = state.rankingsCache.reduce((s, r) => s + (r.confidence || 0), 0) / state.rankingsCache.length;
-    document.getElementById('sidebarAccuracy').textContent = Math.round(avgConf * 100) + '%';
-  } else {
-    document.getElementById('sidebarDataTime').textContent = '--';
-    document.getElementById('sidebarDecisions').textContent = '--';
-    document.getElementById('sidebarAccuracy').textContent = '--';
-  }
-
-  renderFindingCards(filtered);
-  document.getElementById('inboxUpdated').textContent = new Date().toLocaleTimeString();
-}
-
-function renderFindingCards(findings) {
-  const list = document.getElementById('findingsList'); clearNode(list);
-  if (!findings.length) { list.innerHTML = '<p class="muted placeholder">No findings.</p>'; return; }
-  const dirClass = (d) => d === 'up' ? 'up' : d === 'down' ? 'down' : 'neutral';
-  const tagClass = (tag) => tag.includes('风险') || tag.includes('下滑') ? ' risk-tag' : tag.includes('建议') ? ' action-tag' : '';
-
-  findings.forEach(f => {
-    const card = document.createElement('div');
-    card.className = `finding-card priority-${f.priority || 'medium'}`;
-    if (f.entityId === state.selectedEntityId) card.classList.add('selected');
-    card.dataset.entityId = f.entityId;
-    const priorityLabel = { high: 'High', medium: 'Medium', low: 'Low' }[f.priority] || '';
-
-    card.innerHTML = `
-      <div class="finding-product-img">&#128230;</div>
-      <div class="finding-body">
-        <div class="finding-header">
-          <span class="finding-priority-badge ${f.priority}">${priorityLabel}</span>
-          <span class="finding-entity-name">${f.entityName || f.entityId}</span>
-          <span class="finding-tags">${(f.tags || []).map(tag => `<span class="finding-tag${tagClass(tag)}">${tag}</span>`).join('')}</span>
-          <span class="finding-timestamp">${(f.timestamp || '').substring(11, 16) || '--:--'}</span>
-        </div>
-        <div class="finding-metrics">
-          ${(f.metrics || []).map(m => `
-            <div class="finding-metric">
-              <div class="finding-metric-value ${dirClass(m.direction)}">${m.value}</div>
-              <div class="finding-metric-label">${m.label}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="finding-suggestion">
-          <div class="finding-suggestion-text">
-            <div class="finding-suggestion-label">AI 建议</div>
-            ${f.aiSuggestion || ''}
-          </div>
-          <button class="finding-inspect-btn">查看原因 →</button>
-        </div>
-      </div>`;
-    card.addEventListener('click', () => selectFinding(f));
-    list.appendChild(card);
-  });
-}
-
 // ═══ Product Analysis ═════════════════════════════════════
 async function loadProduct() {
   const ct = document.getElementById('productContent');
@@ -787,16 +602,6 @@ async function loadRuntimeDetail(date) {
     content.innerHTML = '<p class="muted placeholder">加载详情失败 (' + e.message + ')</p>';
   }
 }
-
-// ═══ Agent Config ═════════════════════════════════════════
-function loadConfig() {
-  const saved = JSON.parse(localStorage.getItem('agentfabric-workspace-config') || '{}');
-  if (saved.growthWeight != null) document.getElementById('cfgGrowthWeight').value = saved.growthWeight;
-  if (saved.competitionWeight != null) document.getElementById('cfgCompetitionWeight').value = saved.competitionWeight;
-  if (saved.qualityWeight != null) document.getElementById('cfgQualityWeight').value = saved.qualityWeight;
-  applyI18n();
-}
-
 // ═══ P0007.3 Situation Feed ═══════════════════════════════
 async function loadSituationFeed(filter) {
   filter = filter || 'all';
@@ -1112,8 +917,6 @@ async function submitStructuredIntervention(situationId, type, summary, content)
 // Event-driven: subscribes to SSE event stream and renders Agent Activity.
 // Phase 2 shell (notice + slots + disabled input) → Phase 3.3 live event display.
 
-var agentSessionState = { taskId: null, status: 'idle', events: [], connected: false };
-var agentSessionEventSource = null;
 
 function loadAgentSession() {
   loadReadiness();
@@ -1195,93 +998,6 @@ function appendSessionMessage(role, text, isPending) {
   container.appendChild(el);
   container.scrollTop = container.scrollHeight;
   return el;
-}
-
-function connectEventStream() {
-  if (agentSessionEventSource) {
-    agentSessionEventSource.close();
-  }
-
-  // Use a demo task ID. Phase 3.4 replaces this with real task IDs from HermesAgent.
-  var taskId = 'task_demo_' + Date.now();
-  agentSessionState = { taskId: taskId, status: 'connecting', events: [], connected: false };
-
-  // Update status badge
-  var badge = document.getElementById('sessionStatusBadge');
-  if (badge) { badge.textContent = 'Connecting...'; badge.className = 'session-status-badge unavailable'; }
-
-  // Reset all activity slots to pending
-  document.querySelectorAll('.activity-slot-status').forEach(function(el) {
-    el.textContent = '— pending';
-    el.className = 'activity-slot-status pending';
-  });
-
-  agentSessionEventSource = new EventSource('/api/runtime/events/' + taskId);
-
-  agentSessionEventSource.addEventListener('execution.started', function(e) {
-    var data = JSON.parse(e.data);
-    agentSessionState.status = 'executing';
-    agentSessionState.events.push(data);
-    updateSlot('execution.started', 'Execution started: ' + (data.data && data.data.capability || ''));
-    updateStatusBadge('running');
-  });
-
-  agentSessionEventSource.addEventListener('acquisition.started', function(e) {
-    var data = JSON.parse(e.data);
-    agentSessionState.events.push(data);
-    var label = 'Acquisition started';
-    if (data.data && data.data.method) label += ': ' + data.data.method.toUpperCase();
-    if (data.data && data.data.platform) label += ' (' + data.data.platform + ')';
-    updateSlot('acquisition.started', label);
-  });
-
-  agentSessionEventSource.addEventListener('evidence.created', function(e) {
-    var data = JSON.parse(e.data);
-    agentSessionState.events.push(data);
-    var n = data.data && data.data.metricsCount || 0;
-    updateSlot('evidence.created', 'Evidence available: ' + n + ' metrics');
-    updateSlot('acquisition.completed', 'Acquisition done');
-  });
-
-  agentSessionEventSource.addEventListener('acquisition.completed', function(e) {
-    var data = JSON.parse(e.data);
-    agentSessionState.events.push(data);
-    var n = data.data && data.data.endpointsCaptured || 0;
-    updateSlot('acquisition.completed', 'Acquisition completed: ' + n + ' endpoints');
-  });
-
-  agentSessionEventSource.addEventListener('execution.completed', function(e) {
-    var data = JSON.parse(e.data);
-    agentSessionState.events.push(data);
-    agentSessionState.status = 'completed';
-    agentSessionState.connected = false;
-    var ev = data.data && data.data.totalEvidence || 0;
-    var mt = data.data && data.data.totalMetrics || 0;
-    updateSlot('execution.completed', 'Completed: ' + ev + ' evidence, ' + mt + ' metrics');
-    updateStatusBadge('connected');
-    agentSessionEventSource.close();
-  });
-
-  agentSessionEventSource.addEventListener('execution.failed', function(e) {
-    var data = JSON.parse(e.data);
-    agentSessionState.status = 'failed';
-    updateSlot('execution.failed', 'Failed: ' + (data.data && data.data.message || ''));
-    updateStatusBadge('unavailable');
-    agentSessionEventSource.close();
-  });
-
-  agentSessionEventSource.onerror = function() {
-    agentSessionState.connected = false;
-    // Only show error if we haven't completed successfully
-    if (agentSessionState.status !== 'completed') {
-      updateStatusBadge('unavailable');
-    }
-    // Don't close — EventSource auto-reconnects
-  };
-
-  agentSessionEventSource.onopen = function() {
-    agentSessionState.connected = true;
-  };
 }
 
 function updateSlot(eventType, text) {
@@ -1849,65 +1565,6 @@ document.getElementById('decisionCloseBtn')?.addEventListener('click', () => {
   document.getElementById('decisionContent').style.display = 'none';
   document.querySelectorAll('.finding-card').forEach(c => c.classList.remove('selected'));
 });
-document.getElementById('refreshInboxBtn')?.addEventListener('click', () => { loadInbox(state.activeFilter); showToast(t('toast.refreshed')); });
-document.getElementById('filterPriority')?.addEventListener('change', () => { loadInbox(state.activeFilter); });
-document.getElementById('filterType')?.addEventListener('change', (e) => { switchView('inbox', e.target.value); });
-document.getElementById('saveAgentConfig')?.addEventListener('click', () => {
-  const config = {
-    growthWeight: parseFloat(document.getElementById('cfgGrowthWeight')?.value) || 0.35,
-    competitionWeight: parseFloat(document.getElementById('cfgCompetitionWeight')?.value) || 0.25,
-    qualityWeight: parseFloat(document.getElementById('cfgQualityWeight')?.value) || 0.15,
-    memoryTtl: parseInt(document.getElementById('cfgMemoryTtl')?.value) || 30,
-    memoryDecay: parseFloat(document.getElementById('cfgMemoryDecay')?.value) || 0.05,
-    memoryThreshold: parseFloat(document.getElementById('cfgMemoryThreshold')?.value) || 0.6,
-  };
-  localStorage.setItem('agentfabric-workspace-config', JSON.stringify(config));
-  showToast(t('config.saved'));
-});
-
-// Chat
-document.getElementById('chatSendButton')?.addEventListener('click', async () => {
-  const inp = document.getElementById('chatInput');
-  const message = inp?.value.trim();
-  if (!message) return;
-  // Show user message
-  const container = document.getElementById('inboxChatMessages');
-  if (container) {
-    const userMsg = document.createElement('div');
-    userMsg.className = 'chat-message-user';
-    userMsg.style.cssText = 'text-align:right;margin-bottom:8px;padding:6px 12px;background:var(--card-bg);border-radius:8px;font-size:0.82rem';
-    userMsg.textContent = message;
-    container.appendChild(userMsg);
-    const loadingMsg = document.createElement('div');
-    loadingMsg.className = 'chat-message-bot';
-    loadingMsg.id = 'chatLoadingMsg';
-    loadingMsg.style.cssText = 'margin-bottom:8px;padding:6px 12px;color:var(--text-muted);font-size:0.82rem';
-    loadingMsg.textContent = 'Agent 思考中...';
-    container.appendChild(loadingMsg);
-    container.scrollTop = container.scrollHeight;
-    inp.value = '';
-    try {
-      // P0009: canonical Situation Chat → persistent Hermes Session (P0008.3).
-      // The session is keyed by the current business context (shop).
-      const data = await apiPost('/api/situation/jd_shop_001/chat', { message: message });
-      loadingMsg.remove();
-      const botMsg = document.createElement('div');
-      botMsg.className = 'chat-message-bot';
-      botMsg.style.cssText = 'margin-bottom:8px;padding:8px 12px;background:var(--card-bg);border-left:3px solid var(--primary);border-radius:6px;font-size:0.82rem';
-      botMsg.textContent = (data.reply || '无法处理该请求');
-      container.appendChild(botMsg);
-      container.scrollTop = container.scrollHeight;
-    } catch (e) {
-      loadingMsg.remove();
-      const errMsg = document.createElement('div');
-      errMsg.className = 'chat-message-bot';
-      errMsg.style.cssText = 'margin-bottom:8px;padding:6px 12px;color:var(--danger);font-size:0.82rem';
-      errMsg.textContent = 'Agent 响应失败: ' + e.message;
-      container.appendChild(errMsg);
-    }
-  }
-  if (inp) inp.value = '';
-});
 document.getElementById('runtimeCollectBtn')?.addEventListener('click', async () => {
   const status = document.getElementById('runtimeCollectStatus');
   const btn = document.getElementById('runtimeCollectBtn');
@@ -1965,9 +1622,6 @@ document.getElementById('replayRunBtn')?.addEventListener('click', async () => {
   if (btn) { btn.disabled = false; btn.textContent = '▶️ Run Replay'; }
   if (progressDiv) progressDiv.style.display = 'none';
 });
-document.querySelectorAll('.chip-question').forEach(chip => {
-  chip.addEventListener('click', () => { const inp = document.getElementById('chatInput'); if (inp) { inp.value = chip.dataset.question; } });
-});
 
 // ═══ Boot ═════════════════════════════════════════════════
 (async function boot() {
@@ -1990,7 +1644,6 @@ document.querySelectorAll('.chip-question').forEach(chip => {
       showToast('正在生成初始分析数据...');
       await apiPost('/api/ranking', { profile: 'operator_mode', persist: true });
       await loadData();
-      loadInbox(state.activeFilter);
       showToast(t('toast.ready'));
     } catch (e) {
       showToast(t('toast.ready'));

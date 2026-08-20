@@ -1,5 +1,34 @@
 # 技术决策记录 (ADR)
 
+## ADR-039: Post-Consolidation REMOVE Sweep
+
+- **日期**: 2026-08-21
+- **状态**: Accepted
+- **来源**: Consolidation 收口（post-consolidation inventory 判定剩余资产为 demo/死代码/误导入口）
+
+**决策**（只删除 audit/ADR 明确 REMOVE CANDIDATE + 证明无 canonical consumer 的资产；DB 表/列一律不动）：
+
+1. **删除（REMOVED）**：
+   - `situation-viewmodel.ts` 孤儿文件（已被 `interaction-grammar.js` 取代）。
+   - agentSession SSE demo：`/api/runtime/events/:taskId` demo 路由 + `connectEventStream`（P0009 起无调用者，真实聊天走 `/api/situation/:id/chat`）。
+   - agentConfig：`loadConfig`/`saveAgentConfig`/`view-agentConfig`/sidebar 入口/`config.*` i18n（localStorage 伪持久化，权重从不在 ranking 生效）。
+   - Legacy Inbox：`loadInbox`/`renderFindingCards`/`view-inbox`/隐藏入口/inbox 内嵌 chat 及全部相关 i18n 键（含 pre-existing broken `badgeAll` 残留，ADR-037 REMOVE CANDIDATE）。
+   - Evidence Viewer 死 i18n 键（17 个 `evidence.*`，从未渲染）。
+   - operator_memories producer+API+consumer：`buildOperatorMemories`、`buildMemories`（pattern/memory.ts）、`matchMemories`/`buildContext`（memory/matcher.ts）、3 个零消费者端点（memories/sync、memories、context）。
+
+2. **保留为 DEPRECATED / inert**：
+   - `operator_memories` 表 + `memory/store.ts`（`initMemoryStore`）+ `memory/types.ts`：表由 init 建（DB 约束），无运行时 reader/writer。
+   - `signal_weights` 表 + seed：仅 schema + init，删 = schema cleanup，禁止。
+   - legacy `Review → Feedback → context_memories → memory-adjustment`：**读侧有真实 consumer 不删**（`MemoryFacade.queryActive` 被 /api/memory + chat.ts + workspace.ts findings + orchestrator `adjustmentsFor` 消费）；生产侧 `extractMemories` 零调用 = inert。
+
+3. **边界**：不删 DB columns/tables、不做 schema cleanup、不处理 Evaluation dormant columns、不修 persistent evidence identity（ADR-038 gap）、不补 capability↔evidence、不新增替代实现、不做 UI redesign。
+
+**验收**：typecheck 17 errors 前后一致（全 pre-existing）；570/572 tests（2 pre-existing）；浏览器 7 链全通（Acquisition → Ranking→Explainability（真实 trust=12%/low_coverage）→ Situation → Professional Action → Learning Context（intervention `evaluation:agree` 落库，lifecycle:partial）→ Evidence Viewer（641 records））；全视图控制台零 error。
+
+**文件**: `apps/ecommerce/workspace/{app.js,index.html}`，`platform/server/routes/{runtime.ts,ranking.ts}`，`apps/ecommerce/analysis/pattern/{engine.ts,index.ts,memory.ts(删除)}`，`apps/ecommerce/memory/{index.ts,matcher.ts(删除)}`。
+
+---
+
 ## ADR-038: Evidence Viewer Contract Repair - 消费真实 Provenance
 
 - **日期**: 2026-08-21

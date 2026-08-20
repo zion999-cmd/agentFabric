@@ -206,3 +206,28 @@ Consolidation 功能恢复阶段收口盘点（基于当前代码逐项验证，
 ### 结论
 
 **Consolidation 的「功能恢复」到此结束。** 剩余只有两类：(a) REMOVE sweep 清 demo/死代码/误导入口；(b) 全新产品工作（knowledge/policy/reports、Action/Result、provenance consolidation）。继续修 UI 小 bug = 开始造新功能，不再是还债。
+
+### REMOVE Sweep 执行结果（2026-08-21，Committed as a76f86d 之后）
+
+删除前逐项证明无 canonical consumer；DB 表/列一律不删（schema cleanup 禁止）。
+
+**REMOVED（代码层删除，无 canonical consumer）**：
+
+| 资产 | 删除内容 |
+|---|---|
+| `situation-viewmodel.ts` | 孤儿文件（已被 `interaction-grammar.js` 取代，Pass 2 已确认） |
+| agentSession SSE demo | `/api/runtime/events/:taskId` demo 路由 + `connectEventStream`/`agentSessionState`/`agentSessionEventSource`（P0009 起已无调用者；真实聊天走 `/api/situation/:id/chat` + 3 个真实 activity slots） |
+| agentConfig | `loadConfig` + `saveAgentConfig` + `view-agentConfig` + sidebar 入口 + 全部 `config.*`/`nav.agentConfig` i18n 键（localStorage 伪持久化，权重从不在 ranking 生效） |
+| Legacy Inbox | `loadInbox` + `renderFindingCards` + `view-inbox` + 隐藏 sidebar 入口 + inbox 内嵌 chat（`chatSendButton`/recommendedChips）+ 相关 i18n 键（`inbox.*`/`stat.*`/`findings.title`/`filter.*`/`nav.inbox\|growth\|risk\|review`/`toast.refreshed`）——含 pre-existing broken `badgeAll` 残留 |
+| Evidence Viewer 死 i18n 键 | 全部 17 个 `evidence.*` 键（`viewRawJson`/`viewMappings`/`provenanceRaw` 等，指向不存在的功能，从未渲染） |
+| operator_memories producer+API+consumer | `buildOperatorMemories`（pattern/engine.ts）+ `buildMemories`（pattern/memory.ts，文件删除）+ `matchMemories`/`buildContext`（memory/matcher.ts，文件删除）+ 3 个零消费者端点（POST /api/memories/sync、GET /api/memories、GET /api/context）——12 行表数据与表本身保留 |
+
+**DEPRECATED / inert（因 DB/schema 保留，标记不删不扩）**：
+
+| 资产 | 状态 | 依据 |
+|---|---|---|
+| `operator_memories` 表 + `memory/store.ts`（`initMemoryStore`）+ `memory/types.ts` | inert | 表由 `init.ts` 建（DB 约束），无运行时 reader/writer；12 行历史数据保留 |
+| `signal_weights` 表 + seed | inert | 仅 schema + init seed（`DEFAULT_SIGNAL_WEIGHTS` 常量是真实权重源）；删 = schema cleanup，禁止 |
+| legacy `Review → Feedback → context_memories → memory-adjustment` | DEPRECATED（读侧 live，不删） | `MemoryFacade.queryActive` 有真实消费者（GET /api/memory + chat.ts + workspace.ts findings + orchestrator `adjustmentsFor`）；context_memories 空表无 producer（`extractMemories` 零调用）→ 读侧保留、生产侧 inert |
+
+**验证（删除后无回归）**：typecheck 17 errors 前后一致（全 pre-existing）；570/572 tests passed（2 pre-existing）；浏览器 7 链全通（Acquisition readiness → Ranking→决策面板真实 trust=12%/low_coverage → Situation 今日工作 → Professional Action 认同按钮 → Learning Context 结构化 intervention 落库（`humanInterventions` 含 `evaluation:agree`，lifecycle:partial）→ Evidence Viewer 真实 provenance 641 records）；全视图控制台零 error。

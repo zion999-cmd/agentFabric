@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.2-consolidation-pass5 | **Hermes**: v0.20.0 | **测试**: 570 passed / 2 pre-existing failures (572 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 641 files (Jan-Aug 2026)
+|**版本**: v0.2-consolidation-final | **Hermes**: v0.20.0 | **测试**: 570 passed / 2 pre-existing failures (572 total) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 641 files (Jan-Aug 2026)
 
 ## 已完成
+
+- [x] **Post-Consolidation REMOVE Sweep（债务清零）** - 只删 audit/ADR 明确 REMOVE CANDIDATE 且证明无 canonical consumer 的资产：`situation-viewmodel.ts` 孤儿文件；agentSession SSE demo（`/api/runtime/events/:taskId` + `connectEventStream`）；agentConfig localStorage 伪持久化（`loadConfig`/`saveAgentConfig`/view/sidebar/i18n）；Legacy Inbox 全套（`loadInbox`/`renderFindingCards`/`view-inbox`/inbox 内嵌 chat/相关 i18n，含 pre-existing broken `badgeAll`）；17 个死 `evidence.*` i18n 键；operator_memories producer+3 个零消费者端点（`buildOperatorMemories`/`buildMemories`/`matchMemories`/`buildContext`）。**保留为 DEPRECATED/inert**：operator_memories 表+store（DB 约束）、signal_weights 表+seed（schema cleanup 禁止）、legacy Review→context_memories 读侧（`MemoryFacade.queryActive` 有真实 consumer：/api/memory、chat、findings、orchestrator adjustmentsFor）。净删 -1036 行。**验收**：typecheck 17 errors 前后一致（全 pre-existing）；570/572 tests；浏览器 7 链全通（Acquisition→Ranking→Explainability 真实 trust=12%→Situation→Professional Action→Learning Context 落库→Evidence Viewer 641 records）；全视图控制台零 error。ADR-039。
 
 - [x] **Consolidation - Evidence Viewer Contract Repair (END-TO-END 可用)** - 修复 `/api/evidence/:capabilityId` 与 Workspace Evidence Viewer 的 contract mismatch：`renderProvenanceChain` 三个错误字段路径（`evidence.artifacts`/`evidence_records`/`summary`）改为真实返回（`discovery.artifacts`/`evidence.recentRecords`/`totalRecords`）；producer 侧 `recentRecords` 改 `acquired_at` 降序（原取目录序前 10 = 最旧 10 条）+ `listEvidence` 显式 limit（默认 100 会截断 totalRecords 且最新 CDP evidence 永远进不了列表）；`loadBtn` onclick 防 listener 叠加。浏览器实证：product.overview → 京东商智 · Live CDP Capture + 10 条真实 CDP timeline（2026-08-20 productTop · jd_shop_001）+ Total: 641 records，与 API 逐项一致。**后续 gaps 记录不修**：capability↔evidence 无关联（MISSING）、evidence_id 非持久（provenance identity gap，归后续 provenance consolidation）、lastVerified=null（低优先）。ADR-038。新测试 1。
 
@@ -79,10 +81,11 @@
 
 ## 下一步
 
-- **REMOVE sweep + inventory 收口**（建议的最后一刀）：删除 demo/死代码/误导入口（`situation-viewmodel.ts` 孤儿文件、agentSession `task_demo_*` SSE demo、agentConfig localStorage 伪持久化、`signal_weights` 孤儿表、废弃 i18n keys、operator_memories/Pattern Engine 冗余端点、legacy Inbox、休眠 Evaluation 列），然后归档 post-consolidation inventory，正式结束这轮还债。
-- P0009.1 从 Workspace 浏览器确认「今日工作」渲染真实 Situation（API 已验证返回 5 条）。
-- （可选）trace 幂等：`business_traces` 加 `(profile, entity_id)` 唯一键 + `storeTrace` upsert，或 `ranking_id` 确定性化（需放宽「REUSE store / 不改 ranking 算法」红线）。
-- （后续 provenance consolidation，非本轮）persistent evidence identity + capability↔evidence 关联（ADR-038 记录的 gaps）。
+**本轮 Consolidation 债务清零，正式结束。** 剩余工作属于新功能/新闭环，等业务需求驱动：
+
+- knowledge/policy/context/reports 空目录（有意的未来模块）
+- Action/Result 业务执行闭环（ADR-035 下一阶段）
+- provenance consolidation（ADR-038 gaps：persistent evidence identity、capability↔evidence 关联、lastVerified 数据）
 
 ## 阻塞
 

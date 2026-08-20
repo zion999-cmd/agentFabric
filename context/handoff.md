@@ -1,5 +1,43 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - Post-Consolidation REMOVE Sweep（债务清零收口）
+
+### 目标
+
+执行 audit/ADR 已明确的 REMOVE CANDIDATE 清理：只删有 prove 无 canonical consumer 的资产，DB 表/列不动，删除后浏览器验证 7 条 canonical 链无回归。完成后停止，不找下一刀。
+
+### REMOVED（代码层删除，全部证明无 canonical consumer）
+
+- `situation-viewmodel.ts` 孤儿文件（Pass 2 已被 `interaction-grammar.js` 取代）。
+- agentSession SSE demo：`/api/runtime/events/:taskId` demo 路由（runtime.ts 68 行）+ `connectEventStream`/`agentSessionState`/`agentSessionEventSource`（P0009 起无调用者；真实聊天走 `/api/situation/:id/chat` + 3 个真实 activity slots）。
+- agentConfig：`loadConfig`/`saveAgentConfig`/`view-agentConfig`/sidebar 入口/全部 `config.*` + `nav.agentConfig` i18n（localStorage 伪持久化，权重从不在 ranking 生效）。
+- Legacy Inbox 全套：`loadInbox`/`renderFindingCards`/`view-inbox`/隐藏 sidebar 入口/inbox 内嵌 chat（`chatSendButton`/recommendedChips）及 `inbox.*`/`stat.*`/`findings.title`/`filter.*`/`nav.inbox|growth|risk|review`/`toast.refreshed` i18n——含 ADR-037 记录的 pre-existing broken `badgeAll` 残留。
+- Evidence Viewer 17 个死 `evidence.*` i18n 键（从未渲染，指向不存在的功能）。
+- operator_memories producer+API+consumer：`buildOperatorMemories`、`buildMemories`（pattern/memory.ts 删除）、`matchMemories`/`buildContext`（memory/matcher.ts 删除）、3 个零消费者端点（POST /api/memories/sync、GET /api/memories、GET /api/context）。
+
+### DEPRECATED / inert（保留，不删不扩）
+
+- `operator_memories` 表 + `memory/store.ts`（`initMemoryStore`）+ `memory/types.ts`：表由 init 建（DB 约束），无运行时 reader/writer，12 行历史保留。
+- `signal_weights` 表 + seed：仅 schema + init seed（真实权重源 = `DEFAULT_SIGNAL_WEIGHTS` 常量），删 = schema cleanup 禁止。
+- legacy `Review → Feedback → context_memories → memory-adjustment`：**读侧有真实 consumer 不删**——`MemoryFacade.queryActive` 被 GET /api/memory（Workspace memory 视图）+ chat.ts + workspace.ts findings + orchestrator `adjustmentsFor` 消费；生产侧 `extractMemories` 零调用 = inert。
+
+### 关键决策（ADR-039）
+
+删除只允许「audit/ADR 明确 REMOVE CANDIDATE + 证明无 canonical consumer」；「仍有真实调用 → 停止并报告」的规则在 legacy memory 链上触发（读侧 live），未强删。
+
+### 验证
+
+- typecheck 17 errors 前后一致（全 pre-existing）。
+- 570/572 tests passed（2 pre-existing：coverage indicator_pct 漂移、chat.contract Hermes 超时）。
+- **浏览器 7 链全通**（CDP 实测）：① Acquisition readiness（Hermes ready / JD-CDP ready / Capabilities 11 / Evidence 100）→ ② Ranking→Explainability（商品详情卡 → 决策面板真实 `信任分 12% — 证据稀薄（low_coverage）`）→ ③ Situation 今日工作（真实 situation 卡，70 条含 ranking_attention）→ ④ Professional Action（Situation detail 真实归因/建议 + 「认同」按钮）→ ⑤ Learning Context（`humanInterventions` 含 `evaluation:agree` 结构化落库，lifecycle:partial）→ ⑥ Explainability trace（同上）→ ⑦ Evidence Viewer（3 provenance 节点 + `Total: 641 records` + 真实 CDP timeline）。全视图 reload 后控制台零 error。
+- 净删 -1036 行。
+
+### 状态
+
+**Consolidation 债务清零，正式结束。** 后续 = 新功能（knowledge/policy/reports、Action/Result、provenance consolidation per ADR-038），等业务需求驱动。
+
+---
+
 ## 本次会话 (2026-08-21) - Consolidation: Evidence Viewer Contract Repair
 
 ### 目标

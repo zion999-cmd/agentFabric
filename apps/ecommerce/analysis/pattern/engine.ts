@@ -8,24 +8,11 @@ import { computeBaseline } from './baseline.js';
 import type { DailyMetric, BaselineResult } from './baseline.js';
 import { explainEvent } from './explanation.js';
 import type { Explanation } from './explanation.js';
-import { buildMemories } from './memory.js';
-import type { OperatorMemory } from '#app/memory/types.js';
 
 import type { PatternEvent } from './types.js';
 
 export type { BaselineSnapshot, BaselineResult } from './baseline.js';
 export type { Explanation, MetricEvidence, SimilarEvent } from './explanation.js';
-
-/** Build operator memories from explained events (P0007.2). */
-export const buildOperatorMemories = (
-  db: Db,
-  options: { entityId?: string; entityType?: string; minObservations?: number; maxMemories?: number } = {},
-): OperatorMemory[] => {
-  const { entityId = 'jd_shop_001', entityType = 'product', minObservations = 2, maxMemories = 20 } = options;
-  // Explain all significant events first
-  const explanations = explainPatterns(db, { entityId, entityType, limit: 50 });
-  return buildMemories(explanations, { minObservations, maxMemories });
-};
 
 /** Explain detected patterns — why did this happen? (P0007.1.2) */
 export const explainPatterns = (

@@ -8,8 +8,7 @@ import { listOrders, listProducts } from '#platform/storage/product-repository.j
 import { rankProductsComposition, persistComposition } from '#app/orchestrator.js';
 import { RankingFacade } from '#app/analysis/decision/facade.js';
 import { SignalFacade } from '#app/analysis/metrics/facade.js';
-import { analyzeBaseline, analyzePatterns, explainPatterns, buildOperatorMemories } from '#app/analysis/pattern/engine.js';
-import { upsertMemories, listMemories, matchMemories, buildContext } from '#app/memory/index.js';
+import { analyzeBaseline, analyzePatterns, explainPatterns } from '#app/analysis/pattern/engine.js';
 import { InMemoryRuntimeRegistry } from '#platform/runtime/registry.js';
 import { DefaultRouter } from '#platform/runtime/router.js';
 import { HermesRuntimeAdapter } from '#platform/runtime/hermes/adapter.js';
@@ -163,47 +162,6 @@ export const rankingRouter = (db: Db): Router => {
     }
   });
 
-  // POST /api/memories/sync — persist generated memories (P0007.3.1).
-  router.post('/memories/sync', (_req, res) => {
-    try {
-      const memories = buildOperatorMemories(db, { minObservations: 2, maxMemories: 30 });
-      const stored = upsertMemories(db, memories);
-      ok(res, { stored, total: memories.length });
-    } catch (err) {
-      fail(res, 500, err instanceof Error ? err.message : 'Memory sync failed');
-    }
-  });
-
-  // GET /api/memories — list persisted memories (P0007.3.1).
-  router.get('/memories', (_req, res) => {
-    try {
-      const memories = listMemories(db);
-      ok(res, memories, { total: memories.length, page: 1, limit: memories.length });
-    } catch (err) {
-      fail(res, 500, err instanceof Error ? err.message : 'Memory retrieval failed');
-    }
-  });
-
-  // GET /api/context — build operator context for Hermes (P0007.3.3).
-  router.get('/context', (req, res) => {
-    try {
-      const date = req.query['date'] as string | undefined;
-      const opts: { date?: string; limit: number } = { limit: 1 };
-      if (date) opts.date = date;
-      const explanations = explainPatterns(db, opts);
-      if (!explanations.length) {
-        fail(res, 404, `No pattern event found${date ? ' for ' + date : ''}. Try a date with significant deviation.`);
-        return;
-      }
-      const explanation = explanations[0]!;
-      const memories = listMemories(db);
-      const matches = matchMemories(explanation, memories);
-      const context = buildContext(explanation, matches);
-      ok(res, context);
-    } catch (err) {
-      fail(res, 500, err instanceof Error ? err.message : 'Context build failed');
-    }
-  });
 
   return router;
 };
