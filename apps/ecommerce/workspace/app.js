@@ -1259,68 +1259,168 @@ async function loadEvidenceViewer() {
   };
 }
 
-// ═══ Knowledge Ingest (P0008.4 §10) — Fabric-side control ═══
-// Enumerate raw sources, mark provenance-referenced state, launch Hermes to run
-// the KNOWLEDGE.md Ingest flow, surface Hermes's report verbatim. Fabric does NOT
-// summarize raw or generate knowledge pages.
-function renderKnowledgeStatus(container, status) {
+// ═══ Knowledge Sources (P0008.4 §10) — Fabric-side control surface ═══
+// 专业人员提供资料 → 查看整理状态 → 交给 Agent 整理 → 查看生成的知识。
+// 状态只来自 /api/knowledge/status（前端不推断第二套模型）；Ingest 由 Hermes 执行，
+// Fabric 只启动 + 原样展示报告 + 诚实区分「Agent 执行」与「文件系统结果」。
+
+const TYPE_LABEL = { text: 'TXT', markdown: 'MD', other: '文件' };
+
+function fmtMtime(ms) {
+  if (!ms) return '--';
+  const d = new Date(ms);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' +
+    String(d.getMinutes()).padStart(2, '0');
+}
+
+function renderKnowledgeSources(container, status) {
   if (!status || !status.sources) {
     container.innerHTML = '<p class="muted placeholder">无状态数据。</p>';
     return;
   }
+  if (status.sources.length === 0) {
+    container.innerHTML = '<p class="muted placeholder">还没有知识来源。点击「上传专业资料」添加你的经验资料。</p>';
+    return;
+  }
   const rows = status.sources.map(s => {
     const badge = s.referenced
-      ? '<span class="provenance-status verified">✓ 已引用</span>'
-      : '<span class="provenance-status unavailable" style="opacity:0.8">○ 待 Ingest</span>';
-    const by = s.referenced ? ' · ' + escHtml(s.referencedBy.join(', ')) : '';
-    return '<div class="evidence-timeline-item">' +
+      ? '<span class="provenance-status verified">已整理</span>'
+      : '<span class="provenance-status unavailable" style="opacity:0.8">未整理</span>';
+    const pages = s.referenced ? ' · 生成: ' + escHtml(s.referencedBy.join('、')) : '';
+    const ingestBtn = s.referenced
+      ? ''
+      : '<button class="btn btn-sm" data-source="' + escHtml(s.path) + '" data-file="' + escHtml(s.file) + '" style="margin-left:8px;font-size:0.72rem;padding:2px 8px">整理此份</button>';
+    return '<div class="evidence-timeline-item" style="flex-wrap:wrap">' +
       '<span><span class="evidence-timeline-date" style="min-width:0">' + escHtml(s.file) + '</span> ' +
-      '<span class="evidence-timeline-meta">' + (s.size || 0) + ' B' + by + '</span></span>' +
-      badge +
+      '<span class="evidence-timeline-meta">' + escHtml(TYPE_LABEL[s.type] || '文件') + ' · ' + (s.size || 0) + ' B · ' + fmtMtime(s.mtimeMs) + pages + '</span></span>' +
+      badge + ingestBtn +
       '</div>';
   }).join('');
   container.innerHTML =
-    '<h3 class="session-activity-title">Raw 源 · ' + status.total + '（已引用 ' + status.referencedCount + ' · 待处理 ' + status.pendingCount + '）</h3>' +
-    '<div class="evidence-timeline">' + (rows || '<p class="muted placeholder">knowledge-sources/raw/ 为空。</p>') + '</div>';
+    '<div class="knowledge-sources-count muted" style="font-size:0.78rem;margin-bottom:6px">' +
+    '共 ' + status.total + ' 份 · 已整理 ' + status.referencedCount + ' · 未整理 ' + status.pendingCount +
+    '</div><div class="evidence-timeline">' + rows + '</div>';
+
+  // Per-source "整理此份" → ingest that specific source (REUSE /ingest { source }).
+  container.querySelectorAll('[data-source]').forEach(btn => {
+    btn.onclick = () => runIngest({ source: btn.dataset.source, label: btn.dataset.file });
+  });
+}
+
+function renderKnowledgePages(container, status) {
+  if (!status || !status.pages) { container.innerHTML = ''; return; }
+  if (status.pages.length === 0) {
+    container.innerHTML = '<p class="muted placeholder">还没有生成的知识。把资料「交给 Agent 整理」后，这里会显示整理结果。</p>';
+    return;
+  }
+  const cards = status.pages.map(p =>
+    '<div class="finding-card" style="padding:10px 12px;margin-bottom:6px;cursor:default">' +
+      '<div style="font-size:0.82rem;font-weight:600">' + escHtml(p.title) + '</div>' +
+      '<div class="muted" style="font-size:0.72rem;margin-top:2px">来源: ' +
+        escHtml(p.sources.join('、')) + '</div>' +
+    '</div>'
+  ).join('');
+  container.innerHTML = cards +
+    (status.indexMd
+      ? '<details style="margin-top:8px"><summary class="muted" style="font-size:0.75rem;cursor:pointer">查看知识索引 (INDEX)</summary>' +
+        '<pre style="white-space:pre-wrap;font-size:0.72rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:6px;padding:8px 12px;margin-top:6px">' +
+        escHtml(status.indexMd.slice(0, 2000)) + '</pre></details>'
+      : '');
+}
+
+async function refreshKnowledge(status) {
+  const sourcesEl = document.getElementById('knowledgeStatus');
+  const pagesEl = document.getElementById('knowledgePages');
+  if (sourcesEl) renderKnowledgeSources(sourcesEl, status);
+  if (pagesEl) renderKnowledgePages(pagesEl, status);
+}
+
+async function runIngest(opts) {
+  opts = opts || {};
+  const result = document.getElementById('knowledgeResult');
+  const btn = document.getElementById('knowledgeIngestBtn');
+  if (!result) return;
+  result.style.display = 'block';
+  result.innerHTML = '<p class="muted">🤖 已交给 Agent。Agent 正在阅读资料、组织知识、写入「生成的知识」并更新索引（可能需要几分钟）...</p>';
+  if (btn) btn.disabled = true;
+  try {
+    const body = opts.source ? { source: opts.source } : {};
+    const resp = await apiPost('/api/knowledge/ingest', body);
+    const report = (resp.reply || '').trim();
+
+    if (resp.success) {
+      result.innerHTML =
+        '<div class="knowledge-result-head"><strong>Agent 整理报告</strong></div>' +
+        '<pre style="white-space:pre-wrap;font-size:0.78rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:6px;padding:8px 12px">' +
+        escHtml(report || '（Agent 未返回文字报告）') +
+        '</pre>';
+    } else if (resp.agentStatus === 'timeout') {
+      // 诚实区分：Agent 执行未确认完成，但文件系统状态是实时的。
+      result.innerHTML =
+        '<div class="knowledge-result-head"><strong>Agent 执行未确认完成</strong></div>' +
+        '<p class="muted" style="font-size:0.78rem">Agent 在等待时间内未返回完成信号（模型处理超时，已知限制）。' +
+        '但下方是<strong>实时的文件系统状态</strong>——如果 Agent 实际已写入内容，这里会如实反映：</p>' +
+        '<div id="knowledgeResultStatus" style="margin-top:6px"></div>';
+      const st = document.getElementById('knowledgeResultStatus');
+      if (st) renderKnowledgeSources(st, resp.status);
+    } else {
+      result.innerHTML = '<p class="muted placeholder">Agent 执行失败: ' + escHtml(resp.error || '未知错误') +
+        '<br/><small>请确认 Hermes serve 已启动（hermes serve，端口 9119）。</small></p>';
+    }
+    // 刷新主状态（含生成的知识）——无论 Agent 状态如何，都以磁盘为准。
+    if (resp.status) refreshKnowledge(resp.status);
+    else loadKnowledge();
+  } catch (e) {
+    result.innerHTML = '<p class="muted placeholder">请求失败: ' + escHtml(e.message) +
+      '<br/><small>请确认 Hermes serve 已启动（hermes serve，端口 9119）。</small></p>';
+  } finally {
+    if (btn) btn.disabled = false;
+  }
 }
 
 async function loadKnowledge() {
-  const container = document.getElementById('knowledgeStatus');
   const result = document.getElementById('knowledgeResult');
-  const btn = document.getElementById('knowledgeIngestBtn');
+  const uploadStatus = document.getElementById('knowledgeUploadStatus');
   if (result) { result.style.display = 'none'; result.innerHTML = ''; }
+  if (uploadStatus) uploadStatus.textContent = '';
   try {
     const data = await apiGet('/api/knowledge/status');
-    renderKnowledgeStatus(container, data);
+    refreshKnowledge(data);
   } catch (e) {
-    container.innerHTML = '<p class="muted placeholder">加载 Knowledge 状态失败: ' + escHtml(e.message) + '</p>';
+    const el = document.getElementById('knowledgeStatus');
+    if (el) el.innerHTML = '<p class="muted placeholder">加载知识来源失败: ' + escHtml(e.message) + '</p>';
   }
-  if (btn) {
-    btn.onclick = async function() {
-      if (!result) return;
-      result.style.display = 'block';
-      result.innerHTML = '<p class="muted">正在启动 Hermes 执行 KNOWLEDGE.md Ingest 流程（阅读 raw → 组织 → 写 knowledge/ → 更新 INDEX/log）...</p>';
-      btn.disabled = true;
+
+  // Upload 专业资料 (.txt / .md) → knowledge-sources/raw/（不可变，拒绝覆盖）。
+  const uploadBtn = document.getElementById('knowledgeUploadBtn');
+  const uploadInput = document.getElementById('knowledgeUploadInput');
+  if (uploadBtn && uploadInput) {
+    uploadBtn.onclick = () => uploadInput.click();
+    uploadInput.onchange = async function() {
+      const file = uploadInput.files && uploadInput.files[0];
+      if (!file) return;
+      if (uploadStatus) uploadStatus.textContent = '读取中 ' + escHtml(file.name) + ' ...';
       try {
-        const resp = await apiPost('/api/knowledge/ingest', {});
-        const lines = (resp.reply || '').trim();
-        result.innerHTML =
-          '<div class="knowledge-result-head"><strong>Hermes Ingest 报告</strong></div>' +
-          '<pre style="white-space:pre-wrap;font-size:0.78rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:6px;padding:8px 12px">' +
-          escHtml(lines) +
-          '</pre>' +
-          '<div style="margin-top:8px" class="muted">Ingest 后 provenance 状态：</div>' +
-          '<div id="knowledgeStatusAfter" style="margin-top:4px"></div>';
-        const after = document.getElementById('knowledgeStatusAfter');
-        if (after) renderKnowledgeStatus(after, resp.status);
+        const text = await file.text();
+        const resp = await apiPost('/api/knowledge/upload', { filename: file.name, content: text });
+        if (uploadStatus) {
+          uploadStatus.textContent = resp.success
+            ? '✅ 已上传「' + escHtml(file.name) + '」，状态：未整理'
+            : '❌ ' + escHtml(resp.error || '上传失败');
+        }
+        if (resp.status) refreshKnowledge(resp.status);
       } catch (e) {
-        result.innerHTML = '<p class="muted placeholder">Ingest 失败: ' + escHtml(e.message) +
-          '<br/><small>请确认 Hermes serve 已启动（hermes serve，端口 9119）。</small></p>';
+        if (uploadStatus) uploadStatus.textContent = '❌ 上传失败: ' + escHtml(e.message);
       } finally {
-        btn.disabled = false;
+        uploadInput.value = '';
       }
     };
   }
+
+  // 全局「交给 Agent 整理」→ ingest 全部未整理源。
+  const btn = document.getElementById('knowledgeIngestBtn');
+  if (btn) btn.onclick = () => runIngest({});
 }
 
 function renderProvenanceChain(container, evidence, capId) {

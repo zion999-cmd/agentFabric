@@ -1,5 +1,29 @@
 # 技术决策记录 (ADR)
 
+## ADR-041: Knowledge Sources Workspace Surface
+
+- **日期**: 2026-08-21
+- **状态**: Accepted
+- **来源**: Knowledge Ingest backend 闭环（ADR-040）后的专业人员 Workspace 页面；非 Knowledge Engine
+
+**决策**（专业人员提供资料 → Raw Source → 查看整理状态 → 显式触发 Hermes Ingest → 查看生成的知识）：
+
+1. **状态单一事实源 = `/api/knowledge/status`**，前端不推断第二套状态模型。`status.ts` 增量扩展：source 增加 `type`/`mtimeMs`；新增 `pages`（生成的知识，排除 INDEX/KNOWLEDGE/log 系统文件）+ `indexMd`（只读）。「已整理/未整理」= 是否被 provenance 引用；**不做不可靠的「有更新待整理」推断**。
+
+2. **上传最小入口**：`POST /api/knowledge/upload`（JSON `{filename, content}`，复用 express.json + apiPost，零新依赖/无 multipart）。校验 = `validateRawUpload`（纯函数）：basename-only（防 path traversal）、`.txt`/`.md` 白名单、非隐藏文件、非空、≤500KB。写入 = `storeRawSource`：只写 raw 目录（resolved 防御）、**同名 409 拒绝覆盖**（raw 不可变 provenance）。第一版不提供在线编辑 raw。
+
+3. **Ingest REUSE `POST /api/knowledge/ingest`**（含 per-source `{source}`）。页面提供全局「交给 Agent 整理」+ 每份未整理源的「整理此份」。Fabric 不总结 raw、不生成知识页。
+
+4. **诚实区分 Agent 执行 vs 文件系统结果**：ingest 超时不再返回裸 500，而是返回 `{ success:false, agentStatus:'timeout'|'error', error, status }`——`status` 是 ingest 后实时枚举的磁盘真相。UI 对 timeout 显示「Agent 执行未确认完成 + 实时文件系统状态」，**绝不因无 message.complete 就把已写入的 knowledge 显示为不存在**（P0009 模型延迟下 Hermes 常已写完但报告超时）。
+
+5. **上传/状态路由不触发 writeProjection**：knowledge 路由直接 `initSharedKnowledgeLayer`（seed-if-absent、不清目录），与 situation-chat 的 `ensureWorkspace`（rmSync 清理）解耦——避免并行测试对共享 workspace 的 ENOENT 竞态。
+
+**验收**（真实浏览器 + Hermes）：上传 `团队管理经验.txt` → 立即未整理 → 交给 Agent 整理 → Hermes 创建 `knowledge/operations/团队管理经验.md`（frontmatter `sources` 引用正确）、更新 INDEX、append log → 刷新后 source 显示已整理 + 生成页 → raw 文件逐字节未变 → console 零 error。
+
+**文件**: `apps/ecommerce/runtime/shared-knowledge/status.ts`，`platform/server/routes/knowledge.ts`，`workspace/{index.html,app.js}`，`tests/unit/shared-knowledge/{knowledge-status,raw-upload}.test.ts`，`tests/integration/http.test.ts`。
+
+---
+
 ## ADR-040: Knowledge Ingest — 恢复 Fabric 操作入口（无 Knowledge Engine）
 
 - **日期**: 2026-08-21

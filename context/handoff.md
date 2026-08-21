@@ -1,5 +1,45 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - Knowledge Sources Workspace Surface（专业人员可用）
+
+### 目标与定位
+
+ADR-040 已闭环 Knowledge Ingest backend control plane；本轮补齐专业人员可用的 Workspace 页面，让非开发人员不再手工操作 `data/fabric-workspace/knowledge-sources/raw/`。**不是 Knowledge Engine**：Fabric 仍只做控制面（枚举/标记/上传入口/启动 Hermes/展示结果），Hermes 负责读 raw、组织、写 `knowledge/*.md`、更新 INDEX、append log。
+
+### 做了什么
+
+- `shared-knowledge/status.ts`（增量，未重构）：`RawSourceStatus` +`type`/`mtimeMs`；`KnowledgeStatus` +`pages`（生成的知识列表，排除 INDEX/KNOWLEDGE/log 系统文件）+`indexMd`。新增 `collectKnowledgePages`/`readKnowledgeIndex`/`inferSourceType`/`parseFrontmatterTitle`。状态仍只来自 `/api/knowledge/status`。
+- `platform/server/routes/knowledge.ts`：+`POST /api/knowledge/upload`（纯函数 `validateRawUpload` + `storeRawSource`：basename-only、.txt/.md 白名单、≤500KB、同名 409 拒绝覆盖、只写 raw 目录、path traversal 防护）；ingest 超时诚实化——返回 `{success:false, agentStatus:'timeout'|'error', error, status}`（实时磁盘真相），不再裸 500。**knowledge 路由改 `initSharedKnowledgeLayer` 替代 `ensureWorkspace`**（不触发 writeProjection 的 rmSync，修复并行测试 ENOENT 竞态）。
+- `workspace/index.html` + `app.js`：Knowledge 页重做为「专业知识/经验资料」——上传按钮（.txt/.md）→ 知识来源列表（文件名/类型/大小/更新时间/已整理-未整理/生成页/每份「整理此份」）→ 全局「交给 Agent 整理」→ 诚实结果区（Agent 报告原样 + timeout 时显示实时文件系统状态）→「生成的知识」只读卡片 + 可折叠 INDEX。前端不推断第二套状态模型。
+
+### 真实浏览器 + Hermes 端到端验收（全通）
+
+1. 浏览器上传 `团队管理经验.txt`（DataTransfer 走真实 onchange → apiPost）→ 文件落 raw（154 B）
+2. 页面立即「未整理」（含「整理此份」按钮）
+3. 点击「交给 Agent 整理」（全局）→ 真实 Hermes session 被调用
+4. Hermes 实际读取 → 创建 `knowledge/operations/团队管理经验.md`（frontmatter `sources: [knowledge-sources/raw/团队管理经验.txt]`，提炼 3 条核心原则）
+5. `log.md` append `[2026-08-22] ingest batch 3`；`INDEX.md` Operations 新增条目
+6. 刷新后 source 显示「已整理 · 生成: knowledge/operations/团队管理经验.md」
+7. **raw 文件内容逐字节未变**
+8. console 零 error
+- 另验证：上传 409 重复拒绝（不覆盖）、path traversal / PDF 拒绝、per-source「整理此份」按钮正确触发 `/api/knowledge/ingest {source}`。
+
+### 关键决策（ADR-041）
+
+- 状态单一事实源 = status API；不做「有更新待整理」不可靠推断。
+- 上传 JSON（复用 express.json/apiPost）非 multipart——零新依赖。
+- timeout 不伪造成功：区分 agentStatus 与 filesystem status。
+
+### 测试
+
+587 total / 585 passed / 2 pre-existing failures（coverage indicator_pct 漂移、chat.contract Hermes 超时）。typecheck 17（基线）。新增 7（knowledge-status 1 多行数组 + raw-upload 6）。
+
+### 状态
+
+Knowledge → 专业人员 Workspace surface 完成。**下一阶段由 ChatGPT 重新设计：Knowledge → Investigation → Situation Understanding**（按用户指示，不在本会话做 Situation Knowledge Reasoning / Skill / Knowledge backend 扩展）。
+
+---
+
 ## 本次会话 (2026-08-21) - Knowledge Ingest 操作入口恢复（Fabric 控制面，无 Knowledge Engine）
 
 ### 目标与定位

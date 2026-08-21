@@ -17,20 +17,55 @@ export interface RawSourceStatus {
   file: string;
   /** Size in bytes */
   size: number;
+  /** File type derived from extension: 'text' (.txt) | 'markdown' (.md) | 'other' */
+  type: string;
+  /** Last modified time (epoch ms) of the raw file. */
+  mtimeMs: number;
   /** Whether any knowledge page's `sources:` frontmatter references this raw source. */
   referenced: boolean;
   /** Knowledge pages (workspace-relative) whose provenance references this source. */
   referencedBy: string[];
 }
 
+/** A compiled knowledge page (read-only visibility for the Workspace). */
+export interface KnowledgePageStatus {
+  /** Workspace-root-relative page path, e.g. knowledge/platform/京东内容化推广.md */
+  path: string;
+  /** Page title from frontmatter (fallback: basename). */
+  title: string;
+  /** Raw source basenames this page references (provenance, display-friendly). */
+  sources: string[];
+}
+
 /** Snapshot of the knowledge layer's ingest state. */
 export interface KnowledgeStatus {
   workspaceDir: string;
   sources: RawSourceStatus[];
+  /** Raw sources total / provenance-referenced / pending. */
   total: number;
   referencedCount: number;
   pendingCount: number;
+  /** Compiled knowledge pages (read-only, for the Workspace surface). */
+  pages: KnowledgePageStatus[];
+  /** knowledge/INDEX.md content (empty when absent). */
+  indexMd: string;
 }
+
+/** Infer a display type from a file extension. */
+export const inferSourceType = (file: string): string => {
+  const ext = file.split('.').pop()?.toLowerCase() ?? '';
+  if (ext === 'txt') return 'text';
+  if (ext === 'md') return 'markdown';
+  return 'other';
+};
+
+/** Extract the `title:` value from a knowledge page's YAML frontmatter. */
+export const parseFrontmatterTitle = (content: string): string => {
+  const m = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!m) return '';
+  const titleMatch = m[1]!.match(/^title:[ \t]*(.*)$/m);
+  return titleMatch ? (titleMatch[1] as string).trim().replace(/^['"]|['"]$/g, '') : '';
+};
 
 /** Recursively list files under a directory (empty when dir missing). */
 const listFiles = (dir: string): string[] => {
@@ -111,6 +146,42 @@ export const collectReferencedSources = (workspaceRoot: string): Map<string, str
   return referenced;
 };
 
+/** Knowledge system files that are NOT generated pages (kept out of the page list). */
+const SYSTEM_KNOWLEDGE_FILES = new Set(['INDEX.md', 'KNOWLEDGE.md', 'log.md']);
+
+/** List compiled knowledge pages (title + provenance sources, basenames) — read-only. */
+export const collectKnowledgePages = (workspaceRoot: string): KnowledgePageStatus[] => {
+  const knowledgeDir = resolve(workspaceRoot, 'knowledge');
+  const pages: KnowledgePageStatus[] = [];
+  for (const abs of listFiles(knowledgeDir)) {
+    if (!abs.endsWith('.md')) continue;
+    const file = basename(abs);
+    if (SYSTEM_KNOWLEDGE_FILES.has(file)) continue;
+    let content = '';
+    try {
+      content = readFileSync(abs, 'utf-8');
+    } catch {
+      continue;
+    }
+    pages.push({
+      path: relative(workspaceRoot, abs),
+      title: parseFrontmatterTitle(content) || file,
+      sources: parseFrontmatterSources(content).map((s) => basename(s)),
+    });
+  }
+  return pages;
+};
+
+/** Read knowledge/INDEX.md content (empty when absent). */
+export const readKnowledgeIndex = (workspaceRoot: string): string => {
+  const indexPath = resolve(workspaceRoot, 'knowledge', 'INDEX.md');
+  try {
+    return readFileSync(indexPath, 'utf-8');
+  } catch {
+    return '';
+  }
+};
+
 /** Enumerate raw sources and mark provenance-referenced state (pure, no LLM). */
 export const buildKnowledgeStatus = (workspaceRoot: string): KnowledgeStatus => {
   const rawDir = resolve(workspaceRoot, 'knowledge-sources', 'raw');
@@ -120,10 +191,14 @@ export const buildKnowledgeStatus = (workspaceRoot: string): KnowledgeStatus => 
     const path = relative(workspaceRoot, abs);
     const file = basename(abs);
     let size = 0;
+    let mtimeMs = 0;
     try {
-      size = statSync(abs).size;
+      const st = statSync(abs);
+      size = st.size;
+      mtimeMs = st.mtimeMs;
     } catch {
       size = 0;
+      mtimeMs = 0;
     }
 
     // Exact workspace-relative match first; fall back to basename match so a
@@ -140,8 +215,18 @@ export const buildKnowledgeStatus = (workspaceRoot: string): KnowledgeStatus => 
       }
     }
 
-    return { path, file, size, referenced: referencedBy.length > 0, referencedBy: [...referencedBy] };
+    return {
+      path,
+      file,
+      size,
+      type: inferSourceType(file),
+      mtimeMs,
+      referenced: referencedBy.length > 0,
+      referencedBy: [...referencedBy],
+    };
   });
+
+  const pages = collectKnowledgePages(workspaceRoot);
 
   return {
     workspaceDir: workspaceRoot,
@@ -149,5 +234,7 @@ export const buildKnowledgeStatus = (workspaceRoot: string): KnowledgeStatus => 
     total: sources.length,
     referencedCount: sources.filter((s) => s.referenced).length,
     pendingCount: sources.filter((s) => !s.referenced).length,
+    pages,
+    indexMd: readKnowledgeIndex(workspaceRoot),
   };
 };

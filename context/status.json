@@ -1,9 +1,10 @@
 {
   "project": "agentFabric",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Business Workspace on Hermes Agent Runtime",
   "hermes": "0.20.0",
   "completed": [
+    "Knowledge Sources Workspace surface - upload raw .txt/.md from Workspace (POST /api/knowledge/upload: basename-only, .txt/.md whitelist, dup 409 no-overwrite, raw-dir-only, path traversal + size guards; validated via pure validateRawUpload/storeRawSource), status adds type/mtime/pages/indexMd (read-only), ingest result honest separation (agentStatus timeout vs fresh filesystem status), per-source 整理此份 + global 交给 Agent 整理, generated-knowledge page cards + collapsible INDEX; real browser+Hermes E2E: uploaded 团队管理经验.txt -> 未整理 -> Agent created knowledge/operations/团队管理经验.md (frontmatter provenance), updated INDEX/log, raw byte-identical, 0 console errors; ADR-041",
     "Knowledge Ingest control restored (P0008.4 §10) - Fabric-side entry only, no Knowledge Engine: pure status.ts (enumerate knowledge-sources/raw + mark provenance-referenced via frontmatter sources parsing incl. multi-line array form) + GET /api/knowledge/status + POST /api/knowledge/ingest (launches Hermes in Fabric Workspace to run KNOWLEDGE.md Ingest flow; reuses situation-chat ensureWorkspace/collectTurn, timeout 120s->300s for known P0009 model latency) + Workspace Knowledge view (status list + Ingest button + verbatim Hermes report + post-state). Real Hermes verified: created 2 knowledge pages (SOP + fault-diagnosis), updated INDEX, appended log; status now 7 referenced / 2 pending of 9 raw sources; ADR-040",
     "Post-Consolidation REMOVE Sweep - deleted only assets marked REMOVE CANDIDATE with proven zero canonical consumers: situation-viewmodel.ts orphan, agentSession SSE demo route+connectEventStream, agentConfig localStorage pseudo-persistence, Legacy Inbox (loadInbox/badgeAll/view-inbox/inbox chat), 17 dead Evidence Viewer i18n keys, operator_memories producer+3 zero-consumer endpoints (kept DB table+store as inert); kept legacy Review->Feedback->context_memories read side (LIVE consumers: /api/memory, chat, findings, orchestrator adjustments) and signal_weights (schema cleanup forbidden); -1036 lines; browser-verified 7 canonical chains no regression; ADR-039",
     "Evidence Viewer Contract Repair - renderProvenanceChain field paths aligned to real /api/evidence response (discovery.artifacts/evidence.recentRecords/totalRecords); recentRecords sorted acquired_at desc (was oldest 10) + explicit listEvidence limit (default 100 truncated totalRecords and hid newest CDP evidence); loadBtn onclick; browser-verified real CDP provenance (2026-08-20 productTop, Total: 641 records); gaps recorded not fixed: capability-evidence association MISSING, non-persistent evidence_id, lastVerified=null; ADR-038",
@@ -55,6 +56,6 @@
   "blocked": [
     "P0009 model stability — nemotron-3-ultra run-to-run jitter (71-77s vs >180s), transport confirmed correct, model/quota layer"
   ],
-  "tests": 581,
+  "tests": 587,
   "coverage": "domains: 80%+ target"
 }
