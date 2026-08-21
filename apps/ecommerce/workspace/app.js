@@ -801,29 +801,19 @@ async function loadSituationDetail(situationId) {
     html += '<p>' + escHtml(desc) + '</p>';
     html += '</div></div>';
 
-    // Layer 2: Agent 怎么理解 — real attribution from the Pattern Engine.
+    // Layer 2: 🧠 Agent 当前理解 — P0010 hero surface.
+    // Current Understanding is the PRIMARY business surface; Trace (调查依据) is a
+    // secondary drill-down. Content comes ONLY from persisted LearningContext.investigation
+    // (no LLM call for rendering). Before investigation, the deterministic Pattern
+    // Engine attribution + recommendation remain (pre-existing behavior).
     html += '<div class="situation-layer">';
-    html += '<h3 class="situation-layer-title">🤖 Agent 怎么理解</h3>';
-    html += '<div class="situation-layer-body">';
-    html += renderAgentUnderstanding(explanation, desc);
-    html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');setTimeout(function(){loadEvidenceViewer()},100)">[查看 Evidence →]</p>';
-    html += '</div></div>';
-
-    // Layer 2.5: P0010 Investigation — Knowledge-Guided Investigation surface.
-    html += '<div class="situation-layer">';
-    html += '<h3 class="situation-layer-title">🔍 调查</h3>';
-    html += '<div class="situation-layer-body" id="situationInvestigation_' + escHtml(situationId) + '">';
-    html += '<p class="muted placeholder">尚未调查。</p>';
+    html += '<h3 class="situation-layer-title">🧠 Agent 当前理解</h3>';
+    html += '<div class="situation-layer-body" id="situationUnderstanding_' + escHtml(situationId) + '">';
+    html += '<p class="muted placeholder">加载中...</p>';
     html += '</div>';
+    html += '<div id="situationTrace_' + escHtml(situationId) + '" style="margin-top:6px"></div>';
     html += '<button class="btn btn-primary" id="startInvestigation_' + escHtml(situationId) + '" style="margin-top:8px;font-size:0.78rem" onclick="startInvestigation(\'' + escHtml(situationId) + '\')">🔍 交给 Agent 调查</button>';
     html += '</div>';
-
-    // Layer 3: Agent 建议 — deterministic recommendation from metric + direction.
-    html += '<div class="situation-layer">';
-    html += '<h3 class="situation-layer-title">💡 Agent 建议</h3>';
-    html += '<div class="situation-layer-body">';
-    html += '<p>' + escHtml(renderAgentRecommendation(tags)) + '</p>';
-    html += '</div></div>';
 
     // Layer 4: 你怎么处理？
     html += '<div class="situation-layer situation-interaction">';
@@ -863,64 +853,168 @@ async function loadSituationDetail(situationId) {
     content.innerHTML = html;
 
     // Load any stored P0010 Investigation (read-only; null when not investigated).
+    // The Understanding surface consumes ONLY persisted investigation state — no
+    // LLM/Hermes call, no new evidence acquisition. Trace is a secondary drill-down.
+    const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
+    const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
+    const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
+    let hasInvestigation = false;
     try {
       const inv = await apiGet('/api/situation/' + encodeURIComponent(situationId) + '/investigation');
-      const bodyEl = document.getElementById('situationInvestigation_' + escHtml(situationId));
-      if (bodyEl && inv && inv.investigation) renderInvestigation(bodyEl, inv.investigation);
-    } catch { /* investigation unavailable — leave the empty state */ }
+      if (uEl && inv && inv.investigation) {
+        hasInvestigation = true;
+        renderCurrentUnderstanding(uEl, inv.investigation);
+        if (tEl) renderInvestigationTrace(tEl, inv.investigation, explanation);
+        if (btn) btn.style.display = 'none';
+      }
+    } catch { /* investigation unavailable — fall through to pre-investigation state */ }
+    if (!hasInvestigation && uEl) {
+      // Pre-investigation: existing deterministic attribution + recommendation.
+      uEl.innerHTML = renderAgentUnderstanding(explanation, desc) +
+        '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');setTimeout(function(){loadEvidenceViewer()},100)">[查看 Evidence →]</p>' +
+        '<div style="margin-top:8px"><span class="muted" style="font-size:0.72rem">💡 </span>' + escHtml(renderAgentRecommendation(tags)) + '</div>';
+    }
   } catch (e) {
     content.innerHTML = '<p class="muted placeholder">加载失败 (' + e.message + ')</p>';
   }
 }
 
-// ═══ P0010 Investigation (Knowledge-Guided) ═══
-const STOP_LABELS = { judgment: '已形成判断', observe: '继续观察（无需干预）', missing_capability: '缺少能力（需要扩展 Fabric）', ask_human: '需要人工确认' };
+// ═══ P0010 Current Understanding Surface (Knowledge-Guided Investigation) ═══
+// The PRIMARY business surface: projects persisted LearningContext.investigation
+// into operator-readable language. NO LLM/Hermes call for rendering; no new
+// evidence acquisition; no second Understanding model. Trace (调查依据) is a
+// secondary drill-down, not the hero.
 
-function renderInvestigation(container, inv) {
+const HYPO_STATUS_LABEL = { supported: '已支持', weakened: '已弱化', proposed: '待验证', rejected: '已排除' };
+const STOP_VERDICT_LABEL = {
+  judgment: '已形成判断',
+  observe: '建议观察，暂不干预',
+  missing_capability: '缺少能力（Fabric 无法获取所需证据）',
+  ask_human: '需人工确认',
+};
+
+/** Surface the capability boundary ONLY from the Agent's own persisted words. */
+function deriveCapabilityBoundary(inv) {
+  if (!inv) return null;
+  if (inv.stopReason === 'missing_capability') {
+    return '当前 Fabric 缺少对应能力，无法获取所需证据——Agent 已停止调查，未猜测原因。';
+  }
+  if (inv.stopReason === 'ask_human') {
+    return '所需业务事实无法由系统获取，需要运营人员人工确认。';
+  }
+  const text = ((inv.judgment || '') + (inv.currentUnderstanding || '')).toLowerCase();
+  if (text.includes('人工核验') || text.includes('人工确认') || text.includes('人工核查') || text.includes('无法获取')) {
+    const req = (inv.requiredEvidence || []).slice(0, 4).join('；');
+    return '部分所需证据当前 Fabric 无法获取，需要人工核验' + (req ? '：' + req : '') + '。';
+  }
+  return null;
+}
+
+/** The hero surface: Agent 当前理解 (judgment / confirmed / hypotheses / unknown / next / boundary). */
+function renderCurrentUnderstanding(container, inv) {
   if (!inv) { container.innerHTML = '<p class="muted placeholder">尚未调查。</p>'; return; }
-  const block = (label, inner) => '<div class="inv-block" style="margin:6px 0"><div class="inv-label" style="font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:2px">' + label + '</div>' + inner + '</div>';
-  const list = (items) => '<ul style="margin:0;padding-left:16px">' + items.map(i => '<li style="font-size:0.8rem">' + i + '</li>').join('') + '</ul>';
-  const hyp = (inv.hypotheses || []).map(h => escHtml(h.statement) + ' <span class="muted" style="font-size:0.72rem">(' + escHtml(h.status) + ')</span>');
-  const findings = (inv.findings || []).map(f =>
-    '<div style="margin:4px 0;font-size:0.8rem">' +
-      '<div class="muted" style="font-size:0.72rem">Q: ' + escHtml(f.question || '') + '</div>' +
-      '<div>A: ' + escHtml(f.answer || '') + '</div>' +
-      (f.impactOnHypothesis ? '<div class="muted" style="font-size:0.72rem">影响: ' + escHtml(f.impactOnHypothesis) + '</div>' : '') +
-    '</div>');
+  const block = (label, inner) => '<div class="inv-block" style="margin:8px 0"><div class="inv-label" style="font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:3px">' + label + '</div>' + inner + '</div>';
+  const list = (items) => '<ul style="margin:0;padding-left:16px">' + items.map(i => '<li style="font-size:0.82rem;margin:2px 0">' + i + '</li>').join('') + '</ul>';
 
   let html = '';
-  if (inv.currentUnderstanding) html += block('Agent 当前判断', '<p style="margin:0;font-size:0.8rem">' + escHtml(inv.currentUnderstanding) + '</p>');
-  if (inv.knownEvidence && inv.knownEvidence.length) html += block('已确认', list(inv.knownEvidence.map(escHtml)));
-  if (hyp.length) html += block('当前假设', list(hyp));
-  if (inv.unknowns && inv.unknowns.length) html += block('尚未确认', list(inv.unknowns.map(escHtml)));
-  if (inv.nextQuestion) {
-    let req = '';
-    if (inv.requiredEvidence && inv.requiredEvidence.length) req += '<div class="muted" style="font-size:0.72rem;margin-top:2px">需要证据: ' + escHtml(inv.requiredEvidence.join('、')) + '</div>';
-    if (inv.capabilityUsed) req += '<div class="muted" style="font-size:0.72rem">获取方式: ' + escHtml(inv.capabilityUsed) + '</div>';
-    html += block('下一问题', '<p style="margin:0;font-size:0.8rem">' + escHtml(inv.nextQuestion) + '</p>' + req);
+
+  // 1) 当前判断 — the Agent's business conclusion (verbatim, operator language).
+  html += block('当前判断',
+    (inv.judgment ? '<p style="margin:0;font-size:0.82rem;white-space:pre-wrap">' + escHtml(inv.judgment) + '</p>' : '') +
+    (inv.stopReason ? '<p style="margin:6px 0 0;font-size:0.75rem;font-weight:600;color:var(--primary)">调查结果 · ' + escHtml(STOP_VERDICT_LABEL[inv.stopReason] || inv.stopReason) + '</p>' : '')
+  );
+
+  // 2) 已确认 — evidence-backed findings (readable, not raw JSON).
+  const findings = (inv.findings || []).map(f =>
+    '<div style="margin:3px 0;font-size:0.8rem">' +
+      '<span class="muted" style="font-size:0.72rem">' + escHtml(f.question || '') + '</span><br/>' +
+      escHtml(f.answer || '') +
+      (f.impactOnHypothesis ? ' <span class="muted" style="font-size:0.72rem">（' + escHtml(f.impactOnHypothesis) + '）</span>' : '') +
+    '</div>');
+  const known = (inv.knownEvidence || []).map(escHtml);
+  if (findings.length || known.length) {
+    html += block('已确认', findings.join('') +
+      (known.length ? '<div class="muted" style="font-size:0.75rem;margin-top:4px">依据: ' + known.join('；') + '</div>' : ''));
   }
-  if (findings.length) html += block('新发现', findings.join(''));
-  if (inv.judgment) html += block('判断', '<p style="margin:0;font-size:0.8rem">' + escHtml(inv.judgment) + '</p>');
-  if (inv.stopReason) html += block('调查结果', '<p style="margin:0;font-size:0.8rem">' + escHtml(STOP_LABELS[inv.stopReason] || inv.stopReason) + '</p>');
+
+  // 3) 当前假设 — competing hypotheses with operator-language status.
+  const hyp = (inv.hypotheses || []).map(h =>
+    '<li style="font-size:0.82rem;margin:2px 0">' + escHtml(h.statement) +
+    ' <span class="muted" style="font-size:0.72rem">[' + escHtml(HYPO_STATUS_LABEL[h.status] || h.status) + ']</span></li>');
+  if (hyp.length) html += block('当前假设', '<ul style="margin:0;padding-left:16px">' + hyp.join('') + '</ul>');
+
+  // 4) 还不知道 — what the Agent knows it does not know (missing/required evidence).
+  const unknowns = (inv.unknowns || []).map(escHtml);
+  const req = (inv.requiredEvidence || []).map(escHtml);
+  if (unknowns.length || req.length) {
+    html += block('还不知道',
+      (unknowns.length ? list(unknowns) : '') +
+      (req.length ? '<div class="muted" style="font-size:0.75rem;margin-top:3px">需要证据: ' + req.join('；') + '</div>' : '')
+    );
+  }
+
+  // 5) 下一步调查 — the real next question / investigation intent (never fabricated).
+  // A stopped investigation (observe) is presented as observation, NOT as an
+  // active next question — the model's recorded question, if any, is shown as
+  // a muted 观察项 so the operator sees it without implying continued investigation.
+  if (inv.stopReason === 'observe') {
+    html += block('下一步调查',
+      '<p style="margin:0;font-size:0.82rem">当前无需继续调查，建议观察后续数据。</p>' +
+      (inv.nextQuestion ? '<div class="muted" style="font-size:0.75rem;margin-top:2px">观察项: ' + escHtml(inv.nextQuestion) + '</div>' : '')
+    );
+  } else if (inv.nextQuestion) {
+    html += block('下一步调查',
+      '<p style="margin:0;font-size:0.82rem">' + escHtml(inv.nextQuestion) + '</p>' +
+      (inv.investigationRequest ? '<div class="muted" style="font-size:0.75rem;margin-top:2px">' + escHtml(inv.investigationRequest) + '</div>' : '')
+    );
+  } else if (inv.stopReason === 'judgment') {
+    html += block('下一步调查', '<p style="margin:0;font-size:0.82rem">调查已形成判断，无需继续。</p>');
+  }
+
+  // 6) 能力边界 — only when the Agent itself recognized Fabric cannot get it.
+  const boundary = deriveCapabilityBoundary(inv);
+  if (boundary) html += block('能力边界', '<p style="margin:0;font-size:0.82rem;color:var(--danger)">⚠ ' + escHtml(boundary) + '</p>');
+
   container.innerHTML = html || '<p class="muted placeholder">Agent 未返回调查内容。</p>';
 }
 
+/** Secondary drill-down: why did the Agent judge this way (Knowledge/Question/Capability/Evidence). */
+function renderInvestigationTrace(container, inv, explanation) {
+  if (!container || !inv) return;
+  const rows = [];
+  if (inv.capabilityUsed) rows.push('获取方式: ' + escHtml(inv.capabilityUsed));
+  if (inv.evidenceAcquired && inv.evidenceAcquired.length) rows.push('已获取证据: ' + escHtml(inv.evidenceAcquired.join('；')));
+  if (inv.updatedAt) rows.push('调查时间: ' + escHtml(inv.updatedAt));
+  const inner = rows.length
+    ? '<ul style="margin:4px 0;padding-left:16px;font-size:0.75rem">' + rows.map(r => '<li>' + r + '</li>').join('') + '</ul>'
+    : '<p class="muted" style="font-size:0.75rem">（无额外调查记录）</p>';
+  container.innerHTML =
+    '<details><summary style="cursor:pointer;font-size:0.78rem;font-weight:600;color:var(--muted)">为什么这么判断？ / 查看调查依据</summary>' +
+    '<div style="margin-top:8px">' +
+      (explanation ? '<div style="font-size:0.75rem" class="muted">信号归因: ' + escHtml(explanation.primary_driver || '未知') + '</div>' : '') +
+      inner +
+    '</div></details>';
+}
+
 async function startInvestigation(situationId) {
-  const bodyEl = document.getElementById('situationInvestigation_' + escHtml(situationId));
+  const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
+  const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
   const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
-  if (!bodyEl) return;
-  bodyEl.innerHTML = '<p class="muted">🔍 Agent 正在调查：读取专业知识 → 形成当前判断 → 提出下一个问题 → 检查证据 → 获取所需证据 → 更新判断（可能需要几分钟）...</p>';
+  if (!uEl) return;
+  uEl.innerHTML = '<p class="muted">🔍 Agent 正在调查：读取专业知识 → 形成当前判断 → 提出下一个问题 → 检查证据 → 获取所需证据 → 更新判断（可能需要几分钟）...</p>';
   if (btn) btn.disabled = true;
   try {
     const resp = await apiPost('/api/situation/' + encodeURIComponent(situationId) + '/investigate', {});
     if (resp.investigation) {
-      renderInvestigation(bodyEl, resp.investigation);
+      renderCurrentUnderstanding(uEl, resp.investigation);
+      if (tEl) renderInvestigationTrace(tEl, resp.investigation, null);
+      if (btn) btn.style.display = 'none';
     } else {
-      bodyEl.innerHTML = '<p class="muted placeholder">Agent 未返回有效的调查结果' +
+      uEl.innerHTML = '<p class="muted placeholder">Agent 未返回有效的调查结果' +
         (resp.error ? ': ' + escHtml(resp.error) : '') + '</p>';
     }
   } catch (e) {
-    bodyEl.innerHTML = '<p class="muted placeholder">调查失败: ' + escHtml(e.message) +
+    uEl.innerHTML = '<p class="muted placeholder">调查失败: ' + escHtml(e.message) +
       '<br/><small>请确认 Hermes serve 已启动（hermes serve，端口 9119）。</small></p>';
   } finally {
     if (btn) btn.disabled = false;

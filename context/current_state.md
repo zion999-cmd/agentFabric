@@ -4,6 +4,8 @@
 
 ## 已完成
 
+- [x] **P0010 Current Understanding Workspace Surface（一等业务表象）** - Situation Detail 加「🧠 Agent 当前理解」hero：投影已持久化 `LearningContext.investigation`（当前判断/已确认/当前假设/还不知道/下一步调查/能力边界，运营语言），**零 LLM 渲染、零新取证**；「为什么这么判断」Trace 为次级下钻；observe-stop 不伪装活跃 Next Question（显示"建议观察"+观察项）；能力边界只从 Agent 措辞派生（京准通/广告计划需人工核验）；预调查状态保留 Pattern 归因+建议+按钮。浏览器验收：Case A（GMV→observe→不干预）✅、Case B（orders→真异常→能力边界⚠）✅、reload 持久 ✅、intervention/chat 无回归 ✅、console 零 error ✅。ADR-043。
+
 - [x] **P0010 Behavioral Validation（A-E 五类，真实数据）** - 不扩功能，用现有 Situation 验证：A 伪异常→observe ✅（两机制：GMV -67.9% 周末节律 + CVR -21.2% 小样本噪声）；B 真异常→judgment ✅（orders -66.7% 周同比 -82.5% 真异常 + 5 假设 + 优先排查清单）；C 多假设竞争→最高信息增益问题 ✅（不盲查全部 capability）；D MISSING_CAPABILITY ⚠️ partial（识别非 Fabric 证据转人工核验，但 stopReason=judgment）；E 证据矛盾 ⚠️ 数据不可触发。发现：伪异常门稳定成立（反幻觉）、不必要取证抑制、能力边界识别。数据可用性：当前快照无真实业务异常，B 纯路径/E 待真实异常数据。契约保真度观察：capabilityUsed 有时留空、stopReason 边界由模型选。
 
 - [x] **P0010 Knowledge-Guided Investigation（Initial Acceptance 通过）** - Situation → Knowledge → Question → Fabric Capability → Evidence → Updated Understanding。Investigation Contract schema（Known/Hypotheses/Unknowns/NextQuestion/Findings/Judgment/StopReason，非 CoT）+ `buildInvestigationPrompt`（situation 作 data、读 knowledge/、Agent 自主选问题与能力、诚实 stop、无硬编码树）+ `parseInvestigation` + `POST /api/situation/:id/investigate`（复用 situation-chat sessions Map = **同一 Hermes session**，两阶段契约提取）+ Workspace Situation Detail Investigation 层（渲染 + 开始调查按钮）。**真实 GMV decline 验收**（`sit_6f42b428e06c766d5681` 成交金额 -67.9%）：Hermes 读 Knowledge（引用周末节律/观察规则）→ 形成 Understanding → 自主 Next Question → 证据不足 → **fabric_execute_capability(trade.overview) 真实执行** → 4 天 Evidence 入 Store → Answer（周末节律伪异常）→ 假设更新 → **stopReason=observe**。持久化 learning_contexts + Workspace 渲染。ADR-042。新测试 15。

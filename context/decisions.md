@@ -1,5 +1,29 @@
 # 技术决策记录 (ADR)
 
+## ADR-043: P0010 Current Understanding Workspace Surface
+
+- **日期**: 2026-08-21
+- **状态**: Accepted（浏览器验收通过）
+- **来源**: P0010 最后一个产品层缺口——把已持久化的 Investigation/Understanding 提升为 Workspace 一等业务表象
+
+**决策**（Situation Detail 的「🧠 Agent 当前理解」成为主表象）：
+
+1. **Canonical semantics**：Current Understanding = 主表象；Chat/Intervention = 可改变理解的交互；Trace/调查依据 = 解释"为什么这么判断"的次级下钻面。**本刀停在 Situation → Current Understanding，不进 Recommendation/Action**。
+
+2. **REUSE 已持久化状态，禁 LLM**：Workspace 消费 `LearningContext.investigation`（P0010 已产生），**禁止为 UI 再调 Hermes/LLM 生成摘要**，禁止为展示复制 LLM summary。无第二套 Understanding 模型。
+
+3. **六个业务语义段**（运营语言，非 schema 字段）：当前判断（judgment 原文 + 调查结果 verdict）、已确认（findings 逐条可读 + 依据 knownEvidence）、当前假设（hypotheses + 已支持/待验证/已弱化/已排除）、还不知道（unknowns + requiredEvidence）、下一步调查（真实 nextQuestion；**observe-stop 不伪装活跃问题**——显示"建议观察后续数据"+ muted 观察项）、能力边界（**只从 Agent 自己的措辞派生**：stopReason=missing_capability/ask_human 或 judgment 含 人工核验/无法获取 → ⚠ 需人工核验清单）。
+
+4. **Trace 是次级入口**：`为什么这么判断？/查看调查依据`（capabilityUsed/evidenceAcquired/时间 + 信号归因）。普通运营首先看到的是"Agent 当前怎么理解这件事"，不是 MCP/trace_id/JSON。
+
+5. **预调查状态不回归**：无 investigation 时保留原 Pattern Engine 归因 + 确定性建议 + 「交给 Agent 调查」按钮。
+
+**验收**（真实浏览器）：Case A（GMV -67.9% 周末节律 → observe → 当前不建议干预）肉眼可判断；Case B（orders -66.7% 真异常 → 5 假设 → 下一步调查=京准通/广告计划 → **能力边界 ⚠ 京准通账户余额/预算/广告计划状态需人工核验**）；reload 后状态仍在；console 零 error；intervention/chat 无回归；无新 LLM 调用/无新 evidence acquisition。
+
+**文件**: `apps/ecommerce/workspace/app.js`。
+
+---
+
 ## ADR-042: P0010 Knowledge-Guided Investigation
 
 - **日期**: 2026-08-21

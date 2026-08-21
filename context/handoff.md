@@ -1,5 +1,47 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010 Current Understanding Workspace Surface
+
+### 目标
+
+P0010 Runtime/Behavioral Validation 已成立。补最后一个产品层缺口：把已持久化的 Investigation/Understanding 提升为 Workspace 一等业务表象。**不是新增推理能力**，是把已有认知状态正确投影到 Workspace。
+
+### Canonical semantics（本刀确立）
+
+Current Understanding（主表象）vs Chat/Intervention（可改变理解的交互）vs Trace/调查依据（次级下钻）。本刀停在 Situation → Current Understanding，不进 Recommendation/Action。
+
+### 实现（仅 app.js，零后端改动，零 LLM）
+
+- Situation Detail 重构：`🧠 Agent 当前理解` hero 层（6 段运营语言）+ `为什么这么判断？/查看调查依据` Trace 次级入口。
+- `renderCurrentUnderstanding`：当前判断（judgment 原文 + verdict）、已确认（findings 可读行 + 依据）、当前假设（状态标签）、还不知道（unknowns + requiredEvidence）、下一步调查（真实 nextQuestion；observe-stop 显示"建议观察后续数据"+ muted 观察项，不伪装活跃）、能力边界。
+- `deriveCapabilityBoundary`：**只从 Agent 自己的措辞派生**（stopReason missing_capability/ask_human，或 judgment 含 人工核验/无法获取），不硬编码运营判断、不重算。
+- `renderInvestigationTrace`：次级下钻（capabilityUsed/evidenceAcquired/时间 + 信号归因）。
+- 预调查状态：无 investigation 时保留 Pattern 归因 + 建议 + 「交给 Agent 调查」按钮。
+
+### 真实浏览器验收（全过）
+
+- **Case A**（GMV -67.9% 周末节律）：当前判断=【伪异常判定】禁止干预 + 调查结果·建议观察暂不干预；下一步调查=「当前无需继续调查，建议观察后续数据」；能力边界正确隐藏（伪异常无缺口）。肉眼可判断 伪异常→observe→不干预。
+- **Case B**（orders -66.7% 真异常）：当前判断=【真异常需人工核验】；已确认=周同比-82.5%真实；5 假设；下一步调查=付费广告账户京准通状态；**能力边界=⚠ 京准通账户余额/预算/广告计划状态/渠道占比需人工核验**（来自 Agent 自己的 judgment"需人工核验"+requiredEvidence）。肉眼可判断 真异常→竞争假设→missing evidence→能力边界。
+- reload 后 Case A 状态仍在；console 零 error；intervention/chat 无回归（三 case 均 hasIntervention/hasChat）；预调查 situation 显示 Pattern 归因+建议+按钮。
+- **无新 LLM 调用**（渲染纯消费持久化 JSON）、**无新 evidence acquisition**。
+
+### 关键决策（ADR-043）
+
+- HARD RULE：禁止为 UI 调 Hermes/LLM 生成"理解摘要"——消费 P0010 已产生已持久化的认知结果。
+- observe-stop 不把 nextQuestion 伪装成活跃调查（显示为 muted 观察项）。
+- 能力边界只从 Agent 措辞派生（不重算、不硬编码、不包装成已知道答案）。
+- Trace 是次级，不抢占 Current Understanding 主表象。
+
+### 测试
+
+600/602 passed（2 pre-existing），typecheck 17 基线。零新增测试文件（纯 Workspace 投影）。
+
+### 建议下一步
+
+P0010 产品层缺口已补。按指示停止，不继续 Action Proposal。下一阶段（如用户发起）才考虑：从 Investigation/Judgment 进入 Action Proposal，或补真实业务异常数据验证 B 纯路径/D/E。
+
+---
+
 ## 本次会话 (2026-08-21) - P0010 Behavioral Validation（A-E 五类行为）
 
 ### 目标
