@@ -1,5 +1,27 @@
 # 技术决策记录 (ADR)
 
+## ADR-042: P0010 Knowledge-Guided Investigation
+
+- **日期**: 2026-08-21
+- **状态**: Accepted（Initial Acceptance 通过）
+- **来源**: proposals/P0010-knowledge-guided-investigation.md
+
+**决策**（让 Agent 从"读已有数据解释 Situation"跨到"基于专业 Knowledge 主动调查"）：
+
+1. **Ownership**：Hermes 负责读 Knowledge、形成 Understanding、选 Next Question、选 Capability、读 Evidence、更新判断、决定 Stop。Fabric 负责 Situation、Capability discovery/execute、Evidence persistence、把 Investigation 业务产物给 Workspace、Learning Context。**Fabric 不替 Hermes 思考问题**——无 if/else 调查树、无硬编码问题、不复制运营 SOP 进 prompt。
+
+2. **Investigation Contract**（`shared/schemas/investigation.ts`）：situationId / currentUnderstanding / knownEvidence / hypotheses(statement+status) / unknowns / nextQuestion / requiredEvidence / investigationRequest / findings(question+evidenceRefs+answer+impactOnHypothesis) / judgment / stopReason(judgment|observe|missing_capability|ask_human) / capabilityUsed / evidenceAcquired。领域级可审计对象，**不是 Chain-of-Thought**。
+
+3. **调查触发**（`POST /api/situation/:id/investigate`）：复用 situation-chat 的 sessions Map → **同一 Hermes session**（capability 执行结果回到同一 turn）。两阶段契约提取：主调查 turn（600s）+ 若模型输出 prose 则 follow-up turn 要求结构化 JSON（Fabric 不合成）。持久化 = LearningContext body 增量 `investigation` 字段（`learning_contexts` 表 upsert，**不建新表**）。
+
+4. **Prompt**（`buildInvestigationPrompt`）：situation+evidence 作为 data 注入；指示读 knowledge/INDEX.md + 相关页；Agent 自主选 Next Question + requiredEvidence；证据不足时用 fabric_list_capabilities + fabric_execute_capability；无匹配能力 → missing_capability 不猜；**必须真实调用 fabric_execute_capability 至少一次**。无业务规则/决策树/if/else。
+
+**验收**（真实 GMV decline `sit_6f42b428e06c766d5681`，成交金额 -67.9%）全通：Hermes 读 Knowledge（引用"对比优先级：周同比>类目大盘>日环比"、"单天波动±15%优先观察不干预"——来自 knowledge/reference/京东电商运营隐性经验与故障诊断.md）→ 形成 Current Understanding（4 天真实数据）→ 自主 Next Question（与上周同日对比验证周末节律）→ 证据不足 → **fabric_execute_capability(trade.overview) 真实执行** → 获取 08-13/14/15/16 四天 Evidence 入 Evidence Store → Answer（周末节律伪异常）→ 假设更新（周末效应 supported / 真异常 weakened）→ **stopReason=observe**（Investigation Gate 正确：波动幅度+周度节律判断后观察不干预）。持久化 learning_contexts + Workspace Investigation 层渲染 + console 零 error。
+
+**文件**: `shared/schemas/investigation.ts`，`apps/ecommerce/runtime/investigation/{prompt,parse,index}.ts`，`platform/server/routes/situation-chat.ts`，`workspace/app.js`，`tests/contract/investigation.contract.ts`（15 tests）。
+
+---
+
 ## ADR-041: Knowledge Sources Workspace Surface
 
 - **日期**: 2026-08-21

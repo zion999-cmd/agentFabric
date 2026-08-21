@@ -21,7 +21,12 @@ import { writeProjection } from '#app/runtime/fabric-workspace/index.js';
 import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
 import { loadCapabilityEntries } from '#app/runtime/fabric-workspace/capability-loader.js';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
-import { loadLearningContext } from '#app/experience/learning-context-producer.js';
+import {
+  loadSituation,
+  loadLearningContext,
+  storeInvestigationInLearningContext,
+} from '#app/experience/learning-context-producer.js';
+import { buildInvestigationPrompt, parseInvestigation } from '#app/runtime/investigation/index.js';
 
 // ---- Session registry (server-side) ----
 
@@ -76,7 +81,7 @@ const writeLearningContextToWorkspace = (dir: string, situationId: string, ctx: 
 };
 
 /** Accumulate message.delta text until message.complete, resolve with full reply. */
-export const collectTurn = (client: SituationChatClient, sessionId: string): Promise<string> => {
+export const collectTurn = (client: SituationChatClient, sessionId: string, timeoutMs = 300_000): Promise<string> => {
   return new Promise((resolveTurn, rejectTurn) => {
     let text = '';
     let timedOut = false;
@@ -88,7 +93,7 @@ export const collectTurn = (client: SituationChatClient, sessionId: string): Pro
       // Hermes model latency is unstable (documented: 71-77s fast path, >180s
       // slow path; an ingest that reads sources + writes pages takes longer).
       // 300s keeps the Agent's real completion time inside the window.
-    }, 300_000);
+    }, timeoutMs);
 
     const unsubscribe = client.onEvent((event: HermesEvent) => {
       if (event.session_id !== undefined && event.session_id !== sessionId) return;
@@ -186,6 +191,120 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
       hasSession: Boolean(active),
       hermesSessionId: active?.hermesSessionId ?? null,
     });
+  });
+
+  // GET /api/situation/:id/investigation — the situation's stored P0010
+  // Investigation Contract (read-only; null when not yet investigated).
+  router.get('/situation/:id/investigation', (req, res) => {
+    const situationId = req.params['id'];
+    if (!options.db) {
+      res.json({ success: false, error: 'Investigation requires a database' });
+      return;
+    }
+    const investigation = loadLearningContext(options.db, situationId)?.investigation ?? null;
+    res.json({ success: true, situationId, investigation });
+  });
+
+  // POST /api/situation/:id/investigate — P0010 Knowledge-Guided Investigation.
+  // Runs in the SAME Hermes session as the situation chat (sessions Map), so the
+  // capability-execution result returns into the same turn. Fabric owns: trigger,
+  // situation+evidence delivery, capability tool, persistence, workspace surface.
+  // Hermes owns: reading Knowledge, forming understanding, choosing the Next
+  // Question, selecting a capability, acquiring evidence, updating understanding.
+  // On timeout, returns agentStatus:'timeout' + the persisted state (never
+  // fabricates a completed investigation).
+  router.post('/situation/:id/investigate', async (req, res) => {
+    const situationId = req.params['id'];
+    if (!situationId) {
+      res.status(400).json({ success: false, error: 'Missing situation ID' });
+      return;
+    }
+    if (!options.db) {
+      res.status(500).json({ success: false, error: 'Investigation requires a database' });
+      return;
+    }
+
+    const situation = loadSituation(options.db, situationId);
+    if (!situation) {
+      res.status(404).json({ success: false, error: 'Situation not found' });
+      return;
+    }
+
+    try {
+      // Ensure the SAME session used by situation chat (reuse, no new session).
+      let active = sessions.get(situationId);
+      if (!active) {
+        if (options.db) {
+          const ctx = loadLearningContext(options.db, situationId);
+          if (ctx) writeLearningContextToWorkspace(workspaceDir, situationId, ctx);
+        }
+        const client = options.clientFactory
+          ? options.clientFactory(options.hermesUrl)
+          : new HermesSessionClient(options.hermesUrl ? { url: options.hermesUrl } : {});
+        await client.connect();
+        const created = await client.createSession({
+          cwd: workspaceDir,
+          ...(options.profile ? { profile: options.profile } : {}),
+        });
+        active = { client, hermesSessionId: created.sessionId };
+        sessions.set(situationId, active);
+      }
+
+      const ctx = loadLearningContext(options.db, situationId);
+      const prompt = buildInvestigationPrompt(situation, ctx);
+
+      const replyPromise = collectTurn(active.client, active.hermesSessionId, 600_000);
+      await active.client.submitPrompt(active.hermesSessionId, prompt);
+      const reply = await replyPromise;
+
+      // Phase 2: if the Agent ran the investigation but did not emit the
+      // structured contract (prose report), ask it — in the SAME session — to
+      // structure what it did. Fabric does NOT synthesize the contract.
+      let parsed = parseInvestigation(reply, situationId);
+      if (!parsed.ok) {
+        const finalizePrompt = [
+          `You just investigated situation ${situationId}. Now output ONLY the Investigation Contract as a single JSON object (no prose, no markdown fences).`,
+          `Use the exact shape: {"situationId":"${situationId}","currentUnderstanding":"...","knownEvidence":[...],"hypotheses":[{"statement":"...","status":"..."}],"unknowns":[...],"nextQuestion":"...","requiredEvidence":[...],"investigationRequest":"...","findings":[{"question":"...","evidenceRefs":[...],"answer":"...","impactOnHypothesis":"..."}],"judgment":"...","stopReason":"...","capabilityUsed":"...","evidenceAcquired":[...]}`,
+          `Base every field on what you actually did and observed in this investigation. Do not invent capabilities or evidence you did not acquire.`,
+        ].join('\n');
+        const reply2Promise = collectTurn(active.client, active.hermesSessionId, 240_000);
+        await active.client.submitPrompt(active.hermesSessionId, finalizePrompt);
+        const reply2 = await reply2Promise;
+        const parsed2 = parseInvestigation(reply2, situationId);
+        if (!parsed2.ok) {
+          res.status(200).json({
+            success: false,
+            agentStatus: 'error',
+            error: parsed2.error,
+            rawReply: (reply + '\n---\n' + reply2).slice(0, 2000),
+          });
+          return;
+        }
+        parsed = parsed2;
+      }
+
+      // Persist the Investigation Contract into the situation's Learning Context.
+      storeInvestigationInLearningContext(options.db, situation, parsed.investigation);
+
+      res.json({
+        success: true,
+        agentStatus: 'completed',
+        situationId,
+        sessionId: active.hermesSessionId,
+        investigation: parsed.investigation,
+      });
+    } catch (err) {
+      sessions.delete(situationId);
+      const message = err instanceof Error ? err.message : 'Investigation failed';
+      res.status(200).json({
+        success: false,
+        agentStatus: /timed out/i.test(message) ? 'timeout' : 'error',
+        error: message,
+        // Persisted state is the ground truth if Hermes wrote an investigation
+        // before the turn timed out (never fabricate completion).
+        investigation: loadLearningContext(options.db, situationId)?.investigation ?? null,
+      });
+    }
   });
 
   return router;

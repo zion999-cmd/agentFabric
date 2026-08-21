@@ -1,9 +1,10 @@
 {
   "project": "agentFabric",
-  "version": "0.9.9",
+  "version": "0.10.0",
   "description": "Business Workspace on Hermes Agent Runtime",
   "hermes": "0.20.0",
   "completed": [
+    "P0010 Knowledge-Guided Investigation - Situation -> Knowledge -> Question -> Fabric Capability -> Evidence -> Updated Understanding loop. Investigation Contract schema (Known/Hypotheses/Unknowns/NextQuestion/Findings/Judgment/StopReason, not CoT) + buildInvestigationPrompt (situation as data, reads knowledge/, Agent picks Next Question + capability, honest stop reasons, no hardcoded tree) + parseInvestigation + POST /api/situation/:id/investigate (same Hermes session as chat via sessions Map, two-phase contract extraction) + GET investigation + Workspace Investigation layer (render + 开始调查 button). LIVE acceptance on real GMV decline (sit_6f42b428e06c766d5681 成交金额 -67.9%): Hermes read knowledge/ (cited 周末节律/观察 rules), formed understanding, chose next question, called fabric_execute_capability trade.overview -> acquired 4 days evidence (08-13..16) into Evidence Store, answered (weekend-rhythm pseudo-anomaly), updated hypotheses, stopReason=observe. Persisted to learning_contexts + Workspace renders. ADR-042",
     "Knowledge Sources Workspace surface - upload raw .txt/.md from Workspace (POST /api/knowledge/upload: basename-only, .txt/.md whitelist, dup 409 no-overwrite, raw-dir-only, path traversal + size guards; validated via pure validateRawUpload/storeRawSource), status adds type/mtime/pages/indexMd (read-only), ingest result honest separation (agentStatus timeout vs fresh filesystem status), per-source 整理此份 + global 交给 Agent 整理, generated-knowledge page cards + collapsible INDEX; real browser+Hermes E2E: uploaded 团队管理经验.txt -> 未整理 -> Agent created knowledge/operations/团队管理经验.md (frontmatter provenance), updated INDEX/log, raw byte-identical, 0 console errors; ADR-041",
     "Knowledge Ingest control restored (P0008.4 §10) - Fabric-side entry only, no Knowledge Engine: pure status.ts (enumerate knowledge-sources/raw + mark provenance-referenced via frontmatter sources parsing incl. multi-line array form) + GET /api/knowledge/status + POST /api/knowledge/ingest (launches Hermes in Fabric Workspace to run KNOWLEDGE.md Ingest flow; reuses situation-chat ensureWorkspace/collectTurn, timeout 120s->300s for known P0009 model latency) + Workspace Knowledge view (status list + Ingest button + verbatim Hermes report + post-state). Real Hermes verified: created 2 knowledge pages (SOP + fault-diagnosis), updated INDEX, appended log; status now 7 referenced / 2 pending of 9 raw sources; ADR-040",
     "Post-Consolidation REMOVE Sweep - deleted only assets marked REMOVE CANDIDATE with proven zero canonical consumers: situation-viewmodel.ts orphan, agentSession SSE demo route+connectEventStream, agentConfig localStorage pseudo-persistence, Legacy Inbox (loadInbox/badgeAll/view-inbox/inbox chat), 17 dead Evidence Viewer i18n keys, operator_memories producer+3 zero-consumer endpoints (kept DB table+store as inert); kept legacy Review->Feedback->context_memories read side (LIVE consumers: /api/memory, chat, findings, orchestrator adjustments) and signal_weights (schema cleanup forbidden); -1036 lines; browser-verified 7 canonical chains no regression; ADR-039",
@@ -56,6 +57,6 @@
   "blocked": [
     "P0009 model stability — nemotron-3-ultra run-to-run jitter (71-77s vs >180s), transport confirmed correct, model/quota layer"
   ],
-  "tests": 587,
+  "tests": 602,
   "coverage": "domains: 80%+ target"
 }

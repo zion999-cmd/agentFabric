@@ -16,6 +16,7 @@
 //   5. Metric snapshots are derived, not authoritative — evidence is the source of truth
 
 import { z } from 'zod';
+import { InvestigationSchema } from './investigation.js';
 import { IsoDateString } from './common.js';
 
 // ---- Lifecycle ----
@@ -372,6 +373,13 @@ export const LearningContextSchema = z.object({
 
   /** What outcomes were observed */
   outcomes: z.array(OutcomeRefSchema).default([]),
+
+  /**
+   * P0010 Knowledge-Guided Investigation state (optional, additive).
+   * The business-level artifacts of an investigation (Known / Hypotheses /
+   * Unknowns / Next Question / Findings / Judgment). NOT Chain-of-Thought.
+   */
+  investigation: InvestigationSchema.optional(),
 
   /**
    * Context summary — aggregated metadata for quick inspection.

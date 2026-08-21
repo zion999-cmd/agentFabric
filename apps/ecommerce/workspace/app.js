@@ -809,6 +809,15 @@ async function loadSituationDetail(situationId) {
     html += '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');setTimeout(function(){loadEvidenceViewer()},100)">[查看 Evidence →]</p>';
     html += '</div></div>';
 
+    // Layer 2.5: P0010 Investigation — Knowledge-Guided Investigation surface.
+    html += '<div class="situation-layer">';
+    html += '<h3 class="situation-layer-title">🔍 调查</h3>';
+    html += '<div class="situation-layer-body" id="situationInvestigation_' + escHtml(situationId) + '">';
+    html += '<p class="muted placeholder">尚未调查。</p>';
+    html += '</div>';
+    html += '<button class="btn btn-primary" id="startInvestigation_' + escHtml(situationId) + '" style="margin-top:8px;font-size:0.78rem" onclick="startInvestigation(\'' + escHtml(situationId) + '\')">🔍 交给 Agent 调查</button>';
+    html += '</div>';
+
     // Layer 3: Agent 建议 — deterministic recommendation from metric + direction.
     html += '<div class="situation-layer">';
     html += '<h3 class="situation-layer-title">💡 Agent 建议</h3>';
@@ -852,8 +861,69 @@ async function loadSituationDetail(situationId) {
 
     html += '</div>'; // end detail body
     content.innerHTML = html;
+
+    // Load any stored P0010 Investigation (read-only; null when not investigated).
+    try {
+      const inv = await apiGet('/api/situation/' + encodeURIComponent(situationId) + '/investigation');
+      const bodyEl = document.getElementById('situationInvestigation_' + escHtml(situationId));
+      if (bodyEl && inv && inv.investigation) renderInvestigation(bodyEl, inv.investigation);
+    } catch { /* investigation unavailable — leave the empty state */ }
   } catch (e) {
     content.innerHTML = '<p class="muted placeholder">加载失败 (' + e.message + ')</p>';
+  }
+}
+
+// ═══ P0010 Investigation (Knowledge-Guided) ═══
+const STOP_LABELS = { judgment: '已形成判断', observe: '继续观察（无需干预）', missing_capability: '缺少能力（需要扩展 Fabric）', ask_human: '需要人工确认' };
+
+function renderInvestigation(container, inv) {
+  if (!inv) { container.innerHTML = '<p class="muted placeholder">尚未调查。</p>'; return; }
+  const block = (label, inner) => '<div class="inv-block" style="margin:6px 0"><div class="inv-label" style="font-size:0.72rem;font-weight:600;color:var(--muted);margin-bottom:2px">' + label + '</div>' + inner + '</div>';
+  const list = (items) => '<ul style="margin:0;padding-left:16px">' + items.map(i => '<li style="font-size:0.8rem">' + i + '</li>').join('') + '</ul>';
+  const hyp = (inv.hypotheses || []).map(h => escHtml(h.statement) + ' <span class="muted" style="font-size:0.72rem">(' + escHtml(h.status) + ')</span>');
+  const findings = (inv.findings || []).map(f =>
+    '<div style="margin:4px 0;font-size:0.8rem">' +
+      '<div class="muted" style="font-size:0.72rem">Q: ' + escHtml(f.question || '') + '</div>' +
+      '<div>A: ' + escHtml(f.answer || '') + '</div>' +
+      (f.impactOnHypothesis ? '<div class="muted" style="font-size:0.72rem">影响: ' + escHtml(f.impactOnHypothesis) + '</div>' : '') +
+    '</div>');
+
+  let html = '';
+  if (inv.currentUnderstanding) html += block('Agent 当前判断', '<p style="margin:0;font-size:0.8rem">' + escHtml(inv.currentUnderstanding) + '</p>');
+  if (inv.knownEvidence && inv.knownEvidence.length) html += block('已确认', list(inv.knownEvidence.map(escHtml)));
+  if (hyp.length) html += block('当前假设', list(hyp));
+  if (inv.unknowns && inv.unknowns.length) html += block('尚未确认', list(inv.unknowns.map(escHtml)));
+  if (inv.nextQuestion) {
+    let req = '';
+    if (inv.requiredEvidence && inv.requiredEvidence.length) req += '<div class="muted" style="font-size:0.72rem;margin-top:2px">需要证据: ' + escHtml(inv.requiredEvidence.join('、')) + '</div>';
+    if (inv.capabilityUsed) req += '<div class="muted" style="font-size:0.72rem">获取方式: ' + escHtml(inv.capabilityUsed) + '</div>';
+    html += block('下一问题', '<p style="margin:0;font-size:0.8rem">' + escHtml(inv.nextQuestion) + '</p>' + req);
+  }
+  if (findings.length) html += block('新发现', findings.join(''));
+  if (inv.judgment) html += block('判断', '<p style="margin:0;font-size:0.8rem">' + escHtml(inv.judgment) + '</p>');
+  if (inv.stopReason) html += block('调查结果', '<p style="margin:0;font-size:0.8rem">' + escHtml(STOP_LABELS[inv.stopReason] || inv.stopReason) + '</p>');
+  container.innerHTML = html || '<p class="muted placeholder">Agent 未返回调查内容。</p>';
+}
+
+async function startInvestigation(situationId) {
+  const bodyEl = document.getElementById('situationInvestigation_' + escHtml(situationId));
+  const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
+  if (!bodyEl) return;
+  bodyEl.innerHTML = '<p class="muted">🔍 Agent 正在调查：读取专业知识 → 形成当前判断 → 提出下一个问题 → 检查证据 → 获取所需证据 → 更新判断（可能需要几分钟）...</p>';
+  if (btn) btn.disabled = true;
+  try {
+    const resp = await apiPost('/api/situation/' + encodeURIComponent(situationId) + '/investigate', {});
+    if (resp.investigation) {
+      renderInvestigation(bodyEl, resp.investigation);
+    } else {
+      bodyEl.innerHTML = '<p class="muted placeholder">Agent 未返回有效的调查结果' +
+        (resp.error ? ': ' + escHtml(resp.error) : '') + '</p>';
+    }
+  } catch (e) {
+    bodyEl.innerHTML = '<p class="muted placeholder">调查失败: ' + escHtml(e.message) +
+      '<br/><small>请确认 Hermes serve 已启动（hermes serve，端口 9119）。</small></p>';
+  } finally {
+    if (btn) btn.disabled = false;
   }
 }
 
@@ -1825,3 +1895,4 @@ window.switchView = switchView;
 window.loadEvidenceViewer = loadEvidenceViewer;
 window.askSituationAgent = askSituationAgent;
 window.handleIntervention = handleIntervention;
+window.startInvestigation = startInvestigation;

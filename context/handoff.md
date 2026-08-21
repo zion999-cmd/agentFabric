@@ -1,5 +1,53 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010 Knowledge-Guided Investigation（Initial Acceptance 通过）
+
+### 目标与定位
+
+proposals/P0010-knowledge-guided-investigation.md 为唯一设计基线。先做 Implementation Readiness / Wiring Audit，无架构冲突后直接实现。核心验证：Agent 不再"读已有数据解释 Situation"，而是基于专业 Knowledge 主动调查——**Knowledge → Better Question → Evidence Acquisition → Updated Understanding**。
+
+### Wiring Audit（先报告后实现）
+
+- Situation → Hermes Session：WIRE（session 只传 cwd/profile；Learning Context 写 situations/<id>.json 但 AGENTS.md 未指向 → 调查 prompt 把 Situation+Evidence 作为 data 注入）
+- Hermes → knowledge/INDEX.md + 运营 Knowledge：REUSE（cwd=fabric-workspace，AGENTS.md routing，ingest 已证实可读）
+- fabric_execute_capability → Evidence：REUSE（`~/.hermes/config.yaml` 注册 fabric MCP → `/api/fabric/execute` → signals+evidence → Evidence Store）
+- capability result → 同一 turn：REUSE（原生 MCP tool-call 返回）
+- Learning Context 承载业务产物：WIRE（增量加 Investigation schema，不建新表）
+- 持久化：REUSE `learning_contexts` body upsert
+- Workspace Situation Detail 接入：WIRE（加 Investigation 层）
+
+### 实现
+
+- `shared/schemas/investigation.ts`：Investigation Contract（Known/Hypotheses/Unknowns/NextQuestion/Findings/Judgment/StopReason）。LearningContextSchema 加 `investigation` optional。
+- `apps/ecommerce/runtime/investigation/{prompt,parse}.ts`：`buildInvestigationPrompt`（situation 作 data、指示读 knowledge/、Agent 自主选问题+能力、诚实 stop、必须真实调用 fabric_execute_capability）；`parseInvestigation`（防御式 JSON 提取 + schema 校验）。
+- `platform/server/routes/situation-chat.ts`：`POST /situation/:id/investigate`（复用 sessions Map = **同一 Hermes session**；两阶段契约提取：主 turn + 若 prose 则 follow-up 结构化；600s+240s 超时）；`GET /situation/:id/investigation`；`collectTurn` 加 timeoutMs 参数。
+- `learning-context-producer.ts`：`storeInvestigationInLearningContext` / `loadInvestigationFromLearningContext`（INSERT/UPDATE，不建新表）。
+- Workspace app.js：Situation Detail 加「🔍 调查」层（Agent 当前判断/已确认/当前假设/尚未确认/下一问题/新发现/判断/调查结果）+ 「交给 Agent 调查」按钮 + `window.startInvestigation`。
+
+### 真实验收（GMV decline `sit_6f42b428e06c766d5681`，成交金额 -67.9%）
+
+Hermes 完整执行：读 Knowledge（引用 "对比优先级：周同比>类目大盘>日环比"、"单天波动±15%优先观察不干预"——来自 knowledge/reference/京东电商运营隐性经验与故障诊断.md）→ Current Understanding（4 天真实数据 knownEvidence）→ 自主 Next Question（与上周同日对比验证周末节律）→ Required Evidence 明确 → 证据不足 → **fabric_execute_capability(trade.overview) 真实调用** → 获取 08-13/14/15/16 四天 Evidence 入 Evidence Store → Answer（67.9% = 周末节律伪异常）→ 假设更新（周末效应 supported / 真异常 weakened）→ **stopReason=observe**（Investigation Gate 正确：波动幅度+周度节律 → 观察不干预）。持久化 learning_contexts + GET API 可读 + Workspace Investigation 层渲染 + console 零 error。
+
+过程中验证：fabric MCP 工具在 session 中可用（probe 确认 fabric_execute_capability/fabric_list_capabilities）；监控 probe 观察到 Hermes read_file×多、tool_search→tool_describe→tool_call、mcp__fabric__fabric_execute_capability×9；evidence 文件 acquired_at=09:38Z（17:38 CST）即调查期间写入。
+
+### 关键决策（ADR-042）
+
+- 无 if/else 调查树、无硬编码问题、不复制 SOP 进 prompt；Next Question 由 Agent 根据 Situation+Knowledge+Evidence 产生。
+- Fabric 不合成 Investigation 契约——两阶段提取是让 Hermes 自己结构化输出。
+- 能力不足 → missing_capability（不猜不扩）；数据不足 → ASK_HUMAN/OBSERVE。
+- 不保存 CoT；只保存 Question/Hypothesis/Evidence/Finding/Judgment/StopReason。
+
+### 测试
+
+602 total（+15 investigation contract）／investigation 15 通过／typecheck 17 基线。
+
+### 建议下一步
+
+- 模型稳定性：本次调查 ~390-600s 完成（P0009 已知延迟），两阶段提取在 >600s 时可能仍 timeout（诚实返回）。
+- 未来（不属本阶段）：把 Investigation 的 stopReason=missing_capability 作为 Fabric 扩能力的信号；Question correction learning 不实现。
+
+---
+
 ## 本次会话 (2026-08-21) - Knowledge Sources Workspace Surface（专业人员可用）
 
 ### 目标与定位

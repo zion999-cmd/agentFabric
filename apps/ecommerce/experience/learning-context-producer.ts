@@ -156,3 +156,43 @@ export const loadLearningContext = (db: Db, situationId: string): LearningContex
     return null;
   }
 };
+
+/** Load a situation's P0010 Investigation (null when none stored). */
+export const loadInvestigationFromLearningContext = (db: Db, situationId: string): LearningContext['investigation'] | null => {
+  return loadLearningContext(db, situationId)?.investigation ?? null;
+};
+
+/**
+ * Store a P0010 Knowledge-Guided Investigation into the situation's Learning
+ * Context (INSERT or UPDATE, same row — no new table). The investigation is an
+ * optional additive field; existing observations/interventions are preserved.
+ */
+export const storeInvestigationInLearningContext = (
+  db: Db,
+  situation: Situation,
+  investigation: LearningContext['investigation'],
+): void => {
+  if (!investigation) return;
+  const now = nowIso();
+  const stamped: LearningContext['investigation'] = { ...investigation, updatedAt: now };
+  const existing = loadLearningContext(db, situation.situationId);
+
+  let next: LearningContext;
+  if (existing) {
+    next = { ...existing, investigation: stamped, lifecycle: 'partial', updatedAt: now };
+  } else {
+    const observations = buildObservations(db, situation);
+    next = { ...buildLearningContext(situation, observations, []), investigation: stamped, lifecycle: 'partial', updatedAt: now };
+  }
+  const validated = LearningContextSchema.parse(next);
+
+  if (existing) {
+    db.prepare('UPDATE learning_contexts SET body = ?, lifecycle = ?, updated_at = ? WHERE situation_id = ?')
+      .run(JSON.stringify(validated), validated.lifecycle, now, situation.situationId);
+  } else {
+    db.prepare(
+      `INSERT INTO learning_contexts (context_id, situation_id, lifecycle, created_at, updated_at, body)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+    ).run(validated.contextId, situation.situationId, validated.lifecycle, validated.createdAt, validated.updatedAt, JSON.stringify(validated));
+  }
+};
