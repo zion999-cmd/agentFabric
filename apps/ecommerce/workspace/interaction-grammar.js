@@ -7,17 +7,14 @@
 // structured `content` via buildInterventionContent — no divergent hardcoded copy.
 
 var INTERACTION_OPTIONS = [
-  // Agent 判断
+  // 对 Agent 判断的反馈 (canonical judgment feedback)
   { label: '认同', grammarType: 'response', section: 'judgment', requiresInput: false, decision: null },
   { label: '这里判断错了', grammarType: 'correction', section: 'judgment', requiresInput: true, inputPlaceholder: '正确的判断是什么？', decision: null },
   { label: '还有一个你不知道的情况', grammarType: 'context_supplement', section: 'judgment', requiresInput: true, inputPlaceholder: '什么情况？', decision: null },
-  // Agent 建议
+  // 对建议的反馈 (canonical recommendation feedback)
   { label: '采用建议', grammarType: 'decision', section: 'suggestion', requiresInput: false, decision: 'accept' },
   { label: '不采用', grammarType: 'decision', section: 'suggestion', requiresInput: true, inputPlaceholder: '为什么不采用？', decision: 'reject' },
   { label: '稍后处理', grammarType: 'decision', section: 'suggestion', requiresInput: false, decision: 'defer' },
-  // 你准备怎么处理
-  { label: '我准备这样处理…', grammarType: 'action_intent', section: 'action', requiresInput: true, inputPlaceholder: '描述你准备做什么…', decision: null },
-  { label: '暂不处理', grammarType: 'decision', section: 'action', requiresInput: false, decision: 'no_action' },
 ];
 
 /** Build the type-specific structured content per InterventionContentSchema. */

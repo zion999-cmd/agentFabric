@@ -95,6 +95,18 @@ export const InvestigationSchema = z.object({
   evidenceAcquired: z.array(z.string()).default([]),
   /** P0010.1 Recommendation (optional — produced from Judgment, not Signal). */
   recommendation: RecommendationSchema.optional(),
+  /**
+   * Lifecycle status of the investigation (P0010.1 recovery). A completed
+   * investigation carries stopReason; a partial marker (status=investigating)
+   * is persisted BEFORE the turn so the Workspace shows a running state and a
+   * failed/timeout turn leaves a recoverable marker instead of silently
+   * disappearing.
+   */
+  status: z.enum(['pending', 'investigating', 'failed', 'completed']).optional(),
+  /** Error detail when status=failed (timeout / contract error). */
+  error: z.string().optional(),
+  /** When the current status was set (marker timestamps). */
+  startedAt: z.string().optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 });

@@ -1,5 +1,33 @@
 # 技术决策记录 (ADR)
 
+## ADR-047: P0010.1 Workspace Semantic Cleanup
+
+- **日期**: 2026-08-21
+- **状态**: Accepted（浏览器验收通过）
+- **来源**: P0010.1 诊断后原地 REPAIR——让已实现的智能从旧 UI 壳子里释放，非新增能力
+
+**决策**（Workspace 收敛为一致的 P0010.1 语义，7 项）：
+
+1. **Pattern Engine 不再冒充「Agent 当前理解」**：非 completed 状态的主表象 = Agent lifecycle（待调查/调查中/失败/完成），旧 Pattern 归因降级为折叠「初始信号归因（辅助信息）」。调查中主体显示「正在调查...完成后将显示：当前判断/已确认/当前假设/还不知道/下一步调查/建议」，不占用 Pattern 内容。
+
+2. **Evidence 语义拆开**：Situation 页移除所有「查看 Evidence」直连（不再把人直接送去 Evidence Viewer）。运营侧判断依据入口 = 「为什么这么判断？/查看调查依据」→ **Investigation Track**（canonical surface）。Evidence Viewer 保留为 **Advanced provenance/debug** surface，不删除不重构。
+
+3. **Sidebar 改为互斥的 Agent lifecycle 状态**：待调查 / 调查中 / 观察中 / 需人工 / 已判断（+全部）。每 Situation 唯一映射一个状态，计数不重叠（11+2+4+1+0=18）。表达 Agent 认知状态而非传统工单状态。
+
+4. **Human interaction 止于 Judgment + Recommendation feedback**：移除尚不存在的 action_intent（「我准备这样处理/暂不处理」——Action 越界，本阶段不做）。保留 6 个 canonical feedback：认同/纠正/补充（对判断）+ 采用/不采用/稍后（对建议）。**未来设计点不提前改**（Judgment→feedback→Recommendation→adoption→Action Proposal→approval→Execution→Result→Experience 是下一阶段）。
+
+5. **capability 技术名从业务 UI 隐去**：`capabilityLabel` 业务模式显示 交易概览/流量分析/商品表现 等；开发模式显示原始 id。
+
+6. **版本号不再硬编码**：readiness 从 `context/status.json` 读 version，app.js boot 设置 header+sidebar（v0.10.x）。
+
+7. **investigation timeout/failure = Runtime reliability，不在本刀修**：Workspace 已诚实显示 lifecycle（investigating/failed/待恢复）；调查能否及时完成是 Hermes/model latency 范畴，不再通过 UI fallback 掩盖。恢复机制（backfill 顺序、有界 3、failed/stale 重试、stopReason 视为 completed）已修复。
+
+**验收**（真实浏览器）：pending（尚未调查+预览）/ investigating（正在调查+预览，Pattern 不在主体）/ completed-observe（完整契约+Track）/ needs-human（真异常需人工核验）四状态；sidebar 互斥计数和=18；无「查看 Evidence」直连；无 action 按钮；Track 显示 交易概览/流量分析/商品表；version v0.10.6；零 console error。
+
+**文件**: `apps/ecommerce/workspace/{app.js,index.html,styles.css,interaction-grammar.js}`，`platform/server/{index.ts,routes/p0007.ts,routes/runtime.ts,routes/situation-chat.ts}`，`shared/schemas/investigation.ts`。
+
+---
+
 ## ADR-046: P0010.1 Slice 4 — Recommendation（P0010.1 终点）
 
 - **日期**: 2026-08-21

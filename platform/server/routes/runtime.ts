@@ -89,6 +89,18 @@ export const resetKernel = (): void => {
   _fabricKernel = null;
 };
 
+/** Read the workspace version from context/status.json (fallback constant). */
+const readWorkspaceVersion = (): string => {
+  try {
+    const p = resolve(process.cwd(), 'context', 'status.json');
+    if (!existsSync(p)) return '0.x';
+    const s = JSON.parse(readFileSync(p, 'utf-8'));
+    return typeof s.version === 'string' ? s.version : '0.x';
+  } catch {
+    return '0.x';
+  }
+};
+
 // ---- Agent-facing Fabric Execution Return Contract ----
 
 /** One projected signal for the Hermes-facing return contract. */
@@ -347,6 +359,9 @@ export const runtimeRouter = (db: Db): Router => {
         jd_cdp: jdCdp,
         jd_page: jdPageAvailable ? 'available' : 'missing',
         evidence: evidenceCount,
+        // P0010.1 UI: workspace version comes from status.json (single source of
+        // truth), not a hardcoded string in the SPA.
+        version: readWorkspaceVersion(),
       });
     } catch (err) {
       fail(res, 500, err instanceof Error ? err.message : 'Readiness check failed');

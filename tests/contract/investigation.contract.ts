@@ -79,6 +79,16 @@ describe('InvestigationSchema', () => {
     expect(RecommendationSchema.safeParse({ rationale: 'x' }).success).toBe(false);
   });
 
+  test('status markers (investigating/failed) validate as Investigations', () => {
+    const investigating = InvestigationSchema.parse({ situationId: 'sit_x', status: 'investigating', startedAt: '2026-08-21T00:00:00.000Z' });
+    expect(investigating.status).toBe('investigating');
+    expect(investigating.knownEvidence).toEqual([]); // defaults filled
+
+    const failed = InvestigationSchema.parse({ situationId: 'sit_x', status: 'failed', error: 'Turn timed out' });
+    expect(failed.status).toBe('failed');
+    expect(failed.error).toBe('Turn timed out');
+  });
+
   test('LearningContextSchema carries an optional investigation additively', () => {
     const ctx = {
       contextId: 'c1',

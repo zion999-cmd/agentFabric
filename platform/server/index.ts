@@ -194,16 +194,49 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
     // eslint-disable-next-line no-console
     console.log(`[backfill] situations: ${situationResult.created} created / ${situationResult.skipped} deduped`);
 
-    // P0010.1 Slice 2: automatic investigation — newly created Situations are
-    // investigated WITHOUT a manual click (steady-state). Fire-and-forget so
-    // startup is never blocked; each run uses the honest timeout/degradation.
-    // Hermes not reachable → the turn fails and is logged, never fabricated.
-    for (const sid of situationResult.createdIds ?? []) {
-      void autoInvestigateSituation(db, resolve(process.cwd(), 'data', 'fabric-workspace'), sid);
+    // P0010.1 Slice 2 (recovery): automatic investigation — newly created
+    // Situations AND existing situations without a COMPLETED investigation are
+    // investigated WITHOUT a manual click (steady-state). Failures/timeouts
+    // leave a 'failed' marker (recoverable), so no turn is silently lost.
+    // Fire-and-forget, processed sequentially in the background; startup is
+    // never blocked. Hermes unreachable → the turn fails and is retried later.
+    const fabricDir = resolve(process.cwd(), 'data', 'fabric-workspace');
+    const todo = new Set<string>(situationResult.createdIds ?? []);
+    for (const sid of findRecoveryCandidates(db, todo, MAX_AUTO_INVESTIGATE)) todo.add(sid);
+    if (todo.size > 0) {
+      void autoInvestigatePending(db, fabricDir, [...todo]);
     }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('[backfill] failed:', err instanceof Error ? err.message : String(err));
+  }
+};
+
+/** Bounded recovery: situations without a completed investigation (old, failed, or stale-investigating).
+ * A situation counts as completed if its investigation has status='completed' OR a stopReason
+ * (the 4 pre-existing investigations were persisted before the status field existed). */
+const MAX_AUTO_INVESTIGATE = 3;
+const findRecoveryCandidates = (db: Db, exclude: Set<string>, limit: number): string[] => {
+  const rows = db.prepare(
+    `SELECT s.situation_id FROM situations s
+     WHERE NOT EXISTS (
+       SELECT 1 FROM learning_contexts lc
+       WHERE lc.situation_id = s.situation_id
+         AND (
+           json_extract(lc.body, '$.investigation.status') = 'completed'
+           OR json_extract(lc.body, '$.investigation.stopReason') IS NOT NULL
+         )
+     )
+     ORDER BY s.observed_at DESC
+     LIMIT ?`,
+  ).all(limit * 2) as { situation_id: string }[];
+  return rows.map((r) => r.situation_id).filter((id) => !exclude.has(id)).slice(0, limit);
+};
+
+/** Investigate a list of situations SEQUENTIALLY in the background (no Queue/Engine — a plain loop). */
+const autoInvestigatePending = async (db: Db, fabricDir: string, ids: string[]): Promise<void> => {
+  for (const sid of ids) {
+    await autoInvestigateSituation(db, fabricDir, sid);
   }
 };
 

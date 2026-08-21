@@ -4,6 +4,8 @@
 
 ## 已完成
 
+- [x] **P0010.1 Workspace Semantic Cleanup（ADR-047，7 项）** - Pattern Engine 降级「初始信号归因」（不再冒充 Agent 当前理解）；investigating/pending/failed/completed 诚实状态（无旧 Pattern fallback）；Situation 页移除「查看 Evidence」直连（Evidence Viewer 保留 Advanced，运营判断依据 = Investigation Track）；Sidebar 改互斥 Agent lifecycle（待调查/调查中/观察中/需人工/已判断，计数 11+2+4+1+0=18 无重叠）；移除 action_intent（Human feedback = 6 canonical：认同/纠正/补充 + 采用/不采用/稍后）；capability 业务标签（交易概览/流量分析/商品表，开发模式显原始 id）；版本号从 status.json 经 readiness 读取（v0.10.x）。恢复机制：runInvestigationTurn 持久化 status + 自动 Recommendation + failed 不静默丢失；backfill findRecoveryCandidates（stopReason 视为 completed）+ autoInvestigatePending（有界 3 顺序）。**investigation timeout/failure = Runtime reliability，不在本刀修。** 4 状态浏览器验收全过。ADR-047。
+
 - [x] **P0010 Current Understanding Workspace Surface（一等业务表象）** - Situation Detail 加「🧠 Agent 当前理解」hero：投影已持久化 `LearningContext.investigation`（当前判断/已确认/当前假设/还不知道/下一步调查/能力边界，运营语言），**零 LLM 渲染、零新取证**；「为什么这么判断」Trace 为次级下钻；observe-stop 不伪装活跃 Next Question（显示"建议观察"+观察项）；能力边界只从 Agent 措辞派生（京准通/广告计划需人工核验）；预调查状态保留 Pattern 归因+建议+按钮。浏览器验收：Case A（GMV→observe→不干预）✅、Case B（orders→真异常→能力边界⚠）✅、reload 持久 ✅、intervention/chat 无回归 ✅、console 零 error ✅。ADR-043。
 
 - [x] **P0010 Behavioral Validation（A-E 五类，真实数据）** - 不扩功能，用现有 Situation 验证：A 伪异常→observe ✅（两机制：GMV -67.9% 周末节律 + CVR -21.2% 小样本噪声）；B 真异常→judgment ✅（orders -66.7% 周同比 -82.5% 真异常 + 5 假设 + 优先排查清单）；C 多假设竞争→最高信息增益问题 ✅（不盲查全部 capability）；D MISSING_CAPABILITY ⚠️ partial（识别非 Fabric 证据转人工核验，但 stopReason=judgment）；E 证据矛盾 ⚠️ 数据不可触发。发现：伪异常门稳定成立（反幻觉）、不必要取证抑制、能力边界识别。数据可用性：当前快照无真实业务异常，B 纯路径/E 待真实异常数据。契约保真度观察：capabilityUsed 有时留空、stopReason 边界由模型选。

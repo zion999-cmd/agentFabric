@@ -22,7 +22,9 @@ import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
 import { loadCapabilityEntries } from '#app/runtime/fabric-workspace/capability-loader.js';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
 import type { LearningContext, Situation } from '#shared/schemas/learning-context.js';
-import { RecommendationSchema } from '#shared/schemas/investigation.js';
+import { InvestigationSchema, RecommendationSchema } from '#shared/schemas/investigation.js';
+import type { Recommendation } from '#shared/schemas/investigation.js';
+import { nowIso } from '#shared/utils/time.js';
 import {
   loadSituation,
   loadLearningContext,
@@ -124,17 +126,72 @@ export const collectTurn = (client: SituationChatClient, sessionId: string, time
 
 export interface InvestigationTurnResult {
   ok: boolean;
+  status?: 'failed' | 'completed';
   investigation?: LearningContext['investigation'];
   error?: string;
   rawReply?: string;
 }
+
+/** Persist a minimal investigation status marker (no silent loss of a turn). */
+const markInvestigation = (
+  db: Db,
+  situation: Situation,
+  marker: { status: 'pending' | 'investigating' | 'failed' | 'completed'; error?: string },
+): void => {
+  const now = nowIso();
+  // InvestigationSchema.parse fills the defaulted contract fields so the marker
+  // is a valid Investigation (only situationId + status are set by us).
+  const full = InvestigationSchema.parse({
+    situationId: situation.situationId,
+    status: marker.status,
+    ...(marker.error ? { error: marker.error } : {}),
+    startedAt: now,
+    updatedAt: now,
+  });
+  storeInvestigationInLearningContext(db, situation, full);
+};
+
+/** Run the Recommendation follow-up turn for a completed investigation (same session). */
+export const runRecommendationTurn = async (
+  client: SituationChatClient,
+  sessionId: string,
+  situation: Situation,
+  existing: LearningContext['investigation'],
+): Promise<{ ok: boolean; recommendation?: Recommendation; error?: string }> => {
+  const prompt = [
+    `You investigated situation ${situation.situationId}. Your judgment was: ${existing?.judgment ?? ''} (stopReason: ${existing?.stopReason ?? ''}).`,
+    `Now produce a Recommendation that follows ONLY from that judgment and the investigation findings.`,
+    `Output ONLY a JSON object: {"recommendation":"...","rationale":"...","expectedOutcome":"...","risks":[...],"prerequisites":[...],"humanNeeded":[...]}`,
+    `Rules: if judgment is observe (pseudo-anomaly/insufficient evidence), recommend NOT acting (continue observing, do not intervene). If human verification is needed, list the facts under humanNeeded. Never recommend an external business Action — recommendation is what to consider, not an execution order.`,
+  ].join('\n');
+
+  const replyPromise = collectTurn(client, sessionId, 600_000);
+  await client.submitPrompt(sessionId, prompt);
+  const reply = await replyPromise;
+
+  const candidate = extractJsonObject(reply);
+  if (!candidate) return { ok: false, error: 'Invalid recommendation JSON' };
+  try {
+    const parsed = RecommendationSchema.safeParse(JSON.parse(candidate));
+    if (!parsed.success) return { ok: false, error: 'Invalid recommendation JSON' };
+    return { ok: true, recommendation: parsed.data };
+  } catch {
+    return { ok: false, error: 'Invalid recommendation JSON' };
+  }
+};
 
 /**
  * Run ONE P0010 investigation turn in an existing Hermes session: build the
  * investigation prompt (situation + evidence as data), submit, two-phase
  * contract extraction (prose → structured follow-up in the SAME session), and
  * persist the contract into the situation's Learning Context. Fabric never
- * synthesizes the contract. Throws on turn timeout — callers handle honestly.
+ * synthesizes the contract.
+ *
+ * P0010.1 recovery: an 'investigating' marker is persisted BEFORE the turn, a
+ * completed contract (status=completed) after success, and a 'failed' marker on
+ * timeout/error — so a failed/timed-out turn is never silently lost and can be
+ * retried by the recovery pass. For a completed investigation with a judgment,
+ * the Recommendation is auto-generated in the SAME session (no manual step).
  */
 export const runInvestigationTurn = async (
   client: SituationChatClient,
@@ -142,12 +199,21 @@ export const runInvestigationTurn = async (
   db: Db,
   situation: Situation,
 ): Promise<InvestigationTurnResult> => {
+  markInvestigation(db, situation, { status: 'investigating' });
+
   const ctx = loadLearningContext(db, situation.situationId);
   const prompt = buildInvestigationPrompt(situation, ctx);
 
-  const replyPromise = collectTurn(client, sessionId, 600_000);
-  await client.submitPrompt(sessionId, prompt);
-  const reply = await replyPromise;
+  let reply: string;
+  try {
+    const replyPromise = collectTurn(client, sessionId, 600_000);
+    await client.submitPrompt(sessionId, prompt);
+    reply = await replyPromise;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Investigation failed';
+    markInvestigation(db, situation, { status: 'failed', error: message });
+    return { ok: false, status: 'failed', error: message };
+  }
 
   let parsed = parseInvestigation(reply, situation.situationId);
   if (!parsed.ok) {
@@ -156,18 +222,38 @@ export const runInvestigationTurn = async (
       `Use the exact shape: {"situationId":"${situation.situationId}","currentUnderstanding":"...","knownEvidence":[...],"hypotheses":[{"statement":"...","status":"..."}],"unknowns":[...],"nextQuestion":"...","requiredEvidence":[...],"investigationRequest":"...","findings":[{"question":"...","evidenceRefs":[...],"answer":"...","impactOnHypothesis":"..."}],"judgment":"...","stopReason":"...","capabilityUsed":"...","evidenceAcquired":[...]}`,
       `Base every field on what you actually did and observed in this investigation. Do not invent capabilities or evidence you did not acquire.`,
     ].join('\n');
-    const reply2Promise = collectTurn(client, sessionId, 240_000);
-    await client.submitPrompt(sessionId, finalizePrompt);
-    const reply2 = await reply2Promise;
-    const parsed2 = parseInvestigation(reply2, situation.situationId);
-    if (!parsed2.ok) {
-      return { ok: false, error: parsed2.error, rawReply: (reply + '\n---\n' + reply2).slice(0, 2000) };
+    try {
+      const reply2Promise = collectTurn(client, sessionId, 240_000);
+      await client.submitPrompt(sessionId, finalizePrompt);
+      const reply2 = await reply2Promise;
+      const parsed2 = parseInvestigation(reply2, situation.situationId);
+      if (!parsed2.ok) {
+        markInvestigation(db, situation, { status: 'failed', error: parsed2.error });
+        return { ok: false, status: 'failed', error: parsed2.error, rawReply: (reply + '\n---\n' + reply2).slice(0, 2000) };
+      }
+      parsed = parsed2;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Investigation failed';
+      markInvestigation(db, situation, { status: 'failed', error: message });
+      return { ok: false, status: 'failed', error: message };
     }
-    parsed = parsed2;
   }
 
-  storeInvestigationInLearningContext(db, situation, parsed.investigation);
-  return { ok: true, investigation: parsed.investigation };
+  const completed: LearningContext['investigation'] = { ...parsed.investigation, status: 'completed' };
+  storeInvestigationInLearningContext(db, situation, completed);
+
+  // P0010.1 Slice 4: auto-generate the Recommendation from the Judgment (same
+  // session, best-effort) so it is not a mandatory manual step.
+  if (completed.stopReason === 'judgment' || completed.stopReason === 'observe') {
+    try {
+      const rec = await runRecommendationTurn(client, sessionId, situation, completed);
+      if (rec.ok && rec.recommendation) {
+        storeInvestigationInLearningContext(db, situation, { ...completed, recommendation: rec.recommendation });
+      }
+    } catch { /* recommendation is best-effort — never blocks the investigation */ }
+  }
+
+  return { ok: true, status: 'completed', investigation: completed };
 };
 
 // ---- Router ----
@@ -279,40 +365,17 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
         sessions.set(situationId, active);
       }
 
-      const prompt = [
-        `You investigated situation ${situationId}. Your judgment was: ${existing.judgment ?? ''} (stopReason: ${existing.stopReason ?? ''}).`,
-        `Now produce a Recommendation that follows ONLY from that judgment and the investigation findings.`,
-        `Output ONLY a JSON object: {"recommendation":"...","rationale":"...","expectedOutcome":"...","risks":"...","prerequisites":[...],"humanNeeded":[...]}`,
-        `Rules: if judgment is observe (pseudo-anomaly/insufficient evidence), recommend NOT acting (continue observing, do not intervene). If human verification is needed, list the facts under humanNeeded. Never recommend an external business Action — recommendation is what to consider, not an execution order.`,
-      ].join('\n');
-
-      const replyPromise = collectTurn(active.client, active.hermesSessionId, 600_000);
-      await active.client.submitPrompt(active.hermesSessionId, prompt);
-      const reply = await replyPromise;
-
-      // Parse the recommendation JSON (defensive — reuse the same extractor as the
-      // Investigation Contract so markdown-fenced / prose-wrapped JSON still parses).
-      const candidate = extractJsonObject(reply);
-      let recommendation;
-      if (candidate) {
-        try {
-          recommendation = RecommendationSchema.safeParse(JSON.parse(candidate));
-        } catch {
-          recommendation = { success: false };
-        }
-      } else {
-        recommendation = { success: false };
-      }
-      if (!recommendation.success) {
-        res.status(200).json({ success: false, agentStatus: 'error', error: 'Invalid recommendation JSON', rawReply: reply.slice(0, 1200) });
+      const rec = await runRecommendationTurn(active.client, active.hermesSessionId, situation, existing);
+      if (!rec.ok || !rec.recommendation) {
+        res.status(200).json({ success: false, agentStatus: 'error', error: rec.error ?? 'Invalid recommendation JSON' });
         return;
       }
 
       // Persist additively into the investigation.
-      const next = { ...existing, recommendation: recommendation.data, updatedAt: new Date().toISOString() };
+      const next = { ...existing, recommendation: rec.recommendation, updatedAt: new Date().toISOString() };
       storeInvestigationInLearningContext(options.db, situation, next);
 
-      res.json({ success: true, agentStatus: 'completed', situationId, recommendation: recommendation.data });
+      res.json({ success: true, agentStatus: 'completed', situationId, recommendation: rec.recommendation });
     } catch (err) {
       sessions.delete(situationId);
       const message = err instanceof Error ? err.message : 'Recommendation failed';
@@ -384,11 +447,14 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
 
       const result = await runInvestigationTurn(active.client, active.hermesSessionId, options.db, situation);
       if (!result.ok) {
+        // runInvestigationTurn persists a 'failed' marker (no silent loss) and
+        // returns status='failed' for timeouts/errors. Surface it honestly.
         res.status(200).json({
           success: false,
-          agentStatus: 'error',
+          agentStatus: result.status === 'failed' ? 'failed' : 'error',
           error: result.error,
           rawReply: result.rawReply,
+          investigation: loadLearningContext(options.db, situationId)?.investigation ?? null,
         });
         return;
       }

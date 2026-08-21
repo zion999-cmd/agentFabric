@@ -19,14 +19,20 @@ const fail = (res: any, status: number, error: string) => {
 /**
  * P0010.1: derive the business status of a Situation from its persisted
  * Investigation state (product semantics, NOT a new state machine). Pure — no LLM.
- *   uninvestigated → no investigation
+ *   pending         → no investigation yet (auto-recovery will pick it up)
+ *   investigating   → a turn is in progress (status marker persisted before run)
+ *   failed          → last turn timed out/failed (recoverable — no silent loss)
  *   observing       → stopReason = observe
  *   needs_human     → missing_capability / ask_human, or the Agent surfaced 人工核验
  *   judgment_ready  → stopReason = judgment (or any other completed stop)
  */
+type SituationInvestigationStatus = 'pending' | 'investigating' | 'failed' | 'observing' | 'needs_human' | 'judgment_ready';
 const deriveInvestigationStatus = (
-  inv: { stopReason?: string; judgment?: string; currentUnderstanding?: string },
-): 'observing' | 'needs_human' | 'judgment_ready' => {
+  inv: { status?: string; stopReason?: string; judgment?: string; currentUnderstanding?: string } | null,
+): SituationInvestigationStatus => {
+  if (!inv) return 'pending';
+  if (inv.status === 'investigating') return 'investigating';
+  if (inv.status === 'failed') return 'failed';
   const stop = inv.stopReason ?? '';
   if (stop === 'observe') return 'observing';
   if (stop === 'missing_capability' || stop === 'ask_human') return 'needs_human';

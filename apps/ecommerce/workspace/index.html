@@ -35,9 +35,11 @@
         <div class="sidebar-section">
           <div class="sidebar-section-label">今日工作</div>
           <a href="#" class="sidebar-item active" data-view="situations" data-filter="all"><span class="sidebar-icon">📋</span><span>全部 Situation</span><span class="sidebar-badge" id="badgeAllSituations">--</span></a>
-          <a href="#" class="sidebar-item" data-view="situations" data-filter="open"><span class="sidebar-icon">●</span><span>待我处理</span><span class="sidebar-badge" id="badgeOpenSituations">--</span></a>
-          <a href="#" class="sidebar-item" data-view="situations" data-filter="agent"><span class="sidebar-icon">⏳</span><span>Agent 处理中</span><span class="sidebar-badge" id="badgeAgentSituations">--</span></a>
-          <a href="#" class="sidebar-item" data-view="situations" data-filter="partial"><span class="sidebar-icon">✓</span><span>已处理</span><span class="sidebar-badge" id="badgePartialSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="pending"><span class="sidebar-icon">○</span><span>待调查</span><span class="sidebar-badge" id="badgePendingSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="investigating"><span class="sidebar-icon">⏳</span><span>调查中</span><span class="sidebar-badge" id="badgeInvestigatingSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="observing"><span class="sidebar-icon">👀</span><span>观察中</span><span class="sidebar-badge" id="badgeObservingSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="needs_human"><span class="sidebar-icon">⚠</span><span>需人工</span><span class="sidebar-badge" id="badgeNeedsHumanSituations">--</span></a>
+          <a href="#" class="sidebar-item" data-view="situations" data-filter="judgment_ready"><span class="sidebar-icon">✓</span><span>已判断</span><span class="sidebar-badge" id="badgeJudgmentSituations">--</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <!-- 经营观察 — renamed, preserved business views -->
@@ -87,9 +89,11 @@
               <div><h2 class="view-title">今日经营</h2><p class="view-subtitle" id="situationFeedSubtitle">加载中...</p></div>
               <div class="situation-feed-tabs" id="situationFeedTabs">
                 <button class="feed-tab active" data-filter="all">全部</button>
-                <button class="feed-tab" data-filter="open">待我处理</button>
-                <button class="feed-tab" data-filter="agent">Agent 处理中</button>
-                <button class="feed-tab" data-filter="partial">已处理</button>
+                <button class="feed-tab" data-filter="pending">待调查</button>
+                <button class="feed-tab" data-filter="investigating">调查中</button>
+                <button class="feed-tab" data-filter="observing">观察中</button>
+                <button class="feed-tab" data-filter="needs_human">需人工</button>
+                <button class="feed-tab" data-filter="judgment_ready">已判断</button>
               </div>
             </div>
             <div id="situationFeedList" class="situation-feed-list"><p class="muted placeholder">加载 Situation 中...</p></div>

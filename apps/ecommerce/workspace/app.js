@@ -621,21 +621,29 @@ async function loadSituationFeed(filter) {
     if (!situations.length) {
       list.innerHTML = '<p class="muted placeholder">暂无 Situation。运行 CDP 采集后，系统会自动创建 Situation。</p>';
       if (subtitle) subtitle.textContent = '0 个 Situation';
-      updateSituationBadges({ all: 0, open: 0, partial: 0 });
+      updateSituationBadges({ all: 0, pending: 0, investigating: 0, observing: 0, needs_human: 0, judgment_ready: 0 });
       return;
     }
 
-    // Filter
+    // Filter — P0010.1: mutually-exclusive Agent investigation status
+    // (pending / investigating / observing / needs_human / judgment_ready).
+    // Each situation maps to EXACTLY one status; counts never overlap.
+    var statusOf = function(s) { return (s.investigation && s.investigation.status) || 'pending'; };
     var filtered = situations;
-    if (filter === 'open') filtered = situations.filter(function(s) { return s.lifecycle === 'open'; });
-    else if (filter === 'partial') filtered = situations.filter(function(s) { return s.lifecycle === 'partial'; });
-    else if (filter === 'agent') filtered = situations.filter(function(s) { return s.interventionCount === 0; });
+    if (filter === 'pending') filtered = situations.filter(function(s) { return statusOf(s) === 'pending' || statusOf(s) === 'failed'; });
+    else if (filter === 'investigating') filtered = situations.filter(function(s) { return statusOf(s) === 'investigating'; });
+    else if (filter === 'observing') filtered = situations.filter(function(s) { return statusOf(s) === 'observing'; });
+    else if (filter === 'needs_human') filtered = situations.filter(function(s) { return statusOf(s) === 'needs_human'; });
+    else if (filter === 'judgment_ready') filtered = situations.filter(function(s) { return statusOf(s) === 'judgment_ready'; });
 
-    var counts = { all: situations.length, open: 0, partial: 0, agent: 0 };
+    var counts = { all: situations.length, pending: 0, investigating: 0, observing: 0, needs_human: 0, judgment_ready: 0 };
     situations.forEach(function(s) {
-      if (s.lifecycle === 'open') counts.open++;
-      if (s.lifecycle === 'partial') counts.partial++;
-      if (s.interventionCount === 0) counts.agent++;
+      var st = statusOf(s);
+      if (st === 'pending' || st === 'failed') counts.pending++;
+      else if (st === 'investigating') counts.investigating++;
+      else if (st === 'observing') counts.observing++;
+      else if (st === 'needs_human') counts.needs_human++;
+      else counts.judgment_ready++;
     });
     updateSituationBadges(counts);
 
@@ -651,8 +659,12 @@ async function loadSituationFeed(filter) {
       // P0010.1: Agent business status from persisted investigation (never re-computed).
       var inv = s.investigation || null;
       var statusChip = '';
-      if (!inv) {
-        statusChip = '<span class="agent-status-chip uninvestigated">未调查</span>';
+      if (!inv || inv.status === 'pending') {
+        statusChip = '<span class="agent-status-chip uninvestigated">待调查</span>';
+      } else if (inv.status === 'investigating') {
+        statusChip = '<span class="agent-status-chip investigating">调查中</span>';
+      } else if (inv.status === 'failed') {
+        statusChip = '<span class="agent-status-chip failed">调查未完成</span>';
       } else if (inv.status === 'observing') {
         statusChip = '<span class="agent-status-chip observing">观察中</span>';
       } else if (inv.status === 'needs_human') {
@@ -693,9 +705,11 @@ async function loadSituationFeed(filter) {
 function updateSituationBadges(counts) {
   var badges = {
     badgeAllSituations: counts.all,
-    badgeOpenSituations: counts.open,
-    badgeAgentSituations: counts.agent,
-    badgePartialSituations: counts.partial,
+    badgePendingSituations: counts.pending,
+    badgeInvestigatingSituations: counts.investigating,
+    badgeObservingSituations: counts.observing,
+    badgeNeedsHumanSituations: counts.needs_human,
+    badgeJudgmentSituations: counts.judgment_ready,
   };
   Object.keys(badges).forEach(function(id) {
     var el = document.getElementById(id);
@@ -873,26 +887,49 @@ async function loadSituationDetail(situationId) {
     // Load any stored P0010 Investigation (read-only; null when not investigated).
     // The Understanding surface consumes ONLY persisted investigation state — no
     // LLM/Hermes call, no new evidence acquisition. Trace is a secondary drill-down.
+    // The Pattern Engine is NEVER presented as "Agent 当前理解" — it only appears
+    // as a secondary 信号归因 inside the Trace.
     const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
     const trEl = document.getElementById('situationTrack_' + escHtml(situationId));
     const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
     const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
-    let hasInvestigation = false;
+    let invData = null;
+    let invStatus = 'pending'; // pending | investigating | failed | completed
     try {
       const inv = await apiGet('/api/situation/' + encodeURIComponent(situationId) + '/investigation');
-      if (uEl && inv && inv.investigation) {
-        hasInvestigation = true;
-        renderCurrentUnderstanding(uEl, inv.investigation);
-        if (trEl) renderInvestigationTrack(trEl, inv.investigation);
-        if (tEl) renderInvestigationTrace(tEl, inv.investigation, explanation);
-        if (btn) btn.style.display = 'none';
+      invData = inv?.investigation ?? null;
+      if (invData) {
+        if (invData.status === 'investigating') invStatus = 'investigating';
+        else if (invData.status === 'failed') invStatus = 'failed';
+        else if (invData.status === 'completed' || invData.stopReason) invStatus = 'completed';
       }
-    } catch { /* investigation unavailable — fall through to pre-investigation state */ }
-    if (!hasInvestigation && uEl) {
-      // Pre-investigation: existing deterministic attribution + recommendation.
-      uEl.innerHTML = renderAgentUnderstanding(explanation, desc) +
-        '<p class="situation-evidence-link" onclick="switchView(\'evidenceViewer\');setTimeout(function(){loadEvidenceViewer()},100)">[查看 Evidence →]</p>' +
-        '<div style="margin-top:8px"><span class="muted" style="font-size:0.72rem">💡 </span>' + escHtml(renderAgentRecommendation(tags)) + '</div>';
+    } catch { /* keep pending */ }
+
+    if (invStatus === 'completed' && invData && uEl) {
+      renderCurrentUnderstanding(uEl, invData);
+      if (trEl) renderInvestigationTrack(trEl, invData);
+      if (tEl) renderInvestigationTrace(tEl, invData, explanation);
+      if (btn) btn.style.display = 'none';
+    } else {
+      // Honest non-completed states — NEVER old Pattern impersonating Understanding.
+      // The MAIN body is the Agent lifecycle (what it will produce), not Signal
+      // attribution. Pattern Engine stays as a collapsed 信号归因 in the Trace.
+      const willShow = '<div class="muted" style="font-size:0.75rem;margin-top:6px">完成后将显示：当前判断 / 已确认 / 当前假设 / 还不知道 / 下一步调查 / 建议</div>';
+      if (uEl) {
+        if (invStatus === 'investigating') {
+          uEl.innerHTML = '<p class="muted">🔍 Agent 正在调查此 Situation（读取知识 → 提出下一问题 → 获取证据 → 更新判断），完成后自动更新此页面...</p>' + willShow;
+        } else if (invStatus === 'failed') {
+          uEl.innerHTML = '<p class="muted" style="color:var(--warning)">⚠ 上次调查未完成' +
+            (invData?.error ? '：' + escHtml(invData.error) : '') +
+            '。<br/><small>系统会在下次启动时自动恢复调查，无需人工点击。</small></p>' + willShow;
+        } else {
+          uEl.innerHTML = '<p class="muted placeholder">Agent 尚未调查此 Situation。系统会自动开始调查。</p>' + willShow;
+        }
+      }
+      // 「交给 Agent 调查」is a RECOVERY control only — not the normal primary entry.
+      if (btn) { btn.style.display = 'block'; btn.textContent = '🔄 立即调查（恢复）'; }
+      // Pattern Engine attribution → collapsed secondary 信号归因 (never the main body).
+      if (tEl) renderSignalAttribution(tEl, explanation, desc);
     }
   } catch (e) {
     content.innerHTML = '<p class="muted placeholder">加载失败 (' + e.message + ')</p>';
@@ -906,6 +943,24 @@ async function loadSituationDetail(situationId) {
 // secondary drill-down, not the hero.
 
 const HYPO_STATUS_LABEL = { supported: '已支持', weakened: '已弱化', proposed: '待验证', rejected: '已排除' };
+
+/** Capability business labels (operator-facing). Developer mode shows raw ids. */
+const CAPABILITY_LABELS = {
+  'trade.overview': '交易概览', 'trade.detail': '交易构成', 'traffic.overview': '流量分析',
+  'product.overview': '商品表现', 'service.overview': '服务指标', 'industry.benchmark': '行业对标',
+  'customer.overview': '客户资产', 'marketing.overview': '营销效果', 'supply_chain.inventory': '库存健康',
+  'trade.competition': '竞争分析', 'trade.reports': '数据导出',
+};
+function capabilityLabel(id) {
+  if (!id) return id;
+  if (state.panelMode === 'developer') return id;
+  if (CAPABILITY_LABELS[id]) return CAPABILITY_LABELS[id];
+  // Evidence label like "trade.overview 2026-08-13 (周四基准)" — map the leading id.
+  for (var k in CAPABILITY_LABELS) {
+    if (id.indexOf(k) === 0) return CAPABILITY_LABELS[k] + id.slice(k.length);
+  }
+  return id;
+}
 const STOP_VERDICT_LABEL = {
   judgment: '已形成判断',
   observe: '建议观察，暂不干预',
@@ -1048,7 +1103,7 @@ function renderInvestigationTrack(container, inv) {
     if (f.question) ev('调查问题', f.question, 'question');
     if (f.answer) ev('发现', f.answer, f.impactOnHypothesis ? '假设更新: ' + f.impactOnHypothesis : null, 'finding');
   });
-  const acquired = [inv.capabilityUsed, ...(inv.evidenceAcquired || [])].filter(Boolean);
+  const acquired = [inv.capabilityUsed, ...(inv.evidenceAcquired || [])].filter(Boolean).map(capabilityLabel);
   if (acquired.length) ev('获取证据', acquired.join('；'), 'evidence');
   const hypoChanges = (inv.hypotheses || []).filter((h) => h.status !== 'proposed' && h.status);
   if (hypoChanges.length) {
@@ -1074,12 +1129,28 @@ function renderInvestigationTrack(container, inv) {
     '<div class="investigation-track">' + (items || '<p class="muted placeholder">无调查过程记录。</p>') + '</div>';
 }
 
+/**
+ * Secondary 初始信号归因 (Pattern Engine) — shown ONLY inside the Trace for
+ * situations without a completed investigation. It is NEVER presented as
+ * "Agent 当前理解", and it does NOT link straight to the Evidence Viewer (that
+ * stays in Advanced). The operator's judgement-basis entry is the Investigation
+ * Track ("为什么这么判断？/查看调查依据") once an investigation exists.
+ */
+function renderSignalAttribution(container, explanation, desc) {
+  if (!container) return;
+  container.innerHTML =
+    '<details><summary style="cursor:pointer;font-size:0.78rem;font-weight:600;color:var(--muted)">初始信号归因（辅助信息）</summary>' +
+    '<div style="margin-top:8px">' +
+      renderAgentUnderstanding(explanation, desc) +
+    '</div></details>';
+}
+
 /** Secondary drill-down: why did the Agent judge this way (Knowledge/Question/Capability/Evidence). */
 function renderInvestigationTrace(container, inv, explanation) {
   if (!container || !inv) return;
   const rows = [];
-  if (inv.capabilityUsed) rows.push('获取方式: ' + escHtml(inv.capabilityUsed));
-  if (inv.evidenceAcquired && inv.evidenceAcquired.length) rows.push('已获取证据: ' + escHtml(inv.evidenceAcquired.join('；')));
+  if (inv.capabilityUsed) rows.push('获取方式: ' + escHtml(capabilityLabel(inv.capabilityUsed)));
+  if (inv.evidenceAcquired && inv.evidenceAcquired.length) rows.push('已获取证据: ' + escHtml(inv.evidenceAcquired.map(capabilityLabel).join('；')));
   if (inv.updatedAt) rows.push('调查时间: ' + escHtml(inv.updatedAt));
   const inner = rows.length
     ? '<ul style="margin:4px 0;padding-left:16px;font-size:0.75rem">' + rows.map(r => '<li>' + r + '</li>').join('') + '</ul>'
@@ -1209,6 +1280,14 @@ function renderReadiness(data) {
     var el = document.getElementById(id);
     if (el) el.textContent = chips[id];
   });
+  // P0010.1: version comes from the server (status.json), not a hardcoded string.
+  if (d.version) {
+    var v = 'v' + d.version;
+    var header = document.getElementById('headerVersion');
+    var side = document.getElementById('sidebarVersion');
+    if (header) header.textContent = v;
+    if (side) side.textContent = v;
+  }
 }
 
 // ── P0009: canonical Situation Chat wired into the primary Agent Session view ──
@@ -2065,6 +2144,18 @@ document.getElementById('replayRunBtn')?.addEventListener('click', async () => {
   applyI18n();
   switchView('situations', 'all');
   await loadData();
+
+  // P0010.1: workspace version from the server (status.json), not a hardcoded string.
+  try {
+    const r = await apiGet('/api/readiness');
+    if (r && r.version) {
+      var v = 'v' + r.version;
+      var header = document.getElementById('headerVersion');
+      var side = document.getElementById('sidebarVersion');
+      if (header) header.textContent = v;
+      if (side) side.textContent = v;
+    }
+  } catch { /* version stays at markup fallback */ }
 
   // If no rankings exist yet, auto-compute them (first-time setup)
   if (state.rankingsCache.length === 0) {

@@ -1,5 +1,39 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010.1 Workspace Semantic Cleanup（已 commit）
+
+### 目标
+
+诊断证明 P0010.1 Initial Acceptance 不成立（18 个 Situation 仅 4 个有 investigation，其余停在旧 Pattern fallback，且 auto-investigation 只覆盖 createdIds + 失败静默丢失）。按现有 P0010.1 原地 REPAIR，把已实现的智能从旧 UI 壳子里释放。
+
+### 三刀
+
+1. **Slice 2 恢复机制**：InvestigationSchema + status/error/startedAt；runInvestigationTurn 持久化 investigating 标记 + 失败 failed 标记（不静默丢失）+ 完成自动 Recommendation；backfill findRecoveryCandidates（无 completed 的 situation，stopReason 视为 completed）+ autoInvestigatePending（有界 3、顺序后台）。
+2. **UI 诚实化**：5 种状态可见；Pattern 降级「初始信号归因」；「交给 Agent 调查」→「🔄 立即调查（恢复）」。
+3. **Workspace Semantic Cleanup（ADR-047，7 项）**：见 ADR-047。
+
+### 真实验收
+
+- 恢复机制：2 个无人工点击自动调查完成（转化率 +20.6%、访客/转化相反），均 observe + 自动 Recommendation + 真实取证（trade.overview/traffic.overview/trade.detail）。
+- 4 状态浏览器验收：pending（尚未调查+预览）/ investigating（正在调查+预览）/ completed-observe（完整契约）/ needs-human（真异常需人工核验）。
+- Sidebar 互斥计数 11+2+4+1+0=18；无「查看 Evidence」直连；无 action 按钮；capability 业务标签（交易概览/流量分析/商品表）；version v0.10.6（readiness 读 status.json）。
+
+### 关键边界（本刀确立）
+
+- **investigation timeout/failure = Runtime reliability**，Workspace 已诚实显示，不再通过 UI fallback 掩盖，不在本刀修。
+- Human interaction 止于 Judgment + Recommendation feedback（6 个 canonical 按钮），action_intent 移除（Action 越界）。
+- 不开始 Action/Approval；Evidence Viewer 保留 Advanced provenance。
+
+### 测试
+
+全量 605（595 passed + 2 pre-existing + 8 http 瞬态 skip），http 独立 8/8，investigation 18/18，typecheck 17 基线。
+
+### 状态
+
+P0010/P0010.1 最重要的东西第一次完整站起来：Situation → Agent 自己知道该问什么 → 自己取证 → 形成理解 → 给出建议 → 把为什么这么判断展示给人。**下一步（用户发起）：设计 Action Proposal 阶段（approval boundary / execution / result / experience evolution）——当前 6 个 feedback 按钮是 canonical human feedback，不提前改。**
+
+---
+
 ## 本次会话 (2026-08-21) - P0010.1 Slice 4（Recommendation）→ P0010.1 全部完成
 
 ### 目标
