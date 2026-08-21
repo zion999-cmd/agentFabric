@@ -1,5 +1,25 @@
 # 技术决策记录 (ADR)
 
+## ADR-045: P0010.1 Slice 2+3 — Automatic Investigation + Scheduled Acquisition
+
+- **日期**: 2026-08-21
+- **状态**: Accepted（wire/API 验证通过；Slice 2 完整模型验收受 P0009 延迟影响）
+- **来源**: proposals/P0010.1 Slice 2（Automatic Investigation）+ Slice 3（Scheduled Acquisition）
+
+**决策**：
+
+1. **Slice 2 — Automatic Investigation**：抽取 `runInvestigationTurn`（prompt + 两阶段契约提取 + 持久化，route 与 backfill 共用）到 situation-chat.ts；`runSituationProducer` 返回 `createdIds`；backfill 对每个新 Situation **无人工点击**自动调查（fire-and-forget，不阻塞 startup，诚实 timeout/degradation）。REUSE P0010 全部（session/prompt/knowledge routing/fabric_execute/contract extraction）。无新 Agent/Planner/Question/Investigation Engine。
+
+2. **Slice 3 — Scheduled Acquisition**：`scheduler.ts` 最小每日 setInterval runner（非 scheduler engine），REUSE 现有 `kernel.execute`（local-first live acquire）→ Evidence Store → onAfterRun 触发 Situation 路径 → 新 Situation → 自动调查（闭合 steady-state 循环）。`GET/POST /api/runtime/schedule`（list/run-now）。默认配置 enabled:false（避免意外 CDP）。
+
+3. **Slice 5（REUSE）**：现有 intervention grammar「采用建议/不采用/稍后处理」已是 Recommendation feedback → `human_interventions` + Learning Context（已验证 decision/accept 落库）。
+
+**验收**：Slice 3 run-now `trade.overview` → `lastStatus: completed` → 新 Evidence（2026/08/21_trend.meta.json）落盘，完全复用现有路径。Slice 2 wire 验证（session 创建 + prompt 提交 + 600s 诚实 timeout 无伪造）。完整 auto-investigation 模型验收受 P0009 延迟影响（模型 600s 未完成时诚实报 timeout）。
+
+**文件**: `apps/ecommerce/runtime/{situation/producer,scheduling/*}.ts`，`platform/server/routes/{situation-chat,schedule}.ts`，`platform/server/index.ts`。
+
+---
+
 ## ADR-044: P0010.1 Slice 0+1 — Workspace Investigation Surface
 
 - **日期**: 2026-08-21

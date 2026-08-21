@@ -21,6 +21,7 @@ import { writeProjection } from '#app/runtime/fabric-workspace/index.js';
 import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
 import { loadCapabilityEntries } from '#app/runtime/fabric-workspace/capability-loader.js';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
+import type { LearningContext, Situation } from '#shared/schemas/learning-context.js';
 import {
   loadSituation,
   loadLearningContext,
@@ -116,6 +117,56 @@ export const collectTurn = (client: SituationChatClient, sessionId: string, time
       }
     });
   });
+};
+
+// ---- P0010 Investigation turn (shared by the route + automatic trigger) ----
+
+export interface InvestigationTurnResult {
+  ok: boolean;
+  investigation?: LearningContext['investigation'];
+  error?: string;
+  rawReply?: string;
+}
+
+/**
+ * Run ONE P0010 investigation turn in an existing Hermes session: build the
+ * investigation prompt (situation + evidence as data), submit, two-phase
+ * contract extraction (prose → structured follow-up in the SAME session), and
+ * persist the contract into the situation's Learning Context. Fabric never
+ * synthesizes the contract. Throws on turn timeout — callers handle honestly.
+ */
+export const runInvestigationTurn = async (
+  client: SituationChatClient,
+  sessionId: string,
+  db: Db,
+  situation: Situation,
+): Promise<InvestigationTurnResult> => {
+  const ctx = loadLearningContext(db, situation.situationId);
+  const prompt = buildInvestigationPrompt(situation, ctx);
+
+  const replyPromise = collectTurn(client, sessionId, 600_000);
+  await client.submitPrompt(sessionId, prompt);
+  const reply = await replyPromise;
+
+  let parsed = parseInvestigation(reply, situation.situationId);
+  if (!parsed.ok) {
+    const finalizePrompt = [
+      `You just investigated situation ${situation.situationId}. Now output ONLY the Investigation Contract as a single JSON object (no prose, no markdown fences).`,
+      `Use the exact shape: {"situationId":"${situation.situationId}","currentUnderstanding":"...","knownEvidence":[...],"hypotheses":[{"statement":"...","status":"..."}],"unknowns":[...],"nextQuestion":"...","requiredEvidence":[...],"investigationRequest":"...","findings":[{"question":"...","evidenceRefs":[...],"answer":"...","impactOnHypothesis":"..."}],"judgment":"...","stopReason":"...","capabilityUsed":"...","evidenceAcquired":[...]}`,
+      `Base every field on what you actually did and observed in this investigation. Do not invent capabilities or evidence you did not acquire.`,
+    ].join('\n');
+    const reply2Promise = collectTurn(client, sessionId, 240_000);
+    await client.submitPrompt(sessionId, finalizePrompt);
+    const reply2 = await reply2Promise;
+    const parsed2 = parseInvestigation(reply2, situation.situationId);
+    if (!parsed2.ok) {
+      return { ok: false, error: parsed2.error, rawReply: (reply + '\n---\n' + reply2).slice(0, 2000) };
+    }
+    parsed = parsed2;
+  }
+
+  storeInvestigationInLearningContext(db, situation, parsed.investigation);
+  return { ok: true, investigation: parsed.investigation };
 };
 
 // ---- Router ----
@@ -250,48 +301,23 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
         sessions.set(situationId, active);
       }
 
-      const ctx = loadLearningContext(options.db, situationId);
-      const prompt = buildInvestigationPrompt(situation, ctx);
-
-      const replyPromise = collectTurn(active.client, active.hermesSessionId, 600_000);
-      await active.client.submitPrompt(active.hermesSessionId, prompt);
-      const reply = await replyPromise;
-
-      // Phase 2: if the Agent ran the investigation but did not emit the
-      // structured contract (prose report), ask it — in the SAME session — to
-      // structure what it did. Fabric does NOT synthesize the contract.
-      let parsed = parseInvestigation(reply, situationId);
-      if (!parsed.ok) {
-        const finalizePrompt = [
-          `You just investigated situation ${situationId}. Now output ONLY the Investigation Contract as a single JSON object (no prose, no markdown fences).`,
-          `Use the exact shape: {"situationId":"${situationId}","currentUnderstanding":"...","knownEvidence":[...],"hypotheses":[{"statement":"...","status":"..."}],"unknowns":[...],"nextQuestion":"...","requiredEvidence":[...],"investigationRequest":"...","findings":[{"question":"...","evidenceRefs":[...],"answer":"...","impactOnHypothesis":"..."}],"judgment":"...","stopReason":"...","capabilityUsed":"...","evidenceAcquired":[...]}`,
-          `Base every field on what you actually did and observed in this investigation. Do not invent capabilities or evidence you did not acquire.`,
-        ].join('\n');
-        const reply2Promise = collectTurn(active.client, active.hermesSessionId, 240_000);
-        await active.client.submitPrompt(active.hermesSessionId, finalizePrompt);
-        const reply2 = await reply2Promise;
-        const parsed2 = parseInvestigation(reply2, situationId);
-        if (!parsed2.ok) {
-          res.status(200).json({
-            success: false,
-            agentStatus: 'error',
-            error: parsed2.error,
-            rawReply: (reply + '\n---\n' + reply2).slice(0, 2000),
-          });
-          return;
-        }
-        parsed = parsed2;
+      const result = await runInvestigationTurn(active.client, active.hermesSessionId, options.db, situation);
+      if (!result.ok) {
+        res.status(200).json({
+          success: false,
+          agentStatus: 'error',
+          error: result.error,
+          rawReply: result.rawReply,
+        });
+        return;
       }
-
-      // Persist the Investigation Contract into the situation's Learning Context.
-      storeInvestigationInLearningContext(options.db, situation, parsed.investigation);
 
       res.json({
         success: true,
         agentStatus: 'completed',
         situationId,
         sessionId: active.hermesSessionId,
-        investigation: parsed.investigation,
+        investigation: result.investigation,
       });
     } catch (err) {
       sessions.delete(situationId);

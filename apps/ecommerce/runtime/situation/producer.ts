@@ -36,6 +36,8 @@ export interface SituationProducerOptions {
 export interface SituationRunResult {
   created: number;
   skipped: number;
+  /** situationIds actually inserted this run (for P0010.1 automatic investigation). */
+  createdIds: string[];
   situations: Situation[];
 }
 
@@ -94,6 +96,7 @@ export const runSituationProducer = (db: Db, options: SituationProducerOptions):
 
   let created = 0;
   let skipped = 0;
+  const createdIds: string[] = [];
   const now = nowIso();
   const persist = db.transaction((rows: readonly Situation[]) => {
     for (const s of rows) {
@@ -115,10 +118,10 @@ export const runSituationProducer = (db: Db, options: SituationProducerOptions):
         now,
         now,
       );
-      if (info.changes > 0) created++; else skipped++;
+      if (info.changes > 0) { created++; createdIds.push(s.situationId); } else skipped++;
     }
   });
   persist(situations);
 
-  return { created, skipped, situations };
+  return { created, skipped, createdIds, situations };
 };

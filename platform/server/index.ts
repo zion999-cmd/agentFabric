@@ -11,13 +11,25 @@ import { workspaceRouter } from './routes/workspace.js';
 import { chatRouter } from './routes/chat.js';
 import { runtimeRouter } from './routes/runtime.js';
 import { p0007Router } from './routes/p0007.js';
-import { situationChatRouter } from './routes/situation-chat.js';
+import { situationChatRouter, runInvestigationTurn } from './routes/situation-chat.js';
 import { knowledgeRouter } from './routes/knowledge.js';
+import { scheduleRouter } from './routes/schedule.js';
 import { openDb } from '#platform/storage/connection.js';
+import { HermesSessionClient } from '#platform/runtime/hermes/index.js';
+import { loadSituation } from '#app/experience/learning-context-producer.js';
+import { createScheduledAcquisitionRunner } from '#app/runtime/scheduling/index.js';
+import type { ScheduledAcquisition } from '#app/runtime/scheduling/index.js';
 
 export interface ServerOptions {
   db: Db;
   workspaceDir?: string;
+  /**
+   * P0010.1 Slice 3 — optional Scheduled Acquisition config. When provided, a
+   * minimal scheduler runs the listed capabilities on a daily schedule (REUSE
+   * the existing Fabric capability → Evidence path; never judges). Off by
+   * default — tests and the plain server do not start any timer.
+   */
+  schedule?: ScheduledAcquisition[];
 }
 
 /** Create the Express app with all routes mounted. */
@@ -57,6 +69,20 @@ export const createServer = (options: ServerOptions): Express => {
       db,
     }),
   );
+
+  // P0010.1 Slice 3 — Scheduled Acquisition (optional). Reuses the existing
+  // capability → Evidence path; after a successful run, feeds new evidence into
+  // the Situation path (→ automatic investigation for newly created situations).
+  if (options.schedule && options.schedule.length > 0) {
+    const fabricDir = resolve(process.cwd(), 'data', 'fabric-workspace');
+    const runner = createScheduledAcquisitionRunner(db, options.schedule, async () => {
+      const { runSituationProducer } = await import('#app/runtime/situation/index.js');
+      const result = runSituationProducer(db, { shopId: 'jd_shop_001', shopName: '祁门红茶旗舰店' });
+      for (const sid of result.createdIds ?? []) void autoInvestigateSituation(db, fabricDir, sid);
+    });
+    runner.start();
+    app.use('/api', scheduleRouter(runner));
+  }
 
   // Dashboard SPA (vanilla JS). Served as static files.
   const dashDir = workspaceDir ?? resolve(process.cwd(), 'apps/ecommerce/workspace');
@@ -167,16 +193,47 @@ const backfillRecentData = async (db: Db, days = 7): Promise<void> => {
     });
     // eslint-disable-next-line no-console
     console.log(`[backfill] situations: ${situationResult.created} created / ${situationResult.skipped} deduped`);
+
+    // P0010.1 Slice 2: automatic investigation — newly created Situations are
+    // investigated WITHOUT a manual click (steady-state). Fire-and-forget so
+    // startup is never blocked; each run uses the honest timeout/degradation.
+    // Hermes not reachable → the turn fails and is logged, never fabricated.
+    for (const sid of situationResult.createdIds ?? []) {
+      void autoInvestigateSituation(db, resolve(process.cwd(), 'data', 'fabric-workspace'), sid);
+    }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('[backfill] failed:', err instanceof Error ? err.message : String(err));
   }
 };
 
+/** P0010.1: run one P0010 investigation for a situation in a fresh Hermes session. */
+export const autoInvestigateSituation = async (db: Db, workspaceDir: string, situationId: string): Promise<void> => {
+  const situation = loadSituation(db, situationId);
+  if (!situation) return;
+  try {
+    const client = new HermesSessionClient();
+    await client.connect();
+    const created = await client.createSession({ cwd: workspaceDir, profile: 'default' });
+    const result = await runInvestigationTurn(client, created.sessionId, db, situation);
+    // eslint-disable-next-line no-console
+    console.log(`[auto-investigate] ${situationId}: ${result.ok ? 'completed' : 'contract error: ' + (result.error ?? '')}`);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(`[auto-investigate] ${situationId}: ${err instanceof Error ? err.message : String(err)}`);
+  }
+};
+
 // CLI entry: `npm run dev` / `npm start`
 const main = (): void => {
   const db = openDb();
-  startServer({ db });
+  // P0010.1 Slice 3: scheduled acquisition config. Disabled by default — the
+  // operator explicitly enables capabilities so no surprise CDP runs happen.
+  const schedule: ScheduledAcquisition[] = [
+    { capability: 'trade.overview', at: '02:00', enabled: false },
+    { capability: 'traffic.overview', at: '02:05', enabled: false },
+  ];
+  startServer({ db, schedule });
   // Supplement missing data in the background (non-blocking).
   void backfillRecentData(db);
 };

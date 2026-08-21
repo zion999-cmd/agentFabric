@@ -1,5 +1,39 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010.1 Slice 2+3（Automatic Investigation + Scheduled Acquisition）
+
+### 目标
+
+P0010.1 把 P0010 从人工触发 Demo 提升为 steady-state。完成 Slice 2（新 Situation 自动调查）+ Slice 3（Scheduled Acquisition 最小化）。Slice 5（Recommendation feedback）REUSE 验证。
+
+### Slice 2 — Automatic Investigation（wire 验证通过，模型验收受 P0009 延迟影响）
+
+- 抽取 `runInvestigationTurn`（prompt + 两阶段契约提取 + 持久化）到 situation-chat.ts，route 与 backfill 共用（DRY，无重复实现）。
+- `runSituationProducer` 返回 `createdIds`（新增 situation ids）。
+- backfill 对每个新 Situation **无人工点击**自动调查：`autoInvestigateSituation`（导出）→ HermesSessionClient + createSession + runInvestigationTurn，fire-and-forget 不阻塞 startup，诚实 timeout/degradation。
+- **wire 验证**：auto-investigate 在真实未调查 anomaly（UV -47.5%）上运行 → session 创建 ✓、prompt 提交 ✓、600s 诚实 timeout（模型未完成，无伪造）。重试运行中。
+
+### Slice 3 — Scheduled Acquisition（API + run-now 验证通过）
+
+- `apps/ecommerce/runtime/scheduling/scheduler.ts`：最小每日 setInterval runner（非 scheduler engine），REUSE `kernel.execute`（local-first live acquire）→ Evidence Store。`onAfterRun` 触发 runSituationProducer → 新 Situation → 自动调查（闭合 steady-state 循环）。
+- `GET/POST /api/runtime/schedule`（list/run-now）。默认配置 trade.overview@02:00 / traffic.overview@02:05（enabled:false，避免意外 CDP）。
+- **验证**：run-now `trade.overview` → `lastStatus: completed` → 新 Evidence（2026/08/21_trend.meta.json）落盘，完全复用现有路径（无第二套 acquisition）。
+
+### Slice 5 — Recommendation Feedback（REUSE 验证通过）
+
+现有 intervention grammar「采用建议/不采用/稍后处理」已是 Recommendation feedback → POST interventions → human_interventions + Learning Context。已验证 decision/accept（"采用建议: 同意优先排查优惠券到期"）落库。
+
+### 测试
+
+600/602 passed（2 pre-existing），typecheck 17 基线。零新测试文件（Slice 2/3 wire 以 API/浏览器实测验证）。
+
+### 剩余
+
+- **Slice 4 Recommendation**：从 Judgment 产生（扩展 InvestigationSchema 或 follow-up turn），禁止 Signal→Rec。需模型 turn（P0009 延迟风险）。
+- Slice 2 完整模型验收：重试 auto-investigate 等待结果；若模型完成 → Workspace 显示该 Situation 状态（observing/judgment_ready）。
+
+---
+
 ## 本次会话 (2026-08-21) - P0010.1 Slice 0+1（Workspace Investigation Surface）
 
 ### 目标
