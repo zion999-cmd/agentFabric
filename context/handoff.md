@@ -1,5 +1,52 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010.1 Slice 0+1（Workspace Investigation Surface）
+
+### 目标
+
+P0010.1 把 P0010 从人工触发 Demo 提升为 steady-state：Workspace 从 Signal/Ranking 告警中心调整为 Agent Operations Workspace。按提案 Implementation Sequence 从 Slice 0（Wiring Audit）开始，完成 Slice 1（产品表象追上 P0010）。
+
+### Slice 0 — Wiring Audit（无 schema gap）
+
+| 项 | 判定 |
+|---|---|
+| Situation 产生 | REUSE（runSituationProducer，index.ts:163） |
+| Automatic Investigation 触发 | WIRE（investigate 逻辑内嵌 situation-chat 路由，需抽取 + 自动触发——Slice 2） |
+| Investigation 入口 | REUSE（POST /api/situation/:id/investigate，session 复用/两阶段提取/持久化） |
+| Investigation Track 重建 | WIRE（**从已持久化契约派生**，零 LLM/CoT/schema 变更） |
+| Intervention UI | REUSE（「采用/不采用」已是 Recommendation feedback） |
+| Recommendation | MISSING（Slice 4，旧「Agent 建议」=Signal→Rec 被禁止） |
+| Scheduler | MISSING（Slice 3，无 primitive） |
+| Situation 列表 | WIRE（+investigation summary） |
+| Ranking Explainability | REUSE（secondary） |
+
+### Slice 1 — Workspace Investigation Surface（浏览器验收通过）
+
+- `/api/situations` join learning_contexts → per-situation `investigation` summary（`deriveInvestigationStatus`：observing/needs_human/judgment_ready，从 stopReason+人工核验 markers 派生，纯函数无 LLM）。
+- Situation 列表卡片：Agent 状态 chip（观察中/未调查/需人工核验/已判断）+ judgment 摘要行。
+- Situation Detail：**「调查过程」Investigation Track 一等 UI**——时间线（发现→调查问题→获取证据→假设更新→能力边界→判断→停止），全部派生自持久化 investigation（findings/hypotheses/capabilityUsed/stopReason），非 CoT。
+- Current Understanding（ADR-043 hero）保持主表象；Track 回答 HOW；「为什么这么判断」保留证据下钻。
+
+### 浏览器验收
+
+- 列表 14 卡片：CVR→观察中+judgment 行；其余→未调查。
+- Case A（GMV→observe）Track 10 步：发现→问题→周末节律→问题→发现→获取证据（trade.overview 4天）→假设更新（周末效应已支持/真异常已弱化）→下一问题→判断（伪异常）→停止（建议观察）。
+- Case B（orders→真异常）Track 9 步：发现→问题→周同比-82.5%真异常→问题→双降→下一问题（广告账户）→**能力边界（京准通需人工核验）**→判断→停止。
+- console 零 error；零 LLM 渲染；reload 持久。
+
+### 剩余 Slice 评估（下一步）
+
+- **Slice 2 Automatic Investigation**：抽取 investigate 核心为可复用函数 + backfill 后对新 situation 自动触发（涉及模型运行，需诚实 timeout）。验收需新 Situation 出现——当前数据难确定性触发。
+- **Slice 3 Scheduled Acquisition**：最小 setInterval scheduler（无 cron primitive），复用 capability→Evidence 路径。
+- **Slice 4 Recommendation**：从 Judgment 产生（扩展 InvestigationSchema 或 follow-up turn），禁止 Signal→Rec。
+- **Slice 5 Human Feedback**：REUSE intervention grammar（采用/不采用已存在），反馈入 Learning Context。
+
+### 建议
+
+Slice 1 已使 Workspace 产品表象追上 P0010 Runtime。Slice 2-5 涉及模型触发/调度/契约扩展，按用户指示逐刀推进。
+
+---
+
 ## 本次会话 (2026-08-21) - P0010 Current Understanding Workspace Surface
 
 ### 目标

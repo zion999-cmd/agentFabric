@@ -16,6 +16,25 @@ const fail = (res: any, status: number, error: string) => {
   res.status(status).json({ success: false, error });
 };
 
+/**
+ * P0010.1: derive the business status of a Situation from its persisted
+ * Investigation state (product semantics, NOT a new state machine). Pure — no LLM.
+ *   uninvestigated → no investigation
+ *   observing       → stopReason = observe
+ *   needs_human     → missing_capability / ask_human, or the Agent surfaced 人工核验
+ *   judgment_ready  → stopReason = judgment (or any other completed stop)
+ */
+const deriveInvestigationStatus = (
+  inv: { stopReason?: string; judgment?: string; currentUnderstanding?: string },
+): 'observing' | 'needs_human' | 'judgment_ready' => {
+  const stop = inv.stopReason ?? '';
+  if (stop === 'observe') return 'observing';
+  if (stop === 'missing_capability' || stop === 'ask_human') return 'needs_human';
+  const text = ((inv.judgment ?? '') + (inv.currentUnderstanding ?? '')).toLowerCase();
+  if (text.includes('人工核验') || text.includes('人工确认') || text.includes('无法获取')) return 'needs_human';
+  return 'judgment_ready';
+};
+
 // ---- Routes ----
 
 export const p0007Router = (db: Db): Router => {
@@ -24,30 +43,55 @@ export const p0007Router = (db: Db): Router => {
   // ── Situation API ────────────────────────────────────────
 
   // GET /api/situations — list recent situations.
+  // P0010.1: each situation carries its Agent investigation summary so the
+  // Workspace list can show business status (uninvestigated / observing /
+  // judgment_ready / needs_human) without entering the Detail.
   router.get('/situations', (_req, res) => {
     try {
       const rows = db.prepare(
-        `SELECT s.*, COUNT(i.intervention_id) as intervention_count
+        `SELECT s.*, COUNT(i.intervention_id) as intervention_count,
+                lc.body as lc_body
          FROM situations s
          LEFT JOIN human_interventions i ON s.situation_id = i.situation_id
+         LEFT JOIN learning_contexts lc ON s.situation_id = lc.situation_id
          GROUP BY s.situation_id
          ORDER BY s.observed_at DESC
          LIMIT 50`,
       ).all() as Record<string, unknown>[];
 
-      const situations = rows.map((r) => ({
-        situationId: r.situation_id,
-        domain: r.domain,
-        type: r.type,
-        entity: { id: r.entity_id, type: r.entity_type, name: r.entity_name, platform: r.entity_platform },
-        temporal: { observedAt: r.observed_at, windowStart: r.window_start, windowEnd: r.window_end },
-        description: r.description,
-        tags: JSON.parse(String(r.tags ?? '[]')),
-        lifecycle: r.lifecycle,
-        interventionCount: r.intervention_count,
-        createdAt: r.created_at,
-        updatedAt: r.updated_at,
-      }));
+      const situations = rows.map((r) => {
+        const lcBody = (() => {
+          try { return JSON.parse(String(r.lc_body ?? '{}')); } catch { return {}; }
+        })();
+        const inv = (lcBody.investigation ?? null) as {
+          stopReason?: string;
+          judgment?: string;
+          nextQuestion?: string;
+          currentUnderstanding?: string;
+          findings?: unknown[];
+        } | null;
+        return {
+          situationId: r.situation_id,
+          domain: r.domain,
+          type: r.type,
+          entity: { id: r.entity_id, type: r.entity_type, name: r.entity_name, platform: r.entity_platform },
+          temporal: { observedAt: r.observed_at, windowStart: r.window_start, windowEnd: r.window_end },
+          description: r.description,
+          tags: JSON.parse(String(r.tags ?? '[]')),
+          lifecycle: r.lifecycle,
+          interventionCount: r.intervention_count,
+          createdAt: r.created_at,
+          updatedAt: r.updated_at,
+          // P0010.1 Agent status (product semantics derived from persisted state).
+          investigation: inv ? {
+            status: deriveInvestigationStatus(inv),
+            stopReason: inv.stopReason ?? null,
+            judgment: inv.judgment ?? null,
+            nextQuestion: inv.nextQuestion ?? null,
+            findingsCount: (inv.findings ?? []).length,
+          } : null,
+        };
+      });
 
       ok(res, situations);
     } catch (err) {

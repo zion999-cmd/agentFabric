@@ -1,5 +1,27 @@
 # 技术决策记录 (ADR)
 
+## ADR-044: P0010.1 Slice 0+1 — Workspace Investigation Surface
+
+- **日期**: 2026-08-21
+- **状态**: Accepted（浏览器验收通过）
+- **来源**: proposals/P0010.1-steady-state-investigation-operations-workspace.md
+
+**决策**（让 Workspace 从 "Signal/Ranking 告警中心" 调整为 "Agent Operations Workspace"——信息优先级调整，非视觉 redesign）：
+
+1. **Slice 0 审计结论**：Situation 产生 REUSE（runSituationProducer）；自动调查触发 WIRE（investigate 逻辑内嵌路由需抽取）；Investigation 入口 REUSE（POST /api/situation/:id/investigate）；Track 可**从已持久化契约派生**（findings/hypotheses/capabilityUsed/stopReason，零 LLM 零 CoT 零 schema 变更）；Intervention UI REUSE（「采用/不采用」已是 Recommendation feedback）；Recommendation MISSING（Slice 4）；Scheduler MISSING（Slice 3）；Situation 列表 WIRE；Ranking Explainability REUSE（secondary）。**无 schema gap**。
+
+2. **Situation 列表 Agent 状态**：`/api/situations` 带 per-situation investigation summary（`deriveInvestigationStatus`：observing/needs_human/judgment_ready 从 stopReason + 人工核验 markers 派生，纯函数无 LLM）。卡片渲染状态 chip（观察中/未调查/需人工核验/已判断）+ Agent 判断摘要行。
+
+3. **Investigation Track 一等 UI**：Detail 中「调查过程」时间线（发现→调查问题→获取证据→假设更新→能力边界→判断→停止），全部从已持久化 investigation 字段派生——**业务可审计过程，非 Chain-of-Thought**，不保存/不展示模型内部推理。
+
+4. **Current Understanding 保持主表象**（ADR-043 hero 不变）；Track 回答 HOW；「为什么这么判断」保留为证据下钻；Ranking Explainability 保持真实 E2E 但为 secondary。
+
+**验收**（真实浏览器）：列表 14 卡片渲染状态 chips + judgment；Case A（GMV→observe）Track 10 步（含假设更新「周末效应已支持/真异常已弱化」）；Case B（orders→真异常）Track 9 步（含能力边界「京准通需人工核验」）；console 零 error；零 LLM 渲染。
+
+**文件**: `platform/server/routes/p0007.ts`，`apps/ecommerce/workspace/{app.js,styles.css}`。
+
+---
+
 ## ADR-043: P0010 Current Understanding Workspace Surface
 
 - **日期**: 2026-08-21

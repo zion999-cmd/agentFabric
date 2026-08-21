@@ -523,9 +523,24 @@ ul, ol { list-style: none; }
 .situation-card-badge.open { background: #eff6ff; color: var(--primary); }
 .situation-card-badge.partial { background: #f0fdf4; color: var(--success); }
 .situation-card-badge.mature { background: #fffbeb; color: var(--warning); }
-.situation-card-summary { font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; line-height: 1.4; }
-.situation-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--muted); }
+.situation-card-summary { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; line-height: 1.4; }
+.situation-card-judgment { font-size: 0.75rem; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+.situation-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--muted); gap: 8px; }
 .situation-card-action { color: var(--primary); font-weight: 600; }
+/* ── Investigation Track ─────────────────────────────── */
+.investigation-track { border-left: 2px solid var(--border); margin-left: 6px; padding-left: 12px; }
+.track-event { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
+.track-step { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 0.62rem; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.track-label { font-size: 0.75rem; font-weight: 700; color: var(--text); }
+.track-detail { font-size: 0.78rem; color: var(--text); margin-top: 1px; line-height: 1.4; }
+.track-boundary .track-step { background: var(--warning); }
+.track-stop .track-step { background: var(--success); }
+.track-judgment .track-step { background: var(--primary); }
+.agent-status-chip { font-size: 0.66rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; flex-shrink: 0; }
+.agent-status-chip.uninvestigated { background: #f1f5f9; color: #64748b; }
+.agent-status-chip.observing { background: #f0fdf4; color: var(--success); }
+.agent-status-chip.judgment-ready { background: #eff6ff; color: var(--primary); }
+.agent-status-chip.needs-human { background: #fef3c7; color: var(--warning); }
 
 /* ── Situation Detail ───────────────────────────────────── */
 .situation-detail-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; position: sticky; top: 0; background: var(--bg); z-index: 1; padding: 8px 0; }

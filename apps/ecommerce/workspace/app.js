@@ -648,6 +648,19 @@ async function loadSituationFeed(filter) {
       var badge = s.lifecycle === 'open' ? '<span class="situation-card-badge open">待处理</span>' :
                   s.lifecycle === 'partial' ? '<span class="situation-card-badge partial">已处理</span>' :
                   '<span class="situation-card-badge mature">待观察</span>';
+      // P0010.1: Agent business status from persisted investigation (never re-computed).
+      var inv = s.investigation || null;
+      var statusChip = '';
+      if (!inv) {
+        statusChip = '<span class="agent-status-chip uninvestigated">未调查</span>';
+      } else if (inv.status === 'observing') {
+        statusChip = '<span class="agent-status-chip observing">观察中</span>';
+      } else if (inv.status === 'needs_human') {
+        statusChip = '<span class="agent-status-chip needs-human">需人工核验</span>';
+      } else {
+        statusChip = '<span class="agent-status-chip judgment-ready">已判断</span>';
+      }
+      var judgmentLine = inv && inv.judgment ? '<div class="situation-card-judgment">Agent 判断: ' + escHtml(inv.judgment.slice(0, 70)) + '</div>' : '';
       var dateLabel = (temporal.observedAt || s.createdAt || '').slice(0, 10);
       html += '<div class="situation-card" data-situation-id="' + escHtml(s.situationId) + '">' +
         '<div class="situation-card-top">' +
@@ -655,7 +668,9 @@ async function loadSituationFeed(filter) {
           badge +
         '</div>' +
         '<div class="situation-card-summary">' + escHtml((s.description || '').slice(0, 80)) + '</div>' +
+        judgmentLine +
         '<div class="situation-card-footer">' +
+          statusChip +
           '<span>' + dateLabel + ' · ' + (s.interventionCount || 0) + ' 条处理</span>' +
           '<span class="situation-card-action">查看详情 →</span>' +
         '</div>' +
@@ -811,6 +826,9 @@ async function loadSituationDetail(situationId) {
     html += '<div class="situation-layer-body" id="situationUnderstanding_' + escHtml(situationId) + '">';
     html += '<p class="muted placeholder">加载中...</p>';
     html += '</div>';
+    // Investigation Track (HOW) — first-class business timeline derived from the
+    // persisted investigation contract (no CoT, no LLM, no re-computation).
+    html += '<div class="investigation-track-section" id="situationTrack_' + escHtml(situationId) + '" style="margin-top:10px"></div>';
     html += '<div id="situationTrace_' + escHtml(situationId) + '" style="margin-top:6px"></div>';
     html += '<button class="btn btn-primary" id="startInvestigation_' + escHtml(situationId) + '" style="margin-top:8px;font-size:0.78rem" onclick="startInvestigation(\'' + escHtml(situationId) + '\')">🔍 交给 Agent 调查</button>';
     html += '</div>';
@@ -856,6 +874,7 @@ async function loadSituationDetail(situationId) {
     // The Understanding surface consumes ONLY persisted investigation state — no
     // LLM/Hermes call, no new evidence acquisition. Trace is a secondary drill-down.
     const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
+    const trEl = document.getElementById('situationTrack_' + escHtml(situationId));
     const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
     const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
     let hasInvestigation = false;
@@ -864,6 +883,7 @@ async function loadSituationDetail(situationId) {
       if (uEl && inv && inv.investigation) {
         hasInvestigation = true;
         renderCurrentUnderstanding(uEl, inv.investigation);
+        if (trEl) renderInvestigationTrack(trEl, inv.investigation);
         if (tEl) renderInvestigationTrace(tEl, inv.investigation, explanation);
         if (btn) btn.style.display = 'none';
       }
@@ -978,6 +998,45 @@ function renderCurrentUnderstanding(container, inv) {
   container.innerHTML = html || '<p class="muted placeholder">Agent 未返回调查内容。</p>';
 }
 
+/** Investigation Track — the business process (HOW), derived from persisted contract.
+ * NOT Chain-of-Thought: only structured business events already in the contract
+ * (question / evidence / finding / hypothesis / judgment / stop). No LLM, no re-computation. */
+function renderInvestigationTrack(container, inv) {
+  if (!container || !inv) return;
+  const events = [];
+  const ev = (label, detail, kind) => events.push({ label, detail, kind });
+
+  ev('发现', 'Situation 已识别，进入调查', 'start');
+  (inv.findings || []).forEach((f) => {
+    if (f.question) ev('调查问题', f.question, 'question');
+    if (f.answer) ev('发现', f.answer, f.impactOnHypothesis ? '假设更新: ' + f.impactOnHypothesis : null, 'finding');
+  });
+  const acquired = [inv.capabilityUsed, ...(inv.evidenceAcquired || [])].filter(Boolean);
+  if (acquired.length) ev('获取证据', acquired.join('；'), 'evidence');
+  const hypoChanges = (inv.hypotheses || []).filter((h) => h.status !== 'proposed' && h.status);
+  if (hypoChanges.length) {
+    ev('假设更新', hypoChanges.map((h) => h.statement + ' [' + (HYPO_STATUS_LABEL[h.status] || h.status) + ']').join('；'), 'hypothesis');
+  }
+  if (inv.nextQuestion) ev('下一问题', inv.nextQuestion, 'question');
+  const boundary = deriveCapabilityBoundary(inv);
+  if (boundary) ev('能力边界', boundary, 'boundary');
+  if (inv.judgment) ev('判断', inv.judgment, 'judgment');
+  if (inv.stopReason) ev('停止', STOP_VERDICT_LABEL[inv.stopReason] || inv.stopReason, 'stop');
+
+  const items = events.map((e, i) =>
+    '<div class="track-event track-' + e.kind + '">' +
+      '<div class="track-step">' + (i + 1) + '</div>' +
+      '<div class="track-body">' +
+        '<div class="track-label">' + escHtml(e.label) + '</div>' +
+        (e.detail ? '<div class="track-detail">' + escHtml(e.detail) + '</div>' : '') +
+      '</div>' +
+    '</div>').join('');
+
+  container.innerHTML =
+    '<h3 class="session-activity-title" style="margin-bottom:6px">调查过程</h3>' +
+    '<div class="investigation-track">' + (items || '<p class="muted placeholder">无调查过程记录。</p>') + '</div>';
+}
+
 /** Secondary drill-down: why did the Agent judge this way (Knowledge/Question/Capability/Evidence). */
 function renderInvestigationTrace(container, inv, explanation) {
   if (!container || !inv) return;
@@ -998,15 +1057,18 @@ function renderInvestigationTrace(container, inv, explanation) {
 
 async function startInvestigation(situationId) {
   const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
+  const trEl = document.getElementById('situationTrack_' + escHtml(situationId));
   const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
   const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
   if (!uEl) return;
   uEl.innerHTML = '<p class="muted">🔍 Agent 正在调查：读取专业知识 → 形成当前判断 → 提出下一个问题 → 检查证据 → 获取所需证据 → 更新判断（可能需要几分钟）...</p>';
+  if (trEl) trEl.innerHTML = '';
   if (btn) btn.disabled = true;
   try {
     const resp = await apiPost('/api/situation/' + encodeURIComponent(situationId) + '/investigate', {});
     if (resp.investigation) {
       renderCurrentUnderstanding(uEl, resp.investigation);
+      if (trEl) renderInvestigationTrack(trEl, resp.investigation);
       if (tEl) renderInvestigationTrace(tEl, resp.investigation, null);
       if (btn) btn.style.display = 'none';
     } else {
