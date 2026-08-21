@@ -28,6 +28,7 @@ import { nowIso } from '#shared/utils/time.js';
 import {
   loadSituation,
   loadLearningContext,
+  loadInvestigationFromLearningContext,
   storeInvestigationInLearningContext,
 } from '#app/experience/learning-context-producer.js';
 import { buildInvestigationPrompt, parseInvestigation, extractJsonObject } from '#app/runtime/investigation/index.js';
@@ -132,23 +133,69 @@ export interface InvestigationTurnResult {
   rawReply?: string;
 }
 
-/** Persist a minimal investigation status marker (no silent loss of a turn). */
-const markInvestigation = (
+/**
+ * Persist a minimal investigation status marker (no silent loss of a turn).
+ *
+ * P0010.1 REPAIR — investigation lifecycle must NOT erase a previously
+ * completed understanding/judgment/recommendation when the latest attempt
+ * fails or is still in flight. The marker represents the *latest attempt*'s
+ * state, not the situation's *current valid cognition*.
+ *
+ *   investigating → keep the existing investigation intact, just stamp
+ *                   status='investigating' + startedAt + updatedAt.
+ *   failed        → keep the existing investigation's currentUnderstanding /
+ *                   judgment / recommendation / knownEvidence / etc. intact,
+ *                   stamp status='failed' + error + updatedAt. The Workspace
+ *                   surfaces a clear "最新调查未完成" hint next to the prior
+ *                   valid cognition.
+ *   pending       → no prior completed content expected; write the marker as
+ *                   a fresh investigation.
+ *   completed     → not used here (full Investigation is written via
+ *                   storeInvestigationInLearningContext after a successful
+ *                   parse, which is the only place the situation's cognition
+ *                   should be fully replaced).
+ */
+export const markInvestigation = (
   db: Db,
   situation: Situation,
   marker: { status: 'pending' | 'investigating' | 'failed' | 'completed'; error?: string },
 ): void => {
   const now = nowIso();
-  // InvestigationSchema.parse fills the defaulted contract fields so the marker
-  // is a valid Investigation (only situationId + status are set by us).
-  const full = InvestigationSchema.parse({
-    situationId: situation.situationId,
-    status: marker.status,
-    ...(marker.error ? { error: marker.error } : {}),
-    startedAt: now,
-    updatedAt: now,
-  });
-  storeInvestigationInLearningContext(db, situation, full);
+  const existing = loadInvestigationFromLearningContext(db, situation.situationId);
+  // Only merge if the prior investigation is a real completed one (has
+  // content the operator already saw). A prior 'failed' / 'investigating'
+  // marker has no valid cognition to preserve — write the new marker as-is.
+  const priorHasCognition =
+    !!existing &&
+    (existing.status === 'completed' || !!existing.judgment || !!existing.currentUnderstanding);
+
+  let next: LearningContext['investigation'];
+  if (priorHasCognition && (marker.status === 'investigating' || marker.status === 'failed')) {
+    // Minimum merge: only the lifecycle fields are updated. The previous
+    // currentUnderstanding / judgment / recommendation / knownEvidence /
+    // findings / hypotheses / capabilityUsed / evidenceAcquired are all
+    // preserved verbatim. We do NOT track per-attempt history.
+    next = {
+      ...existing,
+      status: marker.status,
+      ...(marker.error ? { error: marker.error } : { error: undefined }),
+      startedAt: marker.status === 'investigating' ? now : existing.startedAt,
+      updatedAt: now,
+    };
+  } else {
+    // No prior completed content — write a fresh marker (defaults are filled
+    // by the schema, so the result is a valid Investigation with only the
+    // status / error / timestamps populated).
+    next = InvestigationSchema.parse({
+      situationId: situation.situationId,
+      status: marker.status,
+      ...(marker.error ? { error: marker.error } : {}),
+      startedAt: now,
+      updatedAt: now,
+    });
+  }
+
+  storeInvestigationInLearningContext(db, situation, next);
 };
 
 /** Run the Recommendation follow-up turn for a completed investigation (same session). */

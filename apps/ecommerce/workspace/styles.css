@@ -551,7 +551,46 @@ ul, ol { list-style: none; }
 .situation-lifecycle-badge.partial { background: #f0fdf4; color: var(--success); }
 .situation-lifecycle-badge.mature { background: #fffbeb; color: var(--warning); }
 .situation-detail-title { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 4px; }
-.situation-detail-body { max-width: 780px; }
+.situation-detail-body { max-width: 1180px; }
+
+/* P0010.1: real two-column Situation Detail.
+   Left  = current understanding + human feedback + follow-up chat.
+   Right = fixed Investigation Track rail (the operator's judgement basis). */
+.situation-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.situation-detail-main { min-width: 0; }
+.situation-detail-track {
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+.situation-detail-track-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.situation-detail-track .investigation-track { margin-left: 4px; padding-left: 10px; }
+@media (max-width: 980px) {
+  .situation-detail-grid { grid-template-columns: 1fr; }
+  .situation-detail-track { position: static; max-height: none; }
+}
+
+/* "Why this matters" line on the product card — replaces the old 0.xxx score. */
+.finding-why { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+.finding-strength { font-size: 0.72rem; color: var(--success); }
+.finding-risk { font-size: 0.72rem; color: var(--danger); }
 
 .situation-layer { margin-bottom: 20px; padding: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); }
 .situation-layer-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; }

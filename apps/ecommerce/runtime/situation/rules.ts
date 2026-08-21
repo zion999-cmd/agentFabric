@@ -153,7 +153,13 @@ const buildRankingAttention = (
   window: string,
   productNames: Record<string, string>,
 ): Situation => {
-  const name = productNames[r.entity_id] ?? r.entity_id;
+  // P0010.1: do NOT use the product id as the display name. If the catalog
+  // either has no entry, or its stored name is the id itself (no real human-
+  // friendly name was ever captured), fall back to an empty string. The
+  // Situation row then has entity_name=null; the Workspace renders this
+  // honestly as "未知商品 · SKU <id>" instead of pretending the id is a name.
+  const candidate = productNames[r.entity_id];
+  const name = candidate && candidate !== r.entity_id ? candidate : '';
   return {
     situationId: buildSituationId({
       kind: 'ranking_attention',
@@ -166,7 +172,7 @@ const buildRankingAttention = (
     type: 'performance_analysis',
     entity: { id: r.entity_id, type: 'product', name, platform: shop.platform },
     temporal: { observedAt: window },
-    description: `${name} 综合得分领先，进入当前值得关注的商品集合（综合得分 ${r.overall_score.toFixed(3)}）。`,
+    description: `${name || `未知商品(SKU ${r.entity_id})`} 进入当前值得关注的商品集合（信任分 / 矛盾点见右侧 Track）。`,
     tags: ['ranking_attention', 'product', 'leader'],
   };
 };

@@ -89,6 +89,25 @@ describe('InvestigationSchema', () => {
     expect(failed.error).toBe('Turn timed out');
   });
 
+  // P0010.1 REPAIR: capabilityUsed must accept the HONEST "no capability
+  // called this turn" state without forcing the Agent to invent a fake id.
+  describe('capabilityUsed — honest null is accepted and normalized', () => {
+    test('null capabilityUsed is accepted and normalized to empty string', () => {
+      const parsed = InvestigationSchema.parse({ ...validInvestigation(), capabilityUsed: null });
+      expect(parsed.capabilityUsed).toBe('');
+    });
+
+    test('omitted capabilityUsed is accepted and normalized to empty string', () => {
+      const parsed = InvestigationSchema.parse({ situationId: 'sit_x' });
+      expect(parsed.capabilityUsed).toBe('');
+    });
+
+    test('real capabilityUsed string is preserved verbatim', () => {
+      const parsed = InvestigationSchema.parse({ ...validInvestigation(), capabilityUsed: 'trade.overview' });
+      expect(parsed.capabilityUsed).toBe('trade.overview');
+    });
+  });
+
   test('LearningContextSchema carries an optional investigation additively', () => {
     const ctx = {
       contextId: 'c1',
@@ -183,5 +202,110 @@ describe('buildInvestigationPrompt', () => {
     const prompt = buildInvestigationPrompt(situation, null);
     expect(prompt).not.toContain('if (');
     expect(prompt).not.toContain('GMV down →');
+  });
+});
+
+// P0010.1 — Prior Human Guidance wire. The investigation prompt MUST surface
+// persisted humanInterventions (correction / supplement / decision / response)
+// so the next investigation turn consults the operator's prior input. This
+// proves the consumer side of the human feedback chain is wired.
+describe('buildInvestigationPrompt — Prior Human Guidance (P0010.1)', () => {
+  const baseSituation: Situation = {
+    situationId: 'sit_human_test',
+    domain: 'ecommerce',
+    type: 'anomaly_investigation',
+    entity: { id: 'jd_shop_001', type: 'product', name: '祁门红茶旗舰店', platform: 'jd' },
+    temporal: { observedAt: '2026-08-16T00:00:00.000Z' },
+    description: '成交金额 较昨日下降 67.9%，从 ¥3384.26 变为 ¥1087.13。',
+    tags: ['gmv', 'down'],
+  };
+
+  const buildCtx = (interventions: Array<Record<string, unknown>>) => ({
+    contextId: 'ctx_test',
+    situation: baseSituation,
+    lifecycle: 'partial' as const,
+    createdAt: '2026-08-16T00:00:00.000Z',
+    updatedAt: '2026-08-16T00:00:00.000Z',
+    observations: [],
+    evidenceIds: [],
+    signalIds: [],
+    agentActivities: [],
+    humanInterventions: interventions as never,
+    actions: [],
+    outcomes: [],
+    summary: {
+      capabilitiesUsed: [],
+      agentRuntimes: [],
+      humanActors: [],
+      totalEvidence: 0,
+      totalSignals: 0,
+    },
+  });
+
+  test('emits a "no prior human guidance" sentinel when no interventions exist', () => {
+    const prompt = buildInvestigationPrompt(baseSituation, buildCtx([]) as never);
+    expect(prompt).toContain('## Prior Human Guidance');
+    expect(prompt).toContain('no prior human guidance');
+  });
+
+  test('surfaces a user correction verbatim in the prompt', () => {
+    const prompt = buildInvestigationPrompt(
+      baseSituation,
+      buildCtx([
+        {
+          interventionId: 'int_c1',
+          situationId: 'sit_human_test',
+          actor: { id: 'operator_1', role: 'operator' },
+          type: 'correction',
+          content: { type: 'correction', corrects: {}, correction: '实际是 8月15日大促结束导致订单回落，不是下降' },
+          timestamp: '2026-08-16T01:00:00.000Z',
+          summary: '纠正: 实际是 8月15日大促结束导致订单回落',
+        },
+      ]) as never,
+    );
+    expect(prompt).toContain('## Prior Human Guidance');
+    expect(prompt).toContain('用户纠正');
+    expect(prompt).toContain('8月15日大促结束导致订单回落');
+  });
+
+  test('surfaces a user context supplement in the prompt', () => {
+    const prompt = buildInvestigationPrompt(
+      baseSituation,
+      buildCtx([
+        {
+          interventionId: 'int_s1',
+          situationId: 'sit_human_test',
+          actor: { id: 'operator_1', role: 'operator' },
+          type: 'context_supplement',
+          content: { type: 'context_supplement', supplements: { situationAspect: '库存' }, information: '主推 SKU 缺货已 3 天' },
+          timestamp: '2026-08-16T02:00:00.000Z',
+          summary: '补充: 主推 SKU 缺货已 3 天',
+        },
+      ]) as never,
+    );
+    expect(prompt).toContain('## Prior Human Guidance');
+    expect(prompt).toContain('用户补充');
+    expect(prompt).toContain('主推 SKU 缺货已 3 天');
+  });
+
+  test('surfaces a user decision (accept/reject/defer) in the prompt', () => {
+    const prompt = buildInvestigationPrompt(
+      baseSituation,
+      buildCtx([
+        {
+          interventionId: 'int_d1',
+          situationId: 'sit_human_test',
+          actor: { id: 'operator_1', role: 'operator' },
+          type: 'decision',
+          content: { type: 'decision', decision: 'reject', appliesTo: {}, rationale: '不符合本期主推' },
+          timestamp: '2026-08-16T03:00:00.000Z',
+          summary: '不采用: 不符合本期主推',
+        },
+      ]) as never,
+    );
+    expect(prompt).toContain('## Prior Human Guidance');
+    expect(prompt).toContain('用户已决定');
+    expect(prompt).toContain('reject');
+    expect(prompt).toContain('不符合本期主推');
   });
 });

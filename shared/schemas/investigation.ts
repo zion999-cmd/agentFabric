@@ -89,8 +89,28 @@ export const InvestigationSchema = z.object({
   findings: z.array(FindingSchema).default([]),
   judgment: z.string().default(''),
   stopReason: StopReasonSchema.optional(),
-  /** Which Fabric capability was actually executed during this investigation. */
-  capabilityUsed: z.string().optional(),
+  /**
+   * Which Fabric capability was actually executed during this investigation.
+   *
+   * P0010.1 REPAIR: `null` is the HONEST representation for "this turn did not
+   * execute any Fabric capability" (e.g. the Agent was interrupted before it
+   * could call fabric_execute_capability, or it stopped with judgment purely
+   * from prior context + Knowledge). The previous `z.string().optional()` only
+   * accepted `undefined`; Zod rejected `null`, so the contract was lost even
+   * though the Agent was being truthful.
+   *
+   * The schema normalizes the persisted field to a non-null string (empty when
+   * the Agent made no Fabric call), so the Workspace and downstream consumers
+   * can keep using a single falsy-check (`if (inv.capabilityUsed)`) without
+   * scattering `?.` or `?? ''` across the codebase. This normalization
+   * explicitly does NOT allow the Agent to invent a capability id just to pass
+   * schema: when it has no real capability to report, the empty string is the
+   * canonical "honest null".
+   */
+  capabilityUsed: z
+    .union([z.string(), z.null()])
+    .optional()
+    .transform((v) => (v == null ? '' : v)),
   /** Evidence entries acquired during this investigation (evidence ids / labels). */
   evidenceAcquired: z.array(z.string()).default([]),
   /** P0010.1 Recommendation (optional — produced from Judgment, not Signal). */

@@ -26,6 +26,80 @@ export const formatSituationEvidence = (ctx: LearningContext | null): string => 
 };
 
 /**
+ * P0010.1 Prior Human Guidance — flatten the situation's persisted
+ * humanInterventions into a section the Agent MUST consult. The human's
+ * corrections and supplements override agent guesses; the human's decision
+ * feedback tells the Agent whether its prior recommendation was accepted.
+ *
+ * Type-specific payload shape (per InterventionContentSchema):
+ *   response           — evaluation: agree | disagree | partial | uncertain
+ *   correction         — what is wrong + correctedValue
+ *   context_supplement — information the system cannot observe
+ *   decision           — accept | reject | defer | override | no_action
+ *   action_intent      — skipped here: outbound action is NOT a current slice
+ *
+ * Returns a single string starting with a "(no prior human guidance)" sentinel
+ * when there are no interventions, so the section is always present and the
+ * Agent never silently ignores the input.
+ */
+export const formatPriorHumanGuidance = (ctx: LearningContext | null): string => {
+  const interventions = ctx?.humanInterventions ?? [];
+  if (interventions.length === 0) {
+    return '(no prior human guidance — this is the first investigation turn)';
+  }
+
+  const lines: string[] = [];
+  for (const i of interventions) {
+    const content = (i.content ?? {}) as Record<string, unknown>;
+    const when = (i.timestamp || '').slice(0, 16);
+    switch (i.type) {
+      case 'response': {
+        const eval_ = (content['evaluation'] as string) || 'unspecified';
+        const rationale = content['rationale'] as string | undefined;
+        lines.push(
+          `- [${when}] 用户对 Agent ${eval_}` +
+            (rationale ? ` — 理由: ${rationale}` : ''),
+        );
+        break;
+      }
+      case 'correction': {
+        const correction = (content['correction'] as string) || '(no correction text)';
+        const correctedValue = content['correctedValue'];
+        lines.push(
+          `- [${when}] 用户纠正: ${correction}` +
+            (correctedValue !== undefined ? ` (正确值: ${JSON.stringify(correctedValue)})` : ''),
+        );
+        break;
+      }
+      case 'context_supplement': {
+        const information = (content['information'] as string) || '(no information text)';
+        const aspect = (content['supplements'] as Record<string, unknown> | undefined)?.['situationAspect'] as string | undefined;
+        lines.push(
+          `- [${when}] 用户补充${aspect ? ` (${aspect})` : ''}: ${information}`,
+        );
+        break;
+      }
+      case 'decision': {
+        const decision = (content['decision'] as string) || 'unspecified';
+        const rationale = content['rationale'] as string | undefined;
+        lines.push(
+          `- [${when}] 用户已决定: ${decision}` +
+            (rationale ? ` — 理由: ${rationale}` : ''),
+        );
+        break;
+      }
+      case 'action_intent':
+        // Outbound action — explicitly out of scope of P0010.1 inbound feedback.
+        lines.push(`- [${when}] 用户曾表达行动意图 (outbound action — not a current guidance input)`);
+        break;
+      default:
+        lines.push(`- [${when}] 用户输入 (${i.type}): ${i.summary || ''}`);
+    }
+  }
+  return lines.join('\n');
+};
+
+/**
  * Build the investigation instruction for one situation.
  *
  * Rules (hard lines, enforced by prompt structure — not by Fabric code):
@@ -53,6 +127,12 @@ export const buildInvestigationPrompt = (
     `- type: ${situation.type}`,
     `- description: ${situation.description}`,
     ``,
+    `## Prior Human Guidance (MUST consult — overrides the Agent's own guesses)`,
+    // P0010.1: the human's corrections and supplements are authoritative
+    // within the current Learning Context. The Agent MUST treat them as
+    // constraints when forming currentUnderstanding / hypotheses / judgment.
+    formatPriorHumanGuidance(ctx),
+    ``,
     `## Current evidence (already observed, do NOT re-acquire unless stale)`,
     formatSituationEvidence(ctx),
     ``,
@@ -60,12 +140,12 @@ export const buildInvestigationPrompt = (
     ``,
     `1. Read professional Knowledge: open knowledge/INDEX.md, then read the knowledge pages relevant to this kind of situation. Base your judgment on that Knowledge, not on generic guessing.`,
     ``,
-    `2. Form your Current Understanding:`,
-    `   - known_evidence: what you already know (from the evidence above and the situation)`,
+    `2. Form your Current Understanding. Honour the Prior Human Guidance above: if a user correction said the prior judgment was wrong, your new judgment must be consistent with that correction. If a user supplement provided information the system cannot observe, treat it as a known constraint.`,
+    `   - known_evidence: what you already know (from the evidence above, the situation, AND the prior human guidance)`,
     `   - hypotheses: plausible explanations with status "proposed"`,
     `   - unknowns: what is genuinely still unknown`,
     ``,
-    `3. Choose the NEXT QUESTION — the single question that, if answered, reduces this situation's uncertainty the most. State its required_evidence (the concrete data you would need).`,
+    `3. Choose the NEXT QUESTION — the single question that, if answered, reduces this situation's uncertainty the most. State its required_evidence (the concrete data you would need). If the Prior Human Guidance already answered it, do NOT ask the same question again — incorporate the answer.`,
     ``,
     `4. Check whether existing evidence already answers it. If yes, answer directly from existing evidence.`,
     ``,

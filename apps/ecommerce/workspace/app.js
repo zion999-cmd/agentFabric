@@ -125,6 +125,19 @@ async function apiGet(path) { const r = await fetch(path); if (!r.ok) throw new 
 async function apiPost(path, body) { const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); if (!r.ok) throw new Error(`${r.status}`); const j = await r.json(); return j.data || j; }
 function clearNode(n) { while (n.firstChild) n.removeChild(n.firstChild); }
 
+/**
+ * Resolve a product entity's display name. A raw product id is NEVER a name.
+ * - If the entity has a real name (and it differs from the id), use it.
+ * - Otherwise return "未知商品 · SKU <id>". This is the only honest fallback
+ *   for catalog rows that were projected with the id as the name.
+ */
+function entityDisplayName(entity) {
+  var id = entity && (entity.id || entity.entity_id) ? (entity.id || entity.entity_id) : '';
+  var name = entity && entity.name;
+  if (name && name !== id) return name;
+  return '未知商品 · SKU ' + id;
+}
+
 // ═══ Navigation ═════════════════════════════════════════════
 function switchView(name, filter = 'all') {
   state.activeView = name; state.activeFilter = filter;
@@ -263,11 +276,19 @@ async function loadProduct() {
       } catch(e2) { /* optional */ }
 
       var comp = match.component_scores || {};
+      // P0010.1: 0.xxx overall_score is the engine's internal scalar — NOT the
+      // business main copy. Show strengths/risks/confidence as "why this matters";
+      // overall_score is hidden in business mode and exposed only when the user
+      // drills into Developer Mode (see renderTracePanel).
+      var expl = match.explainability || {};
+      var why = [];
+      (expl.strengths || []).slice(0, 2).forEach(function (s) { why.push('<span class="finding-strength">✓ ' + escHtml(s) + '</span>'); });
+      (expl.risks || []).slice(0, 2).forEach(function (r) { why.push('<span class="finding-risk">⚠ ' + escHtml(r) + '</span>'); });
+      if (!why.length) why.push('<span class="muted" style="font-size:0.72rem">基于多维度指标综合评估</span>');
       ct.innerHTML = '<div class="finding-card" style="cursor:pointer;border-left:4px solid var(--primary)" title="点击查看排名解释 (Ranking Explainability)"><div class="finding-body">' +
-        '<div class="finding-header"><span class="finding-entity-name" style="font-size:0.9rem">' + (pname || pid) + '</span></div>' +
-        '<div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px">ID: ' + pid + '</div>' +
-        '<div class="finding-metrics" style="grid-template-columns:repeat(5,1fr)">' +
-          '<div class="finding-metric"><div class="finding-metric-value">' + (match.overall_score||0).toFixed(3) + '</div><div class="finding-metric-label">综合得分</div></div>' +
+        '<div class="finding-header"><span class="finding-entity-name" style="font-size:0.9rem">' + escHtml(entityDisplayName({ id: pid, name: pname })) + '</span></div>' +
+        '<div class="finding-why">' + why.join(' ') + '</div>' +
+        '<div class="finding-metrics" style="grid-template-columns:repeat(4,1fr);margin-top:8px">' +
           '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.growth||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Growth</div></div>' +
           '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.competition||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Competition</div></div>' +
           '<div class="finding-metric"><div class="finding-metric-value">' + ((comp.supply_stability||0)*100).toFixed(0) + '%</div><div class="finding-metric-label">Supply</div></div>' +
@@ -456,10 +477,15 @@ async function loadArchive() {
     if (!rankings.length) { ct.innerHTML = '<p class="muted placeholder">暂无归档数据 — 运行一次排名计算</p>'; return; }
     let html = '<div class="timeline">';
     rankings.slice(0, 20).forEach((r, i) => {
+      // P0010.1: archive (business view) does NOT lead with overall_score. The
+      // scalar moves to Developer Mode (renderTracePanel). The archive shows the
+      // operator-friendly "why this rank" — confidence + strengths/risks.
+      var strengths = (r.explainability?.strengths || []).slice(0, 2).join('，') || '—';
+      var conf = Math.round((r.confidence || 0) * 100) + '%';
       html += `<div class="timeline-day ${r.explainability?.risks?.length ? 'changed' : ''}" style="cursor:pointer" data-id="${r.entity_id}">
-        <span><strong>#${i + 1}</strong> ${r.entity_id.slice(-12)}</span>
-        <span>Score: ${r.overall_score.toFixed(3)} | Conf: ${Math.round(r.confidence*100)}%</span>
-        <span>${(r.explainability?.strengths||[]).slice(0,2).join(', ') || '-'}</span>
+        <span><strong>#${i + 1}</strong> ${entityDisplayName({ id: r.entity_id, name: state.productNames[r.entity_id] })}</span>
+        <span>支持度 ${conf} · ${strengths}</span>
+        <span>${(r.explainability?.risks||[]).slice(0,1).join('，') || '无明显风险'}</span>
       </div>`;
     });
     html += '</div>';
@@ -579,7 +605,10 @@ async function loadRuntimeDetail(date) {
           html += '<span style="font-family:var(--font-mono)">' + (s.observed_at||'').slice(0,10) + '</span>';
           html += '<span style="font-weight:600;font-size:1.1rem">¥' + (s.signal_value||0).toLocaleString() + '</span>';
           html += '</div>';
-          html += '<div class="muted" style="font-size:0.72rem;margin-top:2px">sig: ' + s.signal_id.slice(-12) + ' | conf: ' + (s.confidence||0).toFixed(2) + '</div>';
+          // P0010.1: no raw signal_id in business UI — show only the support metric.
+          // Runtime view is in the "系统 / Advanced" sidebar, but signal_id is still
+          // an internal id, not operator language. Support is what the operator reads.
+          html += '<div class="muted" style="font-size:0.72rem;margin-top:2px">支持度: ' + Math.round((s.confidence||0)*100) + '%</div>';
           html += '</div>';
         });
         html += '</div>';
@@ -673,13 +702,21 @@ async function loadSituationFeed(filter) {
         statusChip = '<span class="agent-status-chip judgment-ready">已判断</span>';
       }
       var judgmentLine = inv && inv.judgment ? '<div class="situation-card-judgment">Agent 判断: ' + escHtml(inv.judgment.slice(0, 70)) + '</div>' : '';
+      // P0010.1: strip a leading entity-id from the description so the card
+      // title doesn't render "未知商品 · SKU 101 · 101 …" (duplicate id).
+      var entityId = (entity && (entity.id || entity.entity_id)) || '';
+      var cardDescClean = (s.description || '');
+      if (entityId && cardDescClean.indexOf(entityId) === 0) {
+        cardDescClean = cardDescClean.slice(entityId.length).replace(/^[\s·,\-，]+/, '');
+      }
+      cardDescClean = cardDescClean.slice(0, 60);
       var dateLabel = (temporal.observedAt || s.createdAt || '').slice(0, 10);
       html += '<div class="situation-card" data-situation-id="' + escHtml(s.situationId) + '">' +
         '<div class="situation-card-top">' +
-          '<span class="situation-card-title">' + escHtml(entity.name || s.situationId) + ' · ' + escHtml((s.description || '').slice(0, 30)) + '</span>' +
+          '<span class="situation-card-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(cardDescClean) + '</span>' +
           badge +
         '</div>' +
-        '<div class="situation-card-summary">' + escHtml((s.description || '').slice(0, 80)) + '</div>' +
+        '<div class="situation-card-summary">' + escHtml(cardDescClean.slice(0, 80)) + '</div>' +
         judgmentLine +
         '<div class="situation-card-footer">' +
           statusChip +
@@ -820,8 +857,29 @@ async function loadSituationDetail(situationId) {
     var html = '<div class="situation-detail-body">';
 
     // Title
-    html += '<h2 class="situation-detail-title">' + escHtml(entity.name || '') + ' · ' + escHtml((desc || '').slice(0, 40)) + '</h2>';
+    // P0010.1: strip a leading entity-id from the description so the title
+    // doesn't render "未知商品 · SKU 101 · 101 …" (duplicate id). Legacy
+    // situations were generated with the id as the leading token.
+    var entityId = (entity && (entity.id || entity.entity_id)) || '';
+    var descClean = (desc || '');
+    if (entityId && descClean.indexOf(entityId) === 0) {
+      descClean = descClean.slice(entityId.length).replace(/^[\s·,\-，]+/, '');
+    }
+    descClean = descClean.slice(0, 80);
+    html += '<h2 class="situation-detail-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(descClean) + '</h2>';
     html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
+
+    // P0010.1: real two-column Situation Detail.
+    //   LEFT  — current understanding, human feedback, follow-up chat
+    //   RIGHT — fixed Investigation Track (the operator's judgement basis)
+    // The Track is the FIRST-CLASS business surface; the previous single-column
+    // inline track inside Layer 2 has been moved out into this dedicated rail.
+    // No fake Knowledge/Evidence citations are added here — only real Track
+    // content from the persisted investigation contract.
+    html += '<div class="situation-detail-grid">';
+
+    // LEFT column
+    html += '<div class="situation-detail-main">';
 
     // Layer 1: 发生了什么
     html += '<div class="situation-layer">';
@@ -830,20 +888,13 @@ async function loadSituationDetail(situationId) {
     html += '<p>' + escHtml(desc) + '</p>';
     html += '</div></div>';
 
-    // Layer 2: 🧠 Agent 当前理解 — P0010 hero surface.
-    // Current Understanding is the PRIMARY business surface; Trace (调查依据) is a
-    // secondary drill-down. Content comes ONLY from persisted LearningContext.investigation
-    // (no LLM call for rendering). Before investigation, the deterministic Pattern
-    // Engine attribution + recommendation remain (pre-existing behavior).
+    // Layer 2: 🧠 Agent 当前理解 — P0010 hero surface (LEFT only).
+    // The Investigation Track is no longer injected here; it lives in the right rail.
     html += '<div class="situation-layer">';
     html += '<h3 class="situation-layer-title">🧠 Agent 当前理解</h3>';
     html += '<div class="situation-layer-body" id="situationUnderstanding_' + escHtml(situationId) + '">';
     html += '<p class="muted placeholder">加载中...</p>';
     html += '</div>';
-    // Investigation Track (HOW) — first-class business timeline derived from the
-    // persisted investigation contract (no CoT, no LLM, no re-computation).
-    html += '<div class="investigation-track-section" id="situationTrack_' + escHtml(situationId) + '" style="margin-top:10px"></div>';
-    html += '<div id="situationTrace_' + escHtml(situationId) + '" style="margin-top:6px"></div>';
     html += '<button class="btn btn-primary" id="startInvestigation_' + escHtml(situationId) + '" style="margin-top:8px;font-size:0.78rem" onclick="startInvestigation(\'' + escHtml(situationId) + '\')">🔍 交给 Agent 调查</button>';
     html += '</div>';
 
@@ -881,6 +932,21 @@ async function loadSituationDetail(situationId) {
     html += '</div></div>';
     html += '</details></div>';
 
+    html += '</div>'; // end left column (.situation-detail-main)
+
+    // RIGHT column — the fixed Investigation Track rail.
+    // Renders ONLY real Track content from the persisted investigation contract
+    // (no LLM for rendering, no fake Knowledge/Evidence citations, no Chain-of-Thought).
+    // The Trace ("为什么这么判断？") is a secondary drill-down inside the same rail.
+    html += '<aside class="situation-detail-track">';
+    html += '<h3 class="situation-detail-track-title">🔍 调查过程</h3>';
+    html += '<div id="situationTrack_' + escHtml(situationId) + '">';
+    html += '<p class="muted" style="font-size:0.78rem">尚未开始调查。</p>';
+    html += '</div>';
+    html += '<div id="situationTrace_' + escHtml(situationId) + '" style="margin-top:10px"></div>';
+    html += '</aside>';
+
+    html += '</div>'; // end .situation-detail-grid
     html += '</div>'; // end detail body
     content.innerHTML = html;
 
@@ -905,7 +971,17 @@ async function loadSituationDetail(situationId) {
       }
     } catch { /* keep pending */ }
 
-    if (invStatus === 'completed' && invData && uEl) {
+    // P0010.1 REPAIR: when the latest attempt failed but the persisted
+    // investigation still carries a previously completed judgment
+    // (markInvestigation merged it), we MUST show the real Understanding
+    // surface (with the "最新调查未完成" hint) instead of the generic
+    // "上次调查未完成" placeholder. The prior valid cognition IS the
+    // operator's basis for action; the failure marker only describes the
+    // LATEST attempt, not the situation's last known good.
+    const hasPriorCognition = invStatus === 'failed'
+      && invData
+      && (!!invData.judgment || !!invData.currentUnderstanding);
+    if ((invStatus === 'completed' || hasPriorCognition) && invData && uEl) {
       renderCurrentUnderstanding(uEl, invData);
       if (trEl) renderInvestigationTrack(trEl, invData);
       if (tEl) renderInvestigationTrace(tEl, invData, explanation);
@@ -953,13 +1029,41 @@ const CAPABILITY_LABELS = {
 };
 function capabilityLabel(id) {
   if (!id) return id;
+  // Developer mode is the ONLY place where raw capability ids are exposed.
+  // Business mode never leaks a raw id; an unknown capability is reported
+  // honestly as "未识别能力", not as a raw technical string.
   if (state.panelMode === 'developer') return id;
   if (CAPABILITY_LABELS[id]) return CAPABILITY_LABELS[id];
   // Evidence label like "trade.overview 2026-08-13 (周四基准)" — map the leading id.
   for (var k in CAPABILITY_LABELS) {
     if (id.indexOf(k) === 0) return CAPABILITY_LABELS[k] + id.slice(k.length);
   }
-  return id;
+  return '未识别能力';
+}
+
+/**
+ * P0010.1: scrub raw capability ids out of the Agent's PROSE in business mode.
+ *
+ * The Agent sometimes embeds raw ids inside knownEvidence / currentUnderstanding /
+ * finding.answer text — e.g. "证据来源：product.overview (evidenceId: ...),
+ * trade.overview (evidenceId: ...)". capabilityLabel only handles a single id;
+ * here we walk the whole string and replace every raw id we recognise.
+ *
+ * Developer mode is exempt (the raw id IS the surface). Unknown ids are left
+ * as-is rather than inventing a label — the data is what it is.
+ */
+function scrubCapabilityIdsInProse(text) {
+  if (state.panelMode === 'developer') return text;
+  if (!text) return text;
+  var out = text;
+  for (var k in CAPABILITY_LABELS) {
+    // Word-boundary replacement so we don't accidentally rewrite a partial
+    // substring. The id is the entire matched token (no leading/trailing word
+    // chars), so the boundaries are non-word on both sides.
+    var re = new RegExp('(^|[^A-Za-z0-9_])' + k.replace(/\./g, '\\.') + '(?=$|[^A-Za-z0-9_])', 'g');
+    out = out.replace(re, function (m, lead) { return lead + CAPABILITY_LABELS[k]; });
+  }
+  return out;
 }
 const STOP_VERDICT_LABEL = {
   judgment: '已形成判断',
@@ -993,20 +1097,34 @@ function renderCurrentUnderstanding(container, inv) {
 
   let html = '';
 
+  // P0010.1 REPAIR: when the latest investigation attempt failed but the
+  // situation still carries a previously completed judgment (merge preserved
+  // it), surface a clear "最新调查未完成" hint. The operator sees the prior
+  // valid cognition below the hint, NOT a wiped card.
+  if (inv.status === 'failed' && (inv.judgment || inv.currentUnderstanding)) {
+    const reason = inv.error ? escHtml(inv.error.slice(0, 120)) : '';
+    html += '<div class="inv-stale-banner" style="margin:0 0 12px;padding:10px 12px;border:1px solid var(--danger,#d9534f);border-left-width:3px;border-radius:6px;background:rgba(217,83,79,0.06)">' +
+      '<div style="font-size:0.78rem;font-weight:600;color:var(--danger,#d9534f)">⚠️ 最新调查未完成 — 以下为上一次有效判断</div>' +
+      (reason ? '<div style="font-size:0.72rem;color:var(--muted);margin-top:3px">原因: ' + reason + '</div>' : '') +
+      '</div>';
+  }
+
   // 1) 当前判断 — the Agent's business conclusion (verbatim, operator language).
+  // P0010.1: scrub raw capability ids the Agent may have embedded in the prose.
   html += block('当前判断',
-    (inv.judgment ? '<p style="margin:0;font-size:0.82rem;white-space:pre-wrap">' + escHtml(inv.judgment) + '</p>' : '') +
+    (inv.judgment ? '<p style="margin:0;font-size:0.82rem;white-space:pre-wrap">' + escHtml(scrubCapabilityIdsInProse(inv.judgment)) + '</p>' : '') +
     (inv.stopReason ? '<p style="margin:6px 0 0;font-size:0.75rem;font-weight:600;color:var(--primary)">调查结果 · ' + escHtml(STOP_VERDICT_LABEL[inv.stopReason] || inv.stopReason) + '</p>' : '')
   );
 
   // 2) 已确认 — evidence-backed findings (readable, not raw JSON).
+  // P0010.1: scrub raw capability ids from finding answers + knownEvidence.
   const findings = (inv.findings || []).map(f =>
     '<div style="margin:3px 0;font-size:0.8rem">' +
-      '<span class="muted" style="font-size:0.72rem">' + escHtml(f.question || '') + '</span><br/>' +
-      escHtml(f.answer || '') +
-      (f.impactOnHypothesis ? ' <span class="muted" style="font-size:0.72rem">（' + escHtml(f.impactOnHypothesis) + '）</span>' : '') +
+      '<span class="muted" style="font-size:0.72rem">' + escHtml(scrubCapabilityIdsInProse(f.question || '')) + '</span><br/>' +
+      escHtml(scrubCapabilityIdsInProse(f.answer || '')) +
+      (f.impactOnHypothesis ? ' <span class="muted" style="font-size:0.72rem">（' + escHtml(scrubCapabilityIdsInProse(f.impactOnHypothesis)) + '）</span>' : '') +
     '</div>');
-  const known = (inv.knownEvidence || []).map(escHtml);
+  const known = (inv.knownEvidence || []).map(function (e) { return escHtml(scrubCapabilityIdsInProse(e)); });
   if (findings.length || known.length) {
     html += block('已确认', findings.join('') +
       (known.length ? '<div class="muted" style="font-size:0.75rem;margin-top:4px">依据: ' + known.join('；') + '</div>' : ''));
@@ -1035,12 +1153,12 @@ function renderCurrentUnderstanding(container, inv) {
   if (inv.stopReason === 'observe') {
     html += block('下一步调查',
       '<p style="margin:0;font-size:0.82rem">当前无需继续调查，建议观察后续数据。</p>' +
-      (inv.nextQuestion ? '<div class="muted" style="font-size:0.75rem;margin-top:2px">观察项: ' + escHtml(inv.nextQuestion) + '</div>' : '')
+      (inv.nextQuestion ? '<div class="muted" style="font-size:0.75rem;margin-top:2px">观察项: ' + escHtml(scrubCapabilityIdsInProse(inv.nextQuestion)) + '</div>' : '')
     );
   } else if (inv.nextQuestion) {
     html += block('下一步调查',
-      '<p style="margin:0;font-size:0.82rem">' + escHtml(inv.nextQuestion) + '</p>' +
-      (inv.investigationRequest ? '<div class="muted" style="font-size:0.75rem;margin-top:2px">' + escHtml(inv.investigationRequest) + '</div>' : '')
+      '<p style="margin:0;font-size:0.82rem">' + escHtml(scrubCapabilityIdsInProse(inv.nextQuestion)) + '</p>' +
+      (inv.investigationRequest ? '<div class="muted" style="font-size:0.75rem;margin-top:2px">' + escHtml(scrubCapabilityIdsInProse(inv.investigationRequest)) + '</div>' : '')
     );
   } else if (inv.stopReason === 'judgment') {
     html += block('下一步调查', '<p style="margin:0;font-size:0.82rem">调查已形成判断，无需继续。</p>');
@@ -1053,10 +1171,10 @@ function renderCurrentUnderstanding(container, inv) {
   // 7) 建议 (Recommendation) — P0010.1: produced ONLY from Judgment.
   const rec = inv.recommendation;
   if (rec) {
-    const list = (items) => items.length ? '<ul style="margin:2px 0;padding-left:16px;font-size:0.78rem">' + items.map(i => '<li style="margin:1px 0">' + escHtml(i) + '</li>').join('') + '</ul>' : '';
-    let recHtml = '<p style="margin:0;font-size:0.82rem;white-space:pre-wrap"><strong>' + escHtml(rec.recommendation) + '</strong></p>';
-    if (rec.rationale) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">依据: ' + escHtml(rec.rationale) + '</div>';
-    if (rec.expectedOutcome) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">预期: ' + escHtml(rec.expectedOutcome) + '</div>';
+    const list = (items) => items.length ? '<ul style="margin:2px 0;padding-left:16px;font-size:0.78rem">' + items.map(function (i) { return '<li style="margin:1px 0">' + escHtml(scrubCapabilityIdsInProse(i)) + '</li>'; }).join('') + '</ul>' : '';
+    let recHtml = '<p style="margin:0;font-size:0.82rem;white-space:pre-wrap"><strong>' + escHtml(scrubCapabilityIdsInProse(rec.recommendation)) + '</strong></p>';
+    if (rec.rationale) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">依据: ' + escHtml(scrubCapabilityIdsInProse(rec.rationale)) + '</div>';
+    if (rec.expectedOutcome) recHtml += '<div class="muted" style="margin-top:2px;font-size:0.75rem">预期: ' + escHtml(scrubCapabilityIdsInProse(rec.expectedOutcome)) + '</div>';
     if (rec.risks && rec.risks.length) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">风险:</div>' + list(rec.risks);
     if (rec.prerequisites && rec.prerequisites.length) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">前提:</div>' + list(rec.prerequisites);
     if (rec.humanNeeded && rec.humanNeeded.length) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px;color:var(--warning)">需人工:</div>' + list(rec.humanNeeded);
@@ -1103,7 +1221,14 @@ function renderInvestigationTrack(container, inv) {
     if (f.question) ev('调查问题', f.question, 'question');
     if (f.answer) ev('发现', f.answer, f.impactOnHypothesis ? '假设更新: ' + f.impactOnHypothesis : null, 'finding');
   });
-  const acquired = [inv.capabilityUsed, ...(inv.evidenceAcquired || [])].filter(Boolean).map(capabilityLabel);
+  // P0010.1: capabilityUsed may be a comma-separated string (the Agent often
+  // names 2-3 capabilities in one field). Split on comma before mapping so
+  // every capability id is independently translated via capabilityLabel —
+  // otherwise a bare "trade.overview" inside the comma string leaks through
+  // the prefix-match as a raw suffix.
+  const usedList = (inv.capabilityUsed || '')
+    .split(/[，,]/).map((s) => s.trim()).filter(Boolean);
+  const acquired = [...usedList, ...(inv.evidenceAcquired || [])].filter(Boolean).map(capabilityLabel);
   if (acquired.length) ev('获取证据', acquired.join('；'), 'evidence');
   const hypoChanges = (inv.hypotheses || []).filter((h) => h.status !== 'proposed' && h.status);
   if (hypoChanges.length) {
@@ -1149,7 +1274,10 @@ function renderSignalAttribution(container, explanation, desc) {
 function renderInvestigationTrace(container, inv, explanation) {
   if (!container || !inv) return;
   const rows = [];
-  if (inv.capabilityUsed) rows.push('获取方式: ' + escHtml(capabilityLabel(inv.capabilityUsed)));
+  if (inv.capabilityUsed) {
+    const usedList = inv.capabilityUsed.split(/[，,]/).map((s) => s.trim()).filter(Boolean);
+    rows.push('获取方式: ' + escHtml(usedList.map(capabilityLabel).join('；')));
+  }
   if (inv.evidenceAcquired && inv.evidenceAcquired.length) rows.push('已获取证据: ' + escHtml(inv.evidenceAcquired.map(capabilityLabel).join('；')));
   if (inv.updatedAt) rows.push('调查时间: ' + escHtml(inv.updatedAt));
   const inner = rows.length
@@ -1924,12 +2052,19 @@ function renderBusinessPanel(finding, ranking, trace) {
       <div class="reasoning-item-desc">${finding.aiSuggestion || ''}</div>
     </div></div>`).join('');
 
-  // Pipeline steps — describe actual execution flow
+  // Pipeline steps — describe actual execution flow.
+  // P0010.1: 排名输出 step uses the BUSINESS summary (trust + strengths/risks),
+  // not the internal overall_score. The scalar is reserved for Developer Mode.
+  const tScore = trace?.alignment ? Math.round((trace.alignment.trust_score || 0) * 100) : null;
+  const trustVerdict = tScore == null ? '—' : tScore >= 70 ? '证据充分' : tScore >= 40 ? '中等可信' : '证据稀薄';
+  const contradictions = trace?.alignment?.contradictions?.length || 0;
+  const strengths = ranking?.explainability?.strengths?.length || 0;
+  const risks = ranking?.explainability?.risks?.length || 0;
   const steps = [
     { title: '信号计算', desc: `Compute ${signalsUsed.length || 9} signals/product × [3,7,14]d windows` },
     { title: '多维评分', desc: `Growth(${((comp.growth||0)*100).toFixed(0)}%) + Competition(${((comp.competition||0)*100).toFixed(0)}%) + Supply(${((comp.supply_stability||0)*100).toFixed(0)}%) + Quality(${((comp.quality||0)*100).toFixed(0)}%)` },
     { title: '记忆调整', desc: `${ranking?.memory_adjustments?.length || 0} active memory adjustments applied` },
-    { title: '排名输出', desc: `Overall score: ${ranking?.overall_score?.toFixed(3) || '?'} · Confidence: ${Math.round((ranking?.confidence||0)*100)}%` },
+    { title: '排名输出', desc: `信任分 ${tScore == null ? '—' : tScore + '%'} (${trustVerdict}) · 矛盾点 ${contradictions} · 优势 ${strengths} · 风险 ${risks}` },
   ];
   document.getElementById('decisionStepsList').innerHTML = steps.map((s, i) => `
     <div class="execution-step"><div class="step-num">${i+1}</div><div>
