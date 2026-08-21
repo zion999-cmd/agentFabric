@@ -53,7 +53,7 @@ interface SituationChatOptions {
 }
 
 /** Lazily build the Fabric Agent Workspace: systems/ + capabilities/ (projected) + knowledge/ (seeded, persistent). */
-const ensureWorkspace = (dir: string): string => {
+export const ensureWorkspace = (dir: string): string => {
   writeProjection(
     {
       worldModel: JD_FIXTURE.worldModel,
@@ -76,7 +76,7 @@ const writeLearningContextToWorkspace = (dir: string, situationId: string, ctx: 
 };
 
 /** Accumulate message.delta text until message.complete, resolve with full reply. */
-const collectTurn = (client: SituationChatClient, sessionId: string): Promise<string> => {
+export const collectTurn = (client: SituationChatClient, sessionId: string): Promise<string> => {
   return new Promise((resolveTurn, rejectTurn) => {
     let text = '';
     let timedOut = false;
@@ -85,7 +85,10 @@ const collectTurn = (client: SituationChatClient, sessionId: string): Promise<st
       timedOut = true;
       unsubscribe();
       rejectTurn(new Error('Turn timed out waiting for message.complete'));
-    }, 120_000);
+      // Hermes model latency is unstable (documented: 71-77s fast path, >180s
+      // slow path; an ingest that reads sources + writes pages takes longer).
+      // 300s keeps the Agent's real completion time inside the window.
+    }, 300_000);
 
     const unsubscribe = client.onEvent((event: HermesEvent) => {
       if (event.session_id !== undefined && event.session_id !== sessionId) return;

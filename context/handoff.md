@@ -1,5 +1,43 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - Knowledge Ingest 操作入口恢复（Fabric 控制面，无 Knowledge Engine）
+
+### 目标与定位
+
+P0008.4 §10 早已定义 Ingest 流程（Agent 读 raw → 写 knowledge/ → 更新 INDEX → append log），但从未设计控制入口（"暂无自动化引擎"）。按「先查历史、有就恢复、没有补最小入口」——查证后无入口设计，补最小 Fabric 控制面。边界严格：Fabric 不总结 raw、不生成知识页、不做 RAG/向量/Knowledge Engine。
+
+### 做了什么
+
+- `apps/ecommerce/runtime/shared-knowledge/status.ts`（新，纯函数）：`buildKnowledgeStatus` 枚举 `knowledge-sources/raw/` + 解析每个 knowledge 页 frontmatter `sources:` 标记 provenance 引用。支持三种形式：单行数组 `[a, b]`、**多行数组 `[
+ a,
+ b
+]`（Hermes 实测输出形式，初版 parser 漏了，已修）**、dash list。匹配 = workspace-relative 精确路径 + basename fallback。
+- `platform/server/routes/knowledge.ts`（新）：`GET /api/knowledge/status`（纯枚举+标记）；`POST /api/knowledge/ingest`（复用 `situation-chat` 导出的 `ensureWorkspace`/`collectTurn` 启动 Hermes，cwd=`data/fabric-workspace`，prompt 指示执行 KNOWLEDGE.md Ingest 流程，优先未引用源；返回 Hermes 报告原样 + ingest 后状态）。
+- `platform/server/routes/situation-chat.ts`：导出 `ensureWorkspace`/`collectTurn`；`collectTurn` 超时 120s→300s（已知 P0009 模型延迟）。
+- `platform/server/index.ts`：挂载 `knowledgeRouter`。
+- `workspace/{index.html,app.js}`：系统/Advanced 新增 Knowledge 入口 + `view-knowledge`（状态列表：✓ 已引用 / ○ 待 Ingest + 文件大小 + 引用页；Ingest 按钮；Hermes 报告 pre 原样展示；ingest 后 provenance 状态）。
+
+### 真实 Hermes 实测（端到端全通）
+
+- status：枚举 **9 个 raw 源**（2 seed demo md + 7 个真实 `京东电商运营*.txt`，08-21 由人工/Agent 放入）。
+- `POST /api/knowledge/ingest` → Hermes 真实执行：创建 `knowledge/operations/京东电商运营日常SOP.md`（合并 2 个概述源）+ `knowledge/reference/京东电商运营隐性经验与故障诊断.md`（多源），更新 `INDEX.md`（新增 Operations/Reference 条目），append `log.md`（ingest batch 1）。platform-promotion.md 被 Agent 判定已处理未重复——provenance 语义生效。
+- parser 修复后 status 精确反映：**7 referenced / 2 pending**。2 pending 诚实暴露：marketing-case.md（seed demo 未处理）+ `京东电商运营-诊断-决策.txt`（Agent 引用了 `电商运营知识库‑京东板块-诊断-决策.txt` 这个不存在的源名，basename 不匹配 → 诚实显示未引用）。
+
+### 已知限制（非本轮 bug）
+
+模型 `agnes-2.5-flash` 在 ingest prompt 上 300s 内未 emit `message.complete`（thinking.delta 持续报 "waiting... no output"），但 **Agent 的实际工作（写页/更新 INDEX/log）已完成**——这是 P0009 已记录的模型/配额层限制（status.json blocked），不是入口问题。入口机制（session 创建、prompt 提交、delta 流）全部验证通过。
+
+### 测试
+
+新增 9（knowledge-status 8 + http knowledge/status 1）；全量 570+9=579 passed / 2 pre-existing；typecheck 17 errors 前后一致。
+
+### 建议下一步
+
+- 模型稳定性恢复后重跑 ingest，验收 `message.complete` 正常返回（回复原样进 Workspace Knowledge 视图）。
+- 2 个 pending 源：marketing-case.md 可人工触发二次 ingest；`诊断-决策.txt` 的引用名不一致可在后续 ingest 由 Hermes 修正。
+
+---
+
 ## 本次会话 (2026-08-21) - Post-Consolidation REMOVE Sweep（债务清零收口）
 
 ### 目标

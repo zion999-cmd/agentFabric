@@ -125,4 +125,31 @@ describe('HTTP server (integration)', () => {
     expect(typeof provider['platform']).toBe('string');
     expect(typeof provider['acquisition']).toBe('string');
   });
+
+  test('GET /api/knowledge/status enumerates raw sources with provenance markers', async () => {
+    const res = await fetch(`${base}/api/knowledge/status`);
+    const body = (await res.json()) as Record<string, unknown>;
+    expect(res.status).toBe(200);
+    const status = body['data'] as {
+      sources: Array<{ path: string; file: string; size: number; referenced: boolean; referencedBy: string[] }>;
+      total: number;
+      referencedCount: number;
+      pendingCount: number;
+    };
+    expect(Array.isArray(status.sources)).toBe(true);
+    expect(status.total).toBe(status.sources.length);
+    expect(status.referencedCount + status.pendingCount).toBe(status.total);
+    // Every raw source must be enumerated with provenance state.
+    for (const s of status.sources) {
+      expect(typeof s.path).toBe('string');
+      expect(s.path.startsWith('knowledge-sources/raw/')).toBe(true);
+      expect(typeof s.referenced).toBe('boolean');
+      expect(Array.isArray(s.referencedBy)).toBe(true);
+      // platform-promotion.md is seeded and referenced by the seed page.
+      if (s.file === 'platform-promotion.md') {
+        expect(s.referenced).toBe(true);
+        expect(s.referencedBy.some((p) => p.includes('knowledge/platform'))).toBe(true);
+      }
+    }
+  });
 });

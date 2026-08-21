@@ -1,5 +1,30 @@
 # 技术决策记录 (ADR)
 
+## ADR-040: Knowledge Ingest — 恢复 Fabric 操作入口（无 Knowledge Engine）
+
+- **日期**: 2026-08-21
+- **状态**: Accepted
+- **来源**: P0008.4 §10 定义 Ingest 流程但从未设计控制入口（"暂无自动化引擎"）；本轮恢复最小操作入口
+
+**决策**（Fabric 只做控制面，知识编译归 Hermes）：
+
+1. **Fabric 只负责四件事**：① 枚举 `knowledge-sources/raw/`；② 标记 source 是否已被 knowledge 页 `sources:` provenance 引用（纯 FS 检查，无 LLM）；③ 提供显式 "Ingest / Update Knowledge" 入口（`GET /api/knowledge/status` + `POST /api/knowledge/ingest` + Workspace Knowledge 视图按钮）；④ 启动 Hermes 在当前 Fabric Workspace（cwd=`data/fabric-workspace`）执行 KNOWLEDGE.md 已定义的 Ingest 流程，并原样展示 Hermes 报告与 ingest 后 provenance 状态。
+
+2. **Hermes 负责全部知识工作**：读 raw、判断 create vs update、写 `knowledge/*.md`（frontmatter `sources:` 引用）、更新 `knowledge/INDEX.md`、append `knowledge/log.md`。Fabric **不**总结 raw、不生成知识页、不做 RAG/向量/Knowledge Engine。
+
+3. **复用现有 Hermes session 机制**：`knowledge.ts` 复用 `situation-chat.ts` 的 `ensureWorkspace`/`collectTurn`（导出复用，不新写 session 客户端）。`collectTurn` 超时从 120s → 300s（已知 P0009 模型延迟 71-77s 或 >180s，ingest 读源+写页更慢）。
+
+4. **状态解析支持三种 frontmatter 形式**：单行数组 `[a, b]`、多行数组 `[
+ a,
+ b
+]`（Hermes 实测输出形式）、dash list（治理契约形式）。provenance 匹配 = workspace-relative 精确路径，fallback basename。
+
+**验收**（真实 Hermes 实测）：status 枚举 9 个 raw 源（2 seed demo + 7 个真实 `京东电商运营*.txt`）；Hermes ingest 真实完成——创建 `knowledge/operations/京东电商运营日常SOP.md` + `knowledge/reference/京东电商运营隐性经验与故障诊断.md`，更新 INDEX、append log；parser 修复后 status 精确反映 7 referenced / 2 pending（1 个 seed demo 未处理 + 1 个 Agent 引用了不存在的源文件名，诚实暴露）。模型在 300s 窗口内未 emit message.complete（已知 P0009 模型稳定性限制），但 Agent 实际工作已完成——入口与机制全通。
+
+**文件**: `apps/ecommerce/runtime/shared-knowledge/status.ts`（纯函数），`platform/server/routes/knowledge.ts`，`situation-chat.ts`（导出+超时），`index.ts`（挂载），`workspace/{index.html,app.js}`（Knowledge 视图）。
+
+---
+
 ## ADR-039: Post-Consolidation REMOVE Sweep
 
 - **日期**: 2026-08-21

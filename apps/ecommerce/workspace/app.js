@@ -136,8 +136,9 @@ function switchView(name, filter = 'all') {
   viewLoaders[name]?.(filter);
 }
 
-const viewLoaders = { product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime, 
+const viewLoaders = { product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime,
   agentSession: loadAgentSession, capabilityExplorer: loadCapabilityExplorer, evidenceViewer: loadEvidenceViewer,
+  knowledge: loadKnowledge,
   situations: loadSituationFeed, situationDetail: loadSituationDetail };
 
 // ═══ Data Loading ══════════════════════════════════════════
@@ -1256,6 +1257,70 @@ async function loadEvidenceViewer() {
       content.innerHTML = '<p class="muted placeholder">Failed to load evidence (' + e.message + ')</p>';
     }
   };
+}
+
+// ═══ Knowledge Ingest (P0008.4 §10) — Fabric-side control ═══
+// Enumerate raw sources, mark provenance-referenced state, launch Hermes to run
+// the KNOWLEDGE.md Ingest flow, surface Hermes's report verbatim. Fabric does NOT
+// summarize raw or generate knowledge pages.
+function renderKnowledgeStatus(container, status) {
+  if (!status || !status.sources) {
+    container.innerHTML = '<p class="muted placeholder">无状态数据。</p>';
+    return;
+  }
+  const rows = status.sources.map(s => {
+    const badge = s.referenced
+      ? '<span class="provenance-status verified">✓ 已引用</span>'
+      : '<span class="provenance-status unavailable" style="opacity:0.8">○ 待 Ingest</span>';
+    const by = s.referenced ? ' · ' + escHtml(s.referencedBy.join(', ')) : '';
+    return '<div class="evidence-timeline-item">' +
+      '<span><span class="evidence-timeline-date" style="min-width:0">' + escHtml(s.file) + '</span> ' +
+      '<span class="evidence-timeline-meta">' + (s.size || 0) + ' B' + by + '</span></span>' +
+      badge +
+      '</div>';
+  }).join('');
+  container.innerHTML =
+    '<h3 class="session-activity-title">Raw 源 · ' + status.total + '（已引用 ' + status.referencedCount + ' · 待处理 ' + status.pendingCount + '）</h3>' +
+    '<div class="evidence-timeline">' + (rows || '<p class="muted placeholder">knowledge-sources/raw/ 为空。</p>') + '</div>';
+}
+
+async function loadKnowledge() {
+  const container = document.getElementById('knowledgeStatus');
+  const result = document.getElementById('knowledgeResult');
+  const btn = document.getElementById('knowledgeIngestBtn');
+  if (result) { result.style.display = 'none'; result.innerHTML = ''; }
+  try {
+    const data = await apiGet('/api/knowledge/status');
+    renderKnowledgeStatus(container, data);
+  } catch (e) {
+    container.innerHTML = '<p class="muted placeholder">加载 Knowledge 状态失败: ' + escHtml(e.message) + '</p>';
+  }
+  if (btn) {
+    btn.onclick = async function() {
+      if (!result) return;
+      result.style.display = 'block';
+      result.innerHTML = '<p class="muted">正在启动 Hermes 执行 KNOWLEDGE.md Ingest 流程（阅读 raw → 组织 → 写 knowledge/ → 更新 INDEX/log）...</p>';
+      btn.disabled = true;
+      try {
+        const resp = await apiPost('/api/knowledge/ingest', {});
+        const lines = (resp.reply || '').trim();
+        result.innerHTML =
+          '<div class="knowledge-result-head"><strong>Hermes Ingest 报告</strong></div>' +
+          '<pre style="white-space:pre-wrap;font-size:0.78rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:6px;padding:8px 12px">' +
+          escHtml(lines) +
+          '</pre>' +
+          '<div style="margin-top:8px" class="muted">Ingest 后 provenance 状态：</div>' +
+          '<div id="knowledgeStatusAfter" style="margin-top:4px"></div>';
+        const after = document.getElementById('knowledgeStatusAfter');
+        if (after) renderKnowledgeStatus(after, resp.status);
+      } catch (e) {
+        result.innerHTML = '<p class="muted placeholder">Ingest 失败: ' + escHtml(e.message) +
+          '<br/><small>请确认 Hermes serve 已启动（hermes serve，端口 9119）。</small></p>';
+      } finally {
+        btn.disabled = false;
+      }
+    };
+  }
 }
 
 function renderProvenanceChain(container, evidence, capId) {

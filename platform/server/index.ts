@@ -12,6 +12,7 @@ import { chatRouter } from './routes/chat.js';
 import { runtimeRouter } from './routes/runtime.js';
 import { p0007Router } from './routes/p0007.js';
 import { situationChatRouter } from './routes/situation-chat.js';
+import { knowledgeRouter } from './routes/knowledge.js';
 import { openDb } from '#platform/storage/connection.js';
 
 export interface ServerOptions {
@@ -40,6 +41,17 @@ export const createServer = (options: ServerOptions): Express => {
   app.use(
     '/api',
     situationChatRouter({
+      workspaceDir: resolve(process.cwd(), 'data', 'fabric-workspace'),
+      profile: 'default',
+      db,
+    }),
+  );
+
+  // P0008.4 §10 — Knowledge Ingest control (Fabric side): status + launch Hermes
+  // to run the KNOWLEDGE.md Ingest flow. Shares the same Fabric Workspace dir.
+  app.use(
+    '/api',
+    knowledgeRouter({
       workspaceDir: resolve(process.cwd(), 'data', 'fabric-workspace'),
       profile: 'default',
       db,

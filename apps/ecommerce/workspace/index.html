@@ -55,6 +55,7 @@
           <a href="#" class="sidebar-item" data-view="evidenceViewer"><span class="sidebar-icon">🔗</span><span>Evidence</span></a>
           <a href="#" class="sidebar-item" data-view="capabilityExplorer"><span class="sidebar-icon">📋</span><span>Capability</span></a>
           <a href="#" class="sidebar-item" data-view="agentSession"><span class="sidebar-icon">🤖</span><span>Agent Session</span></a>
+          <a href="#" class="sidebar-item" data-view="knowledge"><span class="sidebar-icon">🧠</span><span>Knowledge</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <!-- 业务配置 — only agentFabric-owned config -->
@@ -181,6 +182,25 @@
               <input id="agentSessionInput" class="input session-input-main" placeholder="分析一下最近的店铺流量情况，有什么值得关注的变化？" />
               <button id="agentSessionSendBtn" class="btn btn-primary session-send-btn">➤</button>
             </div>
+          </div>
+        </div>
+
+        <!-- P0008.4: Knowledge Ingest — Fabric-side control for the Shared Knowledge layer -->
+        <div id="view-knowledge" class="view-container">
+          <div class="view-scroll">
+            <div class="view-title-row">
+              <h2 class="view-title">🧠 Knowledge</h2>
+              <span class="muted">共享知识层（raw → knowledge/ 编译）</span>
+            </div>
+            <p class="muted" style="font-size:0.78rem;margin-bottom:12px">
+              Fabric 只负责枚举 raw 源、标记 provenance 引用、并启动 Hermes 执行 KNOWLEDGE.md 定义的 Ingest 流程。
+              总结、组织、写入 knowledge/*.md 由 Hermes 完成，Fabric 不生成知识页。
+            </p>
+            <div class="knowledge-status" id="knowledgeStatus">
+              <p class="muted placeholder">加载 Knowledge 状态中...</p>
+            </div>
+            <button class="btn btn-primary" id="knowledgeIngestBtn" style="margin-top:12px">⚙️ Ingest / Update Knowledge</button>
+            <div class="knowledge-result" id="knowledgeResult" style="display:none;margin-top:12px"></div>
           </div>
         </div>
 
