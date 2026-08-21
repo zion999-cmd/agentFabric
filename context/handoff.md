@@ -1,5 +1,44 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010 Behavioral Validation（A-E 五类行为）
+
+### 目标
+
+P0010 Initial Acceptance 已通过（一个 happy path）。本轮不做横向扩功能，用现有真实 Situation/Knowledge/Capabilities 刻意验证 A-E 五类结果，判断 Agent 是否真的学会了像专业运营一样调查（而非刚好在一个 GMV case 上表现聪明）。
+
+### 真实运行结果（3 个 Situation，全部持久化到 learning_contexts）
+
+| 场景 | Situation | 结果 | 判定 |
+|---|---|---|---|
+| **A 伪异常→observe** | GMV -67.9% (08-16) | 周末节律伪异常；capability=trade.overview 真实取证 4 天 | ✅ |
+| **A 伪异常（另一机制）** | CVR -21.2% (08-20 周四) | **小样本统计噪声**（UV<500、GMV 反升 +19.7%、客单价 +48%）；未取证（现有证据够用） | ✅ |
+| **B 真异常→judgment** | orders -66.7% (08-16) | 真异常确认（周同比 8/9 40单→8/16 7单 = -82.5%）；5 假设；优先排查清单（优惠券到期>断货>京准通） | ✅ |
+| **C 多假设竞争** | orders run | **5 个竞争假设**（优惠券/差评/断货/广告/算法降权），选最高信息增益问题（广告账户状态），**未把所有 capability 全调** | ✅ |
+| **D MISSING_CAPABILITY** | orders run | 模型识别所需证据（京准通账户余额/预算/广告计划/差评/断货）**非 Fabric 能力**，列为人工核验——但 stopReason=judgment 而非 missing_capability | ⚠️ partial |
+| **E 证据矛盾** | 当前数据无矛盾证据 | 无法触发 | ⚠️ not provable |
+
+### 关键行为发现
+
+1. **伪异常门稳定成立**：模型持续用「周同比>类目大盘>日环比」「单天波动±15%优先观察」判断真假异常，两次不同机制（周末节律 vs 小样本噪声）都正确拒绝干预。这是「知道什么时候不该动」的高级运营能力。
+2. **不必要取证抑制**：CVR 案例证据够用时不重复 Acquisition（proposal §5 语义）。
+3. **多假设不盲查**：orders 案例 5 假设选 1 个最高信息增益问题，未全量调用 capability。
+4. **能力边界识别**：模型知道 京准通/差评/断货 是 Fabric 答不了的，转人工核验——但 stopReason 落在 judgment 而非 missing_capability（边界行为，非代码缺陷）。
+
+### 数据可用性诚实发现
+
+当前快照（08-12~08-20）被「08-16 周末簇」+「小样本日」主导。**B 的纯路径（真异常→capability 取证→hypothesis supported by 该 evidence）和 E 需要真实业务异常**（真实事件，非周末/噪声）——现有数据不含，无法现场造。模型的「拒绝伪异常」行为本身就是有价值的反幻觉验证。
+
+### 契约保真度观察（非代码缺陷，未来可精修 prompt）
+
+- orders 案例模型实际调用了 fabric_execute（evidence 文件 08-15/16 被触碰）但契约里 capabilityUsed 留空——用了证据但没记录哪个 capability。
+- stopReason 边界：judgment vs missing_capability 由模型选，未强制。
+
+### 建议下一步
+
+Behavioral Validation 确认 A/C 稳定、B 成立、D 部分、E 待数据。**从 Investigation/Judgment 进入 Action Proposal** 前，需要一个真实业务异常数据（非周末/噪声）来补足 B 纯路径 + D + E。模型稳定性（>600s timeout）仍是主要工程风险。
+
+---
+
 ## 本次会话 (2026-08-21) - P0010 Knowledge-Guided Investigation（Initial Acceptance 通过）
 
 ### 目标与定位
