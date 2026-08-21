@@ -41,6 +41,30 @@ export const StopReasonSchema = z.enum(['judgment', 'observe', 'missing_capabili
 export type StopReason = z.infer<typeof StopReasonSchema>;
 
 /**
+ * P0010.1 Recommendation — the Agent's suggested handling, produced ONLY from
+ * its Investigation/Judgment (never directly from Signal/Ranking/threshold).
+ * Human feedback (accept/reject/correction) reuses the existing Intervention
+ * grammar and lands in the Learning Context.
+ *
+ * The Agent may emit risk/precondition/human items as a single string or a
+ * list — normalize both to arrays for the Workspace.
+ */
+const stringOrList = z.union([z.string(), z.array(z.string())]);
+const toList = (v: string | string[]): string[] => (typeof v === 'string' ? (v ? [v] : []) : v);
+
+export const RecommendationSchema = z.object({
+  recommendation: z.string().min(1),
+  /** Linked judgment (prose) this recommendation is based on. */
+  rationale: z.string().default(''),
+  expectedOutcome: z.string().default(''),
+  risks: stringOrList.transform(toList).default([]),
+  prerequisites: stringOrList.transform(toList).default([]),
+  /** Information only a human can provide, if any. */
+  humanNeeded: stringOrList.transform(toList).default([]),
+});
+export type Recommendation = z.infer<typeof RecommendationSchema>;
+
+/**
  * The full Investigation Contract for one situation.
  * Fabric stores this (additively in the situation's Learning Context) and the
  * Workspace renders it so a professional can judge whether the Agent asked the
@@ -69,6 +93,8 @@ export const InvestigationSchema = z.object({
   capabilityUsed: z.string().optional(),
   /** Evidence entries acquired during this investigation (evidence ids / labels). */
   evidenceAcquired: z.array(z.string()).default([]),
+  /** P0010.1 Recommendation (optional — produced from Judgment, not Signal). */
+  recommendation: RecommendationSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 });

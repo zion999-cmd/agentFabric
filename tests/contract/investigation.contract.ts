@@ -3,7 +3,7 @@
 // situation DATA (not rules) and drives evidence acquisition.
 
 import { describe, expect, test } from 'vitest';
-import { InvestigationSchema } from '#shared/schemas/investigation.js';
+import { InvestigationSchema, RecommendationSchema } from '#shared/schemas/investigation.js';
 import type { Investigation } from '#shared/schemas/investigation.js';
 import { LearningContextSchema } from '#shared/schemas/learning-context.js';
 import type { Situation } from '#shared/schemas/learning-context.js';
@@ -61,6 +61,22 @@ describe('InvestigationSchema', () => {
     expect(minimal.knownEvidence).toEqual([]);
     expect(minimal.hypotheses).toEqual([]);
     expect(minimal.findings).toEqual([]);
+  });
+
+  test('RecommendationSchema normalizes string-or-list risk/human fields', () => {
+    const rec = RecommendationSchema.parse({
+      recommendation: '先人工核验，不干预',
+      rationale: 'judgment 依据',
+      risks: ['风险A', '风险B'], // model may emit a list
+      humanNeeded: '财务确认优惠券到期', // or a single string
+    });
+    expect(rec.risks).toEqual(['风险A', '风险B']);
+    expect(rec.humanNeeded).toEqual(['财务确认优惠券到期']);
+    expect(rec.prerequisites).toEqual([]);
+  });
+
+  test('RecommendationSchema rejects missing recommendation', () => {
+    expect(RecommendationSchema.safeParse({ rationale: 'x' }).success).toBe(false);
   });
 
   test('LearningContextSchema carries an optional investigation additively', () => {

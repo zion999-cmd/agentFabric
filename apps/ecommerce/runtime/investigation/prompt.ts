@@ -99,8 +99,11 @@ export const buildInvestigationPrompt = (
     `  "judgment": "...",`,
     `  "stopReason": "judgment|observe|missing_capability|ask_human",`,
     `  "capabilityUsed": "...",`,
-    `  "evidenceAcquired": ["..."]`,
+    `  "evidenceAcquired": ["..."],`,
+    `  "recommendation": {"recommendation": "...", "rationale": "...", "expectedOutcome": "...", "risks": "...", "prerequisites": ["..."], "humanNeeded": ["..."]}`,
     `}`,
+    ``,
+    `The "recommendation" MUST follow ONLY from your judgment and findings above — never from a single Signal or metric threshold. If your judgment is "observe" (pseudo-anomaly / insufficient evidence), the recommendation should reflect NOT acting (e.g. continue observing, do not intervene). If human verification is required, list the needed facts under "humanNeeded". Do not write an Action — recommendation is what to consider, not an execution order.`,
     ``,
     `Do not write any Action. You are investigating (read / question / acquire evidence / understand), not executing a business operation.`,
   ].join('\n');

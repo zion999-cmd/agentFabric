@@ -22,12 +22,13 @@ import { JD_FIXTURE } from '#app/runtime/fabric-workspace/jd-fixture.js';
 import { loadCapabilityEntries } from '#app/runtime/fabric-workspace/capability-loader.js';
 import { initSharedKnowledgeLayer } from '#app/runtime/shared-knowledge/index.js';
 import type { LearningContext, Situation } from '#shared/schemas/learning-context.js';
+import { RecommendationSchema } from '#shared/schemas/investigation.js';
 import {
   loadSituation,
   loadLearningContext,
   storeInvestigationInLearningContext,
 } from '#app/experience/learning-context-producer.js';
-import { buildInvestigationPrompt, parseInvestigation } from '#app/runtime/investigation/index.js';
+import { buildInvestigationPrompt, parseInvestigation, extractJsonObject } from '#app/runtime/investigation/index.js';
 
 // ---- Session registry (server-side) ----
 
@@ -242,6 +243,86 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
       hasSession: Boolean(active),
       hermesSessionId: active?.hermesSessionId ?? null,
     });
+  });
+
+  // POST /api/situation/:id/recommend — P0010.1 Recommendation.
+  // Produces a Recommendation ONLY from the persisted Investigation/Judgment
+  // (never from Signal/Ranking/threshold). Runs a short follow-up turn in the
+  // SAME session; the recommendation is persisted additively into the
+  // investigation. Human feedback (accept/reject/correction) reuses the
+  // existing Intervention grammar.
+  router.post('/situation/:id/recommend', async (req, res) => {
+    const situationId = req.params['id'];
+    if (!situationId || !options.db) {
+      res.status(400).json({ success: false, error: 'Missing situation ID or database' });
+      return;
+    }
+    const situation = loadSituation(options.db, situationId);
+    const existing = loadLearningContext(options.db, situationId)?.investigation;
+    if (!situation || !existing) {
+      res.status(400).json({ success: false, error: 'No completed investigation to recommend from' });
+      return;
+    }
+
+    try {
+      let active = sessions.get(situationId);
+      if (!active) {
+        const client = options.clientFactory
+          ? options.clientFactory(options.hermesUrl)
+          : new HermesSessionClient(options.hermesUrl ? { url: options.hermesUrl } : {});
+        await client.connect();
+        const created = await client.createSession({
+          cwd: workspaceDir,
+          ...(options.profile ? { profile: options.profile } : {}),
+        });
+        active = { client, hermesSessionId: created.sessionId };
+        sessions.set(situationId, active);
+      }
+
+      const prompt = [
+        `You investigated situation ${situationId}. Your judgment was: ${existing.judgment ?? ''} (stopReason: ${existing.stopReason ?? ''}).`,
+        `Now produce a Recommendation that follows ONLY from that judgment and the investigation findings.`,
+        `Output ONLY a JSON object: {"recommendation":"...","rationale":"...","expectedOutcome":"...","risks":"...","prerequisites":[...],"humanNeeded":[...]}`,
+        `Rules: if judgment is observe (pseudo-anomaly/insufficient evidence), recommend NOT acting (continue observing, do not intervene). If human verification is needed, list the facts under humanNeeded. Never recommend an external business Action — recommendation is what to consider, not an execution order.`,
+      ].join('\n');
+
+      const replyPromise = collectTurn(active.client, active.hermesSessionId, 600_000);
+      await active.client.submitPrompt(active.hermesSessionId, prompt);
+      const reply = await replyPromise;
+
+      // Parse the recommendation JSON (defensive — reuse the same extractor as the
+      // Investigation Contract so markdown-fenced / prose-wrapped JSON still parses).
+      const candidate = extractJsonObject(reply);
+      let recommendation;
+      if (candidate) {
+        try {
+          recommendation = RecommendationSchema.safeParse(JSON.parse(candidate));
+        } catch {
+          recommendation = { success: false };
+        }
+      } else {
+        recommendation = { success: false };
+      }
+      if (!recommendation.success) {
+        res.status(200).json({ success: false, agentStatus: 'error', error: 'Invalid recommendation JSON', rawReply: reply.slice(0, 1200) });
+        return;
+      }
+
+      // Persist additively into the investigation.
+      const next = { ...existing, recommendation: recommendation.data, updatedAt: new Date().toISOString() };
+      storeInvestigationInLearningContext(options.db, situation, next);
+
+      res.json({ success: true, agentStatus: 'completed', situationId, recommendation: recommendation.data });
+    } catch (err) {
+      sessions.delete(situationId);
+      const message = err instanceof Error ? err.message : 'Recommendation failed';
+      res.status(200).json({
+        success: false,
+        agentStatus: /timed out/i.test(message) ? 'timeout' : 'error',
+        error: message,
+        recommendation: loadLearningContext(options.db, situationId)?.investigation?.recommendation ?? null,
+      });
+    }
   });
 
   // GET /api/situation/:id/investigation — the situation's stored P0010

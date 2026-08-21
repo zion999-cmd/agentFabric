@@ -995,7 +995,44 @@ function renderCurrentUnderstanding(container, inv) {
   const boundary = deriveCapabilityBoundary(inv);
   if (boundary) html += block('能力边界', '<p style="margin:0;font-size:0.82rem;color:var(--danger)">⚠ ' + escHtml(boundary) + '</p>');
 
+  // 7) 建议 (Recommendation) — P0010.1: produced ONLY from Judgment.
+  const rec = inv.recommendation;
+  if (rec) {
+    const list = (items) => items.length ? '<ul style="margin:2px 0;padding-left:16px;font-size:0.78rem">' + items.map(i => '<li style="margin:1px 0">' + escHtml(i) + '</li>').join('') + '</ul>' : '';
+    let recHtml = '<p style="margin:0;font-size:0.82rem;white-space:pre-wrap"><strong>' + escHtml(rec.recommendation) + '</strong></p>';
+    if (rec.rationale) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">依据: ' + escHtml(rec.rationale) + '</div>';
+    if (rec.expectedOutcome) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">预期: ' + escHtml(rec.expectedOutcome) + '</div>';
+    if (rec.risks && rec.risks.length) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">风险:</div>' + list(rec.risks);
+    if (rec.prerequisites && rec.prerequisites.length) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px">前提:</div>' + list(rec.prerequisites);
+    if (rec.humanNeeded && rec.humanNeeded.length) recHtml += '<div class="muted" style="font-size:0.75rem;margin-top:2px;color:var(--warning)">需人工:</div>' + list(rec.humanNeeded);
+    html += block('建议', recHtml);
+  } else {
+    html += block('建议',
+      '<div class="muted" style="font-size:0.75rem;margin-bottom:4px">Agent 已完成调查，可基于当前判断生成处理建议。</div>' +
+      '<button class="btn btn-primary" style="font-size:0.72rem;padding:4px 10px" onclick="generateRecommendation(' + JSON.stringify(inv.situationId) + ')">💡 生成建议</button>'
+    );
+  }
+
   container.innerHTML = html || '<p class="muted placeholder">Agent 未返回调查内容。</p>';
+}
+
+/** P0010.1 Slice 4: generate a Recommendation from the persisted Judgment (same session). */
+async function generateRecommendation(situationId) {
+  const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
+  if (!uEl) return;
+  try {
+    const resp = await apiPost('/api/situation/' + encodeURIComponent(situationId) + '/recommend', {});
+    if (resp.recommendation) {
+      // Re-fetch the full investigation to re-render the whole Understanding surface.
+      const inv = await apiGet('/api/situation/' + encodeURIComponent(situationId) + '/investigation');
+      if (inv && inv.investigation) renderCurrentUnderstanding(uEl, inv.investigation);
+    } else {
+      const holder = uEl.querySelector('.inv-block:last-child');
+      if (holder) holder.innerHTML = '<p class="muted" style="font-size:0.75rem">建议生成未完成' + (resp.error ? ': ' + escHtml(resp.error) : '') + '</p>';
+    }
+  } catch (e) {
+    uEl.innerHTML = '<p class="muted placeholder">建议生成失败: ' + escHtml(e.message) + '</p>';
+  }
 }
 
 /** Investigation Track — the business process (HOW), derived from persisted contract.
@@ -2052,3 +2089,4 @@ window.loadEvidenceViewer = loadEvidenceViewer;
 window.askSituationAgent = askSituationAgent;
 window.handleIntervention = handleIntervention;
 window.startInvestigation = startInvestigation;
+window.generateRecommendation = generateRecommendation;

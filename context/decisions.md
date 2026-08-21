@@ -1,5 +1,27 @@
 # 技术决策记录 (ADR)
 
+## ADR-046: P0010.1 Slice 4 — Recommendation（P0010.1 终点）
+
+- **日期**: 2026-08-21
+- **状态**: Accepted（浏览器验收通过）— P0010.1 全部 Slice 完成
+- **来源**: proposals/P0010.1 Slice 4（Recommendation）
+
+**决策**（Recommendation 是 P0010.1 终点，严格数据流 Investigation → Judgment → Recommendation）：
+
+1. **RecommendationSchema**（`shared/schemas/investigation.ts`）：recommendation / rationale（链接 judgment）/ expectedOutcome / risks / prerequisites / humanNeeded。risks/prerequisites/humanNeeded 接受 string 或 list（模型自然产出数组）并归一化为数组。
+
+2. **来源严格性**：Recommendation 只从 Judgment 产生——prompt 明确「recommendation 必须只来自你的 judgment 和 findings，绝不由单个 Signal/指标阈值产生」；observe 判断 → 建议不干预；humanNeeded 列出需人工核验事实。不写 Action（建议是考虑什么，不是执行命令）。
+
+3. **`POST /api/situation/:id/recommend`**：对已有 investigation 在**同一 session** 跑短 follow-up turn，`extractJsonObject` 防御式解析（markdown fence/prose 包裹的 JSON），持久化增量进 investigation.recommendation。600s 超时（模型延迟波动）。
+
+4. **Workspace**：Understanding 表面「建议」section（recommendation 原文 + 依据 + 预期 + 风险 + 前提 + 需人工）；无建议时显示「生成建议」按钮；反馈（采用/不采用/纠正）REUSE 现有 intervention grammar → Learning Context。
+
+**验收**（orders 真异常需人工核验）：持久化 Recommendation「暂停一切自动调价或加投广告的决策，先完成人工核验（优惠券到期→主力SKU库存→京准通账户）」+ rationale（链接 judgment）+ risks×3 + prerequisites×4 + humanNeeded×4；浏览器在 Understanding 表面显示 + intervention/chat 无回归 + console 零 error。
+
+**文件**: `shared/schemas/investigation.ts`，`platform/server/routes/situation-chat.ts`，`apps/ecommerce/runtime/investigation/prompt.ts`，`workspace/app.js`，`tests/contract/investigation.contract.ts`（+2）。
+
+---
+
 ## ADR-045: P0010.1 Slice 2+3 — Automatic Investigation + Scheduled Acquisition
 
 - **日期**: 2026-08-21

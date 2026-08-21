@@ -1,5 +1,46 @@
 # 交接文档
 
+## 本次会话 (2026-08-21) - P0010.1 Slice 4（Recommendation）→ P0010.1 全部完成
+
+### 目标
+
+P0010.1 的终点 Slice：Recommendation 从 Investigation/Judgment 产生（禁止 Signal→Rec），Workspace 展示 + 反馈 REUSE。至此 P0010.1 六个 Slice 全部完成。
+
+### Slice 4 实现
+
+- `RecommendationSchema`（investigation.ts）：recommendation/rationale/expectedOutcome/risks/prerequisites/humanNeeded；risks 等接受 string-or-list 归一化（模型自然产出数组）。
+- prompt 第 9 步 JSON 加 recommendation 形状 + 严格约束（只从 judgment 产生；observe → 不干预；不写 Action）。
+- `POST /api/situation/:id/recommend`：同一 session 短 follow-up turn，`extractJsonObject` 防御解析，持久化增量，600s 超时。
+- Workspace：Understanding「建议」section（原文+依据+预期+风险+前提+需人工）+ 无建议时「生成建议」按钮；反馈 REUSE intervention grammar。
+
+### 真实验收（orders 真异常需人工核验）
+
+持久化 Recommendation：「暂停一切自动调价或加投广告的决策，先完成人工核验（优惠券/促销到期 → 主力子SKU库存状态 → 京准通账户预算与计划状态），核验结果确认后再在24-48h观测窗口内评估修复动作效果；若确认促销到期，优先短期补发券或切换平销策略，而非直接扩流量」+ rationale（链接 judgment 真异常/复合故障）+ risks×3 + prerequisites×4 + humanNeeded×4（财务/仓储/广告投放负责人核验项）。浏览器在 Understanding 表面显示 + intervention/chat 无回归 + console 零 error。
+
+### 调试记录
+
+- recommend 首次 JSON 解析失败：模型返回 ` ```json {...} ``` `（markdown fence）+ risks 为数组——修复 extractJsonObject 复用 + RecommendationSchema string-or-list 归一化。
+- 模型延迟波动：240s 超时不够，提到 600s；多次重试后成功（模型产出质量高，但耗时 4-8 分钟波动）。
+
+### 测试
+
+604 total / 596 passed（2 pre-existing + http 套件瞬态 skip），typecheck 17 基线。investigation.contract +2（RecommendationSchema 归一化）。
+
+### P0010.1 完成状态
+
+- Slice 0（Wiring Audit）✅ 无 schema gap
+- Slice 1（Workspace Investigation Surface）✅ 列表状态+Track+Current Understanding hero
+- Slice 2（Automatic Investigation）✅ 完整模型验收（UV -47.5% 无人工点击自动调查→持久化→Workspace）
+- Slice 3（Scheduled Acquisition）✅ run-now trade.overview→completed→新 Evidence
+- Slice 4（Recommendation）✅ orders 从 judgment 生成建议+Workspace 显示
+- Slice 5（Human Feedback）✅ REUSE intervention grammar（decision/accept→LC）
+
+### 建议下一步
+
+P0010.1 完成。按 P0010/P0010.1 boundaries，本阶段止于 Recommendation，无外部 Action。下一阶段（用户发起）考虑：Action Proposal（需 Approval/Policy），或补真实业务异常数据验证 B 纯路径/D/E。
+
+---
+
 ## 本次会话 (2026-08-21) - P0010.1 Slice 2+3（Automatic Investigation + Scheduled Acquisition）
 
 ### 目标
