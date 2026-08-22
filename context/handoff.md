@@ -1,5 +1,60 @@
 # 交接文档
 
+## 本次会话 (2026-08-22) - P0010.1 REPAIR-5（Output Workspace 诚实性：canonical path、no fake source、no deliveredAt、统一 label、global badge）
+
+### 目标
+
+ChatGPT 审了 `40afdc6`（REPAIR-1/2/3 + Output Workspace v0）后找到 4 个真实断点 + 2 个小问题。Claude 按用户给的边界（**不改 Situation lifecycle、不做 Trust schema、不接 transport、不做 Action/Approval**）只做 6 件事的最小诚实修复。
+
+### 六处修复
+
+1. **P0：canonical 路径** — `GET /api/outputs/:oid` 之前从 `ctx.currentUnderstanding` / `ctx.recommendation` 顶层读，但 `InvestigationSchema` 把它们放在 `ctx.investigation.*`。改成从 `ctx.investigation.currentUnderstanding` / `ctx.investigation.recommendation.recommendation` / `ctx.investigation.recommendation.rationale` 读。**测试通过**（seed 故意写了顶层假字段 `SHOULD-NOT-BE-READ`，断言它们**不被**读出 — 反向证据）。
+
+2. **P0：mark-delivered 端点删除** — `POST /api/situations/:id/outputs/mark-delivered` 整体删除（之前在 Situation detail 打开时把所有 `ready` → `delivered`，违反"打开页面 ≠ 已交付"）。`WorkItemSchema` 顶部注释 + 4 处 app.js 旧注释都改成 REPAIR-5 真实语义。**测试通过**（`POST .../mark-delivered` 返回 404，且没有任何 `ready` 被偷偷转成 `delivered`）。
+
+3. **P0/P1：Source tag 真实存在才显示** — 之前 Output Detail/右栏**固定渲染 4 个 tag（证据/人工/知识/记忆）**不管这个 Output 实际是否引用了任何 source（假来源类别）。改成：服务端 `GET /api/outputs/:oid` 返回 `provenance = { hasHuman, humanInterventions[], hasEvidence, evidenceLabels[], hasKnowledge, knowledgeLabels[] }`，**只包含真实存在的 fact**；`hasKnowledge` 始终 `false`（本刀无 first-class Knowledge 记录，**绝不伪造**）。前端 `renderOutputDetail` + `renderOutputDetailRightPane` 都改用 `out.provenance` 条件渲染 — 有 2 个真实 source 时显示 2 个 tag，0 个真实 source 时显示「本交付物尚无 first-class provenance」诚实提示。**浏览器验证**（`/tmp/verify_repair5.py`）：seed 的 demo Output 有 2 个真实 source → 显示 `证据` + `人工` 两个 tag，不是 4 个假的。
+
+4. **P1：删除 交付时间 / deliveredAt** — `WorkItemSchema` 根本没有 `deliveredAt` 字段（无 Transport，无 delivery event），但 UI 之前显示「交付时间」永远 `—`。按用户偏好**从 UI 删除该行**，**不**为它新增 schema 字段。Output Detail 状态表现在 6 行：当前状态 / 生成时间 / 确认时间 / 关闭时间 / 交付渠道 / 外部发送。**测试通过**（断言 `body.data.deliveredAt === undefined`）。
+
+5. **小：状态 label 统一** — `WORK_ITEM_STATUS_LABEL` 在 `shared/schemas/output.ts` 是 single source of truth（待交付/已交付/已确认/已关闭）。Workspace 是 vanilla JS 不能 import TS，**新加 `apps/ecommerce/workspace/output-labels.js`** 把 schema label 镜像到 `window.WORK_ITEM_STATUS_LABEL` / `window.WORK_ITEM_TYPE_LABEL`，`index.html` 在 app.js 之前加载。**新增 contract test `tests/contract/output-labels-sync.test.ts`**（6 个断言）保证两份自动同步不漂移。
+
+6. **小：左栏 Output badge 全局含义** — `updateOutputsBadge(items)` 之前接收 filtered `items.length`（切到 closed tab badge 就缩成 0），违反"badge 是全局工作输出总数"的语义。改 `loadOutputs` 用 `Promise.all` 同时拿 filtered 列表 + unfiltered 列表，badge 永远用后者。**浏览器验证**：badge 始终显示 `3`（全局总数），切到 closed tab（0 items）badge 不变。
+
+### 边界（严格遵守）
+
+- ❌ 不改 Situation lifecycle（5 状态保持）
+- ❌ 不做 Trust schema（provenance 还是 inline JSON，不持久化）
+- ❌ 不接 transport（无飞书/邮件/企业微信/Telegram）
+- ❌ 不做 Action/Approval（`已知悉/结束` 按钮保持原状）
+- ❌ 不增加 schema 字段（不补 `deliveredAt`、不补 `knowledgeId`）
+- ❌ 不创建第二套 Output Store
+
+### 验收
+
+- `npx vitest run tests/integration/outputs-api.test.ts tests/contract/output-labels-sync.test.ts` — **30/30 ✅**（24 integration + 6 contract）
+- 浏览器 Playwright smoke (`/tmp/verify_repair5.py`)：labels 暴露 ✅ / badge 全局 ✅ / status table 无 deliveredAt 行 ✅ / source tags 只 2 个真实 ✅ / 0 console error ✅
+- 全量 693 tests pass（pre-existing 2 failures 不变：`chat.contract.ts` 5s timeout + `coverage.test.ts` 58% > 50%）
+- typecheck：仅 pre-existing 错误，本刀 0 新增
+
+### 文件改动
+
+- 修改：`platform/server/routes/outputs.ts`（canonical path + 真实 provenance + 删 mark-delivered + header comment REPAIR-5 说明）
+- 修改：`shared/schemas/output.ts`（删旧 auto-deliver 注释，4 状态 label 改 canonical 中文）
+- 修改：`apps/ecommerce/workspace/app.js`（`renderOutputDetail` / `renderOutputDetailRightPane` 用 `out.provenance` + 删 `deliveredAt` / `loadOutputs` `Promise.all` 全局 badge / 4 处旧 `/mark-delivered` 注释清理）
+- 新增：`apps/ecommerce/workspace/output-labels.js`（mirror schema → `window.*`）
+- 修改：`apps/ecommerce/workspace/index.html`（`output-labels.js` 在 app.js 前加载）
+- 修改：`tests/integration/outputs-api.test.ts`（删 mark-delivered 测试 → 改 404 断言 + 加 3 个新 REPAIR-5 测试：no deliveredAt / provenance 真实 fact / canonical path 反向证明）
+- 新增：`tests/contract/output-labels-sync.test.ts`（6 个 sync 断言）
+- 修改：`context/{current_state.md,decisions.md,handoff.md,status.json}`
+
+### 风险与建议下一步
+
+- **风险**: `output-labels.js` 是 schema 的 1:1 mirror，**靠 vitest contract test 防漂移**（CI 红 = 必须同步）。如果 schema 改 label 但忘改 JS，UI 会显示 undefined 字符串兜底（不崩溃），但产生漂移告警。
+- **下一步候选**（不属本刀）: P0011 Evidence Identity（解锁 `evidence` resultRef kind，**首次**让 `hasEvidence: true` 真正有 first-class 记录）/ P0011.1 Knowledge Provenance（解锁 `hasKnowledge`）/ P0012 Operations（解锁 wake + event bus）/ Transport（解锁 `deliveredAt` / 真实 delivery 状态机）— 这些都标为 future slice，不在 REPAIR-5 范围。
+- **Trust schema 候选**: 现在的 `provenance` 是 inline JSON（每请求现算），未来如要做 trust popover / 多 source 引用统计，需要 first-class `provenance` 表（仍是 P0011+ scope）。
+
+---
+
 ## 本次会话 (2026-08-22) - P0010.1 Workspace Productization Baseline 1.0（已 commit）
 
 ### 目标

@@ -20,14 +20,28 @@
 //   - It does NOT poll, wake, or schedule review.
 //   - It does NOT have a delivery acknowledgement by an external system.
 //     `acknowledged` is set by the human pressing a button in Workspace.
+//   - It does NOT auto-advance on page load. The `mark-delivered`
+//     convenience endpoint was REMOVED in P0010.1 REPAIR-5; opening the
+//     Workspace does not change any WorkItem's status.
 //
-// Status semantics (the only state machine):
-//   - `ready`        — Agent has produced this; the human is expected to look.
-//   - `delivered`    — The Operator has seen the WorkItem surface (auto-set
-//                       when the Situation detail view is opened).
-//   - `acknowledged` — The Operator has explicitly clicked "已知悉".
-//   - `closed`       — The Operator has acted on or explicitly closed the
-//                       WorkItem (or an upstream decision was reject/accept).
+// Status semantics (the only state machine; canonical Chinese label):
+//   - `ready`        — 待交付 — Agent has produced this; the Operator is
+//                       expected to look at the deliverable.
+//   - `delivered`    — 已交付 — The Agent has surfaced the item to the
+//                       Workspace surface. Operator-driven transition
+//                       (e.g. via the per-Output acknowledge/close actions
+//                       in the Output Detail view), NOT auto on page load.
+//   - `acknowledged` — 已确认 — The Operator has explicitly clicked
+//                       "已知悉" / "确认收到" on the deliverable.
+//   - `closed`       — 已关闭 — The Operator has closed the deliverable.
+//                       This is a per-WorkItem transition. It does NOT
+//                       close the parent Situation. The Situation has its
+//                       own lifecycle (pending / investigating / watching
+//                       / waiting_human / closed) and a separate resolution
+//                       contract. Recommendation adoption by the Operator
+//                       is an Intervention (`decision: accept/reject`),
+//                       NOT a close path for either the WorkItem or the
+//                       Situation.
 
 import { z } from 'zod';
 
@@ -82,12 +96,13 @@ export const WorkItemSchema = z.object({
 });
 export type WorkItem = z.infer<typeof WorkItemSchema>;
 
-/** Status label for the Operator surface (Chinese). */
+/** Status label for the Operator surface (canonical Chinese, P0010.1 REPAIR-5).
+ *  Single source of truth — both server and Workspace import this. */
 export const WORK_ITEM_STATUS_LABEL: Readonly<Record<WorkItemStatus, string>> = Object.freeze({
-  ready: '待查看',
-  delivered: '已送达',
+  ready: '待交付',
+  delivered: '已交付',
   acknowledged: '已确认',
-  closed: '已结束',
+  closed: '已关闭',
 });
 
 /** Type label for the Operator surface (Chinese). */

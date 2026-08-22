@@ -1,12 +1,20 @@
 // P0010.1 Post-Productization REPAIR — Output / WorkItem API Integration Test.
 //
-// Verifies the 3 new minimal routes (GET / POST / PATCH) +
-// mark-delivered convenience, all backed by the `learning_contexts.body.outputs[]`
+// Verifies the 4 minimal routes (GET list / POST create / PATCH transition /
+// GET single + collection), all backed by the `learning_contexts.body.outputs[]`
 // JSON column (no SQL migration). Asserts the contract:
 //   - The status enum has exactly 4 values: ready / delivered / acknowledged / closed.
-//   - mark-delivered flips only `ready` → `delivered` (idempotent).
 //   - PATCH enforces the status enum; invalid statuses are rejected.
 //   - Missing situation returns 404.
+//   - P0010.1 REPAIR-5: GET /api/outputs/:oid reads current understanding /
+//     recommendation from the canonical `ctx.investigation.*` path
+//     (NOT `ctx.*` top-level), and returns `provenance` with only real
+//     facts (hasHuman / hasEvidence / hasKnowledge — hasKnowledge is
+//     always false in this slice because there is no first-class
+//     Knowledge record).
+//   - P0010.1 REPAIR-5: the previously-existing
+//     `POST /api/situations/:id/outputs/mark-delivered` side effect
+//     has been REMOVED; opening a page does NOT change WorkItem status.
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
 import { rmSync } from 'node:fs';
@@ -100,26 +108,20 @@ describe('P0010.1 Output / WorkItem API (integration)', () => {
     expect(res.status).toBe(400);
   });
 
-  test('mark-delivered flips ready → delivered (and only ready)', async () => {
-    // Add a second output (first is still in 'ready' state from earlier test).
-    await fetch(`${base}/api/situations/${SIT}/outputs`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ type: 'analysis', content: '分析二' }),
-    });
-    // mark-delivered
-    const markRes = await fetch(`${base}/api/situations/${SIT}/outputs/mark-delivered`, {
+  test('P0010.1 REPAIR-5: POST /api/situations/:id/outputs/mark-delivered is GONE (no auto-deliver on page load)', async () => {
+    // The previous "open the page = delivered" side effect was REMOVED.
+    // Confirm the endpoint no longer exists (404 / 405 — Express returns
+    // 404 for unknown routes in this stack).
+    const res = await fetch(`${base}/api/situations/${SIT}/outputs/mark-delivered`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: '{}',
     });
-    const markBody = (await markRes.json()) as { data: { updated: number } };
-    expect(markBody.data.updated).toBeGreaterThan(0);
-    // List and confirm everything is now 'delivered'
-    const list = ((await (await fetch(`${base}/api/situations/${SIT}/outputs`)).json()) as { data: Array<{ status: string }> });
-    for (const o of list.data) {
-      expect(['delivered', 'acknowledged', 'closed']).toContain(o.status);
-    }
+    expect(res.status).toBe(404);
+    // And: calling it must NOT have changed any WorkItem status to delivered.
+    const list = (await (await fetch(`${base}/api/situations/${SIT}/outputs`)).json()) as { data: Array<{ status: string }> };
+    const readyStillExists = list.data.some((o) => o.status === 'ready');
+    expect(readyStillExists).toBe(true);
   });
 
   test('PATCH /api/situations/:id/outputs/:oid transitions status', async () => {
@@ -345,5 +347,140 @@ describe('P0010.1 Output / WorkItem API (integration)', () => {
     const after = (await (await fetch(`${base}/api/outputs`)).json()) as { data: Array<any> };
     const afterById = new Map<string, string>(after.data.map((o: any) => [o.outputId, o.status]));
     expect(afterById.get(target.outputId)).toBe(target.status);
+  });
+
+  // ═══ P0010.1 REPAIR-5: canonical path, provenance, no deliveredAt ═══
+
+  test('P0010.1 REPAIR-5: /api/outputs/:oid response carries NO deliveredAt field (no fake delivery event)', async () => {
+    // The WorkItemSchema does NOT have a deliveredAt field. There is
+    // no Transport, no delivery event. The endpoint must NOT fabricate
+    // a deliveredAt — and the UI must NOT read one.
+    const list = (await (await fetch(`${base}/api/outputs`)).json()) as { data: Array<any> };
+    const target = list.data[0]!;
+    const res = await fetch(`${base}/api/outputs/${encodeURIComponent(target.outputId)}`);
+    const body = (await res.json()) as { data: any };
+    expect(body.data.deliveredAt).toBeUndefined();
+  });
+
+  test('P0010.1 REPAIR-5: /api/outputs/:oid response has `provenance` with only real facts', async () => {
+    // Empty / minimal ctx → all four booleans must be false; knowledge
+    // is always false (no first-class Knowledge record in this slice).
+    const list = (await (await fetch(`${base}/api/outputs`)).json()) as { data: Array<any> };
+    const target = list.data[0]!;
+    const res = await fetch(`${base}/api/outputs/${encodeURIComponent(target.outputId)}`);
+    const body = (await res.json()) as { data: any };
+    expect(body.data.provenance).toBeDefined();
+    expect(body.data.provenance.hasHuman).toBe(false);
+    expect(body.data.provenance.hasEvidence).toBe(false);
+    expect(body.data.provenance.hasKnowledge).toBe(false);
+    expect(body.data.provenance.knowledgeLabels).toEqual([]);
+    expect(body.data.provenance.humanInterventions).toEqual([]);
+    expect(body.data.provenance.evidenceLabels).toEqual([]);
+  });
+
+  test('P0010.1 REPAIR-5: /api/outputs/:oid reads from canonical ctx.investigation.* (NOT ctx.* top level)', async () => {
+    // Seed a dedicated situation with a full investigation object so we
+    // can prove the path. The endpoint must surface investigation
+    // fields — and must NOT pretend a top-level `ctx.currentUnderstanding`
+    // or `ctx.recommendation` field is the canonical store.
+    const SIT_R5 = 'sit_outputs_repair5';
+    const now = '2026-08-22T08:00:00.000Z';
+    const investigationBody = {
+      contextId: 'ctx_' + SIT_R5,
+      situation: { situationId: SIT_R5, domain: 'ecommerce', type: 'anomaly_investigation', entity: { id: 'e1', type: 'shop' }, temporal: { observedAt: now }, description: 'x', tags: [] },
+      lifecycle: 'open', createdAt: now, updatedAt: now,
+      observations: [], evidenceIds: [], signalIds: [],
+      agentActivities: [], humanInterventions: [
+        { interventionId: 'h1', type: 'correction', timestamp: now, summary: '人工修正' },
+        { interventionId: 'h2', type: 'context_supplement', timestamp: now, summary: '补充上下文' },
+      ],
+      actions: [], outcomes: [],
+      summary: { capabilitiesUsed: [], agentRuntimes: [], humanActors: [], totalEvidence: 0, totalSignals: 0 },
+      // The investigation object — fields here are the canonical source.
+      investigation: {
+        currentUnderstanding: '来自 ctx.investigation.currentUnderstanding 的当前理解',
+        judgment: '来自 ctx.investigation.judgment 的当前判断',
+        stopReason: 'judgment',
+        knownEvidence: ['known-evidence-1', 'known-evidence-2'],
+        findings: [
+          { question: 'q1', answer: 'a1', evidenceRefs: ['ev-aaa', 'ev-bbb'] },
+          { question: 'q2', answer: 'a2', evidenceRefs: [] },
+        ],
+        recommendation: {
+          recommendation: '来自 ctx.investigation.recommendation.recommendation 的建议',
+          rationale: '来自 ctx.investigation.recommendation.rationale 的理由',
+          expectedOutcome: '',
+          risks: [],
+          prerequisites: [],
+          humanNeeded: false,
+        },
+      },
+      // Anti-test: a top-level `currentUnderstanding` / `recommendation`
+      // — if the endpoint reads from these, the test will catch it.
+      // (Some legacy implementations read from ctx.* top-level.)
+      currentUnderstanding: 'SHOULD-NOT-BE-READ (top-level, wrong path)',
+      recommendation: { recommendation: 'SHOULD-NOT-BE-READ (top-level, wrong path)' },
+      outputs: [],
+    };
+    const { openDb: openDbR5 } = await import('#platform/storage/connection.js');
+    const dbR5 = openDbR5(TEMP_DB);
+    dbR5.prepare(
+      `INSERT INTO situations (situation_id, domain, type, entity_id, entity_type, entity_name, entity_platform,
+         observed_at, description, tags, lifecycle, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    ).run(
+      SIT_R5, 'ecommerce', 'anomaly_investigation',
+      'jd_shop_repair5', 'shop', 'REPAIR5 测试店', 'jd',
+      now, 'REPAIR-5 canonical-path test', JSON.stringify(['test']), 'open', now, now,
+    );
+    dbR5.prepare(
+      `INSERT INTO learning_contexts (context_id, situation_id, lifecycle, created_at, updated_at, body)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+    ).run(
+      'ctx_' + SIT_R5, SIT_R5, 'open', now, now, JSON.stringify(investigationBody),
+    );
+    dbR5.close();
+
+    // Create an Output for this situation.
+    const createRes = await fetch(`${base}/api/situations/${SIT_R5}/outputs`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ type: 'recommendation', content: 'REPAIR-5 测试交付物' }),
+    });
+    const createBody = (await createRes.json()) as { data: { outputId: string } };
+    expect(createRes.status).toBe(200);
+    const oid = createBody.data.outputId;
+
+    const res = await fetch(`${base}/api/outputs/${encodeURIComponent(oid)}`);
+    const body = (await res.json()) as { data: any };
+    expect(res.status).toBe(200);
+
+    // currentSituation must surface the canonical investigation fields.
+    const cs = body.data.currentSituation;
+    expect(cs.understanding).toBe('来自 ctx.investigation.currentUnderstanding 的当前理解');
+    expect(cs.judgment).toBe('来自 ctx.investigation.judgment 的当前判断');
+    expect(cs.stopReason).toBe('judgment');
+    expect(cs.recommendation).toBe('来自 ctx.investigation.recommendation.recommendation 的建议');
+    expect(cs.recommendationRationale).toBe('来自 ctx.investigation.recommendation.rationale 的理由');
+
+    // Anti-test: the wrong-path top-level fields MUST NOT be read.
+    expect(cs.understanding).not.toContain('SHOULD-NOT-BE-READ');
+    expect(cs.recommendation).not.toContain('SHOULD-NOT-BE-READ');
+
+    // Provenance must reflect the real facts.
+    const prov = body.data.provenance;
+    expect(prov.hasHuman).toBe(true);
+    expect(prov.humanInterventions.length).toBe(2);
+    expect(prov.humanInterventions[0].interventionId).toBe('h1');
+    expect(prov.humanInterventions[1].interventionId).toBe('h2');
+    // Evidence: 2 from findings[0].evidenceRefs + 2 from knownEvidence.
+    expect(prov.hasEvidence).toBe(true);
+    expect(prov.evidenceLabels).toContain('ev-aaa');
+    expect(prov.evidenceLabels).toContain('ev-bbb');
+    expect(prov.evidenceLabels).toContain('known-evidence-1');
+    expect(prov.evidenceLabels).toContain('known-evidence-2');
+    expect(prov.evidenceLabels.length).toBe(4);
+    // Knowledge: never present in this slice.
+    expect(prov.hasKnowledge).toBe(false);
+    expect(prov.knowledgeLabels).toEqual([]);
   });
 });

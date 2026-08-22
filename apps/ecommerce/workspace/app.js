@@ -357,9 +357,10 @@ async function loadMemory() {
 //   - No Hermes bridge.
 //   - No Action execution / Approval flow.
 //   - Opening this page does NOT change any WorkItem's status to
-//     'delivered' (the per-situation /mark-delivered side effect stays
-//     in the Situation detail view, where the operator has already
-//     expressed intent to look at the Output).
+//     'delivered'. P0010.1 REPAIR-5: the per-situation /mark-delivered
+//     side effect was REMOVED entirely. Status transitions are
+//     Operator-driven via PATCH on /api/situations/:id/outputs/:oid;
+//     collection / detail endpoints are strictly read-only.
 //   - No Event Bus / Wake / Scheduler.
 //   - Does NOT change Situation.lifecycle.
 const OUTPUT_COLLECTION_STATUS_LABEL = {
@@ -381,22 +382,33 @@ async function loadOutputs() {
   if (!ct) return;
   ct.innerHTML = '<p class="muted placeholder">加载中…</p>';
   try {
-    const url = '/api/outputs' + (outputsActiveStatus ? '?status=' + encodeURIComponent(outputsActiveStatus) : '');
-    const res = await apiGet(url);
-    const items = Array.isArray(res) ? res : (res && Array.isArray(res.data) ? res.data : []);
+    // P0010.1 REPAIR-5: fetch BOTH the filtered list (for the table) and
+    // the unfiltered list (for the sidebar badge). The badge must keep
+    // a GLOBAL meaning — "all WorkItems, every status" — not the count
+    // of whichever tab the operator currently has open. Without this,
+    // switching to the "closed" tab would shrink the badge to a small
+    // number, and the operator would lose the global signal.
+    const filteredUrl = '/api/outputs' + (outputsActiveStatus ? '?status=' + encodeURIComponent(outputsActiveStatus) : '');
+    const [filtered, all] = await Promise.all([
+      apiGet(filteredUrl),
+      apiGet('/api/outputs'),
+    ]);
+    const items = Array.isArray(filtered) ? filtered : (filtered && Array.isArray(filtered.data) ? filtered.data : []);
+    const allItems = Array.isArray(all) ? all : (all && Array.isArray(all.data) ? all.data : []);
     renderOutputsCollection(items);
-    updateOutputsBadge(items);
+    updateOutputsBadge(allItems);
   } catch (e) {
     ct.innerHTML = '<p class="muted">加载失败：' + escHtml(e && e.message ? e.message : String(e)) + '</p>';
   }
 }
 
 function updateOutputsBadge(items) {
-  // Update the sidebar badge with the all-statuses count.
+  // P0010.1 REPAIR-5: the badge is a GLOBAL count of ALL WorkItems
+  // across all statuses — not the count of the currently filtered tab.
+  // The caller is responsible for passing the unfiltered set.
   const badge = document.getElementById('badgeAllOutputs');
   if (badge) {
-    const all = items.length;
-    badge.textContent = String(all);
+    badge.textContent = String(items.length);
   }
 }
 
@@ -557,11 +569,13 @@ function renderOutputDetail(out) {
   if (!ct) return;
   if (!out) { ct.innerHTML = '<p class="muted placeholder">交付物不存在。</p>'; return; }
 
+  // P0010.1 REPAIR-5: single source of truth for labels — import from
+  // the schema (exposed via window globals in index.html). No more
+  // drift between schema and Workspace.
   const status = out.status || 'ready';
-  const statusLabel = OUTPUT_STATUS_LABEL[status] || status;
-  const typeLabel = OUTPUT_TYPE_LABEL[out.type] || out.type || '交付物';
+  const statusLabel = (window.WORK_ITEM_STATUS_LABEL || OUTPUT_STATUS_LABEL)[status] || status;
+  const typeLabel = (window.WORK_ITEM_TYPE_LABEL || OUTPUT_TYPE_LABEL)[out.type] || out.type || '交付物';
   const createdAt = (out.createdAt || '').slice(0, 16).replace('T', ' ');
-  const deliveredAt = (out.deliveredAt || '').slice(0, 16).replace('T', ' ');
   const acknowledgedAt = (out.acknowledgedAt || '').slice(0, 16).replace('T', ' ');
   const closedAt = (out.closedAt || '').slice(0, 16).replace('T', ' ');
   const sit = out.situation || {};
@@ -574,15 +588,20 @@ function renderOutputDetail(out) {
   const recText = cs.recommendation || '';
   const rationale = cs.recommendationRationale || '';
   const understanding = cs.understanding || '';
+  const prov = out.provenance || { hasHuman: false, humanInterventions: [], hasEvidence: false, evidenceLabels: [], hasKnowledge: false, knowledgeLabels: [] };
 
   // ---- Region A: 交付内容 ----
   var bodyA = '<p class="output-detail-content">' + escHtml(out.content || '') + '</p>';
 
   // ---- Region B: 交付状态 ----
+  // P0010.1 REPAIR-5: removed the "交付时间" row. The schema does not
+  // record deliveredAt; we must NOT display a timestamp that is
+  // always "—" — that is dishonest. There is no Transport here, so
+  // there is no delivery event. We keep the 4 honest rows: current
+  // state + created/acknowledged/closed timestamps.
   var bodyB = '<table class="output-status-table">' +
     rowKV('当前状态', '<span class="output-status output-status-' + escHtml(status) + '">' + escHtml(statusLabel) + '</span>') +
     rowKV('生成时间', escHtml(createdAt || '—')) +
-    rowKV('交付时间', escHtml(deliveredAt || '—')) +
     rowKV('确认时间', escHtml(acknowledgedAt || '—')) +
     rowKV('关闭时间', escHtml(closedAt || '—')) +
     rowKV('交付渠道', '<span class="muted">Workspace（当前阶段）</span>') +
@@ -613,15 +632,27 @@ function renderOutputDetail(out) {
     bodyC += '</div>';
   }
 
-  bodyC += '<div class="output-trust-block">' +
-    '<h5 class="muted" style="font-size:0.75rem;margin:12px 0 6px">来源类别（点击查看）</h5>' +
-    '<div class="source-tag-row">' +
-      '<span class="source-tag" data-trust="evidence" data-trust-note="Evidence 尚未有 first-class 标识（ADR-038）；此处仅为来源类别">证据</span>' +
-      '<span class="source-tag" data-trust="human" data-trust-note="如本交付物由某次人工干预触发，将在此显示 [H1] 标签；当前 schema 不记录">人工</span>' +
-      '<span class="source-tag" data-trust="knowledge" data-trust-note="Knowledge 当前为目录索引，无 first-class 记录">知识</span>' +
-      '<span class="source-tag" data-trust="memory" data-trust-note="Memory 由 Runtime 拥有，Fabric 不持久化">记忆</span>' +
-    '</div>' +
-  '</div>';
+  // ---- Region C (provenance block) ----
+  // P0010.1 REPAIR-5: ONLY render source categories for which there
+  // is a real record. We must NOT fabricate E/H/K/M tags when the
+  // Output does not actually reference any of them. The schema
+  // returns `provenance` with concrete facts; we honor that.
+  var realSources = [];
+  if (prov.hasEvidence) realSources.push({ kind: 'evidence', label: '证据' });
+  if (prov.hasHuman) realSources.push({ kind: 'human', label: '人工' });
+  if (prov.hasKnowledge) realSources.push({ kind: 'knowledge', label: '知识' });
+  if (realSources.length > 0) {
+    bodyC += '<div class="output-trust-block">' +
+      '<h5 class="muted" style="font-size:0.75rem;margin:12px 0 6px">真实来源</h5>' +
+      '<div class="source-tag-row">';
+    for (var i = 0; i < realSources.length; i++) {
+      var src = realSources[i];
+      bodyC += '<span class="source-tag" data-trust="' + escHtml(src.kind) + '">' + escHtml(src.label) + '</span>';
+    }
+    bodyC += '</div></div>';
+  } else {
+    bodyC += '<p class="muted" style="font-size:0.7rem;margin-top:6px">本交付物尚无 first-class provenance（无具体证据 / 人工 / 知识记录）。</p>';
+  }
 
   // ---- Region D: 当前可做的操作 ----
   var bodyD = '';
@@ -666,6 +697,9 @@ function rowKV(k, v) {
 
 function renderOutputDetailRightPane(out) {
   // Output Detail right pane = Source / Trust (NOT Investigation Track).
+  // P0010.1 REPAIR-5: only render source categories for which there
+  // is a real record (provenance.hasHuman / hasEvidence / hasKnowledge).
+  // Never fabricate E/H/K/M tags when no record exists.
   const panel = document.getElementById('decisionPanel');
   const content = document.getElementById('decisionContent');
   const label = document.getElementById('decisionEntityLabel');
@@ -673,8 +707,15 @@ function renderOutputDetailRightPane(out) {
   if (label) label.textContent = '来源 / Trust';
   const sit = (out && out.situation) || {};
   const cs = (out && out.currentSituation) || {};
+  const prov = (out && out.provenance) || { hasHuman: false, humanInterventions: [], hasEvidence: false, evidenceLabels: [], hasKnowledge: false, knowledgeLabels: [] };
   const sitId = sit.situationId || '';
   const entityName = sit.entityName || sit.entityId || '—';
+
+  var realSources = [];
+  if (prov.hasEvidence) realSources.push({ kind: 'evidence', label: '证据' });
+  if (prov.hasHuman) realSources.push({ kind: 'human', label: '人工' });
+  if (prov.hasKnowledge) realSources.push({ kind: 'knowledge', label: '知识' });
+
   var html = '<div class="output-trust-pane">' +
     '<h4 class="muted" style="font-size:0.78rem;margin:0 0 8px">来源</h4>' +
     '<p style="font-size:0.78rem;margin:0 0 12px"><a href="#" data-output-action="open-situation" data-situation-id="' + escHtml(sitId) + '">' + escHtml(entityName) + '</a></p>';
@@ -686,14 +727,19 @@ function renderOutputDetailRightPane(out) {
     html += '<h4 class="muted" style="font-size:0.78rem;margin:8px 0">当前建议</h4>' +
       '<p style="font-size:0.78rem;margin:0 0 8px">' + escHtml(cs.recommendation) + '</p>';
   }
-  html += '<h4 class="muted" style="font-size:0.78rem;margin:12px 0 6px">来源类别</h4>' +
-    '<div class="source-tag-row">' +
-      '<span class="source-tag" data-trust="evidence" data-trust-note="Evidence 尚未有 first-class 标识（ADR-038）">证据</span>' +
-      '<span class="source-tag" data-trust="human" data-trust-note="如由人工干预触发则显示 [H1]…[Hn]">人工</span>' +
-      '<span class="source-tag" data-trust="knowledge" data-trust-note="Knowledge 当前为目录索引">知识</span>' +
-      '<span class="source-tag" data-trust="memory" data-trust-note="Memory 由 Runtime 拥有">记忆</span>' +
-    '</div>' +
-    '<p class="muted" style="font-size:0.7rem;margin-top:12px">右栏为 Trust / Source 视角；完整调查过程请打开来源 Situation。</p>' +
+
+  if (realSources.length > 0) {
+    html += '<h4 class="muted" style="font-size:0.78rem;margin:12px 0 6px">真实来源</h4>' +
+      '<div class="source-tag-row">';
+    for (var i = 0; i < realSources.length; i++) {
+      var src = realSources[i];
+      html += '<span class="source-tag" data-trust="' + escHtml(src.kind) + '">' + escHtml(src.label) + '</span>';
+    }
+    html += '</div>';
+  } else {
+    html += '<p class="muted" style="font-size:0.7rem;margin-top:12px">本交付物尚无 first-class provenance（无具体证据 / 人工 / 知识记录）。</p>';
+  }
+  html += '<p class="muted" style="font-size:0.7rem;margin-top:12px">右栏为 Trust / Source 视角；完整调查过程请打开来源 Situation。</p>' +
   '</div>';
   content.style.display = 'block';
   content.innerHTML = html;
@@ -1274,8 +1320,9 @@ async function loadSituationDetail(situationId) {
     // Investigation. The section only appears when outputs[] is non-empty
     // (no giant empty card when the Agent has produced nothing yet).
     // Rendered SYNCHRONOUSLY from the data already loaded (raw.outputs /
-    // raw.learningContext), so there is no second-pass / mark-delivered
-    // call that could fail and leave the section blank.
+    // raw.learningContext). P0010.1 REPAIR-5: the previous
+    // /mark-delivered side effect was REMOVED — opening this page does
+    // NOT change any WorkItem status.
     var initialOutputs = Array.isArray(raw.outputs) ? raw.outputs : [];
     html += '<div id="situationOutputsHost_' + escHtml(situationId) + '">';
     html += renderOutputsSection(initialOutputs, situationId);
@@ -1350,8 +1397,9 @@ async function loadSituationDetail(situationId) {
     html += '</details></div>';
 
     // P0010.1 REPAIR-2: Output/WorkItem is rendered FIRST-CLASS (above
-    // Lifecycle) and synchronously — no bottom host, no second-pass
-    // / mark-delivered call needed.
+    // Lifecycle) and synchronously. REPAIR-5: the previous
+    // /mark-delivered side effect is gone — opening this page does
+    // NOT change any WorkItem status.
 
     html += '</div>'; // end detail body
     content.innerHTML = html;
@@ -1416,11 +1464,11 @@ async function loadSituationDetail(situationId) {
       knownEvidence: knownEvidence,
       interventions: interventions,
       invData: invData,
-      // P0010.1 REPAIR-2: outputs are loaded in the first pass (no second-
-      // pass / mark-delivered call). Auto-marking as 'delivered' on page
-      // open is removed — that side effect was mutating state without the
-      // operator's intent. Status transitions are now triggered ONLY by
-      // explicit button clicks (已知悉 / 结束).
+      // P0010.1 REPAIR-2 + REPAIR-5: outputs are loaded in the first
+      // pass. The previous /mark-delivered convenience endpoint has been
+      // REMOVED — opening this page does NOT change any WorkItem status.
+      // Status transitions are now triggered ONLY by explicit button
+      // clicks (已知悉 / 结束) in the Output Detail view.
       outputs: initialOutputs,
     };
     state.currentSituationId = situationId;
@@ -1709,7 +1757,8 @@ function renderCommitmentCard(inv) {
 //   - Renders ONLY when outputs.length > 0 (no giant empty card otherwise).
 //   - First-class position (above the Lifecycle card).
 //   - Synchronous render from data already loaded by /api/situations/:id —
-//     no second-pass / mark-delivered call.
+//     P0010.1 REPAIR-5: there is no /mark-delivered side effect anywhere;
+//     opening this page does NOT change any WorkItem status.
 //   - Per-Output fields shown: type, content (the deliverable's body),
 //     status, createdAt, resultRef.
 //   - "查看结果" button is shown ONLY when resultRef.kind+ref describe a

@@ -1,5 +1,56 @@
 # 技术决策记录 (ADR)
 
+## ADR-049: P0010.1 REPAIR-5 — Output Workspace 诚实性（ChatGPT 4 断点 + 2 小问题）
+
+- **日期**: 2026-08-22
+- **状态**: Accepted（30/30 定向测试 + 浏览器 Playwright smoke + 6 处最小诚实修复完成）
+- **来源**: ChatGPT 对 `40afdc6`（REPAIR-1/2/3 + Output Workspace v0）的代码审计 + 用户明确边界
+
+**核心原则**（用户原话）:
+> 不改 Situation lifecycle、不做 Trust schema、不接 transport、不做 Action/Approval。暂时不需要再给我截图。Claude 修完 push 后，我再审一次实际代码；代码通过以后，你再从人类使用角度看页面最有效。
+
+**决策**（6 处 P0/P1/小问题 的最小诚实修复，不扩大产品边界）:
+
+1. **P0：canonical 路径必须是 `ctx.investigation.*`**。`GET /api/outputs/:oid` 之前从 `ctx.currentUnderstanding` / `ctx.recommendation` 顶层读，但 `InvestigationSchema` 把它们放在 `ctx.investigation.currentUnderstanding` / `ctx.investigation.recommendation.recommendation` / `ctx.investigation.recommendation.rationale` / `ctx.investigation.judgment` / `ctx.investigation.stopReason`。改后端只从 canonical 路径读，**前端不再有"判断依据空白"bug**。**反向测试**：seed 故意写 `ctx.currentUnderstanding = 'SHOULD-NOT-BE-READ'`，断言 endpoint 不读它。
+
+2. **P0：删除 `POST /api/situations/:id/outputs/mark-delivered` 端点**。之前的语义"打开 Situation detail = 全部 `ready` 切到 `delivered`"是隐藏 side effect，违反"Operator-driven transitions only"原则，且与"Recommendation adoption ≠ Output closed"语义冲突。**整条路由删除**（不再有 405/409 灰区），并把"打开页面 ≠ 已交付"显式写进 `WorkItemSchema` 头部注释 + app.js 4 处旧注释。新测试断言此端点返回 404，且没有任何 `ready` 被偷偷转成 `delivered`。
+
+3. **P0/P1：Source tag 真实存在才显示**（**反 fake citation**）。之前 Output Detail + 右栏固定渲染 4 个 tag（证据/人工/知识/记忆）不管这个 Output 实际是否引用了任何 source — 这是赤裸的 fake citation。改成：
+   - 服务端 `GET /api/outputs/:oid` 响应里加 `provenance` 字段：`{ hasHuman: boolean, humanInterventions: [{interventionId, type, timestamp, summary}], hasEvidence: boolean, evidenceLabels: string[], hasKnowledge: boolean, knowledgeLabels: string[] }`
+   - `hasKnowledge` **始终 `false`**（本刀无 first-class Knowledge 记录，**绝不伪造** — 业务 workspace 不假装有 Knowledge 库）
+   - `hasHuman` 由 `ctx.humanInterventions.length > 0` 真实驱动
+   - `hasEvidence` 由 `findings[].evidenceRefs[]` + `knownEvidence[]` 真实驱动
+   - 前端 `renderOutputDetail` + `renderOutputDetailRightPane` 都改用 `out.provenance` 条件渲染：0 个真实 source → 「本交付物尚无 first-class provenance（无具体证据 / 人工 / 知识记录）」灰色诚实提示
+
+4. **P1：删 `deliveredAt` / 「交付时间」**。`WorkItemSchema` 根本没有 `deliveredAt` 字段（无 Transport、无 delivery event），但 UI 之前显示「交付时间」永远 `—` — 这是 **silent fabrication**。按用户偏好**从 UI 删除该行**（**不**为它新增 schema 字段；任何字段都得有 first-class 来源才能加）。状态表 6 行：当前状态 / 生成时间 / 确认时间 / 关闭时间 / 交付渠道 / 外部发送。新测试断言 `body.data.deliveredAt === undefined`。
+
+5. **WorkItem 状态 label 单一事实源**。之前 schema 写 `待查看/已送达/已结束`，Workspace 用 `待交付/已交付/已确认/已关闭` — **两套事实源**。改 `WORK_ITEM_STATUS_LABEL` 在 `shared/schemas/output.ts` 为 canonical `待交付/已交付/已确认/已关闭`，Workspace 是 vanilla JS 不能 import TS，**新加 `apps/ecommerce/workspace/output-labels.js`** 镜像到 `window.WORK_ITEM_STATUS_LABEL` / `window.WORK_ITEM_TYPE_LABEL`，`index.html` 在 app.js 之前加载。**新 contract test `tests/contract/output-labels-sync.test.ts` 6 断言自动检测漂移**（CI 必跑）。
+
+6. **左栏 Output badge 全局含义**（**不随 tab filter 变化**）。之前 `updateOutputsBadge(items)` 用 `items.length`（filtered），切到 closed tab（0 items）badge 缩成 0 — 违反"badge 是全局工作输出总数"的语义。改 `loadOutputs` 用 `Promise.all` 同时拿 filtered（for table）+ unfiltered（for badge），badge 永远用后者。浏览器验证：3 个 demo → badge=3，切到 closed tab（0 items）badge 仍=3。
+
+**边界（严格遵守）**:
+- ❌ 不改 Situation 5 状态生命周期
+- ❌ 不做 Trust schema（`provenance` 是 inline JSON，不持久化到独立表）
+- ❌ 不接 transport（无飞书/邮件/企业微信/Telegram）
+- ❌ 不做 Action/Approval（"已知悉/结束" 按钮保持原状）
+- ❌ 不增加 schema 字段（不补 `deliveredAt`、不补 `knowledgeId`、不补 `sourceRef`）
+- ❌ 不创建第二套 Output Store（仍用 `learning_contexts.body.outputs[]` JSON 列）
+
+**验收**:
+- `npx vitest run tests/integration/outputs-api.test.ts tests/contract/output-labels-sync.test.ts` — **30/30 ✅**（24 integration + 6 contract）
+- 全量 693 tests pass（2 pre-existing failures 不变，与本刀无关）
+- 浏览器 Playwright smoke (`/tmp/verify_repair5.py`)：labels 暴露 ✅ / badge 全局 ✅ / 状态表无 deliveredAt 行 ✅ / source tags 只 2 个真实 ✅ / 0 console error ✅
+- typecheck：仅 pre-existing 错误，本刀 0 新增
+
+**未做（明确不属本刀）**:
+- P0011 Evidence Identity（解锁 `hasEvidence: true` 真正有 first-class 记录可引）
+- P0011.1 Knowledge Provenance（解锁 `hasKnowledge` 真实显示）
+- Transport schema（飞书/邮件 — 解锁 `deliveredAt` 真实有值的可能性）
+- P0012 Operations（wake + event bus）
+- Action/Approval 业务执行闭环（ADR-035 下一阶段）
+
+---
+
 ## ADR-048: P0010.1 Workspace Productization Baseline — 人类侧呈现契约
 
 - **日期**: 2026-08-22

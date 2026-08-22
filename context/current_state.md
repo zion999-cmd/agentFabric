@@ -1,8 +1,10 @@
 # 当前状态
 
-|**版本**: v0.10.7 (P0010.1 Productization Baseline 1.0) | **Hermes**: v0.20.0 | **测试**: 594 passed / 2 pre-existing failures (596 total, +27 new) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 641 files (Jan-Aug 2026) | **Demo**: 3 screenshots ✅
+|**版本**: v0.10.8 (P0010.1 REPAIR-5: Output Workspace 诚实性) | **Hermes**: v0.20.0 | **测试**: 693 passed / 2 pre-existing failures (695 total, +30 new) | **真实 CDP**: ✅ self-sustaining (08-12 → 08-18) | **发现**: 70 APIs | **JD Evidence**: 641 files (Jan-Aug 2026) | **Demo**: 3 screenshots ✅ + REPAIR-5 浏览器 smoke ✅
 
 ## 已完成
+
+- [x] **P0010.1 REPAIR-5: Output Workspace 诚实性（ChatGPT 4 个真实断点 + 2 个小问题）** - 不改 Situation lifecycle / 不做 Trust schema / 不接 transport / 不做 Action/Approval。6 处最小诚实修复：①P0 canonical path — `GET /api/outputs/:oid` 改从 `ctx.investigation.*` 读 `currentUnderstanding` / `recommendation.recommendation` / `recommendation.rationale`（之前从 `ctx.*` 顶层读为 undefined；测试 seed 故意写 `SHOULD-NOT-BE-READ` 顶层假字段做反向证明）；②P0 mark-delivered 端点删除 — `POST /api/situations/:id/outputs/mark-delivered` 整体删除（"打开页面 ≠ 已交付"），`WorkItemSchema` 头部 + app.js 4 处旧注释全部改成 REPAIR-5 真实语义；③P0/P1 source tag 真实存在才显示 — 之前 Output Detail/右栏固定渲染 4 个 tag（证据/人工/知识/记忆）不管真实引用（假来源类别），改成服务端 `provenance = { hasHuman, humanInterventions[], hasEvidence, evidenceLabels[], hasKnowledge, knowledgeLabels[] }` 只含真实 fact（`hasKnowledge: false` 因无 first-class 记录绝伪造），前端 `renderOutputDetail` / `renderOutputDetailRightPane` 都用 `out.provenance` 条件渲染（0 个真实时显示「本交付物尚无 first-class provenance」诚实提示）；④P1 删 交付时间 / deliveredAt — schema 无 `deliveredAt` 字段无 Transport，按用户偏好**从 UI 删该行**不补 schema，状态表 6 行：当前状态/生成时间/确认时间/关闭时间/交付渠道/外部发送；⑤状态 label 统一 — `WORK_ITEM_STATUS_LABEL` 在 schema 是 single source of truth（待交付/已交付/已确认/已关闭），Workspace vanilla JS 不能 import TS，新加 `apps/ecommerce/workspace/output-labels.js` 镜像到 `window.WORK_ITEM_STATUS_LABEL` / `window.WORK_ITEM_TYPE_LABEL`，`index.html` 在 app.js 前加载，**新 contract test `tests/contract/output-labels-sync.test.ts` 6 断言防漂移**；⑥左栏 Output badge 全局含义 — 之前 `updateOutputsBadge` 接收 filtered `items.length`（切到 closed tab badge 缩成 0），改 `loadOutputs` 用 `Promise.all` 同时拿 filtered + unfiltered，badge 永远用后者（浏览器验证：3 个 demo → badge=3，切到 closed tab（0 items）badge 仍=3）。**验收**：30/30 定向测试 pass（24 integration + 6 contract）+ Playwright smoke 6/6（labels 暴露 / badge 全局 / 状态表无 deliveredAt / source tags 只 2 个真实 / console 0 error）。ADR-049。
 
 - [x] **P0010.1 Workspace Productization Baseline 1.0（ADR-048，人类侧呈现契约 10 秒验收）** - 三层契约（Business Reality / Agent Cognition / Trust-Provenance）落地：①Layer 1 "发生了什么" 重写为业务情境语（`businessDescribeSituation` 6 type×stopReason 纯函数映射，**不调用 LLM**）；②Progressive Disclosure Hero（当前判断 + 建议 + 调查状态 三行置顶，仅在 completed/failed+hasPrior 出现，failed+hasPrior 顶部加红色 Stale banner）；③Honest Source Tag `[E]/[K]/[H]/[M]`（4 kind 正确渲染，未识别 kind 不渲染，[E1] 标 "证据" 无编号因 content_hash 非持久，[K1] 标 "规则" 锚 knowledge/INDEX.md 路径，[M1] 标 "记忆" 标 Runtime-owned，[H{n}] 由 humanInterventions index 真实计数）；④失败业务化（`humanizeError` 4 种常见 error 字符串业务化，business mode 隐藏原始 error，developer mode 显式）；⑤Language Boundary 强化（`scrubCapabilityIdsInProse` 业务模式不暴露 trade.overview/evidenceId/situationId，纯字符串替换+已知 capability key 映射表）；⑥3 demo situations 不可绕过样本（sit_observe_demo observe+0 人工 / sit_human_demo judgment+3 人工 [H1][H2][H3] / sit_failed_recover_demo failed marker+prior valid cognition 保留+Stale banner），seed 幂等 pre-check existing row。**5 个 schema blocker 显式声明**（SB-1~SB-5，详见 `context/p0010_1_productization_baseline.md`）：[E1] 稳定引用 / [K1] Knowledge first-class / [M1] Memory 永属 Runtime / [SB-4] typed sourceRef / [SB-5] wake condition — 全部诚实 unavailable，不伪造，本刀不修，记入 P0011 候选。3 截图 + 24 contract + 3 integration 全绿。ADR-048。**Baseline §17 NOT INCLUDED 边界严格遵守**（不改 InvestigationSchema/Knowledge/Evidence schema / 不增加 knowledge_id/business_trace/event_bus / 不实现 Human Action/工单/Approval/Commitment Engine / 不调用 LLM 做 UI 翻译 / 不创建第二套 Product Catalog / 不重设计 Hermes session / 不伪造 Source attribution）。
 
@@ -95,10 +97,14 @@
 
 ## 下一步
 
-**本轮 Consolidation 债务清零，正式结束。** 剩余工作属于新功能/新闭环，等业务需求驱动：
+**P0010.1 REPAIR-5 完成**。ChatGPT 找到的 4 个真实断点 + 2 个小问题全部按用户给的边界修复，Output Workspace 第一次**完全诚实**：canonical path 读对了、source 不再假造、`deliveredAt` 这个永远 `—` 的字段从 UI 删了、label 单一事实源、badge 全局含义。
 
-- knowledge/policy/context/reports 空目录（有意的未来模块）
-- Action/Result 业务执行闭环（ADR-035 下一阶段）
+下一轮候选（不属本刀，按用户指示"暂时不要扩产品"）:
+- P0011 Evidence Identity（解锁 `evidence` resultRef kind，**首次**让 Output Detail 的 `hasEvidence: true` 真正有 first-class 记录可引；解锁 SB-1）
+- P0011.1 Knowledge Provenance（解锁 `hasKnowledge` 真实显示；解锁 SB-2）
+- Transport schema（飞书/邮件/企业微信/Telegram — 解锁 `deliveredAt` 真实有值的可能性；当前无）
+- P0012 Operations（wake condition + event bus；解锁 SB-5）
+- Action/Approval 业务执行闭环（ADR-035 下一阶段；人类接受 judgement 之后做什么）
 - provenance consolidation（ADR-038 gaps：persistent evidence identity、capability↔evidence 关联、lastVerified 数据）
 
 ## 阻塞

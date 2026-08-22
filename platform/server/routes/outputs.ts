@@ -1,23 +1,37 @@
 // P0010.1 Post-Productization REPAIR — minimal Output / WorkItem API.
 //
-// Three endpoints, no transport, no engine, no approval flow:
+// Five endpoints, no transport, no engine, no approval flow:
 //   GET    /api/situations/:id/outputs      — list all WorkItems
 //   POST   /api/situations/:id/outputs      — create a new WorkItem
 //   PATCH  /api/situations/:id/outputs/:oid — transition status (ready →
 //                                              delivered → acknowledged →
 //                                              closed)
+//   GET    /api/outputs                     — cross-situation collection
+//   GET    /api/outputs/:oid                — single Output (with provenance)
 //
 // The WorkItem is persisted inside the Learning Context's `body.outputs[]`
 // JSON column. No SQL migration. No new table. Reuses the existing
 // `learning_contexts` row.
 //
-// Strict boundaries:
+// P0010.1 REPAIR-5 boundary changes (per user audit 2026-08-22):
+//   - Removed `POST /api/situations/:id/outputs/mark-delivered`. The
+//     old "open the page = delivered" side effect is no longer valid.
+//     `delivered` now means only that the Agent has surfaced the item
+//     to the Workspace; the transition is driven by the Operator, not
+//     by page load. The collection endpoint does NOT auto-transition.
+//   - `currentSituation` (from `/api/outputs/:oid`) is read from
+//     `ctx.investigation.*` (canonical InvestigationSchema), not from
+//     top-level `ctx.*`.
+//   - `provenance` (real Human / Evidence / Knowledge facts only) is
+//     included in the response; the UI must NOT render categories
+//     that have no supporting record.
+//
+// Strict boundaries (NOT INCLUDED):
 //   - No Action execution (the Agent never executes business operations).
 //   - No external transport (Feishu / WeCom / Email / Telegram — out of scope).
 //   - No Event Bus, no wake engine, no scheduler (out of scope).
-//   - No approval flow (the Operator's "closed" is the only close path).
-//   - `delivered` is set automatically when the Situation detail is opened
-//     (see POST /api/situations/:id/outputs/:oid/delivered convenience below).
+//   - No approval flow (the Operator's lifecycle is the only path).
+//   - `WorkItem.closed` does NOT close the Situation.
 //
 // See `context/p0010_1_productization_baseline.md` Schema Blockers
 // (SB-1 / SB-4) — `evidence` resultRef kind is aspirational and will return
@@ -158,25 +172,12 @@ export const outputsRouter = (db: Db): Router => {
     ok(res, next);
   });
 
-  // ── Convenience: mark all `ready` outputs as `delivered` ───
-  // Called by the Workspace when the Situation detail view is opened.
-  // POST /api/situations/:id/outputs/mark-delivered
-  router.post('/situations/:id/outputs/mark-delivered', (req, res) => {
-    const situationId = req.params.id;
-    const read = readLearningContextBody(db, situationId);
-    if (!read) return ok(res, { updated: 0 });
-    const outputs = read.ctx.outputs as WorkItem[];
-    let updated = 0;
-    read.ctx.outputs = outputs.map((o) => {
-      if (o.status === 'ready') {
-        updated++;
-        return { ...o, status: 'delivered' as WorkItemStatus };
-      }
-      return o;
-    });
-    if (updated > 0) writeLearningContextBody(db, situationId, read.ctx);
-    ok(res, { updated });
-  });
+  // P0010.1 REPAIR-5: the previous "mark all ready as delivered on
+  // Situation detail open" convenience endpoint has been REMOVED.
+  // Opening the Workspace does NOT advance a WorkItem to 'delivered'.
+  // Status transitions are Operator-driven via PATCH; the collection
+  // endpoint does NOT auto-transition either. There is no
+  // side-effect-on-page-load anywhere in this slice.
 
   // ── Single Output (cross-situation, read-only) ────────────────────
   // P0010.1 Output Workspace v0: GET /api/outputs/:oid
@@ -216,24 +217,72 @@ export const outputsRouter = (db: Db): Router => {
       if (!Array.isArray(ctx.outputs)) continue;
       const hit = (ctx.outputs as WorkItem[]).find((o) => o && o.outputId === outputId);
       if (!hit) continue;
-      // Best-effort: pull the current judgment / recommendation out of
-      // the LearningContext body for the "判断依据" region. These are
-      // the *current* values, not a generation-time snapshot — we
-      // surface that honestly in the UI.
+      // P0010.1 REPAIR-5: pull the current judgment / recommendation
+      // from the canonical InvestigationSchema location, which is
+      // `ctx.investigation.*` (NOT `ctx.*` at the top level). The
+      // previous implementation read `ctx.currentUnderstanding` and
+      // `ctx.recommendation` from the top level — which is not where
+      // the canonical schema stores them, so on real data both were
+      // empty / undefined.
       const investigation = (ctx.investigation && typeof ctx.investigation === 'object')
         ? (ctx.investigation as Record<string, unknown>) : null;
-      const recommendation = (ctx.recommendation && typeof ctx.recommendation === 'object')
-        ? (ctx.recommendation as Record<string, unknown>) : null;
-      const understanding = typeof ctx.currentUnderstanding === 'string' ? ctx.currentUnderstanding : '';
-      const judgment = investigation && typeof investigation.judgment === 'string' ? investigation.judgment : '';
-      const stopReason = investigation && typeof investigation.stopReason === 'string' ? investigation.stopReason : '';
-      const rec = recommendation && typeof recommendation.recommendation === 'string' ? recommendation.recommendation : '';
-      const rationale = recommendation && typeof recommendation.rationale === 'string' ? recommendation.rationale : '';
+      const recommendation = investigation && investigation.recommendation
+        && typeof investigation.recommendation === 'object'
+          ? (investigation.recommendation as Record<string, unknown>) : null;
+      const understanding = investigation && typeof investigation.currentUnderstanding === 'string'
+        ? investigation.currentUnderstanding : '';
+      const judgment = investigation && typeof investigation.judgment === 'string'
+        ? investigation.judgment : '';
+      const stopReason = investigation && typeof investigation.stopReason === 'string'
+        ? investigation.stopReason : '';
+      const recText = recommendation && typeof recommendation.recommendation === 'string'
+        ? recommendation.recommendation : '';
+      const rationale = recommendation && typeof recommendation.rationale === 'string'
+        ? recommendation.rationale : '';
       let tags: string[] = [];
       try {
         const parsed = r.tags ? JSON.parse(r.tags) : [];
         if (Array.isArray(parsed)) tags = parsed.map((t) => String(t));
       } catch { /* keep [] */ }
+
+      // P0010.1 REPAIR-5: real provenance facts only. We do NOT invent
+      // categories. Each kind is included in the response ONLY when
+      // there is actual evidence (Human intervention, recorded
+      // Evidence, etc.). Without this, the UI would render 4 fixed
+      // tags even when nothing is referenced — exactly the "fake
+      // citation" the rules forbid.
+      const humanInterventions = Array.isArray(ctx.humanInterventions)
+        ? (ctx.humanInterventions as Array<{ interventionId?: string; type?: string; timestamp?: string; summary?: string }>)
+        : [];
+      const findings = investigation && Array.isArray(investigation.findings)
+        ? (investigation.findings as Array<{ evidenceRefs?: string[]; question?: string; answer?: string }>)
+        : [];
+      const evidenceRefs = findings.flatMap((f) => Array.isArray(f.evidenceRefs) ? f.evidenceRefs : []);
+      const knownEvidence = investigation && Array.isArray(investigation.knownEvidence)
+        ? (investigation.knownEvidence as string[]) : [];
+
+      const provenance: {
+        hasHuman: boolean;
+        humanInterventions: Array<{ interventionId: string; type: string; timestamp: string; summary: string }>;
+        hasEvidence: boolean;
+        evidenceLabels: string[];
+        hasKnowledge: boolean;
+        knowledgeLabels: string[];
+      } = {
+        hasHuman: humanInterventions.length > 0,
+        humanInterventions: humanInterventions.map((h) => ({
+          interventionId: h.interventionId || '',
+          type: h.type || '',
+          timestamp: h.timestamp || '',
+          summary: h.summary || '',
+        })),
+        hasEvidence: evidenceRefs.length > 0 || knownEvidence.length > 0,
+        evidenceLabels: [...evidenceRefs, ...knownEvidence].filter((s) => typeof s === 'string' && s.length > 0),
+        // Knowledge: there is no first-class record in this slice; the
+        // only honest answer is "not present" — we never synthesize.
+        hasKnowledge: false,
+        knowledgeLabels: [],
+      };
 
       return ok(res, {
         ...hit,
@@ -250,12 +299,15 @@ export const outputsRouter = (db: Db): Router => {
           understanding,
           judgment,
           stopReason,
-          recommendation: rec,
+          recommendation: recText,
           recommendationRationale: rationale,
           // Surface that this is the *current* state, not a generation-time
           // snapshot. The schema does not snapshot at output creation.
           snapshotAvailable: false,
         },
+        // Real provenance only; the UI must NOT render categories
+        // that have no supporting record.
+        provenance,
       });
     }
     return fail(res, 404, 'Output not found.');
