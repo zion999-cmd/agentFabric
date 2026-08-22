@@ -3,6 +3,22 @@
  * V1 Sidebar + Agent Transparency / Trace Panel (P0003.1)
  */
 
+// P0010.1 Productization Baseline — pure presentation helpers are
+// imported from `./presentation.js` (the single source of truth, also
+// unit-tested in tests/contract/investigation.contract.ts). The two
+// DOM-coupled wrappers below (renderSourceTag / humanizeError call sites
+// inside renderHeroSummary) reuse the pure helpers but inject the live
+// `state.panelMode` and `escHtml` from this module.
+import {
+  businessDescribeSituation,
+  businessDescribeSituationShort,
+  sourceTagLabel,
+  sourceTagTooltip,
+  humanizeError,
+  descClean,
+  hasPriorValidCognition,
+} from './presentation.js';
+
 const toastNode = document.getElementById('toast');
 
 // ═══ i18n ═══════════════════════════════════════════════════
@@ -876,34 +892,20 @@ async function loadSituationDetail(situationId) {
     html += '<h2 class="situation-detail-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(descClean) + '</h2>';
     html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
 
-    // P0010.1 Post-Review REPAIR: single-column Situation Detail body.
-    // The Investigation Track no longer lives inside this view; it is
-    // projected into the Workspace's existing #decisionPanel right pane
-    // (see decisionPanel/decisionContent references below). The body now
-    // only contains the operator-facing surface: what happened, current
-    // understanding, human feedback, and the follow-up chat. No fake
-    // "Track" / "trust score" promise on the right.
-    html += '<div class="situation-detail-body">';
-
-    // Title
-    // P0010.1: strip a leading entity-id from the description so the title
-    // doesn't render "未知商品 · SKU 101 · 101 …" (duplicate id). Legacy
-    // situations were generated with the id as the leading token.
-    var entityId = (entity && (entity.id || entity.entity_id)) || '';
-    var descClean = (desc || '');
-    if (entityId && descClean.indexOf(entityId) === 0) {
-      descClean = descClean.slice(entityId.length).replace(/^[\s·,\-，]+/, '');
-    }
-    descClean = descClean.slice(0, 80);
-    html += '<h2 class="situation-detail-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(descClean) + '</h2>';
-    html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
-
-    // Layer 1: 发生了什么
+    // Layer 1: 发生了什么 — P0010.1 Productization: Business Situation language,
+    // re-populated after the investigation loads so stopReason / status are
+    // reflected (pending → "待调查"; observe → "正常范围"; failed+hasPrior → banner).
     html += '<div class="situation-layer">';
     html += '<h3 class="situation-layer-title">📊 发生了什么</h3>';
-    html += '<div class="situation-layer-body">';
-    html += '<p>' + escHtml(desc) + '</p>';
+    html += '<div class="situation-layer-body" id="situationWhatHappened_' + escHtml(situationId) + '">';
+    html += '<p>' + escHtml(businessDescribeSituation({ type: raw.type, description: desc }, null)) + '</p>';
     html += '</div></div>';
+
+    // P0010.1 Productization: Hero — conclusion first. Populated after the
+    // investigation loads. When the latest attempt failed but prior valid
+    // cognition is preserved, the stale banner is rendered here (not duplicated
+    // inside Layer 2).
+    html += '<div id="situationHero_' + escHtml(situationId) + '"></div>';
 
     // Layer 2: 🧠 Agent 当前理解 — the hero business surface.
     html += '<div class="situation-layer">';
@@ -923,10 +925,15 @@ async function loadSituationDetail(situationId) {
     if (interventions.length > 0) {
       html += '<div class="situation-interventions-existing">';
       html += '<h4 style="font-size:0.8rem;margin-bottom:8px">处理记录</h4>';
-      interventions.forEach(function(i) {
+      // P0010.1 Productization: each intervention record carries a stable
+      // [H{n}] source tag (n = 1-based index). The underlying interventionId
+      // is intentionally NOT shown in business mode; dev mode reveals it via
+      // the title attribute (handled in renderSourceTag).
+      interventions.forEach(function(i, idx) {
         var typeLabel = i.type === 'correction' ? '判断有误' : i.type === 'context_supplement' ? '补充情况' :
                         i.type === 'decision' ? '决策' : i.type === 'action_intent' ? '准备处理' : '认同判断';
         html += '<div class="intervention-record">' +
+          renderSourceTag('human', idx + 1) +
           '<span class="intervention-record-type">' + typeLabel + '</span>' +
           '<span class="intervention-record-summary">' + escHtml(i.summary || '') + '</span>' +
           '<span class="intervention-record-time">' + (i.timestamp || i.createdAt || '').slice(0, 16) + '</span>' +
@@ -983,6 +990,24 @@ async function loadSituationDetail(situationId) {
     // host divs so we don't fight the existing panelBusiness/panelDeveloper
     // contents (those are owned by the Ranking Explainability path).
 
+    // P0010.1 Productization: re-populate Layer 1 ("发生了什么") with the
+    // investigation-aware business sentence. Pending cases already render the
+    // initial placeholder; this updates once stopReason / status are known.
+    const wEl = document.getElementById('situationWhatHappened_' + escHtml(situationId));
+    if (wEl) {
+      var businessDesc = businessDescribeSituation({ type: raw.type, description: desc }, invData);
+      wEl.innerHTML = '<p>' + escHtml(businessDesc) + '</p>';
+    }
+
+    // P0010.1 Productization: set the right-pane header to "调查过程 · {name}"
+    // so the operator sees the Investigation Track, not Ranking Explainability.
+    var entityLabel = document.getElementById('decisionEntityLabel');
+    if (entityLabel) {
+      var labelName = entityDisplayName(entity);
+      if (labelName.length > 28) labelName = labelName.slice(0, 25) + '…';
+      entityLabel.textContent = '调查过程 · ' + labelName;
+    }
+
     // P0010.1 REPAIR: when the latest attempt failed but the persisted
     // investigation still carries a previously completed judgment
     // (markInvestigation merged it), we MUST show the real Understanding
@@ -995,12 +1020,15 @@ async function loadSituationDetail(situationId) {
       && (!!invData.judgment || !!invData.currentUnderstanding);
     if ((invStatus === 'completed' || hasPriorCognition) && invData && uEl) {
       renderCurrentUnderstanding(uEl, invData);
+      // P0010.1 Productization: Hero (conclusion first) populated here.
+      const heroEl = document.getElementById('situationHero_' + escHtml(situationId));
+      if (heroEl) heroEl.innerHTML = renderHeroSummary(invData, interventions.length);
       // Track + Trace go to the right pane (single host so they stack).
       if (decisionContent) {
         decisionContent.innerHTML = '';
         const trackHost = document.createElement('div'); trackHost.id = 'situationTrackHost';
         decisionContent.appendChild(trackHost);
-        renderInvestigationTrack(trackHost, invData);
+        renderInvestigationTrack(trackHost, invData, { humanCount: interventions.length });
         const traceHost = document.createElement('div'); traceHost.id = 'situationTraceHost'; traceHost.style.marginTop = '10px';
         decisionContent.appendChild(traceHost);
         renderInvestigationTrace(traceHost, invData, explanation);
@@ -1015,8 +1043,9 @@ async function loadSituationDetail(situationId) {
         if (invStatus === 'investigating') {
           uEl.innerHTML = '<p class="muted">🔍 Agent 正在调查此 Situation（读取知识 → 提出下一问题 → 获取证据 → 更新判断），完成后自动更新此页面...</p>' + willShow;
         } else if (invStatus === 'failed') {
-          uEl.innerHTML = '<p class="muted" style="color:var(--warning)">⚠ 上次调查未完成' +
-            (invData?.error ? '：' + escHtml(invData.error) : '') +
+          // P0010.1 Productization: humanize the raw error string in business mode.
+          var humanReason = humanizeError(invData?.error, state.panelMode);
+          uEl.innerHTML = '<p class="muted" style="color:var(--warning)">⚠ ' + escHtml(humanReason) +
             '。<br/><small>系统会在下次启动时自动恢复调查，无需人工点击。</small></p>' + willShow;
         } else {
           uEl.innerHTML = '<p class="muted placeholder">Agent 尚未调查此 Situation。系统会自动开始调查。</p>' + willShow;
@@ -1068,29 +1097,109 @@ function capabilityLabel(id) {
 }
 
 /**
- * P0010.1: scrub raw capability ids out of the Agent's PROSE in business mode.
+ * P0010.1: scrub raw capability ids + English technical literals + internal
+ * metric scalars out of the Agent's PROSE in business mode. Developer mode is
+ * exempt (the raw id/scalar IS the surface there). Unknown ids are left as-is
+ * rather than inventing a label — the data is what it is.
  *
- * The Agent sometimes embeds raw ids inside knownEvidence / currentUnderstanding /
- * finding.answer text — e.g. "证据来源：product.overview (evidenceId: ...),
- * trade.overview (evidenceId: ...)". capabilityLabel only handles a single id;
- * here we walk the whole string and replace every raw id we recognise.
- *
- * Developer mode is exempt (the raw id IS the surface). Unknown ids are left
- * as-is rather than inventing a label — the data is what it is.
+ * - Hermes → Agent
+ * - trade.overview / traffic.overview / ... → 交易概览 / 流量分析 / ...
+ * - evidenceId / signal_id / trace_id / ... → （开发模式可见）
+ * - 综合得分 0.367 / overall_score 0.367 → 综合表现（开发模式可见原始分）
  */
 function scrubCapabilityIdsInProse(text) {
   if (state.panelMode === 'developer') return text;
   if (!text) return text;
   var out = text;
+  // 1) raw capability ids
   for (var k in CAPABILITY_LABELS) {
-    // Word-boundary replacement so we don't accidentally rewrite a partial
-    // substring. The id is the entire matched token (no leading/trailing word
-    // chars), so the boundaries are non-word on both sides.
     var re = new RegExp('(^|[^A-Za-z0-9_])' + k.replace(/\./g, '\\.') + '(?=$|[^A-Za-z0-9_])', 'g');
     out = out.replace(re, function (m, lead) { return lead + CAPABILITY_LABELS[k]; });
   }
+  // 2) English technical literals
+  out = out.replace(/\bHermes\b/g, 'Agent');
+  out = out.replace(
+    /\b(evidenceId|signal_id|trace_id|situationId|capabilityId|taskId|interventionId)\b\s*[:：=]?\s*[A-Za-z0-9_\-]{4,}/g,
+    '（开发模式可见）',
+  );
+  // 3) internal metric scalars
+  out = out.replace(/(?:综合得分|overall_score|排名分)\s*[:：=]?\s*\d+(?:\.\d+)?/g, '综合表现（开发模式可见原始分）');
   return out;
 }
+
+// ═══ P0010.1 Productization Baseline — Human-facing presentation helpers ═══
+// baseline §2-§18: present Agent cognition in operator language. These helpers
+// are pure presentation functions: NO LLM, NO Hermes call, NO new evidence
+// acquisition. They only re-frame already-persisted data.
+
+/**
+ * baseline §8 / §9: Source attribution tag. Honest, schema-bound. Kinds:
+ *   - 'evidence'  → [证据]   (no number; content_hash is non-persistent)
+ *   - 'knowledge' → [规则]   (no number; no first-class Knowledge record)
+ *   - 'human'     → [H{n}]   (n is 1-based index in humanInterventions)
+ *   - 'memory'    → [记忆]   (no number; Memory is Runtime-owned)
+ *   - unknown     → ''       (do not fabricate)
+ *
+ * DOM-coupled wrapper around the pure `sourceTagLabel` / `sourceTagTooltip`
+ * helpers in `./presentation.js`. Adds the panelMode / refId tooltip
+ * resolution and the HTML span.
+ */
+function renderSourceTag(kind, refId) {
+  var label = sourceTagLabel(kind, refId);
+  if (!label) return '';
+  var title = (state.panelMode === 'developer' && refId) ? String(refId) : sourceTagTooltip(kind);
+  return '<span class="source-tag source-tag-' + kind + '" title="' + escHtml(title) + '">' + escHtml(label) + '</span>';
+}
+
+/**
+ * baseline §15 / §16: scrub English technical literals + internal-metric
+ * scalars out of the Agent's prose in business mode. (This function is now
+ * folded into scrubCapabilityIdsInProse — the chain is applied transparently
+ * at every existing call site. Kept here as a thin alias for new callers
+ * that want a more intent-revealing name.)
+ */
+function scrubProse(text) { return scrubCapabilityIdsInProse(text); }
+
+/**
+ * baseline §5: Hero — conclusion first. One-line "current judgment" +
+ * "recommendation" + "stop reason" rendered as a prominent block BEFORE the
+ * detailed 6-block layer. Only when there is a completed (or prior-valid)
+ * investigation. The stale banner is moved here from Layer 2 so it does not
+ * appear twice on failed+has-prior situations.
+ */
+function renderHeroSummary(inv, interventionCount) {
+  if (!inv) return '';
+  var hasCognition = inv.judgment || inv.currentUnderstanding;
+  if (!hasCognition) return '';
+  var html = '';
+  if (inv.status === 'failed') {
+    var reason = humanizeError(inv.error, state.panelMode);
+    html += '<div class="inv-stale-banner" style="margin:0 0 12px;padding:10px 12px;border:1px solid var(--danger,#d9534f);border-left-width:3px;border-radius:6px;background:rgba(217,83,79,0.06)">' +
+      '<div style="font-size:0.78rem;font-weight:600;color:var(--danger,#d9534f)">⚠️ 最新调查未完成 — 以下为上一次有效判断</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);margin-top:3px">原因: ' + escHtml(reason) + (state.panelMode === 'developer' && inv.error ? ' · [开发] ' + escHtml(String(inv.error)) : '') + '</div>' +
+      '</div>';
+  }
+  html += '<div class="hero-block" style="margin:0 0 16px;padding:14px 16px;border:1px solid var(--primary);border-left-width:4px;border-radius:8px;background:var(--primary-light)">';
+  if (inv.judgment) {
+    var j = scrubCapabilityIdsInProse(inv.judgment);
+    if (j.length > 120) j = j.slice(0, 117) + '…';
+    html += '<div style="font-size:0.92rem;line-height:1.45;margin:0 0 8px"><strong style="color:var(--primary)">当前判断：</strong>' + escHtml(j) + '</div>';
+  }
+  if (inv.recommendation && inv.recommendation.recommendation) {
+    var r = scrubCapabilityIdsInProse(inv.recommendation.recommendation);
+    if (r.length > 120) r = r.slice(0, 117) + '…';
+    html += '<div style="font-size:0.88rem;line-height:1.45;margin:0 0 6px"><strong style="color:var(--primary)">建议：</strong>' + escHtml(r) + '</div>';
+  }
+  var stopLabel = STOP_VERDICT_LABEL[inv.stopReason] || '';
+  if (stopLabel) {
+    html += '<div style="font-size:0.72rem;color:var(--muted);margin-top:4px">调查状态 · ' + escHtml(stopLabel) +
+      (interventionCount > 0 ? ' · ' + interventionCount + ' 条人工反馈' : '') +
+      '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
 const STOP_VERDICT_LABEL = {
   judgment: '已形成判断',
   observe: '建议观察，暂不干预',
@@ -1123,17 +1232,11 @@ function renderCurrentUnderstanding(container, inv) {
 
   let html = '';
 
-  // P0010.1 REPAIR: when the latest investigation attempt failed but the
-  // situation still carries a previously completed judgment (merge preserved
-  // it), surface a clear "最新调查未完成" hint. The operator sees the prior
-  // valid cognition below the hint, NOT a wiped card.
-  if (inv.status === 'failed' && (inv.judgment || inv.currentUnderstanding)) {
-    const reason = inv.error ? escHtml(inv.error.slice(0, 120)) : '';
-    html += '<div class="inv-stale-banner" style="margin:0 0 12px;padding:10px 12px;border:1px solid var(--danger,#d9534f);border-left-width:3px;border-radius:6px;background:rgba(217,83,79,0.06)">' +
-      '<div style="font-size:0.78rem;font-weight:600;color:var(--danger,#d9534f)">⚠️ 最新调查未完成 — 以下为上一次有效判断</div>' +
-      (reason ? '<div style="font-size:0.72rem;color:var(--muted);margin-top:3px">原因: ' + reason + '</div>' : '') +
-      '</div>';
-  }
+  // P0010.1 Productization Baseline: the stale banner for failed+has-prior is
+  // owned by the Hero (renderHeroSummary, baseline §2). Rendering it here too
+  // would surface the same red banner twice on the screen, so we removed it
+  // from Layer 2. The Hero also localizes the humanized error string —
+  // this function no longer reads inv.error.
 
   // 1) 当前判断 — the Agent's business conclusion (verbatim, operator language).
   // P0010.1: scrub raw capability ids the Agent may have embedded in the prose.
@@ -1236,11 +1339,20 @@ async function generateRecommendation(situationId) {
 
 /** Investigation Track — the business process (HOW), derived from persisted contract.
  * NOT Chain-of-Thought: only structured business events already in the contract
- * (question / evidence / finding / hypothesis / judgment / stop). No LLM, no re-computation. */
-function renderInvestigationTrack(container, inv) {
+ * (question / evidence / finding / hypothesis / judgment / stop). No LLM, no re-computation.
+ *
+ * opts.humanCount (number, optional) — used by the judgment event to render
+ *   [H1]…[Hn] source tags so the operator can see the citation chain.
+ */
+function renderInvestigationTrack(container, inv, opts) {
   if (!container || !inv) return;
+  opts = opts || {};
   const events = [];
-  const ev = (label, detail, kind) => events.push({ label, detail, kind });
+  const ev = (label, detail, kind, detailHtml) => events.push({ label, detail, kind, detailHtml });
+  // P0010.1: a detailHtml field carries pre-rendered HTML (e.g. the source
+  // tag span from renderSourceTag) that the track renderer will emit WITHOUT
+  // re-escaping. The plain `detail` field is still escHtml'd so a hostile
+  // back-end string can never inject markup into the track body.
 
   ev('发现', 'Situation 已识别，进入调查', 'start');
   (inv.findings || []).forEach((f) => {
@@ -1255,15 +1367,31 @@ function renderInvestigationTrack(container, inv) {
   const usedList = (inv.capabilityUsed || '')
     .split(/[，,]/).map((s) => s.trim()).filter(Boolean);
   const acquired = [...usedList, ...(inv.evidenceAcquired || [])].filter(Boolean).map(capabilityLabel);
-  if (acquired.length) ev('获取证据', acquired.join('；'), 'evidence');
+  if (acquired.length) {
+    const acquiredText = escHtml(acquired.join('；'));
+    ev('获取证据', null, 'evidence', acquiredText + ' ' + renderSourceTag('evidence', null));
+  }
   const hypoChanges = (inv.hypotheses || []).filter((h) => h.status !== 'proposed' && h.status);
   if (hypoChanges.length) {
-    ev('假设更新', hypoChanges.map((h) => h.statement + ' [' + (HYPO_STATUS_LABEL[h.status] || h.status) + ']').join('；'), 'hypothesis');
+    const hypoText = escHtml(hypoChanges.map((h) => h.statement + ' [' + (HYPO_STATUS_LABEL[h.status] || h.status) + ']').join('；'));
+    ev('假设更新', null, 'hypothesis', hypoText + ' ' + renderSourceTag('knowledge', null));
   }
   if (inv.nextQuestion) ev('下一问题', inv.nextQuestion, 'question');
   const boundary = deriveCapabilityBoundary(inv);
   if (boundary) ev('能力边界', boundary, 'boundary');
-  if (inv.judgment) ev('判断', inv.judgment, 'judgment');
+  if (inv.judgment) {
+    // P0010.1 Productization: append "(依据: [证据] + [H1]…[Hn])" to the judgment
+    // event so the operator can see what was cited. The count is derived from
+    // the persisted findings + humanInterventions already on the record; we do
+    // NOT fabricate exact citation ids.
+    const findingEvidenceCount = (inv.findings || []).reduce((sum, f) => sum + (f.evidenceRefs || []).filter(Boolean).length, 0);
+    const humanCount = opts.humanCount || 0;
+    const basis = [];
+    if (findingEvidenceCount > 0) basis.push(renderSourceTag('evidence', null));
+    if (humanCount > 0) basis.push(renderSourceTag('human', 1) + (humanCount > 1 ? ' … ' + renderSourceTag('human', humanCount) : ''));
+    const basisSuffix = basis.length ? ' （依据: ' + basis.join(' + ') + '）' : '';
+    ev('判断', null, 'judgment', escHtml(inv.judgment) + basisSuffix);
+  }
   if (inv.stopReason) ev('停止', STOP_VERDICT_LABEL[inv.stopReason] || inv.stopReason, 'stop');
 
   const items = events.map((e, i) =>
@@ -1271,7 +1399,10 @@ function renderInvestigationTrack(container, inv) {
       '<div class="track-step">' + (i + 1) + '</div>' +
       '<div class="track-body">' +
         '<div class="track-label">' + escHtml(e.label) + '</div>' +
-        (e.detail ? '<div class="track-detail">' + escHtml(e.detail) + '</div>' : '') +
+        (e.detailHtml
+          ? '<div class="track-detail">' + e.detailHtml + '</div>'
+          : (e.detail ? '<div class="track-detail">' + escHtml(e.detail) + '</div>' : '')
+        ) +
       '</div>' +
     '</div>').join('');
 
@@ -1342,7 +1473,7 @@ async function startInvestigation(situationId) {
         decisionContent.innerHTML = '';
         const trackHost = document.createElement('div'); trackHost.id = 'situationTrackHost';
         decisionContent.appendChild(trackHost);
-        renderInvestigationTrack(trackHost, resp.investigation);
+        renderInvestigationTrack(trackHost, resp.investigation, { humanCount: 0 });
         const traceHost = document.createElement('div'); traceHost.id = 'situationTraceHost';
         traceHost.style.marginTop = '10px';
         decisionContent.appendChild(traceHost);

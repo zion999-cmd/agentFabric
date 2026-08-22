@@ -15,6 +15,7 @@
     "test:coverage": "vitest run --coverage",
     "db:init": "tsx platform/storage/init.ts",
     "migrate:agentcms": "tsx scripts/migrate-agentcms-data.ts",
+    "seed:demo-situations": "tsx scripts/seed-demo-situations.ts",
     "dev": "tsx watch platform/server/index.ts",
     "build": "tsc",
     "start": "node dist/platform/server/index.js",

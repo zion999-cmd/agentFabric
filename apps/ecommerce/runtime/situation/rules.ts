@@ -172,7 +172,7 @@ const buildRankingAttention = (
     type: 'performance_analysis',
     entity: { id: r.entity_id, type: 'product', name, platform: shop.platform },
     temporal: { observedAt: window },
-    description: `${name || `未知商品(SKU ${r.entity_id})`} 综合得分领先，进入当前值得关注的商品集合（详尽证据见 Evidence Viewer）。`,
+    description: `${name || `未知商品(SKU ${r.entity_id})`} 近期经营表现相对突出，进入持续观察名单 — 待 Agent 调查后给出判断。`,
     tags: ['ranking_attention', 'product', 'leader'],
   };
 };

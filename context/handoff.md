@@ -1,5 +1,42 @@
 # 交接文档
 
+## 本次会话 (2026-08-22) - P0010.1 Workspace Productization Baseline 1.0（已 commit）
+
+### 目标
+
+按 18 节人类侧呈现契约打磨 Workspace，让人打开任一 Situation 在 10 秒内回答 10 个问题（What/Why/Who/Where/Sources 等）。**不创建第二套 Memory/Knowledge/Catalog，不重设计 Hermes session，不为了页面漂亮伪造 Evidence/Knowledge/Source**。
+
+### 关键成果
+
+1. **3 demo situations**（`sit_observe_demo` / `sit_human_demo` / `sit_failed_recover_demo`）作为不可绕过样本，覆盖完成态、有人工反馈、失败+有上次有效判断三种关键状态。Seed 幂等。
+2. **Hero block**（"当前判断 + 建议 + 调查状态"）置顶 Layer 1 之下、Layer 2 6 块之上；failed+hasPrior 时顶部加红色 Stale banner；business mode 隐藏原始 error，developer mode 显式。
+3. **Honest Source Tag** `[E]/[K]/[H]/[M]` 4 kind 正确渲染；未识别 kind 不渲染（不伪造）；[H{n}] 标签由 `humanInterventions[]` index 真实计数（如 sit_human_demo 3 条 → `[H1] … [H3]`）。
+4. **失败业务化**（`humanizeError` 4 种常见 error 字符串 → 中文）+ **Track 投影**到现有 `#decisionPanel` 右侧 pane（HARD RULE：不放第二条 Track 列在 Situation 主区），通过 `decisionEntityLabel="调查过程 · {entity.name}"` 与 Ranking Explainability 区分。
+5. **5 个 schema blocker 显式声明**（SB-1~SB-5，详见 `context/p0010_1_productization_baseline.md`）— 不修，记入 P0011 候选，不为了页面漂亮伪造引用。
+
+### 验收
+
+- 3 截图：`data/fabric-workspace/screenshots/{01_observe,02_human_guidance,03_failed_recover}.png` ✅
+- 24 contract tests in `tests/contract/investigation.contract.ts` ✅
+- 3 integration tests in `tests/integration/three-demo-situations.test.ts` ✅
+- 浏览器真实打开 3 demo，Hero / Source Tag / Stale banner 全部按契约显示 ✅
+
+### 文件改动
+
+- 新增：`apps/ecommerce/workspace/presentation.js`（7 个 pure helpers）+ `presentation.d.ts`（types）+ `scripts/seed-demo-situations.ts`（idempotent seed）+ `scripts/capture-demo-screenshots.ts`（Playwright 1223 截图）+ `tests/integration/three-demo-situations.test.ts`（3 测试）+ `context/p0010_1_productization_baseline.md`（18 节验收对照）
+- 修改：`apps/ecommerce/workspace/app.js`（6 helper 接入 + Hero 块 + decisionEntityLabel + detailHtml track 事件 + 移除重复 title block）+ `styles.css`（.hero-block / .source-tag / .inv-stale-banner）+ `apps/ecommerce/runtime/situation/rules.ts:175`（business language）+ `package.json`（seed:demo-situations script）+ `tests/contract/investigation.contract.ts`（+24 baseline tests）+ `context/{current_state.md,decisions.md,handoff.md,status.json}`
+
+### 调试经验
+
+发现一个**易踩的 schema 类型陷阱**：`recommendation.{risks, prerequisites, humanNeeded}` 在 production schema 归一化为 `string[]`，但 seed 当时用 string 写，UI 的 `list(rec.risks)` 走 `risks.map(...)` 时 throw `"items.map is not a function"`。修复 = seed 全部用 `string[]`。后续 seed demo 数据应强制走 Zod parse-in 校验路径。
+
+### 风险与建议下一步
+
+- **风险**: 3 demo situation_id `sit_observe_demo` / `sit_human_demo` / `sit_failed_recover_demo` 与生产 SHA256 命名空间隔离（dev 不会混淆），但若运营不识别"DEMO"标签可能误判。**建议**: 下一刀给 demo 卡片加视觉标识（如 prefix `[DEMO]`）。
+- **P0011 候选**: P0011 Evidence Identity（解锁 SB-1）/ P0011.1 Knowledge Provenance（解锁 SB-2 + SB-6）/ P0011 Trust Schema（解锁 SB-4）/ P0012 Operations（解锁 SB-5）/ P0013 Memory Bridge（解锁 SB-3，Memory 写仍在 Runtime）。
+
+---
+
 ## 本次会话 (2026-08-21) - P0010.1 Workspace Semantic Cleanup（已 commit）
 
 ### 目标

@@ -1,5 +1,54 @@
 # 技术决策记录 (ADR)
 
+## ADR-048: P0010.1 Workspace Productization Baseline — 人类侧呈现契约
+
+- **日期**: 2026-08-22
+- **状态**: Accepted（3 截图 + 24+3 测试验收通过）
+- **来源**: P0010.1 Productization Baseline 18 节呈现契约
+
+**核心原则**（用户原话，verbatim 保留）:
+> Workspace 必须把机器的 cognition 转换成人类能够理解、质疑、追溯和反馈的工作对象。Situation 是工作对象。Judgment 是 Agent 的结论。Recommendation 是 Agent 给人的建议。Track 是认知过程。Source 是判断依据。Trust 是人能够沿 Source 回溯 Judgment。
+
+**决策**（让 Workspace 通过人类侧 10 个 baseline 问题 10 秒验收，6 项 PURE 前端打磨 + 5 项诚实 unavailable）:
+
+1. **三层呈现契约**（Business Reality / Agent Cognition / Trust-Provenance）。HARD RULE：不在 Situation 主区放第二条 Track 列；Track 投影到现有 `#decisionPanel` 右侧 pane，与 Ranking Explainability 共列；通过 `decisionEntityLabel="调查过程 · {entity.name}"` 区分。
+
+2. **Progressive Disclosure Hero**（结论在前）：当前判断 + 建议 + 调查状态 三行高亮块置顶；Layer 2 6 块（当前判断/已确认/当前假设/还不知道/下一步调查/建议）在下方。仅在 completed / failed+hasPrior 出现。
+
+3. **Honest Source Tag** `[E]/[K]/[H]/[M]`：4 kind 渲染正确；refId 仅 human kind 有效（intervention_index+1）；[E1] 标 "证据" 无编号（content_hash 非持久）；[K1] 标 "规则" tooltip 注明路径锚；[M1] 标 "记忆" tooltip 注明 Runtime-owned；**未识别 kind 不渲染**（不伪造）。
+
+4. **失败业务化** + Stale banner：`humanizeError` 4 种常见 error 字符串 → 中文（Turn timed out → 调查超时（已超过 10 分钟））；business mode 隐藏原始 error，developer mode 显式；failed+hasPrior 时 Hero 顶部加红色 Stale banner（人类能看懂的"上次有效判断还在，下面是新的失败"）。
+
+5. **Language Boundary 强化**：`scrubCapabilityIdsInProse` 已在 P0010.1 Slice 0+1 引入，本刀验证业务模式不暴露 `trade.overview` / `evidenceId` / `situationId`；scrub 不调用 LLM（纯字符串替换 + 已知 capability key 映射表）。
+
+6. **3 demo situations 不可绕过的演示样本**：`sit_observe_demo`（observe / 0 人工 / 完整契约）/ `sit_human_demo`（judgment / 3 人工 [H1][H2][H3]）/ `sit_failed_recover_demo`（failed marker + prior valid cognition 保留 + Stale banner）。Seed 幂等（pre-check existing row）；[风险] 推荐种子的 situation_id 前缀 `sit_*_demo` 永远不与生产 SHA256 collision。
+
+7. **5 个 schema blocker 显式声明**（不伪造，本刀不修，记入 P0011 候选）:
+   - **SB-1 [E1]**: 稳定 Evidence 引用（content_hash 非持久）
+   - **SB-2 [K1]**: Knowledge first-class record（目录式，无 DB record）
+   - **SB-3 [M1]**: Memory 稳定引用（Memory 永远 Runtime-owned）
+   - **SB-4 typed sourceRef**: `sourceRef: { kind, id }` schema（需 InvestigationSchema 改动）
+   - **SB-5 wake condition / Event Bus**: 本刀不实现
+
+**验收**（真实浏览器 3 截图 + 测试）:
+- 3 截图覆盖三种关键状态（observe / human-guidance / failed+recover）✅
+- 24 contract tests（businessDescribeSituation 6 type×stopReason / sourceTag 4+unknown / humanizeError 4+mode / descClean / hasPriorValidCognition 3）✅
+- 3 integration tests（demo seed 落库 / human-demo 3 interventions / failed-recover prior cognition 保留）✅
+- 真实浏览器打开 3 demo situation，Hero + Source Tag + Stale banner 全部按契约显示 ✅
+
+**Baseline §17 NOT INCLUDED 边界严格遵守**:
+✓ 不改 InvestigationSchema / Knowledge schema / Evidence schema
+✓ 不增加 `knowledge_id` / `business_trace` / `event_bus` / `wake_condition`
+✓ 不实现 Human Action Protocol / 工单 / 飞书 / 邮件 / Approval / Commitment Engine / attempt history
+✓ 不调用 LLM 做 UI 翻译
+✓ 不创建第二套 Product Catalog / Memory Store / Knowledge Engine
+✓ 不重设计 Agent Investigation / Hermes session architecture
+✓ 不为了页面漂亮伪造 Evidence / Knowledge / Source attribution
+
+**文件**: `apps/ecommerce/workspace/{app.js,presentation.js,presentation.d.ts,styles.css}`，`apps/ecommerce/runtime/situation/rules.ts:175`，`scripts/seed-demo-situations.ts`，`scripts/capture-demo-screenshots.ts`，`tests/contract/investigation.contract.ts`，`tests/integration/three-demo-situations.test.ts`，`context/p0010_1_productization_baseline.md`，`context/{current_state.md,decisions.md,handoff.md,status.json}`。
+
+---
+
 ## ADR-047: P0010.1 Workspace Semantic Cleanup
 
 - **日期**: 2026-08-21
