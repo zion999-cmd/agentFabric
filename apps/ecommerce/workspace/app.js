@@ -828,6 +828,13 @@ async function loadSituationDetail(situationId) {
   currentSituationId = situationId;
   var content = document.getElementById('situationDetailContent');
   var badge = document.getElementById('situationLifecycleBadge');
+  // P0010.1 Post-Review REPAIR: the Investigation Track is projected into
+  // the existing #decisionPanel right pane (the Workspace's natural side
+  // column). We open it on entry and clear it on exit; we do NOT add a
+  // second right column inside the Situation Detail body — that double-rail
+  // promised a "trust/Track" that doesn't exist in this slice.
+  var decisionPanel = document.getElementById('decisionPanel');
+  var decisionContent = document.getElementById('decisionContent');
   content.innerHTML = '<p class="muted placeholder">加载中...</p>';
 
   try {
@@ -869,17 +876,27 @@ async function loadSituationDetail(situationId) {
     html += '<h2 class="situation-detail-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(descClean) + '</h2>';
     html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
 
-    // P0010.1: real two-column Situation Detail.
-    //   LEFT  — current understanding, human feedback, follow-up chat
-    //   RIGHT — fixed Investigation Track (the operator's judgement basis)
-    // The Track is the FIRST-CLASS business surface; the previous single-column
-    // inline track inside Layer 2 has been moved out into this dedicated rail.
-    // No fake Knowledge/Evidence citations are added here — only real Track
-    // content from the persisted investigation contract.
-    html += '<div class="situation-detail-grid">';
+    // P0010.1 Post-Review REPAIR: single-column Situation Detail body.
+    // The Investigation Track no longer lives inside this view; it is
+    // projected into the Workspace's existing #decisionPanel right pane
+    // (see decisionPanel/decisionContent references below). The body now
+    // only contains the operator-facing surface: what happened, current
+    // understanding, human feedback, and the follow-up chat. No fake
+    // "Track" / "trust score" promise on the right.
+    html += '<div class="situation-detail-body">';
 
-    // LEFT column
-    html += '<div class="situation-detail-main">';
+    // Title
+    // P0010.1: strip a leading entity-id from the description so the title
+    // doesn't render "未知商品 · SKU 101 · 101 …" (duplicate id). Legacy
+    // situations were generated with the id as the leading token.
+    var entityId = (entity && (entity.id || entity.entity_id)) || '';
+    var descClean = (desc || '');
+    if (entityId && descClean.indexOf(entityId) === 0) {
+      descClean = descClean.slice(entityId.length).replace(/^[\s·,\-，]+/, '');
+    }
+    descClean = descClean.slice(0, 80);
+    html += '<h2 class="situation-detail-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(descClean) + '</h2>';
+    html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
 
     // Layer 1: 发生了什么
     html += '<div class="situation-layer">';
@@ -888,8 +905,7 @@ async function loadSituationDetail(situationId) {
     html += '<p>' + escHtml(desc) + '</p>';
     html += '</div></div>';
 
-    // Layer 2: 🧠 Agent 当前理解 — P0010 hero surface (LEFT only).
-    // The Investigation Track is no longer injected here; it lives in the right rail.
+    // Layer 2: 🧠 Agent 当前理解 — the hero business surface.
     html += '<div class="situation-layer">';
     html += '<h3 class="situation-layer-title">🧠 Agent 当前理解</h3>';
     html += '<div class="situation-layer-body" id="situationUnderstanding_' + escHtml(situationId) + '">';
@@ -932,23 +948,16 @@ async function loadSituationDetail(situationId) {
     html += '</div></div>';
     html += '</details></div>';
 
-    html += '</div>'; // end left column (.situation-detail-main)
-
-    // RIGHT column — the fixed Investigation Track rail.
-    // Renders ONLY real Track content from the persisted investigation contract
-    // (no LLM for rendering, no fake Knowledge/Evidence citations, no Chain-of-Thought).
-    // The Trace ("为什么这么判断？") is a secondary drill-down inside the same rail.
-    html += '<aside class="situation-detail-track">';
-    html += '<h3 class="situation-detail-track-title">🔍 调查过程</h3>';
-    html += '<div id="situationTrack_' + escHtml(situationId) + '">';
-    html += '<p class="muted" style="font-size:0.78rem">尚未开始调查。</p>';
-    html += '</div>';
-    html += '<div id="situationTrace_' + escHtml(situationId) + '" style="margin-top:10px"></div>';
-    html += '</aside>';
-
-    html += '</div>'; // end .situation-detail-grid
     html += '</div>'; // end detail body
     content.innerHTML = html;
+
+    // Open the Workspace's right pane and clear any prior content (so the
+    // situation's Track is the only thing rendered in the right column).
+    if (decisionPanel) decisionPanel.classList.add('open');
+    if (decisionContent) {
+      decisionContent.style.display = 'block';
+      decisionContent.innerHTML = '';
+    }
 
     // Load any stored P0010 Investigation (read-only; null when not investigated).
     // The Understanding surface consumes ONLY persisted investigation state — no
@@ -956,8 +965,6 @@ async function loadSituationDetail(situationId) {
     // The Pattern Engine is NEVER presented as "Agent 当前理解" — it only appears
     // as a secondary 信号归因 inside the Trace.
     const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
-    const trEl = document.getElementById('situationTrack_' + escHtml(situationId));
-    const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
     const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
     let invData = null;
     let invStatus = 'pending'; // pending | investigating | failed | completed
@@ -971,6 +978,11 @@ async function loadSituationDetail(situationId) {
       }
     } catch { /* keep pending */ }
 
+    // Project the Investigation Track + secondary Trace into #decisionContent.
+    // The Track functions only need a `container` — we feed them throwaway
+    // host divs so we don't fight the existing panelBusiness/panelDeveloper
+    // contents (those are owned by the Ranking Explainability path).
+
     // P0010.1 REPAIR: when the latest attempt failed but the persisted
     // investigation still carries a previously completed judgment
     // (markInvestigation merged it), we MUST show the real Understanding
@@ -983,8 +995,16 @@ async function loadSituationDetail(situationId) {
       && (!!invData.judgment || !!invData.currentUnderstanding);
     if ((invStatus === 'completed' || hasPriorCognition) && invData && uEl) {
       renderCurrentUnderstanding(uEl, invData);
-      if (trEl) renderInvestigationTrack(trEl, invData);
-      if (tEl) renderInvestigationTrace(tEl, invData, explanation);
+      // Track + Trace go to the right pane (single host so they stack).
+      if (decisionContent) {
+        decisionContent.innerHTML = '';
+        const trackHost = document.createElement('div'); trackHost.id = 'situationTrackHost';
+        decisionContent.appendChild(trackHost);
+        renderInvestigationTrack(trackHost, invData);
+        const traceHost = document.createElement('div'); traceHost.id = 'situationTraceHost'; traceHost.style.marginTop = '10px';
+        decisionContent.appendChild(traceHost);
+        renderInvestigationTrace(traceHost, invData, explanation);
+      }
       if (btn) btn.style.display = 'none';
     } else {
       // Honest non-completed states — NEVER old Pattern impersonating Understanding.
@@ -1004,8 +1024,14 @@ async function loadSituationDetail(situationId) {
       }
       // 「交给 Agent 调查」is a RECOVERY control only — not the normal primary entry.
       if (btn) { btn.style.display = 'block'; btn.textContent = '🔄 立即调查（恢复）'; }
-      // Pattern Engine attribution → collapsed secondary 信号归因 (never the main body).
-      if (tEl) renderSignalAttribution(tEl, explanation, desc);
+      // Pattern Engine attribution → projected into right pane as collapsed
+      // secondary 信号归因 (never the main body).
+      if (decisionContent) {
+        decisionContent.innerHTML = '';
+        const host = document.createElement('div'); host.id = 'situationTraceHost';
+        decisionContent.appendChild(host);
+        renderSignalAttribution(host, explanation, desc);
+      }
     }
   } catch (e) {
     content.innerHTML = '<p class="muted placeholder">加载失败 (' + e.message + ')</p>';
@@ -1293,19 +1319,35 @@ function renderInvestigationTrace(container, inv, explanation) {
 
 async function startInvestigation(situationId) {
   const uEl = document.getElementById('situationUnderstanding_' + escHtml(situationId));
-  const trEl = document.getElementById('situationTrack_' + escHtml(situationId));
-  const tEl = document.getElementById('situationTrace_' + escHtml(situationId));
+  // P0010.1 Post-Review REPAIR: the Track lives in the existing #decisionPanel
+  // right pane now (loaded by loadSituationDetail), not inside this view.
+  // We re-project the new investigation into the right pane on success.
+  const decisionPanel = document.getElementById('decisionPanel');
+  const decisionContent = document.getElementById('decisionContent');
   const btn = document.getElementById('startInvestigation_' + escHtml(situationId));
   if (!uEl) return;
   uEl.innerHTML = '<p class="muted">🔍 Agent 正在调查：读取专业知识 → 形成当前判断 → 提出下一个问题 → 检查证据 → 获取所需证据 → 更新判断（可能需要几分钟）...</p>';
-  if (trEl) trEl.innerHTML = '';
+  if (decisionPanel) decisionPanel.classList.add('open');
+  if (decisionContent) {
+    decisionContent.style.display = 'block';
+    decisionContent.innerHTML = '<p class="muted" style="font-size:0.78rem">正在调查...</p>';
+  }
   if (btn) btn.disabled = true;
   try {
     const resp = await apiPost('/api/situation/' + encodeURIComponent(situationId) + '/investigate', {});
     if (resp.investigation) {
       renderCurrentUnderstanding(uEl, resp.investigation);
-      if (trEl) renderInvestigationTrack(trEl, resp.investigation);
-      if (tEl) renderInvestigationTrace(tEl, resp.investigation, null);
+      // Re-project the Track into the right pane (overwrite the "正在调查..." host).
+      if (decisionContent) {
+        decisionContent.innerHTML = '';
+        const trackHost = document.createElement('div'); trackHost.id = 'situationTrackHost';
+        decisionContent.appendChild(trackHost);
+        renderInvestigationTrack(trackHost, resp.investigation);
+        const traceHost = document.createElement('div'); traceHost.id = 'situationTraceHost';
+        traceHost.style.marginTop = '10px';
+        decisionContent.appendChild(traceHost);
+        renderInvestigationTrace(traceHost, resp.investigation, null);
+      }
       if (btn) btn.style.display = 'none';
     } else {
       uEl.innerHTML = '<p class="muted placeholder">Agent 未返回有效的调查结果' +

@@ -203,6 +203,35 @@ describe('buildInvestigationPrompt', () => {
     expect(prompt).not.toContain('if (');
     expect(prompt).not.toContain('GMV down →');
   });
+
+  // P0010.1 Post-Review REPAIR — epistemic semantics. The prompt must NOT
+  // frame prior human guidance as "authoritative" / "overrides the Agent's
+  // own guesses" / "MUST be consistent". Human input is ONE input the
+  // Agent should weigh alongside Evidence; if the two conflict, the Agent
+  // surfaces the conflict in the judgment, it does NOT silently override
+  // either side.
+  test('does not use override/authoritative/MUST-consult/MUST-be-consistent wording', () => {
+    const prompt = buildInvestigationPrompt(situation, null);
+    const lower = prompt.toLowerCase();
+    expect(lower).not.toContain('overrides the agent');
+    expect(lower).not.toContain('authoritative');
+    expect(lower).not.toContain('must consult');
+    expect(lower).not.toContain('must be consistent');
+  });
+
+  test('capabilityUsed schema hint accepts null (matches REPAIR 1 schema)', () => {
+    const prompt = buildInvestigationPrompt(situation, null);
+    expect(prompt).toContain('"capabilityUsed"');
+    expect(prompt.toLowerCase()).toMatch(/capabilityused.*or null|null.*capabilityused/s);
+  });
+
+  test('prior human guidance section is weighted (correction/supplement vs response/decision)', () => {
+    const prompt = buildInvestigationPrompt(situation, null);
+    expect(prompt).toContain('权重');
+    expect(prompt).toMatch(/correction/);
+    expect(prompt).toMatch(/decision/);
+    expect(prompt).toContain('反馈');
+  });
 });
 
 // P0010.1 — Prior Human Guidance wire. The investigation prompt MUST surface

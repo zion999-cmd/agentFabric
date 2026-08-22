@@ -384,6 +384,17 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
   // SAME session; the recommendation is persisted additively into the
   // investigation. Human feedback (accept/reject/correction) reuses the
   // existing Intervention grammar.
+  //
+  // P0010.1 Post-Review REPAIR — KNOWN GAP (recorded, not fixed in this slice):
+  //   When runRecommendationTurn's JSON parse fails (rec.ok === false), the
+  //   situation is left WITHOUT a recommendation. The route returns a soft
+  //   { success: false, agentStatus: 'error', error: ... } to the client;
+  //   the operator must re-call /recommend to retry. We deliberately do NOT
+  //   auto-restart: this would re-enter the same Hermes session, risk
+  //   inflating attempt history, and require session-architecture changes
+  //   out of scope for the P0010.1 closeout. If a follow-up slice wants to
+  //   address this, the surface is exactly the if-branch below — do NOT
+  //   add retry / finalize-prompt logic here without an explicit plan.
   router.post('/situation/:id/recommend', async (req, res) => {
     const situationId = req.params['id'];
     if (!situationId || !options.db) {
@@ -413,6 +424,9 @@ export const situationChatRouter = (options: SituationChatOptions): Router => {
       }
 
       const rec = await runRecommendationTurn(active.client, active.hermesSessionId, situation, existing);
+      // KNOWN GAP: parse failure leaves no recommendation; do NOT auto-restart
+      // here (see block comment on the route above). Operator retries by
+      // re-calling /recommend. No attempt history, no session rewrite.
       if (!rec.ok || !rec.recommendation) {
         res.status(200).json({ success: false, agentStatus: 'error', error: rec.error ?? 'Invalid recommendation JSON' });
         return;

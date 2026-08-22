@@ -27,20 +27,27 @@ export const formatSituationEvidence = (ctx: LearningContext | null): string => 
 
 /**
  * P0010.1 Prior Human Guidance — flatten the situation's persisted
- * humanInterventions into a section the Agent MUST consult. The human's
- * corrections and supplements override agent guesses; the human's decision
- * feedback tells the Agent whether its prior recommendation was accepted.
+ * humanInterventions into a section the Agent MUST consider as ONE input
+ * (not the only input). correction / context_supplement are important
+ * human input the Agent should weigh alongside Evidence; if they conflict
+ * with hard Evidence, the Agent should call that out rather than silently
+ * override either side. response / decision are feedback on the Agent's
+ * prior output, not factual constraints on Evidence.
  *
  * Type-specific payload shape (per InterventionContentSchema):
  *   response           — evaluation: agree | disagree | partial | uncertain
+ *                         (feedback, NOT a factual constraint on Evidence)
  *   correction         — what is wrong + correctedValue
+ *                         (important human input, weigh with Evidence)
  *   context_supplement — information the system cannot observe
+ *                         (important human input, weigh with Evidence)
  *   decision           — accept | reject | defer | override | no_action
+ *                         (feedback, NOT a factual constraint on Evidence)
  *   action_intent      — skipped here: outbound action is NOT a current slice
  *
  * Returns a single string starting with a "(no prior human guidance)" sentinel
  * when there are no interventions, so the section is always present and the
- * Agent never silently ignores the input.
+ * Agent never silently drops it.
  */
 export const formatPriorHumanGuidance = (ctx: LearningContext | null): string => {
   const interventions = ctx?.humanInterventions ?? [];
@@ -127,10 +134,13 @@ export const buildInvestigationPrompt = (
     `- type: ${situation.type}`,
     `- description: ${situation.description}`,
     ``,
-    `## Prior Human Guidance (MUST consult — overrides the Agent's own guesses)`,
-    // P0010.1: the human's corrections and supplements are authoritative
-    // within the current Learning Context. The Agent MUST treat them as
-    // constraints when forming currentUnderstanding / hypotheses / judgment.
+    `## Prior Human Guidance (one input; weigh alongside Evidence, do not silently override either side)`,
+    // P0010.1 Post-Review REPAIR: prior human guidance is an input, not
+    // authoritative. The Agent must NOT silently drop or invert this
+    // section, but it also must not use it to override hard Evidence; if
+    // the two conflict, the Agent should surface the conflict in the
+    // judgment and recommend a human reconciliation.
+    `- 权重: correction / context_supplement 是重要人类输入；response / decision 是反馈，不构成 Evidence 级别约束。`,
     formatPriorHumanGuidance(ctx),
     ``,
     `## Current evidence (already observed, do NOT re-acquire unless stale)`,
@@ -140,7 +150,7 @@ export const buildInvestigationPrompt = (
     ``,
     `1. Read professional Knowledge: open knowledge/INDEX.md, then read the knowledge pages relevant to this kind of situation. Base your judgment on that Knowledge, not on generic guessing.`,
     ``,
-    `2. Form your Current Understanding. Honour the Prior Human Guidance above: if a user correction said the prior judgment was wrong, your new judgment must be consistent with that correction. If a user supplement provided information the system cannot observe, treat it as a known constraint.`,
+    `2. Form your Current Understanding. Weigh the Prior Human Guidance above as you form it: if a user correction notes a prior judgment was wrong, take that as a strong hint to re-examine that judgment, but verify against the Evidence before finalizing. If a user supplement provided information the system cannot observe, treat it as important context; if the Evidence contradicts it, surface the contradiction in the judgment rather than silently choosing one side.`,
     `   - known_evidence: what you already know (from the evidence above, the situation, AND the prior human guidance)`,
     `   - hypotheses: plausible explanations with status "proposed"`,
     `   - unknowns: what is genuinely still unknown`,
@@ -178,7 +188,7 @@ export const buildInvestigationPrompt = (
     `  "findings": [{"question": "...", "evidenceRefs": ["..."], "answer": "...", "impactOnHypothesis": "..."}],`,
     `  "judgment": "...",`,
     `  "stopReason": "judgment|observe|missing_capability|ask_human",`,
-    `  "capabilityUsed": "...",`,
+    `  "capabilityUsed": "<capability name> or null",`,
     `  "evidenceAcquired": ["..."],`,
     `  "recommendation": {"recommendation": "...", "rationale": "...", "expectedOutcome": "...", "risks": "...", "prerequisites": ["..."], "humanNeeded": ["..."]}`,
     `}`,
