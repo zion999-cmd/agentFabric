@@ -63,6 +63,11 @@
         <!-- 业务配置 — only agentFabric-owned config -->
         <div class="sidebar-section">
           <div class="sidebar-section-label">业务配置</div>
+          <!-- P0010.1 REPAIR-3: Workspace "工作输出" collection page.
+               Read-only. Groups all WorkItems across all situations by
+               status (全部 / 待交付 / 已交付 / 已确认 / 已关闭). Does NOT
+               change status on page open. -->
+          <a href="#" class="sidebar-item" data-view="outputs"><span class="sidebar-icon">📤</span><span>工作输出</span><span class="sidebar-badge" id="badgeAllOutputs">--</span></a>
         </div>
         <div class="sidebar-divider"></div>
         <!-- Legacy — hidden (Memory is Runtime-owned, removed from nav) -->
@@ -111,6 +116,34 @@
           </div>
         </div>
         <div id="view-product" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="product.title">商品分析</h2></div><div class="product-search-row"><input id="productSearchInput" class="input" style="flex:1" placeholder="搜索商品 ID..." /><button id="productSearchBtn" class="btn btn-primary" data-i18n="product.search">搜索</button></div><div id="productContent" class="muted placeholder">输入商品 ID 查看完整画像</div></div>
+        <!-- P0010.1 REPAIR-3: Workspace "工作输出" collection surface.
+             Read-only view of every WorkItem across all situations.
+             No transport, no Hermes bridge, no auto-delivered. -->
+        <div id="view-outputs" class="view-container">
+          <div class="view-title-row">
+            <h2 class="view-title">📤 工作输出</h2>
+            <span class="muted">所有 Situation 的 Agent 交付物（按状态分组；只读）</span>
+          </div>
+          <div class="outputs-tabs" id="outputsTabs">
+            <button class="feed-tab active" data-status="">全部</button>
+            <button class="feed-tab" data-status="ready">待交付</button>
+            <button class="feed-tab" data-status="delivered">已交付</button>
+            <button class="feed-tab" data-status="acknowledged">已确认</button>
+            <button class="feed-tab" data-status="closed">已关闭</button>
+          </div>
+          <div id="outputsContent" class="muted placeholder">加载中...</div>
+        </div>
+        <!-- P0010.1 Output Workspace v0: independent Output Detail view.
+             Reached by clicking "查看交付物" in the collection page (NOT
+             Situation Detail). Right pane shows Source/Trust (different
+             from Situation Detail's Investigation Track). -->
+        <div id="view-outputDetail" class="view-container">
+          <div class="view-title-row">
+            <h2 class="view-title">📦 交付物详情</h2>
+            <span class="muted">Agent 交付物独立视图（与 Situation 详情解耦）</span>
+          </div>
+          <div id="outputDetailContent" class="muted placeholder">加载中...</div>
+        </div>
         <div id="view-trend" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="trend.title">趋势观察</h2><span class="muted" data-i18n="trend.subtitle">信号变化与排名漂移时间轴</span></div><div id="trendContent" class="muted placeholder">加载中...</div></div>
         <div id="view-archive" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="archive.title">历史归档</h2><select id="archiveProfileSelect" class="input select" style="font-size:0.8rem;"><option value="operator_mode" data-i18n="profile.operator">运营推荐</option><option value="growth_discovery" data-i18n="profile.growth">增长发现</option><option value="sales_leaderboard" data-i18n="profile.sales">销售排行</option></select></div><div id="archiveTimeline"></div></div>
         <div id="view-memory" class="view-container"><div class="view-title-row"><h2 class="view-title" data-i18n="memory.title">Memory 成长</h2><span class="unimplemented-badge">未实现 (Legacy)</span><span class="muted" data-i18n="memory.subtitle">Memory 属于 Runtime ownership，不再由 agentFabric 管理</span></div><div id="memoryContent" class="muted placeholder">Memory 成长已标记为 Legacy。Memory/Skill 的生成属于 HermesAgent Runtime 的职责，不属于 agentFabric。</div></div>

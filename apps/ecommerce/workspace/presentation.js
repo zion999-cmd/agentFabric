@@ -158,3 +158,340 @@ export function hasPriorValidCognition(investigation) {
   if (!investigation) return false;
   return !!(investigation.judgment || investigation.currentUnderstanding);
 }
+
+// ============================================================================
+// P0010.1 Post-Productization REPAIR — Trust Links + Lifecycle + Commitment
+// ============================================================================
+
+/**
+ * REPAIR §2: Derive the Situation LIFECYCLE (5 business states) from the
+ * persisted Investigation + Intervention shape. This is the PRIMARY
+ * operator-facing status; the investigation.status is a SECONDARY
+ * (failure) signal. They are not the same.
+ *
+ * Lifecycle semantics (each = a distinct business state, never "已处理"):
+ *
+ *   - 'pending'        No investigation yet, or inv.status='pending'.
+ *                      This is the "待处理" state.
+ *   - 'investigating'  inv.status='investigating'. The Agent is running.
+ *                      "调查中" — distinct from "watching" (which means
+ *                      the Agent is done but the case is still alive).
+ *   - 'waiting_human'  The Agent's stopReason or judgment explicitly asks
+ *                      the human to act (ask_human / missing_capability,
+ *                      or the judgment/understanding contains
+ *                      人工核验/人工确认/无法获取, or the recommendation's
+ *                      humanNeeded is non-empty AND the operator has not
+ *                      yet decided). "等待人工".
+ *   - 'watching'       The Agent has finished a real investigation (either
+ *                      stopReason='observe' OR completed-judgment without
+ *                      a decision) OR the latest attempt failed but prior
+ *                      valid cognition exists. "持续观察" — NOT "已处理".
+ *                      The case is alive; the operator is expected to
+ *                      monitor. This is the state the user explicitly
+ *                      called out as missing in P0010.1.
+ *   - 'closed'         RESERVED for a future durable resolution contract
+ *                      (e.g. an explicit Situation-resolution event). In
+ *                      this REPAIR the derivation can NEVER return 'closed':
+ *                      a human `decision='accept'` on a recommendation
+ *                      means the recommendation was adopted, NOT that the
+ *                      Situation is over. The underlying business issue
+ *                      (e.g. "继续观察 2 天") persists until either (a) the
+ *                      Agent explicitly resolves it via a durable protocol
+ *                      that does not yet exist, or (b) the human performs
+ *                      a separate resolution action that is not "accept
+ *                      recommendation". For now: human-accept ⇒ 'watching'.
+ *
+ * "已处理" is intentionally NOT in this list. There is no state where
+ * "the Agent processed this" means "the case is over". The user said:
+ *   WATCHING / 持续观察不是"已处理"。
+ *
+ * Architectural note: Situation.closed and WorkItem.closed are INDEPENDENT.
+ * WorkItem.closed is a status on a deliverable (ready → delivered →
+ * acknowledged → closed); it has no authority to close the Situation.
+ * A WorkItem can be 'closed' while the Situation is still 'watching'.
+ */
+export function deriveSituationLifecycle(
+  investigation,
+  interventionCount,
+  hasAcceptedDecision,
+) {
+  if (!investigation || investigation.status === 'pending') return 'pending';
+  if (investigation.status === 'investigating') return 'investigating';
+
+  // failed-without-prior is "still pending" — the case is not actionable yet.
+  if (investigation.status === 'failed' && !hasPriorValidCognition(investigation)) {
+    return 'pending';
+  }
+
+  // needs_human check (priority over watching). This is a Human-side
+  // requirement: the Agent is asking the operator to act.
+  var stop = investigation.stopReason || '';
+  if (stop === 'missing_capability' || stop === 'ask_human') return 'waiting_human';
+  var text = ((investigation.judgment || '') + ' ' + (investigation.currentUnderstanding || '')).toLowerCase();
+  if (text.indexOf('人工核验') >= 0) return 'waiting_human';
+  if (text.indexOf('人工确认') >= 0) return 'waiting_human';
+  if (text.indexOf('无法获取') >= 0) return 'waiting_human';
+
+  // Observation: the Agent's recommendation is "继续观察".
+  if (stop === 'observe') return 'watching';
+
+  // Failed with prior valid cognition = watching prior judgment.
+  if (investigation.status === 'failed' && hasPriorValidCognition(investigation)) {
+    return 'watching';
+  }
+
+  // Completed judgment (stopReason='judgment'): the case is in 'watching'
+  // until a future durable resolution contract exists. A human
+  // decision='accept' only records "recommendation adopted" — it does NOT
+  // close the Situation. decision='reject' likewise keeps it 'watching'.
+  // hasAcceptedDecision is accepted as input for forward-compat with the
+  // eventual resolution contract, but the derivation currently ignores it.
+  void hasAcceptedDecision; // intentionally unused in this REPAIR
+  return 'watching';
+}
+
+/** Chinese label + emoji for each lifecycle.
+ *  `closed` is RESERVED — the derivation can never return it in this REPAIR. */
+export const SITUATION_LIFECYCLE_LABEL = Object.freeze({
+  pending:        '⏳ 待处理',
+  investigating:  '🔍 调查中',
+  waiting_human:  '👤 等待人工',
+  watching:       '👀 持续观察',
+  closed:         '✓ 已结束（保留 · 尚无可触发条件）',
+});
+
+/** Investigation secondary status (the "Investigation attempt" sub-state).
+ *  Mirrors the existing 4 in shared/schemas/investigation.ts. */
+export const INVESTIGATION_STATUS_LABEL = Object.freeze({
+  pending: '调查待启动',
+  investigating: '调查中',
+  completed: '已完成',
+  failed: '⚠️ 最新调查未完成',
+});
+
+/**
+ * REPAIR §3: Derive a minimal "Observation Commitment" from the
+ * persisted Investigation. No new schema, no scheduler, no wake engine.
+ * Just the operator-facing representation of the "observation plan":
+ * "this case is being watched; here's when the next checkpoint is
+ * expected AND what humans should look for before re-evaluating."
+ *
+ * Returns null when the situation is not in a watching-like state
+ * (pending / investigating / failed-no-prior — none of these
+ * make sense as a commitment). The Operator UI hides the card in that
+ * case.
+ *
+ * The `checkpoints` field is a HUMAN-READABLE label of what an operator
+ * should look for before re-evaluating (e.g. "new evidence arrives",
+ * "review time reached"). It is NOT an auto-wake condition: there is no
+ * scheduler, no wake engine, no event bus. The note field makes this
+ * explicit so the UI cannot be misread as "the system will wake me up".
+ */
+export function deriveObservationCommitment(investigation) {
+  if (!investigation) return null;
+  // Only "watching-like" states produce a commitment.
+  var stop = investigation.stopReason || '';
+  var isObserve = stop === 'observe';
+  var isFailedWithPrior = investigation.status === 'failed' && hasPriorValidCognition(investigation);
+  var isWatchingLike = isObserve || isFailedWithPrior;
+  if (!isWatchingLike) return null;
+
+  // startedAt = investigation.updatedAt (when the latest valid cognition
+  // was written). Fall back to createdAt if updatedAt is missing.
+  var startedAt = investigation.updatedAt || investigation.createdAt || new Date().toISOString();
+  // reviewAt: heuristic — if the recommendation mentions a duration,
+  // try to parse it; otherwise null (no implied review date).
+  var reviewAt = parseReviewAtFromRecommendation(startedAt, investigation.recommendation);
+  return {
+    type: 'observe',
+    startedAt: startedAt,
+    reviewAt: reviewAt,
+    // checkpoints: human-readable labels of what to watch for, NOT
+    // auto-wake conditions. The UI must surface this as "观察重点",
+    // not "自动唤醒条件".
+    checkpoints: ['新证据到达', '复查时间到达', '运营主动复查'],
+    note: isFailedWithPrior
+      ? '上次有效判断仍在跟踪中；最新调查未完成，详见顶部红条。系统当前未实现自动唤醒，需运营主动复查。'
+      : '观察计划：等待新证据或复查时间到达。系统当前未实现自动唤醒，需运营主动复查。',
+  };
+}
+
+/** Heuristic: pull "继续观察 N 天" / "观察 N 小时" out of the
+ *  recommendation rationale. Returns an ISO date or null. */
+function parseReviewAtFromRecommendation(startedAt, recommendation) {
+  if (!recommendation) return null;
+  var txt = (recommendation.recommendation || '') + ' ' + (recommendation.rationale || '');
+  var m = txt.match(/(\d+)\s*[-~— ]?\s*(天|日)/);
+  if (m) {
+    var days = parseInt(m[1], 10);
+    if (!isNaN(days) && days > 0 && days < 365) {
+      return new Date(new Date(startedAt).getTime() + days * 86400_000).toISOString();
+    }
+  }
+  var m2 = txt.match(/(\d+)\s*小时/);
+  if (m2) {
+    var hours = parseInt(m2[1], 10);
+    if (!isNaN(hours) && hours > 0 && hours < 24 * 30) {
+      return new Date(new Date(startedAt).getTime() + hours * 3600_000).toISOString();
+    }
+  }
+  return null;
+}
+
+// ============================================================================
+// REPAIR §1: Trust Reference Popover — content for [E]/[K]/[H] click.
+// ============================================================================
+
+/**
+ * Build the popover data for a [证据] tag. We have NO stable id (SB-1),
+ * so we surface what the Agent actually wrote (the evidenceAcquired
+ * string) + a best-effort parse of capability + date range. There is no
+ * underlying record to fetch. The popover must be honest about that.
+ */
+export function popoverContentForEvidence(evidenceString) {
+  if (!evidenceString) return null;
+  // Common Agent-written shapes:
+  //   "trade.overview 2026-08-21→2026-08-22"
+  //   "orders.overview 2026-08-21"
+  //   "product.overview 2026-08-21→2026-08-22"
+  var parts = String(evidenceString).split(/\s+/);
+  var capabilityId = parts[0] || '';
+  var dateRange = parts.slice(1).join(' ') || '';
+  // best-effort: human label (no real mapping; use id directly)
+  return {
+    title: '证据引用',
+    fields: [
+      { label: '能力', value: capabilityId || '（未提供）' },
+      { label: '日期', value: dateRange || '（未提供）' },
+    ],
+    unavailable: {
+      reason: '原始来源暂不可定位',
+      detail: 'Evidence 当前为运行时生成，无跨会话稳定引用。本字段展示的是 Agent 写入 evidenceAcquired 的字面值。',
+    },
+  };
+}
+
+/**
+ * Build the popover data for a [规则] tag. We have NO first-class
+ * Knowledge record (SB-2), so we show the knownEvidence text the Agent
+ * wrote + admit the schema blocker.
+ */
+export function popoverContentForKnowledge(knownEvidenceText) {
+  if (!knownEvidenceText) return null;
+  return {
+    title: '知识/规则引用',
+    fields: [
+      { label: '规则文本', value: knownEvidenceText },
+    ],
+    unavailable: {
+      reason: 'Knowledge 暂无 first-class 记录',
+      detail: '当前引用以 knowledge/INDEX.md 路径为锚，无独立 provenance 元数据。',
+    },
+  };
+}
+
+/**
+ * Build the popover data for a [H{n}] tag. We have full fidelity here:
+ * interventionId, type, summary, actor, createdAt all live in the
+ * human_interventions table.
+ */
+export function popoverContentForHuman(intervention) {
+  if (!intervention) return null;
+  var content = intervention.content;
+  var contentStr = '';
+  if (content && typeof content === 'object') {
+    // The DB column is `{"type":"<type>"}` for seeded rows; richer
+    // fields live in learning_contexts.body.humanInterventions[].content.
+    var keys = Object.keys(content);
+    contentStr = keys
+      .filter(function (k) { return k !== 'type'; })
+      .map(function (k) { return k + ': ' + JSON.stringify(content[k]); })
+      .join('\n');
+  }
+  return {
+    title: '人工干预 [H]',
+    fields: [
+      { label: '类型', value: intervention.type || '（未提供）' },
+      { label: '摘要', value: intervention.summary || '（未提供）' },
+      { label: '操作员', value: (intervention.actor && intervention.actor.id) || '（未提供）' },
+      { label: '时间', value: (intervention.timestamp || intervention.createdAt || '').slice(0, 19).replace('T', ' ') || '（未提供）' },
+      { label: 'interventionId', value: intervention.interventionId || '（未提供）', devOnly: true },
+      { label: '附加内容', value: contentStr || '（无附加内容 — 仅类型）' },
+    ],
+  };
+}
+
+/**
+ * Build the popover data for a [记忆] tag. Memory is Runtime-owned;
+ * Fabric never persists it (SB-3). We always return the unavailable
+ * surface so the click is honest.
+ */
+export function popoverContentForMemory() {
+  return {
+    title: '记忆引用',
+    fields: [],
+    unavailable: {
+      reason: 'Memory 永属 Runtime',
+      detail: 'Memory 当前为 Runtime 拥有，Fabric 不持久化其稳定 id。',
+    },
+  };
+}
+
+/** Dispatch by kind — the caller (app.js) hands us a kind + the matching
+ *  context (evidence string / knownEvidence text / intervention object).
+ *  Returns the popover data or null when the kind is unknown. */
+export function getSourcePopoverData(kind, refId, context) {
+  context = context || {};
+  if (kind === 'evidence') {
+    var evs = context.evidenceStrings || [];
+    // The track emits [证据] without a specific refId; we just show the
+    // first one. (The Operator will see this is a coarse surface and
+    // can ask for finer citation in P0011.)
+    return popoverContentForEvidence(evs[refId ? refId - 1 : 0] || evs[0] || null);
+  }
+  if (kind === 'knowledge') {
+    var ks = context.knownEvidence || [];
+    return popoverContentForKnowledge(ks[0] || null);
+  }
+  if (kind === 'human') {
+    var interventions = context.interventions || [];
+    var idx = refId ? refId - 1 : 0;
+    return popoverContentForHuman(interventions[idx] || null);
+  }
+  if (kind === 'memory') return popoverContentForMemory();
+  return null;
+}
+
+/** Render the popover HTML (caller passes into the DOM). Pure — no state. */
+export function renderSourcePopoverHtml(data) {
+  if (!data) return '';
+  var html = '<div class="popover-header"><span class="popover-title">' + escHtml(data.title) + '</span><button class="popover-close" type="button" aria-label="关闭">×</button></div>';
+  html += '<div class="popover-body">';
+  if (data.fields && data.fields.length) {
+    html += '<table class="popover-table">';
+    for (var i = 0; i < data.fields.length; i++) {
+      var f = data.fields[i];
+      if (f.devOnly) {
+        html += '<tr class="popover-dev-row" data-popover-dev="1"><th>' + escHtml(f.label) + '</th><td><code>' + escHtml(f.value) + '</code></td></tr>';
+      } else {
+        html += '<tr><th>' + escHtml(f.label) + '</th><td>' + escHtml(f.value) + '</td></tr>';
+      }
+    }
+    html += '</table>';
+  }
+  if (data.unavailable) {
+    html += '<div class="popover-warning"><div class="popover-warning-reason">⚠ ' + escHtml(data.unavailable.reason) + '</div><div class="popover-warning-detail">' + escHtml(data.unavailable.detail) + '</div></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function escHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+

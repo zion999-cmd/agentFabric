@@ -14,6 +14,7 @@ import { p0007Router } from './routes/p0007.js';
 import { situationChatRouter, runInvestigationTurn } from './routes/situation-chat.js';
 import { knowledgeRouter } from './routes/knowledge.js';
 import { scheduleRouter } from './routes/schedule.js';
+import { outputsRouter } from './routes/outputs.js';
 import { openDb } from '#platform/storage/connection.js';
 import { HermesSessionClient } from '#platform/runtime/hermes/index.js';
 import { loadSituation } from '#app/experience/learning-context-producer.js';
@@ -83,6 +84,10 @@ export const createServer = (options: ServerOptions): Express => {
     runner.start();
     app.use('/api', scheduleRouter(runner));
   }
+
+  // P0010.1 Post-Productization REPAIR — minimal Output / WorkItem API.
+  // Mounted at /api so the routes inside can be /situations/:id/outputs/...
+  app.use('/api', outputsRouter(db));
 
   // Dashboard SPA (vanilla JS). Served as static files.
   const dashDir = workspaceDir ?? resolve(process.cwd(), 'apps/ecommerce/workspace');

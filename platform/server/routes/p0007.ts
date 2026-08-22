@@ -119,6 +119,28 @@ export const p0007Router = (db: Db): Router => {
         'SELECT * FROM human_interventions WHERE situation_id = ? ORDER BY created_at ASC',
       ).all(situationId) as Record<string, unknown>[];
 
+      // P0010.1 REPAIR-2: include learningContext (carries outputs[]) in the
+      // first-pass response so the Output/WorkItem section can render
+      // synchronously without a second-pass API call. Without this, the
+      // section was only populated via a follow-up /outputs + mark-delivered
+      // call that could fail silently, leaving the section empty.
+      const lcRow = db.prepare(
+        'SELECT body, lifecycle, created_at, updated_at FROM learning_contexts WHERE situation_id = ?',
+      ).get(situationId) as { body: string; lifecycle: string; created_at: string; updated_at: string } | undefined;
+      const learningContext = lcRow ? (() => {
+        try {
+          const parsed = JSON.parse(lcRow.body);
+          return {
+            ...parsed,
+            lifecycle: lcRow.lifecycle,
+            createdAt: lcRow.created_at,
+            updatedAt: lcRow.updated_at,
+          };
+        } catch {
+          return { raw: lcRow.body, parseError: true };
+        }
+      })() : null;
+
       const situation = {
         situationId: row.situation_id,
         domain: row.domain,
@@ -143,6 +165,13 @@ export const p0007Router = (db: Db): Router => {
           legacySource: i.legacy_source,
           timestamp: i.created_at,
         })),
+        // P0010.1 REPAIR-2: outputs[] lives on learning_contexts.body; expose
+        // it (and the rest of the LearningContext) at the top level so the
+        // Operator UI can render Agent deliverables in the FIRST pass.
+        outputs: (learningContext && Array.isArray(learningContext.outputs))
+          ? learningContext.outputs
+          : [],
+        learningContext: learningContext,
       };
 
       ok(res, situation);

@@ -18,6 +18,7 @@
 import { z } from 'zod';
 import { InvestigationSchema } from './investigation.js';
 import { IsoDateString } from './common.js';
+import { WorkItemSchema } from './output.js';
 
 // ---- Lifecycle ----
 
@@ -370,6 +371,18 @@ export const LearningContextSchema = z.object({
 
   /** What real-world actions were taken */
   actions: z.array(ActionRefSchema).default([]),
+
+  /**
+   * P0010.1 Post-Productization REPAIR — Operator-visible deliverables
+   * produced by the Agent. Each WorkItem is something the human is expected
+   * to look at (e.g. a Recommendation persisted as an Output). Additive —
+   * the field is optional on the wire and defaults to `[]`; producers do
+   * not need to populate it (a Situation without Outputs is valid).
+   *
+   * No transport, no delivery engine, no approval flow. Status transitions
+   * are: ready → delivered → acknowledged → closed (set by operator).
+   */
+  outputs: z.array(WorkItemSchema).default([]),
 
   /** What outcomes were observed */
   outcomes: z.array(OutcomeRefSchema).default([]),

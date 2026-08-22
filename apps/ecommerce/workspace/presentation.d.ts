@@ -29,3 +29,53 @@ export function descClean(text: string | null | undefined): string;
 export function hasPriorValidCognition(
   investigation: { status?: string; error?: string; judgment?: string; currentUnderstanding?: string } | null | undefined,
 ): boolean;
+
+// ---- P0010.1 Post-Productization REPAIR additions ----
+
+export type SituationLifecycle = 'pending' | 'investigating' | 'watching' | 'waiting_human' | 'closed';
+
+export function deriveSituationLifecycle(
+  investigation: any,
+  interventionCount: number,
+  hasAcceptedDecision: boolean,
+): SituationLifecycle;
+
+export const SITUATION_LIFECYCLE_LABEL: Readonly<Record<SituationLifecycle, string>>;
+export const INVESTIGATION_STATUS_LABEL: Readonly<Record<string, string>>;
+
+export interface ObservationCommitment {
+  type: 'observe';
+  startedAt: string;
+  reviewAt: string | null;
+  /** Human-readable labels of what an operator should look for before
+   *  re-evaluating. NOT auto-wake conditions: there is no scheduler. */
+  checkpoints: string[];
+  note: string;
+}
+
+export function deriveObservationCommitment(investigation: any): ObservationCommitment | null;
+
+export interface SourcePopoverField {
+  label: string;
+  value: string;
+  devOnly?: boolean;
+}
+
+export interface SourcePopover {
+  title: string;
+  fields: SourcePopoverField[];
+  unavailable?: { reason: string; detail: string };
+}
+
+export function popoverContentForEvidence(evidenceString: string | null | undefined): SourcePopover | null;
+export function popoverContentForKnowledge(knownEvidenceText: string | null | undefined): SourcePopover | null;
+export function popoverContentForHuman(intervention: any): SourcePopover | null;
+export function popoverContentForMemory(): SourcePopover;
+
+export function getSourcePopoverData(
+  kind: 'evidence' | 'knowledge' | 'human' | 'memory',
+  refId: number | string | null,
+  context: { evidenceStrings?: string[]; knownEvidence?: string[]; interventions?: unknown[] },
+): SourcePopover | null;
+
+export function renderSourcePopoverHtml(data: SourcePopover | null): string;

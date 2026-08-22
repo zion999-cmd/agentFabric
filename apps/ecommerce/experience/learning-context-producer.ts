@@ -102,6 +102,7 @@ const buildLearningContext = (
     agentActivities: [],
     humanInterventions: interventions,
     actions: [],
+    outputs: [],
     outcomes: [],
     summary: {
       capabilitiesUsed: [...new Set(observations.map((o) => o.capability))],

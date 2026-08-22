@@ -642,3 +642,276 @@ ul, ol { list-style: none; }
 .inv-stale-banner { margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--danger, #d9534f); border-left-width: 3px; border-radius: 6px; background: rgba(217, 83, 79, 0.06); }
 .inv-stale-banner .inv-stale-title { font-size: 0.78rem; font-weight: 600; color: var(--danger, #d9534f); }
 .inv-stale-banner .inv-stale-reason { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+
+/* ── P0010.1 Post-Productization REPAIR: 5-state lifecycle + commitment ── */
+/* The lifecycle card lives at the top of the Situation Detail. It MUST show
+   one of 5 distinct business states — never "已处理" — and the 4th state
+   (watching / 持续观察) is not equivalent to "completed". */
+.lifecycle-card {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 16px; padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+.lifecycle-card .lifecycle-icon { font-size: 1rem; }
+.lifecycle-card .lifecycle-state { font-weight: 600; }
+.lifecycle-card .lifecycle-detail { color: var(--muted); font-size: 0.74rem; }
+.lifecycle-card.lifecycle-pending        { background: #f8fafc; border-color: #cbd5e1; }
+.lifecycle-card.lifecycle-investigating  { background: #eff6ff; border-color: #93c5fd; }
+.lifecycle-card.lifecycle-watching       { background: #fef3c7; border-color: #fcd34d; }
+.lifecycle-card.lifecycle-watching .lifecycle-state { color: #b45309; }
+.lifecycle-card.lifecycle-waiting_human  { background: #fff7ed; border-color: #fdba74; }
+.lifecycle-card.lifecycle-waiting_human .lifecycle-state { color: #c2410c; }
+.lifecycle-card.lifecycle-closed         { background: #f0fdf4; border-color: #86efac; }
+.lifecycle-card.lifecycle-closed .lifecycle-state { color: #166534; }
+
+/* Observation Commitment card — the operator-facing representation of
+   "未完成事务". No scheduler, no wake engine — just the visible "next
+   checkpoint expected" surface. Shown only when lifecycle is watching-like. */
+.commitment-card {
+  margin: 0 0 16px; padding: 12px 14px;
+  border: 1px solid #fcd34d; border-left-width: 3px; border-radius: 8px;
+  background: #fffbeb; font-size: 0.78rem; line-height: 1.5;
+}
+.commitment-card .commitment-title { font-weight: 600; color: #b45309; margin-bottom: 4px; }
+.commitment-card .commitment-row   { color: var(--muted); }
+.commitment-card .commitment-row strong { color: var(--text); font-weight: 600; }
+
+/* Output/WorkItem section — the minimal P0011-prep surface. Shows the
+   Agent's deliverables (recommendation persisted as an Output). Status
+   chips follow the 4-state enum: ready → delivered → acknowledged → closed.
+   P0010.1 REPAIR-2: this is a FIRST-CLASS region, rendered above the
+   Lifecycle card so the operator sees the deliverable immediately. */
+.outputs-section {
+  margin: 0 0 16px 0;
+  padding: 12px 14px;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #2563eb;
+  border-radius: 6px;
+  background: #eff6ff;
+}
+.outputs-section .outputs-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; color: #1e40af; }
+.output-item {
+  display: block;
+  padding: 10px 12px; margin-bottom: 8px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--panel); font-size: 0.8rem;
+}
+.output-item:last-child { margin-bottom: 0; }
+.output-item .output-row1 {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+}
+.output-item .output-type {
+  font-weight: 600; font-size: 0.75rem;
+  padding: 2px 6px; border-radius: 4px;
+  background: #e0e7ff; color: #3730a3;
+}
+.output-item .output-title { font-weight: 600; flex: 1; }
+.output-item .output-content {
+  line-height: 1.5; margin: 4px 0 6px 0; color: var(--text);
+}
+.output-item .output-meta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  font-size: 0.7rem; color: var(--muted);
+  margin-bottom: 6px;
+}
+.output-item .output-result-ref-empty { color: #9ca3af; font-style: italic; }
+.output-item .output-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.output-item .output-actions button { font-size: 0.72rem; padding: 4px 10px; }
+.output-item .output-view-result {
+  background: #fff; color: #1d4ed8; border: 1px solid #93c5fd;
+}
+.output-item .output-view-result:hover { background: #dbeafe; }
+.output-item .output-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+
+/* P0010.1 REPAIR-3: Workspace "工作输出" collection page.
+   Read-only aggregation of every WorkItem across all situations. */
+.outputs-tabs {
+  display: flex; gap: 4px; margin: 0 0 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.outputs-tabs .feed-tab {
+  background: transparent; border: 0; border-bottom: 2px solid transparent;
+  padding: 8px 12px; font-size: 0.82rem; cursor: pointer; color: var(--muted);
+  font-weight: 500;
+}
+.outputs-tabs .feed-tab:hover { color: var(--text); }
+.outputs-tabs .feed-tab.active {
+  color: #1d4ed8; border-bottom-color: #2563eb; font-weight: 600;
+}
+.outputs-collection { display: flex; flex-direction: column; gap: 8px; }
+.output-collection-item {
+  display: block;
+  padding: 12px 14px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--panel); font-size: 0.8rem;
+  border-left: 3px solid #93c5fd;
+}
+.output-collection-item[data-output-status="ready"]        { border-left-color: #fbbf24; }
+.output-collection-item[data-output-status="delivered"]    { border-left-color: #3b82f6; }
+.output-collection-item[data-output-status="acknowledged"] { border-left-color: #10b981; }
+.output-collection-item[data-output-status="closed"]       { border-left-color: #94a3b8; }
+.output-collection-item .output-row1 {
+  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px;
+}
+.output-collection-item .output-content-summary {
+  flex: 1; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.output-collection-item .output-source-link {
+  color: #1d4ed8; text-decoration: none; font-weight: 500;
+  border-bottom: 1px dashed #93c5fd;
+}
+.output-collection-item .output-source-link:hover {
+  color: #1e40af; border-bottom-color: #1d4ed8;
+}
+.output-collection-item .output-collection-view-result {
+  background: #fff; color: #1d4ed8; border: 1px solid #93c5fd;
+  font-size: 0.72rem; padding: 4px 10px;
+}
+.output-collection-item .output-collection-view-result:hover { background: #dbeafe; }
+.output-status-ready        { background: #fef3c7; color: #b45309; }
+.output-status-delivered    { background: #dbeafe; color: #1d4ed8; }
+.output-status-acknowledged { background: #d1fae5; color: #047857; }
+.output-status-closed       { background: #f1f5f9; color: #475569; }
+
+/* ── P0010.1 Output Workspace v0 ─────────────────────────── */
+/* Output Detail (independent view, NOT Situation Detail). 4 regions:
+   交付内容 / 交付状态 / 来源与追溯 / 当前可做的操作. */
+#view-outputDetail .output-detail-header {
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+#view-outputDetail .output-back-link {
+  font-size: 0.78rem; color: #1d4ed8; text-decoration: none;
+  font-weight: 500;
+}
+#view-outputDetail .output-back-link:hover { color: #1e40af; text-decoration: underline; }
+#view-outputDetail .output-detail-title {
+  font-size: 1.2rem; font-weight: 600; margin: 4px 0;
+  display: flex; align-items: center; gap: 10px;
+}
+#view-outputDetail .output-detail-source {
+  font-size: 0.78rem; color: var(--muted);
+}
+#view-outputDetail .output-detail-region {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border); border-radius: 8px;
+}
+#view-outputDetail .output-detail-region-title {
+  font-size: 0.85rem; font-weight: 600; margin: 0 0 10px;
+  color: #1e40af;
+}
+#view-outputDetail .output-detail-content {
+  font-size: 0.85rem; line-height: 1.55; margin: 0;
+  white-space: pre-wrap; color: var(--text);
+}
+#view-outputDetail .output-status-table {
+  border-collapse: collapse; width: 100%; font-size: 0.78rem;
+}
+#view-outputDetail .output-status-table td {
+  padding: 6px 8px; vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+#view-outputDetail .output-status-table tr:last-child td { border-bottom: 0; }
+#view-outputDetail .output-kv-key { width: 30%; }
+#view-outputDetail .output-kv-val { width: 70%; }
+#view-outputDetail .output-source-line {
+  font-size: 0.82rem; margin: 6px 0;
+}
+#view-outputDetail .output-source-block { margin-bottom: 8px; }
+#view-outputDetail .output-judgment-block {
+  border-top: 1px dashed var(--border); padding-top: 8px; margin-top: 8px;
+}
+#view-outputDetail .output-trust-block { margin-top: 4px; }
+#view-outputDetail .source-tag-row {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+#view-outputDetail .source-tag {
+  display: inline-block;
+  background: #e0e7ff; color: #3730a3;
+  border: 1px solid #c7d2fe;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 0.72rem; font-weight: 500;
+}
+#view-outputDetail .output-detail-region-actions .btn {
+  margin-right: 8px; margin-bottom: 4px;
+}
+
+/* Situation Detail Output Surface (summary, not full copy). */
+.outputs-section .outputs-section-footer {
+  margin-top: 8px; padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  text-align: right;
+}
+.output-item-summary .output-row1 {
+  margin-bottom: 4px;
+}
+.output-item-summary .output-content {
+  font-size: 0.78rem; line-height: 1.45;
+  color: var(--text);
+  margin: 4px 0 8px 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.output-item-summary .output-actions { justify-content: flex-end; }
+
+/* Right-pane Trust/Source block (Output Detail uses this, not Track). */
+.output-trust-pane { font-size: 0.78rem; }
+.output-trust-pane h4 { font-weight: 600; }
+.output-trust-pane a {
+  color: #1d4ed8; text-decoration: none;
+  border-bottom: 1px dashed #93c5fd;
+}
+
+/* Source-tag popover — click target, NOT a tooltip. The [E]/[K]/[H]/[M] tag
+   becomes clickable; clicking opens a popover anchored to the tag with
+   the available content + an honest "原始来源暂不可定位" surface when the
+   underlying record is not addressable. No navigation. */
+.source-tag { cursor: pointer; user-select: none; }
+.source-tag:hover { filter: brightness(0.96); }
+
+.popover-overlay {
+  position: fixed; inset: 0; z-index: 9998;
+  background: transparent;
+}
+.popover {
+  position: absolute; z-index: 9999;
+  min-width: 280px; max-width: 420px;
+  background: #ffffff; color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  font-size: 0.8rem; line-height: 1.4;
+}
+.popover-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  background: var(--bg-strong);
+}
+.popover-title { font-weight: 600; font-size: 0.82rem; }
+.popover-close {
+  font-size: 1.1rem; line-height: 1; color: var(--muted); padding: 0 4px;
+}
+.popover-close:hover { color: var(--text); }
+.popover-body { padding: 10px 12px; }
+.popover-table { width: 100%; border-collapse: collapse; }
+.popover-table th {
+  text-align: left; font-weight: 500; color: var(--muted);
+  padding: 3px 8px 3px 0; width: 80px; font-size: 0.74rem;
+  vertical-align: top;
+}
+.popover-table td { padding: 3px 0; font-size: 0.78rem; }
+.popover-table code { font-family: var(--font-mono); font-size: 0.72rem; background: var(--bg-strong); padding: 1px 4px; border-radius: 3px; }
+.popover-table tr.popover-dev-row td { opacity: 0.5; font-size: 0.7rem; }
+.popover-warning {
+  margin-top: 8px; padding: 8px 10px;
+  border: 1px solid #fcd34d; border-radius: 6px;
+  background: #fffbeb;
+}
+.popover-warning-reason { font-weight: 600; color: #b45309; font-size: 0.76rem; }
+.popover-warning-detail { color: var(--muted); font-size: 0.72rem; margin-top: 3px; }

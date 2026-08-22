@@ -1,0 +1,99 @@
+// P0010.1 Post-Productization REPAIR — minimal Output / WorkItem contract.
+//
+// A WorkItem is the Agent's "deliverable" — what the Agent has produced that
+// the human is supposed to look at / acknowledge / close. This is a thin
+// surface, NOT a ticket system. There is no transport, no delivery engine,
+// no approval flow. The status enum is the only state machine.
+//
+// Why JSON-in-body, not a new SQL table:
+//   - Existing `learning_contexts.body` is JSON; adding `outputs[]` is
+//     additive (default []) and does not require a migration.
+//   - The 5-7 existing fields (`interventions[]`, `actions[]`, `outcomes[]`)
+//     are already stored this way, so the pattern is established.
+//   - The audit (Output/WorkItem) classified this as REUSE with a single new
+//     field; no producer changes are required for the 3 demo situations.
+//
+// What this contract does NOT do:
+//   - It does NOT represent Action execution (Agent never executes business
+//     actions in this slice — see runtime/investigation/prompt.ts:196-198).
+//   - It does NOT transport to Feishu / WeCom / Email / Telegram.
+//   - It does NOT poll, wake, or schedule review.
+//   - It does NOT have a delivery acknowledgement by an external system.
+//     `acknowledged` is set by the human pressing a button in Workspace.
+//
+// Status semantics (the only state machine):
+//   - `ready`        — Agent has produced this; the human is expected to look.
+//   - `delivered`    — The Operator has seen the WorkItem surface (auto-set
+//                       when the Situation detail view is opened).
+//   - `acknowledged` — The Operator has explicitly clicked "已知悉".
+//   - `closed`       — The Operator has acted on or explicitly closed the
+//                       WorkItem (or an upstream decision was reject/accept).
+
+import { z } from 'zod';
+
+/** What kind of deliverable is this. */
+export const WorkItemTypeSchema = z.enum([
+  /** A persisted Recommendation from an investigation. */
+  'recommendation',
+  /** An analysis report (e.g. the full Investigation contract as a deliverable). */
+  'analysis',
+  /** A concrete work item the operator should perform (e.g. check inventory). */
+  'work_item',
+  /** A generated report / document (e.g. a CVR analysis report). */
+  'report',
+]);
+export type WorkItemType = z.infer<typeof WorkItemTypeSchema>;
+
+/** Lifecycle status of a WorkItem. */
+export const WorkItemStatusSchema = z.enum(['ready', 'delivered', 'acknowledged', 'closed']);
+export type WorkItemStatus = z.infer<typeof WorkItemStatusSchema>;
+
+/**
+ * How to find the actual artifact this WorkItem refers to.
+ * `kind` names the address space; `ref` is a path or id; `contentHash`
+ * is the content-addressable hash (when the address space supports it).
+ *
+ * Today only `workspace_path` and `learning_context` are real (they resolve
+ * to local files we already write). `evidence` is aspirational — see
+ * `SB-1` schema blocker in `context/p0010_1_productization_baseline.md`.
+ */
+export const WorkItemResultRefSchema = z.object({
+  kind: z.enum(['workspace_path', 'learning_context', 'evidence', 'none']),
+  ref: z.string().min(1).optional(),
+  contentHash: z.string().optional(),
+});
+export type WorkItemResultRef = z.infer<typeof WorkItemResultRefSchema>;
+
+/**
+ * Minimal WorkItem — the Operator-visible deliverable.
+ * All fields are required unless marked optional.
+ */
+export const WorkItemSchema = z.object({
+  outputId: z.string().min(1),
+  situationId: z.string().min(1),
+  type: WorkItemTypeSchema,
+  status: WorkItemStatusSchema,
+  resultRef: WorkItemResultRefSchema.optional(),
+  /** Operator-facing prose summary of the deliverable. */
+  content: z.string().min(1),
+  createdAt: z.string().min(1),
+  acknowledgedAt: z.string().optional(),
+  closedAt: z.string().optional(),
+});
+export type WorkItem = z.infer<typeof WorkItemSchema>;
+
+/** Status label for the Operator surface (Chinese). */
+export const WORK_ITEM_STATUS_LABEL: Readonly<Record<WorkItemStatus, string>> = Object.freeze({
+  ready: '待查看',
+  delivered: '已送达',
+  acknowledged: '已确认',
+  closed: '已结束',
+});
+
+/** Type label for the Operator surface (Chinese). */
+export const WORK_ITEM_TYPE_LABEL: Readonly<Record<WorkItemType, string>> = Object.freeze({
+  recommendation: '建议',
+  analysis: '分析',
+  work_item: '工作项',
+  report: '报告',
+});

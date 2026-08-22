@@ -1,0 +1,360 @@
+// P0010.1 Post-Productization REPAIR — minimal Output / WorkItem API.
+//
+// Three endpoints, no transport, no engine, no approval flow:
+//   GET    /api/situations/:id/outputs      — list all WorkItems
+//   POST   /api/situations/:id/outputs      — create a new WorkItem
+//   PATCH  /api/situations/:id/outputs/:oid — transition status (ready →
+//                                              delivered → acknowledged →
+//                                              closed)
+//
+// The WorkItem is persisted inside the Learning Context's `body.outputs[]`
+// JSON column. No SQL migration. No new table. Reuses the existing
+// `learning_contexts` row.
+//
+// Strict boundaries:
+//   - No Action execution (the Agent never executes business operations).
+//   - No external transport (Feishu / WeCom / Email / Telegram — out of scope).
+//   - No Event Bus, no wake engine, no scheduler (out of scope).
+//   - No approval flow (the Operator's "closed" is the only close path).
+//   - `delivered` is set automatically when the Situation detail is opened
+//     (see POST /api/situations/:id/outputs/:oid/delivered convenience below).
+//
+// See `context/p0010_1_productization_baseline.md` Schema Blockers
+// (SB-1 / SB-4) — `evidence` resultRef kind is aspirational and will return
+// "unavailable" until P0011 Evidence Identity lands.
+
+import { Router } from 'express';
+import type { Database as Db } from 'better-sqlite3';
+import { z } from 'zod';
+import { nowIso } from '#shared/utils/time.js';
+import {
+  WorkItemSchema,
+  WorkItemStatusSchema,
+  type WorkItem,
+  type WorkItemStatus,
+} from '#shared/schemas/output.js';
+
+// ---- Helpers ----
+
+const ok = (res: any, data: unknown, meta?: Record<string, unknown>) => {
+  res.json({ success: true, data, ...(meta ? { meta } : {}) });
+};
+const fail = (res: any, status: number, error: string) => {
+  res.status(status).json({ success: false, error });
+};
+
+/** Read the LearningContext body, ensuring `outputs` is an array. */
+const readLearningContextBody = (db: Db, situationId: string): { row: { body: string }; ctx: Record<string, unknown> } | null => {
+  const row = db.prepare('SELECT body FROM learning_contexts WHERE situation_id = ?').get(situationId) as Record<string, unknown> | undefined;
+  if (!row) return null;
+  let ctx: Record<string, unknown>;
+  try {
+    ctx = JSON.parse(String(row.body ?? '{}'));
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(ctx.outputs)) ctx.outputs = [];
+  return { row: { body: String(row.body) }, ctx };
+};
+
+const writeLearningContextBody = (db: Db, situationId: string, ctx: Record<string, unknown>): void => {
+  const now = nowIso();
+  db.prepare('UPDATE learning_contexts SET body = ?, updated_at = ? WHERE situation_id = ?').run(
+    JSON.stringify(ctx),
+    now,
+    situationId,
+  );
+};
+
+/** Generate a stable-looking id without bringing in uuid (matches the
+ *  convention used by `human_interventions` and the demo seed). */
+const genOutputId = (): string =>
+  `out_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+
+// ---- Routes ----
+
+export const outputsRouter = (db: Db): Router => {
+  const router = Router();
+
+  // ── List ───────────────────────────────────────────────
+  router.get('/situations/:id/outputs', (req, res) => {
+    const situationId = req.params.id;
+    const read = readLearningContextBody(db, situationId);
+    if (!read) return ok(res, []);
+    ok(res, read.ctx.outputs);
+  });
+
+  // ── Create ─────────────────────────────────────────────
+  // Body: { type, content, resultRef? }
+  // Server assigns: outputId, situationId, status='ready', createdAt
+  const CreateOutputBody = z.object({
+    type: WorkItemSchema.shape.type,
+    content: z.string().min(1).max(2000),
+    resultRef: WorkItemSchema.shape.resultRef.optional(),
+  });
+
+  router.post('/situations/:id/outputs', (req, res) => {
+    const situationId = req.params.id;
+    let body: z.infer<typeof CreateOutputBody>;
+    try {
+      body = CreateOutputBody.parse(req.body);
+    } catch (e) {
+      return fail(res, 400, e instanceof Error ? e.message : 'invalid body');
+    }
+    const read = readLearningContextBody(db, situationId);
+    if (!read) return fail(res, 404, 'Learning context not found for this situation.');
+
+    const now = nowIso();
+    const output: WorkItem = {
+      outputId: genOutputId(),
+      situationId,
+      type: body.type,
+      status: 'ready',
+      resultRef: body.resultRef,
+      content: body.content,
+      createdAt: now,
+    };
+    read.ctx.outputs = [...(read.ctx.outputs as WorkItem[]), output];
+    writeLearningContextBody(db, situationId, read.ctx);
+    ok(res, output);
+  });
+
+  // ── Patch (status transition) ──────────────────────────
+  // Body: { status }
+  // Allowed transitions: ready → delivered → acknowledged → closed
+  // (each step can skip the intermediate; e.g. ready → closed is allowed
+  //  because the Operator may decide to close without acknowledging.)
+  const PatchOutputBody = z.object({
+    status: WorkItemStatusSchema,
+  });
+
+  router.patch('/situations/:id/outputs/:oid', (req, res) => {
+    const situationId = req.params.id;
+    const outputId = req.params.oid;
+    let body: z.infer<typeof PatchOutputBody>;
+    try {
+      body = PatchOutputBody.parse(req.body);
+    } catch (e) {
+      return fail(res, 400, e instanceof Error ? e.message : 'invalid body');
+    }
+    const read = readLearningContextBody(db, situationId);
+    if (!read) return fail(res, 404, 'Learning context not found for this situation.');
+
+    const outputs = read.ctx.outputs as WorkItem[];
+    const idx = outputs.findIndex((o) => o.outputId === outputId);
+    if (idx === -1) return fail(res, 404, 'Output not found.');
+
+    const prev = outputs[idx];
+    if (!prev) return fail(res, 404, 'Output not found.');
+    const next: WorkItem = { ...prev, status: body.status };
+    if (body.status === 'acknowledged' && !prev.acknowledgedAt) {
+      next.acknowledgedAt = nowIso();
+    }
+    if (body.status === 'closed' && !prev.closedAt) {
+      next.closedAt = nowIso();
+    }
+    read.ctx.outputs = outputs.map((o, i) => (i === idx ? next : o));
+    writeLearningContextBody(db, situationId, read.ctx);
+    ok(res, next);
+  });
+
+  // ── Convenience: mark all `ready` outputs as `delivered` ───
+  // Called by the Workspace when the Situation detail view is opened.
+  // POST /api/situations/:id/outputs/mark-delivered
+  router.post('/situations/:id/outputs/mark-delivered', (req, res) => {
+    const situationId = req.params.id;
+    const read = readLearningContextBody(db, situationId);
+    if (!read) return ok(res, { updated: 0 });
+    const outputs = read.ctx.outputs as WorkItem[];
+    let updated = 0;
+    read.ctx.outputs = outputs.map((o) => {
+      if (o.status === 'ready') {
+        updated++;
+        return { ...o, status: 'delivered' as WorkItemStatus };
+      }
+      return o;
+    });
+    if (updated > 0) writeLearningContextBody(db, situationId, read.ctx);
+    ok(res, { updated });
+  });
+
+  // ── Single Output (cross-situation, read-only) ────────────────────
+  // P0010.1 Output Workspace v0: GET /api/outputs/:oid
+  // Fetches one WorkItem from across all learning_contexts, attaching
+  // the source situation context (entity / description / type) so the
+  // Output Detail view can render "来源 Situation" without a second
+  // call. Does NOT attach generation-time judgment snapshot (the
+  // schema does not currently record it) — the surface shows the
+  // *current* situation judgment with a clear "current state" note.
+  // 404 if no matching outputId is found.
+  router.get('/outputs/:oid', (req, res) => {
+    const outputId = req.params.oid;
+    if (!outputId) return fail(res, 400, 'Missing outputId.');
+
+    const rows = db.prepare(
+      'SELECT lc.situation_id AS situation_id, s.entity_id, s.entity_name, s.entity_type, s.entity_platform, s.description, s.tags, lc.body AS body ' +
+      'FROM learning_contexts lc ' +
+      'LEFT JOIN situations s ON s.situation_id = lc.situation_id',
+    ).all() as Array<{
+      situation_id: string;
+      entity_id: string | null;
+      entity_name: string | null;
+      entity_type: string | null;
+      entity_platform: string | null;
+      description: string | null;
+      tags: string | null;
+      body: string;
+    }>;
+
+    for (const r of rows) {
+      let ctx: Record<string, unknown>;
+      try {
+        ctx = JSON.parse(r.body ?? '{}');
+      } catch {
+        continue;
+      }
+      if (!Array.isArray(ctx.outputs)) continue;
+      const hit = (ctx.outputs as WorkItem[]).find((o) => o && o.outputId === outputId);
+      if (!hit) continue;
+      // Best-effort: pull the current judgment / recommendation out of
+      // the LearningContext body for the "判断依据" region. These are
+      // the *current* values, not a generation-time snapshot — we
+      // surface that honestly in the UI.
+      const investigation = (ctx.investigation && typeof ctx.investigation === 'object')
+        ? (ctx.investigation as Record<string, unknown>) : null;
+      const recommendation = (ctx.recommendation && typeof ctx.recommendation === 'object')
+        ? (ctx.recommendation as Record<string, unknown>) : null;
+      const understanding = typeof ctx.currentUnderstanding === 'string' ? ctx.currentUnderstanding : '';
+      const judgment = investigation && typeof investigation.judgment === 'string' ? investigation.judgment : '';
+      const stopReason = investigation && typeof investigation.stopReason === 'string' ? investigation.stopReason : '';
+      const rec = recommendation && typeof recommendation.recommendation === 'string' ? recommendation.recommendation : '';
+      const rationale = recommendation && typeof recommendation.rationale === 'string' ? recommendation.rationale : '';
+      let tags: string[] = [];
+      try {
+        const parsed = r.tags ? JSON.parse(r.tags) : [];
+        if (Array.isArray(parsed)) tags = parsed.map((t) => String(t));
+      } catch { /* keep [] */ }
+
+      return ok(res, {
+        ...hit,
+        situation: {
+          situationId: r.situation_id,
+          entityId: r.entity_id,
+          entityName: r.entity_name,
+          entityType: r.entity_type,
+          entityPlatform: r.entity_platform,
+          description: r.description,
+          tags,
+        },
+        currentSituation: {
+          understanding,
+          judgment,
+          stopReason,
+          recommendation: rec,
+          recommendationRationale: rationale,
+          // Surface that this is the *current* state, not a generation-time
+          // snapshot. The schema does not snapshot at output creation.
+          snapshotAvailable: false,
+        },
+      });
+    }
+    return fail(res, 404, 'Output not found.');
+  });
+
+  // ── Collection (cross-situation, read-only) ───────────────────
+  // P0010.1 REPAIR-3: a single read-only endpoint that lists ALL outputs
+  // across all situations, with optional `status` filter. The data
+  // source is the existing `learning_contexts.body.outputs[]` JSON
+  // column — we do NOT copy, duplicate, or create a second Output
+  // Store. The endpoint joins with `situations` ONLY to surface
+  // operator-facing context (entityName, entityType, platform) so the
+  // Workspace "工作输出" page can show "来自: 祁门红茶旗舰店 (sit_human_demo)".
+  //
+  // Query params:
+  //   status  — optional: ready | delivered | acknowledged | closed
+  //   limit   — optional: 1..500, default 200
+  //   offset  — optional: default 0
+  //
+  // Strict boundaries (NOT INCLUDED):
+  //   - Read-only. No POST / PATCH / DELETE here.
+  //   - Opening the page does NOT change status to 'delivered'.
+  //   - No transport, no Hermes bridge, no Email/Feishu/WeCom.
+  //   - Does not affect Situation.lifecycle.
+  router.get('/outputs', (req, res) => {
+    const status = typeof req.query.status === 'string' ? req.query.status : '';
+    const limit = Math.min(Math.max(parseInt(String(req.query.limit ?? '200'), 10) || 200, 1), 500);
+    const offset = Math.max(parseInt(String(req.query.offset ?? '0'), 10) || 0, 0);
+
+    // Validate the status filter against the enum (unknown status → 400).
+    if (status && !WorkItemStatusSchema.options.includes(status as WorkItemStatus)) {
+      return fail(res, 400, `Invalid status filter: ${status}. Allowed: ${WorkItemStatusSchema.options.join(', ')}`);
+    }
+
+    // Pull every learning_context that has a non-empty outputs[].
+    // We keep this as a single SQL pass with JSON parsing in JS so we
+    // do not need to migrate the schema. A bounded set (production cap
+    // is small — typical team has <1k learning contexts).
+    const rows = db.prepare(
+      'SELECT lc.situation_id AS situation_id, s.entity_id, s.entity_name, s.entity_type, s.entity_platform, s.description, lc.body AS body ' +
+      'FROM learning_contexts lc ' +
+      'LEFT JOIN situations s ON s.situation_id = lc.situation_id',
+    ).all() as Array<{
+      situation_id: string;
+      entity_id: string | null;
+      entity_name: string | null;
+      entity_type: string | null;
+      entity_platform: string | null;
+      description: string | null;
+      body: string;
+    }>;
+
+    const items: Array<WorkItem & {
+      situation: {
+        situationId: string;
+        entityId: string | null;
+        entityName: string | null;
+        entityType: string | null;
+        entityPlatform: string | null;
+        description: string | null;
+      };
+    }> = [];
+    for (const r of rows) {
+      let ctx: Record<string, unknown>;
+      try {
+        ctx = JSON.parse(r.body ?? '{}');
+      } catch {
+        continue;
+      }
+      if (!Array.isArray(ctx.outputs)) continue;
+      for (const raw of ctx.outputs as WorkItem[]) {
+        if (!raw || typeof raw !== 'object') continue;
+        if (status && raw.status !== status) continue;
+        items.push({
+          ...raw,
+          situation: {
+            situationId: r.situation_id,
+            entityId: r.entity_id,
+            entityName: r.entity_name,
+            entityType: r.entity_type,
+            entityPlatform: r.entity_platform,
+            description: r.description,
+          },
+        });
+      }
+    }
+
+    // Stable ordering: most recent first, then by situationId for determinism.
+    items.sort((a, b) => {
+      const ta = new Date(a.createdAt || 0).getTime();
+      const tb = new Date(b.createdAt || 0).getTime();
+      if (ta !== tb) return tb - ta;
+      return a.situationId.localeCompare(b.situationId);
+    });
+
+    const total = items.length;
+    const sliced = items.slice(offset, offset + limit);
+    return ok(res, sliced, { total, limit, offset });
+  });
+
+  return router;
+};

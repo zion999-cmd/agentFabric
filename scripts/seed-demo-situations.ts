@@ -1,18 +1,25 @@
-// P0010.1 Workspace Productization Baseline — Demo 3 Situation Seed.
+// P0010.1 Workspace Productization Baseline — Demo 4 Situation Seed.
 //
-// Inserts 3 idempotent fixture situations into the database so a human
-// reviewer can open Workspace and see, in one place, the three states
-// the Presentation Contract is supposed to handle honestly:
+// Inserts 4 idempotent fixture situations into the database so a human
+// reviewer can open Workspace and see, in one place, the four lifecycle
+// states the Post-Productization REPAIR must handle honestly:
 //
-//   1. sit_observe_demo       — completed investigation, stopReason='observe'
+//   1. sit_observe_demo        — completed investigation, stopReason='observe'
 //                                (no human intervention, no failed marker)
-//   2. sit_human_demo         — completed investigation, stopReason='judgment'
+//                                → lifecycle: 👀 持续观察
+//   2. sit_human_demo          — completed investigation, stopReason='judgment'
 //                                + 3 human interventions (correction +
-//                                context_supplement + decision/reject)
+//                                context_supplement + decision/reject) +
+//                                1 Output/WorkItem deliverable
+//                                → lifecycle: 👀 持续观察 (decision=reject)
 //   3. sit_failed_recover_demo — a failed marker on top of a prior
 //                                completed judgment (REPAIR: prior valid
 //                                cognition is preserved, banner shows on
 //                                the Hero block)
+//                                → lifecycle: 👀 持续观察 (with stale banner)
+//   4. sit_waiting_human_demo  — Agent explicitly asks the human to act
+//                                (stopReason='ask_human'); no decision yet
+//                                → lifecycle: 👤 等待人工
 //
 // Why we hand-write SQL and don't reuse the SituationSchema /
 // InvestigationSchema parsers: the seed must be a stable, hand-curated
@@ -71,6 +78,16 @@ const SIT_FAILED = {
   temporal: { observedAt: '2026-08-22T11:00:00.000Z' },
   description: '祁门红茶 · 经典 250g 礼盒 近期经营表现相对突出，进入持续观察名单 — 待 Agent 调查后给出判断。',
   tags: ['ranking_attention', 'product', 'leader'],
+};
+
+const SIT_WAITING_HUMAN = {
+  situationId: 'sit_waiting_human_demo',
+  domain: 'ecommerce',
+  type: 'anomaly_investigation',
+  entity: { id: SHOP_ID, type: 'shop', name: SHOP_NAME, platform: PLATFORM },
+  temporal: { observedAt: '2026-08-22T13:00:00.000Z', windowStart: '2026-08-20', windowEnd: '2026-08-22' },
+  description: '祁门红茶旗舰店 客服 24h 响应率 较 7 日均值下降 41.2%，需要人工核验客服排班是否变动。',
+  tags: ['anomaly_investigation', 'service', 'response_rate'],
 };
 
 // ------------------------------------------------------------------
@@ -164,6 +181,30 @@ const FAILED_PRIOR_INVESTIGATION = {
   },
   status: 'completed' as const,
   updatedAt: '2026-08-22T11:30:00.000Z',
+};
+
+// P0010.1 REPAIR — Demo #4: Agent explicitly asks the human to act.
+// stopReason='ask_human' → deriveSituationLifecycle returns 'waiting_human'.
+const WAITING_HUMAN_INVESTIGATION = {
+  situationId: SIT_WAITING_HUMAN.situationId,
+  currentUnderstanding: '客服 24h 响应率显著下降，但当前 Fabric 没有客服排班数据源，需要人工核验。',
+  knownEvidence: ['客服 24h 响应率 41.2% (低于 7 日均值 71.4%)', '订单量同步下降 12%', '投诉量未明显增加'],
+  hypotheses: [
+    { statement: '客服排班变动导致响应延迟', status: 'proposed' as const },
+    { statement: '系统统计口径变化', status: 'rejected' as const },
+  ],
+  judgment: '需要人工核验客服排班是否近期有变动（Fabric 暂无法获取此数据）。',
+  stopReason: 'ask_human' as const,
+  capabilityUsed: 'service.overview',
+  evidenceAcquired: ['service.overview 2026-08-20→2026-08-22'],
+  recommendation: {
+    recommendation: '请运营核对近 3 天客服排班表，确认是否有人员调整。',
+    rationale: 'Fabric 暂无法获取客服排班数据（不在已注册能力内）。',
+    risks: ['若不核验，可能错失响应率恢复的最佳窗口。'],
+    humanNeeded: ['运营提供近 3 天客服排班表 / 客服主管访谈。'],
+  },
+  status: 'completed' as const,
+  updatedAt: '2026-08-22T13:30:00.000Z',
 };
 
 // ------------------------------------------------------------------
@@ -317,8 +358,59 @@ const main = (): void => {
   };
   upsertLearningContext(SIT_FAILED, failedMarker, [], '2026-08-22T12:00:00.000Z');
 
+  // 4) sit_waiting_human_demo — Agent explicitly asks the human to act.
+  //    stopReason='ask_human' → deriveSituationLifecycle returns 'waiting_human'.
+  upsertSituation(SIT_WAITING_HUMAN, now);
+  upsertLearningContext(SIT_WAITING_HUMAN, WAITING_HUMAN_INVESTIGATION, [], now);
+
+  // 5) P0010.1 REPAIR: seed 3 Output/WorkItems for sit_human_demo so the
+  //    Operator can see the "Agent 交付物" first-class region with a
+  //    realistic range of statuses (ready / delivered / acknowledged).
+  //    The third (work_item) has no resultRef so the UI does NOT show a
+  //    "查看结果" button for it (no fabricated link).
+  const humanCtx = globalDb.prepare('SELECT body FROM learning_contexts WHERE situation_id = ?').get(SIT_HUMAN.situationId) as { body: string } | undefined;
+  if (humanCtx) {
+    const ctx = JSON.parse(humanCtx.body);
+    if (!Array.isArray(ctx.outputs)) ctx.outputs = [];
+    if (ctx.outputs.length === 0) {
+      ctx.outputs.push(
+        {
+          outputId: 'out_demo_recommendation_h1',
+          situationId: SIT_HUMAN.situationId,
+          type: 'recommendation',
+          status: 'ready',
+          resultRef: { kind: 'learning_context', ref: 'ctx_' + SIT_HUMAN.situationId },
+          content: '先排查主推 SKU 库存与客服 24h 响应率再判断是否干预。',
+          createdAt: '2026-08-22T10:45:00.000Z',
+        },
+        {
+          outputId: 'out_demo_analysis_h1',
+          situationId: SIT_HUMAN.situationId,
+          type: 'analysis',
+          status: 'delivered',
+          resultRef: { kind: 'learning_context', ref: 'ctx_' + SIT_HUMAN.situationId },
+          content: '8月15日大促结束后订单异常已持续 7 天，运营反馈与自动证据一致指向库存 / 客服链路。',
+          createdAt: '2026-08-22T10:40:00.000Z',
+        },
+        {
+          outputId: 'out_demo_workitem_h1',
+          situationId: SIT_HUMAN.situationId,
+          type: 'work_item',
+          status: 'acknowledged',
+          resultRef: { kind: 'none' },
+          content: '运营需在 24h 内确认主推 SKU 是否断货。',
+          createdAt: '2026-08-22T10:20:00.000Z',
+          acknowledgedAt: '2026-08-22T10:30:00.000Z',
+        },
+      );
+      globalDb.prepare('UPDATE learning_contexts SET body = ?, updated_at = ? WHERE situation_id = ?').run(
+        JSON.stringify(ctx), now, SIT_HUMAN.situationId,
+      );
+    }
+  }
+
   // eslint-disable-next-line no-console
-  console.log(`[seed:demo-situations] seeded 3 demo situations into ${path}:`);
+  console.log(`[seed:demo-situations] seeded 4 demo situations into ${path}:`);
   // eslint-disable-next-line no-console
   console.log(`  - ${SIT_OBSERVE.situationId}  (completed · observe · 0 human interventions)`);
   // eslint-disable-next-line no-console

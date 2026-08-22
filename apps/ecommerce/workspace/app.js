@@ -17,6 +17,13 @@ import {
   humanizeError,
   descClean,
   hasPriorValidCognition,
+  // P0010.1 Post-Productization REPAIR — Trust links + Lifecycle + Output
+  deriveSituationLifecycle,
+  SITUATION_LIFECYCLE_LABEL,
+  INVESTIGATION_STATUS_LABEL,
+  deriveObservationCommitment,
+  getSourcePopoverData,
+  renderSourcePopoverHtml,
 } from './presentation.js';
 
 const toastNode = document.getElementById('toast');
@@ -134,6 +141,11 @@ const state = {
   rankingsCache: [], memoriesCache: [],
   productNames: {},  // product_id → name
   currentTrace: null, // BusinessConclusionTrace loaded for the selected entity
+  // P0010.1 REPAIR: stash the open situation's evidence / knownEvidence /
+  // interventions here so the popover dispatcher can resolve any [E]/[K]/[H]
+  // click to real content.
+  situationContext: null,
+  currentSituationId: null,
 };
 
 function showToast(msg) { toastNode.textContent = msg; toastNode.classList.add('show'); setTimeout(() => toastNode.classList.remove('show'), 1500); }
@@ -168,7 +180,8 @@ function switchView(name, filter = 'all') {
 const viewLoaders = { product: loadProduct, trend: loadTrend, archive: loadArchive, memory: loadMemory, runtime: loadRuntime,
   agentSession: loadAgentSession, capabilityExplorer: loadCapabilityExplorer, evidenceViewer: loadEvidenceViewer,
   knowledge: loadKnowledge,
-  situations: loadSituationFeed, situationDetail: loadSituationDetail };
+  situations: loadSituationFeed, situationDetail: loadSituationDetail,
+  outputs: loadOutputs, outputDetail: loadOutputDetail };
 
 // ═══ Data Loading ══════════════════════════════════════════
 async function loadData() {
@@ -335,6 +348,356 @@ async function loadMemory() {
       ? `<div class="list">${items.map(m => `<div class="item"><strong>${m.statement||m.memory_id}</strong><br/><span class="muted">${m.memory_type} | Score: ${m.weight?.final_score?.toFixed(3)||'?'} | Status: ${m.status}</span></div>`).join('')}</div>`
       : '<div class="muted placeholder">暂无已验证的业务经验。<br/><small>Memory 来自运营审核反馈 — 在 Inbox 中对 AI 发现进行"批准/拒绝/修改"操作，验证后的经验会自动积累为 Memory。</small></div>';
   } catch { ct.innerHTML = `<p class="muted">${t('label.unavailable')}</p>`; }
+}
+
+// ═══ 工作输出 (REPAIR-3) ═══════════════════════════════════
+// P0010.1 REPAIR-3: a Workspace collection surface that aggregates
+// every WorkItem across all situations, grouped by status. Read-only:
+//   - No transport (no Feishu/WeCom/Email/Telegram).
+//   - No Hermes bridge.
+//   - No Action execution / Approval flow.
+//   - Opening this page does NOT change any WorkItem's status to
+//     'delivered' (the per-situation /mark-delivered side effect stays
+//     in the Situation detail view, where the operator has already
+//     expressed intent to look at the Output).
+//   - No Event Bus / Wake / Scheduler.
+//   - Does NOT change Situation.lifecycle.
+const OUTPUT_COLLECTION_STATUS_LABEL = {
+  ready: '待交付',
+  delivered: '已交付',
+  acknowledged: '已确认',
+  closed: '已关闭',
+};
+const OUTPUT_COLLECTION_TYPE_LABEL = {
+  recommendation: '建议',
+  analysis: '分析',
+  work_item: '工作项',
+  report: '报告',
+};
+let outputsActiveStatus = ''; // '' = 全部; otherwise WorkItemStatus
+
+async function loadOutputs() {
+  const ct = document.getElementById('outputsContent');
+  if (!ct) return;
+  ct.innerHTML = '<p class="muted placeholder">加载中…</p>';
+  try {
+    const url = '/api/outputs' + (outputsActiveStatus ? '?status=' + encodeURIComponent(outputsActiveStatus) : '');
+    const res = await apiGet(url);
+    const items = Array.isArray(res) ? res : (res && Array.isArray(res.data) ? res.data : []);
+    renderOutputsCollection(items);
+    updateOutputsBadge(items);
+  } catch (e) {
+    ct.innerHTML = '<p class="muted">加载失败：' + escHtml(e && e.message ? e.message : String(e)) + '</p>';
+  }
+}
+
+function updateOutputsBadge(items) {
+  // Update the sidebar badge with the all-statuses count.
+  const badge = document.getElementById('badgeAllOutputs');
+  if (badge) {
+    const all = items.length;
+    badge.textContent = String(all);
+  }
+}
+
+function renderOutputsCollection(items) {
+  const ct = document.getElementById('outputsContent');
+  if (!ct) return;
+  if (!items.length) {
+    ct.innerHTML = '<p class="muted placeholder">当前没有' + escHtml(outputsActiveStatus ? OUTPUT_COLLECTION_STATUS_LABEL[outputsActiveStatus] || outputsActiveStatus : '') + '输出。<br/><small>提示：所有状态的 WorkItem 来自现有 Situation 的 outputs[]，未复制第二套 Store。</small></p>';
+    return;
+  }
+  var html = '<div class="outputs-collection">';
+  items.forEach(function (o) {
+    html += renderCollectionOutputItem(o);
+  });
+  html += '</div>';
+  ct.innerHTML = html;
+}
+
+function renderCollectionOutputItem(o) {
+  // Output Workspace v0: this row is operator-facing (交付中心). It
+  // deliberately hides raw dev identifiers (outputId / situationId /
+  // resultRef: learning_context · ctx_xxx) in business mode. The
+  // Output Detail view is where dev/diagnostic info lives, if ever.
+  var status = o.status || 'ready';
+  var typeLabel = OUTPUT_COLLECTION_TYPE_LABEL[o.type] || o.type || '交付物';
+  var statusLabel = OUTPUT_COLLECTION_STATUS_LABEL[status] || status;
+  var createdAt = (o.createdAt || '').slice(0, 16).replace('T', ' ');
+  var content = o.content || '';
+  var sit = o.situation || {};
+  var sitId = sit.situationId || o.situationId || '';
+  var outputId = o.outputId || '';
+  var entityName = sit.entityName || sit.entityId || sitId || '未知来源';
+  var entityType = sit.entityType || '';
+  var entityPlatform = sit.entityPlatform || '';
+  var sitDescription = (sit.description || '').slice(0, 60);
+
+  // "查看交付物" — opens the new Output Detail view (not Situation).
+  // Always available; the Output Detail page is the operator-facing
+  // record of this deliverable.
+  var viewOutputBtn = '<button class="btn primary output-collection-view-output" data-output-action="open-output" data-output-id="' + escHtml(outputId) + '">查看交付物</button>';
+
+  // "查看来源调查" — always available (every Output traces back to a
+  // source Situation). Operator-facing copy: the *Situation* name, not
+  // the situationId.
+  var sitLink = '<a href="#" class="output-source-link" data-output-action="open-situation" data-situation-id="' + escHtml(sitId) + '">' +
+    escHtml(entityName) +
+    (entityType ? ' <span class="muted">(' + escHtml(entityType) + (entityPlatform ? ' · ' + escHtml(entityPlatform) : '') + ')</span>' : '') +
+  '</a>';
+
+  return '<div class="output-collection-item" data-output-id="' + escHtml(outputId) + '" data-output-status="' + escHtml(status) + '">' +
+    '<div class="output-row1">' +
+      '<span class="output-type">' + escHtml(typeLabel) + '</span>' +
+      '<span class="output-content-summary">' + escHtml(content) + '</span>' +
+      '<span class="output-status output-status-' + escHtml(status) + '">' + escHtml(statusLabel) + '</span>' +
+    '</div>' +
+    '<div class="output-meta">' +
+      (sitDescription ? '<span class="output-source-summary">' + escHtml(sitDescription) + '</span>' : '') +
+      '<span class="output-source">来源：' + sitLink + '</span>' +
+      '<span class="output-created-at">生成：' + escHtml(createdAt || '—') + '</span>' +
+    '</div>' +
+    '<div class="output-actions">' +
+      viewOutputBtn +
+    '</div>' +
+  '</div>';
+}
+
+/** Tab click dispatcher (init once). */
+let outputsTabsInit = false;
+function initOutputsTabs() {
+  if (outputsTabsInit) return;
+  outputsTabsInit = true;
+  const tabs = document.getElementById('outputsTabs');
+  if (!tabs) return;
+  tabs.addEventListener('click', function (ev) {
+    var btn = ev.target.closest && ev.target.closest('.feed-tab');
+    if (!btn) return;
+    ev.preventDefault();
+    tabs.querySelectorAll('.feed-tab').forEach(function (t) { t.classList.toggle('active', t === btn); });
+    outputsActiveStatus = btn.getAttribute('data-status') || '';
+    loadOutputs();
+  });
+}
+
+/** Output row click dispatcher (init once). */
+let outputsCollectionInit = false;
+function initOutputsCollectionDispatcher() {
+  if (outputsCollectionInit) return;
+  outputsCollectionInit = true;
+  const ct = document.getElementById('outputsContent');
+  if (!ct) return;
+  ct.addEventListener('click', function (ev) {
+    // 1) "查看交付物" → open the Output Detail view (NOT Situation).
+    var openOutput = ev.target.closest && ev.target.closest('[data-output-action="open-output"]');
+    if (openOutput) {
+      ev.preventDefault();
+      var oid = openOutput.getAttribute('data-output-id');
+      if (!oid) return;
+      if (typeof switchView === 'function') {
+        switchView('outputDetail', oid);
+      } else if (typeof loadOutputDetail === 'function') {
+        loadOutputDetail(oid);
+      }
+      return;
+    }
+    // 2) Source link / "查看来源调查" → open the source Situation Detail.
+    var a = ev.target.closest && ev.target.closest('[data-output-action="open-situation"]');
+    if (!a) return;
+    ev.preventDefault();
+    var sitId = a.getAttribute('data-situation-id');
+    if (!sitId) return;
+    // Navigate to the Situation Detail. switchView activates #view-situation-detail
+    // and triggers loadSituationDetail via viewLoaders. Without switchView, the
+    // data is fetched + rendered into #situationDetailContent but the container
+    // stays hidden and the operator still sees the Output collection page.
+    if (typeof switchView === 'function') {
+      switchView('situationDetail', sitId);
+    } else if (typeof loadSituationDetail === 'function') {
+      loadSituationDetail(sitId);
+    }
+  });
+}
+
+// ═══ Output Detail (independent view) ═══════════════════════
+// P0010.1 Output Workspace v0: clicking "查看交付物" in the collection
+// page opens this view — NOT the Situation Detail. The Output is its
+// own first-class entity (交付物) and the right pane shows Source /
+// Trust (not the Investigation Track). The 4 regions are:
+//   A. 交付内容       — type-specific rendered body
+//   B. 交付状态       — timestamps + transport honest-state
+//   C. 来源与追溯     — Situation link + judgment/recommendation + Trust popover
+//   D. 当前可做的操作 — lifecycle transitions ONLY (no transport)
+let outputDetailCurrent = null; // last fetched output, used by right pane
+async function loadOutputDetail(outputId) {
+  const ct = document.getElementById('outputDetailContent');
+  if (!ct) return;
+  if (!outputId) {
+    ct.innerHTML = '<p class="muted placeholder">未提供交付物 ID。</p>';
+    return;
+  }
+  ct.innerHTML = '<p class="muted placeholder">加载中...</p>';
+  const decisionPanel = document.getElementById('decisionPanel');
+  const decisionContent = document.getElementById('decisionContent');
+  if (decisionContent) decisionContent.innerHTML = '';
+  if (decisionPanel) decisionPanel.classList.remove('open');
+
+  try {
+    const out = await apiGet('/api/outputs/' + encodeURIComponent(outputId));
+    outputDetailCurrent = out;
+    renderOutputDetail(out);
+    renderOutputDetailRightPane(out);
+  } catch (e) {
+    ct.innerHTML = '<p class="muted">加载失败：' + escHtml(e && e.message ? e.message : String(e)) + '</p>';
+  }
+}
+
+function renderOutputDetail(out) {
+  const ct = document.getElementById('outputDetailContent');
+  if (!ct) return;
+  if (!out) { ct.innerHTML = '<p class="muted placeholder">交付物不存在。</p>'; return; }
+
+  const status = out.status || 'ready';
+  const statusLabel = OUTPUT_STATUS_LABEL[status] || status;
+  const typeLabel = OUTPUT_TYPE_LABEL[out.type] || out.type || '交付物';
+  const createdAt = (out.createdAt || '').slice(0, 16).replace('T', ' ');
+  const deliveredAt = (out.deliveredAt || '').slice(0, 16).replace('T', ' ');
+  const acknowledgedAt = (out.acknowledgedAt || '').slice(0, 16).replace('T', ' ');
+  const closedAt = (out.closedAt || '').slice(0, 16).replace('T', ' ');
+  const sit = out.situation || {};
+  const sitId = sit.situationId || out.situationId || '';
+  const entityName = sit.entityName || sit.entityId || '未知来源';
+  const sitDescription = (sit.description || '').slice(0, 100);
+  const cs = out.currentSituation || {};
+  const judgment = cs.judgment || '';
+  const stopReason = cs.stopReason || '';
+  const recText = cs.recommendation || '';
+  const rationale = cs.recommendationRationale || '';
+  const understanding = cs.understanding || '';
+
+  // ---- Region A: 交付内容 ----
+  var bodyA = '<p class="output-detail-content">' + escHtml(out.content || '') + '</p>';
+
+  // ---- Region B: 交付状态 ----
+  var bodyB = '<table class="output-status-table">' +
+    rowKV('当前状态', '<span class="output-status output-status-' + escHtml(status) + '">' + escHtml(statusLabel) + '</span>') +
+    rowKV('生成时间', escHtml(createdAt || '—')) +
+    rowKV('交付时间', escHtml(deliveredAt || '—')) +
+    rowKV('确认时间', escHtml(acknowledgedAt || '—')) +
+    rowKV('关闭时间', escHtml(closedAt || '—')) +
+    rowKV('交付渠道', '<span class="muted">Workspace（当前阶段）</span>') +
+    rowKV('外部发送', '<span class="muted">尚未启用 — 无飞书 / 邮件 / 企业微信 / Telegram 通道</span>') +
+  '</table>';
+
+  // ---- Region C: 来源与追溯 ----
+  var bodyC = '<div class="output-source-block">' +
+    '<div class="output-source-line">来源 Situation：' +
+      '<a href="#" class="output-source-link" data-output-action="open-situation" data-situation-id="' + escHtml(sitId) + '">' +
+        escHtml(entityName) +
+      '</a>' +
+      (sitDescription ? ' <span class="muted">— ' + escHtml(sitDescription) + '</span>' : '') +
+    '</div>' +
+    '<div class="output-source-line">' +
+      '<button class="btn" data-output-action="open-situation-from-detail" data-situation-id="' + escHtml(sitId) + '">查看原始调查</button>' +
+    '</div>' +
+  '</div>';
+
+  if (judgment || recText || understanding) {
+    bodyC += '<div class="output-judgment-block">' +
+      '<h5 class="muted" style="font-size:0.75rem;margin:12px 0 6px">判断依据（当前 Situation 状态）</h5>';
+    if (understanding) bodyC += '<p class="muted" style="margin:4px 0"><small>理解：</small>' + escHtml(understanding) + '</p>';
+    if (judgment) bodyC += '<p class="muted" style="margin:4px 0"><small>判断：</small>' + escHtml(judgment) + (stopReason ? ' <span class="muted">（停止：' + escHtml(stopReason) + '）</span>' : '') + '</p>';
+    if (recText) bodyC += '<p class="muted" style="margin:4px 0"><small>建议：</small>' + escHtml(recText) + '</p>';
+    if (rationale) bodyC += '<p class="muted" style="margin:4px 0"><small>理由：</small>' + escHtml(rationale) + '</p>';
+    bodyC += '<p class="muted" style="font-size:0.7rem;margin-top:6px">注：以上为当前 Situation 状态，非生成时快照（schema 未快照化）。</p>';
+    bodyC += '</div>';
+  }
+
+  bodyC += '<div class="output-trust-block">' +
+    '<h5 class="muted" style="font-size:0.75rem;margin:12px 0 6px">来源类别（点击查看）</h5>' +
+    '<div class="source-tag-row">' +
+      '<span class="source-tag" data-trust="evidence" data-trust-note="Evidence 尚未有 first-class 标识（ADR-038）；此处仅为来源类别">证据</span>' +
+      '<span class="source-tag" data-trust="human" data-trust-note="如本交付物由某次人工干预触发，将在此显示 [H1] 标签；当前 schema 不记录">人工</span>' +
+      '<span class="source-tag" data-trust="knowledge" data-trust-note="Knowledge 当前为目录索引，无 first-class 记录">知识</span>' +
+      '<span class="source-tag" data-trust="memory" data-trust-note="Memory 由 Runtime 拥有，Fabric 不持久化">记忆</span>' +
+    '</div>' +
+  '</div>';
+
+  // ---- Region D: 当前可做的操作 ----
+  var bodyD = '';
+  if (status === 'ready' || status === 'delivered') {
+    bodyD += '<button class="btn primary" data-output-action="ack" data-output-id="' + escHtml(out.outputId) + '" data-output-situation-id="' + escHtml(sitId) + '">已知悉 / 确认收到</button>';
+  }
+  if (status !== 'closed') {
+    bodyD += '<button class="btn" data-output-action="close" data-output-id="' + escHtml(out.outputId) + '" data-output-situation-id="' + escHtml(sitId) + '">关闭交付物</button>';
+  }
+  if (!bodyD) {
+    bodyD = '<p class="muted">该交付物已关闭，无可操作项。</p>';
+  }
+  var forbiddenNote = '<p class="muted" style="font-size:0.7rem;margin-top:8px">当前阶段不允许发送到飞书 / 邮件 / 企业微信 / Telegram；不允许执行业务操作；不允许审批流。</p>';
+
+  ct.innerHTML = '<div class="output-detail-header">' +
+    '<a href="#" class="output-back-link" data-output-action="back-to-outputs">← 返回工作输出</a>' +
+    '<h2 class="output-detail-title">' + escHtml(typeLabel) + ' <span class="output-status output-status-' + escHtml(status) + '">' + escHtml(statusLabel) + '</span></h2>' +
+    '<p class="output-detail-source muted">' + escHtml(entityName) + (sit.entityType ? ' · ' + escHtml(sit.entityType) : '') + (sit.entityPlatform ? ' · ' + escHtml(sit.entityPlatform) : '') + '</p>' +
+  '</div>' +
+  '<div class="output-detail-region output-detail-region-content">' +
+    '<h4 class="output-detail-region-title">📦 交付内容</h4>' +
+    bodyA +
+  '</div>' +
+  '<div class="output-detail-region output-detail-region-status">' +
+    '<h4 class="output-detail-region-title">📬 交付状态</h4>' +
+    bodyB +
+  '</div>' +
+  '<div class="output-detail-region output-detail-region-source">' +
+    '<h4 class="output-detail-region-title">🔗 来源与追溯</h4>' +
+    bodyC +
+  '</div>' +
+  '<div class="output-detail-region output-detail-region-actions">' +
+    '<h4 class="output-detail-region-title">⚙️ 当前可做的操作</h4>' +
+    bodyD +
+    forbiddenNote +
+  '</div>';
+}
+
+function rowKV(k, v) {
+  return '<tr><td class="output-kv-key muted">' + escHtml(k) + '</td><td class="output-kv-val">' + v + '</td></tr>';
+}
+
+function renderOutputDetailRightPane(out) {
+  // Output Detail right pane = Source / Trust (NOT Investigation Track).
+  const panel = document.getElementById('decisionPanel');
+  const content = document.getElementById('decisionContent');
+  const label = document.getElementById('decisionEntityLabel');
+  if (!panel || !content) return;
+  if (label) label.textContent = '来源 / Trust';
+  const sit = (out && out.situation) || {};
+  const cs = (out && out.currentSituation) || {};
+  const sitId = sit.situationId || '';
+  const entityName = sit.entityName || sit.entityId || '—';
+  var html = '<div class="output-trust-pane">' +
+    '<h4 class="muted" style="font-size:0.78rem;margin:0 0 8px">来源</h4>' +
+    '<p style="font-size:0.78rem;margin:0 0 12px"><a href="#" data-output-action="open-situation" data-situation-id="' + escHtml(sitId) + '">' + escHtml(entityName) + '</a></p>';
+  if (cs.judgment) {
+    html += '<h4 class="muted" style="font-size:0.78rem;margin:8px 0">当前判断</h4>' +
+      '<p style="font-size:0.78rem;margin:0 0 8px">' + escHtml(cs.judgment) + '</p>';
+  }
+  if (cs.recommendation) {
+    html += '<h4 class="muted" style="font-size:0.78rem;margin:8px 0">当前建议</h4>' +
+      '<p style="font-size:0.78rem;margin:0 0 8px">' + escHtml(cs.recommendation) + '</p>';
+  }
+  html += '<h4 class="muted" style="font-size:0.78rem;margin:12px 0 6px">来源类别</h4>' +
+    '<div class="source-tag-row">' +
+      '<span class="source-tag" data-trust="evidence" data-trust-note="Evidence 尚未有 first-class 标识（ADR-038）">证据</span>' +
+      '<span class="source-tag" data-trust="human" data-trust-note="如由人工干预触发则显示 [H1]…[Hn]">人工</span>' +
+      '<span class="source-tag" data-trust="knowledge" data-trust-note="Knowledge 当前为目录索引">知识</span>' +
+      '<span class="source-tag" data-trust="memory" data-trust-note="Memory 由 Runtime 拥有">记忆</span>' +
+    '</div>' +
+    '<p class="muted" style="font-size:0.7rem;margin-top:12px">右栏为 Trust / Source 视角；完整调查过程请打开来源 Situation。</p>' +
+  '</div>';
+  content.style.display = 'block';
+  content.innerHTML = html;
+  panel.classList.add('open');
 }
 
 // ═══ Trend ════════════════════════════════════════════════
@@ -698,9 +1061,19 @@ async function loadSituationFeed(filter) {
     filtered.forEach(function(s) {
       var entity = s.entity || {};
       var temporal = s.temporal || {};
-      var badge = s.lifecycle === 'open' ? '<span class="situation-card-badge open">待处理</span>' :
-                  s.lifecycle === 'partial' ? '<span class="situation-card-badge partial">已处理</span>' :
-                  '<span class="situation-card-badge mature">待观察</span>';
+      // P0010.1 REPAIR: drop the legacy "已处理/待处理/待观察" badge (the
+      // situations.lifecycle field is now a Content-shape flag, not a
+      // business lifecycle). The card now shows the 5-state Situation
+      // lifecycle derived from the agent-status-chip + intervention count.
+      var inv = s.investigation || null;
+      var interventionCount = s.interventionCount || 0;
+      var hasAcceptedDecision = !!s.hasAcceptedDecision;
+      var lifecycle = deriveSituationLifecycle(inv, interventionCount, hasAcceptedDecision);
+      if (lifecycle === 'closed') lifecycle = 'watching';
+      var lcLabel = SITUATION_LIFECYCLE_LABEL[lifecycle] || '';
+      var lcIcon = lcLabel.split(' ')[0] || '';
+      var lcText = lcLabel.replace(/^[^\s]+\s+/, '');
+      var badge = '<span class="situation-card-badge lifecycle-' + lifecycle + '">' + escHtml(lcIcon + ' ' + lcText) + '</span>';
       // P0010.1: Agent business status from persisted investigation (never re-computed).
       var inv = s.investigation || null;
       var statusChip = '';
@@ -727,7 +1100,7 @@ async function loadSituationFeed(filter) {
       }
       cardDescClean = cardDescClean.slice(0, 60);
       var dateLabel = (temporal.observedAt || s.createdAt || '').slice(0, 10);
-      html += '<div class="situation-card" data-situation-id="' + escHtml(s.situationId) + '">' +
+      html += '<div class="situation-card" data-situation-id="' + escHtml(s.situationId) + '" data-lifecycle="' + escHtml(lifecycle) + '">' +
         '<div class="situation-card-top">' +
           '<span class="situation-card-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(cardDescClean) + '</span>' +
           badge +
@@ -736,7 +1109,7 @@ async function loadSituationFeed(filter) {
         judgmentLine +
         '<div class="situation-card-footer">' +
           statusChip +
-          '<span>' + dateLabel + ' · ' + (s.interventionCount || 0) + ' 条处理</span>' +
+          '<span>' + dateLabel + ' · ' + (s.interventionCount || 0) + ' 条反馈</span>' +
           '<span class="situation-card-action">查看详情 →</span>' +
         '</div>' +
       '</div>';
@@ -873,10 +1246,12 @@ async function loadSituationDetail(situationId) {
     }
 
     if (badge) {
-      badge.textContent = raw.lifecycle === 'open' ? '待处理' : raw.lifecycle === 'partial' ? '已处理' : '待观察';
-      badge.className = 'situation-lifecycle-badge ' + (raw.lifecycle || 'open');
+      // P0010.1 REPAIR: the badge is a place-holder; the authoritative
+      // 5-state lifecycle is computed AFTER the investigation loads and
+      // the second pass below replaces this.
+      badge.textContent = '⏳ 加载中…';
+      badge.className = 'situation-lifecycle-badge open';
     }
-
     var html = '<div class="situation-detail-body">';
 
     // Title
@@ -891,6 +1266,25 @@ async function loadSituationDetail(situationId) {
     descClean = descClean.slice(0, 80);
     html += '<h2 class="situation-detail-title">' + escHtml(entityDisplayName(entity)) + ' · ' + escHtml(descClean) + '</h2>';
     html += '<p class="muted" style="font-size:0.78rem;margin-bottom:20px">' + escHtml(temporal.observedAt || '') + ' · ' + escHtml(entity.platform || '') + '</p>';
+
+    // P0010.1 REPAIR-2: Output/WorkItem is a FIRST-CLASS region. It is
+    // rendered BEFORE the Lifecycle card so the operator sees the Agent's
+    // deliverable (recommendation / analysis / report) immediately on
+    // open — without entering Advanced, dev mode, or expanding the
+    // Investigation. The section only appears when outputs[] is non-empty
+    // (no giant empty card when the Agent has produced nothing yet).
+    // Rendered SYNCHRONOUSLY from the data already loaded (raw.outputs /
+    // raw.learningContext), so there is no second-pass / mark-delivered
+    // call that could fail and leave the section blank.
+    var initialOutputs = Array.isArray(raw.outputs) ? raw.outputs : [];
+    html += '<div id="situationOutputsHost_' + escHtml(situationId) + '">';
+    html += renderOutputsSection(initialOutputs, situationId);
+    html += '</div>';
+
+    // P0010.1 REPAIR: 5-state Lifecycle + Observation Commitment hosts.
+    // Populated in the second pass after the investigation loads.
+    html += '<div id="situationLifecycleHost_' + escHtml(situationId) + '"></div>';
+    html += '<div id="situationCommitmentHost_' + escHtml(situationId) + '"></div>';
 
     // Layer 1: 发生了什么 — P0010.1 Productization: Business Situation language,
     // re-populated after the investigation loads so stopReason / status are
@@ -955,6 +1349,10 @@ async function loadSituationDetail(situationId) {
     html += '</div></div>';
     html += '</details></div>';
 
+    // P0010.1 REPAIR-2: Output/WorkItem is rendered FIRST-CLASS (above
+    // Lifecycle) and synchronously — no bottom host, no second-pass
+    // / mark-delivered call needed.
+
     html += '</div>'; // end detail body
     content.innerHTML = html;
 
@@ -984,6 +1382,48 @@ async function loadSituationDetail(situationId) {
         else if (invData.status === 'completed' || invData.stopReason) invStatus = 'completed';
       }
     } catch { /* keep pending */ }
+
+    // P0010.1 REPAIR: 5-state Lifecycle + Commitment + Outputs (second pass).
+    // Compute hasAcceptedDecision from interventions (decision='accept').
+    var hasAcceptedDecision = interventions.some(function (i) {
+      var c = i && i.content;
+      return i && i.type === 'decision' && c && (c.decision === 'accept' || c.type === 'decision_accept');
+    });
+    var lifeHost = document.getElementById('situationLifecycleHost_' + escHtml(situationId));
+    if (lifeHost) lifeHost.innerHTML = renderLifecycleCard(invData, interventions.length, hasAcceptedDecision);
+    var commitHost = document.getElementById('situationCommitmentHost_' + escHtml(situationId));
+    if (commitHost) commitHost.innerHTML = renderCommitmentCard(invData);
+    // Update the top badge to the real lifecycle state.
+    var lc = deriveSituationLifecycle(invData, interventions.length, hasAcceptedDecision);
+    if (badge) {
+      var lcLabel = (SITUATION_LIFECYCLE_LABEL[lc] || lc).replace(/^[^\s]+\s+/, '');
+      var lcIcon = (SITUATION_LIFECYCLE_LABEL[lc] || '').split(' ')[0] || '';
+      badge.textContent = lcIcon + ' ' + lcLabel;
+      badge.className = 'situation-lifecycle-badge lifecycle-' + lc;
+    }
+    // Stash context for the popover dispatcher (so [E]/[K]/[H] clicks can
+    // resolve to real content + the persistent interventionId).
+    var evidenceStrings = invData && Array.isArray(invData.evidenceAcquired) ? invData.evidenceAcquired : [];
+    var knownEvidence = [];
+    if (invData && invData.findings && invData.findings.length > 0) {
+      invData.findings.forEach(function (f) {
+        if (f && f.knownEvidence) knownEvidence.push(f.knownEvidence);
+      });
+    }
+    if (invData && invData.knownEvidence) knownEvidence.push(invData.knownEvidence);
+    state.situationContext = {
+      evidenceStrings: evidenceStrings,
+      knownEvidence: knownEvidence,
+      interventions: interventions,
+      invData: invData,
+      // P0010.1 REPAIR-2: outputs are loaded in the first pass (no second-
+      // pass / mark-delivered call). Auto-marking as 'delivered' on page
+      // open is removed — that side effect was mutating state without the
+      // operator's intent. Status transitions are now triggered ONLY by
+      // explicit button clicks (已知悉 / 结束).
+      outputs: initialOutputs,
+    };
+    state.currentSituationId = situationId;
 
     // Project the Investigation Track + secondary Trace into #decisionContent.
     // The Track functions only need a `container` — we feed them throwaway
@@ -1148,8 +1588,277 @@ function renderSourceTag(kind, refId) {
   var label = sourceTagLabel(kind, refId);
   if (!label) return '';
   var title = (state.panelMode === 'developer' && refId) ? String(refId) : sourceTagTooltip(kind);
-  return '<span class="source-tag source-tag-' + kind + '" title="' + escHtml(title) + '">' + escHtml(label) + '</span>';
+  // P0010.1 REPAIR: tag is clickable. data-source-* attributes are
+  // read by the document-level click handler (initSourcePopoverDispatcher).
+  // We store the kind + refId as DOM data; the popover content is computed
+  // lazily at click time (so it always reflects the latest evidence/knownEvidence/intervention).
+  return '<span class="source-tag source-tag-' + kind + '" title="' + escHtml(title) +
+    '" data-source-kind="' + escHtml(kind) + '"' +
+    (refId ? ' data-source-ref="' + escHtml(String(refId)) + '"' : '') +
+    ' role="button" tabindex="0" aria-label="查看引用详情">' + escHtml(label) + '</span>';
 }
+
+/** Dispatcher: any click on a [data-source-kind] opens a popover anchored to
+ *  the tag. Reads `state.situationContext` (set by loadSituationDetail) for
+ *  the evidence/knownEvidence/interventions arrays. */
+function initSourcePopoverDispatcher() {
+  if (sourcePopoverDispatcherInit) return;
+  sourcePopoverDispatcherInit = true;
+  document.addEventListener('click', function (ev) {
+    var tag = ev.target.closest && ev.target.closest('.source-tag[data-source-kind]');
+    if (!tag) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    var kind = tag.getAttribute('data-source-kind');
+    var refId = tag.getAttribute('data-source-ref');
+    openSourcePopover(tag, kind, refId);
+  });
+  // Esc closes any open popover.
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') closeSourcePopover();
+  });
+}
+let sourcePopoverDispatcherInit = false;
+
+/** Anchor: fixed-positioned popover directly under the tag. */
+function openSourcePopover(tag, kind, refId) {
+  closeSourcePopover();
+  var ctx = state.situationContext || {};
+  var data = getSourcePopoverData(
+    kind,
+    refId ? Number(refId) : null,
+    {
+      evidenceStrings: ctx.evidenceStrings || [],
+      knownEvidence: ctx.knownEvidence || [],
+      interventions: ctx.interventions || [],
+    },
+  );
+  if (!data) {
+    showToast('该引用暂未关联到具体来源');
+    return;
+  }
+  var popover = document.createElement('div');
+  popover.className = 'popover';
+  popover.id = 'sourcePopover';
+  popover.innerHTML = renderSourcePopoverHtml(data);
+  document.body.appendChild(popover);
+  // Position under the tag, clamped to viewport.
+  var rect = tag.getBoundingClientRect();
+  var popRect = popover.getBoundingClientRect();
+  var top = rect.bottom + 6;
+  var left = rect.left;
+  if (left + popRect.width > window.innerWidth - 12) left = window.innerWidth - popRect.width - 12;
+  if (left < 12) left = 12;
+  if (top + popRect.height > window.innerHeight - 12) top = rect.top - popRect.height - 6;
+  popover.style.top = top + 'px';
+  popover.style.left = left + 'px';
+  // Wire close.
+  popover.querySelector('.popover-close').addEventListener('click', closeSourcePopover);
+  // Click outside dismisses.
+  var overlay = document.createElement('div');
+  overlay.className = 'popover-overlay';
+  overlay.id = 'sourcePopoverOverlay';
+  overlay.addEventListener('click', closeSourcePopover);
+  document.body.appendChild(overlay);
+}
+
+function closeSourcePopover() {
+  var p = document.getElementById('sourcePopover');
+  if (p) p.remove();
+  var o = document.getElementById('sourcePopoverOverlay');
+  if (o) o.remove();
+}
+
+// ── P0010.1 REPAIR: 5-state lifecycle card ────────────────────
+function renderLifecycleCard(inv, interventionCount, hasAcceptedDecision) {
+  var lifecycle = deriveSituationLifecycle(inv, interventionCount, hasAcceptedDecision);
+  var label = SITUATION_LIFECYCLE_LABEL[lifecycle] || lifecycle;
+  // Detail line — the secondary investigation status, ONLY when it adds information.
+  // 'completed' adds nothing (the lifecycle already covers it). 'failed' or
+  // 'investigating' DO add information (the operator needs to know the latest
+  // attempt is in that state).
+  var detail = '';
+  if (inv && inv.status && inv.status !== 'completed') {
+    detail = INVESTIGATION_STATUS_LABEL[inv.status] || '';
+  }
+  return '<div class="lifecycle-card lifecycle-' + lifecycle + '" data-lifecycle="' + lifecycle + '">' +
+    '<span class="lifecycle-icon">' + (label.split(' ')[0] || '·') + '</span>' +
+    '<span class="lifecycle-state">' + escHtml(label.replace(/^[^\s]+\s+/, '')) + '</span>' +
+    (detail ? '<span class="lifecycle-detail">· ' + escHtml(detail) + '</span>' : '') +
+  '</div>';
+}
+
+// ── P0010.1 REPAIR: Observation Commitment card (no engine, no wake) ──
+function renderCommitmentCard(inv) {
+  var c = deriveObservationCommitment(inv);
+  if (!c) return '';
+  var reviewAt = c.reviewAt ? new Date(c.reviewAt).toISOString().slice(0, 16).replace('T', ' ') : '（未指定 — 由人工复查触发）';
+  var started = c.startedAt ? new Date(c.startedAt).toISOString().slice(0, 16).replace('T', ' ') : '—';
+  return '<div class="commitment-card" data-commitment-type="observe">' +
+    '<div class="commitment-title">⏳ 观察计划（未完成事务）</div>' +
+    '<div class="commitment-row">开始时间：<strong>' + escHtml(started) + '</strong></div>' +
+    '<div class="commitment-row">复查时机：<strong>' + escHtml(reviewAt) + '</strong></div>' +
+    '<div class="commitment-row">观察重点：<strong>' + escHtml(c.checkpoints.join('、')) + '</strong></div>' +
+    '<div class="commitment-row" style="margin-top:4px;font-size:0.72rem">' + escHtml(c.note) + '</div>' +
+  '</div>';
+}
+
+// ── P0010.1 REPAIR-2: Outputs / WorkItem first-class region ───────────────
+//
+// Output/WorkItem surface spec:
+//   - Renders ONLY when outputs.length > 0 (no giant empty card otherwise).
+//   - First-class position (above the Lifecycle card).
+//   - Synchronous render from data already loaded by /api/situations/:id —
+//     no second-pass / mark-delivered call.
+//   - Per-Output fields shown: type, content (the deliverable's body),
+//     status, createdAt, resultRef.
+//   - "查看结果" button is shown ONLY when resultRef.kind+ref describe a
+//     resolvable reference (currently: kind=learning_context → scrolls to
+//     the Agent understanding section; everything else is hidden to avoid
+//     fabricating a link).
+//   - Status uses human semantics: 待交付 / 已交付 / 已确认 / 已关闭.
+//   - Status transitions are triggered ONLY by explicit button clicks
+//     (已知悉 / 结束) — never auto on page open.
+//
+// Independence: WorkItem.closed does NOT close the Situation. The
+// Situation's lifecycle is computed independently in
+// deriveSituationLifecycle. Closing a deliverable here is purely a
+// per-WorkItem status transition; the Situation keeps its own lifecycle.
+const OUTPUT_STATUS_LABEL = {
+  ready: '待交付',
+  delivered: '已交付',
+  acknowledged: '已确认',
+  closed: '已关闭',
+};
+
+const OUTPUT_TYPE_LABEL = {
+  recommendation: '建议',
+  analysis: '分析',
+  work_item: '工作项',
+  report: '报告',
+};
+
+function renderOutputsSection(outputs, situationId) {
+  // P0010.1 Output Workspace v0: in the Situation Detail body, the Output
+  // Surface is a SUMMARY only. The full Output (status timeline + 交付
+  // 状态 + 来源与追溯 + 当前可做的操作) lives in the independent Output
+  // Detail view. The surface here is a single card with the count + each
+  // output as a 2-line preview (type · status + content) + a "查看交付物"
+  // button per row, plus a "查看全部输出" link to the collection page.
+  if (!Array.isArray(outputs) || outputs.length === 0) return '';
+  var html = '<div class="outputs-section" data-first-class="output">' +
+    '<h4 class="outputs-title">📤 已产生 ' + outputs.length + ' 个工作输出</h4>' +
+    '<p class="muted" style="font-size:0.7rem;margin:-4px 0 8px">完整交付状态请打开"交付物详情"页面</p>';
+  outputs.forEach(function (o) {
+    html += renderOutputItem(o, situationId);
+  });
+  html += '<div class="outputs-section-footer">' +
+    '<a href="#" class="output-source-link" data-output-action="back-to-outputs">查看全部输出 →</a>' +
+  '</div>' +
+  '</div>';
+  return html;
+}
+
+function renderOutputItem(o, situationId) {
+  // Summary view used inside Situation Detail. The full Output lives in
+  // the independent Output Detail view. We deliberately omit:
+  //   - resultRef raw id (e.g. "learning_context · ctx_xxx")
+  //   - dev-mode createdAt micro-detail
+  //   - the inline "已知悉" / "结束" buttons (those are in Output Detail)
+  // to avoid duplicating the Output Detail surface.
+  var status = o.status || 'ready';
+  var typeLabel = OUTPUT_TYPE_LABEL[o.type] || o.type || '交付物';
+  var statusLabel = OUTPUT_STATUS_LABEL[status] || status;
+  var bodyText = o.content || '';
+
+  return '<div class="output-item output-item-summary" data-output-id="' + escHtml(o.outputId) + '" data-output-status="' + escHtml(status) + '">' +
+    '<div class="output-row1">' +
+      '<span class="output-type">' + escHtml(typeLabel) + '</span>' +
+      '<span class="output-status output-status-' + escHtml(status) + '">' + escHtml(statusLabel) + '</span>' +
+    '</div>' +
+    (bodyText ? '<div class="output-content">' + escHtml(bodyText) + '</div>' : '') +
+    '<div class="output-actions">' +
+      '<button class="btn primary" data-output-action="open-output" data-output-id="' + escHtml(o.outputId) + '">查看交付物</button>' +
+    '</div>' +
+  '</div>';
+}
+
+/** Wire the document-level click for output status transitions + view-result. */
+function initOutputsDispatcher() {
+  if (outputsDispatcherInit) return;
+  outputsDispatcherInit = true;
+  document.addEventListener('click', async function (ev) {
+    var btn = ev.target.closest && ev.target.closest('[data-output-action]');
+    if (!btn) return;
+    var action = btn.getAttribute('data-output-action');
+    var outputId = btn.getAttribute('data-output-id');
+    // For actions that don't need outputId (back / open-situation), allow
+    // early dispatch without an outputId.
+    if (action !== 'back-to-outputs' && action !== 'open-situation' && action !== 'open-situation-from-detail' && !outputId) return;
+    ev.preventDefault();
+
+    // Navigation actions (no transport, no API call).
+    if (action === 'back-to-outputs') {
+      if (typeof switchView === 'function') switchView('outputs');
+      return;
+    }
+    if (action === 'open-output') {
+      if (!outputId) return;
+      if (typeof switchView === 'function') switchView('outputDetail', outputId);
+      return;
+    }
+    if (action === 'open-situation' || action === 'open-situation-from-detail') {
+      var sitId = btn.getAttribute('data-situation-id');
+      if (!sitId) return;
+      if (typeof switchView === 'function') switchView('situationDetail', sitId);
+      return;
+    }
+
+    // Resolve situationId: prefer the explicit attribute (Output Detail
+    // view), fall back to state.currentSituationId (Situation Detail view).
+    var sitIdResolved = btn.getAttribute('data-output-situation-id') || state.currentSituationId;
+    if (!sitIdResolved || !outputId) return;
+
+    // "查看结果" — local scroll, no transport / no API call.
+    if (action === 'view-result') {
+      var understandingEl = document.getElementById('situationUnderstanding_' + sitIdResolved);
+      if (understandingEl) {
+        understandingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        understandingEl.style.transition = 'background 0.6s';
+        var origBg = understandingEl.style.background;
+        understandingEl.style.background = '#fef9c3';
+        setTimeout(function () { understandingEl.style.background = origBg; }, 800);
+      }
+      return;
+    }
+
+    var targetStatus = action === 'ack' ? 'acknowledged' : 'closed';
+    btn.disabled = true;
+    try {
+      await apiPost('/api/situations/' + encodeURIComponent(sitIdResolved) + '/outputs/' + encodeURIComponent(outputId),
+        { status: targetStatus });
+      // Re-render in place. For Output Detail we re-load the detail view;
+      // for Situation Detail we re-render the Output Surface host.
+      if (typeof switchView === 'function' && state.activeView === 'outputDetail' && outputDetailCurrent) {
+        var oid = outputId;
+        var refreshed = await apiGet('/api/outputs/' + encodeURIComponent(oid));
+        outputDetailCurrent = refreshed;
+        renderOutputDetail(refreshed);
+        renderOutputDetailRightPane(refreshed);
+      } else {
+        var sit = await apiGet('/api/situations/' + encodeURIComponent(sitIdResolved));
+        var ctx = sit && sit.learningContext ? sit.learningContext : null;
+        var outputs = ctx && Array.isArray(ctx.outputs) ? ctx.outputs : [];
+        var host = document.getElementById('situationOutputsHost_' + sitIdResolved);
+        if (host) host.innerHTML = renderOutputsSection(outputs, sitIdResolved);
+      }
+    } catch (e) {
+      showToast('更新失败：' + (e && e.message ? e.message : e));
+      btn.disabled = false;
+    }
+  });
+}
+let outputsDispatcherInit = false;
 
 /**
  * baseline §15 / §16: scrub English technical literals + internal-metric
@@ -2448,6 +3157,15 @@ document.getElementById('replayRunBtn')?.addEventListener('click', async () => {
   var replayTo = document.getElementById('replayTo');
   if (replayFrom) { replayFrom.max = today; replayFrom.value = '2026-07-01'; }
   if (replayTo) { replayTo.max = today; replayTo.value = today; }
+
+  // P0010.1 REPAIR: initialize the [E]/[K]/[H] popover dispatcher and the
+  // Output status transition dispatcher once on page load. They are
+  // document-level — no per-situation re-binding needed.
+  initSourcePopoverDispatcher();
+  initOutputsDispatcher();
+  // REPAIR-3: workspace 工作输出 collection page — tab + row click dispatchers.
+  initOutputsTabs();
+  initOutputsCollectionDispatcher();
 
   applyI18n();
   switchView('situations', 'all');
